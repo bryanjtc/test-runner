@@ -9477,9 +9477,24 @@ var getJestPlaywrightConfig = /* @__PURE__ */ __name(() => {
 }, "getJestPlaywrightConfig");
 var getJestConfig = /* @__PURE__ */ __name(() => {
   const { TEST_ROOT, TEST_MATCH, STORYBOOK_STORIES_PATTERN, TEST_BROWSERS, STORYBOOK_COLLECT_COVERAGE, STORYBOOK_JUNIT } = process.env;
+  const jestJunitPath = import_path.default.dirname(require.resolve("jest-junit", {
+    paths: [
+      import_path.default.join(__dirname, "../node_modules")
+    ]
+  }));
+  const jestSerializerHtmlPath = import_path.default.dirname(require.resolve("jest-serializer-html", {
+    paths: [
+      import_path.default.join(__dirname, "../node_modules")
+    ]
+  }));
+  const swcJestPath = import_path.default.dirname(require.resolve("@swc/jest", {
+    paths: [
+      import_path.default.join(__dirname, "../node_modules")
+    ]
+  }));
   const reporters = STORYBOOK_JUNIT ? [
     "default",
-    "jest-junit"
+    jestJunitPath
   ] : [
     "default"
   ];
@@ -9492,10 +9507,10 @@ var getJestConfig = /* @__PURE__ */ __name(() => {
     testMatch: STORYBOOK_STORIES_PATTERN && STORYBOOK_STORIES_PATTERN.split(";"),
     transform: {
       "^.+\\.stories\\.[jt]sx?$": "@storybook/test-runner/playwright/transform",
-      "^.+\\.[jt]sx?$": "@swc/jest"
+      "^.+\\.[jt]sx?$": swcJestPath
     },
     snapshotSerializers: [
-      "jest-serializer-html"
+      jestSerializerHtmlPath
     ],
     testEnvironmentOptions: {
       "jest-playwright": {
