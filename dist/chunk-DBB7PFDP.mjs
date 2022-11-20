@@ -1,0 +1,80 @@
+import {
+  __name,
+  __require,
+  __spreadValues
+} from "./chunk-2RV4EXUL.mjs";
+
+// src/config/jest-playwright.ts
+import path from "path";
+var getJestPlaywrightConfig = /* @__PURE__ */ __name(() => {
+  const presetBasePath = path.dirname(__require.resolve("jest-playwright-preset", {
+    paths: [
+      path.join(__dirname, "../node_modules")
+    ]
+  }));
+  const expectPlaywrightPath = path.dirname(__require.resolve("expect-playwright", {
+    paths: [
+      path.join(__dirname, "../node_modules")
+    ]
+  }));
+  return {
+    runner: path.join(presetBasePath, "runner.js"),
+    globalSetup: "@storybook/test-runner/playwright/global-setup.js",
+    globalTeardown: "@storybook/test-runner/playwright/global-teardown.js",
+    testEnvironment: "@storybook/test-runner/playwright/custom-environment.js",
+    setupFilesAfterEnv: [
+      "@storybook/test-runner/playwright/jest-setup.js",
+      expectPlaywrightPath,
+      path.join(presetBasePath, "lib", "extends.js")
+    ]
+  };
+}, "getJestPlaywrightConfig");
+var getJestConfig = /* @__PURE__ */ __name(() => {
+  const { TEST_ROOT, TEST_MATCH, STORYBOOK_STORIES_PATTERN, TEST_BROWSERS, STORYBOOK_COLLECT_COVERAGE, STORYBOOK_JUNIT } = process.env;
+  const reporters = STORYBOOK_JUNIT ? [
+    "default",
+    "jest-junit"
+  ] : [
+    "default"
+  ];
+  let config = __spreadValues({
+    rootDir: process.cwd(),
+    roots: TEST_ROOT ? [
+      TEST_ROOT
+    ] : void 0,
+    reporters,
+    testMatch: STORYBOOK_STORIES_PATTERN && STORYBOOK_STORIES_PATTERN.split(";"),
+    transform: {
+      "^.+\\.stories\\.[jt]sx?$": "@storybook/test-runner/playwright/transform",
+      "^.+\\.[jt]sx?$": "@swc/jest"
+    },
+    snapshotSerializers: [
+      "jest-serializer-html"
+    ],
+    testEnvironmentOptions: {
+      "jest-playwright": {
+        browsers: TEST_BROWSERS.split(",").map((p) => p.trim().toLowerCase()).filter(Boolean),
+        collectCoverage: STORYBOOK_COLLECT_COVERAGE === "true"
+      }
+    },
+    watchPlugins: [
+      __require.resolve("jest-watch-typeahead/filename"),
+      __require.resolve("jest-watch-typeahead/testname")
+    ],
+    watchPathIgnorePatterns: [
+      "coverage",
+      ".nyc_output",
+      ".cache"
+    ]
+  }, getJestPlaywrightConfig());
+  if (TEST_MATCH) {
+    config.testMatch = [
+      TEST_MATCH
+    ];
+  }
+  return config;
+}, "getJestConfig");
+
+export {
+  getJestConfig
+};
