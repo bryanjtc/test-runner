@@ -1,5 +1,4 @@
 #!/usr/bin/env node
-"use strict";
 var __create = Object.create;
 var __defProp = Object.defineProperty;
 var __defProps = Object.defineProperties;
@@ -24,6 +23,13 @@ var __spreadValues = (a, b) => {
 };
 var __spreadProps = (a, b) => __defProps(a, __getOwnPropDescs(b));
 var __name = (target, value) => __defProp(target, "name", { value, configurable: true });
+var __require = /* @__PURE__ */ ((x) => typeof require !== "undefined" ? require : typeof Proxy !== "undefined" ? new Proxy(x, {
+  get: (a, b) => (typeof require !== "undefined" ? require : a)[b]
+}) : x)(function(x) {
+  if (typeof require !== "undefined")
+    return require.apply(this, arguments);
+  throw new Error('Dynamic require of "' + x + '" is not supported');
+});
 var __objRest = (source, exclude) => {
   var target = {};
   for (var prop in source)
@@ -36,7 +42,10 @@ var __objRest = (source, exclude) => {
     }
   return target;
 };
-var __commonJS = (cb, mod) => function __require() {
+var __esm = (fn, res) => function __init() {
+  return fn && (res = (0, fn[__getOwnPropNames(fn)[0]])(fn = 0)), res;
+};
+var __commonJS = (cb, mod) => function __require2() {
   return mod || (0, cb[__getOwnPropNames(cb)[0]])((mod = { exports: {} }).exports, mod), mod.exports;
 };
 var __copyProps = (to, from, except, desc) => {
@@ -74,19 +83,19 @@ var __async = (__this, __arguments, generator) => {
 
 // node_modules/can-bind-to-host/dist/index.js
 var require_dist = __commonJS({
-  "node_modules/can-bind-to-host/dist/index.js"(exports2) {
+  "node_modules/can-bind-to-host/dist/index.js"(exports) {
     "use strict";
-    var __importDefault = exports2 && exports2.__importDefault || function(mod) {
+    var __importDefault = exports && exports.__importDefault || function(mod) {
       return mod && mod.__esModule ? mod : {
         "default": mod
       };
     };
-    Object.defineProperty(exports2, "__esModule", {
+    Object.defineProperty(exports, "__esModule", {
       value: true
     });
-    exports2.canBindToHost = void 0;
-    var net_1 = __importDefault(require("net"));
-    var canBindToHost2 = /* @__PURE__ */ __name(function(host, port) {
+    exports.canBindToHost = void 0;
+    var net_1 = __importDefault(__require("net"));
+    var canBindToHost = /* @__PURE__ */ __name(function(host, port) {
       if (host === void 0) {
         host = "0.0.0.0";
       }
@@ -108,17 +117,66 @@ var require_dist = __commonJS({
           res(false);
       });
     }, "canBindToHost");
-    exports2.canBindToHost = canBindToHost2;
-    exports2.default = canBindToHost2;
+    exports.canBindToHost = canBindToHost;
+    exports.default = canBindToHost;
+  }
+});
+
+// node_modules/ts-dedent/esm/index.js
+function dedent(templ) {
+  var values = [];
+  for (var _i = 1; _i < arguments.length; _i++) {
+    values[_i - 1] = arguments[_i];
+  }
+  var strings = Array.from(typeof templ === "string" ? [
+    templ
+  ] : templ);
+  strings[strings.length - 1] = strings[strings.length - 1].replace(/\r?\n([\t ]*)$/, "");
+  var indentLengths = strings.reduce(function(arr, str) {
+    var matches = str.match(/\n([\t ]+|(?!\s).)/g);
+    if (matches) {
+      return arr.concat(matches.map(function(match) {
+        var _a, _b;
+        return (_b = (_a = match.match(/[\t ]/g)) === null || _a === void 0 ? void 0 : _a.length) !== null && _b !== void 0 ? _b : 0;
+      }));
+    }
+    return arr;
+  }, []);
+  if (indentLengths.length) {
+    var pattern_1 = new RegExp("\n[	 ]{" + Math.min.apply(Math, indentLengths) + "}", "g");
+    strings = strings.map(function(str) {
+      return str.replace(pattern_1, "\n");
+    });
+  }
+  strings[0] = strings[0].replace(/^\r?\n/, "");
+  var string = strings[0];
+  values.forEach(function(value, i) {
+    var endentations = string.match(/(?:^|\n)( *)$/);
+    var endentation = endentations ? endentations[1] : "";
+    var indentedValue = value;
+    if (typeof value === "string" && value.includes("\n")) {
+      indentedValue = String(value).split("\n").map(function(str, i2) {
+        return i2 === 0 ? str : "" + endentation + str;
+      }).join("\n");
+    }
+    string += indentedValue + strings[i + 1];
+  });
+  return string;
+}
+var esm_default;
+var init_esm = __esm({
+  "node_modules/ts-dedent/esm/index.js"() {
+    __name(dedent, "dedent");
+    esm_default = dedent;
   }
 });
 
 // node_modules/crypto-random-string/index.js
 var require_crypto_random_string = __commonJS({
-  "node_modules/crypto-random-string/index.js"(exports2, module2) {
+  "node_modules/crypto-random-string/index.js"(exports, module) {
     "use strict";
-    var crypto = require("crypto");
-    module2.exports = (length) => {
+    var crypto = __require("crypto");
+    module.exports = (length) => {
       if (!Number.isFinite(length)) {
         throw new TypeError("Expected a finite number");
       }
@@ -129,47 +187,47 @@ var require_crypto_random_string = __commonJS({
 
 // node_modules/unique-string/index.js
 var require_unique_string = __commonJS({
-  "node_modules/unique-string/index.js"(exports2, module2) {
+  "node_modules/unique-string/index.js"(exports, module) {
     "use strict";
     var cryptoRandomString = require_crypto_random_string();
-    module2.exports = () => cryptoRandomString(32);
+    module.exports = () => cryptoRandomString(32);
   }
 });
 
 // node_modules/temp-dir/index.js
 var require_temp_dir = __commonJS({
-  "node_modules/temp-dir/index.js"(exports2, module2) {
+  "node_modules/temp-dir/index.js"(exports, module) {
     "use strict";
-    var fs2 = require("fs");
-    var os = require("os");
+    var fs2 = __require("fs");
+    var os = __require("os");
     var tempDirectorySymbol = Symbol.for("__RESOLVED_TEMP_DIRECTORY__");
     if (!global[tempDirectorySymbol]) {
       Object.defineProperty(global, tempDirectorySymbol, {
         value: fs2.realpathSync(os.tmpdir())
       });
     }
-    module2.exports = global[tempDirectorySymbol];
+    module.exports = global[tempDirectorySymbol];
   }
 });
 
 // node_modules/is-stream/index.js
 var require_is_stream = __commonJS({
-  "node_modules/is-stream/index.js"(exports2, module2) {
+  "node_modules/is-stream/index.js"(exports, module) {
     "use strict";
     var isStream = /* @__PURE__ */ __name((stream) => stream !== null && typeof stream === "object" && typeof stream.pipe === "function", "isStream");
     isStream.writable = (stream) => isStream(stream) && stream.writable !== false && typeof stream._write === "function" && typeof stream._writableState === "object";
     isStream.readable = (stream) => isStream(stream) && stream.readable !== false && typeof stream._read === "function" && typeof stream._readableState === "object";
     isStream.duplex = (stream) => isStream.writable(stream) && isStream.readable(stream);
     isStream.transform = (stream) => isStream.duplex(stream) && typeof stream._transform === "function";
-    module2.exports = isStream;
+    module.exports = isStream;
   }
 });
 
 // node_modules/array-union/index.js
 var require_array_union = __commonJS({
-  "node_modules/array-union/index.js"(exports2, module2) {
+  "node_modules/array-union/index.js"(exports, module) {
     "use strict";
-    module2.exports = (...arguments_) => {
+    module.exports = (...arguments_) => {
       return [
         ...new Set([].concat(...arguments_))
       ];
@@ -179,12 +237,12 @@ var require_array_union = __commonJS({
 
 // node_modules/merge2/index.js
 var require_merge2 = __commonJS({
-  "node_modules/merge2/index.js"(exports2, module2) {
+  "node_modules/merge2/index.js"(exports, module) {
     "use strict";
-    var Stream = require("stream");
+    var Stream = __require("stream");
     var PassThrough = Stream.PassThrough;
     var slice = Array.prototype.slice;
-    module2.exports = merge2;
+    module.exports = merge2;
     function merge2() {
       const streamsQueue = [];
       const args = slice.call(arguments);
@@ -311,17 +369,17 @@ var require_merge2 = __commonJS({
 
 // node_modules/fast-glob/out/utils/array.js
 var require_array = __commonJS({
-  "node_modules/fast-glob/out/utils/array.js"(exports2) {
+  "node_modules/fast-glob/out/utils/array.js"(exports) {
     "use strict";
-    Object.defineProperty(exports2, "__esModule", {
+    Object.defineProperty(exports, "__esModule", {
       value: true
     });
-    exports2.splitWhen = exports2.flatten = void 0;
+    exports.splitWhen = exports.flatten = void 0;
     function flatten(items) {
       return items.reduce((collection, item) => [].concat(collection, item), []);
     }
     __name(flatten, "flatten");
-    exports2.flatten = flatten;
+    exports.flatten = flatten;
     function splitWhen(items, predicate) {
       const result = [
         []
@@ -338,34 +396,34 @@ var require_array = __commonJS({
       return result;
     }
     __name(splitWhen, "splitWhen");
-    exports2.splitWhen = splitWhen;
+    exports.splitWhen = splitWhen;
   }
 });
 
 // node_modules/fast-glob/out/utils/errno.js
 var require_errno = __commonJS({
-  "node_modules/fast-glob/out/utils/errno.js"(exports2) {
+  "node_modules/fast-glob/out/utils/errno.js"(exports) {
     "use strict";
-    Object.defineProperty(exports2, "__esModule", {
+    Object.defineProperty(exports, "__esModule", {
       value: true
     });
-    exports2.isEnoentCodeError = void 0;
-    function isEnoentCodeError(error2) {
-      return error2.code === "ENOENT";
+    exports.isEnoentCodeError = void 0;
+    function isEnoentCodeError(error) {
+      return error.code === "ENOENT";
     }
     __name(isEnoentCodeError, "isEnoentCodeError");
-    exports2.isEnoentCodeError = isEnoentCodeError;
+    exports.isEnoentCodeError = isEnoentCodeError;
   }
 });
 
 // node_modules/fast-glob/out/utils/fs.js
 var require_fs = __commonJS({
-  "node_modules/fast-glob/out/utils/fs.js"(exports2) {
+  "node_modules/fast-glob/out/utils/fs.js"(exports) {
     "use strict";
-    Object.defineProperty(exports2, "__esModule", {
+    Object.defineProperty(exports, "__esModule", {
       value: true
     });
-    exports2.createDirentFromStats = void 0;
+    exports.createDirentFromStats = void 0;
     var DirentFromStats = /* @__PURE__ */ __name(class DirentFromStats {
       constructor(name, stats) {
         this.name = name;
@@ -382,36 +440,36 @@ var require_fs = __commonJS({
       return new DirentFromStats(name, stats);
     }
     __name(createDirentFromStats, "createDirentFromStats");
-    exports2.createDirentFromStats = createDirentFromStats;
+    exports.createDirentFromStats = createDirentFromStats;
   }
 });
 
 // node_modules/fast-glob/out/utils/path.js
 var require_path = __commonJS({
-  "node_modules/fast-glob/out/utils/path.js"(exports2) {
+  "node_modules/fast-glob/out/utils/path.js"(exports) {
     "use strict";
-    Object.defineProperty(exports2, "__esModule", {
+    Object.defineProperty(exports, "__esModule", {
       value: true
     });
-    exports2.removeLeadingDotSegment = exports2.escape = exports2.makeAbsolute = exports2.unixify = void 0;
-    var path2 = require("path");
+    exports.removeLeadingDotSegment = exports.escape = exports.makeAbsolute = exports.unixify = void 0;
+    var path2 = __require("path");
     var LEADING_DOT_SEGMENT_CHARACTERS_COUNT = 2;
     var UNESCAPED_GLOB_SYMBOLS_RE = /(\\?)([()*?[\]{|}]|^!|[!+@](?=\())/g;
     function unixify(filepath) {
       return filepath.replace(/\\/g, "/");
     }
     __name(unixify, "unixify");
-    exports2.unixify = unixify;
+    exports.unixify = unixify;
     function makeAbsolute(cwd, filepath) {
       return path2.resolve(cwd, filepath);
     }
     __name(makeAbsolute, "makeAbsolute");
-    exports2.makeAbsolute = makeAbsolute;
+    exports.makeAbsolute = makeAbsolute;
     function escape(pattern) {
       return pattern.replace(UNESCAPED_GLOB_SYMBOLS_RE, "\\$2");
     }
     __name(escape, "escape");
-    exports2.escape = escape;
+    exports.escape = escape;
     function removeLeadingDotSegment(entry) {
       if (entry.charAt(0) === ".") {
         const secondCharactery = entry.charAt(1);
@@ -422,14 +480,14 @@ var require_path = __commonJS({
       return entry;
     }
     __name(removeLeadingDotSegment, "removeLeadingDotSegment");
-    exports2.removeLeadingDotSegment = removeLeadingDotSegment;
+    exports.removeLeadingDotSegment = removeLeadingDotSegment;
   }
 });
 
 // node_modules/is-extglob/index.js
 var require_is_extglob = __commonJS({
-  "node_modules/is-extglob/index.js"(exports2, module2) {
-    module2.exports = /* @__PURE__ */ __name(function isExtglob(str) {
+  "node_modules/is-extglob/index.js"(exports, module) {
+    module.exports = /* @__PURE__ */ __name(function isExtglob(str) {
       if (typeof str !== "string" || str === "") {
         return false;
       }
@@ -446,7 +504,7 @@ var require_is_extglob = __commonJS({
 
 // node_modules/is-glob/index.js
 var require_is_glob = __commonJS({
-  "node_modules/is-glob/index.js"(exports2, module2) {
+  "node_modules/is-glob/index.js"(exports, module) {
     var isExtglob = require_is_extglob();
     var chars = {
       "{": "}",
@@ -563,7 +621,7 @@ var require_is_glob = __commonJS({
       }
       return false;
     }, "relaxedCheck");
-    module2.exports = /* @__PURE__ */ __name(function isGlob(str, options) {
+    module.exports = /* @__PURE__ */ __name(function isGlob(str, options) {
       if (typeof str !== "string" || str === "") {
         return false;
       }
@@ -581,17 +639,17 @@ var require_is_glob = __commonJS({
 
 // node_modules/glob-parent/index.js
 var require_glob_parent = __commonJS({
-  "node_modules/glob-parent/index.js"(exports2, module2) {
+  "node_modules/glob-parent/index.js"(exports, module) {
     "use strict";
     var isGlob = require_is_glob();
-    var pathPosixDirname = require("path").posix.dirname;
-    var isWin32 = require("os").platform() === "win32";
+    var pathPosixDirname = __require("path").posix.dirname;
+    var isWin32 = __require("os").platform() === "win32";
     var slash = "/";
     var backslash = /\\/g;
     var enclosure = /[\{\[].*[\}\]]$/;
     var globby = /(^|[^\\])([\{\[]|\([^\)]+$)/;
     var escaped = /\\([\!\*\?\|\[\]\(\)\{\}])/g;
-    module2.exports = /* @__PURE__ */ __name(function globParent(str, opts) {
+    module.exports = /* @__PURE__ */ __name(function globParent(str, opts) {
       var options = Object.assign({
         flipBackslashes: true
       }, opts);
@@ -612,9 +670,9 @@ var require_glob_parent = __commonJS({
 
 // node_modules/braces/lib/utils.js
 var require_utils = __commonJS({
-  "node_modules/braces/lib/utils.js"(exports2) {
+  "node_modules/braces/lib/utils.js"(exports) {
     "use strict";
-    exports2.isInteger = (num) => {
+    exports.isInteger = (num) => {
       if (typeof num === "number") {
         return Number.isInteger(num);
       }
@@ -623,15 +681,15 @@ var require_utils = __commonJS({
       }
       return false;
     };
-    exports2.find = (node, type) => node.nodes.find((node2) => node2.type === type);
-    exports2.exceedsLimit = (min, max, step = 1, limit) => {
+    exports.find = (node, type) => node.nodes.find((node2) => node2.type === type);
+    exports.exceedsLimit = (min, max, step = 1, limit) => {
       if (limit === false)
         return false;
-      if (!exports2.isInteger(min) || !exports2.isInteger(max))
+      if (!exports.isInteger(min) || !exports.isInteger(max))
         return false;
       return (Number(max) - Number(min)) / Number(step) >= limit;
     };
-    exports2.escapeNode = (block, n = 0, type) => {
+    exports.escapeNode = (block, n = 0, type) => {
       let node = block.nodes[n];
       if (!node)
         return;
@@ -642,7 +700,7 @@ var require_utils = __commonJS({
         }
       }
     };
-    exports2.encloseBrace = (node) => {
+    exports.encloseBrace = (node) => {
       if (node.type !== "brace")
         return false;
       if (node.commas >> 0 + node.ranges >> 0 === 0) {
@@ -651,7 +709,7 @@ var require_utils = __commonJS({
       }
       return false;
     };
-    exports2.isInvalidBrace = (block) => {
+    exports.isInvalidBrace = (block) => {
       if (block.type !== "brace")
         return false;
       if (block.invalid === true || block.dollar)
@@ -666,20 +724,20 @@ var require_utils = __commonJS({
       }
       return false;
     };
-    exports2.isOpenOrClose = (node) => {
+    exports.isOpenOrClose = (node) => {
       if (node.type === "open" || node.type === "close") {
         return true;
       }
       return node.open === true || node.close === true;
     };
-    exports2.reduce = (nodes) => nodes.reduce((acc, node) => {
+    exports.reduce = (nodes) => nodes.reduce((acc, node) => {
       if (node.type === "text")
         acc.push(node.value);
       if (node.type === "range")
         node.type = "text";
       return acc;
     }, []);
-    exports2.flatten = (...args) => {
+    exports.flatten = (...args) => {
       const result = [];
       const flat = /* @__PURE__ */ __name((arr) => {
         for (let i = 0; i < arr.length; i++) {
@@ -696,10 +754,10 @@ var require_utils = __commonJS({
 
 // node_modules/braces/lib/stringify.js
 var require_stringify = __commonJS({
-  "node_modules/braces/lib/stringify.js"(exports2, module2) {
+  "node_modules/braces/lib/stringify.js"(exports, module) {
     "use strict";
     var utils = require_utils();
-    module2.exports = (ast, options = {}) => {
+    module.exports = (ast, options = {}) => {
       let stringify = /* @__PURE__ */ __name((node, parent = {}) => {
         let invalidBlock = options.escapeInvalid && utils.isInvalidBrace(parent);
         let invalidNode = node.invalid === true && options.escapeInvalid === true;
@@ -727,9 +785,9 @@ var require_stringify = __commonJS({
 
 // node_modules/to-regex-range/node_modules/is-number/index.js
 var require_is_number = __commonJS({
-  "node_modules/to-regex-range/node_modules/is-number/index.js"(exports2, module2) {
+  "node_modules/to-regex-range/node_modules/is-number/index.js"(exports, module) {
     "use strict";
-    module2.exports = function(num) {
+    module.exports = function(num) {
       if (typeof num === "number") {
         return num - num === 0;
       }
@@ -743,7 +801,7 @@ var require_is_number = __commonJS({
 
 // node_modules/to-regex-range/index.js
 var require_to_regex_range = __commonJS({
-  "node_modules/to-regex-range/index.js"(exports2, module2) {
+  "node_modules/to-regex-range/index.js"(exports, module) {
     "use strict";
     var isNumber = require_is_number();
     var toRegexRange = /* @__PURE__ */ __name((min, max, options) => {
@@ -987,15 +1045,15 @@ var require_to_regex_range = __commonJS({
     __name(padZeros, "padZeros");
     toRegexRange.cache = {};
     toRegexRange.clearCache = () => toRegexRange.cache = {};
-    module2.exports = toRegexRange;
+    module.exports = toRegexRange;
   }
 });
 
 // node_modules/fill-range/index.js
 var require_fill_range = __commonJS({
-  "node_modules/fill-range/index.js"(exports2, module2) {
+  "node_modules/fill-range/index.js"(exports, module) {
     "use strict";
-    var util = require("util");
+    var util = __require("util");
     var toRegexRange = require_to_regex_range();
     var isObject = /* @__PURE__ */ __name((val) => val !== null && typeof val === "object" && !Array.isArray(val), "isObject");
     var transform = /* @__PURE__ */ __name((toNumber) => {
@@ -1213,13 +1271,13 @@ var require_fill_range = __commonJS({
       }
       return fillLetters(start, end, Math.max(Math.abs(step), 1), opts);
     }, "fill");
-    module2.exports = fill;
+    module.exports = fill;
   }
 });
 
 // node_modules/braces/lib/compile.js
 var require_compile = __commonJS({
-  "node_modules/braces/lib/compile.js"(exports2, module2) {
+  "node_modules/braces/lib/compile.js"(exports, module) {
     "use strict";
     var fill = require_fill_range();
     var utils = require_utils();
@@ -1267,13 +1325,13 @@ var require_compile = __commonJS({
       }, "walk");
       return walk(ast);
     }, "compile");
-    module2.exports = compile;
+    module.exports = compile;
   }
 });
 
 // node_modules/braces/lib/expand.js
 var require_expand = __commonJS({
-  "node_modules/braces/lib/expand.js"(exports2, module2) {
+  "node_modules/braces/lib/expand.js"(exports, module) {
     "use strict";
     var fill = require_fill_range();
     var stringify = require_stringify();
@@ -1366,15 +1424,15 @@ var require_expand = __commonJS({
       }, "walk");
       return utils.flatten(walk(ast));
     }, "expand");
-    module2.exports = expand;
+    module.exports = expand;
   }
 });
 
 // node_modules/braces/lib/constants.js
 var require_constants = __commonJS({
-  "node_modules/braces/lib/constants.js"(exports2, module2) {
+  "node_modules/braces/lib/constants.js"(exports, module) {
     "use strict";
-    module2.exports = {
+    module.exports = {
       MAX_LENGTH: 1024 * 64,
       CHAR_0: "0",
       CHAR_9: "9",
@@ -1426,7 +1484,7 @@ var require_constants = __commonJS({
 
 // node_modules/braces/lib/parse.js
 var require_parse = __commonJS({
-  "node_modules/braces/lib/parse.js"(exports2, module2) {
+  "node_modules/braces/lib/parse.js"(exports, module) {
     "use strict";
     var stringify = require_stringify();
     var { MAX_LENGTH, CHAR_BACKSLASH, CHAR_BACKTICK, CHAR_COMMA, CHAR_DOT, CHAR_LEFT_PARENTHESES, CHAR_RIGHT_PARENTHESES, CHAR_LEFT_CURLY_BRACE, CHAR_RIGHT_CURLY_BRACE, CHAR_LEFT_SQUARE_BRACKET, CHAR_RIGHT_SQUARE_BRACKET, CHAR_DOUBLE_QUOTE, CHAR_SINGLE_QUOTE, CHAR_NO_BREAK_SPACE, CHAR_ZERO_WIDTH_NOBREAK_SPACE } = require_constants();
@@ -1697,13 +1755,13 @@ var require_parse = __commonJS({
       });
       return ast;
     }, "parse");
-    module2.exports = parse;
+    module.exports = parse;
   }
 });
 
 // node_modules/braces/index.js
 var require_braces = __commonJS({
-  "node_modules/braces/index.js"(exports2, module2) {
+  "node_modules/braces/index.js"(exports, module) {
     "use strict";
     var stringify = require_stringify();
     var compile = require_compile();
@@ -1766,15 +1824,15 @@ var require_braces = __commonJS({
       }
       return options.expand !== true ? braces.compile(input, options) : braces.expand(input, options);
     };
-    module2.exports = braces;
+    module.exports = braces;
   }
 });
 
 // node_modules/picomatch/lib/constants.js
 var require_constants2 = __commonJS({
-  "node_modules/picomatch/lib/constants.js"(exports2, module2) {
+  "node_modules/picomatch/lib/constants.js"(exports, module) {
     "use strict";
-    var path2 = require("path");
+    var path2 = __require("path");
     var WIN_SLASH = "\\\\/";
     var WIN_NO_SLASH = `[^${WIN_SLASH}]`;
     var DOT_LITERAL = "\\.";
@@ -1838,7 +1896,7 @@ var require_constants2 = __commonJS({
       word: "A-Za-z0-9_",
       xdigit: "A-Fa-f0-9"
     };
-    module2.exports = {
+    module.exports = {
       MAX_LENGTH: 1024 * 64,
       POSIX_REGEX_SOURCE,
       REGEX_BACKSLASH: /\\(?![*+?^${}(|)[\]])/g,
@@ -1934,43 +1992,43 @@ var require_constants2 = __commonJS({
 
 // node_modules/picomatch/lib/utils.js
 var require_utils2 = __commonJS({
-  "node_modules/picomatch/lib/utils.js"(exports2) {
+  "node_modules/picomatch/lib/utils.js"(exports) {
     "use strict";
-    var path2 = require("path");
+    var path2 = __require("path");
     var win32 = process.platform === "win32";
     var { REGEX_BACKSLASH, REGEX_REMOVE_BACKSLASH, REGEX_SPECIAL_CHARS, REGEX_SPECIAL_CHARS_GLOBAL } = require_constants2();
-    exports2.isObject = (val) => val !== null && typeof val === "object" && !Array.isArray(val);
-    exports2.hasRegexChars = (str) => REGEX_SPECIAL_CHARS.test(str);
-    exports2.isRegexChar = (str) => str.length === 1 && exports2.hasRegexChars(str);
-    exports2.escapeRegex = (str) => str.replace(REGEX_SPECIAL_CHARS_GLOBAL, "\\$1");
-    exports2.toPosixSlashes = (str) => str.replace(REGEX_BACKSLASH, "/");
-    exports2.removeBackslashes = (str) => {
+    exports.isObject = (val) => val !== null && typeof val === "object" && !Array.isArray(val);
+    exports.hasRegexChars = (str) => REGEX_SPECIAL_CHARS.test(str);
+    exports.isRegexChar = (str) => str.length === 1 && exports.hasRegexChars(str);
+    exports.escapeRegex = (str) => str.replace(REGEX_SPECIAL_CHARS_GLOBAL, "\\$1");
+    exports.toPosixSlashes = (str) => str.replace(REGEX_BACKSLASH, "/");
+    exports.removeBackslashes = (str) => {
       return str.replace(REGEX_REMOVE_BACKSLASH, (match) => {
         return match === "\\" ? "" : match;
       });
     };
-    exports2.supportsLookbehinds = () => {
+    exports.supportsLookbehinds = () => {
       const segs = process.version.slice(1).split(".").map(Number);
       if (segs.length === 3 && segs[0] >= 9 || segs[0] === 8 && segs[1] >= 10) {
         return true;
       }
       return false;
     };
-    exports2.isWindows = (options) => {
+    exports.isWindows = (options) => {
       if (options && typeof options.windows === "boolean") {
         return options.windows;
       }
       return win32 === true || path2.sep === "\\";
     };
-    exports2.escapeLast = (input, char, lastIdx) => {
+    exports.escapeLast = (input, char, lastIdx) => {
       const idx = input.lastIndexOf(char, lastIdx);
       if (idx === -1)
         return input;
       if (input[idx - 1] === "\\")
-        return exports2.escapeLast(input, char, idx - 1);
+        return exports.escapeLast(input, char, idx - 1);
       return `${input.slice(0, idx)}\\${input.slice(idx)}`;
     };
-    exports2.removePrefix = (input, state = {}) => {
+    exports.removePrefix = (input, state = {}) => {
       let output = input;
       if (output.startsWith("./")) {
         output = output.slice(2);
@@ -1978,7 +2036,7 @@ var require_utils2 = __commonJS({
       }
       return output;
     };
-    exports2.wrapOutput = (input, state = {}, options = {}) => {
+    exports.wrapOutput = (input, state = {}, options = {}) => {
       const prepend = options.contains ? "" : "^";
       const append = options.contains ? "" : "$";
       let output = `${prepend}(?:${input})${append}`;
@@ -1992,7 +2050,7 @@ var require_utils2 = __commonJS({
 
 // node_modules/picomatch/lib/scan.js
 var require_scan = __commonJS({
-  "node_modules/picomatch/lib/scan.js"(exports2, module2) {
+  "node_modules/picomatch/lib/scan.js"(exports, module) {
     "use strict";
     var utils = require_utils2();
     var { CHAR_ASTERISK, CHAR_AT, CHAR_BACKWARD_SLASH, CHAR_COMMA, CHAR_DOT, CHAR_EXCLAMATION_MARK, CHAR_FORWARD_SLASH, CHAR_LEFT_CURLY_BRACE, CHAR_LEFT_PARENTHESES, CHAR_LEFT_SQUARE_BRACKET, CHAR_PLUS, CHAR_QUESTION_MARK, CHAR_RIGHT_CURLY_BRACE, CHAR_RIGHT_PARENTHESES, CHAR_RIGHT_SQUARE_BRACKET } = require_constants2();
@@ -2296,13 +2354,13 @@ var require_scan = __commonJS({
       }
       return state;
     }, "scan");
-    module2.exports = scan;
+    module.exports = scan;
   }
 });
 
 // node_modules/picomatch/lib/parse.js
 var require_parse2 = __commonJS({
-  "node_modules/picomatch/lib/parse.js"(exports2, module2) {
+  "node_modules/picomatch/lib/parse.js"(exports, module) {
     "use strict";
     var constants = require_constants2();
     var utils = require_utils2();
@@ -3193,15 +3251,15 @@ var require_parse2 = __commonJS({
       }
       return source;
     };
-    module2.exports = parse;
+    module.exports = parse;
   }
 });
 
 // node_modules/picomatch/lib/picomatch.js
 var require_picomatch = __commonJS({
-  "node_modules/picomatch/lib/picomatch.js"(exports2, module2) {
+  "node_modules/picomatch/lib/picomatch.js"(exports, module) {
     "use strict";
-    var path2 = require("path");
+    var path2 = __require("path");
     var scan = require_scan();
     var parse = require_parse2();
     var utils = require_utils2();
@@ -3365,23 +3423,23 @@ var require_picomatch = __commonJS({
       }
     };
     picomatch.constants = constants;
-    module2.exports = picomatch;
+    module.exports = picomatch;
   }
 });
 
 // node_modules/picomatch/index.js
 var require_picomatch2 = __commonJS({
-  "node_modules/picomatch/index.js"(exports2, module2) {
+  "node_modules/picomatch/index.js"(exports, module) {
     "use strict";
-    module2.exports = require_picomatch();
+    module.exports = require_picomatch();
   }
 });
 
 // node_modules/micromatch/index.js
 var require_micromatch = __commonJS({
-  "node_modules/micromatch/index.js"(exports2, module2) {
+  "node_modules/micromatch/index.js"(exports, module) {
     "use strict";
-    var util = require("util");
+    var util = __require("util");
     var braces = require_braces();
     var picomatch = require_picomatch2();
     var utils = require_utils2();
@@ -3553,19 +3611,19 @@ var require_micromatch = __commonJS({
         expand: true
       }));
     };
-    module2.exports = micromatch;
+    module.exports = micromatch;
   }
 });
 
 // node_modules/fast-glob/out/utils/pattern.js
 var require_pattern = __commonJS({
-  "node_modules/fast-glob/out/utils/pattern.js"(exports2) {
+  "node_modules/fast-glob/out/utils/pattern.js"(exports) {
     "use strict";
-    Object.defineProperty(exports2, "__esModule", {
+    Object.defineProperty(exports, "__esModule", {
       value: true
     });
-    exports2.matchAny = exports2.convertPatternsToRe = exports2.makeRe = exports2.getPatternParts = exports2.expandBraceExpansion = exports2.expandPatternsWithBraceExpansion = exports2.isAffectDepthOfReadingPattern = exports2.endsWithSlashGlobStar = exports2.hasGlobStar = exports2.getBaseDirectory = exports2.isPatternRelatedToParentDirectory = exports2.getPatternsOutsideCurrentDirectory = exports2.getPatternsInsideCurrentDirectory = exports2.getPositivePatterns = exports2.getNegativePatterns = exports2.isPositivePattern = exports2.isNegativePattern = exports2.convertToNegativePattern = exports2.convertToPositivePattern = exports2.isDynamicPattern = exports2.isStaticPattern = void 0;
-    var path2 = require("path");
+    exports.matchAny = exports.convertPatternsToRe = exports.makeRe = exports.getPatternParts = exports.expandBraceExpansion = exports.expandPatternsWithBraceExpansion = exports.isAffectDepthOfReadingPattern = exports.endsWithSlashGlobStar = exports.hasGlobStar = exports.getBaseDirectory = exports.isPatternRelatedToParentDirectory = exports.getPatternsOutsideCurrentDirectory = exports.getPatternsInsideCurrentDirectory = exports.getPositivePatterns = exports.getNegativePatterns = exports.isPositivePattern = exports.isNegativePattern = exports.convertToNegativePattern = exports.convertToPositivePattern = exports.isDynamicPattern = exports.isStaticPattern = void 0;
+    var path2 = __require("path");
     var globParent = require_glob_parent();
     var micromatch = require_micromatch();
     var GLOBSTAR = "**";
@@ -3579,7 +3637,7 @@ var require_pattern = __commonJS({
       return !isDynamicPattern(pattern, options);
     }
     __name(isStaticPattern, "isStaticPattern");
-    exports2.isStaticPattern = isStaticPattern;
+    exports.isStaticPattern = isStaticPattern;
     function isDynamicPattern(pattern, options = {}) {
       if (pattern === "") {
         return false;
@@ -3599,7 +3657,7 @@ var require_pattern = __commonJS({
       return false;
     }
     __name(isDynamicPattern, "isDynamicPattern");
-    exports2.isDynamicPattern = isDynamicPattern;
+    exports.isDynamicPattern = isDynamicPattern;
     function hasBraceExpansion(pattern) {
       const openingBraceIndex = pattern.indexOf("{");
       if (openingBraceIndex === -1) {
@@ -3617,77 +3675,77 @@ var require_pattern = __commonJS({
       return isNegativePattern(pattern) ? pattern.slice(1) : pattern;
     }
     __name(convertToPositivePattern, "convertToPositivePattern");
-    exports2.convertToPositivePattern = convertToPositivePattern;
+    exports.convertToPositivePattern = convertToPositivePattern;
     function convertToNegativePattern(pattern) {
       return "!" + pattern;
     }
     __name(convertToNegativePattern, "convertToNegativePattern");
-    exports2.convertToNegativePattern = convertToNegativePattern;
+    exports.convertToNegativePattern = convertToNegativePattern;
     function isNegativePattern(pattern) {
       return pattern.startsWith("!") && pattern[1] !== "(";
     }
     __name(isNegativePattern, "isNegativePattern");
-    exports2.isNegativePattern = isNegativePattern;
+    exports.isNegativePattern = isNegativePattern;
     function isPositivePattern(pattern) {
       return !isNegativePattern(pattern);
     }
     __name(isPositivePattern, "isPositivePattern");
-    exports2.isPositivePattern = isPositivePattern;
+    exports.isPositivePattern = isPositivePattern;
     function getNegativePatterns(patterns) {
       return patterns.filter(isNegativePattern);
     }
     __name(getNegativePatterns, "getNegativePatterns");
-    exports2.getNegativePatterns = getNegativePatterns;
+    exports.getNegativePatterns = getNegativePatterns;
     function getPositivePatterns(patterns) {
       return patterns.filter(isPositivePattern);
     }
     __name(getPositivePatterns, "getPositivePatterns");
-    exports2.getPositivePatterns = getPositivePatterns;
+    exports.getPositivePatterns = getPositivePatterns;
     function getPatternsInsideCurrentDirectory(patterns) {
       return patterns.filter((pattern) => !isPatternRelatedToParentDirectory(pattern));
     }
     __name(getPatternsInsideCurrentDirectory, "getPatternsInsideCurrentDirectory");
-    exports2.getPatternsInsideCurrentDirectory = getPatternsInsideCurrentDirectory;
+    exports.getPatternsInsideCurrentDirectory = getPatternsInsideCurrentDirectory;
     function getPatternsOutsideCurrentDirectory(patterns) {
       return patterns.filter(isPatternRelatedToParentDirectory);
     }
     __name(getPatternsOutsideCurrentDirectory, "getPatternsOutsideCurrentDirectory");
-    exports2.getPatternsOutsideCurrentDirectory = getPatternsOutsideCurrentDirectory;
+    exports.getPatternsOutsideCurrentDirectory = getPatternsOutsideCurrentDirectory;
     function isPatternRelatedToParentDirectory(pattern) {
       return pattern.startsWith("..") || pattern.startsWith("./..");
     }
     __name(isPatternRelatedToParentDirectory, "isPatternRelatedToParentDirectory");
-    exports2.isPatternRelatedToParentDirectory = isPatternRelatedToParentDirectory;
+    exports.isPatternRelatedToParentDirectory = isPatternRelatedToParentDirectory;
     function getBaseDirectory(pattern) {
       return globParent(pattern, {
         flipBackslashes: false
       });
     }
     __name(getBaseDirectory, "getBaseDirectory");
-    exports2.getBaseDirectory = getBaseDirectory;
+    exports.getBaseDirectory = getBaseDirectory;
     function hasGlobStar(pattern) {
       return pattern.includes(GLOBSTAR);
     }
     __name(hasGlobStar, "hasGlobStar");
-    exports2.hasGlobStar = hasGlobStar;
+    exports.hasGlobStar = hasGlobStar;
     function endsWithSlashGlobStar(pattern) {
       return pattern.endsWith("/" + GLOBSTAR);
     }
     __name(endsWithSlashGlobStar, "endsWithSlashGlobStar");
-    exports2.endsWithSlashGlobStar = endsWithSlashGlobStar;
+    exports.endsWithSlashGlobStar = endsWithSlashGlobStar;
     function isAffectDepthOfReadingPattern(pattern) {
       const basename = path2.basename(pattern);
       return endsWithSlashGlobStar(pattern) || isStaticPattern(basename);
     }
     __name(isAffectDepthOfReadingPattern, "isAffectDepthOfReadingPattern");
-    exports2.isAffectDepthOfReadingPattern = isAffectDepthOfReadingPattern;
+    exports.isAffectDepthOfReadingPattern = isAffectDepthOfReadingPattern;
     function expandPatternsWithBraceExpansion(patterns) {
       return patterns.reduce((collection, pattern) => {
         return collection.concat(expandBraceExpansion(pattern));
       }, []);
     }
     __name(expandPatternsWithBraceExpansion, "expandPatternsWithBraceExpansion");
-    exports2.expandPatternsWithBraceExpansion = expandPatternsWithBraceExpansion;
+    exports.expandPatternsWithBraceExpansion = expandPatternsWithBraceExpansion;
     function expandBraceExpansion(pattern) {
       return micromatch.braces(pattern, {
         expand: true,
@@ -3695,7 +3753,7 @@ var require_pattern = __commonJS({
       });
     }
     __name(expandBraceExpansion, "expandBraceExpansion");
-    exports2.expandBraceExpansion = expandBraceExpansion;
+    exports.expandBraceExpansion = expandBraceExpansion;
     function getPatternParts(pattern, options) {
       let { parts } = micromatch.scan(pattern, Object.assign(Object.assign({}, options), {
         parts: true
@@ -3712,45 +3770,45 @@ var require_pattern = __commonJS({
       return parts;
     }
     __name(getPatternParts, "getPatternParts");
-    exports2.getPatternParts = getPatternParts;
+    exports.getPatternParts = getPatternParts;
     function makeRe(pattern, options) {
       return micromatch.makeRe(pattern, options);
     }
     __name(makeRe, "makeRe");
-    exports2.makeRe = makeRe;
+    exports.makeRe = makeRe;
     function convertPatternsToRe(patterns, options) {
       return patterns.map((pattern) => makeRe(pattern, options));
     }
     __name(convertPatternsToRe, "convertPatternsToRe");
-    exports2.convertPatternsToRe = convertPatternsToRe;
+    exports.convertPatternsToRe = convertPatternsToRe;
     function matchAny(entry, patternsRe) {
       return patternsRe.some((patternRe) => patternRe.test(entry));
     }
     __name(matchAny, "matchAny");
-    exports2.matchAny = matchAny;
+    exports.matchAny = matchAny;
   }
 });
 
 // node_modules/fast-glob/out/utils/stream.js
 var require_stream = __commonJS({
-  "node_modules/fast-glob/out/utils/stream.js"(exports2) {
+  "node_modules/fast-glob/out/utils/stream.js"(exports) {
     "use strict";
-    Object.defineProperty(exports2, "__esModule", {
+    Object.defineProperty(exports, "__esModule", {
       value: true
     });
-    exports2.merge = void 0;
+    exports.merge = void 0;
     var merge2 = require_merge2();
     function merge(streams) {
       const mergedStream = merge2(streams);
       streams.forEach((stream) => {
-        stream.once("error", (error2) => mergedStream.emit("error", error2));
+        stream.once("error", (error) => mergedStream.emit("error", error));
       });
       mergedStream.once("close", () => propagateCloseEventToSources(streams));
       mergedStream.once("end", () => propagateCloseEventToSources(streams));
       return mergedStream;
     }
     __name(merge, "merge");
-    exports2.merge = merge;
+    exports.merge = merge;
     function propagateCloseEventToSources(streams) {
       streams.forEach((stream) => stream.emit("close"));
     }
@@ -3760,58 +3818,58 @@ var require_stream = __commonJS({
 
 // node_modules/fast-glob/out/utils/string.js
 var require_string = __commonJS({
-  "node_modules/fast-glob/out/utils/string.js"(exports2) {
+  "node_modules/fast-glob/out/utils/string.js"(exports) {
     "use strict";
-    Object.defineProperty(exports2, "__esModule", {
+    Object.defineProperty(exports, "__esModule", {
       value: true
     });
-    exports2.isEmpty = exports2.isString = void 0;
+    exports.isEmpty = exports.isString = void 0;
     function isString(input) {
       return typeof input === "string";
     }
     __name(isString, "isString");
-    exports2.isString = isString;
+    exports.isString = isString;
     function isEmpty(input) {
       return input === "";
     }
     __name(isEmpty, "isEmpty");
-    exports2.isEmpty = isEmpty;
+    exports.isEmpty = isEmpty;
   }
 });
 
 // node_modules/fast-glob/out/utils/index.js
 var require_utils3 = __commonJS({
-  "node_modules/fast-glob/out/utils/index.js"(exports2) {
+  "node_modules/fast-glob/out/utils/index.js"(exports) {
     "use strict";
-    Object.defineProperty(exports2, "__esModule", {
+    Object.defineProperty(exports, "__esModule", {
       value: true
     });
-    exports2.string = exports2.stream = exports2.pattern = exports2.path = exports2.fs = exports2.errno = exports2.array = void 0;
+    exports.string = exports.stream = exports.pattern = exports.path = exports.fs = exports.errno = exports.array = void 0;
     var array = require_array();
-    exports2.array = array;
+    exports.array = array;
     var errno = require_errno();
-    exports2.errno = errno;
+    exports.errno = errno;
     var fs2 = require_fs();
-    exports2.fs = fs2;
+    exports.fs = fs2;
     var path2 = require_path();
-    exports2.path = path2;
+    exports.path = path2;
     var pattern = require_pattern();
-    exports2.pattern = pattern;
+    exports.pattern = pattern;
     var stream = require_stream();
-    exports2.stream = stream;
+    exports.stream = stream;
     var string = require_string();
-    exports2.string = string;
+    exports.string = string;
   }
 });
 
 // node_modules/fast-glob/out/managers/tasks.js
 var require_tasks = __commonJS({
-  "node_modules/fast-glob/out/managers/tasks.js"(exports2) {
+  "node_modules/fast-glob/out/managers/tasks.js"(exports) {
     "use strict";
-    Object.defineProperty(exports2, "__esModule", {
+    Object.defineProperty(exports, "__esModule", {
       value: true
     });
-    exports2.convertPatternGroupToTask = exports2.convertPatternGroupsToTasks = exports2.groupPatternsByBaseDirectory = exports2.getNegativePatternsAsPositive = exports2.getPositivePatterns = exports2.convertPatternsToTasks = exports2.generate = void 0;
+    exports.convertPatternGroupToTask = exports.convertPatternGroupsToTasks = exports.groupPatternsByBaseDirectory = exports.getNegativePatternsAsPositive = exports.getPositivePatterns = exports.convertPatternsToTasks = exports.generate = void 0;
     var utils = require_utils3();
     function generate3(patterns, settings) {
       const positivePatterns = getPositivePatterns(patterns);
@@ -3823,7 +3881,7 @@ var require_tasks = __commonJS({
       return staticTasks.concat(dynamicTasks);
     }
     __name(generate3, "generate");
-    exports2.generate = generate3;
+    exports.generate = generate3;
     function convertPatternsToTasks(positive, negative, dynamic) {
       const tasks = [];
       const patternsOutsideCurrentDirectory = utils.pattern.getPatternsOutsideCurrentDirectory(positive);
@@ -3839,19 +3897,19 @@ var require_tasks = __commonJS({
       return tasks;
     }
     __name(convertPatternsToTasks, "convertPatternsToTasks");
-    exports2.convertPatternsToTasks = convertPatternsToTasks;
+    exports.convertPatternsToTasks = convertPatternsToTasks;
     function getPositivePatterns(patterns) {
       return utils.pattern.getPositivePatterns(patterns);
     }
     __name(getPositivePatterns, "getPositivePatterns");
-    exports2.getPositivePatterns = getPositivePatterns;
+    exports.getPositivePatterns = getPositivePatterns;
     function getNegativePatternsAsPositive(patterns, ignore) {
       const negative = utils.pattern.getNegativePatterns(patterns).concat(ignore);
       const positive = negative.map(utils.pattern.convertToPositivePattern);
       return positive;
     }
     __name(getNegativePatternsAsPositive, "getNegativePatternsAsPositive");
-    exports2.getNegativePatternsAsPositive = getNegativePatternsAsPositive;
+    exports.getNegativePatternsAsPositive = getNegativePatternsAsPositive;
     function groupPatternsByBaseDirectory(patterns) {
       const group = {};
       return patterns.reduce((collection, pattern) => {
@@ -3867,14 +3925,14 @@ var require_tasks = __commonJS({
       }, group);
     }
     __name(groupPatternsByBaseDirectory, "groupPatternsByBaseDirectory");
-    exports2.groupPatternsByBaseDirectory = groupPatternsByBaseDirectory;
+    exports.groupPatternsByBaseDirectory = groupPatternsByBaseDirectory;
     function convertPatternGroupsToTasks(positive, negative, dynamic) {
       return Object.keys(positive).map((base) => {
         return convertPatternGroupToTask(base, positive[base], negative, dynamic);
       });
     }
     __name(convertPatternGroupsToTasks, "convertPatternGroupsToTasks");
-    exports2.convertPatternGroupsToTasks = convertPatternGroupsToTasks;
+    exports.convertPatternGroupsToTasks = convertPatternGroupsToTasks;
     function convertPatternGroupToTask(base, positive, negative, dynamic) {
       return {
         dynamic,
@@ -3885,40 +3943,40 @@ var require_tasks = __commonJS({
       };
     }
     __name(convertPatternGroupToTask, "convertPatternGroupToTask");
-    exports2.convertPatternGroupToTask = convertPatternGroupToTask;
+    exports.convertPatternGroupToTask = convertPatternGroupToTask;
   }
 });
 
 // node_modules/fast-glob/out/managers/patterns.js
 var require_patterns = __commonJS({
-  "node_modules/fast-glob/out/managers/patterns.js"(exports2) {
+  "node_modules/fast-glob/out/managers/patterns.js"(exports) {
     "use strict";
-    Object.defineProperty(exports2, "__esModule", {
+    Object.defineProperty(exports, "__esModule", {
       value: true
     });
-    exports2.removeDuplicateSlashes = exports2.transform = void 0;
+    exports.removeDuplicateSlashes = exports.transform = void 0;
     var DOUBLE_SLASH_RE = /(?!^)\/{2,}/g;
     function transform(patterns) {
       return patterns.map((pattern) => removeDuplicateSlashes(pattern));
     }
     __name(transform, "transform");
-    exports2.transform = transform;
+    exports.transform = transform;
     function removeDuplicateSlashes(pattern) {
       return pattern.replace(DOUBLE_SLASH_RE, "/");
     }
     __name(removeDuplicateSlashes, "removeDuplicateSlashes");
-    exports2.removeDuplicateSlashes = removeDuplicateSlashes;
+    exports.removeDuplicateSlashes = removeDuplicateSlashes;
   }
 });
 
 // node_modules/@nodelib/fs.stat/out/providers/async.js
 var require_async = __commonJS({
-  "node_modules/@nodelib/fs.stat/out/providers/async.js"(exports2) {
+  "node_modules/@nodelib/fs.stat/out/providers/async.js"(exports) {
     "use strict";
-    Object.defineProperty(exports2, "__esModule", {
+    Object.defineProperty(exports, "__esModule", {
       value: true
     });
-    exports2.read = void 0;
+    exports.read = void 0;
     function read(path2, settings, callback) {
       settings.fs.lstat(path2, (lstatError, lstat) => {
         if (lstatError !== null) {
@@ -3946,9 +4004,9 @@ var require_async = __commonJS({
       });
     }
     __name(read, "read");
-    exports2.read = read;
-    function callFailureCallback(callback, error2) {
-      callback(error2);
+    exports.read = read;
+    function callFailureCallback(callback, error) {
+      callback(error);
     }
     __name(callFailureCallback, "callFailureCallback");
     function callSuccessCallback(callback, result) {
@@ -3960,12 +4018,12 @@ var require_async = __commonJS({
 
 // node_modules/@nodelib/fs.stat/out/providers/sync.js
 var require_sync = __commonJS({
-  "node_modules/@nodelib/fs.stat/out/providers/sync.js"(exports2) {
+  "node_modules/@nodelib/fs.stat/out/providers/sync.js"(exports) {
     "use strict";
-    Object.defineProperty(exports2, "__esModule", {
+    Object.defineProperty(exports, "__esModule", {
       value: true
     });
-    exports2.read = void 0;
+    exports.read = void 0;
     function read(path2, settings) {
       const lstat = settings.fs.lstatSync(path2);
       if (!lstat.isSymbolicLink() || !settings.followSymbolicLink) {
@@ -3977,28 +4035,28 @@ var require_sync = __commonJS({
           stat.isSymbolicLink = () => true;
         }
         return stat;
-      } catch (error2) {
+      } catch (error) {
         if (!settings.throwErrorOnBrokenSymbolicLink) {
           return lstat;
         }
-        throw error2;
+        throw error;
       }
     }
     __name(read, "read");
-    exports2.read = read;
+    exports.read = read;
   }
 });
 
 // node_modules/@nodelib/fs.stat/out/adapters/fs.js
 var require_fs2 = __commonJS({
-  "node_modules/@nodelib/fs.stat/out/adapters/fs.js"(exports2) {
+  "node_modules/@nodelib/fs.stat/out/adapters/fs.js"(exports) {
     "use strict";
-    Object.defineProperty(exports2, "__esModule", {
+    Object.defineProperty(exports, "__esModule", {
       value: true
     });
-    exports2.createFileSystemAdapter = exports2.FILE_SYSTEM_ADAPTER = void 0;
-    var fs2 = require("fs");
-    exports2.FILE_SYSTEM_ADAPTER = {
+    exports.createFileSystemAdapter = exports.FILE_SYSTEM_ADAPTER = void 0;
+    var fs2 = __require("fs");
+    exports.FILE_SYSTEM_ADAPTER = {
       lstat: fs2.lstat,
       stat: fs2.stat,
       lstatSync: fs2.lstatSync,
@@ -4006,20 +4064,20 @@ var require_fs2 = __commonJS({
     };
     function createFileSystemAdapter(fsMethods) {
       if (fsMethods === void 0) {
-        return exports2.FILE_SYSTEM_ADAPTER;
+        return exports.FILE_SYSTEM_ADAPTER;
       }
-      return Object.assign(Object.assign({}, exports2.FILE_SYSTEM_ADAPTER), fsMethods);
+      return Object.assign(Object.assign({}, exports.FILE_SYSTEM_ADAPTER), fsMethods);
     }
     __name(createFileSystemAdapter, "createFileSystemAdapter");
-    exports2.createFileSystemAdapter = createFileSystemAdapter;
+    exports.createFileSystemAdapter = createFileSystemAdapter;
   }
 });
 
 // node_modules/@nodelib/fs.stat/out/settings.js
 var require_settings = __commonJS({
-  "node_modules/@nodelib/fs.stat/out/settings.js"(exports2) {
+  "node_modules/@nodelib/fs.stat/out/settings.js"(exports) {
     "use strict";
-    Object.defineProperty(exports2, "__esModule", {
+    Object.defineProperty(exports, "__esModule", {
       value: true
     });
     var fs2 = require_fs2();
@@ -4035,22 +4093,22 @@ var require_settings = __commonJS({
         return option !== null && option !== void 0 ? option : value;
       }
     }, "Settings");
-    exports2.default = Settings;
+    exports.default = Settings;
   }
 });
 
 // node_modules/@nodelib/fs.stat/out/index.js
 var require_out = __commonJS({
-  "node_modules/@nodelib/fs.stat/out/index.js"(exports2) {
+  "node_modules/@nodelib/fs.stat/out/index.js"(exports) {
     "use strict";
-    Object.defineProperty(exports2, "__esModule", {
+    Object.defineProperty(exports, "__esModule", {
       value: true
     });
-    exports2.statSync = exports2.stat = exports2.Settings = void 0;
+    exports.statSync = exports.stat = exports.Settings = void 0;
     var async = require_async();
     var sync = require_sync();
     var settings_1 = require_settings();
-    exports2.Settings = settings_1.default;
+    exports.Settings = settings_1.default;
     function stat(path2, optionsOrSettingsOrCallback, callback) {
       if (typeof optionsOrSettingsOrCallback === "function") {
         async.read(path2, getSettings(), optionsOrSettingsOrCallback);
@@ -4059,13 +4117,13 @@ var require_out = __commonJS({
       async.read(path2, getSettings(optionsOrSettingsOrCallback), callback);
     }
     __name(stat, "stat");
-    exports2.stat = stat;
+    exports.stat = stat;
     function statSync(path2, optionsOrSettings) {
       const settings = getSettings(optionsOrSettings);
       return sync.read(path2, settings);
     }
     __name(statSync, "statSync");
-    exports2.statSync = statSync;
+    exports.statSync = statSync;
     function getSettings(settingsOrOptions = {}) {
       if (settingsOrOptions instanceof settings_1.default) {
         return settingsOrOptions;
@@ -4078,9 +4136,9 @@ var require_out = __commonJS({
 
 // node_modules/queue-microtask/index.js
 var require_queue_microtask = __commonJS({
-  "node_modules/queue-microtask/index.js"(exports2, module2) {
+  "node_modules/queue-microtask/index.js"(exports, module) {
     var promise;
-    module2.exports = typeof queueMicrotask === "function" ? queueMicrotask.bind(typeof window !== "undefined" ? window : global) : (cb) => (promise || (promise = Promise.resolve())).then(cb).catch((err) => setTimeout(() => {
+    module.exports = typeof queueMicrotask === "function" ? queueMicrotask.bind(typeof window !== "undefined" ? window : global) : (cb) => (promise || (promise = Promise.resolve())).then(cb).catch((err) => setTimeout(() => {
       throw err;
     }, 0));
   }
@@ -4088,8 +4146,8 @@ var require_queue_microtask = __commonJS({
 
 // node_modules/run-parallel/index.js
 var require_run_parallel = __commonJS({
-  "node_modules/run-parallel/index.js"(exports2, module2) {
-    module2.exports = runParallel;
+  "node_modules/run-parallel/index.js"(exports, module) {
+    module.exports = runParallel;
     var queueMicrotask2 = require_queue_microtask();
     function runParallel(tasks, cb) {
       let results, pending, keys;
@@ -4145,12 +4203,12 @@ var require_run_parallel = __commonJS({
 
 // node_modules/@nodelib/fs.scandir/out/constants.js
 var require_constants3 = __commonJS({
-  "node_modules/@nodelib/fs.scandir/out/constants.js"(exports2) {
+  "node_modules/@nodelib/fs.scandir/out/constants.js"(exports) {
     "use strict";
-    Object.defineProperty(exports2, "__esModule", {
+    Object.defineProperty(exports, "__esModule", {
       value: true
     });
-    exports2.IS_SUPPORT_READDIR_WITH_FILE_TYPES = void 0;
+    exports.IS_SUPPORT_READDIR_WITH_FILE_TYPES = void 0;
     var NODE_PROCESS_VERSION_PARTS = process.versions.node.split(".");
     if (NODE_PROCESS_VERSION_PARTS[0] === void 0 || NODE_PROCESS_VERSION_PARTS[1] === void 0) {
       throw new Error(`Unexpected behavior. The 'process.versions.node' variable has invalid value: ${process.versions.node}`);
@@ -4161,18 +4219,18 @@ var require_constants3 = __commonJS({
     var SUPPORTED_MINOR_VERSION = 10;
     var IS_MATCHED_BY_MAJOR = MAJOR_VERSION > SUPPORTED_MAJOR_VERSION;
     var IS_MATCHED_BY_MAJOR_AND_MINOR = MAJOR_VERSION === SUPPORTED_MAJOR_VERSION && MINOR_VERSION >= SUPPORTED_MINOR_VERSION;
-    exports2.IS_SUPPORT_READDIR_WITH_FILE_TYPES = IS_MATCHED_BY_MAJOR || IS_MATCHED_BY_MAJOR_AND_MINOR;
+    exports.IS_SUPPORT_READDIR_WITH_FILE_TYPES = IS_MATCHED_BY_MAJOR || IS_MATCHED_BY_MAJOR_AND_MINOR;
   }
 });
 
 // node_modules/@nodelib/fs.scandir/out/utils/fs.js
 var require_fs3 = __commonJS({
-  "node_modules/@nodelib/fs.scandir/out/utils/fs.js"(exports2) {
+  "node_modules/@nodelib/fs.scandir/out/utils/fs.js"(exports) {
     "use strict";
-    Object.defineProperty(exports2, "__esModule", {
+    Object.defineProperty(exports, "__esModule", {
       value: true
     });
-    exports2.createDirentFromStats = void 0;
+    exports.createDirentFromStats = void 0;
     var DirentFromStats = /* @__PURE__ */ __name(class DirentFromStats {
       constructor(name, stats) {
         this.name = name;
@@ -4189,31 +4247,31 @@ var require_fs3 = __commonJS({
       return new DirentFromStats(name, stats);
     }
     __name(createDirentFromStats, "createDirentFromStats");
-    exports2.createDirentFromStats = createDirentFromStats;
+    exports.createDirentFromStats = createDirentFromStats;
   }
 });
 
 // node_modules/@nodelib/fs.scandir/out/utils/index.js
 var require_utils4 = __commonJS({
-  "node_modules/@nodelib/fs.scandir/out/utils/index.js"(exports2) {
+  "node_modules/@nodelib/fs.scandir/out/utils/index.js"(exports) {
     "use strict";
-    Object.defineProperty(exports2, "__esModule", {
+    Object.defineProperty(exports, "__esModule", {
       value: true
     });
-    exports2.fs = void 0;
+    exports.fs = void 0;
     var fs2 = require_fs3();
-    exports2.fs = fs2;
+    exports.fs = fs2;
   }
 });
 
 // node_modules/@nodelib/fs.scandir/out/providers/common.js
 var require_common = __commonJS({
-  "node_modules/@nodelib/fs.scandir/out/providers/common.js"(exports2) {
+  "node_modules/@nodelib/fs.scandir/out/providers/common.js"(exports) {
     "use strict";
-    Object.defineProperty(exports2, "__esModule", {
+    Object.defineProperty(exports, "__esModule", {
       value: true
     });
-    exports2.joinPathSegments = void 0;
+    exports.joinPathSegments = void 0;
     function joinPathSegments(a, b, separator) {
       if (a.endsWith(separator)) {
         return a + b;
@@ -4221,18 +4279,18 @@ var require_common = __commonJS({
       return a + separator + b;
     }
     __name(joinPathSegments, "joinPathSegments");
-    exports2.joinPathSegments = joinPathSegments;
+    exports.joinPathSegments = joinPathSegments;
   }
 });
 
 // node_modules/@nodelib/fs.scandir/out/providers/async.js
 var require_async2 = __commonJS({
-  "node_modules/@nodelib/fs.scandir/out/providers/async.js"(exports2) {
+  "node_modules/@nodelib/fs.scandir/out/providers/async.js"(exports) {
     "use strict";
-    Object.defineProperty(exports2, "__esModule", {
+    Object.defineProperty(exports, "__esModule", {
       value: true
     });
-    exports2.readdir = exports2.readdirWithFileTypes = exports2.read = void 0;
+    exports.readdir = exports.readdirWithFileTypes = exports.read = void 0;
     var fsStat = require_out();
     var rpl = require_run_parallel();
     var constants_1 = require_constants3();
@@ -4246,7 +4304,7 @@ var require_async2 = __commonJS({
       readdir(directory, settings, callback);
     }
     __name(read, "read");
-    exports2.read = read;
+    exports.read = read;
     function readdirWithFileTypes(directory, settings, callback) {
       settings.fs.readdir(directory, {
         withFileTypes: true
@@ -4275,7 +4333,7 @@ var require_async2 = __commonJS({
       });
     }
     __name(readdirWithFileTypes, "readdirWithFileTypes");
-    exports2.readdirWithFileTypes = readdirWithFileTypes;
+    exports.readdirWithFileTypes = readdirWithFileTypes;
     function makeRplTaskEntry(entry, settings) {
       return (done) => {
         if (!entry.dirent.isSymbolicLink()) {
@@ -4306,9 +4364,9 @@ var require_async2 = __commonJS({
         const tasks = names.map((name) => {
           const path2 = common.joinPathSegments(directory, name, settings.pathSegmentSeparator);
           return (done) => {
-            fsStat.stat(path2, settings.fsStatSettings, (error2, stats) => {
-              if (error2 !== null) {
-                done(error2);
+            fsStat.stat(path2, settings.fsStatSettings, (error, stats) => {
+              if (error !== null) {
+                done(error);
                 return;
               }
               const entry = {
@@ -4333,9 +4391,9 @@ var require_async2 = __commonJS({
       });
     }
     __name(readdir, "readdir");
-    exports2.readdir = readdir;
-    function callFailureCallback(callback, error2) {
-      callback(error2);
+    exports.readdir = readdir;
+    function callFailureCallback(callback, error) {
+      callback(error);
     }
     __name(callFailureCallback, "callFailureCallback");
     function callSuccessCallback(callback, result) {
@@ -4347,12 +4405,12 @@ var require_async2 = __commonJS({
 
 // node_modules/@nodelib/fs.scandir/out/providers/sync.js
 var require_sync2 = __commonJS({
-  "node_modules/@nodelib/fs.scandir/out/providers/sync.js"(exports2) {
+  "node_modules/@nodelib/fs.scandir/out/providers/sync.js"(exports) {
     "use strict";
-    Object.defineProperty(exports2, "__esModule", {
+    Object.defineProperty(exports, "__esModule", {
       value: true
     });
-    exports2.readdir = exports2.readdirWithFileTypes = exports2.read = void 0;
+    exports.readdir = exports.readdirWithFileTypes = exports.read = void 0;
     var fsStat = require_out();
     var constants_1 = require_constants3();
     var utils = require_utils4();
@@ -4364,7 +4422,7 @@ var require_sync2 = __commonJS({
       return readdir(directory, settings);
     }
     __name(read, "read");
-    exports2.read = read;
+    exports.read = read;
     function readdirWithFileTypes(directory, settings) {
       const dirents = settings.fs.readdirSync(directory, {
         withFileTypes: true
@@ -4379,9 +4437,9 @@ var require_sync2 = __commonJS({
           try {
             const stats = settings.fs.statSync(entry.path);
             entry.dirent = utils.fs.createDirentFromStats(entry.name, stats);
-          } catch (error2) {
+          } catch (error) {
             if (settings.throwErrorOnBrokenSymbolicLink) {
-              throw error2;
+              throw error;
             }
           }
         }
@@ -4389,7 +4447,7 @@ var require_sync2 = __commonJS({
       });
     }
     __name(readdirWithFileTypes, "readdirWithFileTypes");
-    exports2.readdirWithFileTypes = readdirWithFileTypes;
+    exports.readdirWithFileTypes = readdirWithFileTypes;
     function readdir(directory, settings) {
       const names = settings.fs.readdirSync(directory);
       return names.map((name) => {
@@ -4407,20 +4465,20 @@ var require_sync2 = __commonJS({
       });
     }
     __name(readdir, "readdir");
-    exports2.readdir = readdir;
+    exports.readdir = readdir;
   }
 });
 
 // node_modules/@nodelib/fs.scandir/out/adapters/fs.js
 var require_fs4 = __commonJS({
-  "node_modules/@nodelib/fs.scandir/out/adapters/fs.js"(exports2) {
+  "node_modules/@nodelib/fs.scandir/out/adapters/fs.js"(exports) {
     "use strict";
-    Object.defineProperty(exports2, "__esModule", {
+    Object.defineProperty(exports, "__esModule", {
       value: true
     });
-    exports2.createFileSystemAdapter = exports2.FILE_SYSTEM_ADAPTER = void 0;
-    var fs2 = require("fs");
-    exports2.FILE_SYSTEM_ADAPTER = {
+    exports.createFileSystemAdapter = exports.FILE_SYSTEM_ADAPTER = void 0;
+    var fs2 = __require("fs");
+    exports.FILE_SYSTEM_ADAPTER = {
       lstat: fs2.lstat,
       stat: fs2.stat,
       lstatSync: fs2.lstatSync,
@@ -4430,23 +4488,23 @@ var require_fs4 = __commonJS({
     };
     function createFileSystemAdapter(fsMethods) {
       if (fsMethods === void 0) {
-        return exports2.FILE_SYSTEM_ADAPTER;
+        return exports.FILE_SYSTEM_ADAPTER;
       }
-      return Object.assign(Object.assign({}, exports2.FILE_SYSTEM_ADAPTER), fsMethods);
+      return Object.assign(Object.assign({}, exports.FILE_SYSTEM_ADAPTER), fsMethods);
     }
     __name(createFileSystemAdapter, "createFileSystemAdapter");
-    exports2.createFileSystemAdapter = createFileSystemAdapter;
+    exports.createFileSystemAdapter = createFileSystemAdapter;
   }
 });
 
 // node_modules/@nodelib/fs.scandir/out/settings.js
 var require_settings2 = __commonJS({
-  "node_modules/@nodelib/fs.scandir/out/settings.js"(exports2) {
+  "node_modules/@nodelib/fs.scandir/out/settings.js"(exports) {
     "use strict";
-    Object.defineProperty(exports2, "__esModule", {
+    Object.defineProperty(exports, "__esModule", {
       value: true
     });
-    var path2 = require("path");
+    var path2 = __require("path");
     var fsStat = require_out();
     var fs2 = require_fs4();
     var Settings = /* @__PURE__ */ __name(class Settings {
@@ -4467,22 +4525,22 @@ var require_settings2 = __commonJS({
         return option !== null && option !== void 0 ? option : value;
       }
     }, "Settings");
-    exports2.default = Settings;
+    exports.default = Settings;
   }
 });
 
 // node_modules/@nodelib/fs.scandir/out/index.js
 var require_out2 = __commonJS({
-  "node_modules/@nodelib/fs.scandir/out/index.js"(exports2) {
+  "node_modules/@nodelib/fs.scandir/out/index.js"(exports) {
     "use strict";
-    Object.defineProperty(exports2, "__esModule", {
+    Object.defineProperty(exports, "__esModule", {
       value: true
     });
-    exports2.Settings = exports2.scandirSync = exports2.scandir = void 0;
+    exports.Settings = exports.scandirSync = exports.scandir = void 0;
     var async = require_async2();
     var sync = require_sync2();
     var settings_1 = require_settings2();
-    exports2.Settings = settings_1.default;
+    exports.Settings = settings_1.default;
     function scandir(path2, optionsOrSettingsOrCallback, callback) {
       if (typeof optionsOrSettingsOrCallback === "function") {
         async.read(path2, getSettings(), optionsOrSettingsOrCallback);
@@ -4491,13 +4549,13 @@ var require_out2 = __commonJS({
       async.read(path2, getSettings(optionsOrSettingsOrCallback), callback);
     }
     __name(scandir, "scandir");
-    exports2.scandir = scandir;
+    exports.scandir = scandir;
     function scandirSync(path2, optionsOrSettings) {
       const settings = getSettings(optionsOrSettings);
       return sync.read(path2, settings);
     }
     __name(scandirSync, "scandirSync");
-    exports2.scandirSync = scandirSync;
+    exports.scandirSync = scandirSync;
     function getSettings(settingsOrOptions = {}) {
       if (settingsOrOptions instanceof settings_1.default) {
         return settingsOrOptions;
@@ -4510,7 +4568,7 @@ var require_out2 = __commonJS({
 
 // node_modules/reusify/reusify.js
 var require_reusify = __commonJS({
-  "node_modules/reusify/reusify.js"(exports2, module2) {
+  "node_modules/reusify/reusify.js"(exports, module) {
     "use strict";
     function reusify(Constructor) {
       var head = new Constructor();
@@ -4538,13 +4596,13 @@ var require_reusify = __commonJS({
       };
     }
     __name(reusify, "reusify");
-    module2.exports = reusify;
+    module.exports = reusify;
   }
 });
 
 // node_modules/fastq/queue.js
 var require_queue = __commonJS({
-  "node_modules/fastq/queue.js"(exports2, module2) {
+  "node_modules/fastq/queue.js"(exports, module) {
     "use strict";
     var reusify = require_reusify();
     function fastqueue(context, worker, concurrency) {
@@ -4577,7 +4635,7 @@ var require_queue = __commonJS({
         empty: noop,
         kill,
         killAndDrain,
-        error: error2
+        error
       };
       return self2;
       function running() {
@@ -4702,10 +4760,10 @@ var require_queue = __commonJS({
         self2.drain = noop;
       }
       __name(killAndDrain, "killAndDrain");
-      function error2(handler) {
+      function error(handler) {
         errorHandler = handler;
       }
-      __name(error2, "error");
+      __name(error, "error");
     }
     __name(fastqueue, "fastqueue");
     function noop() {
@@ -4793,37 +4851,37 @@ var require_queue = __commonJS({
       __name(drained, "drained");
     }
     __name(queueAsPromised, "queueAsPromised");
-    module2.exports = fastqueue;
-    module2.exports.promise = queueAsPromised;
+    module.exports = fastqueue;
+    module.exports.promise = queueAsPromised;
   }
 });
 
 // node_modules/@nodelib/fs.walk/out/readers/common.js
 var require_common2 = __commonJS({
-  "node_modules/@nodelib/fs.walk/out/readers/common.js"(exports2) {
+  "node_modules/@nodelib/fs.walk/out/readers/common.js"(exports) {
     "use strict";
-    Object.defineProperty(exports2, "__esModule", {
+    Object.defineProperty(exports, "__esModule", {
       value: true
     });
-    exports2.joinPathSegments = exports2.replacePathSegmentSeparator = exports2.isAppliedFilter = exports2.isFatalError = void 0;
-    function isFatalError(settings, error2) {
+    exports.joinPathSegments = exports.replacePathSegmentSeparator = exports.isAppliedFilter = exports.isFatalError = void 0;
+    function isFatalError(settings, error) {
       if (settings.errorFilter === null) {
         return true;
       }
-      return !settings.errorFilter(error2);
+      return !settings.errorFilter(error);
     }
     __name(isFatalError, "isFatalError");
-    exports2.isFatalError = isFatalError;
+    exports.isFatalError = isFatalError;
     function isAppliedFilter(filter, value) {
       return filter === null || filter(value);
     }
     __name(isAppliedFilter, "isAppliedFilter");
-    exports2.isAppliedFilter = isAppliedFilter;
+    exports.isAppliedFilter = isAppliedFilter;
     function replacePathSegmentSeparator(filepath, separator) {
       return filepath.split(/[/\\]/).join(separator);
     }
     __name(replacePathSegmentSeparator, "replacePathSegmentSeparator");
-    exports2.replacePathSegmentSeparator = replacePathSegmentSeparator;
+    exports.replacePathSegmentSeparator = replacePathSegmentSeparator;
     function joinPathSegments(a, b, separator) {
       if (a === "") {
         return b;
@@ -4834,15 +4892,15 @@ var require_common2 = __commonJS({
       return a + separator + b;
     }
     __name(joinPathSegments, "joinPathSegments");
-    exports2.joinPathSegments = joinPathSegments;
+    exports.joinPathSegments = joinPathSegments;
   }
 });
 
 // node_modules/@nodelib/fs.walk/out/readers/reader.js
 var require_reader = __commonJS({
-  "node_modules/@nodelib/fs.walk/out/readers/reader.js"(exports2) {
+  "node_modules/@nodelib/fs.walk/out/readers/reader.js"(exports) {
     "use strict";
-    Object.defineProperty(exports2, "__esModule", {
+    Object.defineProperty(exports, "__esModule", {
       value: true
     });
     var common = require_common2();
@@ -4853,18 +4911,18 @@ var require_reader = __commonJS({
         this._root = common.replacePathSegmentSeparator(_root, _settings.pathSegmentSeparator);
       }
     }, "Reader");
-    exports2.default = Reader;
+    exports.default = Reader;
   }
 });
 
 // node_modules/@nodelib/fs.walk/out/readers/async.js
 var require_async3 = __commonJS({
-  "node_modules/@nodelib/fs.walk/out/readers/async.js"(exports2) {
+  "node_modules/@nodelib/fs.walk/out/readers/async.js"(exports) {
     "use strict";
-    Object.defineProperty(exports2, "__esModule", {
+    Object.defineProperty(exports, "__esModule", {
       value: true
     });
-    var events_1 = require("events");
+    var events_1 = __require("events");
     var fsScandir = require_out2();
     var fastq = require_queue();
     var common = require_common2();
@@ -4916,16 +4974,16 @@ var require_async3 = __commonJS({
           directory,
           base
         };
-        this._queue.push(queueItem, (error2) => {
-          if (error2 !== null) {
-            this._handleError(error2);
+        this._queue.push(queueItem, (error) => {
+          if (error !== null) {
+            this._handleError(error);
           }
         });
       }
       _worker(item, done) {
-        this._scandir(item.directory, this._settings.fsScandirSettings, (error2, entries) => {
-          if (error2 !== null) {
-            done(error2, void 0);
+        this._scandir(item.directory, this._settings.fsScandirSettings, (error, entries) => {
+          if (error !== null) {
+            done(error, void 0);
             return;
           }
           for (const entry of entries) {
@@ -4934,13 +4992,13 @@ var require_async3 = __commonJS({
           done(null, void 0);
         });
       }
-      _handleError(error2) {
-        if (this._isDestroyed || !common.isFatalError(this._settings, error2)) {
+      _handleError(error) {
+        if (this._isDestroyed || !common.isFatalError(this._settings, error)) {
           return;
         }
         this._isFatalError = true;
         this._isDestroyed = true;
-        this._emitter.emit("error", error2);
+        this._emitter.emit("error", error);
       }
       _handleEntry(entry, base) {
         if (this._isDestroyed || this._isFatalError) {
@@ -4961,15 +5019,15 @@ var require_async3 = __commonJS({
         this._emitter.emit("entry", entry);
       }
     }, "AsyncReader");
-    exports2.default = AsyncReader;
+    exports.default = AsyncReader;
   }
 });
 
 // node_modules/@nodelib/fs.walk/out/providers/async.js
 var require_async4 = __commonJS({
-  "node_modules/@nodelib/fs.walk/out/providers/async.js"(exports2) {
+  "node_modules/@nodelib/fs.walk/out/providers/async.js"(exports) {
     "use strict";
-    Object.defineProperty(exports2, "__esModule", {
+    Object.defineProperty(exports, "__esModule", {
       value: true
     });
     var async_1 = require_async3();
@@ -4981,8 +5039,8 @@ var require_async4 = __commonJS({
         this._storage = [];
       }
       read(callback) {
-        this._reader.onError((error2) => {
-          callFailureCallback(callback, error2);
+        this._reader.onError((error) => {
+          callFailureCallback(callback, error);
         });
         this._reader.onEntry((entry) => {
           this._storage.push(entry);
@@ -4993,9 +5051,9 @@ var require_async4 = __commonJS({
         this._reader.read();
       }
     }, "AsyncProvider");
-    exports2.default = AsyncProvider;
-    function callFailureCallback(callback, error2) {
-      callback(error2);
+    exports.default = AsyncProvider;
+    function callFailureCallback(callback, error) {
+      callback(error);
     }
     __name(callFailureCallback, "callFailureCallback");
     function callSuccessCallback(callback, entries) {
@@ -5007,12 +5065,12 @@ var require_async4 = __commonJS({
 
 // node_modules/@nodelib/fs.walk/out/providers/stream.js
 var require_stream2 = __commonJS({
-  "node_modules/@nodelib/fs.walk/out/providers/stream.js"(exports2) {
+  "node_modules/@nodelib/fs.walk/out/providers/stream.js"(exports) {
     "use strict";
-    Object.defineProperty(exports2, "__esModule", {
+    Object.defineProperty(exports, "__esModule", {
       value: true
     });
-    var stream_1 = require("stream");
+    var stream_1 = __require("stream");
     var async_1 = require_async3();
     var StreamProvider = /* @__PURE__ */ __name(class StreamProvider {
       constructor(_root, _settings) {
@@ -5031,8 +5089,8 @@ var require_stream2 = __commonJS({
         });
       }
       read() {
-        this._reader.onError((error2) => {
-          this._stream.emit("error", error2);
+        this._reader.onError((error) => {
+          this._stream.emit("error", error);
         });
         this._reader.onEntry((entry) => {
           this._stream.push(entry);
@@ -5044,15 +5102,15 @@ var require_stream2 = __commonJS({
         return this._stream;
       }
     }, "StreamProvider");
-    exports2.default = StreamProvider;
+    exports.default = StreamProvider;
   }
 });
 
 // node_modules/@nodelib/fs.walk/out/readers/sync.js
 var require_sync3 = __commonJS({
-  "node_modules/@nodelib/fs.walk/out/readers/sync.js"(exports2) {
+  "node_modules/@nodelib/fs.walk/out/readers/sync.js"(exports) {
     "use strict";
-    Object.defineProperty(exports2, "__esModule", {
+    Object.defineProperty(exports, "__esModule", {
       value: true
     });
     var fsScandir = require_out2();
@@ -5087,15 +5145,15 @@ var require_sync3 = __commonJS({
           for (const entry of entries) {
             this._handleEntry(entry, base);
           }
-        } catch (error2) {
-          this._handleError(error2);
+        } catch (error) {
+          this._handleError(error);
         }
       }
-      _handleError(error2) {
-        if (!common.isFatalError(this._settings, error2)) {
+      _handleError(error) {
+        if (!common.isFatalError(this._settings, error)) {
           return;
         }
-        throw error2;
+        throw error;
       }
       _handleEntry(entry, base) {
         const fullpath = entry.path;
@@ -5113,15 +5171,15 @@ var require_sync3 = __commonJS({
         this._storage.push(entry);
       }
     }, "SyncReader");
-    exports2.default = SyncReader;
+    exports.default = SyncReader;
   }
 });
 
 // node_modules/@nodelib/fs.walk/out/providers/sync.js
 var require_sync4 = __commonJS({
-  "node_modules/@nodelib/fs.walk/out/providers/sync.js"(exports2) {
+  "node_modules/@nodelib/fs.walk/out/providers/sync.js"(exports) {
     "use strict";
-    Object.defineProperty(exports2, "__esModule", {
+    Object.defineProperty(exports, "__esModule", {
       value: true
     });
     var sync_1 = require_sync3();
@@ -5135,18 +5193,18 @@ var require_sync4 = __commonJS({
         return this._reader.read();
       }
     }, "SyncProvider");
-    exports2.default = SyncProvider;
+    exports.default = SyncProvider;
   }
 });
 
 // node_modules/@nodelib/fs.walk/out/settings.js
 var require_settings3 = __commonJS({
-  "node_modules/@nodelib/fs.walk/out/settings.js"(exports2) {
+  "node_modules/@nodelib/fs.walk/out/settings.js"(exports) {
     "use strict";
-    Object.defineProperty(exports2, "__esModule", {
+    Object.defineProperty(exports, "__esModule", {
       value: true
     });
-    var path2 = require("path");
+    var path2 = __require("path");
     var fsScandir = require_out2();
     var Settings = /* @__PURE__ */ __name(class Settings {
       constructor(_options = {}) {
@@ -5169,23 +5227,23 @@ var require_settings3 = __commonJS({
         return option !== null && option !== void 0 ? option : value;
       }
     }, "Settings");
-    exports2.default = Settings;
+    exports.default = Settings;
   }
 });
 
 // node_modules/@nodelib/fs.walk/out/index.js
 var require_out3 = __commonJS({
-  "node_modules/@nodelib/fs.walk/out/index.js"(exports2) {
+  "node_modules/@nodelib/fs.walk/out/index.js"(exports) {
     "use strict";
-    Object.defineProperty(exports2, "__esModule", {
+    Object.defineProperty(exports, "__esModule", {
       value: true
     });
-    exports2.Settings = exports2.walkStream = exports2.walkSync = exports2.walk = void 0;
+    exports.Settings = exports.walkStream = exports.walkSync = exports.walk = void 0;
     var async_1 = require_async4();
     var stream_1 = require_stream2();
     var sync_1 = require_sync4();
     var settings_1 = require_settings3();
-    exports2.Settings = settings_1.default;
+    exports.Settings = settings_1.default;
     function walk(directory, optionsOrSettingsOrCallback, callback) {
       if (typeof optionsOrSettingsOrCallback === "function") {
         new async_1.default(directory, getSettings()).read(optionsOrSettingsOrCallback);
@@ -5194,21 +5252,21 @@ var require_out3 = __commonJS({
       new async_1.default(directory, getSettings(optionsOrSettingsOrCallback)).read(callback);
     }
     __name(walk, "walk");
-    exports2.walk = walk;
+    exports.walk = walk;
     function walkSync(directory, optionsOrSettings) {
       const settings = getSettings(optionsOrSettings);
       const provider = new sync_1.default(directory, settings);
       return provider.read();
     }
     __name(walkSync, "walkSync");
-    exports2.walkSync = walkSync;
+    exports.walkSync = walkSync;
     function walkStream(directory, optionsOrSettings) {
       const settings = getSettings(optionsOrSettings);
       const provider = new stream_1.default(directory, settings);
       return provider.read();
     }
     __name(walkStream, "walkStream");
-    exports2.walkStream = walkStream;
+    exports.walkStream = walkStream;
     function getSettings(settingsOrOptions = {}) {
       if (settingsOrOptions instanceof settings_1.default) {
         return settingsOrOptions;
@@ -5221,12 +5279,12 @@ var require_out3 = __commonJS({
 
 // node_modules/fast-glob/out/readers/reader.js
 var require_reader2 = __commonJS({
-  "node_modules/fast-glob/out/readers/reader.js"(exports2) {
+  "node_modules/fast-glob/out/readers/reader.js"(exports) {
     "use strict";
-    Object.defineProperty(exports2, "__esModule", {
+    Object.defineProperty(exports, "__esModule", {
       value: true
     });
-    var path2 = require("path");
+    var path2 = __require("path");
     var fsStat = require_out();
     var utils = require_utils3();
     var Reader = /* @__PURE__ */ __name(class Reader {
@@ -5252,22 +5310,22 @@ var require_reader2 = __commonJS({
         }
         return entry;
       }
-      _isFatalError(error2) {
-        return !utils.errno.isEnoentCodeError(error2) && !this._settings.suppressErrors;
+      _isFatalError(error) {
+        return !utils.errno.isEnoentCodeError(error) && !this._settings.suppressErrors;
       }
     }, "Reader");
-    exports2.default = Reader;
+    exports.default = Reader;
   }
 });
 
 // node_modules/fast-glob/out/readers/stream.js
 var require_stream3 = __commonJS({
-  "node_modules/fast-glob/out/readers/stream.js"(exports2) {
+  "node_modules/fast-glob/out/readers/stream.js"(exports) {
     "use strict";
-    Object.defineProperty(exports2, "__esModule", {
+    Object.defineProperty(exports, "__esModule", {
       value: true
     });
-    var stream_1 = require("stream");
+    var stream_1 = __require("stream");
     var fsStat = require_out();
     var fsWalk = require_out3();
     var reader_1 = require_reader2();
@@ -5302,30 +5360,30 @@ var require_stream3 = __commonJS({
         return stream;
       }
       _getEntry(filepath, pattern, options) {
-        return this._getStat(filepath).then((stats) => this._makeEntry(stats, pattern)).catch((error2) => {
-          if (options.errorFilter(error2)) {
+        return this._getStat(filepath).then((stats) => this._makeEntry(stats, pattern)).catch((error) => {
+          if (options.errorFilter(error)) {
             return null;
           }
-          throw error2;
+          throw error;
         });
       }
       _getStat(filepath) {
         return new Promise((resolve3, reject) => {
-          this._stat(filepath, this._fsStatSettings, (error2, stats) => {
-            return error2 === null ? resolve3(stats) : reject(error2);
+          this._stat(filepath, this._fsStatSettings, (error, stats) => {
+            return error === null ? resolve3(stats) : reject(error);
           });
         });
       }
     }, "ReaderStream");
-    exports2.default = ReaderStream;
+    exports.default = ReaderStream;
   }
 });
 
 // node_modules/fast-glob/out/providers/matchers/matcher.js
 var require_matcher = __commonJS({
-  "node_modules/fast-glob/out/providers/matchers/matcher.js"(exports2) {
+  "node_modules/fast-glob/out/providers/matchers/matcher.js"(exports) {
     "use strict";
-    Object.defineProperty(exports2, "__esModule", {
+    Object.defineProperty(exports, "__esModule", {
       value: true
     });
     var utils = require_utils3();
@@ -5371,15 +5429,15 @@ var require_matcher = __commonJS({
         return utils.array.splitWhen(segments, (segment) => segment.dynamic && utils.pattern.hasGlobStar(segment.pattern));
       }
     }, "Matcher");
-    exports2.default = Matcher;
+    exports.default = Matcher;
   }
 });
 
 // node_modules/fast-glob/out/providers/matchers/partial.js
 var require_partial = __commonJS({
-  "node_modules/fast-glob/out/providers/matchers/partial.js"(exports2) {
+  "node_modules/fast-glob/out/providers/matchers/partial.js"(exports) {
     "use strict";
-    Object.defineProperty(exports2, "__esModule", {
+    Object.defineProperty(exports, "__esModule", {
       value: true
     });
     var matcher_1 = require_matcher();
@@ -5410,15 +5468,15 @@ var require_partial = __commonJS({
         return false;
       }
     }, "PartialMatcher");
-    exports2.default = PartialMatcher;
+    exports.default = PartialMatcher;
   }
 });
 
 // node_modules/fast-glob/out/providers/filters/deep.js
 var require_deep = __commonJS({
-  "node_modules/fast-glob/out/providers/filters/deep.js"(exports2) {
+  "node_modules/fast-glob/out/providers/filters/deep.js"(exports) {
     "use strict";
-    Object.defineProperty(exports2, "__esModule", {
+    Object.defineProperty(exports, "__esModule", {
       value: true
     });
     var utils = require_utils3();
@@ -5477,15 +5535,15 @@ var require_deep = __commonJS({
         return !utils.pattern.matchAny(entryPath, patternsRe);
       }
     }, "DeepFilter");
-    exports2.default = DeepFilter;
+    exports.default = DeepFilter;
   }
 });
 
 // node_modules/fast-glob/out/providers/filters/entry.js
 var require_entry = __commonJS({
-  "node_modules/fast-glob/out/providers/filters/entry.js"(exports2) {
+  "node_modules/fast-glob/out/providers/filters/entry.js"(exports) {
     "use strict";
-    Object.defineProperty(exports2, "__esModule", {
+    Object.defineProperty(exports, "__esModule", {
       value: true
     });
     var utils = require_utils3();
@@ -5541,15 +5599,15 @@ var require_entry = __commonJS({
         return utils.pattern.matchAny(filepath, patternsRe) || utils.pattern.matchAny(filepath + "/", patternsRe);
       }
     }, "EntryFilter");
-    exports2.default = EntryFilter;
+    exports.default = EntryFilter;
   }
 });
 
 // node_modules/fast-glob/out/providers/filters/error.js
 var require_error = __commonJS({
-  "node_modules/fast-glob/out/providers/filters/error.js"(exports2) {
+  "node_modules/fast-glob/out/providers/filters/error.js"(exports) {
     "use strict";
-    Object.defineProperty(exports2, "__esModule", {
+    Object.defineProperty(exports, "__esModule", {
       value: true
     });
     var utils = require_utils3();
@@ -5558,21 +5616,21 @@ var require_error = __commonJS({
         this._settings = _settings;
       }
       getFilter() {
-        return (error2) => this._isNonFatalError(error2);
+        return (error) => this._isNonFatalError(error);
       }
-      _isNonFatalError(error2) {
-        return utils.errno.isEnoentCodeError(error2) || this._settings.suppressErrors;
+      _isNonFatalError(error) {
+        return utils.errno.isEnoentCodeError(error) || this._settings.suppressErrors;
       }
     }, "ErrorFilter");
-    exports2.default = ErrorFilter;
+    exports.default = ErrorFilter;
   }
 });
 
 // node_modules/fast-glob/out/providers/transformers/entry.js
 var require_entry2 = __commonJS({
-  "node_modules/fast-glob/out/providers/transformers/entry.js"(exports2) {
+  "node_modules/fast-glob/out/providers/transformers/entry.js"(exports) {
     "use strict";
-    Object.defineProperty(exports2, "__esModule", {
+    Object.defineProperty(exports, "__esModule", {
       value: true
     });
     var utils = require_utils3();
@@ -5600,18 +5658,18 @@ var require_entry2 = __commonJS({
         });
       }
     }, "EntryTransformer");
-    exports2.default = EntryTransformer;
+    exports.default = EntryTransformer;
   }
 });
 
 // node_modules/fast-glob/out/providers/provider.js
 var require_provider = __commonJS({
-  "node_modules/fast-glob/out/providers/provider.js"(exports2) {
+  "node_modules/fast-glob/out/providers/provider.js"(exports) {
     "use strict";
-    Object.defineProperty(exports2, "__esModule", {
+    Object.defineProperty(exports, "__esModule", {
       value: true
     });
-    var path2 = require("path");
+    var path2 = __require("path");
     var deep_1 = require_deep();
     var entry_1 = require_entry();
     var error_1 = require_error();
@@ -5656,15 +5714,15 @@ var require_provider = __commonJS({
         };
       }
     }, "Provider");
-    exports2.default = Provider;
+    exports.default = Provider;
   }
 });
 
 // node_modules/fast-glob/out/providers/async.js
 var require_async5 = __commonJS({
-  "node_modules/fast-glob/out/providers/async.js"(exports2) {
+  "node_modules/fast-glob/out/providers/async.js"(exports) {
     "use strict";
-    Object.defineProperty(exports2, "__esModule", {
+    Object.defineProperty(exports, "__esModule", {
       value: true
     });
     var stream_1 = require_stream3();
@@ -5692,18 +5750,18 @@ var require_async5 = __commonJS({
         return this._reader.static(task.patterns, options);
       }
     }, "ProviderAsync");
-    exports2.default = ProviderAsync;
+    exports.default = ProviderAsync;
   }
 });
 
 // node_modules/fast-glob/out/providers/stream.js
 var require_stream4 = __commonJS({
-  "node_modules/fast-glob/out/providers/stream.js"(exports2) {
+  "node_modules/fast-glob/out/providers/stream.js"(exports) {
     "use strict";
-    Object.defineProperty(exports2, "__esModule", {
+    Object.defineProperty(exports, "__esModule", {
       value: true
     });
-    var stream_1 = require("stream");
+    var stream_1 = __require("stream");
     var stream_2 = require_stream3();
     var provider_1 = require_provider();
     var ProviderStream = /* @__PURE__ */ __name(class ProviderStream extends provider_1.default {
@@ -5720,7 +5778,7 @@ var require_stream4 = __commonJS({
           read: () => {
           }
         });
-        source.once("error", (error2) => destination.emit("error", error2)).on("data", (entry) => destination.emit("data", options.transform(entry))).once("end", () => destination.emit("end"));
+        source.once("error", (error) => destination.emit("error", error)).on("data", (entry) => destination.emit("data", options.transform(entry))).once("end", () => destination.emit("end"));
         destination.once("close", () => source.destroy());
         return destination;
       }
@@ -5731,15 +5789,15 @@ var require_stream4 = __commonJS({
         return this._reader.static(task.patterns, options);
       }
     }, "ProviderStream");
-    exports2.default = ProviderStream;
+    exports.default = ProviderStream;
   }
 });
 
 // node_modules/fast-glob/out/readers/sync.js
 var require_sync5 = __commonJS({
-  "node_modules/fast-glob/out/readers/sync.js"(exports2) {
+  "node_modules/fast-glob/out/readers/sync.js"(exports) {
     "use strict";
-    Object.defineProperty(exports2, "__esModule", {
+    Object.defineProperty(exports, "__esModule", {
       value: true
     });
     var fsStat = require_out();
@@ -5770,26 +5828,26 @@ var require_sync5 = __commonJS({
         try {
           const stats = this._getStat(filepath);
           return this._makeEntry(stats, pattern);
-        } catch (error2) {
-          if (options.errorFilter(error2)) {
+        } catch (error) {
+          if (options.errorFilter(error)) {
             return null;
           }
-          throw error2;
+          throw error;
         }
       }
       _getStat(filepath) {
         return this._statSync(filepath, this._fsStatSettings);
       }
     }, "ReaderSync");
-    exports2.default = ReaderSync;
+    exports.default = ReaderSync;
   }
 });
 
 // node_modules/fast-glob/out/providers/sync.js
 var require_sync6 = __commonJS({
-  "node_modules/fast-glob/out/providers/sync.js"(exports2) {
+  "node_modules/fast-glob/out/providers/sync.js"(exports) {
     "use strict";
-    Object.defineProperty(exports2, "__esModule", {
+    Object.defineProperty(exports, "__esModule", {
       value: true
     });
     var sync_1 = require_sync5();
@@ -5812,22 +5870,22 @@ var require_sync6 = __commonJS({
         return this._reader.static(task.patterns, options);
       }
     }, "ProviderSync");
-    exports2.default = ProviderSync;
+    exports.default = ProviderSync;
   }
 });
 
 // node_modules/fast-glob/out/settings.js
 var require_settings4 = __commonJS({
-  "node_modules/fast-glob/out/settings.js"(exports2) {
+  "node_modules/fast-glob/out/settings.js"(exports) {
     "use strict";
-    Object.defineProperty(exports2, "__esModule", {
+    Object.defineProperty(exports, "__esModule", {
       value: true
     });
-    exports2.DEFAULT_FILE_SYSTEM_ADAPTER = void 0;
-    var fs2 = require("fs");
-    var os = require("os");
+    exports.DEFAULT_FILE_SYSTEM_ADAPTER = void 0;
+    var fs2 = __require("fs");
+    var os = __require("os");
     var CPU_COUNT = Math.max(os.cpus().length, 1);
-    exports2.DEFAULT_FILE_SYSTEM_ADAPTER = {
+    exports.DEFAULT_FILE_SYSTEM_ADAPTER = {
       lstat: fs2.lstat,
       lstatSync: fs2.lstatSync,
       stat: fs2.stat,
@@ -5870,16 +5928,16 @@ var require_settings4 = __commonJS({
         return option === void 0 ? value : option;
       }
       _getFileSystemMethods(methods = {}) {
-        return Object.assign(Object.assign({}, exports2.DEFAULT_FILE_SYSTEM_ADAPTER), methods);
+        return Object.assign(Object.assign({}, exports.DEFAULT_FILE_SYSTEM_ADAPTER), methods);
       }
     }, "Settings");
-    exports2.default = Settings;
+    exports.default = Settings;
   }
 });
 
 // node_modules/fast-glob/out/index.js
 var require_out4 = __commonJS({
-  "node_modules/fast-glob/out/index.js"(exports2, module2) {
+  "node_modules/fast-glob/out/index.js"(exports, module) {
     "use strict";
     var taskManager = require_tasks();
     var patternManager = require_patterns();
@@ -5950,16 +6008,16 @@ var require_out4 = __commonJS({
       }
     }
     __name(assertPatternsInput, "assertPatternsInput");
-    module2.exports = FastGlob;
+    module.exports = FastGlob;
   }
 });
 
 // node_modules/path-type/index.js
 var require_path_type = __commonJS({
-  "node_modules/path-type/index.js"(exports2) {
+  "node_modules/path-type/index.js"(exports) {
     "use strict";
-    var { promisify } = require("util");
-    var fs2 = require("fs");
+    var { promisify } = __require("util");
+    var fs2 = __require("fs");
     function isType(fsStatType, statsMethodName, filePath) {
       return __async(this, null, function* () {
         if (typeof filePath !== "string") {
@@ -5968,11 +6026,11 @@ var require_path_type = __commonJS({
         try {
           const stats = yield promisify(fs2[fsStatType])(filePath);
           return stats[statsMethodName]();
-        } catch (error2) {
-          if (error2.code === "ENOENT") {
+        } catch (error) {
+          if (error.code === "ENOENT") {
             return false;
           }
-          throw error2;
+          throw error;
         }
       });
     }
@@ -5983,28 +6041,28 @@ var require_path_type = __commonJS({
       }
       try {
         return fs2[fsStatType](filePath)[statsMethodName]();
-      } catch (error2) {
-        if (error2.code === "ENOENT") {
+      } catch (error) {
+        if (error.code === "ENOENT") {
           return false;
         }
-        throw error2;
+        throw error;
       }
     }
     __name(isTypeSync, "isTypeSync");
-    exports2.isFile = isType.bind(null, "stat", "isFile");
-    exports2.isDirectory = isType.bind(null, "stat", "isDirectory");
-    exports2.isSymlink = isType.bind(null, "lstat", "isSymbolicLink");
-    exports2.isFileSync = isTypeSync.bind(null, "statSync", "isFile");
-    exports2.isDirectorySync = isTypeSync.bind(null, "statSync", "isDirectory");
-    exports2.isSymlinkSync = isTypeSync.bind(null, "lstatSync", "isSymbolicLink");
+    exports.isFile = isType.bind(null, "stat", "isFile");
+    exports.isDirectory = isType.bind(null, "stat", "isDirectory");
+    exports.isSymlink = isType.bind(null, "lstat", "isSymbolicLink");
+    exports.isFileSync = isTypeSync.bind(null, "statSync", "isFile");
+    exports.isDirectorySync = isTypeSync.bind(null, "statSync", "isDirectory");
+    exports.isSymlinkSync = isTypeSync.bind(null, "lstatSync", "isSymbolicLink");
   }
 });
 
 // node_modules/dir-glob/index.js
 var require_dir_glob = __commonJS({
-  "node_modules/dir-glob/index.js"(exports2, module2) {
+  "node_modules/dir-glob/index.js"(exports, module) {
     "use strict";
-    var path2 = require("path");
+    var path2 = __require("path");
     var pathType = require_path_type();
     var getExtensions = /* @__PURE__ */ __name((extensions) => extensions.length > 1 ? `{${extensions.join(",")}}` : extensions[0], "getExtensions");
     var getPath = /* @__PURE__ */ __name((filepath, cwd) => {
@@ -6039,20 +6097,20 @@ var require_dir_glob = __commonJS({
         path2.posix.join(directory, "**")
       ];
     }, "getGlob");
-    module2.exports = (input, options) => __async(exports2, null, function* () {
+    module.exports = (input, options) => __async(exports, null, function* () {
       options = __spreadValues({
         cwd: process.cwd()
       }, options);
       if (typeof options.cwd !== "string") {
         throw new TypeError(`Expected \`cwd\` to be of type \`string\` but received type \`${typeof options.cwd}\``);
       }
-      const globs = yield Promise.all([].concat(input).map((x) => __async(exports2, null, function* () {
+      const globs = yield Promise.all([].concat(input).map((x) => __async(exports, null, function* () {
         const isDirectory = yield pathType.isDirectory(getPath(x, options.cwd));
         return isDirectory ? getGlob(x, options) : x;
       })));
       return [].concat.apply([], globs);
     });
-    module2.exports.sync = (input, options) => {
+    module.exports.sync = (input, options) => {
       options = __spreadValues({
         cwd: process.cwd()
       }, options);
@@ -6067,7 +6125,7 @@ var require_dir_glob = __commonJS({
 
 // node_modules/ignore/index.js
 var require_ignore = __commonJS({
-  "node_modules/ignore/index.js"(exports2, module2) {
+  "node_modules/ignore/index.js"(exports, module) {
     function makeArray(subject) {
       return Array.isArray(subject) ? subject : [
         subject
@@ -6301,7 +6359,7 @@ var require_ignore = __commonJS({
     var isPathValid = /* @__PURE__ */ __name((path2) => checkPath(path2 && checkPath.convert(path2), path2, RETURN_FALSE), "isPathValid");
     factory.isPathValid = isPathValid;
     factory.default = factory;
-    module2.exports = factory;
+    module.exports = factory;
     if (typeof process !== "undefined" && (process.env && process.env.IGNORE_TEST_WIN32 || process.platform === "win32")) {
       const makePosix = /* @__PURE__ */ __name((str) => /^\\\\\?\\/.test(str) || /["<>|\u0000-\u001F]+/u.test(str) ? str : str.replace(/\\/g, "/"), "makePosix");
       checkPath.convert = makePosix;
@@ -6313,9 +6371,9 @@ var require_ignore = __commonJS({
 
 // node_modules/slash/index.js
 var require_slash = __commonJS({
-  "node_modules/slash/index.js"(exports2, module2) {
+  "node_modules/slash/index.js"(exports, module) {
     "use strict";
-    module2.exports = (path2) => {
+    module.exports = (path2) => {
       const isExtendedLengthPath = /^\\\\\?\\/.test(path2);
       const hasNonAscii = /[^\u0000-\u0080]+/.test(path2);
       if (isExtendedLengthPath || hasNonAscii) {
@@ -6328,11 +6386,11 @@ var require_slash = __commonJS({
 
 // node_modules/globby/gitignore.js
 var require_gitignore = __commonJS({
-  "node_modules/globby/gitignore.js"(exports2, module2) {
+  "node_modules/globby/gitignore.js"(exports, module) {
     "use strict";
-    var { promisify } = require("util");
-    var fs2 = require("fs");
-    var path2 = require("path");
+    var { promisify } = __require("util");
+    var fs2 = __require("fs");
+    var path2 = __require("path");
     var fastGlob = require_out4();
     var gitIgnore = require_ignore();
     var slash = require_slash();
@@ -6376,7 +6434,7 @@ var require_gitignore = __commonJS({
     var getIsIgnoredPredecate = /* @__PURE__ */ __name((ignores, cwd) => {
       return (p) => ignores.ignores(slash(path2.relative(cwd, ensureAbsolutePathForCwd(cwd, p.path || p))));
     }, "getIsIgnoredPredecate");
-    var getFile = /* @__PURE__ */ __name((file, cwd) => __async(exports2, null, function* () {
+    var getFile = /* @__PURE__ */ __name((file, cwd) => __async(exports, null, function* () {
       const filePath = path2.join(cwd, file);
       const content = yield readFileP(filePath, "utf8");
       return {
@@ -6400,7 +6458,7 @@ var require_gitignore = __commonJS({
         cwd
       };
     }, "normalizeOptions");
-    module2.exports = (options) => __async(exports2, null, function* () {
+    module.exports = (options) => __async(exports, null, function* () {
       options = normalizeOptions(options);
       const paths = yield fastGlob("**/.gitignore", {
         ignore: DEFAULT_IGNORE.concat(options.ignore),
@@ -6410,7 +6468,7 @@ var require_gitignore = __commonJS({
       const ignores = reduceIgnore(files);
       return getIsIgnoredPredecate(ignores, options.cwd);
     });
-    module2.exports.sync = (options) => {
+    module.exports.sync = (options) => {
       options = normalizeOptions(options);
       const paths = fastGlob.sync("**/.gitignore", {
         ignore: DEFAULT_IGNORE.concat(options.ignore),
@@ -6425,9 +6483,9 @@ var require_gitignore = __commonJS({
 
 // node_modules/globby/stream-utils.js
 var require_stream_utils = __commonJS({
-  "node_modules/globby/stream-utils.js"(exports2, module2) {
+  "node_modules/globby/stream-utils.js"(exports, module) {
     "use strict";
-    var { Transform } = require("stream");
+    var { Transform } = __require("stream");
     var ObjectTransform = /* @__PURE__ */ __name(class ObjectTransform extends Transform {
       constructor() {
         super({
@@ -6460,7 +6518,7 @@ var require_stream_utils = __commonJS({
         callback();
       }
     }, "UniqueStream");
-    module2.exports = {
+    module.exports = {
       FilterStream,
       UniqueStream
     };
@@ -6469,9 +6527,9 @@ var require_stream_utils = __commonJS({
 
 // node_modules/globby/index.js
 var require_globby = __commonJS({
-  "node_modules/globby/index.js"(exports2, module2) {
+  "node_modules/globby/index.js"(exports, module) {
     "use strict";
-    var fs2 = require("fs");
+    var fs2 = __require("fs");
     var arrayUnion = require_array_union();
     var merge2 = require_merge2();
     var fastGlob = require_out4();
@@ -6557,16 +6615,16 @@ var require_globby = __commonJS({
         options
       };
     }, "globToTask");
-    module2.exports = (patterns, options) => __async(exports2, null, function* () {
+    module.exports = (patterns, options) => __async(exports, null, function* () {
       const globTasks = generateGlobTasks(patterns, options);
-      const getFilter = /* @__PURE__ */ __name(() => __async(exports2, null, function* () {
+      const getFilter = /* @__PURE__ */ __name(() => __async(exports, null, function* () {
         return options && options.gitignore ? gitignore({
           cwd: options.cwd,
           ignore: options.ignore
         }) : DEFAULT_FILTER;
       }), "getFilter");
-      const getTasks = /* @__PURE__ */ __name(() => __async(exports2, null, function* () {
-        const tasks2 = yield Promise.all(globTasks.map((task) => __async(exports2, null, function* () {
+      const getTasks = /* @__PURE__ */ __name(() => __async(exports, null, function* () {
+        const tasks2 = yield Promise.all(globTasks.map((task) => __async(exports, null, function* () {
           const globs = yield getPattern(task, dirGlob);
           return Promise.all(globs.map(globToTask(task)));
         })));
@@ -6579,7 +6637,7 @@ var require_globby = __commonJS({
       const paths = yield Promise.all(tasks.map((task) => fastGlob(task.pattern, task.options)));
       return arrayUnion(...paths).filter((path_) => !filter(getPathString(path_)));
     });
-    module2.exports.sync = (patterns, options) => {
+    module.exports.sync = (patterns, options) => {
       const globTasks = generateGlobTasks(patterns, options);
       const tasks = [];
       for (const task of globTasks) {
@@ -6593,7 +6651,7 @@ var require_globby = __commonJS({
       }
       return matches.filter((path_) => !filter(path_));
     };
-    module2.exports.stream = (patterns, options) => {
+    module.exports.stream = (patterns, options) => {
       const globTasks = generateGlobTasks(patterns, options);
       const tasks = [];
       for (const task of globTasks) {
@@ -6605,16 +6663,16 @@ var require_globby = __commonJS({
       const uniqueStream = new UniqueStream();
       return merge2(tasks.map((task) => fastGlob.stream(task.pattern, task.options))).pipe(filterStream).pipe(uniqueStream);
     };
-    module2.exports.generateGlobTasks = generateGlobTasks;
-    module2.exports.hasMagic = (patterns, options) => [].concat(patterns).some((pattern) => fastGlob.isDynamicPattern(pattern, options));
-    module2.exports.gitignore = gitignore;
+    module.exports.generateGlobTasks = generateGlobTasks;
+    module.exports.hasMagic = (patterns, options) => [].concat(patterns).some((pattern) => fastGlob.isDynamicPattern(pattern, options));
+    module.exports.gitignore = gitignore;
   }
 });
 
 // node_modules/graceful-fs/polyfills.js
 var require_polyfills = __commonJS({
-  "node_modules/graceful-fs/polyfills.js"(exports2, module2) {
-    var constants = require("constants");
+  "node_modules/graceful-fs/polyfills.js"(exports, module) {
+    var constants = __require("constants");
     var origCwd = process.cwd;
     var cwd = null;
     var platform = process.env.GRACEFUL_FS_PLATFORM || process.platform;
@@ -6637,7 +6695,7 @@ var require_polyfills = __commonJS({
         Object.setPrototypeOf(process.chdir, chdir);
     }
     var chdir;
-    module2.exports = patch;
+    module.exports = patch;
     function patch(fs2) {
       if (constants.hasOwnProperty("O_SYMLINK") && process.version.match(/^v0\.6\.[0-2]|^v0\.5\./)) {
         patchLchmod(fs2);
@@ -6937,9 +6995,9 @@ var require_polyfills = __commonJS({
 
 // node_modules/graceful-fs/legacy-streams.js
 var require_legacy_streams = __commonJS({
-  "node_modules/graceful-fs/legacy-streams.js"(exports2, module2) {
-    var Stream = require("stream").Stream;
-    module2.exports = legacy;
+  "node_modules/graceful-fs/legacy-streams.js"(exports, module) {
+    var Stream = __require("stream").Stream;
+    module.exports = legacy;
     function legacy(fs2) {
       return {
         ReadStream,
@@ -7045,9 +7103,9 @@ var require_legacy_streams = __commonJS({
 
 // node_modules/graceful-fs/clone.js
 var require_clone = __commonJS({
-  "node_modules/graceful-fs/clone.js"(exports2, module2) {
+  "node_modules/graceful-fs/clone.js"(exports, module) {
     "use strict";
-    module2.exports = clone;
+    module.exports = clone;
     var getPrototypeOf = Object.getPrototypeOf || function(obj) {
       return obj.__proto__;
     };
@@ -7071,12 +7129,12 @@ var require_clone = __commonJS({
 
 // node_modules/graceful-fs/graceful-fs.js
 var require_graceful_fs = __commonJS({
-  "node_modules/graceful-fs/graceful-fs.js"(exports2, module2) {
-    var fs2 = require("fs");
+  "node_modules/graceful-fs/graceful-fs.js"(exports, module) {
+    var fs2 = __require("fs");
     var polyfills = require_polyfills();
     var legacy = require_legacy_streams();
     var clone = require_clone();
-    var util = require("util");
+    var util = __require("util");
     var gracefulQueue;
     var previousSymbol;
     if (typeof Symbol === "function" && typeof Symbol.for === "function") {
@@ -7139,7 +7197,7 @@ var require_graceful_fs = __commonJS({
       if (/\bgfs4\b/i.test(process.env.NODE_DEBUG || "")) {
         process.on("exit", function() {
           debug(fs2[gracefulQueue]);
-          require("assert").equal(fs2[gracefulQueue].length, 0);
+          __require("assert").equal(fs2[gracefulQueue].length, 0);
         });
       }
     }
@@ -7147,9 +7205,9 @@ var require_graceful_fs = __commonJS({
     if (!global[gracefulQueue]) {
       publishQueue(global, fs2[gracefulQueue]);
     }
-    module2.exports = patch(clone(fs2));
+    module.exports = patch(clone(fs2));
     if (process.env.TEST_GRACEFUL_FS_GLOBAL_PATCH && !fs2.__patched) {
-      module2.exports = patch(fs2);
+      module.exports = patch(fs2);
       fs2.__patched = true;
     }
     function patch(fs3) {
@@ -7517,10 +7575,10 @@ var require_graceful_fs = __commonJS({
 
 // node_modules/is-path-cwd/index.js
 var require_is_path_cwd = __commonJS({
-  "node_modules/is-path-cwd/index.js"(exports2, module2) {
+  "node_modules/is-path-cwd/index.js"(exports, module) {
     "use strict";
-    var path2 = require("path");
-    module2.exports = (path_) => {
+    var path2 = __require("path");
+    module.exports = (path_) => {
       let cwd = process.cwd();
       path_ = path2.resolve(path_);
       if (process.platform === "win32") {
@@ -7534,10 +7592,10 @@ var require_is_path_cwd = __commonJS({
 
 // node_modules/is-path-inside/index.js
 var require_is_path_inside = __commonJS({
-  "node_modules/is-path-inside/index.js"(exports2, module2) {
+  "node_modules/is-path-inside/index.js"(exports, module) {
     "use strict";
-    var path2 = require("path");
-    module2.exports = (childPath, parentPath) => {
+    var path2 = __require("path");
+    module.exports = (childPath, parentPath) => {
       const relation = path2.relative(parentPath, childPath);
       return Boolean(relation && relation !== ".." && !relation.startsWith(`..${path2.sep}`) && relation !== path2.resolve(childPath));
     };
@@ -7546,10 +7604,10 @@ var require_is_path_inside = __commonJS({
 
 // node_modules/fs.realpath/old.js
 var require_old = __commonJS({
-  "node_modules/fs.realpath/old.js"(exports2) {
-    var pathModule = require("path");
+  "node_modules/fs.realpath/old.js"(exports) {
+    var pathModule = __require("path");
     var isWindows = process.platform === "win32";
-    var fs2 = require("fs");
+    var fs2 = __require("fs");
     var DEBUG = process.env.NODE_DEBUG && /fs/.test(process.env.NODE_DEBUG);
     function rethrow() {
       var callback;
@@ -7600,7 +7658,7 @@ var require_old = __commonJS({
       splitRootRe = /^[\/]*/;
     }
     var splitRootRe;
-    exports2.realpathSync = /* @__PURE__ */ __name(function realpathSync(p, cache) {
+    exports.realpathSync = /* @__PURE__ */ __name(function realpathSync(p, cache) {
       p = pathModule.resolve(p);
       if (cache && Object.prototype.hasOwnProperty.call(cache, p)) {
         return cache[p];
@@ -7668,7 +7726,7 @@ var require_old = __commonJS({
         cache[original] = p;
       return p;
     }, "realpathSync");
-    exports2.realpath = /* @__PURE__ */ __name(function realpath(p, cache, cb) {
+    exports.realpath = /* @__PURE__ */ __name(function realpath(p, cache, cb) {
       if (typeof cb !== "function") {
         cb = maybeCallback(cache);
         cache = null;
@@ -7768,14 +7826,14 @@ var require_old = __commonJS({
 
 // node_modules/fs.realpath/index.js
 var require_fs5 = __commonJS({
-  "node_modules/fs.realpath/index.js"(exports2, module2) {
-    module2.exports = realpath;
+  "node_modules/fs.realpath/index.js"(exports, module) {
+    module.exports = realpath;
     realpath.realpath = realpath;
     realpath.sync = realpathSync;
     realpath.realpathSync = realpathSync;
     realpath.monkeypatch = monkeypatch;
     realpath.unmonkeypatch = unmonkeypatch;
-    var fs2 = require("fs");
+    var fs2 = __require("fs");
     var origRealpath = fs2.realpath;
     var origRealpathSync = fs2.realpathSync;
     var version = process.version;
@@ -7832,8 +7890,8 @@ var require_fs5 = __commonJS({
 
 // node_modules/concat-map/index.js
 var require_concat_map = __commonJS({
-  "node_modules/concat-map/index.js"(exports2, module2) {
-    module2.exports = function(xs, fn) {
+  "node_modules/concat-map/index.js"(exports, module) {
+    module.exports = function(xs, fn) {
       var res = [];
       for (var i = 0; i < xs.length; i++) {
         var x = fn(xs[i], i);
@@ -7852,9 +7910,9 @@ var require_concat_map = __commonJS({
 
 // node_modules/balanced-match/index.js
 var require_balanced_match = __commonJS({
-  "node_modules/balanced-match/index.js"(exports2, module2) {
+  "node_modules/balanced-match/index.js"(exports, module) {
     "use strict";
-    module2.exports = balanced;
+    module.exports = balanced;
     function balanced(a, b, str) {
       if (a instanceof RegExp)
         a = maybeMatch(a, str);
@@ -7924,10 +7982,10 @@ var require_balanced_match = __commonJS({
 
 // node_modules/brace-expansion/index.js
 var require_brace_expansion = __commonJS({
-  "node_modules/brace-expansion/index.js"(exports2, module2) {
+  "node_modules/brace-expansion/index.js"(exports, module) {
     var concatMap = require_concat_map();
     var balanced = require_balanced_match();
-    module2.exports = expandTop;
+    module.exports = expandTop;
     var escSlash = "\0SLASH" + Math.random() + "\0";
     var escOpen = "\0OPEN" + Math.random() + "\0";
     var escClose = "\0CLOSE" + Math.random() + "\0";
@@ -8089,12 +8147,12 @@ var require_brace_expansion = __commonJS({
 
 // node_modules/minimatch/minimatch.js
 var require_minimatch = __commonJS({
-  "node_modules/minimatch/minimatch.js"(exports2, module2) {
-    module2.exports = minimatch;
+  "node_modules/minimatch/minimatch.js"(exports, module) {
+    module.exports = minimatch;
     minimatch.Minimatch = Minimatch;
     var path2 = function() {
       try {
-        return require("path");
+        return __require("path");
       } catch (e) {
       }
     }() || {
@@ -8719,9 +8777,9 @@ var require_minimatch = __commonJS({
 
 // node_modules/inherits/inherits_browser.js
 var require_inherits_browser = __commonJS({
-  "node_modules/inherits/inherits_browser.js"(exports2, module2) {
+  "node_modules/inherits/inherits_browser.js"(exports, module) {
     if (typeof Object.create === "function") {
-      module2.exports = /* @__PURE__ */ __name(function inherits(ctor, superCtor) {
+      module.exports = /* @__PURE__ */ __name(function inherits(ctor, superCtor) {
         if (superCtor) {
           ctor.super_ = superCtor;
           ctor.prototype = Object.create(superCtor.prototype, {
@@ -8735,7 +8793,7 @@ var require_inherits_browser = __commonJS({
         }
       }, "inherits");
     } else {
-      module2.exports = /* @__PURE__ */ __name(function inherits(ctor, superCtor) {
+      module.exports = /* @__PURE__ */ __name(function inherits(ctor, superCtor) {
         if (superCtor) {
           ctor.super_ = superCtor;
           var TempCtor = /* @__PURE__ */ __name(function() {
@@ -8751,14 +8809,14 @@ var require_inherits_browser = __commonJS({
 
 // node_modules/inherits/inherits.js
 var require_inherits = __commonJS({
-  "node_modules/inherits/inherits.js"(exports2, module2) {
+  "node_modules/inherits/inherits.js"(exports, module) {
     try {
-      util = require("util");
+      util = __require("util");
       if (typeof util.inherits !== "function")
         throw "";
-      module2.exports = util.inherits;
+      module.exports = util.inherits;
     } catch (e) {
-      module2.exports = require_inherits_browser();
+      module.exports = require_inherits_browser();
     }
     var util;
   }
@@ -8766,7 +8824,7 @@ var require_inherits = __commonJS({
 
 // node_modules/path-is-absolute/index.js
 var require_path_is_absolute = __commonJS({
-  "node_modules/path-is-absolute/index.js"(exports2, module2) {
+  "node_modules/path-is-absolute/index.js"(exports, module) {
     "use strict";
     function posix(path2) {
       return path2.charAt(0) === "/";
@@ -8780,28 +8838,28 @@ var require_path_is_absolute = __commonJS({
       return Boolean(result[2] || isUnc);
     }
     __name(win32, "win32");
-    module2.exports = process.platform === "win32" ? win32 : posix;
-    module2.exports.posix = posix;
-    module2.exports.win32 = win32;
+    module.exports = process.platform === "win32" ? win32 : posix;
+    module.exports.posix = posix;
+    module.exports.win32 = win32;
   }
 });
 
 // node_modules/glob/common.js
 var require_common3 = __commonJS({
-  "node_modules/glob/common.js"(exports2) {
-    exports2.setopts = setopts;
-    exports2.ownProp = ownProp;
-    exports2.makeAbs = makeAbs;
-    exports2.finish = finish;
-    exports2.mark = mark;
-    exports2.isIgnored = isIgnored;
-    exports2.childrenIgnored = childrenIgnored;
+  "node_modules/glob/common.js"(exports) {
+    exports.setopts = setopts;
+    exports.ownProp = ownProp;
+    exports.makeAbs = makeAbs;
+    exports.finish = finish;
+    exports.mark = mark;
+    exports.isIgnored = isIgnored;
+    exports.childrenIgnored = childrenIgnored;
     function ownProp(obj, field) {
       return Object.prototype.hasOwnProperty.call(obj, field);
     }
     __name(ownProp, "ownProp");
-    var fs2 = require("fs");
-    var path2 = require("path");
+    var fs2 = __require("fs");
+    var path2 = __require("path");
     var minimatch = require_minimatch();
     var isAbsolute = require_path_is_absolute();
     var Minimatch = minimatch.Minimatch;
@@ -8998,16 +9056,16 @@ var require_common3 = __commonJS({
 
 // node_modules/glob/sync.js
 var require_sync7 = __commonJS({
-  "node_modules/glob/sync.js"(exports2, module2) {
-    module2.exports = globSync;
+  "node_modules/glob/sync.js"(exports, module) {
+    module.exports = globSync;
     globSync.GlobSync = GlobSync;
     var rp = require_fs5();
     var minimatch = require_minimatch();
     var Minimatch = minimatch.Minimatch;
     var Glob = require_glob().Glob;
-    var util = require("util");
-    var path2 = require("path");
-    var assert = require("assert");
+    var util = __require("util");
+    var path2 = __require("path");
+    var assert = __require("assert");
     var isAbsolute = require_path_is_absolute();
     var common = require_common3();
     var setopts = common.setopts;
@@ -9238,10 +9296,10 @@ var require_sync7 = __commonJS({
           var abs = this._makeAbs(f);
           this.cache[abs] = "FILE";
           if (abs === this.cwdAbs) {
-            var error2 = new Error(er.code + " invalid cwd " + this.cwd);
-            error2.path = this.cwd;
-            error2.code = er.code;
-            throw error2;
+            var error = new Error(er.code + " invalid cwd " + this.cwd);
+            error.path = this.cwd;
+            error.code = er.code;
+            throw error;
           }
           break;
         case "ENOENT":
@@ -9359,8 +9417,8 @@ var require_sync7 = __commonJS({
 
 // node_modules/wrappy/wrappy.js
 var require_wrappy = __commonJS({
-  "node_modules/wrappy/wrappy.js"(exports2, module2) {
-    module2.exports = wrappy;
+  "node_modules/wrappy/wrappy.js"(exports, module) {
+    module.exports = wrappy;
     function wrappy(fn, cb) {
       if (fn && cb)
         return wrappy(fn)(cb);
@@ -9392,10 +9450,10 @@ var require_wrappy = __commonJS({
 
 // node_modules/once/once.js
 var require_once = __commonJS({
-  "node_modules/once/once.js"(exports2, module2) {
+  "node_modules/once/once.js"(exports, module) {
     var wrappy = require_wrappy();
-    module2.exports = wrappy(once);
-    module2.exports.strict = wrappy(onceStrict);
+    module.exports = wrappy(once);
+    module.exports.strict = wrappy(onceStrict);
     once.proto = once(function() {
       Object.defineProperty(Function.prototype, "once", {
         value: function() {
@@ -9439,11 +9497,11 @@ var require_once = __commonJS({
 
 // node_modules/inflight/inflight.js
 var require_inflight = __commonJS({
-  "node_modules/inflight/inflight.js"(exports2, module2) {
+  "node_modules/inflight/inflight.js"(exports, module) {
     var wrappy = require_wrappy();
     var reqs = /* @__PURE__ */ Object.create(null);
     var once = require_once();
-    module2.exports = wrappy(inflight);
+    module.exports = wrappy(inflight);
     function inflight(key, cb) {
       if (reqs[key]) {
         reqs[key].push(cb);
@@ -9491,22 +9549,22 @@ var require_inflight = __commonJS({
 
 // node_modules/glob/glob.js
 var require_glob = __commonJS({
-  "node_modules/glob/glob.js"(exports2, module2) {
-    module2.exports = glob;
+  "node_modules/glob/glob.js"(exports, module) {
+    module.exports = glob;
     var rp = require_fs5();
     var minimatch = require_minimatch();
     var Minimatch = minimatch.Minimatch;
     var inherits = require_inherits();
-    var EE = require("events").EventEmitter;
-    var path2 = require("path");
-    var assert = require("assert");
+    var EE = __require("events").EventEmitter;
+    var path2 = __require("path");
+    var assert = __require("assert");
     var isAbsolute = require_path_is_absolute();
     var globSync = require_sync7();
     var common = require_common3();
     var setopts = common.setopts;
     var ownProp = common.ownProp;
     var inflight = require_inflight();
-    var util = require("util");
+    var util = __require("util");
     var childrenIgnored = common.childrenIgnored;
     var isIgnored = common.isIgnored;
     var once = require_once();
@@ -9918,10 +9976,10 @@ var require_glob = __commonJS({
           var abs = this._makeAbs(f);
           this.cache[abs] = "FILE";
           if (abs === this.cwdAbs) {
-            var error2 = new Error(er.code + " invalid cwd " + this.cwd);
-            error2.path = this.cwd;
-            error2.code = er.code;
-            this.emit("error", error2);
+            var error = new Error(er.code + " invalid cwd " + this.cwd);
+            error.path = this.cwd;
+            error.code = er.code;
+            this.emit("error", error);
             this.abort();
           }
           break;
@@ -10066,10 +10124,10 @@ var require_glob = __commonJS({
 
 // node_modules/rimraf/rimraf.js
 var require_rimraf = __commonJS({
-  "node_modules/rimraf/rimraf.js"(exports2, module2) {
-    var assert = require("assert");
-    var path2 = require("path");
-    var fs2 = require("fs");
+  "node_modules/rimraf/rimraf.js"(exports, module) {
+    var assert = __require("assert");
+    var path2 = __require("path");
+    var fs2 = __require("fs");
     var glob = void 0;
     try {
       glob = require_glob();
@@ -10348,16 +10406,16 @@ var require_rimraf = __commonJS({
         }
       } while (true);
     }, "rmkidsSync");
-    module2.exports = rimraf;
+    module.exports = rimraf;
     rimraf.sync = rimrafSync;
   }
 });
 
 // node_modules/indent-string/index.js
 var require_indent_string = __commonJS({
-  "node_modules/indent-string/index.js"(exports2, module2) {
+  "node_modules/indent-string/index.js"(exports, module) {
     "use strict";
-    module2.exports = (string, count = 1, options) => {
+    module.exports = (string, count = 1, options) => {
       options = __spreadValues({
         indent: " ",
         includeEmptyLines: false
@@ -10382,13 +10440,13 @@ var require_indent_string = __commonJS({
 
 // node_modules/clean-stack/index.js
 var require_clean_stack = __commonJS({
-  "node_modules/clean-stack/index.js"(exports2, module2) {
+  "node_modules/clean-stack/index.js"(exports, module) {
     "use strict";
-    var os = require("os");
+    var os = __require("os");
     var extractPathRegex = /\s+at.*(?:\(|\s)(.*)\)?/;
     var pathRegex = /^(?:(?:(?:node|(?:internal\/[\w/]*|.*node_modules\/(?:babel-polyfill|pirates)\/.*)?\w+)\.js:\d+:\d+)|native)/;
     var homeDir = typeof os.homedir === "undefined" ? "" : os.homedir();
-    module2.exports = (stack, options) => {
+    module.exports = (stack, options) => {
       options = Object.assign({
         pretty: false
       }, options);
@@ -10414,7 +10472,7 @@ var require_clean_stack = __commonJS({
 
 // node_modules/aggregate-error/index.js
 var require_aggregate_error = __commonJS({
-  "node_modules/aggregate-error/index.js"(exports2, module2) {
+  "node_modules/aggregate-error/index.js"(exports, module) {
     "use strict";
     var indentString = require_indent_string();
     var cleanStack = require_clean_stack();
@@ -10426,17 +10484,17 @@ var require_aggregate_error = __commonJS({
         }
         errors = [
           ...errors
-        ].map((error2) => {
-          if (error2 instanceof Error) {
-            return error2;
+        ].map((error) => {
+          if (error instanceof Error) {
+            return error;
           }
-          if (error2 !== null && typeof error2 === "object") {
-            return Object.assign(new Error(error2.message), error2);
+          if (error !== null && typeof error === "object") {
+            return Object.assign(new Error(error.message), error);
           }
-          return new Error(error2);
+          return new Error(error);
         });
-        let message = errors.map((error2) => {
-          return typeof error2.stack === "string" ? cleanInternalStack(cleanStack(error2.stack)) : String(error2);
+        let message = errors.map((error) => {
+          return typeof error.stack === "string" ? cleanInternalStack(cleanStack(error.stack)) : String(error);
         }).join("\n");
         message = "\n" + indentString(message, 4);
         super(message);
@@ -10446,21 +10504,21 @@ var require_aggregate_error = __commonJS({
         });
       }
       *[Symbol.iterator]() {
-        for (const error2 of this._errors) {
-          yield error2;
+        for (const error of this._errors) {
+          yield error;
         }
       }
     }, "AggregateError");
-    module2.exports = AggregateError;
+    module.exports = AggregateError;
   }
 });
 
 // node_modules/del/node_modules/p-map/index.js
 var require_p_map = __commonJS({
-  "node_modules/del/node_modules/p-map/index.js"(exports2, module2) {
+  "node_modules/del/node_modules/p-map/index.js"(exports, module) {
     "use strict";
     var AggregateError = require_aggregate_error();
-    module2.exports = (_0, _1, ..._2) => __async(exports2, [_0, _1, ..._2], function* (iterable, mapper, { concurrency = Infinity, stopOnError = true } = {}) {
+    module.exports = (_0, _1, ..._2) => __async(exports, [_0, _1, ..._2], function* (iterable, mapper, { concurrency = Infinity, stopOnError = true } = {}) {
       return new Promise((resolve3, reject) => {
         if (typeof mapper !== "function") {
           throw new TypeError("Mapper function is required");
@@ -10494,18 +10552,18 @@ var require_p_map = __commonJS({
             return;
           }
           resolvingCount++;
-          (() => __async(exports2, null, function* () {
+          (() => __async(exports, null, function* () {
             try {
               const element = yield nextItem.value;
               result[index] = yield mapper(element, index);
               resolvingCount--;
               next();
-            } catch (error2) {
+            } catch (error) {
               if (stopOnError) {
                 isRejected = true;
-                reject(error2);
+                reject(error);
               } else {
-                errors.push(error2);
+                errors.push(error);
                 resolvingCount--;
                 next();
               }
@@ -10525,10 +10583,10 @@ var require_p_map = __commonJS({
 
 // node_modules/del/index.js
 var require_del = __commonJS({
-  "node_modules/del/index.js"(exports2, module2) {
+  "node_modules/del/index.js"(exports, module) {
     "use strict";
-    var { promisify } = require("util");
-    var path2 = require("path");
+    var { promisify } = __require("util");
+    var path2 = __require("path");
     var globby = require_globby();
     var isGlob = require_is_glob();
     var slash = require_slash();
@@ -10575,7 +10633,7 @@ var require_del = __commonJS({
       return patterns;
     }
     __name(normalizePatterns, "normalizePatterns");
-    module2.exports = (_0, ..._1) => __async(exports2, [_0, ..._1], function* (patterns, _a = {}) {
+    module.exports = (_0, ..._1) => __async(exports, [_0, ..._1], function* (patterns, _a = {}) {
       var _b = _a, { force, dryRun, cwd = process.cwd(), onProgress = /* @__PURE__ */ __name(() => {
       }, "onProgress") } = _b, options = __objRest(_b, ["force", "dryRun", "cwd", "onProgress"]);
       options = __spreadValues({
@@ -10594,7 +10652,7 @@ var require_del = __commonJS({
         });
       }
       let deletedCount = 0;
-      const mapper = /* @__PURE__ */ __name((file) => __async(exports2, null, function* () {
+      const mapper = /* @__PURE__ */ __name((file) => __async(exports, null, function* () {
         file = path2.resolve(cwd, file);
         if (!force) {
           safeCheck(file, cwd);
@@ -10614,7 +10672,7 @@ var require_del = __commonJS({
       removedFiles.sort((a, b) => a.localeCompare(b));
       return removedFiles;
     });
-    module2.exports.sync = (patterns, _a = {}) => {
+    module.exports.sync = (patterns, _a = {}) => {
       var _b = _a, { force, dryRun, cwd = process.cwd() } = _b, options = __objRest(_b, ["force", "dryRun", "cwd"]);
       options = __spreadValues({
         expandDirectories: false,
@@ -10642,23 +10700,23 @@ var require_del = __commonJS({
 
 // node_modules/tempy/index.js
 var require_tempy = __commonJS({
-  "node_modules/tempy/index.js"(exports2, module2) {
+  "node_modules/tempy/index.js"(exports, module) {
     "use strict";
-    var fs2 = require("fs");
-    var path2 = require("path");
+    var fs2 = __require("fs");
+    var path2 = __require("path");
     var uniqueString = require_unique_string();
     var tempDir = require_temp_dir();
     var isStream = require_is_stream();
     var del = require_del();
-    var stream = require("stream");
-    var { promisify } = require("util");
+    var stream = __require("stream");
+    var { promisify } = __require("util");
     var pipeline = promisify(stream.pipeline);
     var { writeFile } = fs2.promises;
     var getPath = /* @__PURE__ */ __name((prefix = "") => path2.join(tempDir, prefix + uniqueString()), "getPath");
-    var writeStream = /* @__PURE__ */ __name((filePath, data) => __async(exports2, null, function* () {
+    var writeStream = /* @__PURE__ */ __name((filePath, data) => __async(exports, null, function* () {
       return pipeline(data, fs2.createWriteStream(filePath));
     }), "writeStream");
-    var createTask = /* @__PURE__ */ __name((tempyFunction, { extraArguments = 0 } = {}) => (...arguments_) => __async(exports2, null, function* () {
+    var createTask = /* @__PURE__ */ __name((tempyFunction, { extraArguments = 0 } = {}) => (...arguments_) => __async(exports, null, function* () {
       const [callback, options] = arguments_.slice(extraArguments);
       const result = yield tempyFunction(...arguments_.slice(0, extraArguments), options);
       try {
@@ -10669,38 +10727,38 @@ var require_tempy = __commonJS({
         });
       }
     }), "createTask");
-    module2.exports.file = (options) => {
+    module.exports.file = (options) => {
       options = __spreadValues({}, options);
       if (options.name) {
         if (options.extension !== void 0 && options.extension !== null) {
           throw new Error("The `name` and `extension` options are mutually exclusive");
         }
-        return path2.join(module2.exports.directory(), options.name);
+        return path2.join(module.exports.directory(), options.name);
       }
       return getPath() + (options.extension === void 0 || options.extension === null ? "" : "." + options.extension.replace(/^\./, ""));
     };
-    module2.exports.file.task = createTask(module2.exports.file);
-    module2.exports.directory = ({ prefix = "" } = {}) => {
+    module.exports.file.task = createTask(module.exports.file);
+    module.exports.directory = ({ prefix = "" } = {}) => {
       const directory = getPath(prefix);
       fs2.mkdirSync(directory);
       return directory;
     };
-    module2.exports.directory.task = createTask(module2.exports.directory);
-    module2.exports.write = (data, options) => __async(exports2, null, function* () {
-      const filename = module2.exports.file(options);
+    module.exports.directory.task = createTask(module.exports.directory);
+    module.exports.write = (data, options) => __async(exports, null, function* () {
+      const filename = module.exports.file(options);
       const write = isStream(data) ? writeStream : writeFile;
       yield write(filename, data);
       return filename;
     });
-    module2.exports.write.task = createTask(module2.exports.write, {
+    module.exports.write.task = createTask(module.exports.write, {
       extraArguments: 1
     });
-    module2.exports.writeSync = (data, options) => {
-      const filename = module2.exports.file(options);
+    module.exports.writeSync = (data, options) => {
+      const filename = module.exports.file(options);
       fs2.writeFileSync(filename, data);
       return filename;
     };
-    Object.defineProperty(module2.exports, "root", {
+    Object.defineProperty(module.exports, "root", {
       get() {
         return tempDir;
       }
@@ -10710,7 +10768,7 @@ var require_tempy = __commonJS({
 
 // node_modules/commander/lib/error.js
 var require_error2 = __commonJS({
-  "node_modules/commander/lib/error.js"(exports2) {
+  "node_modules/commander/lib/error.js"(exports) {
     var CommanderError = /* @__PURE__ */ __name(class CommanderError extends Error {
       constructor(exitCode, code, message) {
         super(message);
@@ -10728,14 +10786,14 @@ var require_error2 = __commonJS({
         this.name = this.constructor.name;
       }
     }, "InvalidArgumentError");
-    exports2.CommanderError = CommanderError;
-    exports2.InvalidArgumentError = InvalidArgumentError;
+    exports.CommanderError = CommanderError;
+    exports.InvalidArgumentError = InvalidArgumentError;
   }
 });
 
 // node_modules/commander/lib/argument.js
 var require_argument = __commonJS({
-  "node_modules/commander/lib/argument.js"(exports2) {
+  "node_modules/commander/lib/argument.js"(exports) {
     var { InvalidArgumentError } = require_error2();
     var Argument = /* @__PURE__ */ __name(class Argument {
       constructor(name, description) {
@@ -10811,14 +10869,14 @@ var require_argument = __commonJS({
       return arg.required ? "<" + nameOutput + ">" : "[" + nameOutput + "]";
     }
     __name(humanReadableArgName, "humanReadableArgName");
-    exports2.Argument = Argument;
-    exports2.humanReadableArgName = humanReadableArgName;
+    exports.Argument = Argument;
+    exports.humanReadableArgName = humanReadableArgName;
   }
 });
 
 // node_modules/commander/lib/help.js
 var require_help = __commonJS({
-  "node_modules/commander/lib/help.js"(exports2) {
+  "node_modules/commander/lib/help.js"(exports) {
     var { humanReadableArgName } = require_argument();
     var Help = /* @__PURE__ */ __name(class Help {
       constructor() {
@@ -11046,13 +11104,13 @@ var require_help = __commonJS({
         }).join("\n");
       }
     }, "Help");
-    exports2.Help = Help;
+    exports.Help = Help;
   }
 });
 
 // node_modules/commander/lib/option.js
 var require_option = __commonJS({
-  "node_modules/commander/lib/option.js"(exports2) {
+  "node_modules/commander/lib/option.js"(exports) {
     var { InvalidArgumentError } = require_error2();
     var Option = /* @__PURE__ */ __name(class Option {
       constructor(flags, description) {
@@ -11199,15 +11257,15 @@ var require_option = __commonJS({
       };
     }
     __name(splitOptionFlags, "splitOptionFlags");
-    exports2.Option = Option;
-    exports2.splitOptionFlags = splitOptionFlags;
-    exports2.DualOptions = DualOptions;
+    exports.Option = Option;
+    exports.splitOptionFlags = splitOptionFlags;
+    exports.DualOptions = DualOptions;
   }
 });
 
 // node_modules/commander/lib/suggestSimilar.js
 var require_suggestSimilar = __commonJS({
-  "node_modules/commander/lib/suggestSimilar.js"(exports2) {
+  "node_modules/commander/lib/suggestSimilar.js"(exports) {
     var maxDistance = 3;
     function editDistance(a, b) {
       if (Math.abs(a.length - b.length) > maxDistance)
@@ -11286,18 +11344,18 @@ var require_suggestSimilar = __commonJS({
       return "";
     }
     __name(suggestSimilar, "suggestSimilar");
-    exports2.suggestSimilar = suggestSimilar;
+    exports.suggestSimilar = suggestSimilar;
   }
 });
 
 // node_modules/commander/lib/command.js
 var require_command = __commonJS({
-  "node_modules/commander/lib/command.js"(exports2) {
-    var EventEmitter = require("events").EventEmitter;
-    var childProcess = require("child_process");
-    var path2 = require("path");
-    var fs2 = require("fs");
-    var process2 = require("process");
+  "node_modules/commander/lib/command.js"(exports) {
+    var EventEmitter = __require("events").EventEmitter;
+    var childProcess = __require("child_process");
+    var path2 = __require("path");
+    var fs2 = __require("fs");
+    var process2 = __require("process");
     var { Argument, humanReadableArgName } = require_argument();
     var { CommanderError } = require_error2();
     var { Help } = require_help();
@@ -12540,38 +12598,170 @@ Expecting one of '${allowedValues.join("', '")}'`);
       return result;
     }
     __name(getCommandAndParents, "getCommandAndParents");
-    exports2.Command = Command;
+    exports.Command = Command;
   }
 });
 
 // node_modules/commander/index.js
 var require_commander = __commonJS({
-  "node_modules/commander/index.js"(exports2, module2) {
+  "node_modules/commander/index.js"(exports, module) {
     var { Argument } = require_argument();
     var { Command } = require_command();
     var { CommanderError, InvalidArgumentError } = require_error2();
     var { Help } = require_help();
     var { Option } = require_option();
-    exports2 = module2.exports = new Command();
-    exports2.program = exports2;
-    exports2.Argument = Argument;
-    exports2.Command = Command;
-    exports2.CommanderError = CommanderError;
-    exports2.Help = Help;
-    exports2.InvalidArgumentError = InvalidArgumentError;
-    exports2.InvalidOptionArgumentError = InvalidArgumentError;
-    exports2.Option = Option;
+    exports = module.exports = new Command();
+    exports.program = exports;
+    exports.Argument = Argument;
+    exports.Command = Command;
+    exports.CommanderError = CommanderError;
+    exports.Help = Help;
+    exports.InvalidArgumentError = InvalidArgumentError;
+    exports.InvalidOptionArgumentError = InvalidArgumentError;
+    exports.Option = Option;
+  }
+});
+
+// src/util/getParsedCliOptions.ts
+var getParsedCliOptions;
+var init_getParsedCliOptions = __esm({
+  "src/util/getParsedCliOptions.ts"() {
+    getParsedCliOptions = /* @__PURE__ */ __name(() => {
+      const { program: program2 } = require_commander();
+      program2.option("-i, --index-json", "Run in index json mode. Automatically detected (requires a compatible Storybook)").option("-s, --stories-json", "Run in index json mode. Automatically detected (requires a compatible Storybook) [deprecated, use --index-json]").option("--no-index-json", "Disable index json mode").option("--no-stories-json", "Disable index json mode [deprecated, use --no-index-json]").option("-c, --config-dir <directory>", "Directory where to load Storybook configurations from", ".storybook").option("--watch", "Watch files for changes and rerun tests related to changed files", false).option("--watchAll", "Watch files for changes and rerun all tests when something changes").option("--browsers <browsers...>", "Define browsers to run tests in. Could be one or multiple of: chromium, firefox, webkit", [
+        "chromium"
+      ]).option("--url <url>", "Define the URL to run tests in. Useful for custom Storybook URLs", "http://localhost:6006").option("--maxWorkers <amount>", "Specifies the maximum number of workers the worker-pool will spawn for running tests").option("--no-cache", "Disable the cache").option("--clearCache", "Deletes the Jest cache directory and then exits without running tests").option("--verbose", "Display individual test results with the test suite hierarchy").option("-u, --updateSnapshot", "Use this flag to re-record every snapshot that fails during this test run").option("--json", "Prints the test results in JSON. This mode will send all other test output and user messages to stderr.").option("--outputFile", "Write test results to a file when the --json option is also specified.").option("--coverage", "Indicates that test coverage information should be collected and reported in the output").option("--junit", "Indicates that test information should be reported in a junit file").option("--eject", "Creates a local configuration file to override defaults of the test-runner. Use it only if you want to have better control over the runner configurations").option("--ci", "Instead of the regular behavior of storing a new snapshot automatically, it will fail the test and require to be run with --updateSnapshot.");
+      program2.exitOverride();
+      try {
+        program2.parse();
+      } catch (err) {
+        switch (err.code) {
+          case "commander.unknownOption": {
+            program2.outputHelp();
+            console.warn(`
+If you'd like this option to be supported, please open an issue at https://github.com/storybookjs/test-runner/issues/new
+`);
+            process.exit(1);
+          }
+          case "commander.helpDisplayed": {
+            process.exit(0);
+          }
+          default: {
+            throw err;
+          }
+        }
+      }
+      const _a = program2.opts(), { storiesJson } = _a, options = __objRest(_a, ["storiesJson"]);
+      return {
+        options: __spreadValues({
+          indexJson: storiesJson
+        }, options),
+        extraArgs: program2.args
+      };
+    }, "getParsedCliOptions");
+  }
+});
+
+// src/util/getCliOptions.ts
+var STORYBOOK_RUNNER_COMMANDS, getCliOptions;
+var init_getCliOptions = __esm({
+  "src/util/getCliOptions.ts"() {
+    init_getParsedCliOptions();
+    STORYBOOK_RUNNER_COMMANDS = [
+      "indexJson",
+      "configDir",
+      "browsers",
+      "eject",
+      "url",
+      "coverage",
+      "junit"
+    ];
+    getCliOptions = /* @__PURE__ */ __name(() => {
+      const { options: allOptions, extraArgs } = getParsedCliOptions();
+      const defaultOptions = {
+        runnerOptions: {},
+        jestOptions: process.argv.splice(0, 2)
+      };
+      const finalOptions = Object.keys(allOptions).reduce((acc, key) => {
+        if (STORYBOOK_RUNNER_COMMANDS.includes(key)) {
+          acc.runnerOptions[key] = allOptions[key];
+        } else {
+          if (allOptions[key] === true) {
+            acc.jestOptions.push(`--${key}`);
+          } else if (allOptions[key] === false) {
+            acc.jestOptions.push(`--no-${key}`);
+          } else {
+            acc.jestOptions.push(`--${key}`, allOptions[key]);
+          }
+        }
+        return acc;
+      }, defaultOptions);
+      if (extraArgs.length) {
+        finalOptions.jestOptions.push(...extraArgs);
+      }
+      return finalOptions;
+    }, "getCliOptions");
+  }
+});
+
+// src/util/getStorybookMain.ts
+import { join, resolve } from "path";
+import { serverRequire } from "@storybook/core-common";
+var storybookMainConfig, getStorybookMain;
+var init_getStorybookMain = __esm({
+  "src/util/getStorybookMain.ts"() {
+    getStorybookMain = /* @__PURE__ */ __name((configDir) => {
+      if (storybookMainConfig) {
+        return storybookMainConfig;
+      }
+      storybookMainConfig = serverRequire(join(resolve(configDir), "main"));
+      if (!storybookMainConfig) {
+        throw new Error(`Could not load main.js in ${configDir}. Is the config directory correct? You can change it by using --config-dir <path-to-dir>`);
+      }
+      return storybookMainConfig;
+    }, "getStorybookMain");
+  }
+});
+
+// src/util/getStorybookMetadata.ts
+import { relative, resolve as resolve2 } from "path";
+import { normalizeStories } from "@storybook/core-common";
+var getStorybookMetadata;
+var init_getStorybookMetadata = __esm({
+  "src/util/getStorybookMetadata.ts"() {
+    init_getStorybookMain();
+    getStorybookMetadata = /* @__PURE__ */ __name(() => {
+      var _a, _b, _c;
+      const workingDir = resolve2();
+      const configDir = process.env.STORYBOOK_CONFIG_DIR;
+      const main = getStorybookMain(configDir);
+      const normalizedStoriesEntries = normalizeStories(main.stories, {
+        configDir,
+        workingDir
+      }).map((specifier) => __spreadProps(__spreadValues({}, specifier), {
+        importPathMatcher: new RegExp(specifier.importPathMatcher)
+      }));
+      const storiesPaths = normalizedStoriesEntries.map((entry) => entry.directory + "/" + entry.files).map((dir) => "<rootDir>/" + relative(workingDir, dir)).join(";");
+      const lazyCompilation = !!((_c = (_b = (_a = main == null ? void 0 : main.core) == null ? void 0 : _a.builder) == null ? void 0 : _b.options) == null ? void 0 : _c.lazyCompilation);
+      return {
+        configDir,
+        workingDir,
+        storiesPaths,
+        normalizedStoriesEntries,
+        lazyCompilation
+      };
+    }, "getStorybookMetadata");
   }
 });
 
 // node_modules/@babel/types/lib/utils/shallowEqual.js
 var require_shallowEqual = __commonJS({
-  "node_modules/@babel/types/lib/utils/shallowEqual.js"(exports2) {
+  "node_modules/@babel/types/lib/utils/shallowEqual.js"(exports) {
     "use strict";
-    Object.defineProperty(exports2, "__esModule", {
+    Object.defineProperty(exports, "__esModule", {
       value: true
     });
-    exports2.default = shallowEqual;
+    exports.default = shallowEqual;
     function shallowEqual(actual, expected) {
       const keys = Object.keys(expected);
       for (const key of keys) {
@@ -12587,313 +12777,313 @@ var require_shallowEqual = __commonJS({
 
 // node_modules/@babel/types/lib/validators/generated/index.js
 var require_generated = __commonJS({
-  "node_modules/@babel/types/lib/validators/generated/index.js"(exports2) {
+  "node_modules/@babel/types/lib/validators/generated/index.js"(exports) {
     "use strict";
-    Object.defineProperty(exports2, "__esModule", {
+    Object.defineProperty(exports, "__esModule", {
       value: true
     });
-    exports2.isAccessor = isAccessor;
-    exports2.isAnyTypeAnnotation = isAnyTypeAnnotation;
-    exports2.isArgumentPlaceholder = isArgumentPlaceholder;
-    exports2.isArrayExpression = isArrayExpression;
-    exports2.isArrayPattern = isArrayPattern;
-    exports2.isArrayTypeAnnotation = isArrayTypeAnnotation;
-    exports2.isArrowFunctionExpression = isArrowFunctionExpression;
-    exports2.isAssignmentExpression = isAssignmentExpression;
-    exports2.isAssignmentPattern = isAssignmentPattern;
-    exports2.isAwaitExpression = isAwaitExpression;
-    exports2.isBigIntLiteral = isBigIntLiteral;
-    exports2.isBinary = isBinary;
-    exports2.isBinaryExpression = isBinaryExpression;
-    exports2.isBindExpression = isBindExpression;
-    exports2.isBlock = isBlock;
-    exports2.isBlockParent = isBlockParent;
-    exports2.isBlockStatement = isBlockStatement;
-    exports2.isBooleanLiteral = isBooleanLiteral;
-    exports2.isBooleanLiteralTypeAnnotation = isBooleanLiteralTypeAnnotation;
-    exports2.isBooleanTypeAnnotation = isBooleanTypeAnnotation;
-    exports2.isBreakStatement = isBreakStatement;
-    exports2.isCallExpression = isCallExpression;
-    exports2.isCatchClause = isCatchClause;
-    exports2.isClass = isClass;
-    exports2.isClassAccessorProperty = isClassAccessorProperty;
-    exports2.isClassBody = isClassBody;
-    exports2.isClassDeclaration = isClassDeclaration;
-    exports2.isClassExpression = isClassExpression;
-    exports2.isClassImplements = isClassImplements;
-    exports2.isClassMethod = isClassMethod;
-    exports2.isClassPrivateMethod = isClassPrivateMethod;
-    exports2.isClassPrivateProperty = isClassPrivateProperty;
-    exports2.isClassProperty = isClassProperty;
-    exports2.isCompletionStatement = isCompletionStatement;
-    exports2.isConditional = isConditional;
-    exports2.isConditionalExpression = isConditionalExpression;
-    exports2.isContinueStatement = isContinueStatement;
-    exports2.isDebuggerStatement = isDebuggerStatement;
-    exports2.isDecimalLiteral = isDecimalLiteral;
-    exports2.isDeclaration = isDeclaration;
-    exports2.isDeclareClass = isDeclareClass;
-    exports2.isDeclareExportAllDeclaration = isDeclareExportAllDeclaration;
-    exports2.isDeclareExportDeclaration = isDeclareExportDeclaration;
-    exports2.isDeclareFunction = isDeclareFunction;
-    exports2.isDeclareInterface = isDeclareInterface;
-    exports2.isDeclareModule = isDeclareModule;
-    exports2.isDeclareModuleExports = isDeclareModuleExports;
-    exports2.isDeclareOpaqueType = isDeclareOpaqueType;
-    exports2.isDeclareTypeAlias = isDeclareTypeAlias;
-    exports2.isDeclareVariable = isDeclareVariable;
-    exports2.isDeclaredPredicate = isDeclaredPredicate;
-    exports2.isDecorator = isDecorator;
-    exports2.isDirective = isDirective;
-    exports2.isDirectiveLiteral = isDirectiveLiteral;
-    exports2.isDoExpression = isDoExpression;
-    exports2.isDoWhileStatement = isDoWhileStatement;
-    exports2.isEmptyStatement = isEmptyStatement;
-    exports2.isEmptyTypeAnnotation = isEmptyTypeAnnotation;
-    exports2.isEnumBody = isEnumBody;
-    exports2.isEnumBooleanBody = isEnumBooleanBody;
-    exports2.isEnumBooleanMember = isEnumBooleanMember;
-    exports2.isEnumDeclaration = isEnumDeclaration;
-    exports2.isEnumDefaultedMember = isEnumDefaultedMember;
-    exports2.isEnumMember = isEnumMember;
-    exports2.isEnumNumberBody = isEnumNumberBody;
-    exports2.isEnumNumberMember = isEnumNumberMember;
-    exports2.isEnumStringBody = isEnumStringBody;
-    exports2.isEnumStringMember = isEnumStringMember;
-    exports2.isEnumSymbolBody = isEnumSymbolBody;
-    exports2.isExistsTypeAnnotation = isExistsTypeAnnotation;
-    exports2.isExportAllDeclaration = isExportAllDeclaration;
-    exports2.isExportDeclaration = isExportDeclaration;
-    exports2.isExportDefaultDeclaration = isExportDefaultDeclaration;
-    exports2.isExportDefaultSpecifier = isExportDefaultSpecifier;
-    exports2.isExportNamedDeclaration = isExportNamedDeclaration;
-    exports2.isExportNamespaceSpecifier = isExportNamespaceSpecifier;
-    exports2.isExportSpecifier = isExportSpecifier;
-    exports2.isExpression = isExpression;
-    exports2.isExpressionStatement = isExpressionStatement;
-    exports2.isExpressionWrapper = isExpressionWrapper;
-    exports2.isFile = isFile;
-    exports2.isFlow = isFlow;
-    exports2.isFlowBaseAnnotation = isFlowBaseAnnotation;
-    exports2.isFlowDeclaration = isFlowDeclaration;
-    exports2.isFlowPredicate = isFlowPredicate;
-    exports2.isFlowType = isFlowType;
-    exports2.isFor = isFor;
-    exports2.isForInStatement = isForInStatement;
-    exports2.isForOfStatement = isForOfStatement;
-    exports2.isForStatement = isForStatement;
-    exports2.isForXStatement = isForXStatement;
-    exports2.isFunction = isFunction;
-    exports2.isFunctionDeclaration = isFunctionDeclaration;
-    exports2.isFunctionExpression = isFunctionExpression;
-    exports2.isFunctionParent = isFunctionParent;
-    exports2.isFunctionTypeAnnotation = isFunctionTypeAnnotation;
-    exports2.isFunctionTypeParam = isFunctionTypeParam;
-    exports2.isGenericTypeAnnotation = isGenericTypeAnnotation;
-    exports2.isIdentifier = isIdentifier;
-    exports2.isIfStatement = isIfStatement;
-    exports2.isImmutable = isImmutable;
-    exports2.isImport = isImport;
-    exports2.isImportAttribute = isImportAttribute;
-    exports2.isImportDeclaration = isImportDeclaration;
-    exports2.isImportDefaultSpecifier = isImportDefaultSpecifier;
-    exports2.isImportNamespaceSpecifier = isImportNamespaceSpecifier;
-    exports2.isImportSpecifier = isImportSpecifier;
-    exports2.isIndexedAccessType = isIndexedAccessType;
-    exports2.isInferredPredicate = isInferredPredicate;
-    exports2.isInterfaceDeclaration = isInterfaceDeclaration;
-    exports2.isInterfaceExtends = isInterfaceExtends;
-    exports2.isInterfaceTypeAnnotation = isInterfaceTypeAnnotation;
-    exports2.isInterpreterDirective = isInterpreterDirective;
-    exports2.isIntersectionTypeAnnotation = isIntersectionTypeAnnotation;
-    exports2.isJSX = isJSX;
-    exports2.isJSXAttribute = isJSXAttribute;
-    exports2.isJSXClosingElement = isJSXClosingElement;
-    exports2.isJSXClosingFragment = isJSXClosingFragment;
-    exports2.isJSXElement = isJSXElement;
-    exports2.isJSXEmptyExpression = isJSXEmptyExpression;
-    exports2.isJSXExpressionContainer = isJSXExpressionContainer;
-    exports2.isJSXFragment = isJSXFragment;
-    exports2.isJSXIdentifier = isJSXIdentifier;
-    exports2.isJSXMemberExpression = isJSXMemberExpression;
-    exports2.isJSXNamespacedName = isJSXNamespacedName;
-    exports2.isJSXOpeningElement = isJSXOpeningElement;
-    exports2.isJSXOpeningFragment = isJSXOpeningFragment;
-    exports2.isJSXSpreadAttribute = isJSXSpreadAttribute;
-    exports2.isJSXSpreadChild = isJSXSpreadChild;
-    exports2.isJSXText = isJSXText;
-    exports2.isLVal = isLVal;
-    exports2.isLabeledStatement = isLabeledStatement;
-    exports2.isLiteral = isLiteral;
-    exports2.isLogicalExpression = isLogicalExpression;
-    exports2.isLoop = isLoop;
-    exports2.isMemberExpression = isMemberExpression;
-    exports2.isMetaProperty = isMetaProperty;
-    exports2.isMethod = isMethod;
-    exports2.isMiscellaneous = isMiscellaneous;
-    exports2.isMixedTypeAnnotation = isMixedTypeAnnotation;
-    exports2.isModuleDeclaration = isModuleDeclaration;
-    exports2.isModuleExpression = isModuleExpression;
-    exports2.isModuleSpecifier = isModuleSpecifier;
-    exports2.isNewExpression = isNewExpression;
-    exports2.isNoop = isNoop;
-    exports2.isNullLiteral = isNullLiteral;
-    exports2.isNullLiteralTypeAnnotation = isNullLiteralTypeAnnotation;
-    exports2.isNullableTypeAnnotation = isNullableTypeAnnotation;
-    exports2.isNumberLiteral = isNumberLiteral;
-    exports2.isNumberLiteralTypeAnnotation = isNumberLiteralTypeAnnotation;
-    exports2.isNumberTypeAnnotation = isNumberTypeAnnotation;
-    exports2.isNumericLiteral = isNumericLiteral;
-    exports2.isObjectExpression = isObjectExpression;
-    exports2.isObjectMember = isObjectMember;
-    exports2.isObjectMethod = isObjectMethod;
-    exports2.isObjectPattern = isObjectPattern;
-    exports2.isObjectProperty = isObjectProperty;
-    exports2.isObjectTypeAnnotation = isObjectTypeAnnotation;
-    exports2.isObjectTypeCallProperty = isObjectTypeCallProperty;
-    exports2.isObjectTypeIndexer = isObjectTypeIndexer;
-    exports2.isObjectTypeInternalSlot = isObjectTypeInternalSlot;
-    exports2.isObjectTypeProperty = isObjectTypeProperty;
-    exports2.isObjectTypeSpreadProperty = isObjectTypeSpreadProperty;
-    exports2.isOpaqueType = isOpaqueType;
-    exports2.isOptionalCallExpression = isOptionalCallExpression;
-    exports2.isOptionalIndexedAccessType = isOptionalIndexedAccessType;
-    exports2.isOptionalMemberExpression = isOptionalMemberExpression;
-    exports2.isParenthesizedExpression = isParenthesizedExpression;
-    exports2.isPattern = isPattern;
-    exports2.isPatternLike = isPatternLike;
-    exports2.isPipelineBareFunction = isPipelineBareFunction;
-    exports2.isPipelinePrimaryTopicReference = isPipelinePrimaryTopicReference;
-    exports2.isPipelineTopicExpression = isPipelineTopicExpression;
-    exports2.isPlaceholder = isPlaceholder;
-    exports2.isPrivate = isPrivate;
-    exports2.isPrivateName = isPrivateName;
-    exports2.isProgram = isProgram;
-    exports2.isProperty = isProperty;
-    exports2.isPureish = isPureish;
-    exports2.isQualifiedTypeIdentifier = isQualifiedTypeIdentifier;
-    exports2.isRecordExpression = isRecordExpression;
-    exports2.isRegExpLiteral = isRegExpLiteral;
-    exports2.isRegexLiteral = isRegexLiteral;
-    exports2.isRestElement = isRestElement;
-    exports2.isRestProperty = isRestProperty;
-    exports2.isReturnStatement = isReturnStatement;
-    exports2.isScopable = isScopable;
-    exports2.isSequenceExpression = isSequenceExpression;
-    exports2.isSpreadElement = isSpreadElement;
-    exports2.isSpreadProperty = isSpreadProperty;
-    exports2.isStandardized = isStandardized;
-    exports2.isStatement = isStatement;
-    exports2.isStaticBlock = isStaticBlock;
-    exports2.isStringLiteral = isStringLiteral;
-    exports2.isStringLiteralTypeAnnotation = isStringLiteralTypeAnnotation;
-    exports2.isStringTypeAnnotation = isStringTypeAnnotation;
-    exports2.isSuper = isSuper;
-    exports2.isSwitchCase = isSwitchCase;
-    exports2.isSwitchStatement = isSwitchStatement;
-    exports2.isSymbolTypeAnnotation = isSymbolTypeAnnotation;
-    exports2.isTSAnyKeyword = isTSAnyKeyword;
-    exports2.isTSArrayType = isTSArrayType;
-    exports2.isTSAsExpression = isTSAsExpression;
-    exports2.isTSBaseType = isTSBaseType;
-    exports2.isTSBigIntKeyword = isTSBigIntKeyword;
-    exports2.isTSBooleanKeyword = isTSBooleanKeyword;
-    exports2.isTSCallSignatureDeclaration = isTSCallSignatureDeclaration;
-    exports2.isTSConditionalType = isTSConditionalType;
-    exports2.isTSConstructSignatureDeclaration = isTSConstructSignatureDeclaration;
-    exports2.isTSConstructorType = isTSConstructorType;
-    exports2.isTSDeclareFunction = isTSDeclareFunction;
-    exports2.isTSDeclareMethod = isTSDeclareMethod;
-    exports2.isTSEntityName = isTSEntityName;
-    exports2.isTSEnumDeclaration = isTSEnumDeclaration;
-    exports2.isTSEnumMember = isTSEnumMember;
-    exports2.isTSExportAssignment = isTSExportAssignment;
-    exports2.isTSExpressionWithTypeArguments = isTSExpressionWithTypeArguments;
-    exports2.isTSExternalModuleReference = isTSExternalModuleReference;
-    exports2.isTSFunctionType = isTSFunctionType;
-    exports2.isTSImportEqualsDeclaration = isTSImportEqualsDeclaration;
-    exports2.isTSImportType = isTSImportType;
-    exports2.isTSIndexSignature = isTSIndexSignature;
-    exports2.isTSIndexedAccessType = isTSIndexedAccessType;
-    exports2.isTSInferType = isTSInferType;
-    exports2.isTSInstantiationExpression = isTSInstantiationExpression;
-    exports2.isTSInterfaceBody = isTSInterfaceBody;
-    exports2.isTSInterfaceDeclaration = isTSInterfaceDeclaration;
-    exports2.isTSIntersectionType = isTSIntersectionType;
-    exports2.isTSIntrinsicKeyword = isTSIntrinsicKeyword;
-    exports2.isTSLiteralType = isTSLiteralType;
-    exports2.isTSMappedType = isTSMappedType;
-    exports2.isTSMethodSignature = isTSMethodSignature;
-    exports2.isTSModuleBlock = isTSModuleBlock;
-    exports2.isTSModuleDeclaration = isTSModuleDeclaration;
-    exports2.isTSNamedTupleMember = isTSNamedTupleMember;
-    exports2.isTSNamespaceExportDeclaration = isTSNamespaceExportDeclaration;
-    exports2.isTSNeverKeyword = isTSNeverKeyword;
-    exports2.isTSNonNullExpression = isTSNonNullExpression;
-    exports2.isTSNullKeyword = isTSNullKeyword;
-    exports2.isTSNumberKeyword = isTSNumberKeyword;
-    exports2.isTSObjectKeyword = isTSObjectKeyword;
-    exports2.isTSOptionalType = isTSOptionalType;
-    exports2.isTSParameterProperty = isTSParameterProperty;
-    exports2.isTSParenthesizedType = isTSParenthesizedType;
-    exports2.isTSPropertySignature = isTSPropertySignature;
-    exports2.isTSQualifiedName = isTSQualifiedName;
-    exports2.isTSRestType = isTSRestType;
-    exports2.isTSSatisfiesExpression = isTSSatisfiesExpression;
-    exports2.isTSStringKeyword = isTSStringKeyword;
-    exports2.isTSSymbolKeyword = isTSSymbolKeyword;
-    exports2.isTSThisType = isTSThisType;
-    exports2.isTSTupleType = isTSTupleType;
-    exports2.isTSType = isTSType;
-    exports2.isTSTypeAliasDeclaration = isTSTypeAliasDeclaration;
-    exports2.isTSTypeAnnotation = isTSTypeAnnotation;
-    exports2.isTSTypeAssertion = isTSTypeAssertion;
-    exports2.isTSTypeElement = isTSTypeElement;
-    exports2.isTSTypeLiteral = isTSTypeLiteral;
-    exports2.isTSTypeOperator = isTSTypeOperator;
-    exports2.isTSTypeParameter = isTSTypeParameter;
-    exports2.isTSTypeParameterDeclaration = isTSTypeParameterDeclaration;
-    exports2.isTSTypeParameterInstantiation = isTSTypeParameterInstantiation;
-    exports2.isTSTypePredicate = isTSTypePredicate;
-    exports2.isTSTypeQuery = isTSTypeQuery;
-    exports2.isTSTypeReference = isTSTypeReference;
-    exports2.isTSUndefinedKeyword = isTSUndefinedKeyword;
-    exports2.isTSUnionType = isTSUnionType;
-    exports2.isTSUnknownKeyword = isTSUnknownKeyword;
-    exports2.isTSVoidKeyword = isTSVoidKeyword;
-    exports2.isTaggedTemplateExpression = isTaggedTemplateExpression;
-    exports2.isTemplateElement = isTemplateElement;
-    exports2.isTemplateLiteral = isTemplateLiteral;
-    exports2.isTerminatorless = isTerminatorless;
-    exports2.isThisExpression = isThisExpression;
-    exports2.isThisTypeAnnotation = isThisTypeAnnotation;
-    exports2.isThrowStatement = isThrowStatement;
-    exports2.isTopicReference = isTopicReference;
-    exports2.isTryStatement = isTryStatement;
-    exports2.isTupleExpression = isTupleExpression;
-    exports2.isTupleTypeAnnotation = isTupleTypeAnnotation;
-    exports2.isTypeAlias = isTypeAlias;
-    exports2.isTypeAnnotation = isTypeAnnotation;
-    exports2.isTypeCastExpression = isTypeCastExpression;
-    exports2.isTypeParameter = isTypeParameter;
-    exports2.isTypeParameterDeclaration = isTypeParameterDeclaration;
-    exports2.isTypeParameterInstantiation = isTypeParameterInstantiation;
-    exports2.isTypeScript = isTypeScript;
-    exports2.isTypeofTypeAnnotation = isTypeofTypeAnnotation;
-    exports2.isUnaryExpression = isUnaryExpression;
-    exports2.isUnaryLike = isUnaryLike;
-    exports2.isUnionTypeAnnotation = isUnionTypeAnnotation;
-    exports2.isUpdateExpression = isUpdateExpression;
-    exports2.isUserWhitespacable = isUserWhitespacable;
-    exports2.isV8IntrinsicIdentifier = isV8IntrinsicIdentifier;
-    exports2.isVariableDeclaration = isVariableDeclaration;
-    exports2.isVariableDeclarator = isVariableDeclarator;
-    exports2.isVariance = isVariance;
-    exports2.isVoidTypeAnnotation = isVoidTypeAnnotation;
-    exports2.isWhile = isWhile;
-    exports2.isWhileStatement = isWhileStatement;
-    exports2.isWithStatement = isWithStatement;
-    exports2.isYieldExpression = isYieldExpression;
+    exports.isAccessor = isAccessor;
+    exports.isAnyTypeAnnotation = isAnyTypeAnnotation;
+    exports.isArgumentPlaceholder = isArgumentPlaceholder;
+    exports.isArrayExpression = isArrayExpression;
+    exports.isArrayPattern = isArrayPattern;
+    exports.isArrayTypeAnnotation = isArrayTypeAnnotation;
+    exports.isArrowFunctionExpression = isArrowFunctionExpression;
+    exports.isAssignmentExpression = isAssignmentExpression;
+    exports.isAssignmentPattern = isAssignmentPattern;
+    exports.isAwaitExpression = isAwaitExpression;
+    exports.isBigIntLiteral = isBigIntLiteral;
+    exports.isBinary = isBinary;
+    exports.isBinaryExpression = isBinaryExpression;
+    exports.isBindExpression = isBindExpression;
+    exports.isBlock = isBlock;
+    exports.isBlockParent = isBlockParent;
+    exports.isBlockStatement = isBlockStatement;
+    exports.isBooleanLiteral = isBooleanLiteral;
+    exports.isBooleanLiteralTypeAnnotation = isBooleanLiteralTypeAnnotation;
+    exports.isBooleanTypeAnnotation = isBooleanTypeAnnotation;
+    exports.isBreakStatement = isBreakStatement;
+    exports.isCallExpression = isCallExpression;
+    exports.isCatchClause = isCatchClause;
+    exports.isClass = isClass;
+    exports.isClassAccessorProperty = isClassAccessorProperty;
+    exports.isClassBody = isClassBody;
+    exports.isClassDeclaration = isClassDeclaration;
+    exports.isClassExpression = isClassExpression;
+    exports.isClassImplements = isClassImplements;
+    exports.isClassMethod = isClassMethod;
+    exports.isClassPrivateMethod = isClassPrivateMethod;
+    exports.isClassPrivateProperty = isClassPrivateProperty;
+    exports.isClassProperty = isClassProperty;
+    exports.isCompletionStatement = isCompletionStatement;
+    exports.isConditional = isConditional;
+    exports.isConditionalExpression = isConditionalExpression;
+    exports.isContinueStatement = isContinueStatement;
+    exports.isDebuggerStatement = isDebuggerStatement;
+    exports.isDecimalLiteral = isDecimalLiteral;
+    exports.isDeclaration = isDeclaration;
+    exports.isDeclareClass = isDeclareClass;
+    exports.isDeclareExportAllDeclaration = isDeclareExportAllDeclaration;
+    exports.isDeclareExportDeclaration = isDeclareExportDeclaration;
+    exports.isDeclareFunction = isDeclareFunction;
+    exports.isDeclareInterface = isDeclareInterface;
+    exports.isDeclareModule = isDeclareModule;
+    exports.isDeclareModuleExports = isDeclareModuleExports;
+    exports.isDeclareOpaqueType = isDeclareOpaqueType;
+    exports.isDeclareTypeAlias = isDeclareTypeAlias;
+    exports.isDeclareVariable = isDeclareVariable;
+    exports.isDeclaredPredicate = isDeclaredPredicate;
+    exports.isDecorator = isDecorator;
+    exports.isDirective = isDirective;
+    exports.isDirectiveLiteral = isDirectiveLiteral;
+    exports.isDoExpression = isDoExpression;
+    exports.isDoWhileStatement = isDoWhileStatement;
+    exports.isEmptyStatement = isEmptyStatement;
+    exports.isEmptyTypeAnnotation = isEmptyTypeAnnotation;
+    exports.isEnumBody = isEnumBody;
+    exports.isEnumBooleanBody = isEnumBooleanBody;
+    exports.isEnumBooleanMember = isEnumBooleanMember;
+    exports.isEnumDeclaration = isEnumDeclaration;
+    exports.isEnumDefaultedMember = isEnumDefaultedMember;
+    exports.isEnumMember = isEnumMember;
+    exports.isEnumNumberBody = isEnumNumberBody;
+    exports.isEnumNumberMember = isEnumNumberMember;
+    exports.isEnumStringBody = isEnumStringBody;
+    exports.isEnumStringMember = isEnumStringMember;
+    exports.isEnumSymbolBody = isEnumSymbolBody;
+    exports.isExistsTypeAnnotation = isExistsTypeAnnotation;
+    exports.isExportAllDeclaration = isExportAllDeclaration;
+    exports.isExportDeclaration = isExportDeclaration;
+    exports.isExportDefaultDeclaration = isExportDefaultDeclaration;
+    exports.isExportDefaultSpecifier = isExportDefaultSpecifier;
+    exports.isExportNamedDeclaration = isExportNamedDeclaration;
+    exports.isExportNamespaceSpecifier = isExportNamespaceSpecifier;
+    exports.isExportSpecifier = isExportSpecifier;
+    exports.isExpression = isExpression;
+    exports.isExpressionStatement = isExpressionStatement;
+    exports.isExpressionWrapper = isExpressionWrapper;
+    exports.isFile = isFile;
+    exports.isFlow = isFlow;
+    exports.isFlowBaseAnnotation = isFlowBaseAnnotation;
+    exports.isFlowDeclaration = isFlowDeclaration;
+    exports.isFlowPredicate = isFlowPredicate;
+    exports.isFlowType = isFlowType;
+    exports.isFor = isFor;
+    exports.isForInStatement = isForInStatement;
+    exports.isForOfStatement = isForOfStatement;
+    exports.isForStatement = isForStatement;
+    exports.isForXStatement = isForXStatement;
+    exports.isFunction = isFunction;
+    exports.isFunctionDeclaration = isFunctionDeclaration;
+    exports.isFunctionExpression = isFunctionExpression;
+    exports.isFunctionParent = isFunctionParent;
+    exports.isFunctionTypeAnnotation = isFunctionTypeAnnotation;
+    exports.isFunctionTypeParam = isFunctionTypeParam;
+    exports.isGenericTypeAnnotation = isGenericTypeAnnotation;
+    exports.isIdentifier = isIdentifier;
+    exports.isIfStatement = isIfStatement;
+    exports.isImmutable = isImmutable;
+    exports.isImport = isImport;
+    exports.isImportAttribute = isImportAttribute;
+    exports.isImportDeclaration = isImportDeclaration;
+    exports.isImportDefaultSpecifier = isImportDefaultSpecifier;
+    exports.isImportNamespaceSpecifier = isImportNamespaceSpecifier;
+    exports.isImportSpecifier = isImportSpecifier;
+    exports.isIndexedAccessType = isIndexedAccessType;
+    exports.isInferredPredicate = isInferredPredicate;
+    exports.isInterfaceDeclaration = isInterfaceDeclaration;
+    exports.isInterfaceExtends = isInterfaceExtends;
+    exports.isInterfaceTypeAnnotation = isInterfaceTypeAnnotation;
+    exports.isInterpreterDirective = isInterpreterDirective;
+    exports.isIntersectionTypeAnnotation = isIntersectionTypeAnnotation;
+    exports.isJSX = isJSX;
+    exports.isJSXAttribute = isJSXAttribute;
+    exports.isJSXClosingElement = isJSXClosingElement;
+    exports.isJSXClosingFragment = isJSXClosingFragment;
+    exports.isJSXElement = isJSXElement;
+    exports.isJSXEmptyExpression = isJSXEmptyExpression;
+    exports.isJSXExpressionContainer = isJSXExpressionContainer;
+    exports.isJSXFragment = isJSXFragment;
+    exports.isJSXIdentifier = isJSXIdentifier;
+    exports.isJSXMemberExpression = isJSXMemberExpression;
+    exports.isJSXNamespacedName = isJSXNamespacedName;
+    exports.isJSXOpeningElement = isJSXOpeningElement;
+    exports.isJSXOpeningFragment = isJSXOpeningFragment;
+    exports.isJSXSpreadAttribute = isJSXSpreadAttribute;
+    exports.isJSXSpreadChild = isJSXSpreadChild;
+    exports.isJSXText = isJSXText;
+    exports.isLVal = isLVal;
+    exports.isLabeledStatement = isLabeledStatement;
+    exports.isLiteral = isLiteral;
+    exports.isLogicalExpression = isLogicalExpression;
+    exports.isLoop = isLoop;
+    exports.isMemberExpression = isMemberExpression;
+    exports.isMetaProperty = isMetaProperty;
+    exports.isMethod = isMethod;
+    exports.isMiscellaneous = isMiscellaneous;
+    exports.isMixedTypeAnnotation = isMixedTypeAnnotation;
+    exports.isModuleDeclaration = isModuleDeclaration;
+    exports.isModuleExpression = isModuleExpression;
+    exports.isModuleSpecifier = isModuleSpecifier;
+    exports.isNewExpression = isNewExpression;
+    exports.isNoop = isNoop;
+    exports.isNullLiteral = isNullLiteral;
+    exports.isNullLiteralTypeAnnotation = isNullLiteralTypeAnnotation;
+    exports.isNullableTypeAnnotation = isNullableTypeAnnotation;
+    exports.isNumberLiteral = isNumberLiteral;
+    exports.isNumberLiteralTypeAnnotation = isNumberLiteralTypeAnnotation;
+    exports.isNumberTypeAnnotation = isNumberTypeAnnotation;
+    exports.isNumericLiteral = isNumericLiteral;
+    exports.isObjectExpression = isObjectExpression;
+    exports.isObjectMember = isObjectMember;
+    exports.isObjectMethod = isObjectMethod;
+    exports.isObjectPattern = isObjectPattern;
+    exports.isObjectProperty = isObjectProperty;
+    exports.isObjectTypeAnnotation = isObjectTypeAnnotation;
+    exports.isObjectTypeCallProperty = isObjectTypeCallProperty;
+    exports.isObjectTypeIndexer = isObjectTypeIndexer;
+    exports.isObjectTypeInternalSlot = isObjectTypeInternalSlot;
+    exports.isObjectTypeProperty = isObjectTypeProperty;
+    exports.isObjectTypeSpreadProperty = isObjectTypeSpreadProperty;
+    exports.isOpaqueType = isOpaqueType;
+    exports.isOptionalCallExpression = isOptionalCallExpression;
+    exports.isOptionalIndexedAccessType = isOptionalIndexedAccessType;
+    exports.isOptionalMemberExpression = isOptionalMemberExpression;
+    exports.isParenthesizedExpression = isParenthesizedExpression;
+    exports.isPattern = isPattern;
+    exports.isPatternLike = isPatternLike;
+    exports.isPipelineBareFunction = isPipelineBareFunction;
+    exports.isPipelinePrimaryTopicReference = isPipelinePrimaryTopicReference;
+    exports.isPipelineTopicExpression = isPipelineTopicExpression;
+    exports.isPlaceholder = isPlaceholder;
+    exports.isPrivate = isPrivate;
+    exports.isPrivateName = isPrivateName;
+    exports.isProgram = isProgram;
+    exports.isProperty = isProperty;
+    exports.isPureish = isPureish;
+    exports.isQualifiedTypeIdentifier = isQualifiedTypeIdentifier;
+    exports.isRecordExpression = isRecordExpression;
+    exports.isRegExpLiteral = isRegExpLiteral;
+    exports.isRegexLiteral = isRegexLiteral;
+    exports.isRestElement = isRestElement;
+    exports.isRestProperty = isRestProperty;
+    exports.isReturnStatement = isReturnStatement;
+    exports.isScopable = isScopable;
+    exports.isSequenceExpression = isSequenceExpression;
+    exports.isSpreadElement = isSpreadElement;
+    exports.isSpreadProperty = isSpreadProperty;
+    exports.isStandardized = isStandardized;
+    exports.isStatement = isStatement;
+    exports.isStaticBlock = isStaticBlock;
+    exports.isStringLiteral = isStringLiteral;
+    exports.isStringLiteralTypeAnnotation = isStringLiteralTypeAnnotation;
+    exports.isStringTypeAnnotation = isStringTypeAnnotation;
+    exports.isSuper = isSuper;
+    exports.isSwitchCase = isSwitchCase;
+    exports.isSwitchStatement = isSwitchStatement;
+    exports.isSymbolTypeAnnotation = isSymbolTypeAnnotation;
+    exports.isTSAnyKeyword = isTSAnyKeyword;
+    exports.isTSArrayType = isTSArrayType;
+    exports.isTSAsExpression = isTSAsExpression;
+    exports.isTSBaseType = isTSBaseType;
+    exports.isTSBigIntKeyword = isTSBigIntKeyword;
+    exports.isTSBooleanKeyword = isTSBooleanKeyword;
+    exports.isTSCallSignatureDeclaration = isTSCallSignatureDeclaration;
+    exports.isTSConditionalType = isTSConditionalType;
+    exports.isTSConstructSignatureDeclaration = isTSConstructSignatureDeclaration;
+    exports.isTSConstructorType = isTSConstructorType;
+    exports.isTSDeclareFunction = isTSDeclareFunction;
+    exports.isTSDeclareMethod = isTSDeclareMethod;
+    exports.isTSEntityName = isTSEntityName;
+    exports.isTSEnumDeclaration = isTSEnumDeclaration;
+    exports.isTSEnumMember = isTSEnumMember;
+    exports.isTSExportAssignment = isTSExportAssignment;
+    exports.isTSExpressionWithTypeArguments = isTSExpressionWithTypeArguments;
+    exports.isTSExternalModuleReference = isTSExternalModuleReference;
+    exports.isTSFunctionType = isTSFunctionType;
+    exports.isTSImportEqualsDeclaration = isTSImportEqualsDeclaration;
+    exports.isTSImportType = isTSImportType;
+    exports.isTSIndexSignature = isTSIndexSignature;
+    exports.isTSIndexedAccessType = isTSIndexedAccessType;
+    exports.isTSInferType = isTSInferType;
+    exports.isTSInstantiationExpression = isTSInstantiationExpression;
+    exports.isTSInterfaceBody = isTSInterfaceBody;
+    exports.isTSInterfaceDeclaration = isTSInterfaceDeclaration;
+    exports.isTSIntersectionType = isTSIntersectionType;
+    exports.isTSIntrinsicKeyword = isTSIntrinsicKeyword;
+    exports.isTSLiteralType = isTSLiteralType;
+    exports.isTSMappedType = isTSMappedType;
+    exports.isTSMethodSignature = isTSMethodSignature;
+    exports.isTSModuleBlock = isTSModuleBlock;
+    exports.isTSModuleDeclaration = isTSModuleDeclaration;
+    exports.isTSNamedTupleMember = isTSNamedTupleMember;
+    exports.isTSNamespaceExportDeclaration = isTSNamespaceExportDeclaration;
+    exports.isTSNeverKeyword = isTSNeverKeyword;
+    exports.isTSNonNullExpression = isTSNonNullExpression;
+    exports.isTSNullKeyword = isTSNullKeyword;
+    exports.isTSNumberKeyword = isTSNumberKeyword;
+    exports.isTSObjectKeyword = isTSObjectKeyword;
+    exports.isTSOptionalType = isTSOptionalType;
+    exports.isTSParameterProperty = isTSParameterProperty;
+    exports.isTSParenthesizedType = isTSParenthesizedType;
+    exports.isTSPropertySignature = isTSPropertySignature;
+    exports.isTSQualifiedName = isTSQualifiedName;
+    exports.isTSRestType = isTSRestType;
+    exports.isTSSatisfiesExpression = isTSSatisfiesExpression;
+    exports.isTSStringKeyword = isTSStringKeyword;
+    exports.isTSSymbolKeyword = isTSSymbolKeyword;
+    exports.isTSThisType = isTSThisType;
+    exports.isTSTupleType = isTSTupleType;
+    exports.isTSType = isTSType;
+    exports.isTSTypeAliasDeclaration = isTSTypeAliasDeclaration;
+    exports.isTSTypeAnnotation = isTSTypeAnnotation;
+    exports.isTSTypeAssertion = isTSTypeAssertion;
+    exports.isTSTypeElement = isTSTypeElement;
+    exports.isTSTypeLiteral = isTSTypeLiteral;
+    exports.isTSTypeOperator = isTSTypeOperator;
+    exports.isTSTypeParameter = isTSTypeParameter;
+    exports.isTSTypeParameterDeclaration = isTSTypeParameterDeclaration;
+    exports.isTSTypeParameterInstantiation = isTSTypeParameterInstantiation;
+    exports.isTSTypePredicate = isTSTypePredicate;
+    exports.isTSTypeQuery = isTSTypeQuery;
+    exports.isTSTypeReference = isTSTypeReference;
+    exports.isTSUndefinedKeyword = isTSUndefinedKeyword;
+    exports.isTSUnionType = isTSUnionType;
+    exports.isTSUnknownKeyword = isTSUnknownKeyword;
+    exports.isTSVoidKeyword = isTSVoidKeyword;
+    exports.isTaggedTemplateExpression = isTaggedTemplateExpression;
+    exports.isTemplateElement = isTemplateElement;
+    exports.isTemplateLiteral = isTemplateLiteral;
+    exports.isTerminatorless = isTerminatorless;
+    exports.isThisExpression = isThisExpression;
+    exports.isThisTypeAnnotation = isThisTypeAnnotation;
+    exports.isThrowStatement = isThrowStatement;
+    exports.isTopicReference = isTopicReference;
+    exports.isTryStatement = isTryStatement;
+    exports.isTupleExpression = isTupleExpression;
+    exports.isTupleTypeAnnotation = isTupleTypeAnnotation;
+    exports.isTypeAlias = isTypeAlias;
+    exports.isTypeAnnotation = isTypeAnnotation;
+    exports.isTypeCastExpression = isTypeCastExpression;
+    exports.isTypeParameter = isTypeParameter;
+    exports.isTypeParameterDeclaration = isTypeParameterDeclaration;
+    exports.isTypeParameterInstantiation = isTypeParameterInstantiation;
+    exports.isTypeScript = isTypeScript;
+    exports.isTypeofTypeAnnotation = isTypeofTypeAnnotation;
+    exports.isUnaryExpression = isUnaryExpression;
+    exports.isUnaryLike = isUnaryLike;
+    exports.isUnionTypeAnnotation = isUnionTypeAnnotation;
+    exports.isUpdateExpression = isUpdateExpression;
+    exports.isUserWhitespacable = isUserWhitespacable;
+    exports.isV8IntrinsicIdentifier = isV8IntrinsicIdentifier;
+    exports.isVariableDeclaration = isVariableDeclaration;
+    exports.isVariableDeclarator = isVariableDeclarator;
+    exports.isVariance = isVariance;
+    exports.isVoidTypeAnnotation = isVoidTypeAnnotation;
+    exports.isWhile = isWhile;
+    exports.isWhileStatement = isWhileStatement;
+    exports.isWithStatement = isWithStatement;
+    exports.isYieldExpression = isYieldExpression;
     var _shallowEqual = require_shallowEqual();
     function isArrayExpression(node, opts) {
       if (!node)
@@ -17132,12 +17322,12 @@ var require_generated = __commonJS({
 
 // node_modules/@babel/types/lib/validators/matchesPattern.js
 var require_matchesPattern = __commonJS({
-  "node_modules/@babel/types/lib/validators/matchesPattern.js"(exports2) {
+  "node_modules/@babel/types/lib/validators/matchesPattern.js"(exports) {
     "use strict";
-    Object.defineProperty(exports2, "__esModule", {
+    Object.defineProperty(exports, "__esModule", {
       value: true
     });
-    exports2.default = matchesPattern;
+    exports.default = matchesPattern;
     var _generated = require_generated();
     function matchesPattern(member, match, allowPartial) {
       if (!(0, _generated.isMemberExpression)(member))
@@ -17176,12 +17366,12 @@ var require_matchesPattern = __commonJS({
 
 // node_modules/@babel/types/lib/validators/buildMatchMemberExpression.js
 var require_buildMatchMemberExpression = __commonJS({
-  "node_modules/@babel/types/lib/validators/buildMatchMemberExpression.js"(exports2) {
+  "node_modules/@babel/types/lib/validators/buildMatchMemberExpression.js"(exports) {
     "use strict";
-    Object.defineProperty(exports2, "__esModule", {
+    Object.defineProperty(exports, "__esModule", {
       value: true
     });
-    exports2.default = buildMatchMemberExpression;
+    exports.default = buildMatchMemberExpression;
     var _matchesPattern = require_matchesPattern();
     function buildMatchMemberExpression(match, allowPartial) {
       const parts = match.split(".");
@@ -17193,27 +17383,27 @@ var require_buildMatchMemberExpression = __commonJS({
 
 // node_modules/@babel/types/lib/validators/react/isReactComponent.js
 var require_isReactComponent = __commonJS({
-  "node_modules/@babel/types/lib/validators/react/isReactComponent.js"(exports2) {
+  "node_modules/@babel/types/lib/validators/react/isReactComponent.js"(exports) {
     "use strict";
-    Object.defineProperty(exports2, "__esModule", {
+    Object.defineProperty(exports, "__esModule", {
       value: true
     });
-    exports2.default = void 0;
+    exports.default = void 0;
     var _buildMatchMemberExpression = require_buildMatchMemberExpression();
     var isReactComponent = (0, _buildMatchMemberExpression.default)("React.Component");
     var _default = isReactComponent;
-    exports2.default = _default;
+    exports.default = _default;
   }
 });
 
 // node_modules/@babel/types/lib/validators/react/isCompatTag.js
 var require_isCompatTag = __commonJS({
-  "node_modules/@babel/types/lib/validators/react/isCompatTag.js"(exports2) {
+  "node_modules/@babel/types/lib/validators/react/isCompatTag.js"(exports) {
     "use strict";
-    Object.defineProperty(exports2, "__esModule", {
+    Object.defineProperty(exports, "__esModule", {
       value: true
     });
-    exports2.default = isCompatTag;
+    exports.default = isCompatTag;
     function isCompatTag(tagName) {
       return !!tagName && /^[a-z]/.test(tagName);
     }
@@ -17223,7 +17413,7 @@ var require_isCompatTag = __commonJS({
 
 // node_modules/to-fast-properties/index.js
 var require_to_fast_properties = __commonJS({
-  "node_modules/to-fast-properties/index.js"(exports2, module2) {
+  "node_modules/to-fast-properties/index.js"(exports, module) {
     "use strict";
     var fastProto = null;
     function FastObject(o) {
@@ -17237,7 +17427,7 @@ var require_to_fast_properties = __commonJS({
     }
     __name(FastObject, "FastObject");
     FastObject();
-    module2.exports = /* @__PURE__ */ __name(function toFastproperties(o) {
+    module.exports = /* @__PURE__ */ __name(function toFastproperties(o) {
       return FastObject(o);
     }, "toFastproperties");
   }
@@ -17245,12 +17435,12 @@ var require_to_fast_properties = __commonJS({
 
 // node_modules/@babel/types/lib/validators/isType.js
 var require_isType = __commonJS({
-  "node_modules/@babel/types/lib/validators/isType.js"(exports2) {
+  "node_modules/@babel/types/lib/validators/isType.js"(exports) {
     "use strict";
-    Object.defineProperty(exports2, "__esModule", {
+    Object.defineProperty(exports, "__esModule", {
       value: true
     });
-    exports2.default = isType;
+    exports.default = isType;
     var _definitions = require_definitions();
     function isType(nodeType, targetType) {
       if (nodeType === targetType)
@@ -17274,12 +17464,12 @@ var require_isType = __commonJS({
 
 // node_modules/@babel/types/lib/validators/isPlaceholderType.js
 var require_isPlaceholderType = __commonJS({
-  "node_modules/@babel/types/lib/validators/isPlaceholderType.js"(exports2) {
+  "node_modules/@babel/types/lib/validators/isPlaceholderType.js"(exports) {
     "use strict";
-    Object.defineProperty(exports2, "__esModule", {
+    Object.defineProperty(exports, "__esModule", {
       value: true
     });
-    exports2.default = isPlaceholderType;
+    exports.default = isPlaceholderType;
     var _definitions = require_definitions();
     function isPlaceholderType(placeholderType, targetType) {
       if (placeholderType === targetType)
@@ -17299,12 +17489,12 @@ var require_isPlaceholderType = __commonJS({
 
 // node_modules/@babel/types/lib/validators/is.js
 var require_is = __commonJS({
-  "node_modules/@babel/types/lib/validators/is.js"(exports2) {
+  "node_modules/@babel/types/lib/validators/is.js"(exports) {
     "use strict";
-    Object.defineProperty(exports2, "__esModule", {
+    Object.defineProperty(exports, "__esModule", {
       value: true
     });
-    exports2.default = is;
+    exports.default = is;
     var _shallowEqual = require_shallowEqual();
     var _isType = require_isType();
     var _isPlaceholderType = require_isPlaceholderType();
@@ -17331,14 +17521,14 @@ var require_is = __commonJS({
 
 // node_modules/@babel/helper-validator-identifier/lib/identifier.js
 var require_identifier = __commonJS({
-  "node_modules/@babel/helper-validator-identifier/lib/identifier.js"(exports2) {
+  "node_modules/@babel/helper-validator-identifier/lib/identifier.js"(exports) {
     "use strict";
-    Object.defineProperty(exports2, "__esModule", {
+    Object.defineProperty(exports, "__esModule", {
       value: true
     });
-    exports2.isIdentifierChar = isIdentifierChar;
-    exports2.isIdentifierName = isIdentifierName;
-    exports2.isIdentifierStart = isIdentifierStart;
+    exports.isIdentifierChar = isIdentifierChar;
+    exports.isIdentifierName = isIdentifierName;
+    exports.isIdentifierStart = isIdentifierStart;
     var nonASCIIidentifierStartChars = "\xAA\xB5\xBA\xC0-\xD6\xD8-\xF6\xF8-\u02C1\u02C6-\u02D1\u02E0-\u02E4\u02EC\u02EE\u0370-\u0374\u0376\u0377\u037A-\u037D\u037F\u0386\u0388-\u038A\u038C\u038E-\u03A1\u03A3-\u03F5\u03F7-\u0481\u048A-\u052F\u0531-\u0556\u0559\u0560-\u0588\u05D0-\u05EA\u05EF-\u05F2\u0620-\u064A\u066E\u066F\u0671-\u06D3\u06D5\u06E5\u06E6\u06EE\u06EF\u06FA-\u06FC\u06FF\u0710\u0712-\u072F\u074D-\u07A5\u07B1\u07CA-\u07EA\u07F4\u07F5\u07FA\u0800-\u0815\u081A\u0824\u0828\u0840-\u0858\u0860-\u086A\u0870-\u0887\u0889-\u088E\u08A0-\u08C9\u0904-\u0939\u093D\u0950\u0958-\u0961\u0971-\u0980\u0985-\u098C\u098F\u0990\u0993-\u09A8\u09AA-\u09B0\u09B2\u09B6-\u09B9\u09BD\u09CE\u09DC\u09DD\u09DF-\u09E1\u09F0\u09F1\u09FC\u0A05-\u0A0A\u0A0F\u0A10\u0A13-\u0A28\u0A2A-\u0A30\u0A32\u0A33\u0A35\u0A36\u0A38\u0A39\u0A59-\u0A5C\u0A5E\u0A72-\u0A74\u0A85-\u0A8D\u0A8F-\u0A91\u0A93-\u0AA8\u0AAA-\u0AB0\u0AB2\u0AB3\u0AB5-\u0AB9\u0ABD\u0AD0\u0AE0\u0AE1\u0AF9\u0B05-\u0B0C\u0B0F\u0B10\u0B13-\u0B28\u0B2A-\u0B30\u0B32\u0B33\u0B35-\u0B39\u0B3D\u0B5C\u0B5D\u0B5F-\u0B61\u0B71\u0B83\u0B85-\u0B8A\u0B8E-\u0B90\u0B92-\u0B95\u0B99\u0B9A\u0B9C\u0B9E\u0B9F\u0BA3\u0BA4\u0BA8-\u0BAA\u0BAE-\u0BB9\u0BD0\u0C05-\u0C0C\u0C0E-\u0C10\u0C12-\u0C28\u0C2A-\u0C39\u0C3D\u0C58-\u0C5A\u0C5D\u0C60\u0C61\u0C80\u0C85-\u0C8C\u0C8E-\u0C90\u0C92-\u0CA8\u0CAA-\u0CB3\u0CB5-\u0CB9\u0CBD\u0CDD\u0CDE\u0CE0\u0CE1\u0CF1\u0CF2\u0D04-\u0D0C\u0D0E-\u0D10\u0D12-\u0D3A\u0D3D\u0D4E\u0D54-\u0D56\u0D5F-\u0D61\u0D7A-\u0D7F\u0D85-\u0D96\u0D9A-\u0DB1\u0DB3-\u0DBB\u0DBD\u0DC0-\u0DC6\u0E01-\u0E30\u0E32\u0E33\u0E40-\u0E46\u0E81\u0E82\u0E84\u0E86-\u0E8A\u0E8C-\u0EA3\u0EA5\u0EA7-\u0EB0\u0EB2\u0EB3\u0EBD\u0EC0-\u0EC4\u0EC6\u0EDC-\u0EDF\u0F00\u0F40-\u0F47\u0F49-\u0F6C\u0F88-\u0F8C\u1000-\u102A\u103F\u1050-\u1055\u105A-\u105D\u1061\u1065\u1066\u106E-\u1070\u1075-\u1081\u108E\u10A0-\u10C5\u10C7\u10CD\u10D0-\u10FA\u10FC-\u1248\u124A-\u124D\u1250-\u1256\u1258\u125A-\u125D\u1260-\u1288\u128A-\u128D\u1290-\u12B0\u12B2-\u12B5\u12B8-\u12BE\u12C0\u12C2-\u12C5\u12C8-\u12D6\u12D8-\u1310\u1312-\u1315\u1318-\u135A\u1380-\u138F\u13A0-\u13F5\u13F8-\u13FD\u1401-\u166C\u166F-\u167F\u1681-\u169A\u16A0-\u16EA\u16EE-\u16F8\u1700-\u1711\u171F-\u1731\u1740-\u1751\u1760-\u176C\u176E-\u1770\u1780-\u17B3\u17D7\u17DC\u1820-\u1878\u1880-\u18A8\u18AA\u18B0-\u18F5\u1900-\u191E\u1950-\u196D\u1970-\u1974\u1980-\u19AB\u19B0-\u19C9\u1A00-\u1A16\u1A20-\u1A54\u1AA7\u1B05-\u1B33\u1B45-\u1B4C\u1B83-\u1BA0\u1BAE\u1BAF\u1BBA-\u1BE5\u1C00-\u1C23\u1C4D-\u1C4F\u1C5A-\u1C7D\u1C80-\u1C88\u1C90-\u1CBA\u1CBD-\u1CBF\u1CE9-\u1CEC\u1CEE-\u1CF3\u1CF5\u1CF6\u1CFA\u1D00-\u1DBF\u1E00-\u1F15\u1F18-\u1F1D\u1F20-\u1F45\u1F48-\u1F4D\u1F50-\u1F57\u1F59\u1F5B\u1F5D\u1F5F-\u1F7D\u1F80-\u1FB4\u1FB6-\u1FBC\u1FBE\u1FC2-\u1FC4\u1FC6-\u1FCC\u1FD0-\u1FD3\u1FD6-\u1FDB\u1FE0-\u1FEC\u1FF2-\u1FF4\u1FF6-\u1FFC\u2071\u207F\u2090-\u209C\u2102\u2107\u210A-\u2113\u2115\u2118-\u211D\u2124\u2126\u2128\u212A-\u2139\u213C-\u213F\u2145-\u2149\u214E\u2160-\u2188\u2C00-\u2CE4\u2CEB-\u2CEE\u2CF2\u2CF3\u2D00-\u2D25\u2D27\u2D2D\u2D30-\u2D67\u2D6F\u2D80-\u2D96\u2DA0-\u2DA6\u2DA8-\u2DAE\u2DB0-\u2DB6\u2DB8-\u2DBE\u2DC0-\u2DC6\u2DC8-\u2DCE\u2DD0-\u2DD6\u2DD8-\u2DDE\u3005-\u3007\u3021-\u3029\u3031-\u3035\u3038-\u303C\u3041-\u3096\u309B-\u309F\u30A1-\u30FA\u30FC-\u30FF\u3105-\u312F\u3131-\u318E\u31A0-\u31BF\u31F0-\u31FF\u3400-\u4DBF\u4E00-\uA48C\uA4D0-\uA4FD\uA500-\uA60C\uA610-\uA61F\uA62A\uA62B\uA640-\uA66E\uA67F-\uA69D\uA6A0-\uA6EF\uA717-\uA71F\uA722-\uA788\uA78B-\uA7CA\uA7D0\uA7D1\uA7D3\uA7D5-\uA7D9\uA7F2-\uA801\uA803-\uA805\uA807-\uA80A\uA80C-\uA822\uA840-\uA873\uA882-\uA8B3\uA8F2-\uA8F7\uA8FB\uA8FD\uA8FE\uA90A-\uA925\uA930-\uA946\uA960-\uA97C\uA984-\uA9B2\uA9CF\uA9E0-\uA9E4\uA9E6-\uA9EF\uA9FA-\uA9FE\uAA00-\uAA28\uAA40-\uAA42\uAA44-\uAA4B\uAA60-\uAA76\uAA7A\uAA7E-\uAAAF\uAAB1\uAAB5\uAAB6\uAAB9-\uAABD\uAAC0\uAAC2\uAADB-\uAADD\uAAE0-\uAAEA\uAAF2-\uAAF4\uAB01-\uAB06\uAB09-\uAB0E\uAB11-\uAB16\uAB20-\uAB26\uAB28-\uAB2E\uAB30-\uAB5A\uAB5C-\uAB69\uAB70-\uABE2\uAC00-\uD7A3\uD7B0-\uD7C6\uD7CB-\uD7FB\uF900-\uFA6D\uFA70-\uFAD9\uFB00-\uFB06\uFB13-\uFB17\uFB1D\uFB1F-\uFB28\uFB2A-\uFB36\uFB38-\uFB3C\uFB3E\uFB40\uFB41\uFB43\uFB44\uFB46-\uFBB1\uFBD3-\uFD3D\uFD50-\uFD8F\uFD92-\uFDC7\uFDF0-\uFDFB\uFE70-\uFE74\uFE76-\uFEFC\uFF21-\uFF3A\uFF41-\uFF5A\uFF66-\uFFBE\uFFC2-\uFFC7\uFFCA-\uFFCF\uFFD2-\uFFD7\uFFDA-\uFFDC";
     var nonASCIIidentifierChars = "\u200C\u200D\xB7\u0300-\u036F\u0387\u0483-\u0487\u0591-\u05BD\u05BF\u05C1\u05C2\u05C4\u05C5\u05C7\u0610-\u061A\u064B-\u0669\u0670\u06D6-\u06DC\u06DF-\u06E4\u06E7\u06E8\u06EA-\u06ED\u06F0-\u06F9\u0711\u0730-\u074A\u07A6-\u07B0\u07C0-\u07C9\u07EB-\u07F3\u07FD\u0816-\u0819\u081B-\u0823\u0825-\u0827\u0829-\u082D\u0859-\u085B\u0898-\u089F\u08CA-\u08E1\u08E3-\u0903\u093A-\u093C\u093E-\u094F\u0951-\u0957\u0962\u0963\u0966-\u096F\u0981-\u0983\u09BC\u09BE-\u09C4\u09C7\u09C8\u09CB-\u09CD\u09D7\u09E2\u09E3\u09E6-\u09EF\u09FE\u0A01-\u0A03\u0A3C\u0A3E-\u0A42\u0A47\u0A48\u0A4B-\u0A4D\u0A51\u0A66-\u0A71\u0A75\u0A81-\u0A83\u0ABC\u0ABE-\u0AC5\u0AC7-\u0AC9\u0ACB-\u0ACD\u0AE2\u0AE3\u0AE6-\u0AEF\u0AFA-\u0AFF\u0B01-\u0B03\u0B3C\u0B3E-\u0B44\u0B47\u0B48\u0B4B-\u0B4D\u0B55-\u0B57\u0B62\u0B63\u0B66-\u0B6F\u0B82\u0BBE-\u0BC2\u0BC6-\u0BC8\u0BCA-\u0BCD\u0BD7\u0BE6-\u0BEF\u0C00-\u0C04\u0C3C\u0C3E-\u0C44\u0C46-\u0C48\u0C4A-\u0C4D\u0C55\u0C56\u0C62\u0C63\u0C66-\u0C6F\u0C81-\u0C83\u0CBC\u0CBE-\u0CC4\u0CC6-\u0CC8\u0CCA-\u0CCD\u0CD5\u0CD6\u0CE2\u0CE3\u0CE6-\u0CEF\u0CF3\u0D00-\u0D03\u0D3B\u0D3C\u0D3E-\u0D44\u0D46-\u0D48\u0D4A-\u0D4D\u0D57\u0D62\u0D63\u0D66-\u0D6F\u0D81-\u0D83\u0DCA\u0DCF-\u0DD4\u0DD6\u0DD8-\u0DDF\u0DE6-\u0DEF\u0DF2\u0DF3\u0E31\u0E34-\u0E3A\u0E47-\u0E4E\u0E50-\u0E59\u0EB1\u0EB4-\u0EBC\u0EC8-\u0ECE\u0ED0-\u0ED9\u0F18\u0F19\u0F20-\u0F29\u0F35\u0F37\u0F39\u0F3E\u0F3F\u0F71-\u0F84\u0F86\u0F87\u0F8D-\u0F97\u0F99-\u0FBC\u0FC6\u102B-\u103E\u1040-\u1049\u1056-\u1059\u105E-\u1060\u1062-\u1064\u1067-\u106D\u1071-\u1074\u1082-\u108D\u108F-\u109D\u135D-\u135F\u1369-\u1371\u1712-\u1715\u1732-\u1734\u1752\u1753\u1772\u1773\u17B4-\u17D3\u17DD\u17E0-\u17E9\u180B-\u180D\u180F-\u1819\u18A9\u1920-\u192B\u1930-\u193B\u1946-\u194F\u19D0-\u19DA\u1A17-\u1A1B\u1A55-\u1A5E\u1A60-\u1A7C\u1A7F-\u1A89\u1A90-\u1A99\u1AB0-\u1ABD\u1ABF-\u1ACE\u1B00-\u1B04\u1B34-\u1B44\u1B50-\u1B59\u1B6B-\u1B73\u1B80-\u1B82\u1BA1-\u1BAD\u1BB0-\u1BB9\u1BE6-\u1BF3\u1C24-\u1C37\u1C40-\u1C49\u1C50-\u1C59\u1CD0-\u1CD2\u1CD4-\u1CE8\u1CED\u1CF4\u1CF7-\u1CF9\u1DC0-\u1DFF\u203F\u2040\u2054\u20D0-\u20DC\u20E1\u20E5-\u20F0\u2CEF-\u2CF1\u2D7F\u2DE0-\u2DFF\u302A-\u302F\u3099\u309A\uA620-\uA629\uA66F\uA674-\uA67D\uA69E\uA69F\uA6F0\uA6F1\uA802\uA806\uA80B\uA823-\uA827\uA82C\uA880\uA881\uA8B4-\uA8C5\uA8D0-\uA8D9\uA8E0-\uA8F1\uA8FF-\uA909\uA926-\uA92D\uA947-\uA953\uA980-\uA983\uA9B3-\uA9C0\uA9D0-\uA9D9\uA9E5\uA9F0-\uA9F9\uAA29-\uAA36\uAA43\uAA4C\uAA4D\uAA50-\uAA59\uAA7B-\uAA7D\uAAB0\uAAB2-\uAAB4\uAAB7\uAAB8\uAABE\uAABF\uAAC1\uAAEB-\uAAEF\uAAF5\uAAF6\uABE3-\uABEA\uABEC\uABED\uABF0-\uABF9\uFB1E\uFE00-\uFE0F\uFE20-\uFE2F\uFE33\uFE34\uFE4D-\uFE4F\uFF10-\uFF19\uFF3F";
     var nonASCIIidentifierStart = new RegExp("[" + nonASCIIidentifierStartChars + "]");
@@ -18270,16 +18460,16 @@ var require_identifier = __commonJS({
 
 // node_modules/@babel/helper-validator-identifier/lib/keyword.js
 var require_keyword = __commonJS({
-  "node_modules/@babel/helper-validator-identifier/lib/keyword.js"(exports2) {
+  "node_modules/@babel/helper-validator-identifier/lib/keyword.js"(exports) {
     "use strict";
-    Object.defineProperty(exports2, "__esModule", {
+    Object.defineProperty(exports, "__esModule", {
       value: true
     });
-    exports2.isKeyword = isKeyword;
-    exports2.isReservedWord = isReservedWord;
-    exports2.isStrictBindOnlyReservedWord = isStrictBindOnlyReservedWord;
-    exports2.isStrictBindReservedWord = isStrictBindReservedWord;
-    exports2.isStrictReservedWord = isStrictReservedWord;
+    exports.isKeyword = isKeyword;
+    exports.isReservedWord = isReservedWord;
+    exports.isStrictBindOnlyReservedWord = isStrictBindOnlyReservedWord;
+    exports.isStrictBindReservedWord = isStrictBindReservedWord;
+    exports.isStrictReservedWord = isStrictReservedWord;
     var reservedWords = {
       keyword: [
         "break",
@@ -18362,54 +18552,54 @@ var require_keyword = __commonJS({
 
 // node_modules/@babel/helper-validator-identifier/lib/index.js
 var require_lib = __commonJS({
-  "node_modules/@babel/helper-validator-identifier/lib/index.js"(exports2) {
+  "node_modules/@babel/helper-validator-identifier/lib/index.js"(exports) {
     "use strict";
-    Object.defineProperty(exports2, "__esModule", {
+    Object.defineProperty(exports, "__esModule", {
       value: true
     });
-    Object.defineProperty(exports2, "isIdentifierChar", {
+    Object.defineProperty(exports, "isIdentifierChar", {
       enumerable: true,
       get: function() {
         return _identifier.isIdentifierChar;
       }
     });
-    Object.defineProperty(exports2, "isIdentifierName", {
+    Object.defineProperty(exports, "isIdentifierName", {
       enumerable: true,
       get: function() {
         return _identifier.isIdentifierName;
       }
     });
-    Object.defineProperty(exports2, "isIdentifierStart", {
+    Object.defineProperty(exports, "isIdentifierStart", {
       enumerable: true,
       get: function() {
         return _identifier.isIdentifierStart;
       }
     });
-    Object.defineProperty(exports2, "isKeyword", {
+    Object.defineProperty(exports, "isKeyword", {
       enumerable: true,
       get: function() {
         return _keyword.isKeyword;
       }
     });
-    Object.defineProperty(exports2, "isReservedWord", {
+    Object.defineProperty(exports, "isReservedWord", {
       enumerable: true,
       get: function() {
         return _keyword.isReservedWord;
       }
     });
-    Object.defineProperty(exports2, "isStrictBindOnlyReservedWord", {
+    Object.defineProperty(exports, "isStrictBindOnlyReservedWord", {
       enumerable: true,
       get: function() {
         return _keyword.isStrictBindOnlyReservedWord;
       }
     });
-    Object.defineProperty(exports2, "isStrictBindReservedWord", {
+    Object.defineProperty(exports, "isStrictBindReservedWord", {
       enumerable: true,
       get: function() {
         return _keyword.isStrictBindReservedWord;
       }
     });
-    Object.defineProperty(exports2, "isStrictReservedWord", {
+    Object.defineProperty(exports, "isStrictReservedWord", {
       enumerable: true,
       get: function() {
         return _keyword.isStrictReservedWord;
@@ -18422,12 +18612,12 @@ var require_lib = __commonJS({
 
 // node_modules/@babel/types/lib/validators/isValidIdentifier.js
 var require_isValidIdentifier = __commonJS({
-  "node_modules/@babel/types/lib/validators/isValidIdentifier.js"(exports2) {
+  "node_modules/@babel/types/lib/validators/isValidIdentifier.js"(exports) {
     "use strict";
-    Object.defineProperty(exports2, "__esModule", {
+    Object.defineProperty(exports, "__esModule", {
       value: true
     });
-    exports2.default = isValidIdentifier;
+    exports.default = isValidIdentifier;
     var _helperValidatorIdentifier = require_lib();
     function isValidIdentifier(name, reserved = true) {
       if (typeof name !== "string")
@@ -18445,14 +18635,14 @@ var require_isValidIdentifier = __commonJS({
 
 // node_modules/@babel/helper-string-parser/lib/index.js
 var require_lib2 = __commonJS({
-  "node_modules/@babel/helper-string-parser/lib/index.js"(exports2) {
+  "node_modules/@babel/helper-string-parser/lib/index.js"(exports) {
     "use strict";
-    Object.defineProperty(exports2, "__esModule", {
+    Object.defineProperty(exports, "__esModule", {
       value: true
     });
-    exports2.readCodePoint = readCodePoint;
-    exports2.readInt = readInt;
-    exports2.readStringContents = readStringContents;
+    exports.readCodePoint = readCodePoint;
+    exports.readInt = readInt;
+    exports.readStringContents = readStringContents;
     var _isDigit = /* @__PURE__ */ __name(function isDigit(code) {
       return code >= 48 && code <= 57;
     }, "isDigit");
@@ -18742,70 +18932,70 @@ var require_lib2 = __commonJS({
 
 // node_modules/@babel/types/lib/constants/index.js
 var require_constants4 = __commonJS({
-  "node_modules/@babel/types/lib/constants/index.js"(exports2) {
+  "node_modules/@babel/types/lib/constants/index.js"(exports) {
     "use strict";
-    Object.defineProperty(exports2, "__esModule", {
+    Object.defineProperty(exports, "__esModule", {
       value: true
     });
-    exports2.UPDATE_OPERATORS = exports2.UNARY_OPERATORS = exports2.STRING_UNARY_OPERATORS = exports2.STATEMENT_OR_BLOCK_KEYS = exports2.NUMBER_UNARY_OPERATORS = exports2.NUMBER_BINARY_OPERATORS = exports2.NOT_LOCAL_BINDING = exports2.LOGICAL_OPERATORS = exports2.INHERIT_KEYS = exports2.FOR_INIT_KEYS = exports2.FLATTENABLE_KEYS = exports2.EQUALITY_BINARY_OPERATORS = exports2.COMPARISON_BINARY_OPERATORS = exports2.COMMENT_KEYS = exports2.BOOLEAN_UNARY_OPERATORS = exports2.BOOLEAN_NUMBER_BINARY_OPERATORS = exports2.BOOLEAN_BINARY_OPERATORS = exports2.BLOCK_SCOPED_SYMBOL = exports2.BINARY_OPERATORS = exports2.ASSIGNMENT_OPERATORS = void 0;
+    exports.UPDATE_OPERATORS = exports.UNARY_OPERATORS = exports.STRING_UNARY_OPERATORS = exports.STATEMENT_OR_BLOCK_KEYS = exports.NUMBER_UNARY_OPERATORS = exports.NUMBER_BINARY_OPERATORS = exports.NOT_LOCAL_BINDING = exports.LOGICAL_OPERATORS = exports.INHERIT_KEYS = exports.FOR_INIT_KEYS = exports.FLATTENABLE_KEYS = exports.EQUALITY_BINARY_OPERATORS = exports.COMPARISON_BINARY_OPERATORS = exports.COMMENT_KEYS = exports.BOOLEAN_UNARY_OPERATORS = exports.BOOLEAN_NUMBER_BINARY_OPERATORS = exports.BOOLEAN_BINARY_OPERATORS = exports.BLOCK_SCOPED_SYMBOL = exports.BINARY_OPERATORS = exports.ASSIGNMENT_OPERATORS = void 0;
     var STATEMENT_OR_BLOCK_KEYS = [
       "consequent",
       "body",
       "alternate"
     ];
-    exports2.STATEMENT_OR_BLOCK_KEYS = STATEMENT_OR_BLOCK_KEYS;
+    exports.STATEMENT_OR_BLOCK_KEYS = STATEMENT_OR_BLOCK_KEYS;
     var FLATTENABLE_KEYS = [
       "body",
       "expressions"
     ];
-    exports2.FLATTENABLE_KEYS = FLATTENABLE_KEYS;
+    exports.FLATTENABLE_KEYS = FLATTENABLE_KEYS;
     var FOR_INIT_KEYS = [
       "left",
       "init"
     ];
-    exports2.FOR_INIT_KEYS = FOR_INIT_KEYS;
+    exports.FOR_INIT_KEYS = FOR_INIT_KEYS;
     var COMMENT_KEYS = [
       "leadingComments",
       "trailingComments",
       "innerComments"
     ];
-    exports2.COMMENT_KEYS = COMMENT_KEYS;
+    exports.COMMENT_KEYS = COMMENT_KEYS;
     var LOGICAL_OPERATORS = [
       "||",
       "&&",
       "??"
     ];
-    exports2.LOGICAL_OPERATORS = LOGICAL_OPERATORS;
+    exports.LOGICAL_OPERATORS = LOGICAL_OPERATORS;
     var UPDATE_OPERATORS = [
       "++",
       "--"
     ];
-    exports2.UPDATE_OPERATORS = UPDATE_OPERATORS;
+    exports.UPDATE_OPERATORS = UPDATE_OPERATORS;
     var BOOLEAN_NUMBER_BINARY_OPERATORS = [
       ">",
       "<",
       ">=",
       "<="
     ];
-    exports2.BOOLEAN_NUMBER_BINARY_OPERATORS = BOOLEAN_NUMBER_BINARY_OPERATORS;
+    exports.BOOLEAN_NUMBER_BINARY_OPERATORS = BOOLEAN_NUMBER_BINARY_OPERATORS;
     var EQUALITY_BINARY_OPERATORS = [
       "==",
       "===",
       "!=",
       "!=="
     ];
-    exports2.EQUALITY_BINARY_OPERATORS = EQUALITY_BINARY_OPERATORS;
+    exports.EQUALITY_BINARY_OPERATORS = EQUALITY_BINARY_OPERATORS;
     var COMPARISON_BINARY_OPERATORS = [
       ...EQUALITY_BINARY_OPERATORS,
       "in",
       "instanceof"
     ];
-    exports2.COMPARISON_BINARY_OPERATORS = COMPARISON_BINARY_OPERATORS;
+    exports.COMPARISON_BINARY_OPERATORS = COMPARISON_BINARY_OPERATORS;
     var BOOLEAN_BINARY_OPERATORS = [
       ...COMPARISON_BINARY_OPERATORS,
       ...BOOLEAN_NUMBER_BINARY_OPERATORS
     ];
-    exports2.BOOLEAN_BINARY_OPERATORS = BOOLEAN_BINARY_OPERATORS;
+    exports.BOOLEAN_BINARY_OPERATORS = BOOLEAN_BINARY_OPERATORS;
     var NUMBER_BINARY_OPERATORS = [
       "-",
       "/",
@@ -18819,36 +19009,36 @@ var require_constants4 = __commonJS({
       "<<",
       "^"
     ];
-    exports2.NUMBER_BINARY_OPERATORS = NUMBER_BINARY_OPERATORS;
+    exports.NUMBER_BINARY_OPERATORS = NUMBER_BINARY_OPERATORS;
     var BINARY_OPERATORS = [
       "+",
       ...NUMBER_BINARY_OPERATORS,
       ...BOOLEAN_BINARY_OPERATORS,
       "|>"
     ];
-    exports2.BINARY_OPERATORS = BINARY_OPERATORS;
+    exports.BINARY_OPERATORS = BINARY_OPERATORS;
     var ASSIGNMENT_OPERATORS = [
       "=",
       "+=",
       ...NUMBER_BINARY_OPERATORS.map((op) => op + "="),
       ...LOGICAL_OPERATORS.map((op) => op + "=")
     ];
-    exports2.ASSIGNMENT_OPERATORS = ASSIGNMENT_OPERATORS;
+    exports.ASSIGNMENT_OPERATORS = ASSIGNMENT_OPERATORS;
     var BOOLEAN_UNARY_OPERATORS = [
       "delete",
       "!"
     ];
-    exports2.BOOLEAN_UNARY_OPERATORS = BOOLEAN_UNARY_OPERATORS;
+    exports.BOOLEAN_UNARY_OPERATORS = BOOLEAN_UNARY_OPERATORS;
     var NUMBER_UNARY_OPERATORS = [
       "+",
       "-",
       "~"
     ];
-    exports2.NUMBER_UNARY_OPERATORS = NUMBER_UNARY_OPERATORS;
+    exports.NUMBER_UNARY_OPERATORS = NUMBER_UNARY_OPERATORS;
     var STRING_UNARY_OPERATORS = [
       "typeof"
     ];
-    exports2.STRING_UNARY_OPERATORS = STRING_UNARY_OPERATORS;
+    exports.STRING_UNARY_OPERATORS = STRING_UNARY_OPERATORS;
     var UNARY_OPERATORS = [
       "void",
       "throw",
@@ -18856,7 +19046,7 @@ var require_constants4 = __commonJS({
       ...NUMBER_UNARY_OPERATORS,
       ...STRING_UNARY_OPERATORS
     ];
-    exports2.UNARY_OPERATORS = UNARY_OPERATORS;
+    exports.UNARY_OPERATORS = UNARY_OPERATORS;
     var INHERIT_KEYS = {
       optional: [
         "typeAnnotation",
@@ -18869,56 +19059,56 @@ var require_constants4 = __commonJS({
         "end"
       ]
     };
-    exports2.INHERIT_KEYS = INHERIT_KEYS;
+    exports.INHERIT_KEYS = INHERIT_KEYS;
     var BLOCK_SCOPED_SYMBOL = Symbol.for("var used to be block scoped");
-    exports2.BLOCK_SCOPED_SYMBOL = BLOCK_SCOPED_SYMBOL;
+    exports.BLOCK_SCOPED_SYMBOL = BLOCK_SCOPED_SYMBOL;
     var NOT_LOCAL_BINDING = Symbol.for("should not be considered a local binding");
-    exports2.NOT_LOCAL_BINDING = NOT_LOCAL_BINDING;
+    exports.NOT_LOCAL_BINDING = NOT_LOCAL_BINDING;
   }
 });
 
 // node_modules/@babel/types/lib/definitions/utils.js
 var require_utils5 = __commonJS({
-  "node_modules/@babel/types/lib/definitions/utils.js"(exports2) {
+  "node_modules/@babel/types/lib/definitions/utils.js"(exports) {
     "use strict";
-    Object.defineProperty(exports2, "__esModule", {
+    Object.defineProperty(exports, "__esModule", {
       value: true
     });
-    exports2.VISITOR_KEYS = exports2.NODE_PARENT_VALIDATIONS = exports2.NODE_FIELDS = exports2.FLIPPED_ALIAS_KEYS = exports2.DEPRECATED_KEYS = exports2.BUILDER_KEYS = exports2.ALIAS_KEYS = void 0;
-    exports2.arrayOf = arrayOf;
-    exports2.arrayOfType = arrayOfType;
-    exports2.assertEach = assertEach;
-    exports2.assertNodeOrValueType = assertNodeOrValueType;
-    exports2.assertNodeType = assertNodeType;
-    exports2.assertOneOf = assertOneOf;
-    exports2.assertOptionalChainStart = assertOptionalChainStart;
-    exports2.assertShape = assertShape;
-    exports2.assertValueType = assertValueType;
-    exports2.chain = chain;
-    exports2.default = defineType;
-    exports2.defineAliasedType = defineAliasedType;
-    exports2.typeIs = typeIs;
-    exports2.validate = validate;
-    exports2.validateArrayOfType = validateArrayOfType;
-    exports2.validateOptional = validateOptional;
-    exports2.validateOptionalType = validateOptionalType;
-    exports2.validateType = validateType;
+    exports.VISITOR_KEYS = exports.NODE_PARENT_VALIDATIONS = exports.NODE_FIELDS = exports.FLIPPED_ALIAS_KEYS = exports.DEPRECATED_KEYS = exports.BUILDER_KEYS = exports.ALIAS_KEYS = void 0;
+    exports.arrayOf = arrayOf;
+    exports.arrayOfType = arrayOfType;
+    exports.assertEach = assertEach;
+    exports.assertNodeOrValueType = assertNodeOrValueType;
+    exports.assertNodeType = assertNodeType;
+    exports.assertOneOf = assertOneOf;
+    exports.assertOptionalChainStart = assertOptionalChainStart;
+    exports.assertShape = assertShape;
+    exports.assertValueType = assertValueType;
+    exports.chain = chain;
+    exports.default = defineType;
+    exports.defineAliasedType = defineAliasedType;
+    exports.typeIs = typeIs;
+    exports.validate = validate;
+    exports.validateArrayOfType = validateArrayOfType;
+    exports.validateOptional = validateOptional;
+    exports.validateOptionalType = validateOptionalType;
+    exports.validateType = validateType;
     var _is = require_is();
     var _validate = require_validate();
     var VISITOR_KEYS = {};
-    exports2.VISITOR_KEYS = VISITOR_KEYS;
+    exports.VISITOR_KEYS = VISITOR_KEYS;
     var ALIAS_KEYS = {};
-    exports2.ALIAS_KEYS = ALIAS_KEYS;
+    exports.ALIAS_KEYS = ALIAS_KEYS;
     var FLIPPED_ALIAS_KEYS = {};
-    exports2.FLIPPED_ALIAS_KEYS = FLIPPED_ALIAS_KEYS;
+    exports.FLIPPED_ALIAS_KEYS = FLIPPED_ALIAS_KEYS;
     var NODE_FIELDS = {};
-    exports2.NODE_FIELDS = NODE_FIELDS;
+    exports.NODE_FIELDS = NODE_FIELDS;
     var BUILDER_KEYS = {};
-    exports2.BUILDER_KEYS = BUILDER_KEYS;
+    exports.BUILDER_KEYS = BUILDER_KEYS;
     var DEPRECATED_KEYS = {};
-    exports2.DEPRECATED_KEYS = DEPRECATED_KEYS;
+    exports.DEPRECATED_KEYS = DEPRECATED_KEYS;
     var NODE_PARENT_VALIDATIONS = {};
-    exports2.NODE_PARENT_VALIDATIONS = NODE_PARENT_VALIDATIONS;
+    exports.NODE_PARENT_VALIDATIONS = NODE_PARENT_VALIDATIONS;
     function getType(val) {
       if (Array.isArray(val)) {
         return "array";
@@ -19045,12 +19235,12 @@ var require_utils5 = __commonJS({
         for (const property of Object.keys(shape)) {
           try {
             (0, _validate.validateField)(node, property, val[property], shape[property]);
-          } catch (error2) {
-            if (error2 instanceof TypeError) {
-              errors.push(error2.message);
+          } catch (error) {
+            if (error instanceof TypeError) {
+              errors.push(error.message);
               continue;
             }
-            throw error2;
+            throw error;
           }
         }
         if (errors.length) {
@@ -19204,12 +19394,12 @@ ${errors.join("\n")}`);
 
 // node_modules/@babel/types/lib/definitions/core.js
 var require_core = __commonJS({
-  "node_modules/@babel/types/lib/definitions/core.js"(exports2) {
+  "node_modules/@babel/types/lib/definitions/core.js"(exports) {
     "use strict";
-    Object.defineProperty(exports2, "__esModule", {
+    Object.defineProperty(exports, "__esModule", {
       value: true
     });
-    exports2.patternLikeCommon = exports2.functionTypeAnnotationCommon = exports2.functionDeclarationCommon = exports2.functionCommon = exports2.classMethodOrPropertyCommon = exports2.classMethodOrDeclareMethodCommon = void 0;
+    exports.patternLikeCommon = exports.functionTypeAnnotationCommon = exports.functionDeclarationCommon = exports.functionCommon = exports.classMethodOrPropertyCommon = exports.classMethodOrDeclareMethodCommon = void 0;
     var _is = require_is();
     var _isValidIdentifier = require_isValidIdentifier();
     var _helperValidatorIdentifier = require_lib();
@@ -19618,7 +19808,7 @@ var require_core = __commonJS({
         default: false
       }
     }), "functionCommon");
-    exports2.functionCommon = functionCommon;
+    exports.functionCommon = functionCommon;
     var functionTypeAnnotationCommon = /* @__PURE__ */ __name(() => ({
       returnType: {
         validate: (0, _utils.assertNodeType)("TypeAnnotation", "TSTypeAnnotation", "Noop"),
@@ -19629,7 +19819,7 @@ var require_core = __commonJS({
         optional: true
       }
     }), "functionTypeAnnotationCommon");
-    exports2.functionTypeAnnotationCommon = functionTypeAnnotationCommon;
+    exports.functionTypeAnnotationCommon = functionTypeAnnotationCommon;
     var functionDeclarationCommon = /* @__PURE__ */ __name(() => Object.assign({}, functionCommon(), {
       declare: {
         validate: (0, _utils.assertValueType)("boolean"),
@@ -19640,7 +19830,7 @@ var require_core = __commonJS({
         optional: true
       }
     }), "functionDeclarationCommon");
-    exports2.functionDeclarationCommon = functionDeclarationCommon;
+    exports.functionDeclarationCommon = functionDeclarationCommon;
     defineType("FunctionDeclaration", {
       builder: [
         "id",
@@ -19720,7 +19910,7 @@ var require_core = __commonJS({
         optional: true
       }
     }), "patternLikeCommon");
-    exports2.patternLikeCommon = patternLikeCommon;
+    exports.patternLikeCommon = patternLikeCommon;
     defineType("Identifier", {
       builder: [
         "name"
@@ -21035,7 +21225,7 @@ var require_core = __commonJS({
         }(), (0, _utils.assertNodeType)("Identifier", "StringLiteral", "NumericLiteral", "BigIntLiteral", "Expression"))
       }
     }), "classMethodOrPropertyCommon");
-    exports2.classMethodOrPropertyCommon = classMethodOrPropertyCommon;
+    exports.classMethodOrPropertyCommon = classMethodOrPropertyCommon;
     var classMethodOrDeclareMethodCommon = /* @__PURE__ */ __name(() => Object.assign({}, functionCommon(), classMethodOrPropertyCommon(), {
       params: {
         validate: (0, _utils.chain)((0, _utils.assertValueType)("array"), (0, _utils.assertEach)((0, _utils.assertNodeType)("Identifier", "Pattern", "RestElement", "TSParameterProperty")))
@@ -21053,7 +21243,7 @@ var require_core = __commonJS({
         optional: true
       }
     }), "classMethodOrDeclareMethodCommon");
-    exports2.classMethodOrDeclareMethodCommon = classMethodOrDeclareMethodCommon;
+    exports.classMethodOrDeclareMethodCommon = classMethodOrDeclareMethodCommon;
     defineType("ClassMethod", {
       aliases: [
         "Function",
@@ -21169,19 +21359,19 @@ var require_core = __commonJS({
           }), /* @__PURE__ */ __name(function templateElementCookedValidator(node) {
             const raw = node.value.raw;
             let unterminatedCalled = false;
-            const error2 = /* @__PURE__ */ __name(() => {
+            const error = /* @__PURE__ */ __name(() => {
               throw new Error("Internal @babel/types error.");
             }, "error");
             const { str, firstInvalidLoc } = (0, _helperStringParser.readStringContents)("template", raw, 0, 0, 0, {
               unterminated() {
                 unterminatedCalled = true;
               },
-              strictNumericEscape: error2,
-              invalidEscapeSequence: error2,
-              numericSeparatorInEscapeSequence: error2,
-              unexpectedNumericSeparator: error2,
-              invalidDigit: error2,
-              invalidCodePoint: error2
+              strictNumericEscape: error,
+              invalidEscapeSequence: error,
+              numericSeparatorInEscapeSequence: error,
+              unexpectedNumericSeparator: error,
+              invalidDigit: error,
+              invalidCodePoint: error
             });
             if (!unterminatedCalled)
               throw new Error("Invalid raw");
@@ -22655,12 +22845,12 @@ var require_jsx = __commonJS({
 
 // node_modules/@babel/types/lib/definitions/placeholders.js
 var require_placeholders = __commonJS({
-  "node_modules/@babel/types/lib/definitions/placeholders.js"(exports2) {
+  "node_modules/@babel/types/lib/definitions/placeholders.js"(exports) {
     "use strict";
-    Object.defineProperty(exports2, "__esModule", {
+    Object.defineProperty(exports, "__esModule", {
       value: true
     });
-    exports2.PLACEHOLDERS_FLIPPED_ALIAS = exports2.PLACEHOLDERS_ALIAS = exports2.PLACEHOLDERS = void 0;
+    exports.PLACEHOLDERS_FLIPPED_ALIAS = exports.PLACEHOLDERS_ALIAS = exports.PLACEHOLDERS = void 0;
     var _utils = require_utils5();
     var PLACEHOLDERS = [
       "Identifier",
@@ -22672,7 +22862,7 @@ var require_placeholders = __commonJS({
       "ClassBody",
       "Pattern"
     ];
-    exports2.PLACEHOLDERS = PLACEHOLDERS;
+    exports.PLACEHOLDERS = PLACEHOLDERS;
     var PLACEHOLDERS_ALIAS = {
       Declaration: [
         "Statement"
@@ -22682,14 +22872,14 @@ var require_placeholders = __commonJS({
         "LVal"
       ]
     };
-    exports2.PLACEHOLDERS_ALIAS = PLACEHOLDERS_ALIAS;
+    exports.PLACEHOLDERS_ALIAS = PLACEHOLDERS_ALIAS;
     for (const type of PLACEHOLDERS) {
       const alias = _utils.ALIAS_KEYS[type];
       if (alias != null && alias.length)
         PLACEHOLDERS_ALIAS[type] = alias;
     }
     var PLACEHOLDERS_FLIPPED_ALIAS = {};
-    exports2.PLACEHOLDERS_FLIPPED_ALIAS = PLACEHOLDERS_FLIPPED_ALIAS;
+    exports.PLACEHOLDERS_FLIPPED_ALIAS = PLACEHOLDERS_FLIPPED_ALIAS;
     Object.keys(PLACEHOLDERS_ALIAS).forEach((type) => {
       PLACEHOLDERS_ALIAS[type].forEach((alias) => {
         if (!Object.hasOwnProperty.call(PLACEHOLDERS_FLIPPED_ALIAS, alias)) {
@@ -23724,67 +23914,67 @@ var require_typescript = __commonJS({
 
 // node_modules/@babel/types/lib/definitions/index.js
 var require_definitions = __commonJS({
-  "node_modules/@babel/types/lib/definitions/index.js"(exports2) {
+  "node_modules/@babel/types/lib/definitions/index.js"(exports) {
     "use strict";
-    Object.defineProperty(exports2, "__esModule", {
+    Object.defineProperty(exports, "__esModule", {
       value: true
     });
-    Object.defineProperty(exports2, "ALIAS_KEYS", {
+    Object.defineProperty(exports, "ALIAS_KEYS", {
       enumerable: true,
       get: function() {
         return _utils.ALIAS_KEYS;
       }
     });
-    Object.defineProperty(exports2, "BUILDER_KEYS", {
+    Object.defineProperty(exports, "BUILDER_KEYS", {
       enumerable: true,
       get: function() {
         return _utils.BUILDER_KEYS;
       }
     });
-    Object.defineProperty(exports2, "DEPRECATED_KEYS", {
+    Object.defineProperty(exports, "DEPRECATED_KEYS", {
       enumerable: true,
       get: function() {
         return _utils.DEPRECATED_KEYS;
       }
     });
-    Object.defineProperty(exports2, "FLIPPED_ALIAS_KEYS", {
+    Object.defineProperty(exports, "FLIPPED_ALIAS_KEYS", {
       enumerable: true,
       get: function() {
         return _utils.FLIPPED_ALIAS_KEYS;
       }
     });
-    Object.defineProperty(exports2, "NODE_FIELDS", {
+    Object.defineProperty(exports, "NODE_FIELDS", {
       enumerable: true,
       get: function() {
         return _utils.NODE_FIELDS;
       }
     });
-    Object.defineProperty(exports2, "NODE_PARENT_VALIDATIONS", {
+    Object.defineProperty(exports, "NODE_PARENT_VALIDATIONS", {
       enumerable: true,
       get: function() {
         return _utils.NODE_PARENT_VALIDATIONS;
       }
     });
-    Object.defineProperty(exports2, "PLACEHOLDERS", {
+    Object.defineProperty(exports, "PLACEHOLDERS", {
       enumerable: true,
       get: function() {
         return _placeholders.PLACEHOLDERS;
       }
     });
-    Object.defineProperty(exports2, "PLACEHOLDERS_ALIAS", {
+    Object.defineProperty(exports, "PLACEHOLDERS_ALIAS", {
       enumerable: true,
       get: function() {
         return _placeholders.PLACEHOLDERS_ALIAS;
       }
     });
-    Object.defineProperty(exports2, "PLACEHOLDERS_FLIPPED_ALIAS", {
+    Object.defineProperty(exports, "PLACEHOLDERS_FLIPPED_ALIAS", {
       enumerable: true,
       get: function() {
         return _placeholders.PLACEHOLDERS_FLIPPED_ALIAS;
       }
     });
-    exports2.TYPES = void 0;
-    Object.defineProperty(exports2, "VISITOR_KEYS", {
+    exports.TYPES = void 0;
+    Object.defineProperty(exports, "VISITOR_KEYS", {
       enumerable: true,
       get: function() {
         return _utils.VISITOR_KEYS;
@@ -23808,20 +23998,20 @@ var require_definitions = __commonJS({
     _toFastProperties(_placeholders.PLACEHOLDERS_ALIAS);
     _toFastProperties(_placeholders.PLACEHOLDERS_FLIPPED_ALIAS);
     var TYPES = [].concat(Object.keys(_utils.VISITOR_KEYS), Object.keys(_utils.FLIPPED_ALIAS_KEYS), Object.keys(_utils.DEPRECATED_KEYS));
-    exports2.TYPES = TYPES;
+    exports.TYPES = TYPES;
   }
 });
 
 // node_modules/@babel/types/lib/validators/validate.js
 var require_validate = __commonJS({
-  "node_modules/@babel/types/lib/validators/validate.js"(exports2) {
+  "node_modules/@babel/types/lib/validators/validate.js"(exports) {
     "use strict";
-    Object.defineProperty(exports2, "__esModule", {
+    Object.defineProperty(exports, "__esModule", {
       value: true
     });
-    exports2.default = validate;
-    exports2.validateChild = validateChild;
-    exports2.validateField = validateField;
+    exports.default = validate;
+    exports.validateChild = validateChild;
+    exports.validateField = validateField;
     var _definitions = require_definitions();
     function validate(node, key, val) {
       if (!node)
@@ -23856,12 +24046,12 @@ var require_validate = __commonJS({
 
 // node_modules/@babel/types/lib/builders/validateNode.js
 var require_validateNode = __commonJS({
-  "node_modules/@babel/types/lib/builders/validateNode.js"(exports2) {
+  "node_modules/@babel/types/lib/builders/validateNode.js"(exports) {
     "use strict";
-    Object.defineProperty(exports2, "__esModule", {
+    Object.defineProperty(exports, "__esModule", {
       value: true
     });
-    exports2.default = validateNode;
+    exports.default = validateNode;
     var _validate = require_validate();
     var _ = require_lib3();
     function validateNode(node) {
@@ -23877,264 +24067,264 @@ var require_validateNode = __commonJS({
 
 // node_modules/@babel/types/lib/builders/generated/index.js
 var require_generated2 = __commonJS({
-  "node_modules/@babel/types/lib/builders/generated/index.js"(exports2) {
+  "node_modules/@babel/types/lib/builders/generated/index.js"(exports) {
     "use strict";
-    Object.defineProperty(exports2, "__esModule", {
+    Object.defineProperty(exports, "__esModule", {
       value: true
     });
-    exports2.anyTypeAnnotation = anyTypeAnnotation;
-    exports2.argumentPlaceholder = argumentPlaceholder;
-    exports2.arrayExpression = arrayExpression;
-    exports2.arrayPattern = arrayPattern;
-    exports2.arrayTypeAnnotation = arrayTypeAnnotation;
-    exports2.arrowFunctionExpression = arrowFunctionExpression3;
-    exports2.assignmentExpression = assignmentExpression;
-    exports2.assignmentPattern = assignmentPattern;
-    exports2.awaitExpression = awaitExpression;
-    exports2.bigIntLiteral = bigIntLiteral;
-    exports2.binaryExpression = binaryExpression;
-    exports2.bindExpression = bindExpression;
-    exports2.blockStatement = blockStatement3;
-    exports2.booleanLiteral = booleanLiteral;
-    exports2.booleanLiteralTypeAnnotation = booleanLiteralTypeAnnotation;
-    exports2.booleanTypeAnnotation = booleanTypeAnnotation;
-    exports2.breakStatement = breakStatement;
-    exports2.callExpression = callExpression3;
-    exports2.catchClause = catchClause;
-    exports2.classAccessorProperty = classAccessorProperty;
-    exports2.classBody = classBody;
-    exports2.classDeclaration = classDeclaration;
-    exports2.classExpression = classExpression;
-    exports2.classImplements = classImplements;
-    exports2.classMethod = classMethod;
-    exports2.classPrivateMethod = classPrivateMethod;
-    exports2.classPrivateProperty = classPrivateProperty;
-    exports2.classProperty = classProperty;
-    exports2.conditionalExpression = conditionalExpression;
-    exports2.continueStatement = continueStatement;
-    exports2.debuggerStatement = debuggerStatement;
-    exports2.decimalLiteral = decimalLiteral;
-    exports2.declareClass = declareClass;
-    exports2.declareExportAllDeclaration = declareExportAllDeclaration;
-    exports2.declareExportDeclaration = declareExportDeclaration;
-    exports2.declareFunction = declareFunction;
-    exports2.declareInterface = declareInterface;
-    exports2.declareModule = declareModule;
-    exports2.declareModuleExports = declareModuleExports;
-    exports2.declareOpaqueType = declareOpaqueType;
-    exports2.declareTypeAlias = declareTypeAlias;
-    exports2.declareVariable = declareVariable;
-    exports2.declaredPredicate = declaredPredicate;
-    exports2.decorator = decorator;
-    exports2.directive = directive;
-    exports2.directiveLiteral = directiveLiteral;
-    exports2.doExpression = doExpression;
-    exports2.doWhileStatement = doWhileStatement;
-    exports2.emptyStatement = emptyStatement;
-    exports2.emptyTypeAnnotation = emptyTypeAnnotation;
-    exports2.enumBooleanBody = enumBooleanBody;
-    exports2.enumBooleanMember = enumBooleanMember;
-    exports2.enumDeclaration = enumDeclaration;
-    exports2.enumDefaultedMember = enumDefaultedMember;
-    exports2.enumNumberBody = enumNumberBody;
-    exports2.enumNumberMember = enumNumberMember;
-    exports2.enumStringBody = enumStringBody;
-    exports2.enumStringMember = enumStringMember;
-    exports2.enumSymbolBody = enumSymbolBody;
-    exports2.existsTypeAnnotation = existsTypeAnnotation;
-    exports2.exportAllDeclaration = exportAllDeclaration;
-    exports2.exportDefaultDeclaration = exportDefaultDeclaration;
-    exports2.exportDefaultSpecifier = exportDefaultSpecifier;
-    exports2.exportNamedDeclaration = exportNamedDeclaration;
-    exports2.exportNamespaceSpecifier = exportNamespaceSpecifier;
-    exports2.exportSpecifier = exportSpecifier;
-    exports2.expressionStatement = expressionStatement3;
-    exports2.file = file;
-    exports2.forInStatement = forInStatement;
-    exports2.forOfStatement = forOfStatement;
-    exports2.forStatement = forStatement;
-    exports2.functionDeclaration = functionDeclaration;
-    exports2.functionExpression = functionExpression;
-    exports2.functionTypeAnnotation = functionTypeAnnotation;
-    exports2.functionTypeParam = functionTypeParam;
-    exports2.genericTypeAnnotation = genericTypeAnnotation;
-    exports2.identifier = identifier3;
-    exports2.ifStatement = ifStatement;
-    exports2.import = _import;
-    exports2.importAttribute = importAttribute;
-    exports2.importDeclaration = importDeclaration;
-    exports2.importDefaultSpecifier = importDefaultSpecifier;
-    exports2.importNamespaceSpecifier = importNamespaceSpecifier;
-    exports2.importSpecifier = importSpecifier;
-    exports2.indexedAccessType = indexedAccessType;
-    exports2.inferredPredicate = inferredPredicate;
-    exports2.interfaceDeclaration = interfaceDeclaration;
-    exports2.interfaceExtends = interfaceExtends;
-    exports2.interfaceTypeAnnotation = interfaceTypeAnnotation;
-    exports2.interpreterDirective = interpreterDirective;
-    exports2.intersectionTypeAnnotation = intersectionTypeAnnotation;
-    exports2.jSXAttribute = exports2.jsxAttribute = jsxAttribute;
-    exports2.jSXClosingElement = exports2.jsxClosingElement = jsxClosingElement;
-    exports2.jSXClosingFragment = exports2.jsxClosingFragment = jsxClosingFragment;
-    exports2.jSXElement = exports2.jsxElement = jsxElement;
-    exports2.jSXEmptyExpression = exports2.jsxEmptyExpression = jsxEmptyExpression;
-    exports2.jSXExpressionContainer = exports2.jsxExpressionContainer = jsxExpressionContainer;
-    exports2.jSXFragment = exports2.jsxFragment = jsxFragment;
-    exports2.jSXIdentifier = exports2.jsxIdentifier = jsxIdentifier;
-    exports2.jSXMemberExpression = exports2.jsxMemberExpression = jsxMemberExpression;
-    exports2.jSXNamespacedName = exports2.jsxNamespacedName = jsxNamespacedName;
-    exports2.jSXOpeningElement = exports2.jsxOpeningElement = jsxOpeningElement;
-    exports2.jSXOpeningFragment = exports2.jsxOpeningFragment = jsxOpeningFragment;
-    exports2.jSXSpreadAttribute = exports2.jsxSpreadAttribute = jsxSpreadAttribute;
-    exports2.jSXSpreadChild = exports2.jsxSpreadChild = jsxSpreadChild;
-    exports2.jSXText = exports2.jsxText = jsxText;
-    exports2.labeledStatement = labeledStatement;
-    exports2.logicalExpression = logicalExpression;
-    exports2.memberExpression = memberExpression;
-    exports2.metaProperty = metaProperty;
-    exports2.mixedTypeAnnotation = mixedTypeAnnotation;
-    exports2.moduleExpression = moduleExpression;
-    exports2.newExpression = newExpression;
-    exports2.noop = noop;
-    exports2.nullLiteral = nullLiteral;
-    exports2.nullLiteralTypeAnnotation = nullLiteralTypeAnnotation;
-    exports2.nullableTypeAnnotation = nullableTypeAnnotation;
-    exports2.numberLiteral = NumberLiteral;
-    exports2.numberLiteralTypeAnnotation = numberLiteralTypeAnnotation;
-    exports2.numberTypeAnnotation = numberTypeAnnotation;
-    exports2.numericLiteral = numericLiteral;
-    exports2.objectExpression = objectExpression;
-    exports2.objectMethod = objectMethod;
-    exports2.objectPattern = objectPattern;
-    exports2.objectProperty = objectProperty;
-    exports2.objectTypeAnnotation = objectTypeAnnotation;
-    exports2.objectTypeCallProperty = objectTypeCallProperty;
-    exports2.objectTypeIndexer = objectTypeIndexer;
-    exports2.objectTypeInternalSlot = objectTypeInternalSlot;
-    exports2.objectTypeProperty = objectTypeProperty;
-    exports2.objectTypeSpreadProperty = objectTypeSpreadProperty;
-    exports2.opaqueType = opaqueType;
-    exports2.optionalCallExpression = optionalCallExpression;
-    exports2.optionalIndexedAccessType = optionalIndexedAccessType;
-    exports2.optionalMemberExpression = optionalMemberExpression;
-    exports2.parenthesizedExpression = parenthesizedExpression;
-    exports2.pipelineBareFunction = pipelineBareFunction;
-    exports2.pipelinePrimaryTopicReference = pipelinePrimaryTopicReference;
-    exports2.pipelineTopicExpression = pipelineTopicExpression;
-    exports2.placeholder = placeholder;
-    exports2.privateName = privateName;
-    exports2.program = program2;
-    exports2.qualifiedTypeIdentifier = qualifiedTypeIdentifier;
-    exports2.recordExpression = recordExpression;
-    exports2.regExpLiteral = regExpLiteral;
-    exports2.regexLiteral = RegexLiteral;
-    exports2.restElement = restElement;
-    exports2.restProperty = RestProperty;
-    exports2.returnStatement = returnStatement;
-    exports2.sequenceExpression = sequenceExpression;
-    exports2.spreadElement = spreadElement;
-    exports2.spreadProperty = SpreadProperty;
-    exports2.staticBlock = staticBlock;
-    exports2.stringLiteral = stringLiteral3;
-    exports2.stringLiteralTypeAnnotation = stringLiteralTypeAnnotation;
-    exports2.stringTypeAnnotation = stringTypeAnnotation;
-    exports2.super = _super;
-    exports2.switchCase = switchCase;
-    exports2.switchStatement = switchStatement;
-    exports2.symbolTypeAnnotation = symbolTypeAnnotation;
-    exports2.taggedTemplateExpression = taggedTemplateExpression;
-    exports2.templateElement = templateElement;
-    exports2.templateLiteral = templateLiteral;
-    exports2.thisExpression = thisExpression;
-    exports2.thisTypeAnnotation = thisTypeAnnotation;
-    exports2.throwStatement = throwStatement;
-    exports2.topicReference = topicReference;
-    exports2.tryStatement = tryStatement;
-    exports2.tSAnyKeyword = exports2.tsAnyKeyword = tsAnyKeyword;
-    exports2.tSArrayType = exports2.tsArrayType = tsArrayType;
-    exports2.tSAsExpression = exports2.tsAsExpression = tsAsExpression;
-    exports2.tSBigIntKeyword = exports2.tsBigIntKeyword = tsBigIntKeyword;
-    exports2.tSBooleanKeyword = exports2.tsBooleanKeyword = tsBooleanKeyword;
-    exports2.tSCallSignatureDeclaration = exports2.tsCallSignatureDeclaration = tsCallSignatureDeclaration;
-    exports2.tSConditionalType = exports2.tsConditionalType = tsConditionalType;
-    exports2.tSConstructSignatureDeclaration = exports2.tsConstructSignatureDeclaration = tsConstructSignatureDeclaration;
-    exports2.tSConstructorType = exports2.tsConstructorType = tsConstructorType;
-    exports2.tSDeclareFunction = exports2.tsDeclareFunction = tsDeclareFunction;
-    exports2.tSDeclareMethod = exports2.tsDeclareMethod = tsDeclareMethod;
-    exports2.tSEnumDeclaration = exports2.tsEnumDeclaration = tsEnumDeclaration;
-    exports2.tSEnumMember = exports2.tsEnumMember = tsEnumMember;
-    exports2.tSExportAssignment = exports2.tsExportAssignment = tsExportAssignment;
-    exports2.tSExpressionWithTypeArguments = exports2.tsExpressionWithTypeArguments = tsExpressionWithTypeArguments;
-    exports2.tSExternalModuleReference = exports2.tsExternalModuleReference = tsExternalModuleReference;
-    exports2.tSFunctionType = exports2.tsFunctionType = tsFunctionType;
-    exports2.tSImportEqualsDeclaration = exports2.tsImportEqualsDeclaration = tsImportEqualsDeclaration;
-    exports2.tSImportType = exports2.tsImportType = tsImportType;
-    exports2.tSIndexSignature = exports2.tsIndexSignature = tsIndexSignature;
-    exports2.tSIndexedAccessType = exports2.tsIndexedAccessType = tsIndexedAccessType;
-    exports2.tSInferType = exports2.tsInferType = tsInferType;
-    exports2.tSInstantiationExpression = exports2.tsInstantiationExpression = tsInstantiationExpression;
-    exports2.tSInterfaceBody = exports2.tsInterfaceBody = tsInterfaceBody;
-    exports2.tSInterfaceDeclaration = exports2.tsInterfaceDeclaration = tsInterfaceDeclaration;
-    exports2.tSIntersectionType = exports2.tsIntersectionType = tsIntersectionType;
-    exports2.tSIntrinsicKeyword = exports2.tsIntrinsicKeyword = tsIntrinsicKeyword;
-    exports2.tSLiteralType = exports2.tsLiteralType = tsLiteralType;
-    exports2.tSMappedType = exports2.tsMappedType = tsMappedType;
-    exports2.tSMethodSignature = exports2.tsMethodSignature = tsMethodSignature;
-    exports2.tSModuleBlock = exports2.tsModuleBlock = tsModuleBlock;
-    exports2.tSModuleDeclaration = exports2.tsModuleDeclaration = tsModuleDeclaration;
-    exports2.tSNamedTupleMember = exports2.tsNamedTupleMember = tsNamedTupleMember;
-    exports2.tSNamespaceExportDeclaration = exports2.tsNamespaceExportDeclaration = tsNamespaceExportDeclaration;
-    exports2.tSNeverKeyword = exports2.tsNeverKeyword = tsNeverKeyword;
-    exports2.tSNonNullExpression = exports2.tsNonNullExpression = tsNonNullExpression;
-    exports2.tSNullKeyword = exports2.tsNullKeyword = tsNullKeyword;
-    exports2.tSNumberKeyword = exports2.tsNumberKeyword = tsNumberKeyword;
-    exports2.tSObjectKeyword = exports2.tsObjectKeyword = tsObjectKeyword;
-    exports2.tSOptionalType = exports2.tsOptionalType = tsOptionalType;
-    exports2.tSParameterProperty = exports2.tsParameterProperty = tsParameterProperty;
-    exports2.tSParenthesizedType = exports2.tsParenthesizedType = tsParenthesizedType;
-    exports2.tSPropertySignature = exports2.tsPropertySignature = tsPropertySignature;
-    exports2.tSQualifiedName = exports2.tsQualifiedName = tsQualifiedName;
-    exports2.tSRestType = exports2.tsRestType = tsRestType;
-    exports2.tSSatisfiesExpression = exports2.tsSatisfiesExpression = tsSatisfiesExpression;
-    exports2.tSStringKeyword = exports2.tsStringKeyword = tsStringKeyword;
-    exports2.tSSymbolKeyword = exports2.tsSymbolKeyword = tsSymbolKeyword;
-    exports2.tSThisType = exports2.tsThisType = tsThisType;
-    exports2.tSTupleType = exports2.tsTupleType = tsTupleType;
-    exports2.tSTypeAliasDeclaration = exports2.tsTypeAliasDeclaration = tsTypeAliasDeclaration;
-    exports2.tSTypeAnnotation = exports2.tsTypeAnnotation = tsTypeAnnotation;
-    exports2.tSTypeAssertion = exports2.tsTypeAssertion = tsTypeAssertion;
-    exports2.tSTypeLiteral = exports2.tsTypeLiteral = tsTypeLiteral;
-    exports2.tSTypeOperator = exports2.tsTypeOperator = tsTypeOperator;
-    exports2.tSTypeParameter = exports2.tsTypeParameter = tsTypeParameter;
-    exports2.tSTypeParameterDeclaration = exports2.tsTypeParameterDeclaration = tsTypeParameterDeclaration;
-    exports2.tSTypeParameterInstantiation = exports2.tsTypeParameterInstantiation = tsTypeParameterInstantiation;
-    exports2.tSTypePredicate = exports2.tsTypePredicate = tsTypePredicate;
-    exports2.tSTypeQuery = exports2.tsTypeQuery = tsTypeQuery;
-    exports2.tSTypeReference = exports2.tsTypeReference = tsTypeReference;
-    exports2.tSUndefinedKeyword = exports2.tsUndefinedKeyword = tsUndefinedKeyword;
-    exports2.tSUnionType = exports2.tsUnionType = tsUnionType;
-    exports2.tSUnknownKeyword = exports2.tsUnknownKeyword = tsUnknownKeyword;
-    exports2.tSVoidKeyword = exports2.tsVoidKeyword = tsVoidKeyword;
-    exports2.tupleExpression = tupleExpression;
-    exports2.tupleTypeAnnotation = tupleTypeAnnotation;
-    exports2.typeAlias = typeAlias;
-    exports2.typeAnnotation = typeAnnotation;
-    exports2.typeCastExpression = typeCastExpression;
-    exports2.typeParameter = typeParameter;
-    exports2.typeParameterDeclaration = typeParameterDeclaration;
-    exports2.typeParameterInstantiation = typeParameterInstantiation;
-    exports2.typeofTypeAnnotation = typeofTypeAnnotation;
-    exports2.unaryExpression = unaryExpression;
-    exports2.unionTypeAnnotation = unionTypeAnnotation;
-    exports2.updateExpression = updateExpression;
-    exports2.v8IntrinsicIdentifier = v8IntrinsicIdentifier;
-    exports2.variableDeclaration = variableDeclaration;
-    exports2.variableDeclarator = variableDeclarator;
-    exports2.variance = variance;
-    exports2.voidTypeAnnotation = voidTypeAnnotation;
-    exports2.whileStatement = whileStatement;
-    exports2.withStatement = withStatement;
-    exports2.yieldExpression = yieldExpression;
+    exports.anyTypeAnnotation = anyTypeAnnotation;
+    exports.argumentPlaceholder = argumentPlaceholder;
+    exports.arrayExpression = arrayExpression;
+    exports.arrayPattern = arrayPattern;
+    exports.arrayTypeAnnotation = arrayTypeAnnotation;
+    exports.arrowFunctionExpression = arrowFunctionExpression3;
+    exports.assignmentExpression = assignmentExpression;
+    exports.assignmentPattern = assignmentPattern;
+    exports.awaitExpression = awaitExpression;
+    exports.bigIntLiteral = bigIntLiteral;
+    exports.binaryExpression = binaryExpression;
+    exports.bindExpression = bindExpression;
+    exports.blockStatement = blockStatement3;
+    exports.booleanLiteral = booleanLiteral;
+    exports.booleanLiteralTypeAnnotation = booleanLiteralTypeAnnotation;
+    exports.booleanTypeAnnotation = booleanTypeAnnotation;
+    exports.breakStatement = breakStatement;
+    exports.callExpression = callExpression3;
+    exports.catchClause = catchClause;
+    exports.classAccessorProperty = classAccessorProperty;
+    exports.classBody = classBody;
+    exports.classDeclaration = classDeclaration;
+    exports.classExpression = classExpression;
+    exports.classImplements = classImplements;
+    exports.classMethod = classMethod;
+    exports.classPrivateMethod = classPrivateMethod;
+    exports.classPrivateProperty = classPrivateProperty;
+    exports.classProperty = classProperty;
+    exports.conditionalExpression = conditionalExpression;
+    exports.continueStatement = continueStatement;
+    exports.debuggerStatement = debuggerStatement;
+    exports.decimalLiteral = decimalLiteral;
+    exports.declareClass = declareClass;
+    exports.declareExportAllDeclaration = declareExportAllDeclaration;
+    exports.declareExportDeclaration = declareExportDeclaration;
+    exports.declareFunction = declareFunction;
+    exports.declareInterface = declareInterface;
+    exports.declareModule = declareModule;
+    exports.declareModuleExports = declareModuleExports;
+    exports.declareOpaqueType = declareOpaqueType;
+    exports.declareTypeAlias = declareTypeAlias;
+    exports.declareVariable = declareVariable;
+    exports.declaredPredicate = declaredPredicate;
+    exports.decorator = decorator;
+    exports.directive = directive;
+    exports.directiveLiteral = directiveLiteral;
+    exports.doExpression = doExpression;
+    exports.doWhileStatement = doWhileStatement;
+    exports.emptyStatement = emptyStatement;
+    exports.emptyTypeAnnotation = emptyTypeAnnotation;
+    exports.enumBooleanBody = enumBooleanBody;
+    exports.enumBooleanMember = enumBooleanMember;
+    exports.enumDeclaration = enumDeclaration;
+    exports.enumDefaultedMember = enumDefaultedMember;
+    exports.enumNumberBody = enumNumberBody;
+    exports.enumNumberMember = enumNumberMember;
+    exports.enumStringBody = enumStringBody;
+    exports.enumStringMember = enumStringMember;
+    exports.enumSymbolBody = enumSymbolBody;
+    exports.existsTypeAnnotation = existsTypeAnnotation;
+    exports.exportAllDeclaration = exportAllDeclaration;
+    exports.exportDefaultDeclaration = exportDefaultDeclaration;
+    exports.exportDefaultSpecifier = exportDefaultSpecifier;
+    exports.exportNamedDeclaration = exportNamedDeclaration;
+    exports.exportNamespaceSpecifier = exportNamespaceSpecifier;
+    exports.exportSpecifier = exportSpecifier;
+    exports.expressionStatement = expressionStatement3;
+    exports.file = file;
+    exports.forInStatement = forInStatement;
+    exports.forOfStatement = forOfStatement;
+    exports.forStatement = forStatement;
+    exports.functionDeclaration = functionDeclaration;
+    exports.functionExpression = functionExpression;
+    exports.functionTypeAnnotation = functionTypeAnnotation;
+    exports.functionTypeParam = functionTypeParam;
+    exports.genericTypeAnnotation = genericTypeAnnotation;
+    exports.identifier = identifier3;
+    exports.ifStatement = ifStatement;
+    exports.import = _import;
+    exports.importAttribute = importAttribute;
+    exports.importDeclaration = importDeclaration;
+    exports.importDefaultSpecifier = importDefaultSpecifier;
+    exports.importNamespaceSpecifier = importNamespaceSpecifier;
+    exports.importSpecifier = importSpecifier;
+    exports.indexedAccessType = indexedAccessType;
+    exports.inferredPredicate = inferredPredicate;
+    exports.interfaceDeclaration = interfaceDeclaration;
+    exports.interfaceExtends = interfaceExtends;
+    exports.interfaceTypeAnnotation = interfaceTypeAnnotation;
+    exports.interpreterDirective = interpreterDirective;
+    exports.intersectionTypeAnnotation = intersectionTypeAnnotation;
+    exports.jSXAttribute = exports.jsxAttribute = jsxAttribute;
+    exports.jSXClosingElement = exports.jsxClosingElement = jsxClosingElement;
+    exports.jSXClosingFragment = exports.jsxClosingFragment = jsxClosingFragment;
+    exports.jSXElement = exports.jsxElement = jsxElement;
+    exports.jSXEmptyExpression = exports.jsxEmptyExpression = jsxEmptyExpression;
+    exports.jSXExpressionContainer = exports.jsxExpressionContainer = jsxExpressionContainer;
+    exports.jSXFragment = exports.jsxFragment = jsxFragment;
+    exports.jSXIdentifier = exports.jsxIdentifier = jsxIdentifier;
+    exports.jSXMemberExpression = exports.jsxMemberExpression = jsxMemberExpression;
+    exports.jSXNamespacedName = exports.jsxNamespacedName = jsxNamespacedName;
+    exports.jSXOpeningElement = exports.jsxOpeningElement = jsxOpeningElement;
+    exports.jSXOpeningFragment = exports.jsxOpeningFragment = jsxOpeningFragment;
+    exports.jSXSpreadAttribute = exports.jsxSpreadAttribute = jsxSpreadAttribute;
+    exports.jSXSpreadChild = exports.jsxSpreadChild = jsxSpreadChild;
+    exports.jSXText = exports.jsxText = jsxText;
+    exports.labeledStatement = labeledStatement;
+    exports.logicalExpression = logicalExpression;
+    exports.memberExpression = memberExpression;
+    exports.metaProperty = metaProperty;
+    exports.mixedTypeAnnotation = mixedTypeAnnotation;
+    exports.moduleExpression = moduleExpression;
+    exports.newExpression = newExpression;
+    exports.noop = noop;
+    exports.nullLiteral = nullLiteral;
+    exports.nullLiteralTypeAnnotation = nullLiteralTypeAnnotation;
+    exports.nullableTypeAnnotation = nullableTypeAnnotation;
+    exports.numberLiteral = NumberLiteral;
+    exports.numberLiteralTypeAnnotation = numberLiteralTypeAnnotation;
+    exports.numberTypeAnnotation = numberTypeAnnotation;
+    exports.numericLiteral = numericLiteral;
+    exports.objectExpression = objectExpression;
+    exports.objectMethod = objectMethod;
+    exports.objectPattern = objectPattern;
+    exports.objectProperty = objectProperty;
+    exports.objectTypeAnnotation = objectTypeAnnotation;
+    exports.objectTypeCallProperty = objectTypeCallProperty;
+    exports.objectTypeIndexer = objectTypeIndexer;
+    exports.objectTypeInternalSlot = objectTypeInternalSlot;
+    exports.objectTypeProperty = objectTypeProperty;
+    exports.objectTypeSpreadProperty = objectTypeSpreadProperty;
+    exports.opaqueType = opaqueType;
+    exports.optionalCallExpression = optionalCallExpression;
+    exports.optionalIndexedAccessType = optionalIndexedAccessType;
+    exports.optionalMemberExpression = optionalMemberExpression;
+    exports.parenthesizedExpression = parenthesizedExpression;
+    exports.pipelineBareFunction = pipelineBareFunction;
+    exports.pipelinePrimaryTopicReference = pipelinePrimaryTopicReference;
+    exports.pipelineTopicExpression = pipelineTopicExpression;
+    exports.placeholder = placeholder;
+    exports.privateName = privateName;
+    exports.program = program2;
+    exports.qualifiedTypeIdentifier = qualifiedTypeIdentifier;
+    exports.recordExpression = recordExpression;
+    exports.regExpLiteral = regExpLiteral;
+    exports.regexLiteral = RegexLiteral;
+    exports.restElement = restElement;
+    exports.restProperty = RestProperty;
+    exports.returnStatement = returnStatement;
+    exports.sequenceExpression = sequenceExpression;
+    exports.spreadElement = spreadElement;
+    exports.spreadProperty = SpreadProperty;
+    exports.staticBlock = staticBlock;
+    exports.stringLiteral = stringLiteral3;
+    exports.stringLiteralTypeAnnotation = stringLiteralTypeAnnotation;
+    exports.stringTypeAnnotation = stringTypeAnnotation;
+    exports.super = _super;
+    exports.switchCase = switchCase;
+    exports.switchStatement = switchStatement;
+    exports.symbolTypeAnnotation = symbolTypeAnnotation;
+    exports.taggedTemplateExpression = taggedTemplateExpression;
+    exports.templateElement = templateElement;
+    exports.templateLiteral = templateLiteral;
+    exports.thisExpression = thisExpression;
+    exports.thisTypeAnnotation = thisTypeAnnotation;
+    exports.throwStatement = throwStatement;
+    exports.topicReference = topicReference;
+    exports.tryStatement = tryStatement;
+    exports.tSAnyKeyword = exports.tsAnyKeyword = tsAnyKeyword;
+    exports.tSArrayType = exports.tsArrayType = tsArrayType;
+    exports.tSAsExpression = exports.tsAsExpression = tsAsExpression;
+    exports.tSBigIntKeyword = exports.tsBigIntKeyword = tsBigIntKeyword;
+    exports.tSBooleanKeyword = exports.tsBooleanKeyword = tsBooleanKeyword;
+    exports.tSCallSignatureDeclaration = exports.tsCallSignatureDeclaration = tsCallSignatureDeclaration;
+    exports.tSConditionalType = exports.tsConditionalType = tsConditionalType;
+    exports.tSConstructSignatureDeclaration = exports.tsConstructSignatureDeclaration = tsConstructSignatureDeclaration;
+    exports.tSConstructorType = exports.tsConstructorType = tsConstructorType;
+    exports.tSDeclareFunction = exports.tsDeclareFunction = tsDeclareFunction;
+    exports.tSDeclareMethod = exports.tsDeclareMethod = tsDeclareMethod;
+    exports.tSEnumDeclaration = exports.tsEnumDeclaration = tsEnumDeclaration;
+    exports.tSEnumMember = exports.tsEnumMember = tsEnumMember;
+    exports.tSExportAssignment = exports.tsExportAssignment = tsExportAssignment;
+    exports.tSExpressionWithTypeArguments = exports.tsExpressionWithTypeArguments = tsExpressionWithTypeArguments;
+    exports.tSExternalModuleReference = exports.tsExternalModuleReference = tsExternalModuleReference;
+    exports.tSFunctionType = exports.tsFunctionType = tsFunctionType;
+    exports.tSImportEqualsDeclaration = exports.tsImportEqualsDeclaration = tsImportEqualsDeclaration;
+    exports.tSImportType = exports.tsImportType = tsImportType;
+    exports.tSIndexSignature = exports.tsIndexSignature = tsIndexSignature;
+    exports.tSIndexedAccessType = exports.tsIndexedAccessType = tsIndexedAccessType;
+    exports.tSInferType = exports.tsInferType = tsInferType;
+    exports.tSInstantiationExpression = exports.tsInstantiationExpression = tsInstantiationExpression;
+    exports.tSInterfaceBody = exports.tsInterfaceBody = tsInterfaceBody;
+    exports.tSInterfaceDeclaration = exports.tsInterfaceDeclaration = tsInterfaceDeclaration;
+    exports.tSIntersectionType = exports.tsIntersectionType = tsIntersectionType;
+    exports.tSIntrinsicKeyword = exports.tsIntrinsicKeyword = tsIntrinsicKeyword;
+    exports.tSLiteralType = exports.tsLiteralType = tsLiteralType;
+    exports.tSMappedType = exports.tsMappedType = tsMappedType;
+    exports.tSMethodSignature = exports.tsMethodSignature = tsMethodSignature;
+    exports.tSModuleBlock = exports.tsModuleBlock = tsModuleBlock;
+    exports.tSModuleDeclaration = exports.tsModuleDeclaration = tsModuleDeclaration;
+    exports.tSNamedTupleMember = exports.tsNamedTupleMember = tsNamedTupleMember;
+    exports.tSNamespaceExportDeclaration = exports.tsNamespaceExportDeclaration = tsNamespaceExportDeclaration;
+    exports.tSNeverKeyword = exports.tsNeverKeyword = tsNeverKeyword;
+    exports.tSNonNullExpression = exports.tsNonNullExpression = tsNonNullExpression;
+    exports.tSNullKeyword = exports.tsNullKeyword = tsNullKeyword;
+    exports.tSNumberKeyword = exports.tsNumberKeyword = tsNumberKeyword;
+    exports.tSObjectKeyword = exports.tsObjectKeyword = tsObjectKeyword;
+    exports.tSOptionalType = exports.tsOptionalType = tsOptionalType;
+    exports.tSParameterProperty = exports.tsParameterProperty = tsParameterProperty;
+    exports.tSParenthesizedType = exports.tsParenthesizedType = tsParenthesizedType;
+    exports.tSPropertySignature = exports.tsPropertySignature = tsPropertySignature;
+    exports.tSQualifiedName = exports.tsQualifiedName = tsQualifiedName;
+    exports.tSRestType = exports.tsRestType = tsRestType;
+    exports.tSSatisfiesExpression = exports.tsSatisfiesExpression = tsSatisfiesExpression;
+    exports.tSStringKeyword = exports.tsStringKeyword = tsStringKeyword;
+    exports.tSSymbolKeyword = exports.tsSymbolKeyword = tsSymbolKeyword;
+    exports.tSThisType = exports.tsThisType = tsThisType;
+    exports.tSTupleType = exports.tsTupleType = tsTupleType;
+    exports.tSTypeAliasDeclaration = exports.tsTypeAliasDeclaration = tsTypeAliasDeclaration;
+    exports.tSTypeAnnotation = exports.tsTypeAnnotation = tsTypeAnnotation;
+    exports.tSTypeAssertion = exports.tsTypeAssertion = tsTypeAssertion;
+    exports.tSTypeLiteral = exports.tsTypeLiteral = tsTypeLiteral;
+    exports.tSTypeOperator = exports.tsTypeOperator = tsTypeOperator;
+    exports.tSTypeParameter = exports.tsTypeParameter = tsTypeParameter;
+    exports.tSTypeParameterDeclaration = exports.tsTypeParameterDeclaration = tsTypeParameterDeclaration;
+    exports.tSTypeParameterInstantiation = exports.tsTypeParameterInstantiation = tsTypeParameterInstantiation;
+    exports.tSTypePredicate = exports.tsTypePredicate = tsTypePredicate;
+    exports.tSTypeQuery = exports.tsTypeQuery = tsTypeQuery;
+    exports.tSTypeReference = exports.tsTypeReference = tsTypeReference;
+    exports.tSUndefinedKeyword = exports.tsUndefinedKeyword = tsUndefinedKeyword;
+    exports.tSUnionType = exports.tsUnionType = tsUnionType;
+    exports.tSUnknownKeyword = exports.tsUnknownKeyword = tsUnknownKeyword;
+    exports.tSVoidKeyword = exports.tsVoidKeyword = tsVoidKeyword;
+    exports.tupleExpression = tupleExpression;
+    exports.tupleTypeAnnotation = tupleTypeAnnotation;
+    exports.typeAlias = typeAlias;
+    exports.typeAnnotation = typeAnnotation;
+    exports.typeCastExpression = typeCastExpression;
+    exports.typeParameter = typeParameter;
+    exports.typeParameterDeclaration = typeParameterDeclaration;
+    exports.typeParameterInstantiation = typeParameterInstantiation;
+    exports.typeofTypeAnnotation = typeofTypeAnnotation;
+    exports.unaryExpression = unaryExpression;
+    exports.unionTypeAnnotation = unionTypeAnnotation;
+    exports.updateExpression = updateExpression;
+    exports.v8IntrinsicIdentifier = v8IntrinsicIdentifier;
+    exports.variableDeclaration = variableDeclaration;
+    exports.variableDeclarator = variableDeclarator;
+    exports.variance = variance;
+    exports.voidTypeAnnotation = voidTypeAnnotation;
+    exports.whileStatement = whileStatement;
+    exports.withStatement = withStatement;
+    exports.yieldExpression = yieldExpression;
     var _validateNode = require_validateNode();
     function arrayExpression(elements = []) {
       return (0, _validateNode.default)({
@@ -26117,12 +26307,12 @@ var require_generated2 = __commonJS({
 
 // node_modules/@babel/types/lib/utils/react/cleanJSXElementLiteralChild.js
 var require_cleanJSXElementLiteralChild = __commonJS({
-  "node_modules/@babel/types/lib/utils/react/cleanJSXElementLiteralChild.js"(exports2) {
+  "node_modules/@babel/types/lib/utils/react/cleanJSXElementLiteralChild.js"(exports) {
     "use strict";
-    Object.defineProperty(exports2, "__esModule", {
+    Object.defineProperty(exports, "__esModule", {
       value: true
     });
-    exports2.default = cleanJSXElementLiteralChild;
+    exports.default = cleanJSXElementLiteralChild;
     var _generated = require_generated2();
     function cleanJSXElementLiteralChild(child, args) {
       const lines = child.value.split(/\r\n|\n|\r/);
@@ -26161,12 +26351,12 @@ var require_cleanJSXElementLiteralChild = __commonJS({
 
 // node_modules/@babel/types/lib/builders/react/buildChildren.js
 var require_buildChildren = __commonJS({
-  "node_modules/@babel/types/lib/builders/react/buildChildren.js"(exports2) {
+  "node_modules/@babel/types/lib/builders/react/buildChildren.js"(exports) {
     "use strict";
-    Object.defineProperty(exports2, "__esModule", {
+    Object.defineProperty(exports, "__esModule", {
       value: true
     });
-    exports2.default = buildChildren;
+    exports.default = buildChildren;
     var _generated = require_generated();
     var _cleanJSXElementLiteralChild = require_cleanJSXElementLiteralChild();
     function buildChildren(node) {
@@ -26191,12 +26381,12 @@ var require_buildChildren = __commonJS({
 
 // node_modules/@babel/types/lib/validators/isNode.js
 var require_isNode = __commonJS({
-  "node_modules/@babel/types/lib/validators/isNode.js"(exports2) {
+  "node_modules/@babel/types/lib/validators/isNode.js"(exports) {
     "use strict";
-    Object.defineProperty(exports2, "__esModule", {
+    Object.defineProperty(exports, "__esModule", {
       value: true
     });
-    exports2.default = isNode;
+    exports.default = isNode;
     var _definitions = require_definitions();
     function isNode(node) {
       return !!(node && _definitions.VISITOR_KEYS[node.type]);
@@ -26207,12 +26397,12 @@ var require_isNode = __commonJS({
 
 // node_modules/@babel/types/lib/asserts/assertNode.js
 var require_assertNode = __commonJS({
-  "node_modules/@babel/types/lib/asserts/assertNode.js"(exports2) {
+  "node_modules/@babel/types/lib/asserts/assertNode.js"(exports) {
     "use strict";
-    Object.defineProperty(exports2, "__esModule", {
+    Object.defineProperty(exports, "__esModule", {
       value: true
     });
-    exports2.default = assertNode;
+    exports.default = assertNode;
     var _isNode = require_isNode();
     function assertNode(node) {
       if (!(0, _isNode.default)(node)) {
@@ -26227,313 +26417,313 @@ var require_assertNode = __commonJS({
 
 // node_modules/@babel/types/lib/asserts/generated/index.js
 var require_generated3 = __commonJS({
-  "node_modules/@babel/types/lib/asserts/generated/index.js"(exports2) {
+  "node_modules/@babel/types/lib/asserts/generated/index.js"(exports) {
     "use strict";
-    Object.defineProperty(exports2, "__esModule", {
+    Object.defineProperty(exports, "__esModule", {
       value: true
     });
-    exports2.assertAccessor = assertAccessor;
-    exports2.assertAnyTypeAnnotation = assertAnyTypeAnnotation;
-    exports2.assertArgumentPlaceholder = assertArgumentPlaceholder;
-    exports2.assertArrayExpression = assertArrayExpression;
-    exports2.assertArrayPattern = assertArrayPattern;
-    exports2.assertArrayTypeAnnotation = assertArrayTypeAnnotation;
-    exports2.assertArrowFunctionExpression = assertArrowFunctionExpression;
-    exports2.assertAssignmentExpression = assertAssignmentExpression;
-    exports2.assertAssignmentPattern = assertAssignmentPattern;
-    exports2.assertAwaitExpression = assertAwaitExpression;
-    exports2.assertBigIntLiteral = assertBigIntLiteral;
-    exports2.assertBinary = assertBinary;
-    exports2.assertBinaryExpression = assertBinaryExpression;
-    exports2.assertBindExpression = assertBindExpression;
-    exports2.assertBlock = assertBlock;
-    exports2.assertBlockParent = assertBlockParent;
-    exports2.assertBlockStatement = assertBlockStatement;
-    exports2.assertBooleanLiteral = assertBooleanLiteral;
-    exports2.assertBooleanLiteralTypeAnnotation = assertBooleanLiteralTypeAnnotation;
-    exports2.assertBooleanTypeAnnotation = assertBooleanTypeAnnotation;
-    exports2.assertBreakStatement = assertBreakStatement;
-    exports2.assertCallExpression = assertCallExpression;
-    exports2.assertCatchClause = assertCatchClause;
-    exports2.assertClass = assertClass;
-    exports2.assertClassAccessorProperty = assertClassAccessorProperty;
-    exports2.assertClassBody = assertClassBody;
-    exports2.assertClassDeclaration = assertClassDeclaration;
-    exports2.assertClassExpression = assertClassExpression;
-    exports2.assertClassImplements = assertClassImplements;
-    exports2.assertClassMethod = assertClassMethod;
-    exports2.assertClassPrivateMethod = assertClassPrivateMethod;
-    exports2.assertClassPrivateProperty = assertClassPrivateProperty;
-    exports2.assertClassProperty = assertClassProperty;
-    exports2.assertCompletionStatement = assertCompletionStatement;
-    exports2.assertConditional = assertConditional;
-    exports2.assertConditionalExpression = assertConditionalExpression;
-    exports2.assertContinueStatement = assertContinueStatement;
-    exports2.assertDebuggerStatement = assertDebuggerStatement;
-    exports2.assertDecimalLiteral = assertDecimalLiteral;
-    exports2.assertDeclaration = assertDeclaration;
-    exports2.assertDeclareClass = assertDeclareClass;
-    exports2.assertDeclareExportAllDeclaration = assertDeclareExportAllDeclaration;
-    exports2.assertDeclareExportDeclaration = assertDeclareExportDeclaration;
-    exports2.assertDeclareFunction = assertDeclareFunction;
-    exports2.assertDeclareInterface = assertDeclareInterface;
-    exports2.assertDeclareModule = assertDeclareModule;
-    exports2.assertDeclareModuleExports = assertDeclareModuleExports;
-    exports2.assertDeclareOpaqueType = assertDeclareOpaqueType;
-    exports2.assertDeclareTypeAlias = assertDeclareTypeAlias;
-    exports2.assertDeclareVariable = assertDeclareVariable;
-    exports2.assertDeclaredPredicate = assertDeclaredPredicate;
-    exports2.assertDecorator = assertDecorator;
-    exports2.assertDirective = assertDirective;
-    exports2.assertDirectiveLiteral = assertDirectiveLiteral;
-    exports2.assertDoExpression = assertDoExpression;
-    exports2.assertDoWhileStatement = assertDoWhileStatement;
-    exports2.assertEmptyStatement = assertEmptyStatement;
-    exports2.assertEmptyTypeAnnotation = assertEmptyTypeAnnotation;
-    exports2.assertEnumBody = assertEnumBody;
-    exports2.assertEnumBooleanBody = assertEnumBooleanBody;
-    exports2.assertEnumBooleanMember = assertEnumBooleanMember;
-    exports2.assertEnumDeclaration = assertEnumDeclaration;
-    exports2.assertEnumDefaultedMember = assertEnumDefaultedMember;
-    exports2.assertEnumMember = assertEnumMember;
-    exports2.assertEnumNumberBody = assertEnumNumberBody;
-    exports2.assertEnumNumberMember = assertEnumNumberMember;
-    exports2.assertEnumStringBody = assertEnumStringBody;
-    exports2.assertEnumStringMember = assertEnumStringMember;
-    exports2.assertEnumSymbolBody = assertEnumSymbolBody;
-    exports2.assertExistsTypeAnnotation = assertExistsTypeAnnotation;
-    exports2.assertExportAllDeclaration = assertExportAllDeclaration;
-    exports2.assertExportDeclaration = assertExportDeclaration;
-    exports2.assertExportDefaultDeclaration = assertExportDefaultDeclaration;
-    exports2.assertExportDefaultSpecifier = assertExportDefaultSpecifier;
-    exports2.assertExportNamedDeclaration = assertExportNamedDeclaration;
-    exports2.assertExportNamespaceSpecifier = assertExportNamespaceSpecifier;
-    exports2.assertExportSpecifier = assertExportSpecifier;
-    exports2.assertExpression = assertExpression;
-    exports2.assertExpressionStatement = assertExpressionStatement;
-    exports2.assertExpressionWrapper = assertExpressionWrapper;
-    exports2.assertFile = assertFile;
-    exports2.assertFlow = assertFlow;
-    exports2.assertFlowBaseAnnotation = assertFlowBaseAnnotation;
-    exports2.assertFlowDeclaration = assertFlowDeclaration;
-    exports2.assertFlowPredicate = assertFlowPredicate;
-    exports2.assertFlowType = assertFlowType;
-    exports2.assertFor = assertFor;
-    exports2.assertForInStatement = assertForInStatement;
-    exports2.assertForOfStatement = assertForOfStatement;
-    exports2.assertForStatement = assertForStatement;
-    exports2.assertForXStatement = assertForXStatement;
-    exports2.assertFunction = assertFunction;
-    exports2.assertFunctionDeclaration = assertFunctionDeclaration;
-    exports2.assertFunctionExpression = assertFunctionExpression;
-    exports2.assertFunctionParent = assertFunctionParent;
-    exports2.assertFunctionTypeAnnotation = assertFunctionTypeAnnotation;
-    exports2.assertFunctionTypeParam = assertFunctionTypeParam;
-    exports2.assertGenericTypeAnnotation = assertGenericTypeAnnotation;
-    exports2.assertIdentifier = assertIdentifier;
-    exports2.assertIfStatement = assertIfStatement;
-    exports2.assertImmutable = assertImmutable;
-    exports2.assertImport = assertImport;
-    exports2.assertImportAttribute = assertImportAttribute;
-    exports2.assertImportDeclaration = assertImportDeclaration;
-    exports2.assertImportDefaultSpecifier = assertImportDefaultSpecifier;
-    exports2.assertImportNamespaceSpecifier = assertImportNamespaceSpecifier;
-    exports2.assertImportSpecifier = assertImportSpecifier;
-    exports2.assertIndexedAccessType = assertIndexedAccessType;
-    exports2.assertInferredPredicate = assertInferredPredicate;
-    exports2.assertInterfaceDeclaration = assertInterfaceDeclaration;
-    exports2.assertInterfaceExtends = assertInterfaceExtends;
-    exports2.assertInterfaceTypeAnnotation = assertInterfaceTypeAnnotation;
-    exports2.assertInterpreterDirective = assertInterpreterDirective;
-    exports2.assertIntersectionTypeAnnotation = assertIntersectionTypeAnnotation;
-    exports2.assertJSX = assertJSX;
-    exports2.assertJSXAttribute = assertJSXAttribute;
-    exports2.assertJSXClosingElement = assertJSXClosingElement;
-    exports2.assertJSXClosingFragment = assertJSXClosingFragment;
-    exports2.assertJSXElement = assertJSXElement;
-    exports2.assertJSXEmptyExpression = assertJSXEmptyExpression;
-    exports2.assertJSXExpressionContainer = assertJSXExpressionContainer;
-    exports2.assertJSXFragment = assertJSXFragment;
-    exports2.assertJSXIdentifier = assertJSXIdentifier;
-    exports2.assertJSXMemberExpression = assertJSXMemberExpression;
-    exports2.assertJSXNamespacedName = assertJSXNamespacedName;
-    exports2.assertJSXOpeningElement = assertJSXOpeningElement;
-    exports2.assertJSXOpeningFragment = assertJSXOpeningFragment;
-    exports2.assertJSXSpreadAttribute = assertJSXSpreadAttribute;
-    exports2.assertJSXSpreadChild = assertJSXSpreadChild;
-    exports2.assertJSXText = assertJSXText;
-    exports2.assertLVal = assertLVal;
-    exports2.assertLabeledStatement = assertLabeledStatement;
-    exports2.assertLiteral = assertLiteral;
-    exports2.assertLogicalExpression = assertLogicalExpression;
-    exports2.assertLoop = assertLoop;
-    exports2.assertMemberExpression = assertMemberExpression;
-    exports2.assertMetaProperty = assertMetaProperty;
-    exports2.assertMethod = assertMethod;
-    exports2.assertMiscellaneous = assertMiscellaneous;
-    exports2.assertMixedTypeAnnotation = assertMixedTypeAnnotation;
-    exports2.assertModuleDeclaration = assertModuleDeclaration;
-    exports2.assertModuleExpression = assertModuleExpression;
-    exports2.assertModuleSpecifier = assertModuleSpecifier;
-    exports2.assertNewExpression = assertNewExpression;
-    exports2.assertNoop = assertNoop;
-    exports2.assertNullLiteral = assertNullLiteral;
-    exports2.assertNullLiteralTypeAnnotation = assertNullLiteralTypeAnnotation;
-    exports2.assertNullableTypeAnnotation = assertNullableTypeAnnotation;
-    exports2.assertNumberLiteral = assertNumberLiteral;
-    exports2.assertNumberLiteralTypeAnnotation = assertNumberLiteralTypeAnnotation;
-    exports2.assertNumberTypeAnnotation = assertNumberTypeAnnotation;
-    exports2.assertNumericLiteral = assertNumericLiteral;
-    exports2.assertObjectExpression = assertObjectExpression;
-    exports2.assertObjectMember = assertObjectMember;
-    exports2.assertObjectMethod = assertObjectMethod;
-    exports2.assertObjectPattern = assertObjectPattern;
-    exports2.assertObjectProperty = assertObjectProperty;
-    exports2.assertObjectTypeAnnotation = assertObjectTypeAnnotation;
-    exports2.assertObjectTypeCallProperty = assertObjectTypeCallProperty;
-    exports2.assertObjectTypeIndexer = assertObjectTypeIndexer;
-    exports2.assertObjectTypeInternalSlot = assertObjectTypeInternalSlot;
-    exports2.assertObjectTypeProperty = assertObjectTypeProperty;
-    exports2.assertObjectTypeSpreadProperty = assertObjectTypeSpreadProperty;
-    exports2.assertOpaqueType = assertOpaqueType;
-    exports2.assertOptionalCallExpression = assertOptionalCallExpression;
-    exports2.assertOptionalIndexedAccessType = assertOptionalIndexedAccessType;
-    exports2.assertOptionalMemberExpression = assertOptionalMemberExpression;
-    exports2.assertParenthesizedExpression = assertParenthesizedExpression;
-    exports2.assertPattern = assertPattern;
-    exports2.assertPatternLike = assertPatternLike;
-    exports2.assertPipelineBareFunction = assertPipelineBareFunction;
-    exports2.assertPipelinePrimaryTopicReference = assertPipelinePrimaryTopicReference;
-    exports2.assertPipelineTopicExpression = assertPipelineTopicExpression;
-    exports2.assertPlaceholder = assertPlaceholder;
-    exports2.assertPrivate = assertPrivate;
-    exports2.assertPrivateName = assertPrivateName;
-    exports2.assertProgram = assertProgram;
-    exports2.assertProperty = assertProperty;
-    exports2.assertPureish = assertPureish;
-    exports2.assertQualifiedTypeIdentifier = assertQualifiedTypeIdentifier;
-    exports2.assertRecordExpression = assertRecordExpression;
-    exports2.assertRegExpLiteral = assertRegExpLiteral;
-    exports2.assertRegexLiteral = assertRegexLiteral;
-    exports2.assertRestElement = assertRestElement;
-    exports2.assertRestProperty = assertRestProperty;
-    exports2.assertReturnStatement = assertReturnStatement;
-    exports2.assertScopable = assertScopable;
-    exports2.assertSequenceExpression = assertSequenceExpression;
-    exports2.assertSpreadElement = assertSpreadElement;
-    exports2.assertSpreadProperty = assertSpreadProperty;
-    exports2.assertStandardized = assertStandardized;
-    exports2.assertStatement = assertStatement;
-    exports2.assertStaticBlock = assertStaticBlock;
-    exports2.assertStringLiteral = assertStringLiteral;
-    exports2.assertStringLiteralTypeAnnotation = assertStringLiteralTypeAnnotation;
-    exports2.assertStringTypeAnnotation = assertStringTypeAnnotation;
-    exports2.assertSuper = assertSuper;
-    exports2.assertSwitchCase = assertSwitchCase;
-    exports2.assertSwitchStatement = assertSwitchStatement;
-    exports2.assertSymbolTypeAnnotation = assertSymbolTypeAnnotation;
-    exports2.assertTSAnyKeyword = assertTSAnyKeyword;
-    exports2.assertTSArrayType = assertTSArrayType;
-    exports2.assertTSAsExpression = assertTSAsExpression;
-    exports2.assertTSBaseType = assertTSBaseType;
-    exports2.assertTSBigIntKeyword = assertTSBigIntKeyword;
-    exports2.assertTSBooleanKeyword = assertTSBooleanKeyword;
-    exports2.assertTSCallSignatureDeclaration = assertTSCallSignatureDeclaration;
-    exports2.assertTSConditionalType = assertTSConditionalType;
-    exports2.assertTSConstructSignatureDeclaration = assertTSConstructSignatureDeclaration;
-    exports2.assertTSConstructorType = assertTSConstructorType;
-    exports2.assertTSDeclareFunction = assertTSDeclareFunction;
-    exports2.assertTSDeclareMethod = assertTSDeclareMethod;
-    exports2.assertTSEntityName = assertTSEntityName;
-    exports2.assertTSEnumDeclaration = assertTSEnumDeclaration;
-    exports2.assertTSEnumMember = assertTSEnumMember;
-    exports2.assertTSExportAssignment = assertTSExportAssignment;
-    exports2.assertTSExpressionWithTypeArguments = assertTSExpressionWithTypeArguments;
-    exports2.assertTSExternalModuleReference = assertTSExternalModuleReference;
-    exports2.assertTSFunctionType = assertTSFunctionType;
-    exports2.assertTSImportEqualsDeclaration = assertTSImportEqualsDeclaration;
-    exports2.assertTSImportType = assertTSImportType;
-    exports2.assertTSIndexSignature = assertTSIndexSignature;
-    exports2.assertTSIndexedAccessType = assertTSIndexedAccessType;
-    exports2.assertTSInferType = assertTSInferType;
-    exports2.assertTSInstantiationExpression = assertTSInstantiationExpression;
-    exports2.assertTSInterfaceBody = assertTSInterfaceBody;
-    exports2.assertTSInterfaceDeclaration = assertTSInterfaceDeclaration;
-    exports2.assertTSIntersectionType = assertTSIntersectionType;
-    exports2.assertTSIntrinsicKeyword = assertTSIntrinsicKeyword;
-    exports2.assertTSLiteralType = assertTSLiteralType;
-    exports2.assertTSMappedType = assertTSMappedType;
-    exports2.assertTSMethodSignature = assertTSMethodSignature;
-    exports2.assertTSModuleBlock = assertTSModuleBlock;
-    exports2.assertTSModuleDeclaration = assertTSModuleDeclaration;
-    exports2.assertTSNamedTupleMember = assertTSNamedTupleMember;
-    exports2.assertTSNamespaceExportDeclaration = assertTSNamespaceExportDeclaration;
-    exports2.assertTSNeverKeyword = assertTSNeverKeyword;
-    exports2.assertTSNonNullExpression = assertTSNonNullExpression;
-    exports2.assertTSNullKeyword = assertTSNullKeyword;
-    exports2.assertTSNumberKeyword = assertTSNumberKeyword;
-    exports2.assertTSObjectKeyword = assertTSObjectKeyword;
-    exports2.assertTSOptionalType = assertTSOptionalType;
-    exports2.assertTSParameterProperty = assertTSParameterProperty;
-    exports2.assertTSParenthesizedType = assertTSParenthesizedType;
-    exports2.assertTSPropertySignature = assertTSPropertySignature;
-    exports2.assertTSQualifiedName = assertTSQualifiedName;
-    exports2.assertTSRestType = assertTSRestType;
-    exports2.assertTSSatisfiesExpression = assertTSSatisfiesExpression;
-    exports2.assertTSStringKeyword = assertTSStringKeyword;
-    exports2.assertTSSymbolKeyword = assertTSSymbolKeyword;
-    exports2.assertTSThisType = assertTSThisType;
-    exports2.assertTSTupleType = assertTSTupleType;
-    exports2.assertTSType = assertTSType;
-    exports2.assertTSTypeAliasDeclaration = assertTSTypeAliasDeclaration;
-    exports2.assertTSTypeAnnotation = assertTSTypeAnnotation;
-    exports2.assertTSTypeAssertion = assertTSTypeAssertion;
-    exports2.assertTSTypeElement = assertTSTypeElement;
-    exports2.assertTSTypeLiteral = assertTSTypeLiteral;
-    exports2.assertTSTypeOperator = assertTSTypeOperator;
-    exports2.assertTSTypeParameter = assertTSTypeParameter;
-    exports2.assertTSTypeParameterDeclaration = assertTSTypeParameterDeclaration;
-    exports2.assertTSTypeParameterInstantiation = assertTSTypeParameterInstantiation;
-    exports2.assertTSTypePredicate = assertTSTypePredicate;
-    exports2.assertTSTypeQuery = assertTSTypeQuery;
-    exports2.assertTSTypeReference = assertTSTypeReference;
-    exports2.assertTSUndefinedKeyword = assertTSUndefinedKeyword;
-    exports2.assertTSUnionType = assertTSUnionType;
-    exports2.assertTSUnknownKeyword = assertTSUnknownKeyword;
-    exports2.assertTSVoidKeyword = assertTSVoidKeyword;
-    exports2.assertTaggedTemplateExpression = assertTaggedTemplateExpression;
-    exports2.assertTemplateElement = assertTemplateElement;
-    exports2.assertTemplateLiteral = assertTemplateLiteral;
-    exports2.assertTerminatorless = assertTerminatorless;
-    exports2.assertThisExpression = assertThisExpression;
-    exports2.assertThisTypeAnnotation = assertThisTypeAnnotation;
-    exports2.assertThrowStatement = assertThrowStatement;
-    exports2.assertTopicReference = assertTopicReference;
-    exports2.assertTryStatement = assertTryStatement;
-    exports2.assertTupleExpression = assertTupleExpression;
-    exports2.assertTupleTypeAnnotation = assertTupleTypeAnnotation;
-    exports2.assertTypeAlias = assertTypeAlias;
-    exports2.assertTypeAnnotation = assertTypeAnnotation;
-    exports2.assertTypeCastExpression = assertTypeCastExpression;
-    exports2.assertTypeParameter = assertTypeParameter;
-    exports2.assertTypeParameterDeclaration = assertTypeParameterDeclaration;
-    exports2.assertTypeParameterInstantiation = assertTypeParameterInstantiation;
-    exports2.assertTypeScript = assertTypeScript;
-    exports2.assertTypeofTypeAnnotation = assertTypeofTypeAnnotation;
-    exports2.assertUnaryExpression = assertUnaryExpression;
-    exports2.assertUnaryLike = assertUnaryLike;
-    exports2.assertUnionTypeAnnotation = assertUnionTypeAnnotation;
-    exports2.assertUpdateExpression = assertUpdateExpression;
-    exports2.assertUserWhitespacable = assertUserWhitespacable;
-    exports2.assertV8IntrinsicIdentifier = assertV8IntrinsicIdentifier;
-    exports2.assertVariableDeclaration = assertVariableDeclaration;
-    exports2.assertVariableDeclarator = assertVariableDeclarator;
-    exports2.assertVariance = assertVariance;
-    exports2.assertVoidTypeAnnotation = assertVoidTypeAnnotation;
-    exports2.assertWhile = assertWhile;
-    exports2.assertWhileStatement = assertWhileStatement;
-    exports2.assertWithStatement = assertWithStatement;
-    exports2.assertYieldExpression = assertYieldExpression;
+    exports.assertAccessor = assertAccessor;
+    exports.assertAnyTypeAnnotation = assertAnyTypeAnnotation;
+    exports.assertArgumentPlaceholder = assertArgumentPlaceholder;
+    exports.assertArrayExpression = assertArrayExpression;
+    exports.assertArrayPattern = assertArrayPattern;
+    exports.assertArrayTypeAnnotation = assertArrayTypeAnnotation;
+    exports.assertArrowFunctionExpression = assertArrowFunctionExpression;
+    exports.assertAssignmentExpression = assertAssignmentExpression;
+    exports.assertAssignmentPattern = assertAssignmentPattern;
+    exports.assertAwaitExpression = assertAwaitExpression;
+    exports.assertBigIntLiteral = assertBigIntLiteral;
+    exports.assertBinary = assertBinary;
+    exports.assertBinaryExpression = assertBinaryExpression;
+    exports.assertBindExpression = assertBindExpression;
+    exports.assertBlock = assertBlock;
+    exports.assertBlockParent = assertBlockParent;
+    exports.assertBlockStatement = assertBlockStatement;
+    exports.assertBooleanLiteral = assertBooleanLiteral;
+    exports.assertBooleanLiteralTypeAnnotation = assertBooleanLiteralTypeAnnotation;
+    exports.assertBooleanTypeAnnotation = assertBooleanTypeAnnotation;
+    exports.assertBreakStatement = assertBreakStatement;
+    exports.assertCallExpression = assertCallExpression;
+    exports.assertCatchClause = assertCatchClause;
+    exports.assertClass = assertClass;
+    exports.assertClassAccessorProperty = assertClassAccessorProperty;
+    exports.assertClassBody = assertClassBody;
+    exports.assertClassDeclaration = assertClassDeclaration;
+    exports.assertClassExpression = assertClassExpression;
+    exports.assertClassImplements = assertClassImplements;
+    exports.assertClassMethod = assertClassMethod;
+    exports.assertClassPrivateMethod = assertClassPrivateMethod;
+    exports.assertClassPrivateProperty = assertClassPrivateProperty;
+    exports.assertClassProperty = assertClassProperty;
+    exports.assertCompletionStatement = assertCompletionStatement;
+    exports.assertConditional = assertConditional;
+    exports.assertConditionalExpression = assertConditionalExpression;
+    exports.assertContinueStatement = assertContinueStatement;
+    exports.assertDebuggerStatement = assertDebuggerStatement;
+    exports.assertDecimalLiteral = assertDecimalLiteral;
+    exports.assertDeclaration = assertDeclaration;
+    exports.assertDeclareClass = assertDeclareClass;
+    exports.assertDeclareExportAllDeclaration = assertDeclareExportAllDeclaration;
+    exports.assertDeclareExportDeclaration = assertDeclareExportDeclaration;
+    exports.assertDeclareFunction = assertDeclareFunction;
+    exports.assertDeclareInterface = assertDeclareInterface;
+    exports.assertDeclareModule = assertDeclareModule;
+    exports.assertDeclareModuleExports = assertDeclareModuleExports;
+    exports.assertDeclareOpaqueType = assertDeclareOpaqueType;
+    exports.assertDeclareTypeAlias = assertDeclareTypeAlias;
+    exports.assertDeclareVariable = assertDeclareVariable;
+    exports.assertDeclaredPredicate = assertDeclaredPredicate;
+    exports.assertDecorator = assertDecorator;
+    exports.assertDirective = assertDirective;
+    exports.assertDirectiveLiteral = assertDirectiveLiteral;
+    exports.assertDoExpression = assertDoExpression;
+    exports.assertDoWhileStatement = assertDoWhileStatement;
+    exports.assertEmptyStatement = assertEmptyStatement;
+    exports.assertEmptyTypeAnnotation = assertEmptyTypeAnnotation;
+    exports.assertEnumBody = assertEnumBody;
+    exports.assertEnumBooleanBody = assertEnumBooleanBody;
+    exports.assertEnumBooleanMember = assertEnumBooleanMember;
+    exports.assertEnumDeclaration = assertEnumDeclaration;
+    exports.assertEnumDefaultedMember = assertEnumDefaultedMember;
+    exports.assertEnumMember = assertEnumMember;
+    exports.assertEnumNumberBody = assertEnumNumberBody;
+    exports.assertEnumNumberMember = assertEnumNumberMember;
+    exports.assertEnumStringBody = assertEnumStringBody;
+    exports.assertEnumStringMember = assertEnumStringMember;
+    exports.assertEnumSymbolBody = assertEnumSymbolBody;
+    exports.assertExistsTypeAnnotation = assertExistsTypeAnnotation;
+    exports.assertExportAllDeclaration = assertExportAllDeclaration;
+    exports.assertExportDeclaration = assertExportDeclaration;
+    exports.assertExportDefaultDeclaration = assertExportDefaultDeclaration;
+    exports.assertExportDefaultSpecifier = assertExportDefaultSpecifier;
+    exports.assertExportNamedDeclaration = assertExportNamedDeclaration;
+    exports.assertExportNamespaceSpecifier = assertExportNamespaceSpecifier;
+    exports.assertExportSpecifier = assertExportSpecifier;
+    exports.assertExpression = assertExpression;
+    exports.assertExpressionStatement = assertExpressionStatement;
+    exports.assertExpressionWrapper = assertExpressionWrapper;
+    exports.assertFile = assertFile;
+    exports.assertFlow = assertFlow;
+    exports.assertFlowBaseAnnotation = assertFlowBaseAnnotation;
+    exports.assertFlowDeclaration = assertFlowDeclaration;
+    exports.assertFlowPredicate = assertFlowPredicate;
+    exports.assertFlowType = assertFlowType;
+    exports.assertFor = assertFor;
+    exports.assertForInStatement = assertForInStatement;
+    exports.assertForOfStatement = assertForOfStatement;
+    exports.assertForStatement = assertForStatement;
+    exports.assertForXStatement = assertForXStatement;
+    exports.assertFunction = assertFunction;
+    exports.assertFunctionDeclaration = assertFunctionDeclaration;
+    exports.assertFunctionExpression = assertFunctionExpression;
+    exports.assertFunctionParent = assertFunctionParent;
+    exports.assertFunctionTypeAnnotation = assertFunctionTypeAnnotation;
+    exports.assertFunctionTypeParam = assertFunctionTypeParam;
+    exports.assertGenericTypeAnnotation = assertGenericTypeAnnotation;
+    exports.assertIdentifier = assertIdentifier;
+    exports.assertIfStatement = assertIfStatement;
+    exports.assertImmutable = assertImmutable;
+    exports.assertImport = assertImport;
+    exports.assertImportAttribute = assertImportAttribute;
+    exports.assertImportDeclaration = assertImportDeclaration;
+    exports.assertImportDefaultSpecifier = assertImportDefaultSpecifier;
+    exports.assertImportNamespaceSpecifier = assertImportNamespaceSpecifier;
+    exports.assertImportSpecifier = assertImportSpecifier;
+    exports.assertIndexedAccessType = assertIndexedAccessType;
+    exports.assertInferredPredicate = assertInferredPredicate;
+    exports.assertInterfaceDeclaration = assertInterfaceDeclaration;
+    exports.assertInterfaceExtends = assertInterfaceExtends;
+    exports.assertInterfaceTypeAnnotation = assertInterfaceTypeAnnotation;
+    exports.assertInterpreterDirective = assertInterpreterDirective;
+    exports.assertIntersectionTypeAnnotation = assertIntersectionTypeAnnotation;
+    exports.assertJSX = assertJSX;
+    exports.assertJSXAttribute = assertJSXAttribute;
+    exports.assertJSXClosingElement = assertJSXClosingElement;
+    exports.assertJSXClosingFragment = assertJSXClosingFragment;
+    exports.assertJSXElement = assertJSXElement;
+    exports.assertJSXEmptyExpression = assertJSXEmptyExpression;
+    exports.assertJSXExpressionContainer = assertJSXExpressionContainer;
+    exports.assertJSXFragment = assertJSXFragment;
+    exports.assertJSXIdentifier = assertJSXIdentifier;
+    exports.assertJSXMemberExpression = assertJSXMemberExpression;
+    exports.assertJSXNamespacedName = assertJSXNamespacedName;
+    exports.assertJSXOpeningElement = assertJSXOpeningElement;
+    exports.assertJSXOpeningFragment = assertJSXOpeningFragment;
+    exports.assertJSXSpreadAttribute = assertJSXSpreadAttribute;
+    exports.assertJSXSpreadChild = assertJSXSpreadChild;
+    exports.assertJSXText = assertJSXText;
+    exports.assertLVal = assertLVal;
+    exports.assertLabeledStatement = assertLabeledStatement;
+    exports.assertLiteral = assertLiteral;
+    exports.assertLogicalExpression = assertLogicalExpression;
+    exports.assertLoop = assertLoop;
+    exports.assertMemberExpression = assertMemberExpression;
+    exports.assertMetaProperty = assertMetaProperty;
+    exports.assertMethod = assertMethod;
+    exports.assertMiscellaneous = assertMiscellaneous;
+    exports.assertMixedTypeAnnotation = assertMixedTypeAnnotation;
+    exports.assertModuleDeclaration = assertModuleDeclaration;
+    exports.assertModuleExpression = assertModuleExpression;
+    exports.assertModuleSpecifier = assertModuleSpecifier;
+    exports.assertNewExpression = assertNewExpression;
+    exports.assertNoop = assertNoop;
+    exports.assertNullLiteral = assertNullLiteral;
+    exports.assertNullLiteralTypeAnnotation = assertNullLiteralTypeAnnotation;
+    exports.assertNullableTypeAnnotation = assertNullableTypeAnnotation;
+    exports.assertNumberLiteral = assertNumberLiteral;
+    exports.assertNumberLiteralTypeAnnotation = assertNumberLiteralTypeAnnotation;
+    exports.assertNumberTypeAnnotation = assertNumberTypeAnnotation;
+    exports.assertNumericLiteral = assertNumericLiteral;
+    exports.assertObjectExpression = assertObjectExpression;
+    exports.assertObjectMember = assertObjectMember;
+    exports.assertObjectMethod = assertObjectMethod;
+    exports.assertObjectPattern = assertObjectPattern;
+    exports.assertObjectProperty = assertObjectProperty;
+    exports.assertObjectTypeAnnotation = assertObjectTypeAnnotation;
+    exports.assertObjectTypeCallProperty = assertObjectTypeCallProperty;
+    exports.assertObjectTypeIndexer = assertObjectTypeIndexer;
+    exports.assertObjectTypeInternalSlot = assertObjectTypeInternalSlot;
+    exports.assertObjectTypeProperty = assertObjectTypeProperty;
+    exports.assertObjectTypeSpreadProperty = assertObjectTypeSpreadProperty;
+    exports.assertOpaqueType = assertOpaqueType;
+    exports.assertOptionalCallExpression = assertOptionalCallExpression;
+    exports.assertOptionalIndexedAccessType = assertOptionalIndexedAccessType;
+    exports.assertOptionalMemberExpression = assertOptionalMemberExpression;
+    exports.assertParenthesizedExpression = assertParenthesizedExpression;
+    exports.assertPattern = assertPattern;
+    exports.assertPatternLike = assertPatternLike;
+    exports.assertPipelineBareFunction = assertPipelineBareFunction;
+    exports.assertPipelinePrimaryTopicReference = assertPipelinePrimaryTopicReference;
+    exports.assertPipelineTopicExpression = assertPipelineTopicExpression;
+    exports.assertPlaceholder = assertPlaceholder;
+    exports.assertPrivate = assertPrivate;
+    exports.assertPrivateName = assertPrivateName;
+    exports.assertProgram = assertProgram;
+    exports.assertProperty = assertProperty;
+    exports.assertPureish = assertPureish;
+    exports.assertQualifiedTypeIdentifier = assertQualifiedTypeIdentifier;
+    exports.assertRecordExpression = assertRecordExpression;
+    exports.assertRegExpLiteral = assertRegExpLiteral;
+    exports.assertRegexLiteral = assertRegexLiteral;
+    exports.assertRestElement = assertRestElement;
+    exports.assertRestProperty = assertRestProperty;
+    exports.assertReturnStatement = assertReturnStatement;
+    exports.assertScopable = assertScopable;
+    exports.assertSequenceExpression = assertSequenceExpression;
+    exports.assertSpreadElement = assertSpreadElement;
+    exports.assertSpreadProperty = assertSpreadProperty;
+    exports.assertStandardized = assertStandardized;
+    exports.assertStatement = assertStatement;
+    exports.assertStaticBlock = assertStaticBlock;
+    exports.assertStringLiteral = assertStringLiteral;
+    exports.assertStringLiteralTypeAnnotation = assertStringLiteralTypeAnnotation;
+    exports.assertStringTypeAnnotation = assertStringTypeAnnotation;
+    exports.assertSuper = assertSuper;
+    exports.assertSwitchCase = assertSwitchCase;
+    exports.assertSwitchStatement = assertSwitchStatement;
+    exports.assertSymbolTypeAnnotation = assertSymbolTypeAnnotation;
+    exports.assertTSAnyKeyword = assertTSAnyKeyword;
+    exports.assertTSArrayType = assertTSArrayType;
+    exports.assertTSAsExpression = assertTSAsExpression;
+    exports.assertTSBaseType = assertTSBaseType;
+    exports.assertTSBigIntKeyword = assertTSBigIntKeyword;
+    exports.assertTSBooleanKeyword = assertTSBooleanKeyword;
+    exports.assertTSCallSignatureDeclaration = assertTSCallSignatureDeclaration;
+    exports.assertTSConditionalType = assertTSConditionalType;
+    exports.assertTSConstructSignatureDeclaration = assertTSConstructSignatureDeclaration;
+    exports.assertTSConstructorType = assertTSConstructorType;
+    exports.assertTSDeclareFunction = assertTSDeclareFunction;
+    exports.assertTSDeclareMethod = assertTSDeclareMethod;
+    exports.assertTSEntityName = assertTSEntityName;
+    exports.assertTSEnumDeclaration = assertTSEnumDeclaration;
+    exports.assertTSEnumMember = assertTSEnumMember;
+    exports.assertTSExportAssignment = assertTSExportAssignment;
+    exports.assertTSExpressionWithTypeArguments = assertTSExpressionWithTypeArguments;
+    exports.assertTSExternalModuleReference = assertTSExternalModuleReference;
+    exports.assertTSFunctionType = assertTSFunctionType;
+    exports.assertTSImportEqualsDeclaration = assertTSImportEqualsDeclaration;
+    exports.assertTSImportType = assertTSImportType;
+    exports.assertTSIndexSignature = assertTSIndexSignature;
+    exports.assertTSIndexedAccessType = assertTSIndexedAccessType;
+    exports.assertTSInferType = assertTSInferType;
+    exports.assertTSInstantiationExpression = assertTSInstantiationExpression;
+    exports.assertTSInterfaceBody = assertTSInterfaceBody;
+    exports.assertTSInterfaceDeclaration = assertTSInterfaceDeclaration;
+    exports.assertTSIntersectionType = assertTSIntersectionType;
+    exports.assertTSIntrinsicKeyword = assertTSIntrinsicKeyword;
+    exports.assertTSLiteralType = assertTSLiteralType;
+    exports.assertTSMappedType = assertTSMappedType;
+    exports.assertTSMethodSignature = assertTSMethodSignature;
+    exports.assertTSModuleBlock = assertTSModuleBlock;
+    exports.assertTSModuleDeclaration = assertTSModuleDeclaration;
+    exports.assertTSNamedTupleMember = assertTSNamedTupleMember;
+    exports.assertTSNamespaceExportDeclaration = assertTSNamespaceExportDeclaration;
+    exports.assertTSNeverKeyword = assertTSNeverKeyword;
+    exports.assertTSNonNullExpression = assertTSNonNullExpression;
+    exports.assertTSNullKeyword = assertTSNullKeyword;
+    exports.assertTSNumberKeyword = assertTSNumberKeyword;
+    exports.assertTSObjectKeyword = assertTSObjectKeyword;
+    exports.assertTSOptionalType = assertTSOptionalType;
+    exports.assertTSParameterProperty = assertTSParameterProperty;
+    exports.assertTSParenthesizedType = assertTSParenthesizedType;
+    exports.assertTSPropertySignature = assertTSPropertySignature;
+    exports.assertTSQualifiedName = assertTSQualifiedName;
+    exports.assertTSRestType = assertTSRestType;
+    exports.assertTSSatisfiesExpression = assertTSSatisfiesExpression;
+    exports.assertTSStringKeyword = assertTSStringKeyword;
+    exports.assertTSSymbolKeyword = assertTSSymbolKeyword;
+    exports.assertTSThisType = assertTSThisType;
+    exports.assertTSTupleType = assertTSTupleType;
+    exports.assertTSType = assertTSType;
+    exports.assertTSTypeAliasDeclaration = assertTSTypeAliasDeclaration;
+    exports.assertTSTypeAnnotation = assertTSTypeAnnotation;
+    exports.assertTSTypeAssertion = assertTSTypeAssertion;
+    exports.assertTSTypeElement = assertTSTypeElement;
+    exports.assertTSTypeLiteral = assertTSTypeLiteral;
+    exports.assertTSTypeOperator = assertTSTypeOperator;
+    exports.assertTSTypeParameter = assertTSTypeParameter;
+    exports.assertTSTypeParameterDeclaration = assertTSTypeParameterDeclaration;
+    exports.assertTSTypeParameterInstantiation = assertTSTypeParameterInstantiation;
+    exports.assertTSTypePredicate = assertTSTypePredicate;
+    exports.assertTSTypeQuery = assertTSTypeQuery;
+    exports.assertTSTypeReference = assertTSTypeReference;
+    exports.assertTSUndefinedKeyword = assertTSUndefinedKeyword;
+    exports.assertTSUnionType = assertTSUnionType;
+    exports.assertTSUnknownKeyword = assertTSUnknownKeyword;
+    exports.assertTSVoidKeyword = assertTSVoidKeyword;
+    exports.assertTaggedTemplateExpression = assertTaggedTemplateExpression;
+    exports.assertTemplateElement = assertTemplateElement;
+    exports.assertTemplateLiteral = assertTemplateLiteral;
+    exports.assertTerminatorless = assertTerminatorless;
+    exports.assertThisExpression = assertThisExpression;
+    exports.assertThisTypeAnnotation = assertThisTypeAnnotation;
+    exports.assertThrowStatement = assertThrowStatement;
+    exports.assertTopicReference = assertTopicReference;
+    exports.assertTryStatement = assertTryStatement;
+    exports.assertTupleExpression = assertTupleExpression;
+    exports.assertTupleTypeAnnotation = assertTupleTypeAnnotation;
+    exports.assertTypeAlias = assertTypeAlias;
+    exports.assertTypeAnnotation = assertTypeAnnotation;
+    exports.assertTypeCastExpression = assertTypeCastExpression;
+    exports.assertTypeParameter = assertTypeParameter;
+    exports.assertTypeParameterDeclaration = assertTypeParameterDeclaration;
+    exports.assertTypeParameterInstantiation = assertTypeParameterInstantiation;
+    exports.assertTypeScript = assertTypeScript;
+    exports.assertTypeofTypeAnnotation = assertTypeofTypeAnnotation;
+    exports.assertUnaryExpression = assertUnaryExpression;
+    exports.assertUnaryLike = assertUnaryLike;
+    exports.assertUnionTypeAnnotation = assertUnionTypeAnnotation;
+    exports.assertUpdateExpression = assertUpdateExpression;
+    exports.assertUserWhitespacable = assertUserWhitespacable;
+    exports.assertV8IntrinsicIdentifier = assertV8IntrinsicIdentifier;
+    exports.assertVariableDeclaration = assertVariableDeclaration;
+    exports.assertVariableDeclarator = assertVariableDeclarator;
+    exports.assertVariance = assertVariance;
+    exports.assertVoidTypeAnnotation = assertVoidTypeAnnotation;
+    exports.assertWhile = assertWhile;
+    exports.assertWhileStatement = assertWhileStatement;
+    exports.assertWithStatement = assertWithStatement;
+    exports.assertYieldExpression = assertYieldExpression;
     var _is = require_is();
     function assert(type, node, opts) {
       if (!(0, _is.default)(type, node, opts)) {
@@ -27758,15 +27948,15 @@ var require_generated3 = __commonJS({
 
 // node_modules/@babel/types/lib/builders/flow/createTypeAnnotationBasedOnTypeof.js
 var require_createTypeAnnotationBasedOnTypeof = __commonJS({
-  "node_modules/@babel/types/lib/builders/flow/createTypeAnnotationBasedOnTypeof.js"(exports2) {
+  "node_modules/@babel/types/lib/builders/flow/createTypeAnnotationBasedOnTypeof.js"(exports) {
     "use strict";
-    Object.defineProperty(exports2, "__esModule", {
+    Object.defineProperty(exports, "__esModule", {
       value: true
     });
-    exports2.default = void 0;
+    exports.default = void 0;
     var _generated = require_generated2();
     var _default = createTypeAnnotationBasedOnTypeof;
-    exports2.default = _default;
+    exports.default = _default;
     function createTypeAnnotationBasedOnTypeof(type) {
       switch (type) {
         case "string":
@@ -27794,12 +27984,12 @@ var require_createTypeAnnotationBasedOnTypeof = __commonJS({
 
 // node_modules/@babel/types/lib/modifications/flow/removeTypeDuplicates.js
 var require_removeTypeDuplicates = __commonJS({
-  "node_modules/@babel/types/lib/modifications/flow/removeTypeDuplicates.js"(exports2) {
+  "node_modules/@babel/types/lib/modifications/flow/removeTypeDuplicates.js"(exports) {
     "use strict";
-    Object.defineProperty(exports2, "__esModule", {
+    Object.defineProperty(exports, "__esModule", {
       value: true
     });
-    exports2.default = removeTypeDuplicates;
+    exports.default = removeTypeDuplicates;
     var _generated = require_generated();
     function getQualifiedName(node) {
       return (0, _generated.isIdentifier)(node) ? node.name : `${node.id.name}.${getQualifiedName(node.qualification)}`;
@@ -27865,12 +28055,12 @@ var require_removeTypeDuplicates = __commonJS({
 
 // node_modules/@babel/types/lib/builders/flow/createFlowUnionType.js
 var require_createFlowUnionType = __commonJS({
-  "node_modules/@babel/types/lib/builders/flow/createFlowUnionType.js"(exports2) {
+  "node_modules/@babel/types/lib/builders/flow/createFlowUnionType.js"(exports) {
     "use strict";
-    Object.defineProperty(exports2, "__esModule", {
+    Object.defineProperty(exports, "__esModule", {
       value: true
     });
-    exports2.default = createFlowUnionType;
+    exports.default = createFlowUnionType;
     var _generated = require_generated2();
     var _removeTypeDuplicates = require_removeTypeDuplicates();
     function createFlowUnionType(types) {
@@ -27887,12 +28077,12 @@ var require_createFlowUnionType = __commonJS({
 
 // node_modules/@babel/types/lib/modifications/typescript/removeTypeDuplicates.js
 var require_removeTypeDuplicates2 = __commonJS({
-  "node_modules/@babel/types/lib/modifications/typescript/removeTypeDuplicates.js"(exports2) {
+  "node_modules/@babel/types/lib/modifications/typescript/removeTypeDuplicates.js"(exports) {
     "use strict";
-    Object.defineProperty(exports2, "__esModule", {
+    Object.defineProperty(exports, "__esModule", {
       value: true
     });
-    exports2.default = removeTypeDuplicates;
+    exports.default = removeTypeDuplicates;
     var _generated = require_generated();
     function getQualifiedName(node) {
       return (0, _generated.isIdentifier)(node) ? node.name : `${node.right.name}.${getQualifiedName(node.left)}`;
@@ -27958,12 +28148,12 @@ var require_removeTypeDuplicates2 = __commonJS({
 
 // node_modules/@babel/types/lib/builders/typescript/createTSUnionType.js
 var require_createTSUnionType = __commonJS({
-  "node_modules/@babel/types/lib/builders/typescript/createTSUnionType.js"(exports2) {
+  "node_modules/@babel/types/lib/builders/typescript/createTSUnionType.js"(exports) {
     "use strict";
-    Object.defineProperty(exports2, "__esModule", {
+    Object.defineProperty(exports, "__esModule", {
       value: true
     });
-    exports2.default = createTSUnionType;
+    exports.default = createTSUnionType;
     var _generated = require_generated2();
     var _removeTypeDuplicates = require_removeTypeDuplicates2();
     var _index = require_generated();
@@ -27984,1524 +28174,1524 @@ var require_createTSUnionType = __commonJS({
 
 // node_modules/@babel/types/lib/builders/generated/uppercase.js
 var require_uppercase = __commonJS({
-  "node_modules/@babel/types/lib/builders/generated/uppercase.js"(exports2) {
+  "node_modules/@babel/types/lib/builders/generated/uppercase.js"(exports) {
     "use strict";
-    Object.defineProperty(exports2, "__esModule", {
+    Object.defineProperty(exports, "__esModule", {
       value: true
     });
-    Object.defineProperty(exports2, "AnyTypeAnnotation", {
+    Object.defineProperty(exports, "AnyTypeAnnotation", {
       enumerable: true,
       get: function() {
         return _index.anyTypeAnnotation;
       }
     });
-    Object.defineProperty(exports2, "ArgumentPlaceholder", {
+    Object.defineProperty(exports, "ArgumentPlaceholder", {
       enumerable: true,
       get: function() {
         return _index.argumentPlaceholder;
       }
     });
-    Object.defineProperty(exports2, "ArrayExpression", {
+    Object.defineProperty(exports, "ArrayExpression", {
       enumerable: true,
       get: function() {
         return _index.arrayExpression;
       }
     });
-    Object.defineProperty(exports2, "ArrayPattern", {
+    Object.defineProperty(exports, "ArrayPattern", {
       enumerable: true,
       get: function() {
         return _index.arrayPattern;
       }
     });
-    Object.defineProperty(exports2, "ArrayTypeAnnotation", {
+    Object.defineProperty(exports, "ArrayTypeAnnotation", {
       enumerable: true,
       get: function() {
         return _index.arrayTypeAnnotation;
       }
     });
-    Object.defineProperty(exports2, "ArrowFunctionExpression", {
+    Object.defineProperty(exports, "ArrowFunctionExpression", {
       enumerable: true,
       get: function() {
         return _index.arrowFunctionExpression;
       }
     });
-    Object.defineProperty(exports2, "AssignmentExpression", {
+    Object.defineProperty(exports, "AssignmentExpression", {
       enumerable: true,
       get: function() {
         return _index.assignmentExpression;
       }
     });
-    Object.defineProperty(exports2, "AssignmentPattern", {
+    Object.defineProperty(exports, "AssignmentPattern", {
       enumerable: true,
       get: function() {
         return _index.assignmentPattern;
       }
     });
-    Object.defineProperty(exports2, "AwaitExpression", {
+    Object.defineProperty(exports, "AwaitExpression", {
       enumerable: true,
       get: function() {
         return _index.awaitExpression;
       }
     });
-    Object.defineProperty(exports2, "BigIntLiteral", {
+    Object.defineProperty(exports, "BigIntLiteral", {
       enumerable: true,
       get: function() {
         return _index.bigIntLiteral;
       }
     });
-    Object.defineProperty(exports2, "BinaryExpression", {
+    Object.defineProperty(exports, "BinaryExpression", {
       enumerable: true,
       get: function() {
         return _index.binaryExpression;
       }
     });
-    Object.defineProperty(exports2, "BindExpression", {
+    Object.defineProperty(exports, "BindExpression", {
       enumerable: true,
       get: function() {
         return _index.bindExpression;
       }
     });
-    Object.defineProperty(exports2, "BlockStatement", {
+    Object.defineProperty(exports, "BlockStatement", {
       enumerable: true,
       get: function() {
         return _index.blockStatement;
       }
     });
-    Object.defineProperty(exports2, "BooleanLiteral", {
+    Object.defineProperty(exports, "BooleanLiteral", {
       enumerable: true,
       get: function() {
         return _index.booleanLiteral;
       }
     });
-    Object.defineProperty(exports2, "BooleanLiteralTypeAnnotation", {
+    Object.defineProperty(exports, "BooleanLiteralTypeAnnotation", {
       enumerable: true,
       get: function() {
         return _index.booleanLiteralTypeAnnotation;
       }
     });
-    Object.defineProperty(exports2, "BooleanTypeAnnotation", {
+    Object.defineProperty(exports, "BooleanTypeAnnotation", {
       enumerable: true,
       get: function() {
         return _index.booleanTypeAnnotation;
       }
     });
-    Object.defineProperty(exports2, "BreakStatement", {
+    Object.defineProperty(exports, "BreakStatement", {
       enumerable: true,
       get: function() {
         return _index.breakStatement;
       }
     });
-    Object.defineProperty(exports2, "CallExpression", {
+    Object.defineProperty(exports, "CallExpression", {
       enumerable: true,
       get: function() {
         return _index.callExpression;
       }
     });
-    Object.defineProperty(exports2, "CatchClause", {
+    Object.defineProperty(exports, "CatchClause", {
       enumerable: true,
       get: function() {
         return _index.catchClause;
       }
     });
-    Object.defineProperty(exports2, "ClassAccessorProperty", {
+    Object.defineProperty(exports, "ClassAccessorProperty", {
       enumerable: true,
       get: function() {
         return _index.classAccessorProperty;
       }
     });
-    Object.defineProperty(exports2, "ClassBody", {
+    Object.defineProperty(exports, "ClassBody", {
       enumerable: true,
       get: function() {
         return _index.classBody;
       }
     });
-    Object.defineProperty(exports2, "ClassDeclaration", {
+    Object.defineProperty(exports, "ClassDeclaration", {
       enumerable: true,
       get: function() {
         return _index.classDeclaration;
       }
     });
-    Object.defineProperty(exports2, "ClassExpression", {
+    Object.defineProperty(exports, "ClassExpression", {
       enumerable: true,
       get: function() {
         return _index.classExpression;
       }
     });
-    Object.defineProperty(exports2, "ClassImplements", {
+    Object.defineProperty(exports, "ClassImplements", {
       enumerable: true,
       get: function() {
         return _index.classImplements;
       }
     });
-    Object.defineProperty(exports2, "ClassMethod", {
+    Object.defineProperty(exports, "ClassMethod", {
       enumerable: true,
       get: function() {
         return _index.classMethod;
       }
     });
-    Object.defineProperty(exports2, "ClassPrivateMethod", {
+    Object.defineProperty(exports, "ClassPrivateMethod", {
       enumerable: true,
       get: function() {
         return _index.classPrivateMethod;
       }
     });
-    Object.defineProperty(exports2, "ClassPrivateProperty", {
+    Object.defineProperty(exports, "ClassPrivateProperty", {
       enumerable: true,
       get: function() {
         return _index.classPrivateProperty;
       }
     });
-    Object.defineProperty(exports2, "ClassProperty", {
+    Object.defineProperty(exports, "ClassProperty", {
       enumerable: true,
       get: function() {
         return _index.classProperty;
       }
     });
-    Object.defineProperty(exports2, "ConditionalExpression", {
+    Object.defineProperty(exports, "ConditionalExpression", {
       enumerable: true,
       get: function() {
         return _index.conditionalExpression;
       }
     });
-    Object.defineProperty(exports2, "ContinueStatement", {
+    Object.defineProperty(exports, "ContinueStatement", {
       enumerable: true,
       get: function() {
         return _index.continueStatement;
       }
     });
-    Object.defineProperty(exports2, "DebuggerStatement", {
+    Object.defineProperty(exports, "DebuggerStatement", {
       enumerable: true,
       get: function() {
         return _index.debuggerStatement;
       }
     });
-    Object.defineProperty(exports2, "DecimalLiteral", {
+    Object.defineProperty(exports, "DecimalLiteral", {
       enumerable: true,
       get: function() {
         return _index.decimalLiteral;
       }
     });
-    Object.defineProperty(exports2, "DeclareClass", {
+    Object.defineProperty(exports, "DeclareClass", {
       enumerable: true,
       get: function() {
         return _index.declareClass;
       }
     });
-    Object.defineProperty(exports2, "DeclareExportAllDeclaration", {
+    Object.defineProperty(exports, "DeclareExportAllDeclaration", {
       enumerable: true,
       get: function() {
         return _index.declareExportAllDeclaration;
       }
     });
-    Object.defineProperty(exports2, "DeclareExportDeclaration", {
+    Object.defineProperty(exports, "DeclareExportDeclaration", {
       enumerable: true,
       get: function() {
         return _index.declareExportDeclaration;
       }
     });
-    Object.defineProperty(exports2, "DeclareFunction", {
+    Object.defineProperty(exports, "DeclareFunction", {
       enumerable: true,
       get: function() {
         return _index.declareFunction;
       }
     });
-    Object.defineProperty(exports2, "DeclareInterface", {
+    Object.defineProperty(exports, "DeclareInterface", {
       enumerable: true,
       get: function() {
         return _index.declareInterface;
       }
     });
-    Object.defineProperty(exports2, "DeclareModule", {
+    Object.defineProperty(exports, "DeclareModule", {
       enumerable: true,
       get: function() {
         return _index.declareModule;
       }
     });
-    Object.defineProperty(exports2, "DeclareModuleExports", {
+    Object.defineProperty(exports, "DeclareModuleExports", {
       enumerable: true,
       get: function() {
         return _index.declareModuleExports;
       }
     });
-    Object.defineProperty(exports2, "DeclareOpaqueType", {
+    Object.defineProperty(exports, "DeclareOpaqueType", {
       enumerable: true,
       get: function() {
         return _index.declareOpaqueType;
       }
     });
-    Object.defineProperty(exports2, "DeclareTypeAlias", {
+    Object.defineProperty(exports, "DeclareTypeAlias", {
       enumerable: true,
       get: function() {
         return _index.declareTypeAlias;
       }
     });
-    Object.defineProperty(exports2, "DeclareVariable", {
+    Object.defineProperty(exports, "DeclareVariable", {
       enumerable: true,
       get: function() {
         return _index.declareVariable;
       }
     });
-    Object.defineProperty(exports2, "DeclaredPredicate", {
+    Object.defineProperty(exports, "DeclaredPredicate", {
       enumerable: true,
       get: function() {
         return _index.declaredPredicate;
       }
     });
-    Object.defineProperty(exports2, "Decorator", {
+    Object.defineProperty(exports, "Decorator", {
       enumerable: true,
       get: function() {
         return _index.decorator;
       }
     });
-    Object.defineProperty(exports2, "Directive", {
+    Object.defineProperty(exports, "Directive", {
       enumerable: true,
       get: function() {
         return _index.directive;
       }
     });
-    Object.defineProperty(exports2, "DirectiveLiteral", {
+    Object.defineProperty(exports, "DirectiveLiteral", {
       enumerable: true,
       get: function() {
         return _index.directiveLiteral;
       }
     });
-    Object.defineProperty(exports2, "DoExpression", {
+    Object.defineProperty(exports, "DoExpression", {
       enumerable: true,
       get: function() {
         return _index.doExpression;
       }
     });
-    Object.defineProperty(exports2, "DoWhileStatement", {
+    Object.defineProperty(exports, "DoWhileStatement", {
       enumerable: true,
       get: function() {
         return _index.doWhileStatement;
       }
     });
-    Object.defineProperty(exports2, "EmptyStatement", {
+    Object.defineProperty(exports, "EmptyStatement", {
       enumerable: true,
       get: function() {
         return _index.emptyStatement;
       }
     });
-    Object.defineProperty(exports2, "EmptyTypeAnnotation", {
+    Object.defineProperty(exports, "EmptyTypeAnnotation", {
       enumerable: true,
       get: function() {
         return _index.emptyTypeAnnotation;
       }
     });
-    Object.defineProperty(exports2, "EnumBooleanBody", {
+    Object.defineProperty(exports, "EnumBooleanBody", {
       enumerable: true,
       get: function() {
         return _index.enumBooleanBody;
       }
     });
-    Object.defineProperty(exports2, "EnumBooleanMember", {
+    Object.defineProperty(exports, "EnumBooleanMember", {
       enumerable: true,
       get: function() {
         return _index.enumBooleanMember;
       }
     });
-    Object.defineProperty(exports2, "EnumDeclaration", {
+    Object.defineProperty(exports, "EnumDeclaration", {
       enumerable: true,
       get: function() {
         return _index.enumDeclaration;
       }
     });
-    Object.defineProperty(exports2, "EnumDefaultedMember", {
+    Object.defineProperty(exports, "EnumDefaultedMember", {
       enumerable: true,
       get: function() {
         return _index.enumDefaultedMember;
       }
     });
-    Object.defineProperty(exports2, "EnumNumberBody", {
+    Object.defineProperty(exports, "EnumNumberBody", {
       enumerable: true,
       get: function() {
         return _index.enumNumberBody;
       }
     });
-    Object.defineProperty(exports2, "EnumNumberMember", {
+    Object.defineProperty(exports, "EnumNumberMember", {
       enumerable: true,
       get: function() {
         return _index.enumNumberMember;
       }
     });
-    Object.defineProperty(exports2, "EnumStringBody", {
+    Object.defineProperty(exports, "EnumStringBody", {
       enumerable: true,
       get: function() {
         return _index.enumStringBody;
       }
     });
-    Object.defineProperty(exports2, "EnumStringMember", {
+    Object.defineProperty(exports, "EnumStringMember", {
       enumerable: true,
       get: function() {
         return _index.enumStringMember;
       }
     });
-    Object.defineProperty(exports2, "EnumSymbolBody", {
+    Object.defineProperty(exports, "EnumSymbolBody", {
       enumerable: true,
       get: function() {
         return _index.enumSymbolBody;
       }
     });
-    Object.defineProperty(exports2, "ExistsTypeAnnotation", {
+    Object.defineProperty(exports, "ExistsTypeAnnotation", {
       enumerable: true,
       get: function() {
         return _index.existsTypeAnnotation;
       }
     });
-    Object.defineProperty(exports2, "ExportAllDeclaration", {
+    Object.defineProperty(exports, "ExportAllDeclaration", {
       enumerable: true,
       get: function() {
         return _index.exportAllDeclaration;
       }
     });
-    Object.defineProperty(exports2, "ExportDefaultDeclaration", {
+    Object.defineProperty(exports, "ExportDefaultDeclaration", {
       enumerable: true,
       get: function() {
         return _index.exportDefaultDeclaration;
       }
     });
-    Object.defineProperty(exports2, "ExportDefaultSpecifier", {
+    Object.defineProperty(exports, "ExportDefaultSpecifier", {
       enumerable: true,
       get: function() {
         return _index.exportDefaultSpecifier;
       }
     });
-    Object.defineProperty(exports2, "ExportNamedDeclaration", {
+    Object.defineProperty(exports, "ExportNamedDeclaration", {
       enumerable: true,
       get: function() {
         return _index.exportNamedDeclaration;
       }
     });
-    Object.defineProperty(exports2, "ExportNamespaceSpecifier", {
+    Object.defineProperty(exports, "ExportNamespaceSpecifier", {
       enumerable: true,
       get: function() {
         return _index.exportNamespaceSpecifier;
       }
     });
-    Object.defineProperty(exports2, "ExportSpecifier", {
+    Object.defineProperty(exports, "ExportSpecifier", {
       enumerable: true,
       get: function() {
         return _index.exportSpecifier;
       }
     });
-    Object.defineProperty(exports2, "ExpressionStatement", {
+    Object.defineProperty(exports, "ExpressionStatement", {
       enumerable: true,
       get: function() {
         return _index.expressionStatement;
       }
     });
-    Object.defineProperty(exports2, "File", {
+    Object.defineProperty(exports, "File", {
       enumerable: true,
       get: function() {
         return _index.file;
       }
     });
-    Object.defineProperty(exports2, "ForInStatement", {
+    Object.defineProperty(exports, "ForInStatement", {
       enumerable: true,
       get: function() {
         return _index.forInStatement;
       }
     });
-    Object.defineProperty(exports2, "ForOfStatement", {
+    Object.defineProperty(exports, "ForOfStatement", {
       enumerable: true,
       get: function() {
         return _index.forOfStatement;
       }
     });
-    Object.defineProperty(exports2, "ForStatement", {
+    Object.defineProperty(exports, "ForStatement", {
       enumerable: true,
       get: function() {
         return _index.forStatement;
       }
     });
-    Object.defineProperty(exports2, "FunctionDeclaration", {
+    Object.defineProperty(exports, "FunctionDeclaration", {
       enumerable: true,
       get: function() {
         return _index.functionDeclaration;
       }
     });
-    Object.defineProperty(exports2, "FunctionExpression", {
+    Object.defineProperty(exports, "FunctionExpression", {
       enumerable: true,
       get: function() {
         return _index.functionExpression;
       }
     });
-    Object.defineProperty(exports2, "FunctionTypeAnnotation", {
+    Object.defineProperty(exports, "FunctionTypeAnnotation", {
       enumerable: true,
       get: function() {
         return _index.functionTypeAnnotation;
       }
     });
-    Object.defineProperty(exports2, "FunctionTypeParam", {
+    Object.defineProperty(exports, "FunctionTypeParam", {
       enumerable: true,
       get: function() {
         return _index.functionTypeParam;
       }
     });
-    Object.defineProperty(exports2, "GenericTypeAnnotation", {
+    Object.defineProperty(exports, "GenericTypeAnnotation", {
       enumerable: true,
       get: function() {
         return _index.genericTypeAnnotation;
       }
     });
-    Object.defineProperty(exports2, "Identifier", {
+    Object.defineProperty(exports, "Identifier", {
       enumerable: true,
       get: function() {
         return _index.identifier;
       }
     });
-    Object.defineProperty(exports2, "IfStatement", {
+    Object.defineProperty(exports, "IfStatement", {
       enumerable: true,
       get: function() {
         return _index.ifStatement;
       }
     });
-    Object.defineProperty(exports2, "Import", {
+    Object.defineProperty(exports, "Import", {
       enumerable: true,
       get: function() {
         return _index.import;
       }
     });
-    Object.defineProperty(exports2, "ImportAttribute", {
+    Object.defineProperty(exports, "ImportAttribute", {
       enumerable: true,
       get: function() {
         return _index.importAttribute;
       }
     });
-    Object.defineProperty(exports2, "ImportDeclaration", {
+    Object.defineProperty(exports, "ImportDeclaration", {
       enumerable: true,
       get: function() {
         return _index.importDeclaration;
       }
     });
-    Object.defineProperty(exports2, "ImportDefaultSpecifier", {
+    Object.defineProperty(exports, "ImportDefaultSpecifier", {
       enumerable: true,
       get: function() {
         return _index.importDefaultSpecifier;
       }
     });
-    Object.defineProperty(exports2, "ImportNamespaceSpecifier", {
+    Object.defineProperty(exports, "ImportNamespaceSpecifier", {
       enumerable: true,
       get: function() {
         return _index.importNamespaceSpecifier;
       }
     });
-    Object.defineProperty(exports2, "ImportSpecifier", {
+    Object.defineProperty(exports, "ImportSpecifier", {
       enumerable: true,
       get: function() {
         return _index.importSpecifier;
       }
     });
-    Object.defineProperty(exports2, "IndexedAccessType", {
+    Object.defineProperty(exports, "IndexedAccessType", {
       enumerable: true,
       get: function() {
         return _index.indexedAccessType;
       }
     });
-    Object.defineProperty(exports2, "InferredPredicate", {
+    Object.defineProperty(exports, "InferredPredicate", {
       enumerable: true,
       get: function() {
         return _index.inferredPredicate;
       }
     });
-    Object.defineProperty(exports2, "InterfaceDeclaration", {
+    Object.defineProperty(exports, "InterfaceDeclaration", {
       enumerable: true,
       get: function() {
         return _index.interfaceDeclaration;
       }
     });
-    Object.defineProperty(exports2, "InterfaceExtends", {
+    Object.defineProperty(exports, "InterfaceExtends", {
       enumerable: true,
       get: function() {
         return _index.interfaceExtends;
       }
     });
-    Object.defineProperty(exports2, "InterfaceTypeAnnotation", {
+    Object.defineProperty(exports, "InterfaceTypeAnnotation", {
       enumerable: true,
       get: function() {
         return _index.interfaceTypeAnnotation;
       }
     });
-    Object.defineProperty(exports2, "InterpreterDirective", {
+    Object.defineProperty(exports, "InterpreterDirective", {
       enumerable: true,
       get: function() {
         return _index.interpreterDirective;
       }
     });
-    Object.defineProperty(exports2, "IntersectionTypeAnnotation", {
+    Object.defineProperty(exports, "IntersectionTypeAnnotation", {
       enumerable: true,
       get: function() {
         return _index.intersectionTypeAnnotation;
       }
     });
-    Object.defineProperty(exports2, "JSXAttribute", {
+    Object.defineProperty(exports, "JSXAttribute", {
       enumerable: true,
       get: function() {
         return _index.jsxAttribute;
       }
     });
-    Object.defineProperty(exports2, "JSXClosingElement", {
+    Object.defineProperty(exports, "JSXClosingElement", {
       enumerable: true,
       get: function() {
         return _index.jsxClosingElement;
       }
     });
-    Object.defineProperty(exports2, "JSXClosingFragment", {
+    Object.defineProperty(exports, "JSXClosingFragment", {
       enumerable: true,
       get: function() {
         return _index.jsxClosingFragment;
       }
     });
-    Object.defineProperty(exports2, "JSXElement", {
+    Object.defineProperty(exports, "JSXElement", {
       enumerable: true,
       get: function() {
         return _index.jsxElement;
       }
     });
-    Object.defineProperty(exports2, "JSXEmptyExpression", {
+    Object.defineProperty(exports, "JSXEmptyExpression", {
       enumerable: true,
       get: function() {
         return _index.jsxEmptyExpression;
       }
     });
-    Object.defineProperty(exports2, "JSXExpressionContainer", {
+    Object.defineProperty(exports, "JSXExpressionContainer", {
       enumerable: true,
       get: function() {
         return _index.jsxExpressionContainer;
       }
     });
-    Object.defineProperty(exports2, "JSXFragment", {
+    Object.defineProperty(exports, "JSXFragment", {
       enumerable: true,
       get: function() {
         return _index.jsxFragment;
       }
     });
-    Object.defineProperty(exports2, "JSXIdentifier", {
+    Object.defineProperty(exports, "JSXIdentifier", {
       enumerable: true,
       get: function() {
         return _index.jsxIdentifier;
       }
     });
-    Object.defineProperty(exports2, "JSXMemberExpression", {
+    Object.defineProperty(exports, "JSXMemberExpression", {
       enumerable: true,
       get: function() {
         return _index.jsxMemberExpression;
       }
     });
-    Object.defineProperty(exports2, "JSXNamespacedName", {
+    Object.defineProperty(exports, "JSXNamespacedName", {
       enumerable: true,
       get: function() {
         return _index.jsxNamespacedName;
       }
     });
-    Object.defineProperty(exports2, "JSXOpeningElement", {
+    Object.defineProperty(exports, "JSXOpeningElement", {
       enumerable: true,
       get: function() {
         return _index.jsxOpeningElement;
       }
     });
-    Object.defineProperty(exports2, "JSXOpeningFragment", {
+    Object.defineProperty(exports, "JSXOpeningFragment", {
       enumerable: true,
       get: function() {
         return _index.jsxOpeningFragment;
       }
     });
-    Object.defineProperty(exports2, "JSXSpreadAttribute", {
+    Object.defineProperty(exports, "JSXSpreadAttribute", {
       enumerable: true,
       get: function() {
         return _index.jsxSpreadAttribute;
       }
     });
-    Object.defineProperty(exports2, "JSXSpreadChild", {
+    Object.defineProperty(exports, "JSXSpreadChild", {
       enumerable: true,
       get: function() {
         return _index.jsxSpreadChild;
       }
     });
-    Object.defineProperty(exports2, "JSXText", {
+    Object.defineProperty(exports, "JSXText", {
       enumerable: true,
       get: function() {
         return _index.jsxText;
       }
     });
-    Object.defineProperty(exports2, "LabeledStatement", {
+    Object.defineProperty(exports, "LabeledStatement", {
       enumerable: true,
       get: function() {
         return _index.labeledStatement;
       }
     });
-    Object.defineProperty(exports2, "LogicalExpression", {
+    Object.defineProperty(exports, "LogicalExpression", {
       enumerable: true,
       get: function() {
         return _index.logicalExpression;
       }
     });
-    Object.defineProperty(exports2, "MemberExpression", {
+    Object.defineProperty(exports, "MemberExpression", {
       enumerable: true,
       get: function() {
         return _index.memberExpression;
       }
     });
-    Object.defineProperty(exports2, "MetaProperty", {
+    Object.defineProperty(exports, "MetaProperty", {
       enumerable: true,
       get: function() {
         return _index.metaProperty;
       }
     });
-    Object.defineProperty(exports2, "MixedTypeAnnotation", {
+    Object.defineProperty(exports, "MixedTypeAnnotation", {
       enumerable: true,
       get: function() {
         return _index.mixedTypeAnnotation;
       }
     });
-    Object.defineProperty(exports2, "ModuleExpression", {
+    Object.defineProperty(exports, "ModuleExpression", {
       enumerable: true,
       get: function() {
         return _index.moduleExpression;
       }
     });
-    Object.defineProperty(exports2, "NewExpression", {
+    Object.defineProperty(exports, "NewExpression", {
       enumerable: true,
       get: function() {
         return _index.newExpression;
       }
     });
-    Object.defineProperty(exports2, "Noop", {
+    Object.defineProperty(exports, "Noop", {
       enumerable: true,
       get: function() {
         return _index.noop;
       }
     });
-    Object.defineProperty(exports2, "NullLiteral", {
+    Object.defineProperty(exports, "NullLiteral", {
       enumerable: true,
       get: function() {
         return _index.nullLiteral;
       }
     });
-    Object.defineProperty(exports2, "NullLiteralTypeAnnotation", {
+    Object.defineProperty(exports, "NullLiteralTypeAnnotation", {
       enumerable: true,
       get: function() {
         return _index.nullLiteralTypeAnnotation;
       }
     });
-    Object.defineProperty(exports2, "NullableTypeAnnotation", {
+    Object.defineProperty(exports, "NullableTypeAnnotation", {
       enumerable: true,
       get: function() {
         return _index.nullableTypeAnnotation;
       }
     });
-    Object.defineProperty(exports2, "NumberLiteral", {
+    Object.defineProperty(exports, "NumberLiteral", {
       enumerable: true,
       get: function() {
         return _index.numberLiteral;
       }
     });
-    Object.defineProperty(exports2, "NumberLiteralTypeAnnotation", {
+    Object.defineProperty(exports, "NumberLiteralTypeAnnotation", {
       enumerable: true,
       get: function() {
         return _index.numberLiteralTypeAnnotation;
       }
     });
-    Object.defineProperty(exports2, "NumberTypeAnnotation", {
+    Object.defineProperty(exports, "NumberTypeAnnotation", {
       enumerable: true,
       get: function() {
         return _index.numberTypeAnnotation;
       }
     });
-    Object.defineProperty(exports2, "NumericLiteral", {
+    Object.defineProperty(exports, "NumericLiteral", {
       enumerable: true,
       get: function() {
         return _index.numericLiteral;
       }
     });
-    Object.defineProperty(exports2, "ObjectExpression", {
+    Object.defineProperty(exports, "ObjectExpression", {
       enumerable: true,
       get: function() {
         return _index.objectExpression;
       }
     });
-    Object.defineProperty(exports2, "ObjectMethod", {
+    Object.defineProperty(exports, "ObjectMethod", {
       enumerable: true,
       get: function() {
         return _index.objectMethod;
       }
     });
-    Object.defineProperty(exports2, "ObjectPattern", {
+    Object.defineProperty(exports, "ObjectPattern", {
       enumerable: true,
       get: function() {
         return _index.objectPattern;
       }
     });
-    Object.defineProperty(exports2, "ObjectProperty", {
+    Object.defineProperty(exports, "ObjectProperty", {
       enumerable: true,
       get: function() {
         return _index.objectProperty;
       }
     });
-    Object.defineProperty(exports2, "ObjectTypeAnnotation", {
+    Object.defineProperty(exports, "ObjectTypeAnnotation", {
       enumerable: true,
       get: function() {
         return _index.objectTypeAnnotation;
       }
     });
-    Object.defineProperty(exports2, "ObjectTypeCallProperty", {
+    Object.defineProperty(exports, "ObjectTypeCallProperty", {
       enumerable: true,
       get: function() {
         return _index.objectTypeCallProperty;
       }
     });
-    Object.defineProperty(exports2, "ObjectTypeIndexer", {
+    Object.defineProperty(exports, "ObjectTypeIndexer", {
       enumerable: true,
       get: function() {
         return _index.objectTypeIndexer;
       }
     });
-    Object.defineProperty(exports2, "ObjectTypeInternalSlot", {
+    Object.defineProperty(exports, "ObjectTypeInternalSlot", {
       enumerable: true,
       get: function() {
         return _index.objectTypeInternalSlot;
       }
     });
-    Object.defineProperty(exports2, "ObjectTypeProperty", {
+    Object.defineProperty(exports, "ObjectTypeProperty", {
       enumerable: true,
       get: function() {
         return _index.objectTypeProperty;
       }
     });
-    Object.defineProperty(exports2, "ObjectTypeSpreadProperty", {
+    Object.defineProperty(exports, "ObjectTypeSpreadProperty", {
       enumerable: true,
       get: function() {
         return _index.objectTypeSpreadProperty;
       }
     });
-    Object.defineProperty(exports2, "OpaqueType", {
+    Object.defineProperty(exports, "OpaqueType", {
       enumerable: true,
       get: function() {
         return _index.opaqueType;
       }
     });
-    Object.defineProperty(exports2, "OptionalCallExpression", {
+    Object.defineProperty(exports, "OptionalCallExpression", {
       enumerable: true,
       get: function() {
         return _index.optionalCallExpression;
       }
     });
-    Object.defineProperty(exports2, "OptionalIndexedAccessType", {
+    Object.defineProperty(exports, "OptionalIndexedAccessType", {
       enumerable: true,
       get: function() {
         return _index.optionalIndexedAccessType;
       }
     });
-    Object.defineProperty(exports2, "OptionalMemberExpression", {
+    Object.defineProperty(exports, "OptionalMemberExpression", {
       enumerable: true,
       get: function() {
         return _index.optionalMemberExpression;
       }
     });
-    Object.defineProperty(exports2, "ParenthesizedExpression", {
+    Object.defineProperty(exports, "ParenthesizedExpression", {
       enumerable: true,
       get: function() {
         return _index.parenthesizedExpression;
       }
     });
-    Object.defineProperty(exports2, "PipelineBareFunction", {
+    Object.defineProperty(exports, "PipelineBareFunction", {
       enumerable: true,
       get: function() {
         return _index.pipelineBareFunction;
       }
     });
-    Object.defineProperty(exports2, "PipelinePrimaryTopicReference", {
+    Object.defineProperty(exports, "PipelinePrimaryTopicReference", {
       enumerable: true,
       get: function() {
         return _index.pipelinePrimaryTopicReference;
       }
     });
-    Object.defineProperty(exports2, "PipelineTopicExpression", {
+    Object.defineProperty(exports, "PipelineTopicExpression", {
       enumerable: true,
       get: function() {
         return _index.pipelineTopicExpression;
       }
     });
-    Object.defineProperty(exports2, "Placeholder", {
+    Object.defineProperty(exports, "Placeholder", {
       enumerable: true,
       get: function() {
         return _index.placeholder;
       }
     });
-    Object.defineProperty(exports2, "PrivateName", {
+    Object.defineProperty(exports, "PrivateName", {
       enumerable: true,
       get: function() {
         return _index.privateName;
       }
     });
-    Object.defineProperty(exports2, "Program", {
+    Object.defineProperty(exports, "Program", {
       enumerable: true,
       get: function() {
         return _index.program;
       }
     });
-    Object.defineProperty(exports2, "QualifiedTypeIdentifier", {
+    Object.defineProperty(exports, "QualifiedTypeIdentifier", {
       enumerable: true,
       get: function() {
         return _index.qualifiedTypeIdentifier;
       }
     });
-    Object.defineProperty(exports2, "RecordExpression", {
+    Object.defineProperty(exports, "RecordExpression", {
       enumerable: true,
       get: function() {
         return _index.recordExpression;
       }
     });
-    Object.defineProperty(exports2, "RegExpLiteral", {
+    Object.defineProperty(exports, "RegExpLiteral", {
       enumerable: true,
       get: function() {
         return _index.regExpLiteral;
       }
     });
-    Object.defineProperty(exports2, "RegexLiteral", {
+    Object.defineProperty(exports, "RegexLiteral", {
       enumerable: true,
       get: function() {
         return _index.regexLiteral;
       }
     });
-    Object.defineProperty(exports2, "RestElement", {
+    Object.defineProperty(exports, "RestElement", {
       enumerable: true,
       get: function() {
         return _index.restElement;
       }
     });
-    Object.defineProperty(exports2, "RestProperty", {
+    Object.defineProperty(exports, "RestProperty", {
       enumerable: true,
       get: function() {
         return _index.restProperty;
       }
     });
-    Object.defineProperty(exports2, "ReturnStatement", {
+    Object.defineProperty(exports, "ReturnStatement", {
       enumerable: true,
       get: function() {
         return _index.returnStatement;
       }
     });
-    Object.defineProperty(exports2, "SequenceExpression", {
+    Object.defineProperty(exports, "SequenceExpression", {
       enumerable: true,
       get: function() {
         return _index.sequenceExpression;
       }
     });
-    Object.defineProperty(exports2, "SpreadElement", {
+    Object.defineProperty(exports, "SpreadElement", {
       enumerable: true,
       get: function() {
         return _index.spreadElement;
       }
     });
-    Object.defineProperty(exports2, "SpreadProperty", {
+    Object.defineProperty(exports, "SpreadProperty", {
       enumerable: true,
       get: function() {
         return _index.spreadProperty;
       }
     });
-    Object.defineProperty(exports2, "StaticBlock", {
+    Object.defineProperty(exports, "StaticBlock", {
       enumerable: true,
       get: function() {
         return _index.staticBlock;
       }
     });
-    Object.defineProperty(exports2, "StringLiteral", {
+    Object.defineProperty(exports, "StringLiteral", {
       enumerable: true,
       get: function() {
         return _index.stringLiteral;
       }
     });
-    Object.defineProperty(exports2, "StringLiteralTypeAnnotation", {
+    Object.defineProperty(exports, "StringLiteralTypeAnnotation", {
       enumerable: true,
       get: function() {
         return _index.stringLiteralTypeAnnotation;
       }
     });
-    Object.defineProperty(exports2, "StringTypeAnnotation", {
+    Object.defineProperty(exports, "StringTypeAnnotation", {
       enumerable: true,
       get: function() {
         return _index.stringTypeAnnotation;
       }
     });
-    Object.defineProperty(exports2, "Super", {
+    Object.defineProperty(exports, "Super", {
       enumerable: true,
       get: function() {
         return _index.super;
       }
     });
-    Object.defineProperty(exports2, "SwitchCase", {
+    Object.defineProperty(exports, "SwitchCase", {
       enumerable: true,
       get: function() {
         return _index.switchCase;
       }
     });
-    Object.defineProperty(exports2, "SwitchStatement", {
+    Object.defineProperty(exports, "SwitchStatement", {
       enumerable: true,
       get: function() {
         return _index.switchStatement;
       }
     });
-    Object.defineProperty(exports2, "SymbolTypeAnnotation", {
+    Object.defineProperty(exports, "SymbolTypeAnnotation", {
       enumerable: true,
       get: function() {
         return _index.symbolTypeAnnotation;
       }
     });
-    Object.defineProperty(exports2, "TSAnyKeyword", {
+    Object.defineProperty(exports, "TSAnyKeyword", {
       enumerable: true,
       get: function() {
         return _index.tsAnyKeyword;
       }
     });
-    Object.defineProperty(exports2, "TSArrayType", {
+    Object.defineProperty(exports, "TSArrayType", {
       enumerable: true,
       get: function() {
         return _index.tsArrayType;
       }
     });
-    Object.defineProperty(exports2, "TSAsExpression", {
+    Object.defineProperty(exports, "TSAsExpression", {
       enumerable: true,
       get: function() {
         return _index.tsAsExpression;
       }
     });
-    Object.defineProperty(exports2, "TSBigIntKeyword", {
+    Object.defineProperty(exports, "TSBigIntKeyword", {
       enumerable: true,
       get: function() {
         return _index.tsBigIntKeyword;
       }
     });
-    Object.defineProperty(exports2, "TSBooleanKeyword", {
+    Object.defineProperty(exports, "TSBooleanKeyword", {
       enumerable: true,
       get: function() {
         return _index.tsBooleanKeyword;
       }
     });
-    Object.defineProperty(exports2, "TSCallSignatureDeclaration", {
+    Object.defineProperty(exports, "TSCallSignatureDeclaration", {
       enumerable: true,
       get: function() {
         return _index.tsCallSignatureDeclaration;
       }
     });
-    Object.defineProperty(exports2, "TSConditionalType", {
+    Object.defineProperty(exports, "TSConditionalType", {
       enumerable: true,
       get: function() {
         return _index.tsConditionalType;
       }
     });
-    Object.defineProperty(exports2, "TSConstructSignatureDeclaration", {
+    Object.defineProperty(exports, "TSConstructSignatureDeclaration", {
       enumerable: true,
       get: function() {
         return _index.tsConstructSignatureDeclaration;
       }
     });
-    Object.defineProperty(exports2, "TSConstructorType", {
+    Object.defineProperty(exports, "TSConstructorType", {
       enumerable: true,
       get: function() {
         return _index.tsConstructorType;
       }
     });
-    Object.defineProperty(exports2, "TSDeclareFunction", {
+    Object.defineProperty(exports, "TSDeclareFunction", {
       enumerable: true,
       get: function() {
         return _index.tsDeclareFunction;
       }
     });
-    Object.defineProperty(exports2, "TSDeclareMethod", {
+    Object.defineProperty(exports, "TSDeclareMethod", {
       enumerable: true,
       get: function() {
         return _index.tsDeclareMethod;
       }
     });
-    Object.defineProperty(exports2, "TSEnumDeclaration", {
+    Object.defineProperty(exports, "TSEnumDeclaration", {
       enumerable: true,
       get: function() {
         return _index.tsEnumDeclaration;
       }
     });
-    Object.defineProperty(exports2, "TSEnumMember", {
+    Object.defineProperty(exports, "TSEnumMember", {
       enumerable: true,
       get: function() {
         return _index.tsEnumMember;
       }
     });
-    Object.defineProperty(exports2, "TSExportAssignment", {
+    Object.defineProperty(exports, "TSExportAssignment", {
       enumerable: true,
       get: function() {
         return _index.tsExportAssignment;
       }
     });
-    Object.defineProperty(exports2, "TSExpressionWithTypeArguments", {
+    Object.defineProperty(exports, "TSExpressionWithTypeArguments", {
       enumerable: true,
       get: function() {
         return _index.tsExpressionWithTypeArguments;
       }
     });
-    Object.defineProperty(exports2, "TSExternalModuleReference", {
+    Object.defineProperty(exports, "TSExternalModuleReference", {
       enumerable: true,
       get: function() {
         return _index.tsExternalModuleReference;
       }
     });
-    Object.defineProperty(exports2, "TSFunctionType", {
+    Object.defineProperty(exports, "TSFunctionType", {
       enumerable: true,
       get: function() {
         return _index.tsFunctionType;
       }
     });
-    Object.defineProperty(exports2, "TSImportEqualsDeclaration", {
+    Object.defineProperty(exports, "TSImportEqualsDeclaration", {
       enumerable: true,
       get: function() {
         return _index.tsImportEqualsDeclaration;
       }
     });
-    Object.defineProperty(exports2, "TSImportType", {
+    Object.defineProperty(exports, "TSImportType", {
       enumerable: true,
       get: function() {
         return _index.tsImportType;
       }
     });
-    Object.defineProperty(exports2, "TSIndexSignature", {
+    Object.defineProperty(exports, "TSIndexSignature", {
       enumerable: true,
       get: function() {
         return _index.tsIndexSignature;
       }
     });
-    Object.defineProperty(exports2, "TSIndexedAccessType", {
+    Object.defineProperty(exports, "TSIndexedAccessType", {
       enumerable: true,
       get: function() {
         return _index.tsIndexedAccessType;
       }
     });
-    Object.defineProperty(exports2, "TSInferType", {
+    Object.defineProperty(exports, "TSInferType", {
       enumerable: true,
       get: function() {
         return _index.tsInferType;
       }
     });
-    Object.defineProperty(exports2, "TSInstantiationExpression", {
+    Object.defineProperty(exports, "TSInstantiationExpression", {
       enumerable: true,
       get: function() {
         return _index.tsInstantiationExpression;
       }
     });
-    Object.defineProperty(exports2, "TSInterfaceBody", {
+    Object.defineProperty(exports, "TSInterfaceBody", {
       enumerable: true,
       get: function() {
         return _index.tsInterfaceBody;
       }
     });
-    Object.defineProperty(exports2, "TSInterfaceDeclaration", {
+    Object.defineProperty(exports, "TSInterfaceDeclaration", {
       enumerable: true,
       get: function() {
         return _index.tsInterfaceDeclaration;
       }
     });
-    Object.defineProperty(exports2, "TSIntersectionType", {
+    Object.defineProperty(exports, "TSIntersectionType", {
       enumerable: true,
       get: function() {
         return _index.tsIntersectionType;
       }
     });
-    Object.defineProperty(exports2, "TSIntrinsicKeyword", {
+    Object.defineProperty(exports, "TSIntrinsicKeyword", {
       enumerable: true,
       get: function() {
         return _index.tsIntrinsicKeyword;
       }
     });
-    Object.defineProperty(exports2, "TSLiteralType", {
+    Object.defineProperty(exports, "TSLiteralType", {
       enumerable: true,
       get: function() {
         return _index.tsLiteralType;
       }
     });
-    Object.defineProperty(exports2, "TSMappedType", {
+    Object.defineProperty(exports, "TSMappedType", {
       enumerable: true,
       get: function() {
         return _index.tsMappedType;
       }
     });
-    Object.defineProperty(exports2, "TSMethodSignature", {
+    Object.defineProperty(exports, "TSMethodSignature", {
       enumerable: true,
       get: function() {
         return _index.tsMethodSignature;
       }
     });
-    Object.defineProperty(exports2, "TSModuleBlock", {
+    Object.defineProperty(exports, "TSModuleBlock", {
       enumerable: true,
       get: function() {
         return _index.tsModuleBlock;
       }
     });
-    Object.defineProperty(exports2, "TSModuleDeclaration", {
+    Object.defineProperty(exports, "TSModuleDeclaration", {
       enumerable: true,
       get: function() {
         return _index.tsModuleDeclaration;
       }
     });
-    Object.defineProperty(exports2, "TSNamedTupleMember", {
+    Object.defineProperty(exports, "TSNamedTupleMember", {
       enumerable: true,
       get: function() {
         return _index.tsNamedTupleMember;
       }
     });
-    Object.defineProperty(exports2, "TSNamespaceExportDeclaration", {
+    Object.defineProperty(exports, "TSNamespaceExportDeclaration", {
       enumerable: true,
       get: function() {
         return _index.tsNamespaceExportDeclaration;
       }
     });
-    Object.defineProperty(exports2, "TSNeverKeyword", {
+    Object.defineProperty(exports, "TSNeverKeyword", {
       enumerable: true,
       get: function() {
         return _index.tsNeverKeyword;
       }
     });
-    Object.defineProperty(exports2, "TSNonNullExpression", {
+    Object.defineProperty(exports, "TSNonNullExpression", {
       enumerable: true,
       get: function() {
         return _index.tsNonNullExpression;
       }
     });
-    Object.defineProperty(exports2, "TSNullKeyword", {
+    Object.defineProperty(exports, "TSNullKeyword", {
       enumerable: true,
       get: function() {
         return _index.tsNullKeyword;
       }
     });
-    Object.defineProperty(exports2, "TSNumberKeyword", {
+    Object.defineProperty(exports, "TSNumberKeyword", {
       enumerable: true,
       get: function() {
         return _index.tsNumberKeyword;
       }
     });
-    Object.defineProperty(exports2, "TSObjectKeyword", {
+    Object.defineProperty(exports, "TSObjectKeyword", {
       enumerable: true,
       get: function() {
         return _index.tsObjectKeyword;
       }
     });
-    Object.defineProperty(exports2, "TSOptionalType", {
+    Object.defineProperty(exports, "TSOptionalType", {
       enumerable: true,
       get: function() {
         return _index.tsOptionalType;
       }
     });
-    Object.defineProperty(exports2, "TSParameterProperty", {
+    Object.defineProperty(exports, "TSParameterProperty", {
       enumerable: true,
       get: function() {
         return _index.tsParameterProperty;
       }
     });
-    Object.defineProperty(exports2, "TSParenthesizedType", {
+    Object.defineProperty(exports, "TSParenthesizedType", {
       enumerable: true,
       get: function() {
         return _index.tsParenthesizedType;
       }
     });
-    Object.defineProperty(exports2, "TSPropertySignature", {
+    Object.defineProperty(exports, "TSPropertySignature", {
       enumerable: true,
       get: function() {
         return _index.tsPropertySignature;
       }
     });
-    Object.defineProperty(exports2, "TSQualifiedName", {
+    Object.defineProperty(exports, "TSQualifiedName", {
       enumerable: true,
       get: function() {
         return _index.tsQualifiedName;
       }
     });
-    Object.defineProperty(exports2, "TSRestType", {
+    Object.defineProperty(exports, "TSRestType", {
       enumerable: true,
       get: function() {
         return _index.tsRestType;
       }
     });
-    Object.defineProperty(exports2, "TSSatisfiesExpression", {
+    Object.defineProperty(exports, "TSSatisfiesExpression", {
       enumerable: true,
       get: function() {
         return _index.tsSatisfiesExpression;
       }
     });
-    Object.defineProperty(exports2, "TSStringKeyword", {
+    Object.defineProperty(exports, "TSStringKeyword", {
       enumerable: true,
       get: function() {
         return _index.tsStringKeyword;
       }
     });
-    Object.defineProperty(exports2, "TSSymbolKeyword", {
+    Object.defineProperty(exports, "TSSymbolKeyword", {
       enumerable: true,
       get: function() {
         return _index.tsSymbolKeyword;
       }
     });
-    Object.defineProperty(exports2, "TSThisType", {
+    Object.defineProperty(exports, "TSThisType", {
       enumerable: true,
       get: function() {
         return _index.tsThisType;
       }
     });
-    Object.defineProperty(exports2, "TSTupleType", {
+    Object.defineProperty(exports, "TSTupleType", {
       enumerable: true,
       get: function() {
         return _index.tsTupleType;
       }
     });
-    Object.defineProperty(exports2, "TSTypeAliasDeclaration", {
+    Object.defineProperty(exports, "TSTypeAliasDeclaration", {
       enumerable: true,
       get: function() {
         return _index.tsTypeAliasDeclaration;
       }
     });
-    Object.defineProperty(exports2, "TSTypeAnnotation", {
+    Object.defineProperty(exports, "TSTypeAnnotation", {
       enumerable: true,
       get: function() {
         return _index.tsTypeAnnotation;
       }
     });
-    Object.defineProperty(exports2, "TSTypeAssertion", {
+    Object.defineProperty(exports, "TSTypeAssertion", {
       enumerable: true,
       get: function() {
         return _index.tsTypeAssertion;
       }
     });
-    Object.defineProperty(exports2, "TSTypeLiteral", {
+    Object.defineProperty(exports, "TSTypeLiteral", {
       enumerable: true,
       get: function() {
         return _index.tsTypeLiteral;
       }
     });
-    Object.defineProperty(exports2, "TSTypeOperator", {
+    Object.defineProperty(exports, "TSTypeOperator", {
       enumerable: true,
       get: function() {
         return _index.tsTypeOperator;
       }
     });
-    Object.defineProperty(exports2, "TSTypeParameter", {
+    Object.defineProperty(exports, "TSTypeParameter", {
       enumerable: true,
       get: function() {
         return _index.tsTypeParameter;
       }
     });
-    Object.defineProperty(exports2, "TSTypeParameterDeclaration", {
+    Object.defineProperty(exports, "TSTypeParameterDeclaration", {
       enumerable: true,
       get: function() {
         return _index.tsTypeParameterDeclaration;
       }
     });
-    Object.defineProperty(exports2, "TSTypeParameterInstantiation", {
+    Object.defineProperty(exports, "TSTypeParameterInstantiation", {
       enumerable: true,
       get: function() {
         return _index.tsTypeParameterInstantiation;
       }
     });
-    Object.defineProperty(exports2, "TSTypePredicate", {
+    Object.defineProperty(exports, "TSTypePredicate", {
       enumerable: true,
       get: function() {
         return _index.tsTypePredicate;
       }
     });
-    Object.defineProperty(exports2, "TSTypeQuery", {
+    Object.defineProperty(exports, "TSTypeQuery", {
       enumerable: true,
       get: function() {
         return _index.tsTypeQuery;
       }
     });
-    Object.defineProperty(exports2, "TSTypeReference", {
+    Object.defineProperty(exports, "TSTypeReference", {
       enumerable: true,
       get: function() {
         return _index.tsTypeReference;
       }
     });
-    Object.defineProperty(exports2, "TSUndefinedKeyword", {
+    Object.defineProperty(exports, "TSUndefinedKeyword", {
       enumerable: true,
       get: function() {
         return _index.tsUndefinedKeyword;
       }
     });
-    Object.defineProperty(exports2, "TSUnionType", {
+    Object.defineProperty(exports, "TSUnionType", {
       enumerable: true,
       get: function() {
         return _index.tsUnionType;
       }
     });
-    Object.defineProperty(exports2, "TSUnknownKeyword", {
+    Object.defineProperty(exports, "TSUnknownKeyword", {
       enumerable: true,
       get: function() {
         return _index.tsUnknownKeyword;
       }
     });
-    Object.defineProperty(exports2, "TSVoidKeyword", {
+    Object.defineProperty(exports, "TSVoidKeyword", {
       enumerable: true,
       get: function() {
         return _index.tsVoidKeyword;
       }
     });
-    Object.defineProperty(exports2, "TaggedTemplateExpression", {
+    Object.defineProperty(exports, "TaggedTemplateExpression", {
       enumerable: true,
       get: function() {
         return _index.taggedTemplateExpression;
       }
     });
-    Object.defineProperty(exports2, "TemplateElement", {
+    Object.defineProperty(exports, "TemplateElement", {
       enumerable: true,
       get: function() {
         return _index.templateElement;
       }
     });
-    Object.defineProperty(exports2, "TemplateLiteral", {
+    Object.defineProperty(exports, "TemplateLiteral", {
       enumerable: true,
       get: function() {
         return _index.templateLiteral;
       }
     });
-    Object.defineProperty(exports2, "ThisExpression", {
+    Object.defineProperty(exports, "ThisExpression", {
       enumerable: true,
       get: function() {
         return _index.thisExpression;
       }
     });
-    Object.defineProperty(exports2, "ThisTypeAnnotation", {
+    Object.defineProperty(exports, "ThisTypeAnnotation", {
       enumerable: true,
       get: function() {
         return _index.thisTypeAnnotation;
       }
     });
-    Object.defineProperty(exports2, "ThrowStatement", {
+    Object.defineProperty(exports, "ThrowStatement", {
       enumerable: true,
       get: function() {
         return _index.throwStatement;
       }
     });
-    Object.defineProperty(exports2, "TopicReference", {
+    Object.defineProperty(exports, "TopicReference", {
       enumerable: true,
       get: function() {
         return _index.topicReference;
       }
     });
-    Object.defineProperty(exports2, "TryStatement", {
+    Object.defineProperty(exports, "TryStatement", {
       enumerable: true,
       get: function() {
         return _index.tryStatement;
       }
     });
-    Object.defineProperty(exports2, "TupleExpression", {
+    Object.defineProperty(exports, "TupleExpression", {
       enumerable: true,
       get: function() {
         return _index.tupleExpression;
       }
     });
-    Object.defineProperty(exports2, "TupleTypeAnnotation", {
+    Object.defineProperty(exports, "TupleTypeAnnotation", {
       enumerable: true,
       get: function() {
         return _index.tupleTypeAnnotation;
       }
     });
-    Object.defineProperty(exports2, "TypeAlias", {
+    Object.defineProperty(exports, "TypeAlias", {
       enumerable: true,
       get: function() {
         return _index.typeAlias;
       }
     });
-    Object.defineProperty(exports2, "TypeAnnotation", {
+    Object.defineProperty(exports, "TypeAnnotation", {
       enumerable: true,
       get: function() {
         return _index.typeAnnotation;
       }
     });
-    Object.defineProperty(exports2, "TypeCastExpression", {
+    Object.defineProperty(exports, "TypeCastExpression", {
       enumerable: true,
       get: function() {
         return _index.typeCastExpression;
       }
     });
-    Object.defineProperty(exports2, "TypeParameter", {
+    Object.defineProperty(exports, "TypeParameter", {
       enumerable: true,
       get: function() {
         return _index.typeParameter;
       }
     });
-    Object.defineProperty(exports2, "TypeParameterDeclaration", {
+    Object.defineProperty(exports, "TypeParameterDeclaration", {
       enumerable: true,
       get: function() {
         return _index.typeParameterDeclaration;
       }
     });
-    Object.defineProperty(exports2, "TypeParameterInstantiation", {
+    Object.defineProperty(exports, "TypeParameterInstantiation", {
       enumerable: true,
       get: function() {
         return _index.typeParameterInstantiation;
       }
     });
-    Object.defineProperty(exports2, "TypeofTypeAnnotation", {
+    Object.defineProperty(exports, "TypeofTypeAnnotation", {
       enumerable: true,
       get: function() {
         return _index.typeofTypeAnnotation;
       }
     });
-    Object.defineProperty(exports2, "UnaryExpression", {
+    Object.defineProperty(exports, "UnaryExpression", {
       enumerable: true,
       get: function() {
         return _index.unaryExpression;
       }
     });
-    Object.defineProperty(exports2, "UnionTypeAnnotation", {
+    Object.defineProperty(exports, "UnionTypeAnnotation", {
       enumerable: true,
       get: function() {
         return _index.unionTypeAnnotation;
       }
     });
-    Object.defineProperty(exports2, "UpdateExpression", {
+    Object.defineProperty(exports, "UpdateExpression", {
       enumerable: true,
       get: function() {
         return _index.updateExpression;
       }
     });
-    Object.defineProperty(exports2, "V8IntrinsicIdentifier", {
+    Object.defineProperty(exports, "V8IntrinsicIdentifier", {
       enumerable: true,
       get: function() {
         return _index.v8IntrinsicIdentifier;
       }
     });
-    Object.defineProperty(exports2, "VariableDeclaration", {
+    Object.defineProperty(exports, "VariableDeclaration", {
       enumerable: true,
       get: function() {
         return _index.variableDeclaration;
       }
     });
-    Object.defineProperty(exports2, "VariableDeclarator", {
+    Object.defineProperty(exports, "VariableDeclarator", {
       enumerable: true,
       get: function() {
         return _index.variableDeclarator;
       }
     });
-    Object.defineProperty(exports2, "Variance", {
+    Object.defineProperty(exports, "Variance", {
       enumerable: true,
       get: function() {
         return _index.variance;
       }
     });
-    Object.defineProperty(exports2, "VoidTypeAnnotation", {
+    Object.defineProperty(exports, "VoidTypeAnnotation", {
       enumerable: true,
       get: function() {
         return _index.voidTypeAnnotation;
       }
     });
-    Object.defineProperty(exports2, "WhileStatement", {
+    Object.defineProperty(exports, "WhileStatement", {
       enumerable: true,
       get: function() {
         return _index.whileStatement;
       }
     });
-    Object.defineProperty(exports2, "WithStatement", {
+    Object.defineProperty(exports, "WithStatement", {
       enumerable: true,
       get: function() {
         return _index.withStatement;
       }
     });
-    Object.defineProperty(exports2, "YieldExpression", {
+    Object.defineProperty(exports, "YieldExpression", {
       enumerable: true,
       get: function() {
         return _index.yieldExpression;
@@ -29513,12 +29703,12 @@ var require_uppercase = __commonJS({
 
 // node_modules/@babel/types/lib/clone/cloneNode.js
 var require_cloneNode = __commonJS({
-  "node_modules/@babel/types/lib/clone/cloneNode.js"(exports2) {
+  "node_modules/@babel/types/lib/clone/cloneNode.js"(exports) {
     "use strict";
-    Object.defineProperty(exports2, "__esModule", {
+    Object.defineProperty(exports, "__esModule", {
       value: true
     });
-    exports2.default = cloneNode;
+    exports.default = cloneNode;
     var _definitions = require_definitions();
     var _generated = require_generated();
     var has = Function.call.bind(Object.prototype.hasOwnProperty);
@@ -29617,12 +29807,12 @@ var require_cloneNode = __commonJS({
 
 // node_modules/@babel/types/lib/clone/clone.js
 var require_clone2 = __commonJS({
-  "node_modules/@babel/types/lib/clone/clone.js"(exports2) {
+  "node_modules/@babel/types/lib/clone/clone.js"(exports) {
     "use strict";
-    Object.defineProperty(exports2, "__esModule", {
+    Object.defineProperty(exports, "__esModule", {
       value: true
     });
-    exports2.default = clone;
+    exports.default = clone;
     var _cloneNode = require_cloneNode();
     function clone(node) {
       return (0, _cloneNode.default)(node, false);
@@ -29633,12 +29823,12 @@ var require_clone2 = __commonJS({
 
 // node_modules/@babel/types/lib/clone/cloneDeep.js
 var require_cloneDeep = __commonJS({
-  "node_modules/@babel/types/lib/clone/cloneDeep.js"(exports2) {
+  "node_modules/@babel/types/lib/clone/cloneDeep.js"(exports) {
     "use strict";
-    Object.defineProperty(exports2, "__esModule", {
+    Object.defineProperty(exports, "__esModule", {
       value: true
     });
-    exports2.default = cloneDeep;
+    exports.default = cloneDeep;
     var _cloneNode = require_cloneNode();
     function cloneDeep(node) {
       return (0, _cloneNode.default)(node);
@@ -29649,12 +29839,12 @@ var require_cloneDeep = __commonJS({
 
 // node_modules/@babel/types/lib/clone/cloneDeepWithoutLoc.js
 var require_cloneDeepWithoutLoc = __commonJS({
-  "node_modules/@babel/types/lib/clone/cloneDeepWithoutLoc.js"(exports2) {
+  "node_modules/@babel/types/lib/clone/cloneDeepWithoutLoc.js"(exports) {
     "use strict";
-    Object.defineProperty(exports2, "__esModule", {
+    Object.defineProperty(exports, "__esModule", {
       value: true
     });
-    exports2.default = cloneDeepWithoutLoc;
+    exports.default = cloneDeepWithoutLoc;
     var _cloneNode = require_cloneNode();
     function cloneDeepWithoutLoc(node) {
       return (0, _cloneNode.default)(node, true, true);
@@ -29665,12 +29855,12 @@ var require_cloneDeepWithoutLoc = __commonJS({
 
 // node_modules/@babel/types/lib/clone/cloneWithoutLoc.js
 var require_cloneWithoutLoc = __commonJS({
-  "node_modules/@babel/types/lib/clone/cloneWithoutLoc.js"(exports2) {
+  "node_modules/@babel/types/lib/clone/cloneWithoutLoc.js"(exports) {
     "use strict";
-    Object.defineProperty(exports2, "__esModule", {
+    Object.defineProperty(exports, "__esModule", {
       value: true
     });
-    exports2.default = cloneWithoutLoc;
+    exports.default = cloneWithoutLoc;
     var _cloneNode = require_cloneNode();
     function cloneWithoutLoc(node) {
       return (0, _cloneNode.default)(node, false, true);
@@ -29681,12 +29871,12 @@ var require_cloneWithoutLoc = __commonJS({
 
 // node_modules/@babel/types/lib/comments/addComments.js
 var require_addComments = __commonJS({
-  "node_modules/@babel/types/lib/comments/addComments.js"(exports2) {
+  "node_modules/@babel/types/lib/comments/addComments.js"(exports) {
     "use strict";
-    Object.defineProperty(exports2, "__esModule", {
+    Object.defineProperty(exports, "__esModule", {
       value: true
     });
-    exports2.default = addComments;
+    exports.default = addComments;
     function addComments(node, type, comments) {
       if (!comments || !node)
         return node;
@@ -29708,12 +29898,12 @@ var require_addComments = __commonJS({
 
 // node_modules/@babel/types/lib/comments/addComment.js
 var require_addComment = __commonJS({
-  "node_modules/@babel/types/lib/comments/addComment.js"(exports2) {
+  "node_modules/@babel/types/lib/comments/addComment.js"(exports) {
     "use strict";
-    Object.defineProperty(exports2, "__esModule", {
+    Object.defineProperty(exports, "__esModule", {
       value: true
     });
-    exports2.default = addComment;
+    exports.default = addComment;
     var _addComments = require_addComments();
     function addComment(node, type, content, line) {
       return (0, _addComments.default)(node, type, [
@@ -29729,12 +29919,12 @@ var require_addComment = __commonJS({
 
 // node_modules/@babel/types/lib/utils/inherit.js
 var require_inherit = __commonJS({
-  "node_modules/@babel/types/lib/utils/inherit.js"(exports2) {
+  "node_modules/@babel/types/lib/utils/inherit.js"(exports) {
     "use strict";
-    Object.defineProperty(exports2, "__esModule", {
+    Object.defineProperty(exports, "__esModule", {
       value: true
     });
-    exports2.default = inherit;
+    exports.default = inherit;
     function inherit(key, child, parent) {
       if (child && parent) {
         child[key] = Array.from(new Set([].concat(child[key], parent[key]).filter(Boolean)));
@@ -29746,12 +29936,12 @@ var require_inherit = __commonJS({
 
 // node_modules/@babel/types/lib/comments/inheritInnerComments.js
 var require_inheritInnerComments = __commonJS({
-  "node_modules/@babel/types/lib/comments/inheritInnerComments.js"(exports2) {
+  "node_modules/@babel/types/lib/comments/inheritInnerComments.js"(exports) {
     "use strict";
-    Object.defineProperty(exports2, "__esModule", {
+    Object.defineProperty(exports, "__esModule", {
       value: true
     });
-    exports2.default = inheritInnerComments;
+    exports.default = inheritInnerComments;
     var _inherit = require_inherit();
     function inheritInnerComments(child, parent) {
       (0, _inherit.default)("innerComments", child, parent);
@@ -29762,12 +29952,12 @@ var require_inheritInnerComments = __commonJS({
 
 // node_modules/@babel/types/lib/comments/inheritLeadingComments.js
 var require_inheritLeadingComments = __commonJS({
-  "node_modules/@babel/types/lib/comments/inheritLeadingComments.js"(exports2) {
+  "node_modules/@babel/types/lib/comments/inheritLeadingComments.js"(exports) {
     "use strict";
-    Object.defineProperty(exports2, "__esModule", {
+    Object.defineProperty(exports, "__esModule", {
       value: true
     });
-    exports2.default = inheritLeadingComments;
+    exports.default = inheritLeadingComments;
     var _inherit = require_inherit();
     function inheritLeadingComments(child, parent) {
       (0, _inherit.default)("leadingComments", child, parent);
@@ -29778,12 +29968,12 @@ var require_inheritLeadingComments = __commonJS({
 
 // node_modules/@babel/types/lib/comments/inheritTrailingComments.js
 var require_inheritTrailingComments = __commonJS({
-  "node_modules/@babel/types/lib/comments/inheritTrailingComments.js"(exports2) {
+  "node_modules/@babel/types/lib/comments/inheritTrailingComments.js"(exports) {
     "use strict";
-    Object.defineProperty(exports2, "__esModule", {
+    Object.defineProperty(exports, "__esModule", {
       value: true
     });
-    exports2.default = inheritTrailingComments;
+    exports.default = inheritTrailingComments;
     var _inherit = require_inherit();
     function inheritTrailingComments(child, parent) {
       (0, _inherit.default)("trailingComments", child, parent);
@@ -29794,12 +29984,12 @@ var require_inheritTrailingComments = __commonJS({
 
 // node_modules/@babel/types/lib/comments/inheritsComments.js
 var require_inheritsComments = __commonJS({
-  "node_modules/@babel/types/lib/comments/inheritsComments.js"(exports2) {
+  "node_modules/@babel/types/lib/comments/inheritsComments.js"(exports) {
     "use strict";
-    Object.defineProperty(exports2, "__esModule", {
+    Object.defineProperty(exports, "__esModule", {
       value: true
     });
-    exports2.default = inheritsComments;
+    exports.default = inheritsComments;
     var _inheritTrailingComments = require_inheritTrailingComments();
     var _inheritLeadingComments = require_inheritLeadingComments();
     var _inheritInnerComments = require_inheritInnerComments();
@@ -29815,12 +30005,12 @@ var require_inheritsComments = __commonJS({
 
 // node_modules/@babel/types/lib/comments/removeComments.js
 var require_removeComments = __commonJS({
-  "node_modules/@babel/types/lib/comments/removeComments.js"(exports2) {
+  "node_modules/@babel/types/lib/comments/removeComments.js"(exports) {
     "use strict";
-    Object.defineProperty(exports2, "__esModule", {
+    Object.defineProperty(exports, "__esModule", {
       value: true
     });
-    exports2.default = removeComments;
+    exports.default = removeComments;
     var _constants = require_constants4();
     function removeComments(node) {
       _constants.COMMENT_KEYS.forEach((key) => {
@@ -29834,122 +30024,122 @@ var require_removeComments = __commonJS({
 
 // node_modules/@babel/types/lib/constants/generated/index.js
 var require_generated4 = __commonJS({
-  "node_modules/@babel/types/lib/constants/generated/index.js"(exports2) {
+  "node_modules/@babel/types/lib/constants/generated/index.js"(exports) {
     "use strict";
-    Object.defineProperty(exports2, "__esModule", {
+    Object.defineProperty(exports, "__esModule", {
       value: true
     });
-    exports2.WHILE_TYPES = exports2.USERWHITESPACABLE_TYPES = exports2.UNARYLIKE_TYPES = exports2.TYPESCRIPT_TYPES = exports2.TSTYPE_TYPES = exports2.TSTYPEELEMENT_TYPES = exports2.TSENTITYNAME_TYPES = exports2.TSBASETYPE_TYPES = exports2.TERMINATORLESS_TYPES = exports2.STATEMENT_TYPES = exports2.STANDARDIZED_TYPES = exports2.SCOPABLE_TYPES = exports2.PUREISH_TYPES = exports2.PROPERTY_TYPES = exports2.PRIVATE_TYPES = exports2.PATTERN_TYPES = exports2.PATTERNLIKE_TYPES = exports2.OBJECTMEMBER_TYPES = exports2.MODULESPECIFIER_TYPES = exports2.MODULEDECLARATION_TYPES = exports2.MISCELLANEOUS_TYPES = exports2.METHOD_TYPES = exports2.LVAL_TYPES = exports2.LOOP_TYPES = exports2.LITERAL_TYPES = exports2.JSX_TYPES = exports2.IMMUTABLE_TYPES = exports2.FUNCTION_TYPES = exports2.FUNCTIONPARENT_TYPES = exports2.FOR_TYPES = exports2.FORXSTATEMENT_TYPES = exports2.FLOW_TYPES = exports2.FLOWTYPE_TYPES = exports2.FLOWPREDICATE_TYPES = exports2.FLOWDECLARATION_TYPES = exports2.FLOWBASEANNOTATION_TYPES = exports2.EXPRESSION_TYPES = exports2.EXPRESSIONWRAPPER_TYPES = exports2.EXPORTDECLARATION_TYPES = exports2.ENUMMEMBER_TYPES = exports2.ENUMBODY_TYPES = exports2.DECLARATION_TYPES = exports2.CONDITIONAL_TYPES = exports2.COMPLETIONSTATEMENT_TYPES = exports2.CLASS_TYPES = exports2.BLOCK_TYPES = exports2.BLOCKPARENT_TYPES = exports2.BINARY_TYPES = exports2.ACCESSOR_TYPES = void 0;
+    exports.WHILE_TYPES = exports.USERWHITESPACABLE_TYPES = exports.UNARYLIKE_TYPES = exports.TYPESCRIPT_TYPES = exports.TSTYPE_TYPES = exports.TSTYPEELEMENT_TYPES = exports.TSENTITYNAME_TYPES = exports.TSBASETYPE_TYPES = exports.TERMINATORLESS_TYPES = exports.STATEMENT_TYPES = exports.STANDARDIZED_TYPES = exports.SCOPABLE_TYPES = exports.PUREISH_TYPES = exports.PROPERTY_TYPES = exports.PRIVATE_TYPES = exports.PATTERN_TYPES = exports.PATTERNLIKE_TYPES = exports.OBJECTMEMBER_TYPES = exports.MODULESPECIFIER_TYPES = exports.MODULEDECLARATION_TYPES = exports.MISCELLANEOUS_TYPES = exports.METHOD_TYPES = exports.LVAL_TYPES = exports.LOOP_TYPES = exports.LITERAL_TYPES = exports.JSX_TYPES = exports.IMMUTABLE_TYPES = exports.FUNCTION_TYPES = exports.FUNCTIONPARENT_TYPES = exports.FOR_TYPES = exports.FORXSTATEMENT_TYPES = exports.FLOW_TYPES = exports.FLOWTYPE_TYPES = exports.FLOWPREDICATE_TYPES = exports.FLOWDECLARATION_TYPES = exports.FLOWBASEANNOTATION_TYPES = exports.EXPRESSION_TYPES = exports.EXPRESSIONWRAPPER_TYPES = exports.EXPORTDECLARATION_TYPES = exports.ENUMMEMBER_TYPES = exports.ENUMBODY_TYPES = exports.DECLARATION_TYPES = exports.CONDITIONAL_TYPES = exports.COMPLETIONSTATEMENT_TYPES = exports.CLASS_TYPES = exports.BLOCK_TYPES = exports.BLOCKPARENT_TYPES = exports.BINARY_TYPES = exports.ACCESSOR_TYPES = void 0;
     var _definitions = require_definitions();
     var STANDARDIZED_TYPES = _definitions.FLIPPED_ALIAS_KEYS["Standardized"];
-    exports2.STANDARDIZED_TYPES = STANDARDIZED_TYPES;
+    exports.STANDARDIZED_TYPES = STANDARDIZED_TYPES;
     var EXPRESSION_TYPES = _definitions.FLIPPED_ALIAS_KEYS["Expression"];
-    exports2.EXPRESSION_TYPES = EXPRESSION_TYPES;
+    exports.EXPRESSION_TYPES = EXPRESSION_TYPES;
     var BINARY_TYPES = _definitions.FLIPPED_ALIAS_KEYS["Binary"];
-    exports2.BINARY_TYPES = BINARY_TYPES;
+    exports.BINARY_TYPES = BINARY_TYPES;
     var SCOPABLE_TYPES = _definitions.FLIPPED_ALIAS_KEYS["Scopable"];
-    exports2.SCOPABLE_TYPES = SCOPABLE_TYPES;
+    exports.SCOPABLE_TYPES = SCOPABLE_TYPES;
     var BLOCKPARENT_TYPES = _definitions.FLIPPED_ALIAS_KEYS["BlockParent"];
-    exports2.BLOCKPARENT_TYPES = BLOCKPARENT_TYPES;
+    exports.BLOCKPARENT_TYPES = BLOCKPARENT_TYPES;
     var BLOCK_TYPES = _definitions.FLIPPED_ALIAS_KEYS["Block"];
-    exports2.BLOCK_TYPES = BLOCK_TYPES;
+    exports.BLOCK_TYPES = BLOCK_TYPES;
     var STATEMENT_TYPES = _definitions.FLIPPED_ALIAS_KEYS["Statement"];
-    exports2.STATEMENT_TYPES = STATEMENT_TYPES;
+    exports.STATEMENT_TYPES = STATEMENT_TYPES;
     var TERMINATORLESS_TYPES = _definitions.FLIPPED_ALIAS_KEYS["Terminatorless"];
-    exports2.TERMINATORLESS_TYPES = TERMINATORLESS_TYPES;
+    exports.TERMINATORLESS_TYPES = TERMINATORLESS_TYPES;
     var COMPLETIONSTATEMENT_TYPES = _definitions.FLIPPED_ALIAS_KEYS["CompletionStatement"];
-    exports2.COMPLETIONSTATEMENT_TYPES = COMPLETIONSTATEMENT_TYPES;
+    exports.COMPLETIONSTATEMENT_TYPES = COMPLETIONSTATEMENT_TYPES;
     var CONDITIONAL_TYPES = _definitions.FLIPPED_ALIAS_KEYS["Conditional"];
-    exports2.CONDITIONAL_TYPES = CONDITIONAL_TYPES;
+    exports.CONDITIONAL_TYPES = CONDITIONAL_TYPES;
     var LOOP_TYPES = _definitions.FLIPPED_ALIAS_KEYS["Loop"];
-    exports2.LOOP_TYPES = LOOP_TYPES;
+    exports.LOOP_TYPES = LOOP_TYPES;
     var WHILE_TYPES = _definitions.FLIPPED_ALIAS_KEYS["While"];
-    exports2.WHILE_TYPES = WHILE_TYPES;
+    exports.WHILE_TYPES = WHILE_TYPES;
     var EXPRESSIONWRAPPER_TYPES = _definitions.FLIPPED_ALIAS_KEYS["ExpressionWrapper"];
-    exports2.EXPRESSIONWRAPPER_TYPES = EXPRESSIONWRAPPER_TYPES;
+    exports.EXPRESSIONWRAPPER_TYPES = EXPRESSIONWRAPPER_TYPES;
     var FOR_TYPES = _definitions.FLIPPED_ALIAS_KEYS["For"];
-    exports2.FOR_TYPES = FOR_TYPES;
+    exports.FOR_TYPES = FOR_TYPES;
     var FORXSTATEMENT_TYPES = _definitions.FLIPPED_ALIAS_KEYS["ForXStatement"];
-    exports2.FORXSTATEMENT_TYPES = FORXSTATEMENT_TYPES;
+    exports.FORXSTATEMENT_TYPES = FORXSTATEMENT_TYPES;
     var FUNCTION_TYPES = _definitions.FLIPPED_ALIAS_KEYS["Function"];
-    exports2.FUNCTION_TYPES = FUNCTION_TYPES;
+    exports.FUNCTION_TYPES = FUNCTION_TYPES;
     var FUNCTIONPARENT_TYPES = _definitions.FLIPPED_ALIAS_KEYS["FunctionParent"];
-    exports2.FUNCTIONPARENT_TYPES = FUNCTIONPARENT_TYPES;
+    exports.FUNCTIONPARENT_TYPES = FUNCTIONPARENT_TYPES;
     var PUREISH_TYPES = _definitions.FLIPPED_ALIAS_KEYS["Pureish"];
-    exports2.PUREISH_TYPES = PUREISH_TYPES;
+    exports.PUREISH_TYPES = PUREISH_TYPES;
     var DECLARATION_TYPES = _definitions.FLIPPED_ALIAS_KEYS["Declaration"];
-    exports2.DECLARATION_TYPES = DECLARATION_TYPES;
+    exports.DECLARATION_TYPES = DECLARATION_TYPES;
     var PATTERNLIKE_TYPES = _definitions.FLIPPED_ALIAS_KEYS["PatternLike"];
-    exports2.PATTERNLIKE_TYPES = PATTERNLIKE_TYPES;
+    exports.PATTERNLIKE_TYPES = PATTERNLIKE_TYPES;
     var LVAL_TYPES = _definitions.FLIPPED_ALIAS_KEYS["LVal"];
-    exports2.LVAL_TYPES = LVAL_TYPES;
+    exports.LVAL_TYPES = LVAL_TYPES;
     var TSENTITYNAME_TYPES = _definitions.FLIPPED_ALIAS_KEYS["TSEntityName"];
-    exports2.TSENTITYNAME_TYPES = TSENTITYNAME_TYPES;
+    exports.TSENTITYNAME_TYPES = TSENTITYNAME_TYPES;
     var LITERAL_TYPES = _definitions.FLIPPED_ALIAS_KEYS["Literal"];
-    exports2.LITERAL_TYPES = LITERAL_TYPES;
+    exports.LITERAL_TYPES = LITERAL_TYPES;
     var IMMUTABLE_TYPES = _definitions.FLIPPED_ALIAS_KEYS["Immutable"];
-    exports2.IMMUTABLE_TYPES = IMMUTABLE_TYPES;
+    exports.IMMUTABLE_TYPES = IMMUTABLE_TYPES;
     var USERWHITESPACABLE_TYPES = _definitions.FLIPPED_ALIAS_KEYS["UserWhitespacable"];
-    exports2.USERWHITESPACABLE_TYPES = USERWHITESPACABLE_TYPES;
+    exports.USERWHITESPACABLE_TYPES = USERWHITESPACABLE_TYPES;
     var METHOD_TYPES = _definitions.FLIPPED_ALIAS_KEYS["Method"];
-    exports2.METHOD_TYPES = METHOD_TYPES;
+    exports.METHOD_TYPES = METHOD_TYPES;
     var OBJECTMEMBER_TYPES = _definitions.FLIPPED_ALIAS_KEYS["ObjectMember"];
-    exports2.OBJECTMEMBER_TYPES = OBJECTMEMBER_TYPES;
+    exports.OBJECTMEMBER_TYPES = OBJECTMEMBER_TYPES;
     var PROPERTY_TYPES = _definitions.FLIPPED_ALIAS_KEYS["Property"];
-    exports2.PROPERTY_TYPES = PROPERTY_TYPES;
+    exports.PROPERTY_TYPES = PROPERTY_TYPES;
     var UNARYLIKE_TYPES = _definitions.FLIPPED_ALIAS_KEYS["UnaryLike"];
-    exports2.UNARYLIKE_TYPES = UNARYLIKE_TYPES;
+    exports.UNARYLIKE_TYPES = UNARYLIKE_TYPES;
     var PATTERN_TYPES = _definitions.FLIPPED_ALIAS_KEYS["Pattern"];
-    exports2.PATTERN_TYPES = PATTERN_TYPES;
+    exports.PATTERN_TYPES = PATTERN_TYPES;
     var CLASS_TYPES = _definitions.FLIPPED_ALIAS_KEYS["Class"];
-    exports2.CLASS_TYPES = CLASS_TYPES;
+    exports.CLASS_TYPES = CLASS_TYPES;
     var MODULEDECLARATION_TYPES = _definitions.FLIPPED_ALIAS_KEYS["ModuleDeclaration"];
-    exports2.MODULEDECLARATION_TYPES = MODULEDECLARATION_TYPES;
+    exports.MODULEDECLARATION_TYPES = MODULEDECLARATION_TYPES;
     var EXPORTDECLARATION_TYPES = _definitions.FLIPPED_ALIAS_KEYS["ExportDeclaration"];
-    exports2.EXPORTDECLARATION_TYPES = EXPORTDECLARATION_TYPES;
+    exports.EXPORTDECLARATION_TYPES = EXPORTDECLARATION_TYPES;
     var MODULESPECIFIER_TYPES = _definitions.FLIPPED_ALIAS_KEYS["ModuleSpecifier"];
-    exports2.MODULESPECIFIER_TYPES = MODULESPECIFIER_TYPES;
+    exports.MODULESPECIFIER_TYPES = MODULESPECIFIER_TYPES;
     var ACCESSOR_TYPES = _definitions.FLIPPED_ALIAS_KEYS["Accessor"];
-    exports2.ACCESSOR_TYPES = ACCESSOR_TYPES;
+    exports.ACCESSOR_TYPES = ACCESSOR_TYPES;
     var PRIVATE_TYPES = _definitions.FLIPPED_ALIAS_KEYS["Private"];
-    exports2.PRIVATE_TYPES = PRIVATE_TYPES;
+    exports.PRIVATE_TYPES = PRIVATE_TYPES;
     var FLOW_TYPES = _definitions.FLIPPED_ALIAS_KEYS["Flow"];
-    exports2.FLOW_TYPES = FLOW_TYPES;
+    exports.FLOW_TYPES = FLOW_TYPES;
     var FLOWTYPE_TYPES = _definitions.FLIPPED_ALIAS_KEYS["FlowType"];
-    exports2.FLOWTYPE_TYPES = FLOWTYPE_TYPES;
+    exports.FLOWTYPE_TYPES = FLOWTYPE_TYPES;
     var FLOWBASEANNOTATION_TYPES = _definitions.FLIPPED_ALIAS_KEYS["FlowBaseAnnotation"];
-    exports2.FLOWBASEANNOTATION_TYPES = FLOWBASEANNOTATION_TYPES;
+    exports.FLOWBASEANNOTATION_TYPES = FLOWBASEANNOTATION_TYPES;
     var FLOWDECLARATION_TYPES = _definitions.FLIPPED_ALIAS_KEYS["FlowDeclaration"];
-    exports2.FLOWDECLARATION_TYPES = FLOWDECLARATION_TYPES;
+    exports.FLOWDECLARATION_TYPES = FLOWDECLARATION_TYPES;
     var FLOWPREDICATE_TYPES = _definitions.FLIPPED_ALIAS_KEYS["FlowPredicate"];
-    exports2.FLOWPREDICATE_TYPES = FLOWPREDICATE_TYPES;
+    exports.FLOWPREDICATE_TYPES = FLOWPREDICATE_TYPES;
     var ENUMBODY_TYPES = _definitions.FLIPPED_ALIAS_KEYS["EnumBody"];
-    exports2.ENUMBODY_TYPES = ENUMBODY_TYPES;
+    exports.ENUMBODY_TYPES = ENUMBODY_TYPES;
     var ENUMMEMBER_TYPES = _definitions.FLIPPED_ALIAS_KEYS["EnumMember"];
-    exports2.ENUMMEMBER_TYPES = ENUMMEMBER_TYPES;
+    exports.ENUMMEMBER_TYPES = ENUMMEMBER_TYPES;
     var JSX_TYPES = _definitions.FLIPPED_ALIAS_KEYS["JSX"];
-    exports2.JSX_TYPES = JSX_TYPES;
+    exports.JSX_TYPES = JSX_TYPES;
     var MISCELLANEOUS_TYPES = _definitions.FLIPPED_ALIAS_KEYS["Miscellaneous"];
-    exports2.MISCELLANEOUS_TYPES = MISCELLANEOUS_TYPES;
+    exports.MISCELLANEOUS_TYPES = MISCELLANEOUS_TYPES;
     var TYPESCRIPT_TYPES = _definitions.FLIPPED_ALIAS_KEYS["TypeScript"];
-    exports2.TYPESCRIPT_TYPES = TYPESCRIPT_TYPES;
+    exports.TYPESCRIPT_TYPES = TYPESCRIPT_TYPES;
     var TSTYPEELEMENT_TYPES = _definitions.FLIPPED_ALIAS_KEYS["TSTypeElement"];
-    exports2.TSTYPEELEMENT_TYPES = TSTYPEELEMENT_TYPES;
+    exports.TSTYPEELEMENT_TYPES = TSTYPEELEMENT_TYPES;
     var TSTYPE_TYPES = _definitions.FLIPPED_ALIAS_KEYS["TSType"];
-    exports2.TSTYPE_TYPES = TSTYPE_TYPES;
+    exports.TSTYPE_TYPES = TSTYPE_TYPES;
     var TSBASETYPE_TYPES = _definitions.FLIPPED_ALIAS_KEYS["TSBaseType"];
-    exports2.TSBASETYPE_TYPES = TSBASETYPE_TYPES;
+    exports.TSBASETYPE_TYPES = TSBASETYPE_TYPES;
   }
 });
 
 // node_modules/@babel/types/lib/converters/toBlock.js
 var require_toBlock = __commonJS({
-  "node_modules/@babel/types/lib/converters/toBlock.js"(exports2) {
+  "node_modules/@babel/types/lib/converters/toBlock.js"(exports) {
     "use strict";
-    Object.defineProperty(exports2, "__esModule", {
+    Object.defineProperty(exports, "__esModule", {
       value: true
     });
-    exports2.default = toBlock;
+    exports.default = toBlock;
     var _generated = require_generated();
     var _generated2 = require_generated2();
     function toBlock(node, parent) {
@@ -29979,12 +30169,12 @@ var require_toBlock = __commonJS({
 
 // node_modules/@babel/types/lib/converters/ensureBlock.js
 var require_ensureBlock = __commonJS({
-  "node_modules/@babel/types/lib/converters/ensureBlock.js"(exports2) {
+  "node_modules/@babel/types/lib/converters/ensureBlock.js"(exports) {
     "use strict";
-    Object.defineProperty(exports2, "__esModule", {
+    Object.defineProperty(exports, "__esModule", {
       value: true
     });
-    exports2.default = ensureBlock;
+    exports.default = ensureBlock;
     var _toBlock = require_toBlock();
     function ensureBlock(node, key = "body") {
       const result = (0, _toBlock.default)(node[key], node);
@@ -29997,12 +30187,12 @@ var require_ensureBlock = __commonJS({
 
 // node_modules/@babel/types/lib/converters/toIdentifier.js
 var require_toIdentifier = __commonJS({
-  "node_modules/@babel/types/lib/converters/toIdentifier.js"(exports2) {
+  "node_modules/@babel/types/lib/converters/toIdentifier.js"(exports) {
     "use strict";
-    Object.defineProperty(exports2, "__esModule", {
+    Object.defineProperty(exports, "__esModule", {
       value: true
     });
-    exports2.default = toIdentifier;
+    exports.default = toIdentifier;
     var _isValidIdentifier = require_isValidIdentifier();
     var _helperValidatorIdentifier = require_lib();
     function toIdentifier(input) {
@@ -30026,12 +30216,12 @@ var require_toIdentifier = __commonJS({
 
 // node_modules/@babel/types/lib/converters/toBindingIdentifierName.js
 var require_toBindingIdentifierName = __commonJS({
-  "node_modules/@babel/types/lib/converters/toBindingIdentifierName.js"(exports2) {
+  "node_modules/@babel/types/lib/converters/toBindingIdentifierName.js"(exports) {
     "use strict";
-    Object.defineProperty(exports2, "__esModule", {
+    Object.defineProperty(exports, "__esModule", {
       value: true
     });
-    exports2.default = toBindingIdentifierName;
+    exports.default = toBindingIdentifierName;
     var _toIdentifier = require_toIdentifier();
     function toBindingIdentifierName(name) {
       name = (0, _toIdentifier.default)(name);
@@ -30045,12 +30235,12 @@ var require_toBindingIdentifierName = __commonJS({
 
 // node_modules/@babel/types/lib/converters/toComputedKey.js
 var require_toComputedKey = __commonJS({
-  "node_modules/@babel/types/lib/converters/toComputedKey.js"(exports2) {
+  "node_modules/@babel/types/lib/converters/toComputedKey.js"(exports) {
     "use strict";
-    Object.defineProperty(exports2, "__esModule", {
+    Object.defineProperty(exports, "__esModule", {
       value: true
     });
-    exports2.default = toComputedKey;
+    exports.default = toComputedKey;
     var _generated = require_generated();
     var _generated2 = require_generated2();
     function toComputedKey(node, key = node.key || node.property) {
@@ -30064,15 +30254,15 @@ var require_toComputedKey = __commonJS({
 
 // node_modules/@babel/types/lib/converters/toExpression.js
 var require_toExpression = __commonJS({
-  "node_modules/@babel/types/lib/converters/toExpression.js"(exports2) {
+  "node_modules/@babel/types/lib/converters/toExpression.js"(exports) {
     "use strict";
-    Object.defineProperty(exports2, "__esModule", {
+    Object.defineProperty(exports, "__esModule", {
       value: true
     });
-    exports2.default = void 0;
+    exports.default = void 0;
     var _generated = require_generated();
     var _default = toExpression;
-    exports2.default = _default;
+    exports.default = _default;
     function toExpression(node) {
       if ((0, _generated.isExpressionStatement)(node)) {
         node = node.expression;
@@ -30096,12 +30286,12 @@ var require_toExpression = __commonJS({
 
 // node_modules/@babel/types/lib/traverse/traverseFast.js
 var require_traverseFast = __commonJS({
-  "node_modules/@babel/types/lib/traverse/traverseFast.js"(exports2) {
+  "node_modules/@babel/types/lib/traverse/traverseFast.js"(exports) {
     "use strict";
-    Object.defineProperty(exports2, "__esModule", {
+    Object.defineProperty(exports, "__esModule", {
       value: true
     });
-    exports2.default = traverseFast;
+    exports.default = traverseFast;
     var _definitions = require_definitions();
     function traverseFast(node, enter, opts) {
       if (!node)
@@ -30128,12 +30318,12 @@ var require_traverseFast = __commonJS({
 
 // node_modules/@babel/types/lib/modifications/removeProperties.js
 var require_removeProperties = __commonJS({
-  "node_modules/@babel/types/lib/modifications/removeProperties.js"(exports2) {
+  "node_modules/@babel/types/lib/modifications/removeProperties.js"(exports) {
     "use strict";
-    Object.defineProperty(exports2, "__esModule", {
+    Object.defineProperty(exports, "__esModule", {
       value: true
     });
-    exports2.default = removeProperties;
+    exports.default = removeProperties;
     var _constants = require_constants4();
     var CLEAR_KEYS = [
       "tokens",
@@ -30169,12 +30359,12 @@ var require_removeProperties = __commonJS({
 
 // node_modules/@babel/types/lib/modifications/removePropertiesDeep.js
 var require_removePropertiesDeep = __commonJS({
-  "node_modules/@babel/types/lib/modifications/removePropertiesDeep.js"(exports2) {
+  "node_modules/@babel/types/lib/modifications/removePropertiesDeep.js"(exports) {
     "use strict";
-    Object.defineProperty(exports2, "__esModule", {
+    Object.defineProperty(exports, "__esModule", {
       value: true
     });
-    exports2.default = removePropertiesDeep;
+    exports.default = removePropertiesDeep;
     var _traverseFast = require_traverseFast();
     var _removeProperties = require_removeProperties();
     function removePropertiesDeep(tree, opts) {
@@ -30187,12 +30377,12 @@ var require_removePropertiesDeep = __commonJS({
 
 // node_modules/@babel/types/lib/converters/toKeyAlias.js
 var require_toKeyAlias = __commonJS({
-  "node_modules/@babel/types/lib/converters/toKeyAlias.js"(exports2) {
+  "node_modules/@babel/types/lib/converters/toKeyAlias.js"(exports) {
     "use strict";
-    Object.defineProperty(exports2, "__esModule", {
+    Object.defineProperty(exports, "__esModule", {
       value: true
     });
-    exports2.default = toKeyAlias;
+    exports.default = toKeyAlias;
     var _generated = require_generated();
     var _cloneNode = require_cloneNode();
     var _removePropertiesDeep = require_removePropertiesDeep();
@@ -30229,12 +30419,12 @@ var require_toKeyAlias = __commonJS({
 
 // node_modules/@babel/types/lib/retrievers/getBindingIdentifiers.js
 var require_getBindingIdentifiers = __commonJS({
-  "node_modules/@babel/types/lib/retrievers/getBindingIdentifiers.js"(exports2) {
+  "node_modules/@babel/types/lib/retrievers/getBindingIdentifiers.js"(exports) {
     "use strict";
-    Object.defineProperty(exports2, "__esModule", {
+    Object.defineProperty(exports, "__esModule", {
       value: true
     });
-    exports2.default = getBindingIdentifiers;
+    exports.default = getBindingIdentifiers;
     var _generated = require_generated();
     function getBindingIdentifiers(node, duplicates, outerOnly) {
       const search = [].concat(node);
@@ -30407,12 +30597,12 @@ var require_getBindingIdentifiers = __commonJS({
 
 // node_modules/@babel/types/lib/converters/gatherSequenceExpressions.js
 var require_gatherSequenceExpressions = __commonJS({
-  "node_modules/@babel/types/lib/converters/gatherSequenceExpressions.js"(exports2) {
+  "node_modules/@babel/types/lib/converters/gatherSequenceExpressions.js"(exports) {
     "use strict";
-    Object.defineProperty(exports2, "__esModule", {
+    Object.defineProperty(exports, "__esModule", {
       value: true
     });
-    exports2.default = gatherSequenceExpressions;
+    exports.default = gatherSequenceExpressions;
     var _getBindingIdentifiers = require_getBindingIdentifiers();
     var _generated = require_generated();
     var _generated2 = require_generated2();
@@ -30482,12 +30672,12 @@ var require_gatherSequenceExpressions = __commonJS({
 
 // node_modules/@babel/types/lib/converters/toSequenceExpression.js
 var require_toSequenceExpression = __commonJS({
-  "node_modules/@babel/types/lib/converters/toSequenceExpression.js"(exports2) {
+  "node_modules/@babel/types/lib/converters/toSequenceExpression.js"(exports) {
     "use strict";
-    Object.defineProperty(exports2, "__esModule", {
+    Object.defineProperty(exports, "__esModule", {
       value: true
     });
-    exports2.default = toSequenceExpression;
+    exports.default = toSequenceExpression;
     var _gatherSequenceExpressions = require_gatherSequenceExpressions();
     function toSequenceExpression(nodes, scope) {
       if (!(nodes != null && nodes.length))
@@ -30507,16 +30697,16 @@ var require_toSequenceExpression = __commonJS({
 
 // node_modules/@babel/types/lib/converters/toStatement.js
 var require_toStatement = __commonJS({
-  "node_modules/@babel/types/lib/converters/toStatement.js"(exports2) {
+  "node_modules/@babel/types/lib/converters/toStatement.js"(exports) {
     "use strict";
-    Object.defineProperty(exports2, "__esModule", {
+    Object.defineProperty(exports, "__esModule", {
       value: true
     });
-    exports2.default = void 0;
+    exports.default = void 0;
     var _generated = require_generated();
     var _generated2 = require_generated2();
     var _default = toStatement;
-    exports2.default = _default;
+    exports.default = _default;
     function toStatement(node, ignore) {
       if ((0, _generated.isStatement)(node)) {
         return node;
@@ -30551,16 +30741,16 @@ var require_toStatement = __commonJS({
 
 // node_modules/@babel/types/lib/converters/valueToNode.js
 var require_valueToNode = __commonJS({
-  "node_modules/@babel/types/lib/converters/valueToNode.js"(exports2) {
+  "node_modules/@babel/types/lib/converters/valueToNode.js"(exports) {
     "use strict";
-    Object.defineProperty(exports2, "__esModule", {
+    Object.defineProperty(exports, "__esModule", {
       value: true
     });
-    exports2.default = void 0;
+    exports.default = void 0;
     var _isValidIdentifier = require_isValidIdentifier();
     var _generated = require_generated2();
     var _default = valueToNode;
-    exports2.default = _default;
+    exports.default = _default;
     var objectToString = Function.call.bind(Object.prototype.toString);
     function isRegExp(value) {
       return objectToString(value) === "[object RegExp]";
@@ -30634,12 +30824,12 @@ var require_valueToNode = __commonJS({
 
 // node_modules/@babel/types/lib/modifications/appendToMemberExpression.js
 var require_appendToMemberExpression = __commonJS({
-  "node_modules/@babel/types/lib/modifications/appendToMemberExpression.js"(exports2) {
+  "node_modules/@babel/types/lib/modifications/appendToMemberExpression.js"(exports) {
     "use strict";
-    Object.defineProperty(exports2, "__esModule", {
+    Object.defineProperty(exports, "__esModule", {
       value: true
     });
-    exports2.default = appendToMemberExpression;
+    exports.default = appendToMemberExpression;
     var _generated = require_generated2();
     function appendToMemberExpression(member, append, computed = false) {
       member.object = (0, _generated.memberExpression)(member.object, member.property, member.computed);
@@ -30653,12 +30843,12 @@ var require_appendToMemberExpression = __commonJS({
 
 // node_modules/@babel/types/lib/modifications/inherits.js
 var require_inherits2 = __commonJS({
-  "node_modules/@babel/types/lib/modifications/inherits.js"(exports2) {
+  "node_modules/@babel/types/lib/modifications/inherits.js"(exports) {
     "use strict";
-    Object.defineProperty(exports2, "__esModule", {
+    Object.defineProperty(exports, "__esModule", {
       value: true
     });
-    exports2.default = inherits;
+    exports.default = inherits;
     var _constants = require_constants4();
     var _inheritsComments = require_inheritsComments();
     function inherits(child, parent) {
@@ -30686,12 +30876,12 @@ var require_inherits2 = __commonJS({
 
 // node_modules/@babel/types/lib/modifications/prependToMemberExpression.js
 var require_prependToMemberExpression = __commonJS({
-  "node_modules/@babel/types/lib/modifications/prependToMemberExpression.js"(exports2) {
+  "node_modules/@babel/types/lib/modifications/prependToMemberExpression.js"(exports) {
     "use strict";
-    Object.defineProperty(exports2, "__esModule", {
+    Object.defineProperty(exports, "__esModule", {
       value: true
     });
-    exports2.default = prependToMemberExpression;
+    exports.default = prependToMemberExpression;
     var _generated = require_generated2();
     var _ = require_lib3();
     function prependToMemberExpression(member, prepend) {
@@ -30707,15 +30897,15 @@ var require_prependToMemberExpression = __commonJS({
 
 // node_modules/@babel/types/lib/retrievers/getOuterBindingIdentifiers.js
 var require_getOuterBindingIdentifiers = __commonJS({
-  "node_modules/@babel/types/lib/retrievers/getOuterBindingIdentifiers.js"(exports2) {
+  "node_modules/@babel/types/lib/retrievers/getOuterBindingIdentifiers.js"(exports) {
     "use strict";
-    Object.defineProperty(exports2, "__esModule", {
+    Object.defineProperty(exports, "__esModule", {
       value: true
     });
-    exports2.default = void 0;
+    exports.default = void 0;
     var _getBindingIdentifiers = require_getBindingIdentifiers();
     var _default = getOuterBindingIdentifiers;
-    exports2.default = _default;
+    exports.default = _default;
     function getOuterBindingIdentifiers(node, duplicates) {
       return (0, _getBindingIdentifiers.default)(node, duplicates, true);
     }
@@ -30725,12 +30915,12 @@ var require_getOuterBindingIdentifiers = __commonJS({
 
 // node_modules/@babel/types/lib/traverse/traverse.js
 var require_traverse = __commonJS({
-  "node_modules/@babel/types/lib/traverse/traverse.js"(exports2) {
+  "node_modules/@babel/types/lib/traverse/traverse.js"(exports) {
     "use strict";
-    Object.defineProperty(exports2, "__esModule", {
+    Object.defineProperty(exports, "__esModule", {
       value: true
     });
-    exports2.default = traverse;
+    exports.default = traverse;
     var _definitions = require_definitions();
     function traverse(node, handlers, state) {
       if (typeof handlers === "function") {
@@ -30781,12 +30971,12 @@ var require_traverse = __commonJS({
 
 // node_modules/@babel/types/lib/validators/isBinding.js
 var require_isBinding = __commonJS({
-  "node_modules/@babel/types/lib/validators/isBinding.js"(exports2) {
+  "node_modules/@babel/types/lib/validators/isBinding.js"(exports) {
     "use strict";
-    Object.defineProperty(exports2, "__esModule", {
+    Object.defineProperty(exports, "__esModule", {
       value: true
     });
-    exports2.default = isBinding;
+    exports.default = isBinding;
     var _getBindingIdentifiers = require_getBindingIdentifiers();
     function isBinding(node, parent, grandparent) {
       if (grandparent && node.type === "Identifier" && parent.type === "ObjectProperty" && grandparent.type === "ObjectExpression") {
@@ -30814,12 +31004,12 @@ var require_isBinding = __commonJS({
 
 // node_modules/@babel/types/lib/validators/isLet.js
 var require_isLet = __commonJS({
-  "node_modules/@babel/types/lib/validators/isLet.js"(exports2) {
+  "node_modules/@babel/types/lib/validators/isLet.js"(exports) {
     "use strict";
-    Object.defineProperty(exports2, "__esModule", {
+    Object.defineProperty(exports, "__esModule", {
       value: true
     });
-    exports2.default = isLet;
+    exports.default = isLet;
     var _generated = require_generated();
     var _constants = require_constants4();
     function isLet(node) {
@@ -30831,12 +31021,12 @@ var require_isLet = __commonJS({
 
 // node_modules/@babel/types/lib/validators/isBlockScoped.js
 var require_isBlockScoped = __commonJS({
-  "node_modules/@babel/types/lib/validators/isBlockScoped.js"(exports2) {
+  "node_modules/@babel/types/lib/validators/isBlockScoped.js"(exports) {
     "use strict";
-    Object.defineProperty(exports2, "__esModule", {
+    Object.defineProperty(exports, "__esModule", {
       value: true
     });
-    exports2.default = isBlockScoped;
+    exports.default = isBlockScoped;
     var _generated = require_generated();
     var _isLet = require_isLet();
     function isBlockScoped(node) {
@@ -30848,12 +31038,12 @@ var require_isBlockScoped = __commonJS({
 
 // node_modules/@babel/types/lib/validators/isImmutable.js
 var require_isImmutable = __commonJS({
-  "node_modules/@babel/types/lib/validators/isImmutable.js"(exports2) {
+  "node_modules/@babel/types/lib/validators/isImmutable.js"(exports) {
     "use strict";
-    Object.defineProperty(exports2, "__esModule", {
+    Object.defineProperty(exports, "__esModule", {
       value: true
     });
-    exports2.default = isImmutable;
+    exports.default = isImmutable;
     var _isType = require_isType();
     var _generated = require_generated();
     function isImmutable(node) {
@@ -30874,12 +31064,12 @@ var require_isImmutable = __commonJS({
 
 // node_modules/@babel/types/lib/validators/isNodesEquivalent.js
 var require_isNodesEquivalent = __commonJS({
-  "node_modules/@babel/types/lib/validators/isNodesEquivalent.js"(exports2) {
+  "node_modules/@babel/types/lib/validators/isNodesEquivalent.js"(exports) {
     "use strict";
-    Object.defineProperty(exports2, "__esModule", {
+    Object.defineProperty(exports, "__esModule", {
       value: true
     });
-    exports2.default = isNodesEquivalent;
+    exports.default = isNodesEquivalent;
     var _definitions = require_definitions();
     function isNodesEquivalent(a, b) {
       if (typeof a !== "object" || typeof b !== "object" || a == null || b == null) {
@@ -30935,12 +31125,12 @@ var require_isNodesEquivalent = __commonJS({
 
 // node_modules/@babel/types/lib/validators/isReferenced.js
 var require_isReferenced = __commonJS({
-  "node_modules/@babel/types/lib/validators/isReferenced.js"(exports2) {
+  "node_modules/@babel/types/lib/validators/isReferenced.js"(exports) {
     "use strict";
-    Object.defineProperty(exports2, "__esModule", {
+    Object.defineProperty(exports, "__esModule", {
       value: true
     });
-    exports2.default = isReferenced;
+    exports.default = isReferenced;
     function isReferenced(node, parent, grandparent) {
       switch (parent.type) {
         case "MemberExpression":
@@ -31035,12 +31225,12 @@ var require_isReferenced = __commonJS({
 
 // node_modules/@babel/types/lib/validators/isScope.js
 var require_isScope = __commonJS({
-  "node_modules/@babel/types/lib/validators/isScope.js"(exports2) {
+  "node_modules/@babel/types/lib/validators/isScope.js"(exports) {
     "use strict";
-    Object.defineProperty(exports2, "__esModule", {
+    Object.defineProperty(exports, "__esModule", {
       value: true
     });
-    exports2.default = isScope;
+    exports.default = isScope;
     var _generated = require_generated();
     function isScope(node, parent) {
       if ((0, _generated.isBlockStatement)(node) && ((0, _generated.isFunction)(parent) || (0, _generated.isCatchClause)(parent))) {
@@ -31057,12 +31247,12 @@ var require_isScope = __commonJS({
 
 // node_modules/@babel/types/lib/validators/isSpecifierDefault.js
 var require_isSpecifierDefault = __commonJS({
-  "node_modules/@babel/types/lib/validators/isSpecifierDefault.js"(exports2) {
+  "node_modules/@babel/types/lib/validators/isSpecifierDefault.js"(exports) {
     "use strict";
-    Object.defineProperty(exports2, "__esModule", {
+    Object.defineProperty(exports, "__esModule", {
       value: true
     });
-    exports2.default = isSpecifierDefault;
+    exports.default = isSpecifierDefault;
     var _generated = require_generated();
     function isSpecifierDefault(specifier) {
       return (0, _generated.isImportDefaultSpecifier)(specifier) || (0, _generated.isIdentifier)(specifier.imported || specifier.exported, {
@@ -31075,12 +31265,12 @@ var require_isSpecifierDefault = __commonJS({
 
 // node_modules/@babel/types/lib/validators/isValidES3Identifier.js
 var require_isValidES3Identifier = __commonJS({
-  "node_modules/@babel/types/lib/validators/isValidES3Identifier.js"(exports2) {
+  "node_modules/@babel/types/lib/validators/isValidES3Identifier.js"(exports) {
     "use strict";
-    Object.defineProperty(exports2, "__esModule", {
+    Object.defineProperty(exports, "__esModule", {
       value: true
     });
-    exports2.default = isValidES3Identifier;
+    exports.default = isValidES3Identifier;
     var _isValidIdentifier = require_isValidIdentifier();
     var RESERVED_WORDS_ES3_ONLY = /* @__PURE__ */ new Set([
       "abstract",
@@ -31117,12 +31307,12 @@ var require_isValidES3Identifier = __commonJS({
 
 // node_modules/@babel/types/lib/validators/isVar.js
 var require_isVar = __commonJS({
-  "node_modules/@babel/types/lib/validators/isVar.js"(exports2) {
+  "node_modules/@babel/types/lib/validators/isVar.js"(exports) {
     "use strict";
-    Object.defineProperty(exports2, "__esModule", {
+    Object.defineProperty(exports, "__esModule", {
       value: true
     });
-    exports2.default = isVar;
+    exports.default = isVar;
     var _generated = require_generated();
     var _constants = require_constants4();
     function isVar(node) {
@@ -31142,9 +31332,9 @@ var require_generated5 = __commonJS({
 
 // node_modules/@babel/types/lib/index.js
 var require_lib3 = __commonJS({
-  "node_modules/@babel/types/lib/index.js"(exports2) {
+  "node_modules/@babel/types/lib/index.js"(exports) {
     "use strict";
-    Object.defineProperty(exports2, "__esModule", {
+    Object.defineProperty(exports, "__esModule", {
       value: true
     });
     var _exportNames = {
@@ -31206,338 +31396,338 @@ var require_lib3 = __commonJS({
       validate: true,
       buildMatchMemberExpression: true
     };
-    Object.defineProperty(exports2, "addComment", {
+    Object.defineProperty(exports, "addComment", {
       enumerable: true,
       get: function() {
         return _addComment.default;
       }
     });
-    Object.defineProperty(exports2, "addComments", {
+    Object.defineProperty(exports, "addComments", {
       enumerable: true,
       get: function() {
         return _addComments.default;
       }
     });
-    Object.defineProperty(exports2, "appendToMemberExpression", {
+    Object.defineProperty(exports, "appendToMemberExpression", {
       enumerable: true,
       get: function() {
         return _appendToMemberExpression.default;
       }
     });
-    Object.defineProperty(exports2, "assertNode", {
+    Object.defineProperty(exports, "assertNode", {
       enumerable: true,
       get: function() {
         return _assertNode.default;
       }
     });
-    Object.defineProperty(exports2, "buildMatchMemberExpression", {
+    Object.defineProperty(exports, "buildMatchMemberExpression", {
       enumerable: true,
       get: function() {
         return _buildMatchMemberExpression.default;
       }
     });
-    Object.defineProperty(exports2, "clone", {
+    Object.defineProperty(exports, "clone", {
       enumerable: true,
       get: function() {
         return _clone.default;
       }
     });
-    Object.defineProperty(exports2, "cloneDeep", {
+    Object.defineProperty(exports, "cloneDeep", {
       enumerable: true,
       get: function() {
         return _cloneDeep.default;
       }
     });
-    Object.defineProperty(exports2, "cloneDeepWithoutLoc", {
+    Object.defineProperty(exports, "cloneDeepWithoutLoc", {
       enumerable: true,
       get: function() {
         return _cloneDeepWithoutLoc.default;
       }
     });
-    Object.defineProperty(exports2, "cloneNode", {
+    Object.defineProperty(exports, "cloneNode", {
       enumerable: true,
       get: function() {
         return _cloneNode.default;
       }
     });
-    Object.defineProperty(exports2, "cloneWithoutLoc", {
+    Object.defineProperty(exports, "cloneWithoutLoc", {
       enumerable: true,
       get: function() {
         return _cloneWithoutLoc.default;
       }
     });
-    Object.defineProperty(exports2, "createFlowUnionType", {
+    Object.defineProperty(exports, "createFlowUnionType", {
       enumerable: true,
       get: function() {
         return _createFlowUnionType.default;
       }
     });
-    Object.defineProperty(exports2, "createTSUnionType", {
+    Object.defineProperty(exports, "createTSUnionType", {
       enumerable: true,
       get: function() {
         return _createTSUnionType.default;
       }
     });
-    Object.defineProperty(exports2, "createTypeAnnotationBasedOnTypeof", {
+    Object.defineProperty(exports, "createTypeAnnotationBasedOnTypeof", {
       enumerable: true,
       get: function() {
         return _createTypeAnnotationBasedOnTypeof.default;
       }
     });
-    Object.defineProperty(exports2, "createUnionTypeAnnotation", {
+    Object.defineProperty(exports, "createUnionTypeAnnotation", {
       enumerable: true,
       get: function() {
         return _createFlowUnionType.default;
       }
     });
-    Object.defineProperty(exports2, "ensureBlock", {
+    Object.defineProperty(exports, "ensureBlock", {
       enumerable: true,
       get: function() {
         return _ensureBlock.default;
       }
     });
-    Object.defineProperty(exports2, "getBindingIdentifiers", {
+    Object.defineProperty(exports, "getBindingIdentifiers", {
       enumerable: true,
       get: function() {
         return _getBindingIdentifiers.default;
       }
     });
-    Object.defineProperty(exports2, "getOuterBindingIdentifiers", {
+    Object.defineProperty(exports, "getOuterBindingIdentifiers", {
       enumerable: true,
       get: function() {
         return _getOuterBindingIdentifiers.default;
       }
     });
-    Object.defineProperty(exports2, "inheritInnerComments", {
+    Object.defineProperty(exports, "inheritInnerComments", {
       enumerable: true,
       get: function() {
         return _inheritInnerComments.default;
       }
     });
-    Object.defineProperty(exports2, "inheritLeadingComments", {
+    Object.defineProperty(exports, "inheritLeadingComments", {
       enumerable: true,
       get: function() {
         return _inheritLeadingComments.default;
       }
     });
-    Object.defineProperty(exports2, "inheritTrailingComments", {
+    Object.defineProperty(exports, "inheritTrailingComments", {
       enumerable: true,
       get: function() {
         return _inheritTrailingComments.default;
       }
     });
-    Object.defineProperty(exports2, "inherits", {
+    Object.defineProperty(exports, "inherits", {
       enumerable: true,
       get: function() {
         return _inherits.default;
       }
     });
-    Object.defineProperty(exports2, "inheritsComments", {
+    Object.defineProperty(exports, "inheritsComments", {
       enumerable: true,
       get: function() {
         return _inheritsComments.default;
       }
     });
-    Object.defineProperty(exports2, "is", {
+    Object.defineProperty(exports, "is", {
       enumerable: true,
       get: function() {
         return _is.default;
       }
     });
-    Object.defineProperty(exports2, "isBinding", {
+    Object.defineProperty(exports, "isBinding", {
       enumerable: true,
       get: function() {
         return _isBinding.default;
       }
     });
-    Object.defineProperty(exports2, "isBlockScoped", {
+    Object.defineProperty(exports, "isBlockScoped", {
       enumerable: true,
       get: function() {
         return _isBlockScoped.default;
       }
     });
-    Object.defineProperty(exports2, "isImmutable", {
+    Object.defineProperty(exports, "isImmutable", {
       enumerable: true,
       get: function() {
         return _isImmutable.default;
       }
     });
-    Object.defineProperty(exports2, "isLet", {
+    Object.defineProperty(exports, "isLet", {
       enumerable: true,
       get: function() {
         return _isLet.default;
       }
     });
-    Object.defineProperty(exports2, "isNode", {
+    Object.defineProperty(exports, "isNode", {
       enumerable: true,
       get: function() {
         return _isNode.default;
       }
     });
-    Object.defineProperty(exports2, "isNodesEquivalent", {
+    Object.defineProperty(exports, "isNodesEquivalent", {
       enumerable: true,
       get: function() {
         return _isNodesEquivalent.default;
       }
     });
-    Object.defineProperty(exports2, "isPlaceholderType", {
+    Object.defineProperty(exports, "isPlaceholderType", {
       enumerable: true,
       get: function() {
         return _isPlaceholderType.default;
       }
     });
-    Object.defineProperty(exports2, "isReferenced", {
+    Object.defineProperty(exports, "isReferenced", {
       enumerable: true,
       get: function() {
         return _isReferenced.default;
       }
     });
-    Object.defineProperty(exports2, "isScope", {
+    Object.defineProperty(exports, "isScope", {
       enumerable: true,
       get: function() {
         return _isScope.default;
       }
     });
-    Object.defineProperty(exports2, "isSpecifierDefault", {
+    Object.defineProperty(exports, "isSpecifierDefault", {
       enumerable: true,
       get: function() {
         return _isSpecifierDefault.default;
       }
     });
-    Object.defineProperty(exports2, "isType", {
+    Object.defineProperty(exports, "isType", {
       enumerable: true,
       get: function() {
         return _isType.default;
       }
     });
-    Object.defineProperty(exports2, "isValidES3Identifier", {
+    Object.defineProperty(exports, "isValidES3Identifier", {
       enumerable: true,
       get: function() {
         return _isValidES3Identifier.default;
       }
     });
-    Object.defineProperty(exports2, "isValidIdentifier", {
+    Object.defineProperty(exports, "isValidIdentifier", {
       enumerable: true,
       get: function() {
         return _isValidIdentifier.default;
       }
     });
-    Object.defineProperty(exports2, "isVar", {
+    Object.defineProperty(exports, "isVar", {
       enumerable: true,
       get: function() {
         return _isVar.default;
       }
     });
-    Object.defineProperty(exports2, "matchesPattern", {
+    Object.defineProperty(exports, "matchesPattern", {
       enumerable: true,
       get: function() {
         return _matchesPattern.default;
       }
     });
-    Object.defineProperty(exports2, "prependToMemberExpression", {
+    Object.defineProperty(exports, "prependToMemberExpression", {
       enumerable: true,
       get: function() {
         return _prependToMemberExpression.default;
       }
     });
-    exports2.react = void 0;
-    Object.defineProperty(exports2, "removeComments", {
+    exports.react = void 0;
+    Object.defineProperty(exports, "removeComments", {
       enumerable: true,
       get: function() {
         return _removeComments.default;
       }
     });
-    Object.defineProperty(exports2, "removeProperties", {
+    Object.defineProperty(exports, "removeProperties", {
       enumerable: true,
       get: function() {
         return _removeProperties.default;
       }
     });
-    Object.defineProperty(exports2, "removePropertiesDeep", {
+    Object.defineProperty(exports, "removePropertiesDeep", {
       enumerable: true,
       get: function() {
         return _removePropertiesDeep.default;
       }
     });
-    Object.defineProperty(exports2, "removeTypeDuplicates", {
+    Object.defineProperty(exports, "removeTypeDuplicates", {
       enumerable: true,
       get: function() {
         return _removeTypeDuplicates.default;
       }
     });
-    Object.defineProperty(exports2, "shallowEqual", {
+    Object.defineProperty(exports, "shallowEqual", {
       enumerable: true,
       get: function() {
         return _shallowEqual.default;
       }
     });
-    Object.defineProperty(exports2, "toBindingIdentifierName", {
+    Object.defineProperty(exports, "toBindingIdentifierName", {
       enumerable: true,
       get: function() {
         return _toBindingIdentifierName.default;
       }
     });
-    Object.defineProperty(exports2, "toBlock", {
+    Object.defineProperty(exports, "toBlock", {
       enumerable: true,
       get: function() {
         return _toBlock.default;
       }
     });
-    Object.defineProperty(exports2, "toComputedKey", {
+    Object.defineProperty(exports, "toComputedKey", {
       enumerable: true,
       get: function() {
         return _toComputedKey.default;
       }
     });
-    Object.defineProperty(exports2, "toExpression", {
+    Object.defineProperty(exports, "toExpression", {
       enumerable: true,
       get: function() {
         return _toExpression.default;
       }
     });
-    Object.defineProperty(exports2, "toIdentifier", {
+    Object.defineProperty(exports, "toIdentifier", {
       enumerable: true,
       get: function() {
         return _toIdentifier.default;
       }
     });
-    Object.defineProperty(exports2, "toKeyAlias", {
+    Object.defineProperty(exports, "toKeyAlias", {
       enumerable: true,
       get: function() {
         return _toKeyAlias.default;
       }
     });
-    Object.defineProperty(exports2, "toSequenceExpression", {
+    Object.defineProperty(exports, "toSequenceExpression", {
       enumerable: true,
       get: function() {
         return _toSequenceExpression.default;
       }
     });
-    Object.defineProperty(exports2, "toStatement", {
+    Object.defineProperty(exports, "toStatement", {
       enumerable: true,
       get: function() {
         return _toStatement.default;
       }
     });
-    Object.defineProperty(exports2, "traverse", {
+    Object.defineProperty(exports, "traverse", {
       enumerable: true,
       get: function() {
         return _traverse.default;
       }
     });
-    Object.defineProperty(exports2, "traverseFast", {
+    Object.defineProperty(exports, "traverseFast", {
       enumerable: true,
       get: function() {
         return _traverseFast.default;
       }
     });
-    Object.defineProperty(exports2, "validate", {
+    Object.defineProperty(exports, "validate", {
       enumerable: true,
       get: function() {
         return _validate.default;
       }
     });
-    Object.defineProperty(exports2, "valueToNode", {
+    Object.defineProperty(exports, "valueToNode", {
       enumerable: true,
       get: function() {
         return _valueToNode.default;
@@ -31553,9 +31743,9 @@ var require_lib3 = __commonJS({
         return;
       if (Object.prototype.hasOwnProperty.call(_exportNames, key))
         return;
-      if (key in exports2 && exports2[key] === _generated[key])
+      if (key in exports && exports[key] === _generated[key])
         return;
-      Object.defineProperty(exports2, key, {
+      Object.defineProperty(exports, key, {
         enumerable: true,
         get: function() {
           return _generated[key];
@@ -31571,9 +31761,9 @@ var require_lib3 = __commonJS({
         return;
       if (Object.prototype.hasOwnProperty.call(_exportNames, key))
         return;
-      if (key in exports2 && exports2[key] === _generated2[key])
+      if (key in exports && exports[key] === _generated2[key])
         return;
-      Object.defineProperty(exports2, key, {
+      Object.defineProperty(exports, key, {
         enumerable: true,
         get: function() {
           return _generated2[key];
@@ -31586,9 +31776,9 @@ var require_lib3 = __commonJS({
         return;
       if (Object.prototype.hasOwnProperty.call(_exportNames, key))
         return;
-      if (key in exports2 && exports2[key] === _uppercase[key])
+      if (key in exports && exports[key] === _uppercase[key])
         return;
-      Object.defineProperty(exports2, key, {
+      Object.defineProperty(exports, key, {
         enumerable: true,
         get: function() {
           return _uppercase[key];
@@ -31613,9 +31803,9 @@ var require_lib3 = __commonJS({
         return;
       if (Object.prototype.hasOwnProperty.call(_exportNames, key))
         return;
-      if (key in exports2 && exports2[key] === _generated3[key])
+      if (key in exports && exports[key] === _generated3[key])
         return;
-      Object.defineProperty(exports2, key, {
+      Object.defineProperty(exports, key, {
         enumerable: true,
         get: function() {
           return _generated3[key];
@@ -31628,9 +31818,9 @@ var require_lib3 = __commonJS({
         return;
       if (Object.prototype.hasOwnProperty.call(_exportNames, key))
         return;
-      if (key in exports2 && exports2[key] === _constants[key])
+      if (key in exports && exports[key] === _constants[key])
         return;
-      Object.defineProperty(exports2, key, {
+      Object.defineProperty(exports, key, {
         enumerable: true,
         get: function() {
           return _constants[key];
@@ -31653,9 +31843,9 @@ var require_lib3 = __commonJS({
         return;
       if (Object.prototype.hasOwnProperty.call(_exportNames, key))
         return;
-      if (key in exports2 && exports2[key] === _definitions[key])
+      if (key in exports && exports[key] === _definitions[key])
         return;
-      Object.defineProperty(exports2, key, {
+      Object.defineProperty(exports, key, {
         enumerable: true,
         get: function() {
           return _definitions[key];
@@ -31676,9 +31866,9 @@ var require_lib3 = __commonJS({
         return;
       if (Object.prototype.hasOwnProperty.call(_exportNames, key))
         return;
-      if (key in exports2 && exports2[key] === _traverse[key])
+      if (key in exports && exports[key] === _traverse[key])
         return;
-      Object.defineProperty(exports2, key, {
+      Object.defineProperty(exports, key, {
         enumerable: true,
         get: function() {
           return _traverse[key];
@@ -31711,9 +31901,9 @@ var require_lib3 = __commonJS({
         return;
       if (Object.prototype.hasOwnProperty.call(_exportNames, key))
         return;
-      if (key in exports2 && exports2[key] === _generated4[key])
+      if (key in exports && exports[key] === _generated4[key])
         return;
-      Object.defineProperty(exports2, key, {
+      Object.defineProperty(exports, key, {
         enumerable: true,
         get: function() {
           return _generated4[key];
@@ -31726,9 +31916,9 @@ var require_lib3 = __commonJS({
         return;
       if (Object.prototype.hasOwnProperty.call(_exportNames, key))
         return;
-      if (key in exports2 && exports2[key] === _generated5[key])
+      if (key in exports && exports[key] === _generated5[key])
         return;
-      Object.defineProperty(exports2, key, {
+      Object.defineProperty(exports, key, {
         enumerable: true,
         get: function() {
           return _generated5[key];
@@ -31740,18 +31930,18 @@ var require_lib3 = __commonJS({
       isCompatTag: _isCompatTag.default,
       buildChildren: _buildChildren.default
     };
-    exports2.react = react;
+    exports.react = react;
   }
 });
 
 // node_modules/@jridgewell/set-array/dist/set-array.umd.js
 var require_set_array_umd = __commonJS({
-  "node_modules/@jridgewell/set-array/dist/set-array.umd.js"(exports2, module2) {
+  "node_modules/@jridgewell/set-array/dist/set-array.umd.js"(exports, module) {
     (function(global2, factory) {
-      typeof exports2 === "object" && typeof module2 !== "undefined" ? factory(exports2) : typeof define === "function" && define.amd ? define([
+      typeof exports === "object" && typeof module !== "undefined" ? factory(exports) : typeof define === "function" && define.amd ? define([
         "exports"
       ], factory) : (global2 = typeof globalThis !== "undefined" ? globalThis : global2 || self, factory(global2.setArray = {}));
-    })(exports2, function(exports1) {
+    })(exports, function(exports1) {
       "use strict";
       exports1.get = void 0;
       exports1.put = void 0;
@@ -31791,12 +31981,12 @@ var require_set_array_umd = __commonJS({
 
 // node_modules/@jridgewell/sourcemap-codec/dist/sourcemap-codec.umd.js
 var require_sourcemap_codec_umd = __commonJS({
-  "node_modules/@jridgewell/sourcemap-codec/dist/sourcemap-codec.umd.js"(exports2, module2) {
+  "node_modules/@jridgewell/sourcemap-codec/dist/sourcemap-codec.umd.js"(exports, module) {
     (function(global2, factory) {
-      typeof exports2 === "object" && typeof module2 !== "undefined" ? factory(exports2) : typeof define === "function" && define.amd ? define([
+      typeof exports === "object" && typeof module !== "undefined" ? factory(exports) : typeof define === "function" && define.amd ? define([
         "exports"
       ], factory) : (global2 = typeof globalThis !== "undefined" ? globalThis : global2 || self, factory(global2.sourcemapCodec = {}));
-    })(exports2, function(exports1) {
+    })(exports, function(exports1) {
       "use strict";
       const comma = ",".charCodeAt(0);
       const semicolon = ";".charCodeAt(0);
@@ -31982,10 +32172,10 @@ var require_sourcemap_codec_umd = __commonJS({
 
 // node_modules/@jridgewell/resolve-uri/dist/resolve-uri.umd.js
 var require_resolve_uri_umd = __commonJS({
-  "node_modules/@jridgewell/resolve-uri/dist/resolve-uri.umd.js"(exports2, module2) {
+  "node_modules/@jridgewell/resolve-uri/dist/resolve-uri.umd.js"(exports, module) {
     (function(global2, factory) {
-      typeof exports2 === "object" && typeof module2 !== "undefined" ? module2.exports = factory() : typeof define === "function" && define.amd ? define(factory) : (global2 = typeof globalThis !== "undefined" ? globalThis : global2 || self, global2.resolveURI = factory());
-    })(exports2, function() {
+      typeof exports === "object" && typeof module !== "undefined" ? module.exports = factory() : typeof define === "function" && define.amd ? define(factory) : (global2 = typeof globalThis !== "undefined" ? globalThis : global2 || self, global2.resolveURI = factory());
+    })(exports, function() {
       "use strict";
       const schemeRegex = /^[\w+.-]+:\/\//;
       const urlRegex = /^([\w+.-]+:)\/\/([^@/#?]*@)?([^:/#?]*)(:\d+)?(\/[^#?]*)?(\?[^#]*)?(#.*)?/;
@@ -32178,14 +32368,14 @@ var require_resolve_uri_umd = __commonJS({
 
 // node_modules/@jridgewell/gen-mapping/node_modules/@jridgewell/trace-mapping/dist/trace-mapping.umd.js
 var require_trace_mapping_umd = __commonJS({
-  "node_modules/@jridgewell/gen-mapping/node_modules/@jridgewell/trace-mapping/dist/trace-mapping.umd.js"(exports2, module2) {
+  "node_modules/@jridgewell/gen-mapping/node_modules/@jridgewell/trace-mapping/dist/trace-mapping.umd.js"(exports, module) {
     (function(global2, factory) {
-      typeof exports2 === "object" && typeof module2 !== "undefined" ? factory(exports2, require_sourcemap_codec_umd(), require_resolve_uri_umd()) : typeof define === "function" && define.amd ? define([
+      typeof exports === "object" && typeof module !== "undefined" ? factory(exports, require_sourcemap_codec_umd(), require_resolve_uri_umd()) : typeof define === "function" && define.amd ? define([
         "exports",
         "@jridgewell/sourcemap-codec",
         "@jridgewell/resolve-uri"
       ], factory) : (global2 = typeof globalThis !== "undefined" ? globalThis : global2 || self, factory(global2.traceMapping = {}, global2.sourcemapCodec, global2.resolveURI));
-    })(exports2, function(exports1, sourcemapCodec, resolveUri) {
+    })(exports, function(exports1, sourcemapCodec, resolveUri) {
       "use strict";
       function _interopDefaultLegacy(e) {
         return e && typeof e === "object" && "default" in e ? e : {
@@ -32687,15 +32877,15 @@ var require_trace_mapping_umd = __commonJS({
 
 // node_modules/@jridgewell/gen-mapping/dist/gen-mapping.umd.js
 var require_gen_mapping_umd = __commonJS({
-  "node_modules/@jridgewell/gen-mapping/dist/gen-mapping.umd.js"(exports2, module2) {
+  "node_modules/@jridgewell/gen-mapping/dist/gen-mapping.umd.js"(exports, module) {
     (function(global2, factory) {
-      typeof exports2 === "object" && typeof module2 !== "undefined" ? factory(exports2, require_set_array_umd(), require_sourcemap_codec_umd(), require_trace_mapping_umd()) : typeof define === "function" && define.amd ? define([
+      typeof exports === "object" && typeof module !== "undefined" ? factory(exports, require_set_array_umd(), require_sourcemap_codec_umd(), require_trace_mapping_umd()) : typeof define === "function" && define.amd ? define([
         "exports",
         "@jridgewell/set-array",
         "@jridgewell/sourcemap-codec",
         "@jridgewell/trace-mapping"
       ], factory) : (global2 = typeof globalThis !== "undefined" ? globalThis : global2 || self, factory(global2.genMapping = {}, global2.setArray, global2.sourcemapCodec, global2.traceMapping));
-    })(exports2, function(exports1, setArray, sourcemapCodec, traceMapping) {
+    })(exports, function(exports1, setArray, sourcemapCodec, traceMapping) {
       "use strict";
       const COLUMN = 0;
       const SOURCES_INDEX = 1;
@@ -32911,12 +33101,12 @@ var require_gen_mapping_umd = __commonJS({
 
 // node_modules/@babel/generator/lib/source-map.js
 var require_source_map = __commonJS({
-  "node_modules/@babel/generator/lib/source-map.js"(exports2) {
+  "node_modules/@babel/generator/lib/source-map.js"(exports) {
     "use strict";
-    Object.defineProperty(exports2, "__esModule", {
+    Object.defineProperty(exports, "__esModule", {
       value: true
     });
-    exports2.default = void 0;
+    exports.default = void 0;
     var _genMapping = require_gen_mapping_umd();
     var SourceMap = /* @__PURE__ */ __name(class SourceMap {
       constructor(opts, code) {
@@ -32962,18 +33152,18 @@ var require_source_map = __commonJS({
         });
       }
     }, "SourceMap");
-    exports2.default = SourceMap;
+    exports.default = SourceMap;
   }
 });
 
 // node_modules/@babel/generator/lib/buffer.js
 var require_buffer = __commonJS({
-  "node_modules/@babel/generator/lib/buffer.js"(exports2) {
+  "node_modules/@babel/generator/lib/buffer.js"(exports) {
     "use strict";
-    Object.defineProperty(exports2, "__esModule", {
+    Object.defineProperty(exports, "__esModule", {
       value: true
     });
-    exports2.default = void 0;
+    exports.default = void 0;
     var Buffer2 = /* @__PURE__ */ __name(class Buffer {
       constructor(map) {
         this._map = null;
@@ -33246,18 +33436,18 @@ var require_buffer = __commonJS({
         return this._position.line + count;
       }
     }, "Buffer");
-    exports2.default = Buffer2;
+    exports.default = Buffer2;
   }
 });
 
 // node_modules/@babel/generator/lib/node/whitespace.js
 var require_whitespace = __commonJS({
-  "node_modules/@babel/generator/lib/node/whitespace.js"(exports2) {
+  "node_modules/@babel/generator/lib/node/whitespace.js"(exports) {
     "use strict";
-    Object.defineProperty(exports2, "__esModule", {
+    Object.defineProperty(exports, "__esModule", {
       value: true
     });
-    exports2.nodes = void 0;
+    exports.nodes = void 0;
     var _t = require_lib3();
     var { FLIPPED_ALIAS_KEYS, isArrayExpression, isAssignmentExpression, isBinary, isBlockStatement, isCallExpression, isFunction, isIdentifier, isLiteral, isMemberExpression, isObjectExpression, isOptionalCallExpression, isOptionalMemberExpression, isStringLiteral } = _t;
     function crawlInternal(node, state) {
@@ -33358,7 +33548,7 @@ var require_whitespace = __commonJS({
         }
       }
     };
-    exports2.nodes = nodes;
+    exports.nodes = nodes;
     nodes.ObjectProperty = nodes.ObjectTypeProperty = nodes.ObjectMethod = function(node, parent) {
       if (parent.properties[0] === node) {
         return 1;
@@ -33420,35 +33610,35 @@ var require_whitespace = __commonJS({
 
 // node_modules/@babel/generator/lib/node/parentheses.js
 var require_parentheses = __commonJS({
-  "node_modules/@babel/generator/lib/node/parentheses.js"(exports2) {
+  "node_modules/@babel/generator/lib/node/parentheses.js"(exports) {
     "use strict";
-    Object.defineProperty(exports2, "__esModule", {
+    Object.defineProperty(exports, "__esModule", {
       value: true
     });
-    exports2.ArrowFunctionExpression = ArrowFunctionExpression;
-    exports2.AssignmentExpression = AssignmentExpression;
-    exports2.Binary = Binary;
-    exports2.BinaryExpression = BinaryExpression;
-    exports2.ClassExpression = ClassExpression;
-    exports2.ConditionalExpression = ConditionalExpression;
-    exports2.DoExpression = DoExpression;
-    exports2.FunctionExpression = FunctionExpression;
-    exports2.FunctionTypeAnnotation = FunctionTypeAnnotation;
-    exports2.Identifier = Identifier;
-    exports2.LogicalExpression = LogicalExpression;
-    exports2.NullableTypeAnnotation = NullableTypeAnnotation;
-    exports2.ObjectExpression = ObjectExpression;
-    exports2.OptionalIndexedAccessType = OptionalIndexedAccessType;
-    exports2.OptionalCallExpression = exports2.OptionalMemberExpression = OptionalMemberExpression;
-    exports2.SequenceExpression = SequenceExpression;
-    exports2.TSTypeAssertion = exports2.TSSatisfiesExpression = exports2.TSAsExpression = TSAsExpression;
-    exports2.TSInferType = TSInferType;
-    exports2.TSInstantiationExpression = TSInstantiationExpression;
-    exports2.TSIntersectionType = exports2.TSUnionType = TSUnionType;
-    exports2.UnaryLike = UnaryLike;
-    exports2.IntersectionTypeAnnotation = exports2.UnionTypeAnnotation = UnionTypeAnnotation;
-    exports2.UpdateExpression = UpdateExpression;
-    exports2.AwaitExpression = exports2.YieldExpression = YieldExpression;
+    exports.ArrowFunctionExpression = ArrowFunctionExpression;
+    exports.AssignmentExpression = AssignmentExpression;
+    exports.Binary = Binary;
+    exports.BinaryExpression = BinaryExpression;
+    exports.ClassExpression = ClassExpression;
+    exports.ConditionalExpression = ConditionalExpression;
+    exports.DoExpression = DoExpression;
+    exports.FunctionExpression = FunctionExpression;
+    exports.FunctionTypeAnnotation = FunctionTypeAnnotation;
+    exports.Identifier = Identifier;
+    exports.LogicalExpression = LogicalExpression;
+    exports.NullableTypeAnnotation = NullableTypeAnnotation;
+    exports.ObjectExpression = ObjectExpression;
+    exports.OptionalIndexedAccessType = OptionalIndexedAccessType;
+    exports.OptionalCallExpression = exports.OptionalMemberExpression = OptionalMemberExpression;
+    exports.SequenceExpression = SequenceExpression;
+    exports.TSTypeAssertion = exports.TSSatisfiesExpression = exports.TSAsExpression = TSAsExpression;
+    exports.TSInferType = TSInferType;
+    exports.TSInstantiationExpression = TSInstantiationExpression;
+    exports.TSIntersectionType = exports.TSUnionType = TSUnionType;
+    exports.UnaryLike = UnaryLike;
+    exports.IntersectionTypeAnnotation = exports.UnionTypeAnnotation = UnionTypeAnnotation;
+    exports.UpdateExpression = UpdateExpression;
+    exports.AwaitExpression = exports.YieldExpression = YieldExpression;
     var _t = require_lib3();
     var { isArrayTypeAnnotation, isArrowFunctionExpression, isAssignmentExpression, isAwaitExpression, isBinary, isBinaryExpression, isUpdateExpression, isCallExpression, isClass, isClassExpression, isConditional, isConditionalExpression, isExportDeclaration, isExportDefaultDeclaration, isExpressionStatement, isFor, isForInStatement, isForOfStatement, isForStatement, isFunctionExpression, isIfStatement, isIndexedAccessType, isIntersectionTypeAnnotation, isLogicalExpression, isMemberExpression, isNewExpression, isNullableTypeAnnotation, isObjectPattern, isOptionalCallExpression, isOptionalMemberExpression, isReturnStatement, isSequenceExpression, isSwitchStatement, isTSArrayType, isTSAsExpression, isTSInstantiationExpression, isTSIntersectionType, isTSNonNullExpression, isTSOptionalType, isTSRestType, isTSTypeAssertion, isTSUnionType, isTaggedTemplateExpression, isThrowStatement, isTypeAnnotation, isUnaryLike, isUnionTypeAnnotation, isVariableDeclarator, isWhileStatement, isYieldExpression, isTSSatisfiesExpression } = _t;
     var PRECEDENCE = {
@@ -33700,15 +33890,15 @@ var require_parentheses = __commonJS({
 
 // node_modules/@babel/generator/lib/node/index.js
 var require_node = __commonJS({
-  "node_modules/@babel/generator/lib/node/index.js"(exports2) {
+  "node_modules/@babel/generator/lib/node/index.js"(exports) {
     "use strict";
-    Object.defineProperty(exports2, "__esModule", {
+    Object.defineProperty(exports, "__esModule", {
       value: true
     });
-    exports2.needsParens = needsParens;
-    exports2.needsWhitespace = needsWhitespace;
-    exports2.needsWhitespaceAfter = needsWhitespaceAfter;
-    exports2.needsWhitespaceBefore = needsWhitespaceBefore;
+    exports.needsParens = needsParens;
+    exports.needsWhitespace = needsWhitespace;
+    exports.needsWhitespaceAfter = needsWhitespaceAfter;
+    exports.needsWhitespaceBefore = needsWhitespaceBefore;
     var whitespace = require_whitespace();
     var parens = require_parentheses();
     var _t = require_lib3();
@@ -33786,14 +33976,14 @@ var require_node = __commonJS({
 
 // node_modules/@babel/generator/lib/generators/template-literals.js
 var require_template_literals = __commonJS({
-  "node_modules/@babel/generator/lib/generators/template-literals.js"(exports2) {
+  "node_modules/@babel/generator/lib/generators/template-literals.js"(exports) {
     "use strict";
-    Object.defineProperty(exports2, "__esModule", {
+    Object.defineProperty(exports, "__esModule", {
       value: true
     });
-    exports2.TaggedTemplateExpression = TaggedTemplateExpression;
-    exports2.TemplateElement = TemplateElement;
-    exports2.TemplateLiteral = TemplateLiteral;
+    exports.TaggedTemplateExpression = TaggedTemplateExpression;
+    exports.TemplateElement = TemplateElement;
+    exports.TemplateLiteral = TemplateLiteral;
     function TaggedTemplateExpression(node) {
       this.print(node.tag, node);
       this.print(node.typeParameters, node);
@@ -33822,37 +34012,37 @@ var require_template_literals = __commonJS({
 
 // node_modules/@babel/generator/lib/generators/expressions.js
 var require_expressions = __commonJS({
-  "node_modules/@babel/generator/lib/generators/expressions.js"(exports2) {
+  "node_modules/@babel/generator/lib/generators/expressions.js"(exports) {
     "use strict";
-    Object.defineProperty(exports2, "__esModule", {
+    Object.defineProperty(exports, "__esModule", {
       value: true
     });
-    exports2.LogicalExpression = exports2.BinaryExpression = exports2.AssignmentExpression = AssignmentExpression;
-    exports2.AssignmentPattern = AssignmentPattern;
-    exports2.AwaitExpression = AwaitExpression;
-    exports2.BindExpression = BindExpression;
-    exports2.CallExpression = CallExpression;
-    exports2.ConditionalExpression = ConditionalExpression;
-    exports2.Decorator = Decorator;
-    exports2.DoExpression = DoExpression;
-    exports2.EmptyStatement = EmptyStatement;
-    exports2.ExpressionStatement = ExpressionStatement;
-    exports2.Import = Import;
-    exports2.MemberExpression = MemberExpression;
-    exports2.MetaProperty = MetaProperty;
-    exports2.ModuleExpression = ModuleExpression;
-    exports2.NewExpression = NewExpression;
-    exports2.OptionalCallExpression = OptionalCallExpression;
-    exports2.OptionalMemberExpression = OptionalMemberExpression;
-    exports2.ParenthesizedExpression = ParenthesizedExpression;
-    exports2.PrivateName = PrivateName;
-    exports2.SequenceExpression = SequenceExpression;
-    exports2.Super = Super;
-    exports2.ThisExpression = ThisExpression;
-    exports2.UnaryExpression = UnaryExpression;
-    exports2.UpdateExpression = UpdateExpression;
-    exports2.V8IntrinsicIdentifier = V8IntrinsicIdentifier;
-    exports2.YieldExpression = YieldExpression;
+    exports.LogicalExpression = exports.BinaryExpression = exports.AssignmentExpression = AssignmentExpression;
+    exports.AssignmentPattern = AssignmentPattern;
+    exports.AwaitExpression = AwaitExpression;
+    exports.BindExpression = BindExpression;
+    exports.CallExpression = CallExpression;
+    exports.ConditionalExpression = ConditionalExpression;
+    exports.Decorator = Decorator;
+    exports.DoExpression = DoExpression;
+    exports.EmptyStatement = EmptyStatement;
+    exports.ExpressionStatement = ExpressionStatement;
+    exports.Import = Import;
+    exports.MemberExpression = MemberExpression;
+    exports.MetaProperty = MetaProperty;
+    exports.ModuleExpression = ModuleExpression;
+    exports.NewExpression = NewExpression;
+    exports.OptionalCallExpression = OptionalCallExpression;
+    exports.OptionalMemberExpression = OptionalMemberExpression;
+    exports.ParenthesizedExpression = ParenthesizedExpression;
+    exports.PrivateName = PrivateName;
+    exports.SequenceExpression = SequenceExpression;
+    exports.Super = Super;
+    exports.ThisExpression = ThisExpression;
+    exports.UnaryExpression = UnaryExpression;
+    exports.UpdateExpression = UpdateExpression;
+    exports.V8IntrinsicIdentifier = V8IntrinsicIdentifier;
+    exports.YieldExpression = YieldExpression;
     var _t = require_lib3();
     var n = require_node();
     var { isCallExpression, isLiteral, isMemberExpression, isNewExpression } = _t;
@@ -34139,29 +34329,29 @@ var require_expressions = __commonJS({
 
 // node_modules/@babel/generator/lib/generators/statements.js
 var require_statements = __commonJS({
-  "node_modules/@babel/generator/lib/generators/statements.js"(exports2) {
+  "node_modules/@babel/generator/lib/generators/statements.js"(exports) {
     "use strict";
-    Object.defineProperty(exports2, "__esModule", {
+    Object.defineProperty(exports, "__esModule", {
       value: true
     });
-    exports2.BreakStatement = BreakStatement;
-    exports2.CatchClause = CatchClause;
-    exports2.ContinueStatement = ContinueStatement;
-    exports2.DebuggerStatement = DebuggerStatement;
-    exports2.DoWhileStatement = DoWhileStatement;
-    exports2.ForOfStatement = exports2.ForInStatement = void 0;
-    exports2.ForStatement = ForStatement;
-    exports2.IfStatement = IfStatement;
-    exports2.LabeledStatement = LabeledStatement;
-    exports2.ReturnStatement = ReturnStatement;
-    exports2.SwitchCase = SwitchCase;
-    exports2.SwitchStatement = SwitchStatement;
-    exports2.ThrowStatement = ThrowStatement;
-    exports2.TryStatement = TryStatement;
-    exports2.VariableDeclaration = VariableDeclaration;
-    exports2.VariableDeclarator = VariableDeclarator;
-    exports2.WhileStatement = WhileStatement;
-    exports2.WithStatement = WithStatement;
+    exports.BreakStatement = BreakStatement;
+    exports.CatchClause = CatchClause;
+    exports.ContinueStatement = ContinueStatement;
+    exports.DebuggerStatement = DebuggerStatement;
+    exports.DoWhileStatement = DoWhileStatement;
+    exports.ForOfStatement = exports.ForInStatement = void 0;
+    exports.ForStatement = ForStatement;
+    exports.IfStatement = IfStatement;
+    exports.LabeledStatement = LabeledStatement;
+    exports.ReturnStatement = ReturnStatement;
+    exports.SwitchCase = SwitchCase;
+    exports.SwitchStatement = SwitchStatement;
+    exports.ThrowStatement = ThrowStatement;
+    exports.TryStatement = TryStatement;
+    exports.VariableDeclaration = VariableDeclaration;
+    exports.VariableDeclarator = VariableDeclarator;
+    exports.WhileStatement = WhileStatement;
+    exports.WithStatement = WithStatement;
     var _t = require_lib3();
     var { isFor, isForStatement, isIfStatement, isStatement } = _t;
     function WithStatement(node) {
@@ -34259,9 +34449,9 @@ var require_statements = __commonJS({
     }
     __name(ForXStatement, "ForXStatement");
     var ForInStatement = ForXStatement;
-    exports2.ForInStatement = ForInStatement;
+    exports.ForInStatement = ForInStatement;
     var ForOfStatement = ForXStatement;
-    exports2.ForOfStatement = ForOfStatement;
+    exports.ForOfStatement = ForOfStatement;
     function DoWhileStatement(node) {
       this.word("do");
       this.space();
@@ -34435,20 +34625,20 @@ var require_statements = __commonJS({
 
 // node_modules/@babel/generator/lib/generators/classes.js
 var require_classes = __commonJS({
-  "node_modules/@babel/generator/lib/generators/classes.js"(exports2) {
+  "node_modules/@babel/generator/lib/generators/classes.js"(exports) {
     "use strict";
-    Object.defineProperty(exports2, "__esModule", {
+    Object.defineProperty(exports, "__esModule", {
       value: true
     });
-    exports2.ClassAccessorProperty = ClassAccessorProperty;
-    exports2.ClassBody = ClassBody;
-    exports2.ClassExpression = exports2.ClassDeclaration = ClassDeclaration;
-    exports2.ClassMethod = ClassMethod;
-    exports2.ClassPrivateMethod = ClassPrivateMethod;
-    exports2.ClassPrivateProperty = ClassPrivateProperty;
-    exports2.ClassProperty = ClassProperty;
-    exports2.StaticBlock = StaticBlock;
-    exports2._classMethodHead = _classMethodHead;
+    exports.ClassAccessorProperty = ClassAccessorProperty;
+    exports.ClassBody = ClassBody;
+    exports.ClassExpression = exports.ClassDeclaration = ClassDeclaration;
+    exports.ClassMethod = ClassMethod;
+    exports.ClassPrivateMethod = ClassPrivateMethod;
+    exports.ClassPrivateProperty = ClassPrivateProperty;
+    exports.ClassProperty = ClassProperty;
+    exports.StaticBlock = StaticBlock;
+    exports._classMethodHead = _classMethodHead;
     var _t = require_lib3();
     var { isExportDefaultDeclaration, isExportNamedDeclaration } = _t;
     function ClassDeclaration(node, parent) {
@@ -34628,19 +34818,19 @@ var require_classes = __commonJS({
 
 // node_modules/@babel/generator/lib/generators/methods.js
 var require_methods = __commonJS({
-  "node_modules/@babel/generator/lib/generators/methods.js"(exports2) {
+  "node_modules/@babel/generator/lib/generators/methods.js"(exports) {
     "use strict";
-    Object.defineProperty(exports2, "__esModule", {
+    Object.defineProperty(exports, "__esModule", {
       value: true
     });
-    exports2.ArrowFunctionExpression = ArrowFunctionExpression;
-    exports2.FunctionDeclaration = exports2.FunctionExpression = FunctionExpression;
-    exports2._functionHead = _functionHead;
-    exports2._methodHead = _methodHead;
-    exports2._param = _param;
-    exports2._parameters = _parameters;
-    exports2._params = _params;
-    exports2._predicate = _predicate;
+    exports.ArrowFunctionExpression = ArrowFunctionExpression;
+    exports.FunctionDeclaration = exports.FunctionExpression = FunctionExpression;
+    exports._functionHead = _functionHead;
+    exports._methodHead = _methodHead;
+    exports._param = _param;
+    exports._parameters = _parameters;
+    exports._params = _params;
+    exports._predicate = _predicate;
     var _t = require_lib3();
     var { isIdentifier } = _t;
     function _params(node) {
@@ -34768,23 +34958,23 @@ var require_methods = __commonJS({
 
 // node_modules/@babel/generator/lib/generators/modules.js
 var require_modules = __commonJS({
-  "node_modules/@babel/generator/lib/generators/modules.js"(exports2) {
+  "node_modules/@babel/generator/lib/generators/modules.js"(exports) {
     "use strict";
-    Object.defineProperty(exports2, "__esModule", {
+    Object.defineProperty(exports, "__esModule", {
       value: true
     });
-    exports2.ExportAllDeclaration = ExportAllDeclaration;
-    exports2.ExportDefaultDeclaration = ExportDefaultDeclaration;
-    exports2.ExportDefaultSpecifier = ExportDefaultSpecifier;
-    exports2.ExportNamedDeclaration = ExportNamedDeclaration;
-    exports2.ExportNamespaceSpecifier = ExportNamespaceSpecifier;
-    exports2.ExportSpecifier = ExportSpecifier;
-    exports2.ImportAttribute = ImportAttribute;
-    exports2.ImportDeclaration = ImportDeclaration;
-    exports2.ImportDefaultSpecifier = ImportDefaultSpecifier;
-    exports2.ImportNamespaceSpecifier = ImportNamespaceSpecifier;
-    exports2.ImportSpecifier = ImportSpecifier;
-    exports2._printAssertions = _printAssertions;
+    exports.ExportAllDeclaration = ExportAllDeclaration;
+    exports.ExportDefaultDeclaration = ExportDefaultDeclaration;
+    exports.ExportDefaultSpecifier = ExportDefaultSpecifier;
+    exports.ExportNamedDeclaration = ExportNamedDeclaration;
+    exports.ExportNamespaceSpecifier = ExportNamespaceSpecifier;
+    exports.ExportSpecifier = ExportSpecifier;
+    exports.ImportAttribute = ImportAttribute;
+    exports.ImportDeclaration = ImportDeclaration;
+    exports.ImportDefaultSpecifier = ImportDefaultSpecifier;
+    exports.ImportNamespaceSpecifier = ImportNamespaceSpecifier;
+    exports.ImportSpecifier = ImportSpecifier;
+    exports._printAssertions = _printAssertions;
     var _t = require_lib3();
     var { isClassDeclaration, isExportDefaultSpecifier, isExportNamespaceSpecifier, isImportDefaultSpecifier, isImportNamespaceSpecifier, isStatement } = _t;
     function ImportSpecifier(node) {
@@ -35021,7 +35211,7 @@ var require_modules = __commonJS({
 
 // node_modules/jsesc/jsesc.js
 var require_jsesc = __commonJS({
-  "node_modules/jsesc/jsesc.js"(exports2, module2) {
+  "node_modules/jsesc/jsesc.js"(exports, module) {
     "use strict";
     var object = {};
     var hasOwnProperty = object.hasOwnProperty;
@@ -35290,37 +35480,37 @@ var require_jsesc = __commonJS({
       return result;
     }, "jsesc");
     jsesc.version = "2.5.2";
-    module2.exports = jsesc;
+    module.exports = jsesc;
   }
 });
 
 // node_modules/@babel/generator/lib/generators/types.js
 var require_types = __commonJS({
-  "node_modules/@babel/generator/lib/generators/types.js"(exports2) {
+  "node_modules/@babel/generator/lib/generators/types.js"(exports) {
     "use strict";
-    Object.defineProperty(exports2, "__esModule", {
+    Object.defineProperty(exports, "__esModule", {
       value: true
     });
-    exports2.ArgumentPlaceholder = ArgumentPlaceholder;
-    exports2.ArrayPattern = exports2.ArrayExpression = ArrayExpression;
-    exports2.BigIntLiteral = BigIntLiteral;
-    exports2.BooleanLiteral = BooleanLiteral;
-    exports2.DecimalLiteral = DecimalLiteral;
-    exports2.Identifier = Identifier;
-    exports2.NullLiteral = NullLiteral;
-    exports2.NumericLiteral = NumericLiteral;
-    exports2.ObjectPattern = exports2.ObjectExpression = ObjectExpression;
-    exports2.ObjectMethod = ObjectMethod;
-    exports2.ObjectProperty = ObjectProperty;
-    exports2.PipelineBareFunction = PipelineBareFunction;
-    exports2.PipelinePrimaryTopicReference = PipelinePrimaryTopicReference;
-    exports2.PipelineTopicExpression = PipelineTopicExpression;
-    exports2.RecordExpression = RecordExpression;
-    exports2.RegExpLiteral = RegExpLiteral;
-    exports2.SpreadElement = exports2.RestElement = RestElement;
-    exports2.StringLiteral = StringLiteral;
-    exports2.TopicReference = TopicReference;
-    exports2.TupleExpression = TupleExpression;
+    exports.ArgumentPlaceholder = ArgumentPlaceholder;
+    exports.ArrayPattern = exports.ArrayExpression = ArrayExpression;
+    exports.BigIntLiteral = BigIntLiteral;
+    exports.BooleanLiteral = BooleanLiteral;
+    exports.DecimalLiteral = DecimalLiteral;
+    exports.Identifier = Identifier;
+    exports.NullLiteral = NullLiteral;
+    exports.NumericLiteral = NumericLiteral;
+    exports.ObjectPattern = exports.ObjectExpression = ObjectExpression;
+    exports.ObjectMethod = ObjectMethod;
+    exports.ObjectProperty = ObjectProperty;
+    exports.PipelineBareFunction = PipelineBareFunction;
+    exports.PipelinePrimaryTopicReference = PipelinePrimaryTopicReference;
+    exports.PipelineTopicExpression = PipelineTopicExpression;
+    exports.RecordExpression = RecordExpression;
+    exports.RegExpLiteral = RegExpLiteral;
+    exports.SpreadElement = exports.RestElement = RestElement;
+    exports.StringLiteral = StringLiteral;
+    exports.TopicReference = TopicReference;
+    exports.TupleExpression = TupleExpression;
     var _t = require_lib3();
     var _jsesc = require_jsesc();
     var { isAssignmentPattern, isIdentifier } = _t;
@@ -35544,85 +35734,85 @@ var require_types = __commonJS({
 
 // node_modules/@babel/generator/lib/generators/flow.js
 var require_flow2 = __commonJS({
-  "node_modules/@babel/generator/lib/generators/flow.js"(exports2) {
+  "node_modules/@babel/generator/lib/generators/flow.js"(exports) {
     "use strict";
-    Object.defineProperty(exports2, "__esModule", {
+    Object.defineProperty(exports, "__esModule", {
       value: true
     });
-    exports2.AnyTypeAnnotation = AnyTypeAnnotation;
-    exports2.ArrayTypeAnnotation = ArrayTypeAnnotation;
-    exports2.BooleanLiteralTypeAnnotation = BooleanLiteralTypeAnnotation;
-    exports2.BooleanTypeAnnotation = BooleanTypeAnnotation;
-    exports2.DeclareClass = DeclareClass;
-    exports2.DeclareExportAllDeclaration = DeclareExportAllDeclaration;
-    exports2.DeclareExportDeclaration = DeclareExportDeclaration;
-    exports2.DeclareFunction = DeclareFunction;
-    exports2.DeclareInterface = DeclareInterface;
-    exports2.DeclareModule = DeclareModule;
-    exports2.DeclareModuleExports = DeclareModuleExports;
-    exports2.DeclareOpaqueType = DeclareOpaqueType;
-    exports2.DeclareTypeAlias = DeclareTypeAlias;
-    exports2.DeclareVariable = DeclareVariable;
-    exports2.DeclaredPredicate = DeclaredPredicate;
-    exports2.EmptyTypeAnnotation = EmptyTypeAnnotation;
-    exports2.EnumBooleanBody = EnumBooleanBody;
-    exports2.EnumBooleanMember = EnumBooleanMember;
-    exports2.EnumDeclaration = EnumDeclaration;
-    exports2.EnumDefaultedMember = EnumDefaultedMember;
-    exports2.EnumNumberBody = EnumNumberBody;
-    exports2.EnumNumberMember = EnumNumberMember;
-    exports2.EnumStringBody = EnumStringBody;
-    exports2.EnumStringMember = EnumStringMember;
-    exports2.EnumSymbolBody = EnumSymbolBody;
-    exports2.ExistsTypeAnnotation = ExistsTypeAnnotation;
-    exports2.FunctionTypeAnnotation = FunctionTypeAnnotation;
-    exports2.FunctionTypeParam = FunctionTypeParam;
-    exports2.IndexedAccessType = IndexedAccessType;
-    exports2.InferredPredicate = InferredPredicate;
-    exports2.InterfaceDeclaration = InterfaceDeclaration;
-    exports2.GenericTypeAnnotation = exports2.ClassImplements = exports2.InterfaceExtends = InterfaceExtends;
-    exports2.InterfaceTypeAnnotation = InterfaceTypeAnnotation;
-    exports2.IntersectionTypeAnnotation = IntersectionTypeAnnotation;
-    exports2.MixedTypeAnnotation = MixedTypeAnnotation;
-    exports2.NullLiteralTypeAnnotation = NullLiteralTypeAnnotation;
-    exports2.NullableTypeAnnotation = NullableTypeAnnotation;
-    Object.defineProperty(exports2, "NumberLiteralTypeAnnotation", {
+    exports.AnyTypeAnnotation = AnyTypeAnnotation;
+    exports.ArrayTypeAnnotation = ArrayTypeAnnotation;
+    exports.BooleanLiteralTypeAnnotation = BooleanLiteralTypeAnnotation;
+    exports.BooleanTypeAnnotation = BooleanTypeAnnotation;
+    exports.DeclareClass = DeclareClass;
+    exports.DeclareExportAllDeclaration = DeclareExportAllDeclaration;
+    exports.DeclareExportDeclaration = DeclareExportDeclaration;
+    exports.DeclareFunction = DeclareFunction;
+    exports.DeclareInterface = DeclareInterface;
+    exports.DeclareModule = DeclareModule;
+    exports.DeclareModuleExports = DeclareModuleExports;
+    exports.DeclareOpaqueType = DeclareOpaqueType;
+    exports.DeclareTypeAlias = DeclareTypeAlias;
+    exports.DeclareVariable = DeclareVariable;
+    exports.DeclaredPredicate = DeclaredPredicate;
+    exports.EmptyTypeAnnotation = EmptyTypeAnnotation;
+    exports.EnumBooleanBody = EnumBooleanBody;
+    exports.EnumBooleanMember = EnumBooleanMember;
+    exports.EnumDeclaration = EnumDeclaration;
+    exports.EnumDefaultedMember = EnumDefaultedMember;
+    exports.EnumNumberBody = EnumNumberBody;
+    exports.EnumNumberMember = EnumNumberMember;
+    exports.EnumStringBody = EnumStringBody;
+    exports.EnumStringMember = EnumStringMember;
+    exports.EnumSymbolBody = EnumSymbolBody;
+    exports.ExistsTypeAnnotation = ExistsTypeAnnotation;
+    exports.FunctionTypeAnnotation = FunctionTypeAnnotation;
+    exports.FunctionTypeParam = FunctionTypeParam;
+    exports.IndexedAccessType = IndexedAccessType;
+    exports.InferredPredicate = InferredPredicate;
+    exports.InterfaceDeclaration = InterfaceDeclaration;
+    exports.GenericTypeAnnotation = exports.ClassImplements = exports.InterfaceExtends = InterfaceExtends;
+    exports.InterfaceTypeAnnotation = InterfaceTypeAnnotation;
+    exports.IntersectionTypeAnnotation = IntersectionTypeAnnotation;
+    exports.MixedTypeAnnotation = MixedTypeAnnotation;
+    exports.NullLiteralTypeAnnotation = NullLiteralTypeAnnotation;
+    exports.NullableTypeAnnotation = NullableTypeAnnotation;
+    Object.defineProperty(exports, "NumberLiteralTypeAnnotation", {
       enumerable: true,
       get: function() {
         return _types2.NumericLiteral;
       }
     });
-    exports2.NumberTypeAnnotation = NumberTypeAnnotation;
-    exports2.ObjectTypeAnnotation = ObjectTypeAnnotation;
-    exports2.ObjectTypeCallProperty = ObjectTypeCallProperty;
-    exports2.ObjectTypeIndexer = ObjectTypeIndexer;
-    exports2.ObjectTypeInternalSlot = ObjectTypeInternalSlot;
-    exports2.ObjectTypeProperty = ObjectTypeProperty;
-    exports2.ObjectTypeSpreadProperty = ObjectTypeSpreadProperty;
-    exports2.OpaqueType = OpaqueType;
-    exports2.OptionalIndexedAccessType = OptionalIndexedAccessType;
-    exports2.QualifiedTypeIdentifier = QualifiedTypeIdentifier;
-    Object.defineProperty(exports2, "StringLiteralTypeAnnotation", {
+    exports.NumberTypeAnnotation = NumberTypeAnnotation;
+    exports.ObjectTypeAnnotation = ObjectTypeAnnotation;
+    exports.ObjectTypeCallProperty = ObjectTypeCallProperty;
+    exports.ObjectTypeIndexer = ObjectTypeIndexer;
+    exports.ObjectTypeInternalSlot = ObjectTypeInternalSlot;
+    exports.ObjectTypeProperty = ObjectTypeProperty;
+    exports.ObjectTypeSpreadProperty = ObjectTypeSpreadProperty;
+    exports.OpaqueType = OpaqueType;
+    exports.OptionalIndexedAccessType = OptionalIndexedAccessType;
+    exports.QualifiedTypeIdentifier = QualifiedTypeIdentifier;
+    Object.defineProperty(exports, "StringLiteralTypeAnnotation", {
       enumerable: true,
       get: function() {
         return _types2.StringLiteral;
       }
     });
-    exports2.StringTypeAnnotation = StringTypeAnnotation;
-    exports2.SymbolTypeAnnotation = SymbolTypeAnnotation;
-    exports2.ThisTypeAnnotation = ThisTypeAnnotation;
-    exports2.TupleTypeAnnotation = TupleTypeAnnotation;
-    exports2.TypeAlias = TypeAlias;
-    exports2.TypeAnnotation = TypeAnnotation;
-    exports2.TypeCastExpression = TypeCastExpression;
-    exports2.TypeParameter = TypeParameter;
-    exports2.TypeParameterDeclaration = exports2.TypeParameterInstantiation = TypeParameterInstantiation;
-    exports2.TypeofTypeAnnotation = TypeofTypeAnnotation;
-    exports2.UnionTypeAnnotation = UnionTypeAnnotation;
-    exports2.Variance = Variance;
-    exports2.VoidTypeAnnotation = VoidTypeAnnotation;
-    exports2._interfaceish = _interfaceish;
-    exports2._variance = _variance;
+    exports.StringTypeAnnotation = StringTypeAnnotation;
+    exports.SymbolTypeAnnotation = SymbolTypeAnnotation;
+    exports.ThisTypeAnnotation = ThisTypeAnnotation;
+    exports.TupleTypeAnnotation = TupleTypeAnnotation;
+    exports.TypeAlias = TypeAlias;
+    exports.TypeAnnotation = TypeAnnotation;
+    exports.TypeCastExpression = TypeCastExpression;
+    exports.TypeParameter = TypeParameter;
+    exports.TypeParameterDeclaration = exports.TypeParameterInstantiation = TypeParameterInstantiation;
+    exports.TypeofTypeAnnotation = TypeofTypeAnnotation;
+    exports.UnionTypeAnnotation = UnionTypeAnnotation;
+    exports.Variance = Variance;
+    exports.VoidTypeAnnotation = VoidTypeAnnotation;
+    exports._interfaceish = _interfaceish;
+    exports._variance = _variance;
     var _t = require_lib3();
     var _modules = require_modules();
     var _types2 = require_types();
@@ -36268,18 +36458,18 @@ var require_flow2 = __commonJS({
 
 // node_modules/@babel/generator/lib/generators/base.js
 var require_base = __commonJS({
-  "node_modules/@babel/generator/lib/generators/base.js"(exports2) {
+  "node_modules/@babel/generator/lib/generators/base.js"(exports) {
     "use strict";
-    Object.defineProperty(exports2, "__esModule", {
+    Object.defineProperty(exports, "__esModule", {
       value: true
     });
-    exports2.BlockStatement = BlockStatement;
-    exports2.Directive = Directive;
-    exports2.DirectiveLiteral = DirectiveLiteral;
-    exports2.File = File;
-    exports2.InterpreterDirective = InterpreterDirective;
-    exports2.Placeholder = Placeholder;
-    exports2.Program = Program;
+    exports.BlockStatement = BlockStatement;
+    exports.Directive = Directive;
+    exports.DirectiveLiteral = DirectiveLiteral;
+    exports.File = File;
+    exports.InterpreterDirective = InterpreterDirective;
+    exports.Placeholder = Placeholder;
+    exports.Program = Program;
     function File(node) {
       if (node.program) {
         this.print(node.program.interpreter, node);
@@ -36369,26 +36559,26 @@ var require_base = __commonJS({
 
 // node_modules/@babel/generator/lib/generators/jsx.js
 var require_jsx2 = __commonJS({
-  "node_modules/@babel/generator/lib/generators/jsx.js"(exports2) {
+  "node_modules/@babel/generator/lib/generators/jsx.js"(exports) {
     "use strict";
-    Object.defineProperty(exports2, "__esModule", {
+    Object.defineProperty(exports, "__esModule", {
       value: true
     });
-    exports2.JSXAttribute = JSXAttribute;
-    exports2.JSXClosingElement = JSXClosingElement;
-    exports2.JSXClosingFragment = JSXClosingFragment;
-    exports2.JSXElement = JSXElement;
-    exports2.JSXEmptyExpression = JSXEmptyExpression;
-    exports2.JSXExpressionContainer = JSXExpressionContainer;
-    exports2.JSXFragment = JSXFragment;
-    exports2.JSXIdentifier = JSXIdentifier;
-    exports2.JSXMemberExpression = JSXMemberExpression;
-    exports2.JSXNamespacedName = JSXNamespacedName;
-    exports2.JSXOpeningElement = JSXOpeningElement;
-    exports2.JSXOpeningFragment = JSXOpeningFragment;
-    exports2.JSXSpreadAttribute = JSXSpreadAttribute;
-    exports2.JSXSpreadChild = JSXSpreadChild;
-    exports2.JSXText = JSXText;
+    exports.JSXAttribute = JSXAttribute;
+    exports.JSXClosingElement = JSXClosingElement;
+    exports.JSXClosingFragment = JSXClosingFragment;
+    exports.JSXElement = JSXElement;
+    exports.JSXEmptyExpression = JSXEmptyExpression;
+    exports.JSXExpressionContainer = JSXExpressionContainer;
+    exports.JSXFragment = JSXFragment;
+    exports.JSXIdentifier = JSXIdentifier;
+    exports.JSXMemberExpression = JSXMemberExpression;
+    exports.JSXNamespacedName = JSXNamespacedName;
+    exports.JSXOpeningElement = JSXOpeningElement;
+    exports.JSXOpeningFragment = JSXOpeningFragment;
+    exports.JSXSpreadAttribute = JSXSpreadAttribute;
+    exports.JSXSpreadChild = JSXSpreadChild;
+    exports.JSXText = JSXText;
     function JSXAttribute(node) {
       this.print(node.name, node);
       if (node.value) {
@@ -36512,79 +36702,79 @@ var require_jsx2 = __commonJS({
 
 // node_modules/@babel/generator/lib/generators/typescript.js
 var require_typescript2 = __commonJS({
-  "node_modules/@babel/generator/lib/generators/typescript.js"(exports2) {
+  "node_modules/@babel/generator/lib/generators/typescript.js"(exports) {
     "use strict";
-    Object.defineProperty(exports2, "__esModule", {
+    Object.defineProperty(exports, "__esModule", {
       value: true
     });
-    exports2.TSAnyKeyword = TSAnyKeyword;
-    exports2.TSArrayType = TSArrayType;
-    exports2.TSSatisfiesExpression = exports2.TSAsExpression = TSTypeExpression;
-    exports2.TSBigIntKeyword = TSBigIntKeyword;
-    exports2.TSBooleanKeyword = TSBooleanKeyword;
-    exports2.TSCallSignatureDeclaration = TSCallSignatureDeclaration;
-    exports2.TSConditionalType = TSConditionalType;
-    exports2.TSConstructSignatureDeclaration = TSConstructSignatureDeclaration;
-    exports2.TSConstructorType = TSConstructorType;
-    exports2.TSDeclareFunction = TSDeclareFunction;
-    exports2.TSDeclareMethod = TSDeclareMethod;
-    exports2.TSEnumDeclaration = TSEnumDeclaration;
-    exports2.TSEnumMember = TSEnumMember;
-    exports2.TSExportAssignment = TSExportAssignment;
-    exports2.TSExpressionWithTypeArguments = TSExpressionWithTypeArguments;
-    exports2.TSExternalModuleReference = TSExternalModuleReference;
-    exports2.TSFunctionType = TSFunctionType;
-    exports2.TSImportEqualsDeclaration = TSImportEqualsDeclaration;
-    exports2.TSImportType = TSImportType;
-    exports2.TSIndexSignature = TSIndexSignature;
-    exports2.TSIndexedAccessType = TSIndexedAccessType;
-    exports2.TSInferType = TSInferType;
-    exports2.TSInstantiationExpression = TSInstantiationExpression;
-    exports2.TSInterfaceBody = TSInterfaceBody;
-    exports2.TSInterfaceDeclaration = TSInterfaceDeclaration;
-    exports2.TSIntersectionType = TSIntersectionType;
-    exports2.TSIntrinsicKeyword = TSIntrinsicKeyword;
-    exports2.TSLiteralType = TSLiteralType;
-    exports2.TSMappedType = TSMappedType;
-    exports2.TSMethodSignature = TSMethodSignature;
-    exports2.TSModuleBlock = TSModuleBlock;
-    exports2.TSModuleDeclaration = TSModuleDeclaration;
-    exports2.TSNamedTupleMember = TSNamedTupleMember;
-    exports2.TSNamespaceExportDeclaration = TSNamespaceExportDeclaration;
-    exports2.TSNeverKeyword = TSNeverKeyword;
-    exports2.TSNonNullExpression = TSNonNullExpression;
-    exports2.TSNullKeyword = TSNullKeyword;
-    exports2.TSNumberKeyword = TSNumberKeyword;
-    exports2.TSObjectKeyword = TSObjectKeyword;
-    exports2.TSOptionalType = TSOptionalType;
-    exports2.TSParameterProperty = TSParameterProperty;
-    exports2.TSParenthesizedType = TSParenthesizedType;
-    exports2.TSPropertySignature = TSPropertySignature;
-    exports2.TSQualifiedName = TSQualifiedName;
-    exports2.TSRestType = TSRestType;
-    exports2.TSStringKeyword = TSStringKeyword;
-    exports2.TSSymbolKeyword = TSSymbolKeyword;
-    exports2.TSThisType = TSThisType;
-    exports2.TSTupleType = TSTupleType;
-    exports2.TSTypeAliasDeclaration = TSTypeAliasDeclaration;
-    exports2.TSTypeAnnotation = TSTypeAnnotation;
-    exports2.TSTypeAssertion = TSTypeAssertion;
-    exports2.TSTypeLiteral = TSTypeLiteral;
-    exports2.TSTypeOperator = TSTypeOperator;
-    exports2.TSTypeParameter = TSTypeParameter;
-    exports2.TSTypeParameterDeclaration = exports2.TSTypeParameterInstantiation = TSTypeParameterInstantiation;
-    exports2.TSTypePredicate = TSTypePredicate;
-    exports2.TSTypeQuery = TSTypeQuery;
-    exports2.TSTypeReference = TSTypeReference;
-    exports2.TSUndefinedKeyword = TSUndefinedKeyword;
-    exports2.TSUnionType = TSUnionType;
-    exports2.TSUnknownKeyword = TSUnknownKeyword;
-    exports2.TSVoidKeyword = TSVoidKeyword;
-    exports2.tsPrintClassMemberModifiers = tsPrintClassMemberModifiers;
-    exports2.tsPrintFunctionOrConstructorType = tsPrintFunctionOrConstructorType;
-    exports2.tsPrintPropertyOrMethodName = tsPrintPropertyOrMethodName;
-    exports2.tsPrintSignatureDeclarationBase = tsPrintSignatureDeclarationBase;
-    exports2.tsPrintTypeLiteralOrInterfaceBody = tsPrintTypeLiteralOrInterfaceBody;
+    exports.TSAnyKeyword = TSAnyKeyword;
+    exports.TSArrayType = TSArrayType;
+    exports.TSSatisfiesExpression = exports.TSAsExpression = TSTypeExpression;
+    exports.TSBigIntKeyword = TSBigIntKeyword;
+    exports.TSBooleanKeyword = TSBooleanKeyword;
+    exports.TSCallSignatureDeclaration = TSCallSignatureDeclaration;
+    exports.TSConditionalType = TSConditionalType;
+    exports.TSConstructSignatureDeclaration = TSConstructSignatureDeclaration;
+    exports.TSConstructorType = TSConstructorType;
+    exports.TSDeclareFunction = TSDeclareFunction;
+    exports.TSDeclareMethod = TSDeclareMethod;
+    exports.TSEnumDeclaration = TSEnumDeclaration;
+    exports.TSEnumMember = TSEnumMember;
+    exports.TSExportAssignment = TSExportAssignment;
+    exports.TSExpressionWithTypeArguments = TSExpressionWithTypeArguments;
+    exports.TSExternalModuleReference = TSExternalModuleReference;
+    exports.TSFunctionType = TSFunctionType;
+    exports.TSImportEqualsDeclaration = TSImportEqualsDeclaration;
+    exports.TSImportType = TSImportType;
+    exports.TSIndexSignature = TSIndexSignature;
+    exports.TSIndexedAccessType = TSIndexedAccessType;
+    exports.TSInferType = TSInferType;
+    exports.TSInstantiationExpression = TSInstantiationExpression;
+    exports.TSInterfaceBody = TSInterfaceBody;
+    exports.TSInterfaceDeclaration = TSInterfaceDeclaration;
+    exports.TSIntersectionType = TSIntersectionType;
+    exports.TSIntrinsicKeyword = TSIntrinsicKeyword;
+    exports.TSLiteralType = TSLiteralType;
+    exports.TSMappedType = TSMappedType;
+    exports.TSMethodSignature = TSMethodSignature;
+    exports.TSModuleBlock = TSModuleBlock;
+    exports.TSModuleDeclaration = TSModuleDeclaration;
+    exports.TSNamedTupleMember = TSNamedTupleMember;
+    exports.TSNamespaceExportDeclaration = TSNamespaceExportDeclaration;
+    exports.TSNeverKeyword = TSNeverKeyword;
+    exports.TSNonNullExpression = TSNonNullExpression;
+    exports.TSNullKeyword = TSNullKeyword;
+    exports.TSNumberKeyword = TSNumberKeyword;
+    exports.TSObjectKeyword = TSObjectKeyword;
+    exports.TSOptionalType = TSOptionalType;
+    exports.TSParameterProperty = TSParameterProperty;
+    exports.TSParenthesizedType = TSParenthesizedType;
+    exports.TSPropertySignature = TSPropertySignature;
+    exports.TSQualifiedName = TSQualifiedName;
+    exports.TSRestType = TSRestType;
+    exports.TSStringKeyword = TSStringKeyword;
+    exports.TSSymbolKeyword = TSSymbolKeyword;
+    exports.TSThisType = TSThisType;
+    exports.TSTupleType = TSTupleType;
+    exports.TSTypeAliasDeclaration = TSTypeAliasDeclaration;
+    exports.TSTypeAnnotation = TSTypeAnnotation;
+    exports.TSTypeAssertion = TSTypeAssertion;
+    exports.TSTypeLiteral = TSTypeLiteral;
+    exports.TSTypeOperator = TSTypeOperator;
+    exports.TSTypeParameter = TSTypeParameter;
+    exports.TSTypeParameterDeclaration = exports.TSTypeParameterInstantiation = TSTypeParameterInstantiation;
+    exports.TSTypePredicate = TSTypePredicate;
+    exports.TSTypeQuery = TSTypeQuery;
+    exports.TSTypeReference = TSTypeReference;
+    exports.TSUndefinedKeyword = TSUndefinedKeyword;
+    exports.TSUnionType = TSUnionType;
+    exports.TSUnknownKeyword = TSUnknownKeyword;
+    exports.TSVoidKeyword = TSVoidKeyword;
+    exports.tsPrintClassMemberModifiers = tsPrintClassMemberModifiers;
+    exports.tsPrintFunctionOrConstructorType = tsPrintFunctionOrConstructorType;
+    exports.tsPrintPropertyOrMethodName = tsPrintPropertyOrMethodName;
+    exports.tsPrintSignatureDeclarationBase = tsPrintSignatureDeclarationBase;
+    exports.tsPrintTypeLiteralOrInterfaceBody = tsPrintTypeLiteralOrInterfaceBody;
     function TSTypeAnnotation(node) {
       this.tokenChar(58);
       this.space();
@@ -37229,18 +37419,18 @@ var require_typescript2 = __commonJS({
 
 // node_modules/@babel/generator/lib/generators/index.js
 var require_generators = __commonJS({
-  "node_modules/@babel/generator/lib/generators/index.js"(exports2) {
+  "node_modules/@babel/generator/lib/generators/index.js"(exports) {
     "use strict";
-    Object.defineProperty(exports2, "__esModule", {
+    Object.defineProperty(exports, "__esModule", {
       value: true
     });
     var _templateLiterals = require_template_literals();
     Object.keys(_templateLiterals).forEach(function(key) {
       if (key === "default" || key === "__esModule")
         return;
-      if (key in exports2 && exports2[key] === _templateLiterals[key])
+      if (key in exports && exports[key] === _templateLiterals[key])
         return;
-      Object.defineProperty(exports2, key, {
+      Object.defineProperty(exports, key, {
         enumerable: true,
         get: function() {
           return _templateLiterals[key];
@@ -37251,9 +37441,9 @@ var require_generators = __commonJS({
     Object.keys(_expressions).forEach(function(key) {
       if (key === "default" || key === "__esModule")
         return;
-      if (key in exports2 && exports2[key] === _expressions[key])
+      if (key in exports && exports[key] === _expressions[key])
         return;
-      Object.defineProperty(exports2, key, {
+      Object.defineProperty(exports, key, {
         enumerable: true,
         get: function() {
           return _expressions[key];
@@ -37264,9 +37454,9 @@ var require_generators = __commonJS({
     Object.keys(_statements).forEach(function(key) {
       if (key === "default" || key === "__esModule")
         return;
-      if (key in exports2 && exports2[key] === _statements[key])
+      if (key in exports && exports[key] === _statements[key])
         return;
-      Object.defineProperty(exports2, key, {
+      Object.defineProperty(exports, key, {
         enumerable: true,
         get: function() {
           return _statements[key];
@@ -37277,9 +37467,9 @@ var require_generators = __commonJS({
     Object.keys(_classes).forEach(function(key) {
       if (key === "default" || key === "__esModule")
         return;
-      if (key in exports2 && exports2[key] === _classes[key])
+      if (key in exports && exports[key] === _classes[key])
         return;
-      Object.defineProperty(exports2, key, {
+      Object.defineProperty(exports, key, {
         enumerable: true,
         get: function() {
           return _classes[key];
@@ -37290,9 +37480,9 @@ var require_generators = __commonJS({
     Object.keys(_methods).forEach(function(key) {
       if (key === "default" || key === "__esModule")
         return;
-      if (key in exports2 && exports2[key] === _methods[key])
+      if (key in exports && exports[key] === _methods[key])
         return;
-      Object.defineProperty(exports2, key, {
+      Object.defineProperty(exports, key, {
         enumerable: true,
         get: function() {
           return _methods[key];
@@ -37303,9 +37493,9 @@ var require_generators = __commonJS({
     Object.keys(_modules).forEach(function(key) {
       if (key === "default" || key === "__esModule")
         return;
-      if (key in exports2 && exports2[key] === _modules[key])
+      if (key in exports && exports[key] === _modules[key])
         return;
-      Object.defineProperty(exports2, key, {
+      Object.defineProperty(exports, key, {
         enumerable: true,
         get: function() {
           return _modules[key];
@@ -37316,9 +37506,9 @@ var require_generators = __commonJS({
     Object.keys(_types).forEach(function(key) {
       if (key === "default" || key === "__esModule")
         return;
-      if (key in exports2 && exports2[key] === _types[key])
+      if (key in exports && exports[key] === _types[key])
         return;
-      Object.defineProperty(exports2, key, {
+      Object.defineProperty(exports, key, {
         enumerable: true,
         get: function() {
           return _types[key];
@@ -37329,9 +37519,9 @@ var require_generators = __commonJS({
     Object.keys(_flow).forEach(function(key) {
       if (key === "default" || key === "__esModule")
         return;
-      if (key in exports2 && exports2[key] === _flow[key])
+      if (key in exports && exports[key] === _flow[key])
         return;
-      Object.defineProperty(exports2, key, {
+      Object.defineProperty(exports, key, {
         enumerable: true,
         get: function() {
           return _flow[key];
@@ -37342,9 +37532,9 @@ var require_generators = __commonJS({
     Object.keys(_base).forEach(function(key) {
       if (key === "default" || key === "__esModule")
         return;
-      if (key in exports2 && exports2[key] === _base[key])
+      if (key in exports && exports[key] === _base[key])
         return;
-      Object.defineProperty(exports2, key, {
+      Object.defineProperty(exports, key, {
         enumerable: true,
         get: function() {
           return _base[key];
@@ -37355,9 +37545,9 @@ var require_generators = __commonJS({
     Object.keys(_jsx).forEach(function(key) {
       if (key === "default" || key === "__esModule")
         return;
-      if (key in exports2 && exports2[key] === _jsx[key])
+      if (key in exports && exports[key] === _jsx[key])
         return;
-      Object.defineProperty(exports2, key, {
+      Object.defineProperty(exports, key, {
         enumerable: true,
         get: function() {
           return _jsx[key];
@@ -37368,9 +37558,9 @@ var require_generators = __commonJS({
     Object.keys(_typescript).forEach(function(key) {
       if (key === "default" || key === "__esModule")
         return;
-      if (key in exports2 && exports2[key] === _typescript[key])
+      if (key in exports && exports[key] === _typescript[key])
         return;
-      Object.defineProperty(exports2, key, {
+      Object.defineProperty(exports, key, {
         enumerable: true,
         get: function() {
           return _typescript[key];
@@ -37382,12 +37572,12 @@ var require_generators = __commonJS({
 
 // node_modules/@babel/generator/lib/printer.js
 var require_printer = __commonJS({
-  "node_modules/@babel/generator/lib/printer.js"(exports2) {
+  "node_modules/@babel/generator/lib/printer.js"(exports) {
     "use strict";
-    Object.defineProperty(exports2, "__esModule", {
+    Object.defineProperty(exports, "__esModule", {
       value: true
     });
-    exports2.default = void 0;
+    exports.default = void 0;
     var _buffer = require_buffer();
     var n = require_node();
     var _t = require_lib3();
@@ -38024,7 +38214,7 @@ ${" ".repeat(indentSize)}`);
       }, "Noop");
     }
     var _default = Printer;
-    exports2.default = _default;
+    exports.default = _default;
     function commaSeparator() {
       this.tokenChar(44);
       this.space();
@@ -38035,13 +38225,13 @@ ${" ".repeat(indentSize)}`);
 
 // node_modules/@babel/generator/lib/index.js
 var require_lib4 = __commonJS({
-  "node_modules/@babel/generator/lib/index.js"(exports2) {
+  "node_modules/@babel/generator/lib/index.js"(exports) {
     "use strict";
-    Object.defineProperty(exports2, "__esModule", {
+    Object.defineProperty(exports, "__esModule", {
       value: true
     });
-    exports2.CodeGenerator = void 0;
-    exports2.default = generate3;
+    exports.CodeGenerator = void 0;
+    exports.default = generate3;
     var _sourceMap = require_source_map();
     var _printer = require_printer();
     var Generator = /* @__PURE__ */ __name(class Generator extends _printer.default {
@@ -38110,7 +38300,7 @@ var require_lib4 = __commonJS({
         return this._generator.generate();
       }
     }, "CodeGenerator");
-    exports2.CodeGenerator = CodeGenerator;
+    exports.CodeGenerator = CodeGenerator;
     function generate3(ast, opts, code) {
       const gen = new Generator(ast, opts, code);
       return gen.generate();
@@ -38121,12 +38311,12 @@ var require_lib4 = __commonJS({
 
 // node_modules/@babel/template/node_modules/@babel/types/lib/utils/shallowEqual.js
 var require_shallowEqual2 = __commonJS({
-  "node_modules/@babel/template/node_modules/@babel/types/lib/utils/shallowEqual.js"(exports2) {
+  "node_modules/@babel/template/node_modules/@babel/types/lib/utils/shallowEqual.js"(exports) {
     "use strict";
-    Object.defineProperty(exports2, "__esModule", {
+    Object.defineProperty(exports, "__esModule", {
       value: true
     });
-    exports2.default = shallowEqual;
+    exports.default = shallowEqual;
     function shallowEqual(actual, expected) {
       const keys = Object.keys(expected);
       for (const key of keys) {
@@ -38142,312 +38332,312 @@ var require_shallowEqual2 = __commonJS({
 
 // node_modules/@babel/template/node_modules/@babel/types/lib/validators/generated/index.js
 var require_generated6 = __commonJS({
-  "node_modules/@babel/template/node_modules/@babel/types/lib/validators/generated/index.js"(exports2) {
+  "node_modules/@babel/template/node_modules/@babel/types/lib/validators/generated/index.js"(exports) {
     "use strict";
-    Object.defineProperty(exports2, "__esModule", {
+    Object.defineProperty(exports, "__esModule", {
       value: true
     });
-    exports2.isAccessor = isAccessor;
-    exports2.isAnyTypeAnnotation = isAnyTypeAnnotation;
-    exports2.isArgumentPlaceholder = isArgumentPlaceholder;
-    exports2.isArrayExpression = isArrayExpression;
-    exports2.isArrayPattern = isArrayPattern;
-    exports2.isArrayTypeAnnotation = isArrayTypeAnnotation;
-    exports2.isArrowFunctionExpression = isArrowFunctionExpression;
-    exports2.isAssignmentExpression = isAssignmentExpression;
-    exports2.isAssignmentPattern = isAssignmentPattern;
-    exports2.isAwaitExpression = isAwaitExpression;
-    exports2.isBigIntLiteral = isBigIntLiteral;
-    exports2.isBinary = isBinary;
-    exports2.isBinaryExpression = isBinaryExpression;
-    exports2.isBindExpression = isBindExpression;
-    exports2.isBlock = isBlock;
-    exports2.isBlockParent = isBlockParent;
-    exports2.isBlockStatement = isBlockStatement;
-    exports2.isBooleanLiteral = isBooleanLiteral;
-    exports2.isBooleanLiteralTypeAnnotation = isBooleanLiteralTypeAnnotation;
-    exports2.isBooleanTypeAnnotation = isBooleanTypeAnnotation;
-    exports2.isBreakStatement = isBreakStatement;
-    exports2.isCallExpression = isCallExpression;
-    exports2.isCatchClause = isCatchClause;
-    exports2.isClass = isClass;
-    exports2.isClassAccessorProperty = isClassAccessorProperty;
-    exports2.isClassBody = isClassBody;
-    exports2.isClassDeclaration = isClassDeclaration;
-    exports2.isClassExpression = isClassExpression;
-    exports2.isClassImplements = isClassImplements;
-    exports2.isClassMethod = isClassMethod;
-    exports2.isClassPrivateMethod = isClassPrivateMethod;
-    exports2.isClassPrivateProperty = isClassPrivateProperty;
-    exports2.isClassProperty = isClassProperty;
-    exports2.isCompletionStatement = isCompletionStatement;
-    exports2.isConditional = isConditional;
-    exports2.isConditionalExpression = isConditionalExpression;
-    exports2.isContinueStatement = isContinueStatement;
-    exports2.isDebuggerStatement = isDebuggerStatement;
-    exports2.isDecimalLiteral = isDecimalLiteral;
-    exports2.isDeclaration = isDeclaration;
-    exports2.isDeclareClass = isDeclareClass;
-    exports2.isDeclareExportAllDeclaration = isDeclareExportAllDeclaration;
-    exports2.isDeclareExportDeclaration = isDeclareExportDeclaration;
-    exports2.isDeclareFunction = isDeclareFunction;
-    exports2.isDeclareInterface = isDeclareInterface;
-    exports2.isDeclareModule = isDeclareModule;
-    exports2.isDeclareModuleExports = isDeclareModuleExports;
-    exports2.isDeclareOpaqueType = isDeclareOpaqueType;
-    exports2.isDeclareTypeAlias = isDeclareTypeAlias;
-    exports2.isDeclareVariable = isDeclareVariable;
-    exports2.isDeclaredPredicate = isDeclaredPredicate;
-    exports2.isDecorator = isDecorator;
-    exports2.isDirective = isDirective;
-    exports2.isDirectiveLiteral = isDirectiveLiteral;
-    exports2.isDoExpression = isDoExpression;
-    exports2.isDoWhileStatement = isDoWhileStatement;
-    exports2.isEmptyStatement = isEmptyStatement;
-    exports2.isEmptyTypeAnnotation = isEmptyTypeAnnotation;
-    exports2.isEnumBody = isEnumBody;
-    exports2.isEnumBooleanBody = isEnumBooleanBody;
-    exports2.isEnumBooleanMember = isEnumBooleanMember;
-    exports2.isEnumDeclaration = isEnumDeclaration;
-    exports2.isEnumDefaultedMember = isEnumDefaultedMember;
-    exports2.isEnumMember = isEnumMember;
-    exports2.isEnumNumberBody = isEnumNumberBody;
-    exports2.isEnumNumberMember = isEnumNumberMember;
-    exports2.isEnumStringBody = isEnumStringBody;
-    exports2.isEnumStringMember = isEnumStringMember;
-    exports2.isEnumSymbolBody = isEnumSymbolBody;
-    exports2.isExistsTypeAnnotation = isExistsTypeAnnotation;
-    exports2.isExportAllDeclaration = isExportAllDeclaration;
-    exports2.isExportDeclaration = isExportDeclaration;
-    exports2.isExportDefaultDeclaration = isExportDefaultDeclaration;
-    exports2.isExportDefaultSpecifier = isExportDefaultSpecifier;
-    exports2.isExportNamedDeclaration = isExportNamedDeclaration;
-    exports2.isExportNamespaceSpecifier = isExportNamespaceSpecifier;
-    exports2.isExportSpecifier = isExportSpecifier;
-    exports2.isExpression = isExpression;
-    exports2.isExpressionStatement = isExpressionStatement;
-    exports2.isExpressionWrapper = isExpressionWrapper;
-    exports2.isFile = isFile;
-    exports2.isFlow = isFlow;
-    exports2.isFlowBaseAnnotation = isFlowBaseAnnotation;
-    exports2.isFlowDeclaration = isFlowDeclaration;
-    exports2.isFlowPredicate = isFlowPredicate;
-    exports2.isFlowType = isFlowType;
-    exports2.isFor = isFor;
-    exports2.isForInStatement = isForInStatement;
-    exports2.isForOfStatement = isForOfStatement;
-    exports2.isForStatement = isForStatement;
-    exports2.isForXStatement = isForXStatement;
-    exports2.isFunction = isFunction;
-    exports2.isFunctionDeclaration = isFunctionDeclaration;
-    exports2.isFunctionExpression = isFunctionExpression;
-    exports2.isFunctionParent = isFunctionParent;
-    exports2.isFunctionTypeAnnotation = isFunctionTypeAnnotation;
-    exports2.isFunctionTypeParam = isFunctionTypeParam;
-    exports2.isGenericTypeAnnotation = isGenericTypeAnnotation;
-    exports2.isIdentifier = isIdentifier;
-    exports2.isIfStatement = isIfStatement;
-    exports2.isImmutable = isImmutable;
-    exports2.isImport = isImport;
-    exports2.isImportAttribute = isImportAttribute;
-    exports2.isImportDeclaration = isImportDeclaration;
-    exports2.isImportDefaultSpecifier = isImportDefaultSpecifier;
-    exports2.isImportNamespaceSpecifier = isImportNamespaceSpecifier;
-    exports2.isImportSpecifier = isImportSpecifier;
-    exports2.isIndexedAccessType = isIndexedAccessType;
-    exports2.isInferredPredicate = isInferredPredicate;
-    exports2.isInterfaceDeclaration = isInterfaceDeclaration;
-    exports2.isInterfaceExtends = isInterfaceExtends;
-    exports2.isInterfaceTypeAnnotation = isInterfaceTypeAnnotation;
-    exports2.isInterpreterDirective = isInterpreterDirective;
-    exports2.isIntersectionTypeAnnotation = isIntersectionTypeAnnotation;
-    exports2.isJSX = isJSX;
-    exports2.isJSXAttribute = isJSXAttribute;
-    exports2.isJSXClosingElement = isJSXClosingElement;
-    exports2.isJSXClosingFragment = isJSXClosingFragment;
-    exports2.isJSXElement = isJSXElement;
-    exports2.isJSXEmptyExpression = isJSXEmptyExpression;
-    exports2.isJSXExpressionContainer = isJSXExpressionContainer;
-    exports2.isJSXFragment = isJSXFragment;
-    exports2.isJSXIdentifier = isJSXIdentifier;
-    exports2.isJSXMemberExpression = isJSXMemberExpression;
-    exports2.isJSXNamespacedName = isJSXNamespacedName;
-    exports2.isJSXOpeningElement = isJSXOpeningElement;
-    exports2.isJSXOpeningFragment = isJSXOpeningFragment;
-    exports2.isJSXSpreadAttribute = isJSXSpreadAttribute;
-    exports2.isJSXSpreadChild = isJSXSpreadChild;
-    exports2.isJSXText = isJSXText;
-    exports2.isLVal = isLVal;
-    exports2.isLabeledStatement = isLabeledStatement;
-    exports2.isLiteral = isLiteral;
-    exports2.isLogicalExpression = isLogicalExpression;
-    exports2.isLoop = isLoop;
-    exports2.isMemberExpression = isMemberExpression;
-    exports2.isMetaProperty = isMetaProperty;
-    exports2.isMethod = isMethod;
-    exports2.isMiscellaneous = isMiscellaneous;
-    exports2.isMixedTypeAnnotation = isMixedTypeAnnotation;
-    exports2.isModuleDeclaration = isModuleDeclaration;
-    exports2.isModuleExpression = isModuleExpression;
-    exports2.isModuleSpecifier = isModuleSpecifier;
-    exports2.isNewExpression = isNewExpression;
-    exports2.isNoop = isNoop;
-    exports2.isNullLiteral = isNullLiteral;
-    exports2.isNullLiteralTypeAnnotation = isNullLiteralTypeAnnotation;
-    exports2.isNullableTypeAnnotation = isNullableTypeAnnotation;
-    exports2.isNumberLiteral = isNumberLiteral;
-    exports2.isNumberLiteralTypeAnnotation = isNumberLiteralTypeAnnotation;
-    exports2.isNumberTypeAnnotation = isNumberTypeAnnotation;
-    exports2.isNumericLiteral = isNumericLiteral;
-    exports2.isObjectExpression = isObjectExpression;
-    exports2.isObjectMember = isObjectMember;
-    exports2.isObjectMethod = isObjectMethod;
-    exports2.isObjectPattern = isObjectPattern;
-    exports2.isObjectProperty = isObjectProperty;
-    exports2.isObjectTypeAnnotation = isObjectTypeAnnotation;
-    exports2.isObjectTypeCallProperty = isObjectTypeCallProperty;
-    exports2.isObjectTypeIndexer = isObjectTypeIndexer;
-    exports2.isObjectTypeInternalSlot = isObjectTypeInternalSlot;
-    exports2.isObjectTypeProperty = isObjectTypeProperty;
-    exports2.isObjectTypeSpreadProperty = isObjectTypeSpreadProperty;
-    exports2.isOpaqueType = isOpaqueType;
-    exports2.isOptionalCallExpression = isOptionalCallExpression;
-    exports2.isOptionalIndexedAccessType = isOptionalIndexedAccessType;
-    exports2.isOptionalMemberExpression = isOptionalMemberExpression;
-    exports2.isParenthesizedExpression = isParenthesizedExpression;
-    exports2.isPattern = isPattern;
-    exports2.isPatternLike = isPatternLike;
-    exports2.isPipelineBareFunction = isPipelineBareFunction;
-    exports2.isPipelinePrimaryTopicReference = isPipelinePrimaryTopicReference;
-    exports2.isPipelineTopicExpression = isPipelineTopicExpression;
-    exports2.isPlaceholder = isPlaceholder;
-    exports2.isPrivate = isPrivate;
-    exports2.isPrivateName = isPrivateName;
-    exports2.isProgram = isProgram;
-    exports2.isProperty = isProperty;
-    exports2.isPureish = isPureish;
-    exports2.isQualifiedTypeIdentifier = isQualifiedTypeIdentifier;
-    exports2.isRecordExpression = isRecordExpression;
-    exports2.isRegExpLiteral = isRegExpLiteral;
-    exports2.isRegexLiteral = isRegexLiteral;
-    exports2.isRestElement = isRestElement;
-    exports2.isRestProperty = isRestProperty;
-    exports2.isReturnStatement = isReturnStatement;
-    exports2.isScopable = isScopable;
-    exports2.isSequenceExpression = isSequenceExpression;
-    exports2.isSpreadElement = isSpreadElement;
-    exports2.isSpreadProperty = isSpreadProperty;
-    exports2.isStandardized = isStandardized;
-    exports2.isStatement = isStatement;
-    exports2.isStaticBlock = isStaticBlock;
-    exports2.isStringLiteral = isStringLiteral;
-    exports2.isStringLiteralTypeAnnotation = isStringLiteralTypeAnnotation;
-    exports2.isStringTypeAnnotation = isStringTypeAnnotation;
-    exports2.isSuper = isSuper;
-    exports2.isSwitchCase = isSwitchCase;
-    exports2.isSwitchStatement = isSwitchStatement;
-    exports2.isSymbolTypeAnnotation = isSymbolTypeAnnotation;
-    exports2.isTSAnyKeyword = isTSAnyKeyword;
-    exports2.isTSArrayType = isTSArrayType;
-    exports2.isTSAsExpression = isTSAsExpression;
-    exports2.isTSBaseType = isTSBaseType;
-    exports2.isTSBigIntKeyword = isTSBigIntKeyword;
-    exports2.isTSBooleanKeyword = isTSBooleanKeyword;
-    exports2.isTSCallSignatureDeclaration = isTSCallSignatureDeclaration;
-    exports2.isTSConditionalType = isTSConditionalType;
-    exports2.isTSConstructSignatureDeclaration = isTSConstructSignatureDeclaration;
-    exports2.isTSConstructorType = isTSConstructorType;
-    exports2.isTSDeclareFunction = isTSDeclareFunction;
-    exports2.isTSDeclareMethod = isTSDeclareMethod;
-    exports2.isTSEntityName = isTSEntityName;
-    exports2.isTSEnumDeclaration = isTSEnumDeclaration;
-    exports2.isTSEnumMember = isTSEnumMember;
-    exports2.isTSExportAssignment = isTSExportAssignment;
-    exports2.isTSExpressionWithTypeArguments = isTSExpressionWithTypeArguments;
-    exports2.isTSExternalModuleReference = isTSExternalModuleReference;
-    exports2.isTSFunctionType = isTSFunctionType;
-    exports2.isTSImportEqualsDeclaration = isTSImportEqualsDeclaration;
-    exports2.isTSImportType = isTSImportType;
-    exports2.isTSIndexSignature = isTSIndexSignature;
-    exports2.isTSIndexedAccessType = isTSIndexedAccessType;
-    exports2.isTSInferType = isTSInferType;
-    exports2.isTSInstantiationExpression = isTSInstantiationExpression;
-    exports2.isTSInterfaceBody = isTSInterfaceBody;
-    exports2.isTSInterfaceDeclaration = isTSInterfaceDeclaration;
-    exports2.isTSIntersectionType = isTSIntersectionType;
-    exports2.isTSIntrinsicKeyword = isTSIntrinsicKeyword;
-    exports2.isTSLiteralType = isTSLiteralType;
-    exports2.isTSMappedType = isTSMappedType;
-    exports2.isTSMethodSignature = isTSMethodSignature;
-    exports2.isTSModuleBlock = isTSModuleBlock;
-    exports2.isTSModuleDeclaration = isTSModuleDeclaration;
-    exports2.isTSNamedTupleMember = isTSNamedTupleMember;
-    exports2.isTSNamespaceExportDeclaration = isTSNamespaceExportDeclaration;
-    exports2.isTSNeverKeyword = isTSNeverKeyword;
-    exports2.isTSNonNullExpression = isTSNonNullExpression;
-    exports2.isTSNullKeyword = isTSNullKeyword;
-    exports2.isTSNumberKeyword = isTSNumberKeyword;
-    exports2.isTSObjectKeyword = isTSObjectKeyword;
-    exports2.isTSOptionalType = isTSOptionalType;
-    exports2.isTSParameterProperty = isTSParameterProperty;
-    exports2.isTSParenthesizedType = isTSParenthesizedType;
-    exports2.isTSPropertySignature = isTSPropertySignature;
-    exports2.isTSQualifiedName = isTSQualifiedName;
-    exports2.isTSRestType = isTSRestType;
-    exports2.isTSStringKeyword = isTSStringKeyword;
-    exports2.isTSSymbolKeyword = isTSSymbolKeyword;
-    exports2.isTSThisType = isTSThisType;
-    exports2.isTSTupleType = isTSTupleType;
-    exports2.isTSType = isTSType;
-    exports2.isTSTypeAliasDeclaration = isTSTypeAliasDeclaration;
-    exports2.isTSTypeAnnotation = isTSTypeAnnotation;
-    exports2.isTSTypeAssertion = isTSTypeAssertion;
-    exports2.isTSTypeElement = isTSTypeElement;
-    exports2.isTSTypeLiteral = isTSTypeLiteral;
-    exports2.isTSTypeOperator = isTSTypeOperator;
-    exports2.isTSTypeParameter = isTSTypeParameter;
-    exports2.isTSTypeParameterDeclaration = isTSTypeParameterDeclaration;
-    exports2.isTSTypeParameterInstantiation = isTSTypeParameterInstantiation;
-    exports2.isTSTypePredicate = isTSTypePredicate;
-    exports2.isTSTypeQuery = isTSTypeQuery;
-    exports2.isTSTypeReference = isTSTypeReference;
-    exports2.isTSUndefinedKeyword = isTSUndefinedKeyword;
-    exports2.isTSUnionType = isTSUnionType;
-    exports2.isTSUnknownKeyword = isTSUnknownKeyword;
-    exports2.isTSVoidKeyword = isTSVoidKeyword;
-    exports2.isTaggedTemplateExpression = isTaggedTemplateExpression;
-    exports2.isTemplateElement = isTemplateElement;
-    exports2.isTemplateLiteral = isTemplateLiteral;
-    exports2.isTerminatorless = isTerminatorless;
-    exports2.isThisExpression = isThisExpression;
-    exports2.isThisTypeAnnotation = isThisTypeAnnotation;
-    exports2.isThrowStatement = isThrowStatement;
-    exports2.isTopicReference = isTopicReference;
-    exports2.isTryStatement = isTryStatement;
-    exports2.isTupleExpression = isTupleExpression;
-    exports2.isTupleTypeAnnotation = isTupleTypeAnnotation;
-    exports2.isTypeAlias = isTypeAlias;
-    exports2.isTypeAnnotation = isTypeAnnotation;
-    exports2.isTypeCastExpression = isTypeCastExpression;
-    exports2.isTypeParameter = isTypeParameter;
-    exports2.isTypeParameterDeclaration = isTypeParameterDeclaration;
-    exports2.isTypeParameterInstantiation = isTypeParameterInstantiation;
-    exports2.isTypeScript = isTypeScript;
-    exports2.isTypeofTypeAnnotation = isTypeofTypeAnnotation;
-    exports2.isUnaryExpression = isUnaryExpression;
-    exports2.isUnaryLike = isUnaryLike;
-    exports2.isUnionTypeAnnotation = isUnionTypeAnnotation;
-    exports2.isUpdateExpression = isUpdateExpression;
-    exports2.isUserWhitespacable = isUserWhitespacable;
-    exports2.isV8IntrinsicIdentifier = isV8IntrinsicIdentifier;
-    exports2.isVariableDeclaration = isVariableDeclaration;
-    exports2.isVariableDeclarator = isVariableDeclarator;
-    exports2.isVariance = isVariance;
-    exports2.isVoidTypeAnnotation = isVoidTypeAnnotation;
-    exports2.isWhile = isWhile;
-    exports2.isWhileStatement = isWhileStatement;
-    exports2.isWithStatement = isWithStatement;
-    exports2.isYieldExpression = isYieldExpression;
+    exports.isAccessor = isAccessor;
+    exports.isAnyTypeAnnotation = isAnyTypeAnnotation;
+    exports.isArgumentPlaceholder = isArgumentPlaceholder;
+    exports.isArrayExpression = isArrayExpression;
+    exports.isArrayPattern = isArrayPattern;
+    exports.isArrayTypeAnnotation = isArrayTypeAnnotation;
+    exports.isArrowFunctionExpression = isArrowFunctionExpression;
+    exports.isAssignmentExpression = isAssignmentExpression;
+    exports.isAssignmentPattern = isAssignmentPattern;
+    exports.isAwaitExpression = isAwaitExpression;
+    exports.isBigIntLiteral = isBigIntLiteral;
+    exports.isBinary = isBinary;
+    exports.isBinaryExpression = isBinaryExpression;
+    exports.isBindExpression = isBindExpression;
+    exports.isBlock = isBlock;
+    exports.isBlockParent = isBlockParent;
+    exports.isBlockStatement = isBlockStatement;
+    exports.isBooleanLiteral = isBooleanLiteral;
+    exports.isBooleanLiteralTypeAnnotation = isBooleanLiteralTypeAnnotation;
+    exports.isBooleanTypeAnnotation = isBooleanTypeAnnotation;
+    exports.isBreakStatement = isBreakStatement;
+    exports.isCallExpression = isCallExpression;
+    exports.isCatchClause = isCatchClause;
+    exports.isClass = isClass;
+    exports.isClassAccessorProperty = isClassAccessorProperty;
+    exports.isClassBody = isClassBody;
+    exports.isClassDeclaration = isClassDeclaration;
+    exports.isClassExpression = isClassExpression;
+    exports.isClassImplements = isClassImplements;
+    exports.isClassMethod = isClassMethod;
+    exports.isClassPrivateMethod = isClassPrivateMethod;
+    exports.isClassPrivateProperty = isClassPrivateProperty;
+    exports.isClassProperty = isClassProperty;
+    exports.isCompletionStatement = isCompletionStatement;
+    exports.isConditional = isConditional;
+    exports.isConditionalExpression = isConditionalExpression;
+    exports.isContinueStatement = isContinueStatement;
+    exports.isDebuggerStatement = isDebuggerStatement;
+    exports.isDecimalLiteral = isDecimalLiteral;
+    exports.isDeclaration = isDeclaration;
+    exports.isDeclareClass = isDeclareClass;
+    exports.isDeclareExportAllDeclaration = isDeclareExportAllDeclaration;
+    exports.isDeclareExportDeclaration = isDeclareExportDeclaration;
+    exports.isDeclareFunction = isDeclareFunction;
+    exports.isDeclareInterface = isDeclareInterface;
+    exports.isDeclareModule = isDeclareModule;
+    exports.isDeclareModuleExports = isDeclareModuleExports;
+    exports.isDeclareOpaqueType = isDeclareOpaqueType;
+    exports.isDeclareTypeAlias = isDeclareTypeAlias;
+    exports.isDeclareVariable = isDeclareVariable;
+    exports.isDeclaredPredicate = isDeclaredPredicate;
+    exports.isDecorator = isDecorator;
+    exports.isDirective = isDirective;
+    exports.isDirectiveLiteral = isDirectiveLiteral;
+    exports.isDoExpression = isDoExpression;
+    exports.isDoWhileStatement = isDoWhileStatement;
+    exports.isEmptyStatement = isEmptyStatement;
+    exports.isEmptyTypeAnnotation = isEmptyTypeAnnotation;
+    exports.isEnumBody = isEnumBody;
+    exports.isEnumBooleanBody = isEnumBooleanBody;
+    exports.isEnumBooleanMember = isEnumBooleanMember;
+    exports.isEnumDeclaration = isEnumDeclaration;
+    exports.isEnumDefaultedMember = isEnumDefaultedMember;
+    exports.isEnumMember = isEnumMember;
+    exports.isEnumNumberBody = isEnumNumberBody;
+    exports.isEnumNumberMember = isEnumNumberMember;
+    exports.isEnumStringBody = isEnumStringBody;
+    exports.isEnumStringMember = isEnumStringMember;
+    exports.isEnumSymbolBody = isEnumSymbolBody;
+    exports.isExistsTypeAnnotation = isExistsTypeAnnotation;
+    exports.isExportAllDeclaration = isExportAllDeclaration;
+    exports.isExportDeclaration = isExportDeclaration;
+    exports.isExportDefaultDeclaration = isExportDefaultDeclaration;
+    exports.isExportDefaultSpecifier = isExportDefaultSpecifier;
+    exports.isExportNamedDeclaration = isExportNamedDeclaration;
+    exports.isExportNamespaceSpecifier = isExportNamespaceSpecifier;
+    exports.isExportSpecifier = isExportSpecifier;
+    exports.isExpression = isExpression;
+    exports.isExpressionStatement = isExpressionStatement;
+    exports.isExpressionWrapper = isExpressionWrapper;
+    exports.isFile = isFile;
+    exports.isFlow = isFlow;
+    exports.isFlowBaseAnnotation = isFlowBaseAnnotation;
+    exports.isFlowDeclaration = isFlowDeclaration;
+    exports.isFlowPredicate = isFlowPredicate;
+    exports.isFlowType = isFlowType;
+    exports.isFor = isFor;
+    exports.isForInStatement = isForInStatement;
+    exports.isForOfStatement = isForOfStatement;
+    exports.isForStatement = isForStatement;
+    exports.isForXStatement = isForXStatement;
+    exports.isFunction = isFunction;
+    exports.isFunctionDeclaration = isFunctionDeclaration;
+    exports.isFunctionExpression = isFunctionExpression;
+    exports.isFunctionParent = isFunctionParent;
+    exports.isFunctionTypeAnnotation = isFunctionTypeAnnotation;
+    exports.isFunctionTypeParam = isFunctionTypeParam;
+    exports.isGenericTypeAnnotation = isGenericTypeAnnotation;
+    exports.isIdentifier = isIdentifier;
+    exports.isIfStatement = isIfStatement;
+    exports.isImmutable = isImmutable;
+    exports.isImport = isImport;
+    exports.isImportAttribute = isImportAttribute;
+    exports.isImportDeclaration = isImportDeclaration;
+    exports.isImportDefaultSpecifier = isImportDefaultSpecifier;
+    exports.isImportNamespaceSpecifier = isImportNamespaceSpecifier;
+    exports.isImportSpecifier = isImportSpecifier;
+    exports.isIndexedAccessType = isIndexedAccessType;
+    exports.isInferredPredicate = isInferredPredicate;
+    exports.isInterfaceDeclaration = isInterfaceDeclaration;
+    exports.isInterfaceExtends = isInterfaceExtends;
+    exports.isInterfaceTypeAnnotation = isInterfaceTypeAnnotation;
+    exports.isInterpreterDirective = isInterpreterDirective;
+    exports.isIntersectionTypeAnnotation = isIntersectionTypeAnnotation;
+    exports.isJSX = isJSX;
+    exports.isJSXAttribute = isJSXAttribute;
+    exports.isJSXClosingElement = isJSXClosingElement;
+    exports.isJSXClosingFragment = isJSXClosingFragment;
+    exports.isJSXElement = isJSXElement;
+    exports.isJSXEmptyExpression = isJSXEmptyExpression;
+    exports.isJSXExpressionContainer = isJSXExpressionContainer;
+    exports.isJSXFragment = isJSXFragment;
+    exports.isJSXIdentifier = isJSXIdentifier;
+    exports.isJSXMemberExpression = isJSXMemberExpression;
+    exports.isJSXNamespacedName = isJSXNamespacedName;
+    exports.isJSXOpeningElement = isJSXOpeningElement;
+    exports.isJSXOpeningFragment = isJSXOpeningFragment;
+    exports.isJSXSpreadAttribute = isJSXSpreadAttribute;
+    exports.isJSXSpreadChild = isJSXSpreadChild;
+    exports.isJSXText = isJSXText;
+    exports.isLVal = isLVal;
+    exports.isLabeledStatement = isLabeledStatement;
+    exports.isLiteral = isLiteral;
+    exports.isLogicalExpression = isLogicalExpression;
+    exports.isLoop = isLoop;
+    exports.isMemberExpression = isMemberExpression;
+    exports.isMetaProperty = isMetaProperty;
+    exports.isMethod = isMethod;
+    exports.isMiscellaneous = isMiscellaneous;
+    exports.isMixedTypeAnnotation = isMixedTypeAnnotation;
+    exports.isModuleDeclaration = isModuleDeclaration;
+    exports.isModuleExpression = isModuleExpression;
+    exports.isModuleSpecifier = isModuleSpecifier;
+    exports.isNewExpression = isNewExpression;
+    exports.isNoop = isNoop;
+    exports.isNullLiteral = isNullLiteral;
+    exports.isNullLiteralTypeAnnotation = isNullLiteralTypeAnnotation;
+    exports.isNullableTypeAnnotation = isNullableTypeAnnotation;
+    exports.isNumberLiteral = isNumberLiteral;
+    exports.isNumberLiteralTypeAnnotation = isNumberLiteralTypeAnnotation;
+    exports.isNumberTypeAnnotation = isNumberTypeAnnotation;
+    exports.isNumericLiteral = isNumericLiteral;
+    exports.isObjectExpression = isObjectExpression;
+    exports.isObjectMember = isObjectMember;
+    exports.isObjectMethod = isObjectMethod;
+    exports.isObjectPattern = isObjectPattern;
+    exports.isObjectProperty = isObjectProperty;
+    exports.isObjectTypeAnnotation = isObjectTypeAnnotation;
+    exports.isObjectTypeCallProperty = isObjectTypeCallProperty;
+    exports.isObjectTypeIndexer = isObjectTypeIndexer;
+    exports.isObjectTypeInternalSlot = isObjectTypeInternalSlot;
+    exports.isObjectTypeProperty = isObjectTypeProperty;
+    exports.isObjectTypeSpreadProperty = isObjectTypeSpreadProperty;
+    exports.isOpaqueType = isOpaqueType;
+    exports.isOptionalCallExpression = isOptionalCallExpression;
+    exports.isOptionalIndexedAccessType = isOptionalIndexedAccessType;
+    exports.isOptionalMemberExpression = isOptionalMemberExpression;
+    exports.isParenthesizedExpression = isParenthesizedExpression;
+    exports.isPattern = isPattern;
+    exports.isPatternLike = isPatternLike;
+    exports.isPipelineBareFunction = isPipelineBareFunction;
+    exports.isPipelinePrimaryTopicReference = isPipelinePrimaryTopicReference;
+    exports.isPipelineTopicExpression = isPipelineTopicExpression;
+    exports.isPlaceholder = isPlaceholder;
+    exports.isPrivate = isPrivate;
+    exports.isPrivateName = isPrivateName;
+    exports.isProgram = isProgram;
+    exports.isProperty = isProperty;
+    exports.isPureish = isPureish;
+    exports.isQualifiedTypeIdentifier = isQualifiedTypeIdentifier;
+    exports.isRecordExpression = isRecordExpression;
+    exports.isRegExpLiteral = isRegExpLiteral;
+    exports.isRegexLiteral = isRegexLiteral;
+    exports.isRestElement = isRestElement;
+    exports.isRestProperty = isRestProperty;
+    exports.isReturnStatement = isReturnStatement;
+    exports.isScopable = isScopable;
+    exports.isSequenceExpression = isSequenceExpression;
+    exports.isSpreadElement = isSpreadElement;
+    exports.isSpreadProperty = isSpreadProperty;
+    exports.isStandardized = isStandardized;
+    exports.isStatement = isStatement;
+    exports.isStaticBlock = isStaticBlock;
+    exports.isStringLiteral = isStringLiteral;
+    exports.isStringLiteralTypeAnnotation = isStringLiteralTypeAnnotation;
+    exports.isStringTypeAnnotation = isStringTypeAnnotation;
+    exports.isSuper = isSuper;
+    exports.isSwitchCase = isSwitchCase;
+    exports.isSwitchStatement = isSwitchStatement;
+    exports.isSymbolTypeAnnotation = isSymbolTypeAnnotation;
+    exports.isTSAnyKeyword = isTSAnyKeyword;
+    exports.isTSArrayType = isTSArrayType;
+    exports.isTSAsExpression = isTSAsExpression;
+    exports.isTSBaseType = isTSBaseType;
+    exports.isTSBigIntKeyword = isTSBigIntKeyword;
+    exports.isTSBooleanKeyword = isTSBooleanKeyword;
+    exports.isTSCallSignatureDeclaration = isTSCallSignatureDeclaration;
+    exports.isTSConditionalType = isTSConditionalType;
+    exports.isTSConstructSignatureDeclaration = isTSConstructSignatureDeclaration;
+    exports.isTSConstructorType = isTSConstructorType;
+    exports.isTSDeclareFunction = isTSDeclareFunction;
+    exports.isTSDeclareMethod = isTSDeclareMethod;
+    exports.isTSEntityName = isTSEntityName;
+    exports.isTSEnumDeclaration = isTSEnumDeclaration;
+    exports.isTSEnumMember = isTSEnumMember;
+    exports.isTSExportAssignment = isTSExportAssignment;
+    exports.isTSExpressionWithTypeArguments = isTSExpressionWithTypeArguments;
+    exports.isTSExternalModuleReference = isTSExternalModuleReference;
+    exports.isTSFunctionType = isTSFunctionType;
+    exports.isTSImportEqualsDeclaration = isTSImportEqualsDeclaration;
+    exports.isTSImportType = isTSImportType;
+    exports.isTSIndexSignature = isTSIndexSignature;
+    exports.isTSIndexedAccessType = isTSIndexedAccessType;
+    exports.isTSInferType = isTSInferType;
+    exports.isTSInstantiationExpression = isTSInstantiationExpression;
+    exports.isTSInterfaceBody = isTSInterfaceBody;
+    exports.isTSInterfaceDeclaration = isTSInterfaceDeclaration;
+    exports.isTSIntersectionType = isTSIntersectionType;
+    exports.isTSIntrinsicKeyword = isTSIntrinsicKeyword;
+    exports.isTSLiteralType = isTSLiteralType;
+    exports.isTSMappedType = isTSMappedType;
+    exports.isTSMethodSignature = isTSMethodSignature;
+    exports.isTSModuleBlock = isTSModuleBlock;
+    exports.isTSModuleDeclaration = isTSModuleDeclaration;
+    exports.isTSNamedTupleMember = isTSNamedTupleMember;
+    exports.isTSNamespaceExportDeclaration = isTSNamespaceExportDeclaration;
+    exports.isTSNeverKeyword = isTSNeverKeyword;
+    exports.isTSNonNullExpression = isTSNonNullExpression;
+    exports.isTSNullKeyword = isTSNullKeyword;
+    exports.isTSNumberKeyword = isTSNumberKeyword;
+    exports.isTSObjectKeyword = isTSObjectKeyword;
+    exports.isTSOptionalType = isTSOptionalType;
+    exports.isTSParameterProperty = isTSParameterProperty;
+    exports.isTSParenthesizedType = isTSParenthesizedType;
+    exports.isTSPropertySignature = isTSPropertySignature;
+    exports.isTSQualifiedName = isTSQualifiedName;
+    exports.isTSRestType = isTSRestType;
+    exports.isTSStringKeyword = isTSStringKeyword;
+    exports.isTSSymbolKeyword = isTSSymbolKeyword;
+    exports.isTSThisType = isTSThisType;
+    exports.isTSTupleType = isTSTupleType;
+    exports.isTSType = isTSType;
+    exports.isTSTypeAliasDeclaration = isTSTypeAliasDeclaration;
+    exports.isTSTypeAnnotation = isTSTypeAnnotation;
+    exports.isTSTypeAssertion = isTSTypeAssertion;
+    exports.isTSTypeElement = isTSTypeElement;
+    exports.isTSTypeLiteral = isTSTypeLiteral;
+    exports.isTSTypeOperator = isTSTypeOperator;
+    exports.isTSTypeParameter = isTSTypeParameter;
+    exports.isTSTypeParameterDeclaration = isTSTypeParameterDeclaration;
+    exports.isTSTypeParameterInstantiation = isTSTypeParameterInstantiation;
+    exports.isTSTypePredicate = isTSTypePredicate;
+    exports.isTSTypeQuery = isTSTypeQuery;
+    exports.isTSTypeReference = isTSTypeReference;
+    exports.isTSUndefinedKeyword = isTSUndefinedKeyword;
+    exports.isTSUnionType = isTSUnionType;
+    exports.isTSUnknownKeyword = isTSUnknownKeyword;
+    exports.isTSVoidKeyword = isTSVoidKeyword;
+    exports.isTaggedTemplateExpression = isTaggedTemplateExpression;
+    exports.isTemplateElement = isTemplateElement;
+    exports.isTemplateLiteral = isTemplateLiteral;
+    exports.isTerminatorless = isTerminatorless;
+    exports.isThisExpression = isThisExpression;
+    exports.isThisTypeAnnotation = isThisTypeAnnotation;
+    exports.isThrowStatement = isThrowStatement;
+    exports.isTopicReference = isTopicReference;
+    exports.isTryStatement = isTryStatement;
+    exports.isTupleExpression = isTupleExpression;
+    exports.isTupleTypeAnnotation = isTupleTypeAnnotation;
+    exports.isTypeAlias = isTypeAlias;
+    exports.isTypeAnnotation = isTypeAnnotation;
+    exports.isTypeCastExpression = isTypeCastExpression;
+    exports.isTypeParameter = isTypeParameter;
+    exports.isTypeParameterDeclaration = isTypeParameterDeclaration;
+    exports.isTypeParameterInstantiation = isTypeParameterInstantiation;
+    exports.isTypeScript = isTypeScript;
+    exports.isTypeofTypeAnnotation = isTypeofTypeAnnotation;
+    exports.isUnaryExpression = isUnaryExpression;
+    exports.isUnaryLike = isUnaryLike;
+    exports.isUnionTypeAnnotation = isUnionTypeAnnotation;
+    exports.isUpdateExpression = isUpdateExpression;
+    exports.isUserWhitespacable = isUserWhitespacable;
+    exports.isV8IntrinsicIdentifier = isV8IntrinsicIdentifier;
+    exports.isVariableDeclaration = isVariableDeclaration;
+    exports.isVariableDeclarator = isVariableDeclarator;
+    exports.isVariance = isVariance;
+    exports.isVoidTypeAnnotation = isVoidTypeAnnotation;
+    exports.isWhile = isWhile;
+    exports.isWhileStatement = isWhileStatement;
+    exports.isWithStatement = isWithStatement;
+    exports.isYieldExpression = isYieldExpression;
     var _shallowEqual = require_shallowEqual2();
     function isArrayExpression(node, opts) {
       if (!node)
@@ -42672,12 +42862,12 @@ var require_generated6 = __commonJS({
 
 // node_modules/@babel/template/node_modules/@babel/types/lib/validators/matchesPattern.js
 var require_matchesPattern2 = __commonJS({
-  "node_modules/@babel/template/node_modules/@babel/types/lib/validators/matchesPattern.js"(exports2) {
+  "node_modules/@babel/template/node_modules/@babel/types/lib/validators/matchesPattern.js"(exports) {
     "use strict";
-    Object.defineProperty(exports2, "__esModule", {
+    Object.defineProperty(exports, "__esModule", {
       value: true
     });
-    exports2.default = matchesPattern;
+    exports.default = matchesPattern;
     var _generated = require_generated6();
     function matchesPattern(member, match, allowPartial) {
       if (!(0, _generated.isMemberExpression)(member))
@@ -42716,12 +42906,12 @@ var require_matchesPattern2 = __commonJS({
 
 // node_modules/@babel/template/node_modules/@babel/types/lib/validators/buildMatchMemberExpression.js
 var require_buildMatchMemberExpression2 = __commonJS({
-  "node_modules/@babel/template/node_modules/@babel/types/lib/validators/buildMatchMemberExpression.js"(exports2) {
+  "node_modules/@babel/template/node_modules/@babel/types/lib/validators/buildMatchMemberExpression.js"(exports) {
     "use strict";
-    Object.defineProperty(exports2, "__esModule", {
+    Object.defineProperty(exports, "__esModule", {
       value: true
     });
-    exports2.default = buildMatchMemberExpression;
+    exports.default = buildMatchMemberExpression;
     var _matchesPattern = require_matchesPattern2();
     function buildMatchMemberExpression(match, allowPartial) {
       const parts = match.split(".");
@@ -42733,27 +42923,27 @@ var require_buildMatchMemberExpression2 = __commonJS({
 
 // node_modules/@babel/template/node_modules/@babel/types/lib/validators/react/isReactComponent.js
 var require_isReactComponent2 = __commonJS({
-  "node_modules/@babel/template/node_modules/@babel/types/lib/validators/react/isReactComponent.js"(exports2) {
+  "node_modules/@babel/template/node_modules/@babel/types/lib/validators/react/isReactComponent.js"(exports) {
     "use strict";
-    Object.defineProperty(exports2, "__esModule", {
+    Object.defineProperty(exports, "__esModule", {
       value: true
     });
-    exports2.default = void 0;
+    exports.default = void 0;
     var _buildMatchMemberExpression = require_buildMatchMemberExpression2();
     var isReactComponent = (0, _buildMatchMemberExpression.default)("React.Component");
     var _default = isReactComponent;
-    exports2.default = _default;
+    exports.default = _default;
   }
 });
 
 // node_modules/@babel/template/node_modules/@babel/types/lib/validators/react/isCompatTag.js
 var require_isCompatTag2 = __commonJS({
-  "node_modules/@babel/template/node_modules/@babel/types/lib/validators/react/isCompatTag.js"(exports2) {
+  "node_modules/@babel/template/node_modules/@babel/types/lib/validators/react/isCompatTag.js"(exports) {
     "use strict";
-    Object.defineProperty(exports2, "__esModule", {
+    Object.defineProperty(exports, "__esModule", {
       value: true
     });
-    exports2.default = isCompatTag;
+    exports.default = isCompatTag;
     function isCompatTag(tagName) {
       return !!tagName && /^[a-z]/.test(tagName);
     }
@@ -42763,12 +42953,12 @@ var require_isCompatTag2 = __commonJS({
 
 // node_modules/@babel/template/node_modules/@babel/types/lib/validators/isType.js
 var require_isType2 = __commonJS({
-  "node_modules/@babel/template/node_modules/@babel/types/lib/validators/isType.js"(exports2) {
+  "node_modules/@babel/template/node_modules/@babel/types/lib/validators/isType.js"(exports) {
     "use strict";
-    Object.defineProperty(exports2, "__esModule", {
+    Object.defineProperty(exports, "__esModule", {
       value: true
     });
-    exports2.default = isType;
+    exports.default = isType;
     var _definitions = require_definitions2();
     function isType(nodeType, targetType) {
       if (nodeType === targetType)
@@ -42792,12 +42982,12 @@ var require_isType2 = __commonJS({
 
 // node_modules/@babel/template/node_modules/@babel/types/lib/validators/isPlaceholderType.js
 var require_isPlaceholderType2 = __commonJS({
-  "node_modules/@babel/template/node_modules/@babel/types/lib/validators/isPlaceholderType.js"(exports2) {
+  "node_modules/@babel/template/node_modules/@babel/types/lib/validators/isPlaceholderType.js"(exports) {
     "use strict";
-    Object.defineProperty(exports2, "__esModule", {
+    Object.defineProperty(exports, "__esModule", {
       value: true
     });
-    exports2.default = isPlaceholderType;
+    exports.default = isPlaceholderType;
     var _definitions = require_definitions2();
     function isPlaceholderType(placeholderType, targetType) {
       if (placeholderType === targetType)
@@ -42817,12 +43007,12 @@ var require_isPlaceholderType2 = __commonJS({
 
 // node_modules/@babel/template/node_modules/@babel/types/lib/validators/is.js
 var require_is2 = __commonJS({
-  "node_modules/@babel/template/node_modules/@babel/types/lib/validators/is.js"(exports2) {
+  "node_modules/@babel/template/node_modules/@babel/types/lib/validators/is.js"(exports) {
     "use strict";
-    Object.defineProperty(exports2, "__esModule", {
+    Object.defineProperty(exports, "__esModule", {
       value: true
     });
-    exports2.default = is;
+    exports.default = is;
     var _shallowEqual = require_shallowEqual2();
     var _isType = require_isType2();
     var _isPlaceholderType = require_isPlaceholderType2();
@@ -42849,12 +43039,12 @@ var require_is2 = __commonJS({
 
 // node_modules/@babel/template/node_modules/@babel/types/lib/validators/isValidIdentifier.js
 var require_isValidIdentifier2 = __commonJS({
-  "node_modules/@babel/template/node_modules/@babel/types/lib/validators/isValidIdentifier.js"(exports2) {
+  "node_modules/@babel/template/node_modules/@babel/types/lib/validators/isValidIdentifier.js"(exports) {
     "use strict";
-    Object.defineProperty(exports2, "__esModule", {
+    Object.defineProperty(exports, "__esModule", {
       value: true
     });
-    exports2.default = isValidIdentifier;
+    exports.default = isValidIdentifier;
     var _helperValidatorIdentifier = require_lib();
     function isValidIdentifier(name, reserved = true) {
       if (typeof name !== "string")
@@ -42872,70 +43062,70 @@ var require_isValidIdentifier2 = __commonJS({
 
 // node_modules/@babel/template/node_modules/@babel/types/lib/constants/index.js
 var require_constants5 = __commonJS({
-  "node_modules/@babel/template/node_modules/@babel/types/lib/constants/index.js"(exports2) {
+  "node_modules/@babel/template/node_modules/@babel/types/lib/constants/index.js"(exports) {
     "use strict";
-    Object.defineProperty(exports2, "__esModule", {
+    Object.defineProperty(exports, "__esModule", {
       value: true
     });
-    exports2.UPDATE_OPERATORS = exports2.UNARY_OPERATORS = exports2.STRING_UNARY_OPERATORS = exports2.STATEMENT_OR_BLOCK_KEYS = exports2.NUMBER_UNARY_OPERATORS = exports2.NUMBER_BINARY_OPERATORS = exports2.NOT_LOCAL_BINDING = exports2.LOGICAL_OPERATORS = exports2.INHERIT_KEYS = exports2.FOR_INIT_KEYS = exports2.FLATTENABLE_KEYS = exports2.EQUALITY_BINARY_OPERATORS = exports2.COMPARISON_BINARY_OPERATORS = exports2.COMMENT_KEYS = exports2.BOOLEAN_UNARY_OPERATORS = exports2.BOOLEAN_NUMBER_BINARY_OPERATORS = exports2.BOOLEAN_BINARY_OPERATORS = exports2.BLOCK_SCOPED_SYMBOL = exports2.BINARY_OPERATORS = exports2.ASSIGNMENT_OPERATORS = void 0;
+    exports.UPDATE_OPERATORS = exports.UNARY_OPERATORS = exports.STRING_UNARY_OPERATORS = exports.STATEMENT_OR_BLOCK_KEYS = exports.NUMBER_UNARY_OPERATORS = exports.NUMBER_BINARY_OPERATORS = exports.NOT_LOCAL_BINDING = exports.LOGICAL_OPERATORS = exports.INHERIT_KEYS = exports.FOR_INIT_KEYS = exports.FLATTENABLE_KEYS = exports.EQUALITY_BINARY_OPERATORS = exports.COMPARISON_BINARY_OPERATORS = exports.COMMENT_KEYS = exports.BOOLEAN_UNARY_OPERATORS = exports.BOOLEAN_NUMBER_BINARY_OPERATORS = exports.BOOLEAN_BINARY_OPERATORS = exports.BLOCK_SCOPED_SYMBOL = exports.BINARY_OPERATORS = exports.ASSIGNMENT_OPERATORS = void 0;
     var STATEMENT_OR_BLOCK_KEYS = [
       "consequent",
       "body",
       "alternate"
     ];
-    exports2.STATEMENT_OR_BLOCK_KEYS = STATEMENT_OR_BLOCK_KEYS;
+    exports.STATEMENT_OR_BLOCK_KEYS = STATEMENT_OR_BLOCK_KEYS;
     var FLATTENABLE_KEYS = [
       "body",
       "expressions"
     ];
-    exports2.FLATTENABLE_KEYS = FLATTENABLE_KEYS;
+    exports.FLATTENABLE_KEYS = FLATTENABLE_KEYS;
     var FOR_INIT_KEYS = [
       "left",
       "init"
     ];
-    exports2.FOR_INIT_KEYS = FOR_INIT_KEYS;
+    exports.FOR_INIT_KEYS = FOR_INIT_KEYS;
     var COMMENT_KEYS = [
       "leadingComments",
       "trailingComments",
       "innerComments"
     ];
-    exports2.COMMENT_KEYS = COMMENT_KEYS;
+    exports.COMMENT_KEYS = COMMENT_KEYS;
     var LOGICAL_OPERATORS = [
       "||",
       "&&",
       "??"
     ];
-    exports2.LOGICAL_OPERATORS = LOGICAL_OPERATORS;
+    exports.LOGICAL_OPERATORS = LOGICAL_OPERATORS;
     var UPDATE_OPERATORS = [
       "++",
       "--"
     ];
-    exports2.UPDATE_OPERATORS = UPDATE_OPERATORS;
+    exports.UPDATE_OPERATORS = UPDATE_OPERATORS;
     var BOOLEAN_NUMBER_BINARY_OPERATORS = [
       ">",
       "<",
       ">=",
       "<="
     ];
-    exports2.BOOLEAN_NUMBER_BINARY_OPERATORS = BOOLEAN_NUMBER_BINARY_OPERATORS;
+    exports.BOOLEAN_NUMBER_BINARY_OPERATORS = BOOLEAN_NUMBER_BINARY_OPERATORS;
     var EQUALITY_BINARY_OPERATORS = [
       "==",
       "===",
       "!=",
       "!=="
     ];
-    exports2.EQUALITY_BINARY_OPERATORS = EQUALITY_BINARY_OPERATORS;
+    exports.EQUALITY_BINARY_OPERATORS = EQUALITY_BINARY_OPERATORS;
     var COMPARISON_BINARY_OPERATORS = [
       ...EQUALITY_BINARY_OPERATORS,
       "in",
       "instanceof"
     ];
-    exports2.COMPARISON_BINARY_OPERATORS = COMPARISON_BINARY_OPERATORS;
+    exports.COMPARISON_BINARY_OPERATORS = COMPARISON_BINARY_OPERATORS;
     var BOOLEAN_BINARY_OPERATORS = [
       ...COMPARISON_BINARY_OPERATORS,
       ...BOOLEAN_NUMBER_BINARY_OPERATORS
     ];
-    exports2.BOOLEAN_BINARY_OPERATORS = BOOLEAN_BINARY_OPERATORS;
+    exports.BOOLEAN_BINARY_OPERATORS = BOOLEAN_BINARY_OPERATORS;
     var NUMBER_BINARY_OPERATORS = [
       "-",
       "/",
@@ -42949,36 +43139,36 @@ var require_constants5 = __commonJS({
       "<<",
       "^"
     ];
-    exports2.NUMBER_BINARY_OPERATORS = NUMBER_BINARY_OPERATORS;
+    exports.NUMBER_BINARY_OPERATORS = NUMBER_BINARY_OPERATORS;
     var BINARY_OPERATORS = [
       "+",
       ...NUMBER_BINARY_OPERATORS,
       ...BOOLEAN_BINARY_OPERATORS,
       "|>"
     ];
-    exports2.BINARY_OPERATORS = BINARY_OPERATORS;
+    exports.BINARY_OPERATORS = BINARY_OPERATORS;
     var ASSIGNMENT_OPERATORS = [
       "=",
       "+=",
       ...NUMBER_BINARY_OPERATORS.map((op) => op + "="),
       ...LOGICAL_OPERATORS.map((op) => op + "=")
     ];
-    exports2.ASSIGNMENT_OPERATORS = ASSIGNMENT_OPERATORS;
+    exports.ASSIGNMENT_OPERATORS = ASSIGNMENT_OPERATORS;
     var BOOLEAN_UNARY_OPERATORS = [
       "delete",
       "!"
     ];
-    exports2.BOOLEAN_UNARY_OPERATORS = BOOLEAN_UNARY_OPERATORS;
+    exports.BOOLEAN_UNARY_OPERATORS = BOOLEAN_UNARY_OPERATORS;
     var NUMBER_UNARY_OPERATORS = [
       "+",
       "-",
       "~"
     ];
-    exports2.NUMBER_UNARY_OPERATORS = NUMBER_UNARY_OPERATORS;
+    exports.NUMBER_UNARY_OPERATORS = NUMBER_UNARY_OPERATORS;
     var STRING_UNARY_OPERATORS = [
       "typeof"
     ];
-    exports2.STRING_UNARY_OPERATORS = STRING_UNARY_OPERATORS;
+    exports.STRING_UNARY_OPERATORS = STRING_UNARY_OPERATORS;
     var UNARY_OPERATORS = [
       "void",
       "throw",
@@ -42986,7 +43176,7 @@ var require_constants5 = __commonJS({
       ...NUMBER_UNARY_OPERATORS,
       ...STRING_UNARY_OPERATORS
     ];
-    exports2.UNARY_OPERATORS = UNARY_OPERATORS;
+    exports.UNARY_OPERATORS = UNARY_OPERATORS;
     var INHERIT_KEYS = {
       optional: [
         "typeAnnotation",
@@ -42999,56 +43189,56 @@ var require_constants5 = __commonJS({
         "end"
       ]
     };
-    exports2.INHERIT_KEYS = INHERIT_KEYS;
+    exports.INHERIT_KEYS = INHERIT_KEYS;
     var BLOCK_SCOPED_SYMBOL = Symbol.for("var used to be block scoped");
-    exports2.BLOCK_SCOPED_SYMBOL = BLOCK_SCOPED_SYMBOL;
+    exports.BLOCK_SCOPED_SYMBOL = BLOCK_SCOPED_SYMBOL;
     var NOT_LOCAL_BINDING = Symbol.for("should not be considered a local binding");
-    exports2.NOT_LOCAL_BINDING = NOT_LOCAL_BINDING;
+    exports.NOT_LOCAL_BINDING = NOT_LOCAL_BINDING;
   }
 });
 
 // node_modules/@babel/template/node_modules/@babel/types/lib/definitions/utils.js
 var require_utils6 = __commonJS({
-  "node_modules/@babel/template/node_modules/@babel/types/lib/definitions/utils.js"(exports2) {
+  "node_modules/@babel/template/node_modules/@babel/types/lib/definitions/utils.js"(exports) {
     "use strict";
-    Object.defineProperty(exports2, "__esModule", {
+    Object.defineProperty(exports, "__esModule", {
       value: true
     });
-    exports2.VISITOR_KEYS = exports2.NODE_PARENT_VALIDATIONS = exports2.NODE_FIELDS = exports2.FLIPPED_ALIAS_KEYS = exports2.DEPRECATED_KEYS = exports2.BUILDER_KEYS = exports2.ALIAS_KEYS = void 0;
-    exports2.arrayOf = arrayOf;
-    exports2.arrayOfType = arrayOfType;
-    exports2.assertEach = assertEach;
-    exports2.assertNodeOrValueType = assertNodeOrValueType;
-    exports2.assertNodeType = assertNodeType;
-    exports2.assertOneOf = assertOneOf;
-    exports2.assertOptionalChainStart = assertOptionalChainStart;
-    exports2.assertShape = assertShape;
-    exports2.assertValueType = assertValueType;
-    exports2.chain = chain;
-    exports2.default = defineType;
-    exports2.defineAliasedType = defineAliasedType;
-    exports2.typeIs = typeIs;
-    exports2.validate = validate;
-    exports2.validateArrayOfType = validateArrayOfType;
-    exports2.validateOptional = validateOptional;
-    exports2.validateOptionalType = validateOptionalType;
-    exports2.validateType = validateType;
+    exports.VISITOR_KEYS = exports.NODE_PARENT_VALIDATIONS = exports.NODE_FIELDS = exports.FLIPPED_ALIAS_KEYS = exports.DEPRECATED_KEYS = exports.BUILDER_KEYS = exports.ALIAS_KEYS = void 0;
+    exports.arrayOf = arrayOf;
+    exports.arrayOfType = arrayOfType;
+    exports.assertEach = assertEach;
+    exports.assertNodeOrValueType = assertNodeOrValueType;
+    exports.assertNodeType = assertNodeType;
+    exports.assertOneOf = assertOneOf;
+    exports.assertOptionalChainStart = assertOptionalChainStart;
+    exports.assertShape = assertShape;
+    exports.assertValueType = assertValueType;
+    exports.chain = chain;
+    exports.default = defineType;
+    exports.defineAliasedType = defineAliasedType;
+    exports.typeIs = typeIs;
+    exports.validate = validate;
+    exports.validateArrayOfType = validateArrayOfType;
+    exports.validateOptional = validateOptional;
+    exports.validateOptionalType = validateOptionalType;
+    exports.validateType = validateType;
     var _is = require_is2();
     var _validate = require_validate2();
     var VISITOR_KEYS = {};
-    exports2.VISITOR_KEYS = VISITOR_KEYS;
+    exports.VISITOR_KEYS = VISITOR_KEYS;
     var ALIAS_KEYS = {};
-    exports2.ALIAS_KEYS = ALIAS_KEYS;
+    exports.ALIAS_KEYS = ALIAS_KEYS;
     var FLIPPED_ALIAS_KEYS = {};
-    exports2.FLIPPED_ALIAS_KEYS = FLIPPED_ALIAS_KEYS;
+    exports.FLIPPED_ALIAS_KEYS = FLIPPED_ALIAS_KEYS;
     var NODE_FIELDS = {};
-    exports2.NODE_FIELDS = NODE_FIELDS;
+    exports.NODE_FIELDS = NODE_FIELDS;
     var BUILDER_KEYS = {};
-    exports2.BUILDER_KEYS = BUILDER_KEYS;
+    exports.BUILDER_KEYS = BUILDER_KEYS;
     var DEPRECATED_KEYS = {};
-    exports2.DEPRECATED_KEYS = DEPRECATED_KEYS;
+    exports.DEPRECATED_KEYS = DEPRECATED_KEYS;
     var NODE_PARENT_VALIDATIONS = {};
-    exports2.NODE_PARENT_VALIDATIONS = NODE_PARENT_VALIDATIONS;
+    exports.NODE_PARENT_VALIDATIONS = NODE_PARENT_VALIDATIONS;
     function getType(val) {
       if (Array.isArray(val)) {
         return "array";
@@ -43175,12 +43365,12 @@ var require_utils6 = __commonJS({
         for (const property of Object.keys(shape)) {
           try {
             (0, _validate.validateField)(node, property, val[property], shape[property]);
-          } catch (error2) {
-            if (error2 instanceof TypeError) {
-              errors.push(error2.message);
+          } catch (error) {
+            if (error instanceof TypeError) {
+              errors.push(error.message);
               continue;
             }
-            throw error2;
+            throw error;
           }
         }
         if (errors.length) {
@@ -43334,12 +43524,12 @@ ${errors.join("\n")}`);
 
 // node_modules/@babel/template/node_modules/@babel/types/lib/definitions/core.js
 var require_core2 = __commonJS({
-  "node_modules/@babel/template/node_modules/@babel/types/lib/definitions/core.js"(exports2) {
+  "node_modules/@babel/template/node_modules/@babel/types/lib/definitions/core.js"(exports) {
     "use strict";
-    Object.defineProperty(exports2, "__esModule", {
+    Object.defineProperty(exports, "__esModule", {
       value: true
     });
-    exports2.patternLikeCommon = exports2.functionTypeAnnotationCommon = exports2.functionDeclarationCommon = exports2.functionCommon = exports2.classMethodOrPropertyCommon = exports2.classMethodOrDeclareMethodCommon = void 0;
+    exports.patternLikeCommon = exports.functionTypeAnnotationCommon = exports.functionDeclarationCommon = exports.functionCommon = exports.classMethodOrPropertyCommon = exports.classMethodOrDeclareMethodCommon = void 0;
     var _is = require_is2();
     var _isValidIdentifier = require_isValidIdentifier2();
     var _helperValidatorIdentifier = require_lib();
@@ -43748,7 +43938,7 @@ var require_core2 = __commonJS({
         default: false
       }
     }), "functionCommon");
-    exports2.functionCommon = functionCommon;
+    exports.functionCommon = functionCommon;
     var functionTypeAnnotationCommon = /* @__PURE__ */ __name(() => ({
       returnType: {
         validate: (0, _utils.assertNodeType)("TypeAnnotation", "TSTypeAnnotation", "Noop"),
@@ -43759,7 +43949,7 @@ var require_core2 = __commonJS({
         optional: true
       }
     }), "functionTypeAnnotationCommon");
-    exports2.functionTypeAnnotationCommon = functionTypeAnnotationCommon;
+    exports.functionTypeAnnotationCommon = functionTypeAnnotationCommon;
     var functionDeclarationCommon = /* @__PURE__ */ __name(() => Object.assign({}, functionCommon(), {
       declare: {
         validate: (0, _utils.assertValueType)("boolean"),
@@ -43770,7 +43960,7 @@ var require_core2 = __commonJS({
         optional: true
       }
     }), "functionDeclarationCommon");
-    exports2.functionDeclarationCommon = functionDeclarationCommon;
+    exports.functionDeclarationCommon = functionDeclarationCommon;
     defineType("FunctionDeclaration", {
       builder: [
         "id",
@@ -43850,7 +44040,7 @@ var require_core2 = __commonJS({
         optional: true
       }
     }), "patternLikeCommon");
-    exports2.patternLikeCommon = patternLikeCommon;
+    exports.patternLikeCommon = patternLikeCommon;
     defineType("Identifier", {
       builder: [
         "name"
@@ -45161,7 +45351,7 @@ var require_core2 = __commonJS({
         }(), (0, _utils.assertNodeType)("Identifier", "StringLiteral", "NumericLiteral", "BigIntLiteral", "Expression"))
       }
     }), "classMethodOrPropertyCommon");
-    exports2.classMethodOrPropertyCommon = classMethodOrPropertyCommon;
+    exports.classMethodOrPropertyCommon = classMethodOrPropertyCommon;
     var classMethodOrDeclareMethodCommon = /* @__PURE__ */ __name(() => Object.assign({}, functionCommon(), classMethodOrPropertyCommon(), {
       params: {
         validate: (0, _utils.chain)((0, _utils.assertValueType)("array"), (0, _utils.assertEach)((0, _utils.assertNodeType)("Identifier", "Pattern", "RestElement", "TSParameterProperty")))
@@ -45179,7 +45369,7 @@ var require_core2 = __commonJS({
         optional: true
       }
     }), "classMethodOrDeclareMethodCommon");
-    exports2.classMethodOrDeclareMethodCommon = classMethodOrDeclareMethodCommon;
+    exports.classMethodOrDeclareMethodCommon = classMethodOrDeclareMethodCommon;
     defineType("ClassMethod", {
       aliases: [
         "Function",
@@ -45295,19 +45485,19 @@ var require_core2 = __commonJS({
           }), /* @__PURE__ */ __name(function templateElementCookedValidator(node) {
             const raw = node.value.raw;
             let unterminatedCalled = false;
-            const error2 = /* @__PURE__ */ __name(() => {
+            const error = /* @__PURE__ */ __name(() => {
               throw new Error("Internal @babel/types error.");
             }, "error");
             const { str, firstInvalidLoc } = (0, _helperStringParser.readStringContents)("template", raw, 0, 0, 0, {
               unterminated() {
                 unterminatedCalled = true;
               },
-              strictNumericEscape: error2,
-              invalidEscapeSequence: error2,
-              numericSeparatorInEscapeSequence: error2,
-              unexpectedNumericSeparator: error2,
-              invalidDigit: error2,
-              invalidCodePoint: error2
+              strictNumericEscape: error,
+              invalidEscapeSequence: error,
+              numericSeparatorInEscapeSequence: error,
+              unexpectedNumericSeparator: error,
+              invalidDigit: error,
+              invalidCodePoint: error
             });
             if (!unterminatedCalled)
               throw new Error("Invalid raw");
@@ -46781,12 +46971,12 @@ var require_jsx3 = __commonJS({
 
 // node_modules/@babel/template/node_modules/@babel/types/lib/definitions/placeholders.js
 var require_placeholders2 = __commonJS({
-  "node_modules/@babel/template/node_modules/@babel/types/lib/definitions/placeholders.js"(exports2) {
+  "node_modules/@babel/template/node_modules/@babel/types/lib/definitions/placeholders.js"(exports) {
     "use strict";
-    Object.defineProperty(exports2, "__esModule", {
+    Object.defineProperty(exports, "__esModule", {
       value: true
     });
-    exports2.PLACEHOLDERS_FLIPPED_ALIAS = exports2.PLACEHOLDERS_ALIAS = exports2.PLACEHOLDERS = void 0;
+    exports.PLACEHOLDERS_FLIPPED_ALIAS = exports.PLACEHOLDERS_ALIAS = exports.PLACEHOLDERS = void 0;
     var _utils = require_utils6();
     var PLACEHOLDERS = [
       "Identifier",
@@ -46798,7 +46988,7 @@ var require_placeholders2 = __commonJS({
       "ClassBody",
       "Pattern"
     ];
-    exports2.PLACEHOLDERS = PLACEHOLDERS;
+    exports.PLACEHOLDERS = PLACEHOLDERS;
     var PLACEHOLDERS_ALIAS = {
       Declaration: [
         "Statement"
@@ -46808,14 +46998,14 @@ var require_placeholders2 = __commonJS({
         "LVal"
       ]
     };
-    exports2.PLACEHOLDERS_ALIAS = PLACEHOLDERS_ALIAS;
+    exports.PLACEHOLDERS_ALIAS = PLACEHOLDERS_ALIAS;
     for (const type of PLACEHOLDERS) {
       const alias = _utils.ALIAS_KEYS[type];
       if (alias != null && alias.length)
         PLACEHOLDERS_ALIAS[type] = alias;
     }
     var PLACEHOLDERS_FLIPPED_ALIAS = {};
-    exports2.PLACEHOLDERS_FLIPPED_ALIAS = PLACEHOLDERS_FLIPPED_ALIAS;
+    exports.PLACEHOLDERS_FLIPPED_ALIAS = PLACEHOLDERS_FLIPPED_ALIAS;
     Object.keys(PLACEHOLDERS_ALIAS).forEach((type) => {
       PLACEHOLDERS_ALIAS[type].forEach((alias) => {
         if (!Object.hasOwnProperty.call(PLACEHOLDERS_FLIPPED_ALIAS, alias)) {
@@ -47848,67 +48038,67 @@ var require_typescript3 = __commonJS({
 
 // node_modules/@babel/template/node_modules/@babel/types/lib/definitions/index.js
 var require_definitions2 = __commonJS({
-  "node_modules/@babel/template/node_modules/@babel/types/lib/definitions/index.js"(exports2) {
+  "node_modules/@babel/template/node_modules/@babel/types/lib/definitions/index.js"(exports) {
     "use strict";
-    Object.defineProperty(exports2, "__esModule", {
+    Object.defineProperty(exports, "__esModule", {
       value: true
     });
-    Object.defineProperty(exports2, "ALIAS_KEYS", {
+    Object.defineProperty(exports, "ALIAS_KEYS", {
       enumerable: true,
       get: function() {
         return _utils.ALIAS_KEYS;
       }
     });
-    Object.defineProperty(exports2, "BUILDER_KEYS", {
+    Object.defineProperty(exports, "BUILDER_KEYS", {
       enumerable: true,
       get: function() {
         return _utils.BUILDER_KEYS;
       }
     });
-    Object.defineProperty(exports2, "DEPRECATED_KEYS", {
+    Object.defineProperty(exports, "DEPRECATED_KEYS", {
       enumerable: true,
       get: function() {
         return _utils.DEPRECATED_KEYS;
       }
     });
-    Object.defineProperty(exports2, "FLIPPED_ALIAS_KEYS", {
+    Object.defineProperty(exports, "FLIPPED_ALIAS_KEYS", {
       enumerable: true,
       get: function() {
         return _utils.FLIPPED_ALIAS_KEYS;
       }
     });
-    Object.defineProperty(exports2, "NODE_FIELDS", {
+    Object.defineProperty(exports, "NODE_FIELDS", {
       enumerable: true,
       get: function() {
         return _utils.NODE_FIELDS;
       }
     });
-    Object.defineProperty(exports2, "NODE_PARENT_VALIDATIONS", {
+    Object.defineProperty(exports, "NODE_PARENT_VALIDATIONS", {
       enumerable: true,
       get: function() {
         return _utils.NODE_PARENT_VALIDATIONS;
       }
     });
-    Object.defineProperty(exports2, "PLACEHOLDERS", {
+    Object.defineProperty(exports, "PLACEHOLDERS", {
       enumerable: true,
       get: function() {
         return _placeholders.PLACEHOLDERS;
       }
     });
-    Object.defineProperty(exports2, "PLACEHOLDERS_ALIAS", {
+    Object.defineProperty(exports, "PLACEHOLDERS_ALIAS", {
       enumerable: true,
       get: function() {
         return _placeholders.PLACEHOLDERS_ALIAS;
       }
     });
-    Object.defineProperty(exports2, "PLACEHOLDERS_FLIPPED_ALIAS", {
+    Object.defineProperty(exports, "PLACEHOLDERS_FLIPPED_ALIAS", {
       enumerable: true,
       get: function() {
         return _placeholders.PLACEHOLDERS_FLIPPED_ALIAS;
       }
     });
-    exports2.TYPES = void 0;
-    Object.defineProperty(exports2, "VISITOR_KEYS", {
+    exports.TYPES = void 0;
+    Object.defineProperty(exports, "VISITOR_KEYS", {
       enumerable: true,
       get: function() {
         return _utils.VISITOR_KEYS;
@@ -47932,20 +48122,20 @@ var require_definitions2 = __commonJS({
     _toFastProperties(_placeholders.PLACEHOLDERS_ALIAS);
     _toFastProperties(_placeholders.PLACEHOLDERS_FLIPPED_ALIAS);
     var TYPES = [].concat(Object.keys(_utils.VISITOR_KEYS), Object.keys(_utils.FLIPPED_ALIAS_KEYS), Object.keys(_utils.DEPRECATED_KEYS));
-    exports2.TYPES = TYPES;
+    exports.TYPES = TYPES;
   }
 });
 
 // node_modules/@babel/template/node_modules/@babel/types/lib/validators/validate.js
 var require_validate2 = __commonJS({
-  "node_modules/@babel/template/node_modules/@babel/types/lib/validators/validate.js"(exports2) {
+  "node_modules/@babel/template/node_modules/@babel/types/lib/validators/validate.js"(exports) {
     "use strict";
-    Object.defineProperty(exports2, "__esModule", {
+    Object.defineProperty(exports, "__esModule", {
       value: true
     });
-    exports2.default = validate;
-    exports2.validateChild = validateChild;
-    exports2.validateField = validateField;
+    exports.default = validate;
+    exports.validateChild = validateChild;
+    exports.validateField = validateField;
     var _definitions = require_definitions2();
     function validate(node, key, val) {
       if (!node)
@@ -47980,12 +48170,12 @@ var require_validate2 = __commonJS({
 
 // node_modules/@babel/template/node_modules/@babel/types/lib/builders/validateNode.js
 var require_validateNode2 = __commonJS({
-  "node_modules/@babel/template/node_modules/@babel/types/lib/builders/validateNode.js"(exports2) {
+  "node_modules/@babel/template/node_modules/@babel/types/lib/builders/validateNode.js"(exports) {
     "use strict";
-    Object.defineProperty(exports2, "__esModule", {
+    Object.defineProperty(exports, "__esModule", {
       value: true
     });
-    exports2.default = validateNode;
+    exports.default = validateNode;
     var _validate = require_validate2();
     var _ = require_lib5();
     function validateNode(node) {
@@ -48001,263 +48191,263 @@ var require_validateNode2 = __commonJS({
 
 // node_modules/@babel/template/node_modules/@babel/types/lib/builders/generated/index.js
 var require_generated7 = __commonJS({
-  "node_modules/@babel/template/node_modules/@babel/types/lib/builders/generated/index.js"(exports2) {
+  "node_modules/@babel/template/node_modules/@babel/types/lib/builders/generated/index.js"(exports) {
     "use strict";
-    Object.defineProperty(exports2, "__esModule", {
+    Object.defineProperty(exports, "__esModule", {
       value: true
     });
-    exports2.anyTypeAnnotation = anyTypeAnnotation;
-    exports2.argumentPlaceholder = argumentPlaceholder;
-    exports2.arrayExpression = arrayExpression;
-    exports2.arrayPattern = arrayPattern;
-    exports2.arrayTypeAnnotation = arrayTypeAnnotation;
-    exports2.arrowFunctionExpression = arrowFunctionExpression3;
-    exports2.assignmentExpression = assignmentExpression;
-    exports2.assignmentPattern = assignmentPattern;
-    exports2.awaitExpression = awaitExpression;
-    exports2.bigIntLiteral = bigIntLiteral;
-    exports2.binaryExpression = binaryExpression;
-    exports2.bindExpression = bindExpression;
-    exports2.blockStatement = blockStatement3;
-    exports2.booleanLiteral = booleanLiteral;
-    exports2.booleanLiteralTypeAnnotation = booleanLiteralTypeAnnotation;
-    exports2.booleanTypeAnnotation = booleanTypeAnnotation;
-    exports2.breakStatement = breakStatement;
-    exports2.callExpression = callExpression3;
-    exports2.catchClause = catchClause;
-    exports2.classAccessorProperty = classAccessorProperty;
-    exports2.classBody = classBody;
-    exports2.classDeclaration = classDeclaration;
-    exports2.classExpression = classExpression;
-    exports2.classImplements = classImplements;
-    exports2.classMethod = classMethod;
-    exports2.classPrivateMethod = classPrivateMethod;
-    exports2.classPrivateProperty = classPrivateProperty;
-    exports2.classProperty = classProperty;
-    exports2.conditionalExpression = conditionalExpression;
-    exports2.continueStatement = continueStatement;
-    exports2.debuggerStatement = debuggerStatement;
-    exports2.decimalLiteral = decimalLiteral;
-    exports2.declareClass = declareClass;
-    exports2.declareExportAllDeclaration = declareExportAllDeclaration;
-    exports2.declareExportDeclaration = declareExportDeclaration;
-    exports2.declareFunction = declareFunction;
-    exports2.declareInterface = declareInterface;
-    exports2.declareModule = declareModule;
-    exports2.declareModuleExports = declareModuleExports;
-    exports2.declareOpaqueType = declareOpaqueType;
-    exports2.declareTypeAlias = declareTypeAlias;
-    exports2.declareVariable = declareVariable;
-    exports2.declaredPredicate = declaredPredicate;
-    exports2.decorator = decorator;
-    exports2.directive = directive;
-    exports2.directiveLiteral = directiveLiteral;
-    exports2.doExpression = doExpression;
-    exports2.doWhileStatement = doWhileStatement;
-    exports2.emptyStatement = emptyStatement;
-    exports2.emptyTypeAnnotation = emptyTypeAnnotation;
-    exports2.enumBooleanBody = enumBooleanBody;
-    exports2.enumBooleanMember = enumBooleanMember;
-    exports2.enumDeclaration = enumDeclaration;
-    exports2.enumDefaultedMember = enumDefaultedMember;
-    exports2.enumNumberBody = enumNumberBody;
-    exports2.enumNumberMember = enumNumberMember;
-    exports2.enumStringBody = enumStringBody;
-    exports2.enumStringMember = enumStringMember;
-    exports2.enumSymbolBody = enumSymbolBody;
-    exports2.existsTypeAnnotation = existsTypeAnnotation;
-    exports2.exportAllDeclaration = exportAllDeclaration;
-    exports2.exportDefaultDeclaration = exportDefaultDeclaration;
-    exports2.exportDefaultSpecifier = exportDefaultSpecifier;
-    exports2.exportNamedDeclaration = exportNamedDeclaration;
-    exports2.exportNamespaceSpecifier = exportNamespaceSpecifier;
-    exports2.exportSpecifier = exportSpecifier;
-    exports2.expressionStatement = expressionStatement3;
-    exports2.file = file;
-    exports2.forInStatement = forInStatement;
-    exports2.forOfStatement = forOfStatement;
-    exports2.forStatement = forStatement;
-    exports2.functionDeclaration = functionDeclaration;
-    exports2.functionExpression = functionExpression;
-    exports2.functionTypeAnnotation = functionTypeAnnotation;
-    exports2.functionTypeParam = functionTypeParam;
-    exports2.genericTypeAnnotation = genericTypeAnnotation;
-    exports2.identifier = identifier3;
-    exports2.ifStatement = ifStatement;
-    exports2.import = _import;
-    exports2.importAttribute = importAttribute;
-    exports2.importDeclaration = importDeclaration;
-    exports2.importDefaultSpecifier = importDefaultSpecifier;
-    exports2.importNamespaceSpecifier = importNamespaceSpecifier;
-    exports2.importSpecifier = importSpecifier;
-    exports2.indexedAccessType = indexedAccessType;
-    exports2.inferredPredicate = inferredPredicate;
-    exports2.interfaceDeclaration = interfaceDeclaration;
-    exports2.interfaceExtends = interfaceExtends;
-    exports2.interfaceTypeAnnotation = interfaceTypeAnnotation;
-    exports2.interpreterDirective = interpreterDirective;
-    exports2.intersectionTypeAnnotation = intersectionTypeAnnotation;
-    exports2.jSXAttribute = exports2.jsxAttribute = jsxAttribute;
-    exports2.jSXClosingElement = exports2.jsxClosingElement = jsxClosingElement;
-    exports2.jSXClosingFragment = exports2.jsxClosingFragment = jsxClosingFragment;
-    exports2.jSXElement = exports2.jsxElement = jsxElement;
-    exports2.jSXEmptyExpression = exports2.jsxEmptyExpression = jsxEmptyExpression;
-    exports2.jSXExpressionContainer = exports2.jsxExpressionContainer = jsxExpressionContainer;
-    exports2.jSXFragment = exports2.jsxFragment = jsxFragment;
-    exports2.jSXIdentifier = exports2.jsxIdentifier = jsxIdentifier;
-    exports2.jSXMemberExpression = exports2.jsxMemberExpression = jsxMemberExpression;
-    exports2.jSXNamespacedName = exports2.jsxNamespacedName = jsxNamespacedName;
-    exports2.jSXOpeningElement = exports2.jsxOpeningElement = jsxOpeningElement;
-    exports2.jSXOpeningFragment = exports2.jsxOpeningFragment = jsxOpeningFragment;
-    exports2.jSXSpreadAttribute = exports2.jsxSpreadAttribute = jsxSpreadAttribute;
-    exports2.jSXSpreadChild = exports2.jsxSpreadChild = jsxSpreadChild;
-    exports2.jSXText = exports2.jsxText = jsxText;
-    exports2.labeledStatement = labeledStatement;
-    exports2.logicalExpression = logicalExpression;
-    exports2.memberExpression = memberExpression;
-    exports2.metaProperty = metaProperty;
-    exports2.mixedTypeAnnotation = mixedTypeAnnotation;
-    exports2.moduleExpression = moduleExpression;
-    exports2.newExpression = newExpression;
-    exports2.noop = noop;
-    exports2.nullLiteral = nullLiteral;
-    exports2.nullLiteralTypeAnnotation = nullLiteralTypeAnnotation;
-    exports2.nullableTypeAnnotation = nullableTypeAnnotation;
-    exports2.numberLiteral = NumberLiteral;
-    exports2.numberLiteralTypeAnnotation = numberLiteralTypeAnnotation;
-    exports2.numberTypeAnnotation = numberTypeAnnotation;
-    exports2.numericLiteral = numericLiteral;
-    exports2.objectExpression = objectExpression;
-    exports2.objectMethod = objectMethod;
-    exports2.objectPattern = objectPattern;
-    exports2.objectProperty = objectProperty;
-    exports2.objectTypeAnnotation = objectTypeAnnotation;
-    exports2.objectTypeCallProperty = objectTypeCallProperty;
-    exports2.objectTypeIndexer = objectTypeIndexer;
-    exports2.objectTypeInternalSlot = objectTypeInternalSlot;
-    exports2.objectTypeProperty = objectTypeProperty;
-    exports2.objectTypeSpreadProperty = objectTypeSpreadProperty;
-    exports2.opaqueType = opaqueType;
-    exports2.optionalCallExpression = optionalCallExpression;
-    exports2.optionalIndexedAccessType = optionalIndexedAccessType;
-    exports2.optionalMemberExpression = optionalMemberExpression;
-    exports2.parenthesizedExpression = parenthesizedExpression;
-    exports2.pipelineBareFunction = pipelineBareFunction;
-    exports2.pipelinePrimaryTopicReference = pipelinePrimaryTopicReference;
-    exports2.pipelineTopicExpression = pipelineTopicExpression;
-    exports2.placeholder = placeholder;
-    exports2.privateName = privateName;
-    exports2.program = program2;
-    exports2.qualifiedTypeIdentifier = qualifiedTypeIdentifier;
-    exports2.recordExpression = recordExpression;
-    exports2.regExpLiteral = regExpLiteral;
-    exports2.regexLiteral = RegexLiteral;
-    exports2.restElement = restElement;
-    exports2.restProperty = RestProperty;
-    exports2.returnStatement = returnStatement;
-    exports2.sequenceExpression = sequenceExpression;
-    exports2.spreadElement = spreadElement;
-    exports2.spreadProperty = SpreadProperty;
-    exports2.staticBlock = staticBlock;
-    exports2.stringLiteral = stringLiteral3;
-    exports2.stringLiteralTypeAnnotation = stringLiteralTypeAnnotation;
-    exports2.stringTypeAnnotation = stringTypeAnnotation;
-    exports2.super = _super;
-    exports2.switchCase = switchCase;
-    exports2.switchStatement = switchStatement;
-    exports2.symbolTypeAnnotation = symbolTypeAnnotation;
-    exports2.taggedTemplateExpression = taggedTemplateExpression;
-    exports2.templateElement = templateElement;
-    exports2.templateLiteral = templateLiteral;
-    exports2.thisExpression = thisExpression;
-    exports2.thisTypeAnnotation = thisTypeAnnotation;
-    exports2.throwStatement = throwStatement;
-    exports2.topicReference = topicReference;
-    exports2.tryStatement = tryStatement;
-    exports2.tSAnyKeyword = exports2.tsAnyKeyword = tsAnyKeyword;
-    exports2.tSArrayType = exports2.tsArrayType = tsArrayType;
-    exports2.tSAsExpression = exports2.tsAsExpression = tsAsExpression;
-    exports2.tSBigIntKeyword = exports2.tsBigIntKeyword = tsBigIntKeyword;
-    exports2.tSBooleanKeyword = exports2.tsBooleanKeyword = tsBooleanKeyword;
-    exports2.tSCallSignatureDeclaration = exports2.tsCallSignatureDeclaration = tsCallSignatureDeclaration;
-    exports2.tSConditionalType = exports2.tsConditionalType = tsConditionalType;
-    exports2.tSConstructSignatureDeclaration = exports2.tsConstructSignatureDeclaration = tsConstructSignatureDeclaration;
-    exports2.tSConstructorType = exports2.tsConstructorType = tsConstructorType;
-    exports2.tSDeclareFunction = exports2.tsDeclareFunction = tsDeclareFunction;
-    exports2.tSDeclareMethod = exports2.tsDeclareMethod = tsDeclareMethod;
-    exports2.tSEnumDeclaration = exports2.tsEnumDeclaration = tsEnumDeclaration;
-    exports2.tSEnumMember = exports2.tsEnumMember = tsEnumMember;
-    exports2.tSExportAssignment = exports2.tsExportAssignment = tsExportAssignment;
-    exports2.tSExpressionWithTypeArguments = exports2.tsExpressionWithTypeArguments = tsExpressionWithTypeArguments;
-    exports2.tSExternalModuleReference = exports2.tsExternalModuleReference = tsExternalModuleReference;
-    exports2.tSFunctionType = exports2.tsFunctionType = tsFunctionType;
-    exports2.tSImportEqualsDeclaration = exports2.tsImportEqualsDeclaration = tsImportEqualsDeclaration;
-    exports2.tSImportType = exports2.tsImportType = tsImportType;
-    exports2.tSIndexSignature = exports2.tsIndexSignature = tsIndexSignature;
-    exports2.tSIndexedAccessType = exports2.tsIndexedAccessType = tsIndexedAccessType;
-    exports2.tSInferType = exports2.tsInferType = tsInferType;
-    exports2.tSInstantiationExpression = exports2.tsInstantiationExpression = tsInstantiationExpression;
-    exports2.tSInterfaceBody = exports2.tsInterfaceBody = tsInterfaceBody;
-    exports2.tSInterfaceDeclaration = exports2.tsInterfaceDeclaration = tsInterfaceDeclaration;
-    exports2.tSIntersectionType = exports2.tsIntersectionType = tsIntersectionType;
-    exports2.tSIntrinsicKeyword = exports2.tsIntrinsicKeyword = tsIntrinsicKeyword;
-    exports2.tSLiteralType = exports2.tsLiteralType = tsLiteralType;
-    exports2.tSMappedType = exports2.tsMappedType = tsMappedType;
-    exports2.tSMethodSignature = exports2.tsMethodSignature = tsMethodSignature;
-    exports2.tSModuleBlock = exports2.tsModuleBlock = tsModuleBlock;
-    exports2.tSModuleDeclaration = exports2.tsModuleDeclaration = tsModuleDeclaration;
-    exports2.tSNamedTupleMember = exports2.tsNamedTupleMember = tsNamedTupleMember;
-    exports2.tSNamespaceExportDeclaration = exports2.tsNamespaceExportDeclaration = tsNamespaceExportDeclaration;
-    exports2.tSNeverKeyword = exports2.tsNeverKeyword = tsNeverKeyword;
-    exports2.tSNonNullExpression = exports2.tsNonNullExpression = tsNonNullExpression;
-    exports2.tSNullKeyword = exports2.tsNullKeyword = tsNullKeyword;
-    exports2.tSNumberKeyword = exports2.tsNumberKeyword = tsNumberKeyword;
-    exports2.tSObjectKeyword = exports2.tsObjectKeyword = tsObjectKeyword;
-    exports2.tSOptionalType = exports2.tsOptionalType = tsOptionalType;
-    exports2.tSParameterProperty = exports2.tsParameterProperty = tsParameterProperty;
-    exports2.tSParenthesizedType = exports2.tsParenthesizedType = tsParenthesizedType;
-    exports2.tSPropertySignature = exports2.tsPropertySignature = tsPropertySignature;
-    exports2.tSQualifiedName = exports2.tsQualifiedName = tsQualifiedName;
-    exports2.tSRestType = exports2.tsRestType = tsRestType;
-    exports2.tSStringKeyword = exports2.tsStringKeyword = tsStringKeyword;
-    exports2.tSSymbolKeyword = exports2.tsSymbolKeyword = tsSymbolKeyword;
-    exports2.tSThisType = exports2.tsThisType = tsThisType;
-    exports2.tSTupleType = exports2.tsTupleType = tsTupleType;
-    exports2.tSTypeAliasDeclaration = exports2.tsTypeAliasDeclaration = tsTypeAliasDeclaration;
-    exports2.tSTypeAnnotation = exports2.tsTypeAnnotation = tsTypeAnnotation;
-    exports2.tSTypeAssertion = exports2.tsTypeAssertion = tsTypeAssertion;
-    exports2.tSTypeLiteral = exports2.tsTypeLiteral = tsTypeLiteral;
-    exports2.tSTypeOperator = exports2.tsTypeOperator = tsTypeOperator;
-    exports2.tSTypeParameter = exports2.tsTypeParameter = tsTypeParameter;
-    exports2.tSTypeParameterDeclaration = exports2.tsTypeParameterDeclaration = tsTypeParameterDeclaration;
-    exports2.tSTypeParameterInstantiation = exports2.tsTypeParameterInstantiation = tsTypeParameterInstantiation;
-    exports2.tSTypePredicate = exports2.tsTypePredicate = tsTypePredicate;
-    exports2.tSTypeQuery = exports2.tsTypeQuery = tsTypeQuery;
-    exports2.tSTypeReference = exports2.tsTypeReference = tsTypeReference;
-    exports2.tSUndefinedKeyword = exports2.tsUndefinedKeyword = tsUndefinedKeyword;
-    exports2.tSUnionType = exports2.tsUnionType = tsUnionType;
-    exports2.tSUnknownKeyword = exports2.tsUnknownKeyword = tsUnknownKeyword;
-    exports2.tSVoidKeyword = exports2.tsVoidKeyword = tsVoidKeyword;
-    exports2.tupleExpression = tupleExpression;
-    exports2.tupleTypeAnnotation = tupleTypeAnnotation;
-    exports2.typeAlias = typeAlias;
-    exports2.typeAnnotation = typeAnnotation;
-    exports2.typeCastExpression = typeCastExpression;
-    exports2.typeParameter = typeParameter;
-    exports2.typeParameterDeclaration = typeParameterDeclaration;
-    exports2.typeParameterInstantiation = typeParameterInstantiation;
-    exports2.typeofTypeAnnotation = typeofTypeAnnotation;
-    exports2.unaryExpression = unaryExpression;
-    exports2.unionTypeAnnotation = unionTypeAnnotation;
-    exports2.updateExpression = updateExpression;
-    exports2.v8IntrinsicIdentifier = v8IntrinsicIdentifier;
-    exports2.variableDeclaration = variableDeclaration;
-    exports2.variableDeclarator = variableDeclarator;
-    exports2.variance = variance;
-    exports2.voidTypeAnnotation = voidTypeAnnotation;
-    exports2.whileStatement = whileStatement;
-    exports2.withStatement = withStatement;
-    exports2.yieldExpression = yieldExpression;
+    exports.anyTypeAnnotation = anyTypeAnnotation;
+    exports.argumentPlaceholder = argumentPlaceholder;
+    exports.arrayExpression = arrayExpression;
+    exports.arrayPattern = arrayPattern;
+    exports.arrayTypeAnnotation = arrayTypeAnnotation;
+    exports.arrowFunctionExpression = arrowFunctionExpression3;
+    exports.assignmentExpression = assignmentExpression;
+    exports.assignmentPattern = assignmentPattern;
+    exports.awaitExpression = awaitExpression;
+    exports.bigIntLiteral = bigIntLiteral;
+    exports.binaryExpression = binaryExpression;
+    exports.bindExpression = bindExpression;
+    exports.blockStatement = blockStatement3;
+    exports.booleanLiteral = booleanLiteral;
+    exports.booleanLiteralTypeAnnotation = booleanLiteralTypeAnnotation;
+    exports.booleanTypeAnnotation = booleanTypeAnnotation;
+    exports.breakStatement = breakStatement;
+    exports.callExpression = callExpression3;
+    exports.catchClause = catchClause;
+    exports.classAccessorProperty = classAccessorProperty;
+    exports.classBody = classBody;
+    exports.classDeclaration = classDeclaration;
+    exports.classExpression = classExpression;
+    exports.classImplements = classImplements;
+    exports.classMethod = classMethod;
+    exports.classPrivateMethod = classPrivateMethod;
+    exports.classPrivateProperty = classPrivateProperty;
+    exports.classProperty = classProperty;
+    exports.conditionalExpression = conditionalExpression;
+    exports.continueStatement = continueStatement;
+    exports.debuggerStatement = debuggerStatement;
+    exports.decimalLiteral = decimalLiteral;
+    exports.declareClass = declareClass;
+    exports.declareExportAllDeclaration = declareExportAllDeclaration;
+    exports.declareExportDeclaration = declareExportDeclaration;
+    exports.declareFunction = declareFunction;
+    exports.declareInterface = declareInterface;
+    exports.declareModule = declareModule;
+    exports.declareModuleExports = declareModuleExports;
+    exports.declareOpaqueType = declareOpaqueType;
+    exports.declareTypeAlias = declareTypeAlias;
+    exports.declareVariable = declareVariable;
+    exports.declaredPredicate = declaredPredicate;
+    exports.decorator = decorator;
+    exports.directive = directive;
+    exports.directiveLiteral = directiveLiteral;
+    exports.doExpression = doExpression;
+    exports.doWhileStatement = doWhileStatement;
+    exports.emptyStatement = emptyStatement;
+    exports.emptyTypeAnnotation = emptyTypeAnnotation;
+    exports.enumBooleanBody = enumBooleanBody;
+    exports.enumBooleanMember = enumBooleanMember;
+    exports.enumDeclaration = enumDeclaration;
+    exports.enumDefaultedMember = enumDefaultedMember;
+    exports.enumNumberBody = enumNumberBody;
+    exports.enumNumberMember = enumNumberMember;
+    exports.enumStringBody = enumStringBody;
+    exports.enumStringMember = enumStringMember;
+    exports.enumSymbolBody = enumSymbolBody;
+    exports.existsTypeAnnotation = existsTypeAnnotation;
+    exports.exportAllDeclaration = exportAllDeclaration;
+    exports.exportDefaultDeclaration = exportDefaultDeclaration;
+    exports.exportDefaultSpecifier = exportDefaultSpecifier;
+    exports.exportNamedDeclaration = exportNamedDeclaration;
+    exports.exportNamespaceSpecifier = exportNamespaceSpecifier;
+    exports.exportSpecifier = exportSpecifier;
+    exports.expressionStatement = expressionStatement3;
+    exports.file = file;
+    exports.forInStatement = forInStatement;
+    exports.forOfStatement = forOfStatement;
+    exports.forStatement = forStatement;
+    exports.functionDeclaration = functionDeclaration;
+    exports.functionExpression = functionExpression;
+    exports.functionTypeAnnotation = functionTypeAnnotation;
+    exports.functionTypeParam = functionTypeParam;
+    exports.genericTypeAnnotation = genericTypeAnnotation;
+    exports.identifier = identifier3;
+    exports.ifStatement = ifStatement;
+    exports.import = _import;
+    exports.importAttribute = importAttribute;
+    exports.importDeclaration = importDeclaration;
+    exports.importDefaultSpecifier = importDefaultSpecifier;
+    exports.importNamespaceSpecifier = importNamespaceSpecifier;
+    exports.importSpecifier = importSpecifier;
+    exports.indexedAccessType = indexedAccessType;
+    exports.inferredPredicate = inferredPredicate;
+    exports.interfaceDeclaration = interfaceDeclaration;
+    exports.interfaceExtends = interfaceExtends;
+    exports.interfaceTypeAnnotation = interfaceTypeAnnotation;
+    exports.interpreterDirective = interpreterDirective;
+    exports.intersectionTypeAnnotation = intersectionTypeAnnotation;
+    exports.jSXAttribute = exports.jsxAttribute = jsxAttribute;
+    exports.jSXClosingElement = exports.jsxClosingElement = jsxClosingElement;
+    exports.jSXClosingFragment = exports.jsxClosingFragment = jsxClosingFragment;
+    exports.jSXElement = exports.jsxElement = jsxElement;
+    exports.jSXEmptyExpression = exports.jsxEmptyExpression = jsxEmptyExpression;
+    exports.jSXExpressionContainer = exports.jsxExpressionContainer = jsxExpressionContainer;
+    exports.jSXFragment = exports.jsxFragment = jsxFragment;
+    exports.jSXIdentifier = exports.jsxIdentifier = jsxIdentifier;
+    exports.jSXMemberExpression = exports.jsxMemberExpression = jsxMemberExpression;
+    exports.jSXNamespacedName = exports.jsxNamespacedName = jsxNamespacedName;
+    exports.jSXOpeningElement = exports.jsxOpeningElement = jsxOpeningElement;
+    exports.jSXOpeningFragment = exports.jsxOpeningFragment = jsxOpeningFragment;
+    exports.jSXSpreadAttribute = exports.jsxSpreadAttribute = jsxSpreadAttribute;
+    exports.jSXSpreadChild = exports.jsxSpreadChild = jsxSpreadChild;
+    exports.jSXText = exports.jsxText = jsxText;
+    exports.labeledStatement = labeledStatement;
+    exports.logicalExpression = logicalExpression;
+    exports.memberExpression = memberExpression;
+    exports.metaProperty = metaProperty;
+    exports.mixedTypeAnnotation = mixedTypeAnnotation;
+    exports.moduleExpression = moduleExpression;
+    exports.newExpression = newExpression;
+    exports.noop = noop;
+    exports.nullLiteral = nullLiteral;
+    exports.nullLiteralTypeAnnotation = nullLiteralTypeAnnotation;
+    exports.nullableTypeAnnotation = nullableTypeAnnotation;
+    exports.numberLiteral = NumberLiteral;
+    exports.numberLiteralTypeAnnotation = numberLiteralTypeAnnotation;
+    exports.numberTypeAnnotation = numberTypeAnnotation;
+    exports.numericLiteral = numericLiteral;
+    exports.objectExpression = objectExpression;
+    exports.objectMethod = objectMethod;
+    exports.objectPattern = objectPattern;
+    exports.objectProperty = objectProperty;
+    exports.objectTypeAnnotation = objectTypeAnnotation;
+    exports.objectTypeCallProperty = objectTypeCallProperty;
+    exports.objectTypeIndexer = objectTypeIndexer;
+    exports.objectTypeInternalSlot = objectTypeInternalSlot;
+    exports.objectTypeProperty = objectTypeProperty;
+    exports.objectTypeSpreadProperty = objectTypeSpreadProperty;
+    exports.opaqueType = opaqueType;
+    exports.optionalCallExpression = optionalCallExpression;
+    exports.optionalIndexedAccessType = optionalIndexedAccessType;
+    exports.optionalMemberExpression = optionalMemberExpression;
+    exports.parenthesizedExpression = parenthesizedExpression;
+    exports.pipelineBareFunction = pipelineBareFunction;
+    exports.pipelinePrimaryTopicReference = pipelinePrimaryTopicReference;
+    exports.pipelineTopicExpression = pipelineTopicExpression;
+    exports.placeholder = placeholder;
+    exports.privateName = privateName;
+    exports.program = program2;
+    exports.qualifiedTypeIdentifier = qualifiedTypeIdentifier;
+    exports.recordExpression = recordExpression;
+    exports.regExpLiteral = regExpLiteral;
+    exports.regexLiteral = RegexLiteral;
+    exports.restElement = restElement;
+    exports.restProperty = RestProperty;
+    exports.returnStatement = returnStatement;
+    exports.sequenceExpression = sequenceExpression;
+    exports.spreadElement = spreadElement;
+    exports.spreadProperty = SpreadProperty;
+    exports.staticBlock = staticBlock;
+    exports.stringLiteral = stringLiteral3;
+    exports.stringLiteralTypeAnnotation = stringLiteralTypeAnnotation;
+    exports.stringTypeAnnotation = stringTypeAnnotation;
+    exports.super = _super;
+    exports.switchCase = switchCase;
+    exports.switchStatement = switchStatement;
+    exports.symbolTypeAnnotation = symbolTypeAnnotation;
+    exports.taggedTemplateExpression = taggedTemplateExpression;
+    exports.templateElement = templateElement;
+    exports.templateLiteral = templateLiteral;
+    exports.thisExpression = thisExpression;
+    exports.thisTypeAnnotation = thisTypeAnnotation;
+    exports.throwStatement = throwStatement;
+    exports.topicReference = topicReference;
+    exports.tryStatement = tryStatement;
+    exports.tSAnyKeyword = exports.tsAnyKeyword = tsAnyKeyword;
+    exports.tSArrayType = exports.tsArrayType = tsArrayType;
+    exports.tSAsExpression = exports.tsAsExpression = tsAsExpression;
+    exports.tSBigIntKeyword = exports.tsBigIntKeyword = tsBigIntKeyword;
+    exports.tSBooleanKeyword = exports.tsBooleanKeyword = tsBooleanKeyword;
+    exports.tSCallSignatureDeclaration = exports.tsCallSignatureDeclaration = tsCallSignatureDeclaration;
+    exports.tSConditionalType = exports.tsConditionalType = tsConditionalType;
+    exports.tSConstructSignatureDeclaration = exports.tsConstructSignatureDeclaration = tsConstructSignatureDeclaration;
+    exports.tSConstructorType = exports.tsConstructorType = tsConstructorType;
+    exports.tSDeclareFunction = exports.tsDeclareFunction = tsDeclareFunction;
+    exports.tSDeclareMethod = exports.tsDeclareMethod = tsDeclareMethod;
+    exports.tSEnumDeclaration = exports.tsEnumDeclaration = tsEnumDeclaration;
+    exports.tSEnumMember = exports.tsEnumMember = tsEnumMember;
+    exports.tSExportAssignment = exports.tsExportAssignment = tsExportAssignment;
+    exports.tSExpressionWithTypeArguments = exports.tsExpressionWithTypeArguments = tsExpressionWithTypeArguments;
+    exports.tSExternalModuleReference = exports.tsExternalModuleReference = tsExternalModuleReference;
+    exports.tSFunctionType = exports.tsFunctionType = tsFunctionType;
+    exports.tSImportEqualsDeclaration = exports.tsImportEqualsDeclaration = tsImportEqualsDeclaration;
+    exports.tSImportType = exports.tsImportType = tsImportType;
+    exports.tSIndexSignature = exports.tsIndexSignature = tsIndexSignature;
+    exports.tSIndexedAccessType = exports.tsIndexedAccessType = tsIndexedAccessType;
+    exports.tSInferType = exports.tsInferType = tsInferType;
+    exports.tSInstantiationExpression = exports.tsInstantiationExpression = tsInstantiationExpression;
+    exports.tSInterfaceBody = exports.tsInterfaceBody = tsInterfaceBody;
+    exports.tSInterfaceDeclaration = exports.tsInterfaceDeclaration = tsInterfaceDeclaration;
+    exports.tSIntersectionType = exports.tsIntersectionType = tsIntersectionType;
+    exports.tSIntrinsicKeyword = exports.tsIntrinsicKeyword = tsIntrinsicKeyword;
+    exports.tSLiteralType = exports.tsLiteralType = tsLiteralType;
+    exports.tSMappedType = exports.tsMappedType = tsMappedType;
+    exports.tSMethodSignature = exports.tsMethodSignature = tsMethodSignature;
+    exports.tSModuleBlock = exports.tsModuleBlock = tsModuleBlock;
+    exports.tSModuleDeclaration = exports.tsModuleDeclaration = tsModuleDeclaration;
+    exports.tSNamedTupleMember = exports.tsNamedTupleMember = tsNamedTupleMember;
+    exports.tSNamespaceExportDeclaration = exports.tsNamespaceExportDeclaration = tsNamespaceExportDeclaration;
+    exports.tSNeverKeyword = exports.tsNeverKeyword = tsNeverKeyword;
+    exports.tSNonNullExpression = exports.tsNonNullExpression = tsNonNullExpression;
+    exports.tSNullKeyword = exports.tsNullKeyword = tsNullKeyword;
+    exports.tSNumberKeyword = exports.tsNumberKeyword = tsNumberKeyword;
+    exports.tSObjectKeyword = exports.tsObjectKeyword = tsObjectKeyword;
+    exports.tSOptionalType = exports.tsOptionalType = tsOptionalType;
+    exports.tSParameterProperty = exports.tsParameterProperty = tsParameterProperty;
+    exports.tSParenthesizedType = exports.tsParenthesizedType = tsParenthesizedType;
+    exports.tSPropertySignature = exports.tsPropertySignature = tsPropertySignature;
+    exports.tSQualifiedName = exports.tsQualifiedName = tsQualifiedName;
+    exports.tSRestType = exports.tsRestType = tsRestType;
+    exports.tSStringKeyword = exports.tsStringKeyword = tsStringKeyword;
+    exports.tSSymbolKeyword = exports.tsSymbolKeyword = tsSymbolKeyword;
+    exports.tSThisType = exports.tsThisType = tsThisType;
+    exports.tSTupleType = exports.tsTupleType = tsTupleType;
+    exports.tSTypeAliasDeclaration = exports.tsTypeAliasDeclaration = tsTypeAliasDeclaration;
+    exports.tSTypeAnnotation = exports.tsTypeAnnotation = tsTypeAnnotation;
+    exports.tSTypeAssertion = exports.tsTypeAssertion = tsTypeAssertion;
+    exports.tSTypeLiteral = exports.tsTypeLiteral = tsTypeLiteral;
+    exports.tSTypeOperator = exports.tsTypeOperator = tsTypeOperator;
+    exports.tSTypeParameter = exports.tsTypeParameter = tsTypeParameter;
+    exports.tSTypeParameterDeclaration = exports.tsTypeParameterDeclaration = tsTypeParameterDeclaration;
+    exports.tSTypeParameterInstantiation = exports.tsTypeParameterInstantiation = tsTypeParameterInstantiation;
+    exports.tSTypePredicate = exports.tsTypePredicate = tsTypePredicate;
+    exports.tSTypeQuery = exports.tsTypeQuery = tsTypeQuery;
+    exports.tSTypeReference = exports.tsTypeReference = tsTypeReference;
+    exports.tSUndefinedKeyword = exports.tsUndefinedKeyword = tsUndefinedKeyword;
+    exports.tSUnionType = exports.tsUnionType = tsUnionType;
+    exports.tSUnknownKeyword = exports.tsUnknownKeyword = tsUnknownKeyword;
+    exports.tSVoidKeyword = exports.tsVoidKeyword = tsVoidKeyword;
+    exports.tupleExpression = tupleExpression;
+    exports.tupleTypeAnnotation = tupleTypeAnnotation;
+    exports.typeAlias = typeAlias;
+    exports.typeAnnotation = typeAnnotation;
+    exports.typeCastExpression = typeCastExpression;
+    exports.typeParameter = typeParameter;
+    exports.typeParameterDeclaration = typeParameterDeclaration;
+    exports.typeParameterInstantiation = typeParameterInstantiation;
+    exports.typeofTypeAnnotation = typeofTypeAnnotation;
+    exports.unaryExpression = unaryExpression;
+    exports.unionTypeAnnotation = unionTypeAnnotation;
+    exports.updateExpression = updateExpression;
+    exports.v8IntrinsicIdentifier = v8IntrinsicIdentifier;
+    exports.variableDeclaration = variableDeclaration;
+    exports.variableDeclarator = variableDeclarator;
+    exports.variance = variance;
+    exports.voidTypeAnnotation = voidTypeAnnotation;
+    exports.whileStatement = whileStatement;
+    exports.withStatement = withStatement;
+    exports.yieldExpression = yieldExpression;
     var _validateNode = require_validateNode2();
     function arrayExpression(elements = []) {
       return (0, _validateNode.default)({
@@ -50232,12 +50422,12 @@ var require_generated7 = __commonJS({
 
 // node_modules/@babel/template/node_modules/@babel/types/lib/utils/react/cleanJSXElementLiteralChild.js
 var require_cleanJSXElementLiteralChild2 = __commonJS({
-  "node_modules/@babel/template/node_modules/@babel/types/lib/utils/react/cleanJSXElementLiteralChild.js"(exports2) {
+  "node_modules/@babel/template/node_modules/@babel/types/lib/utils/react/cleanJSXElementLiteralChild.js"(exports) {
     "use strict";
-    Object.defineProperty(exports2, "__esModule", {
+    Object.defineProperty(exports, "__esModule", {
       value: true
     });
-    exports2.default = cleanJSXElementLiteralChild;
+    exports.default = cleanJSXElementLiteralChild;
     var _generated = require_generated7();
     function cleanJSXElementLiteralChild(child, args) {
       const lines = child.value.split(/\r\n|\n|\r/);
@@ -50276,12 +50466,12 @@ var require_cleanJSXElementLiteralChild2 = __commonJS({
 
 // node_modules/@babel/template/node_modules/@babel/types/lib/builders/react/buildChildren.js
 var require_buildChildren2 = __commonJS({
-  "node_modules/@babel/template/node_modules/@babel/types/lib/builders/react/buildChildren.js"(exports2) {
+  "node_modules/@babel/template/node_modules/@babel/types/lib/builders/react/buildChildren.js"(exports) {
     "use strict";
-    Object.defineProperty(exports2, "__esModule", {
+    Object.defineProperty(exports, "__esModule", {
       value: true
     });
-    exports2.default = buildChildren;
+    exports.default = buildChildren;
     var _generated = require_generated6();
     var _cleanJSXElementLiteralChild = require_cleanJSXElementLiteralChild2();
     function buildChildren(node) {
@@ -50306,12 +50496,12 @@ var require_buildChildren2 = __commonJS({
 
 // node_modules/@babel/template/node_modules/@babel/types/lib/validators/isNode.js
 var require_isNode2 = __commonJS({
-  "node_modules/@babel/template/node_modules/@babel/types/lib/validators/isNode.js"(exports2) {
+  "node_modules/@babel/template/node_modules/@babel/types/lib/validators/isNode.js"(exports) {
     "use strict";
-    Object.defineProperty(exports2, "__esModule", {
+    Object.defineProperty(exports, "__esModule", {
       value: true
     });
-    exports2.default = isNode;
+    exports.default = isNode;
     var _definitions = require_definitions2();
     function isNode(node) {
       return !!(node && _definitions.VISITOR_KEYS[node.type]);
@@ -50322,12 +50512,12 @@ var require_isNode2 = __commonJS({
 
 // node_modules/@babel/template/node_modules/@babel/types/lib/asserts/assertNode.js
 var require_assertNode2 = __commonJS({
-  "node_modules/@babel/template/node_modules/@babel/types/lib/asserts/assertNode.js"(exports2) {
+  "node_modules/@babel/template/node_modules/@babel/types/lib/asserts/assertNode.js"(exports) {
     "use strict";
-    Object.defineProperty(exports2, "__esModule", {
+    Object.defineProperty(exports, "__esModule", {
       value: true
     });
-    exports2.default = assertNode;
+    exports.default = assertNode;
     var _isNode = require_isNode2();
     function assertNode(node) {
       if (!(0, _isNode.default)(node)) {
@@ -50342,312 +50532,312 @@ var require_assertNode2 = __commonJS({
 
 // node_modules/@babel/template/node_modules/@babel/types/lib/asserts/generated/index.js
 var require_generated8 = __commonJS({
-  "node_modules/@babel/template/node_modules/@babel/types/lib/asserts/generated/index.js"(exports2) {
+  "node_modules/@babel/template/node_modules/@babel/types/lib/asserts/generated/index.js"(exports) {
     "use strict";
-    Object.defineProperty(exports2, "__esModule", {
+    Object.defineProperty(exports, "__esModule", {
       value: true
     });
-    exports2.assertAccessor = assertAccessor;
-    exports2.assertAnyTypeAnnotation = assertAnyTypeAnnotation;
-    exports2.assertArgumentPlaceholder = assertArgumentPlaceholder;
-    exports2.assertArrayExpression = assertArrayExpression;
-    exports2.assertArrayPattern = assertArrayPattern;
-    exports2.assertArrayTypeAnnotation = assertArrayTypeAnnotation;
-    exports2.assertArrowFunctionExpression = assertArrowFunctionExpression;
-    exports2.assertAssignmentExpression = assertAssignmentExpression;
-    exports2.assertAssignmentPattern = assertAssignmentPattern;
-    exports2.assertAwaitExpression = assertAwaitExpression;
-    exports2.assertBigIntLiteral = assertBigIntLiteral;
-    exports2.assertBinary = assertBinary;
-    exports2.assertBinaryExpression = assertBinaryExpression;
-    exports2.assertBindExpression = assertBindExpression;
-    exports2.assertBlock = assertBlock;
-    exports2.assertBlockParent = assertBlockParent;
-    exports2.assertBlockStatement = assertBlockStatement;
-    exports2.assertBooleanLiteral = assertBooleanLiteral;
-    exports2.assertBooleanLiteralTypeAnnotation = assertBooleanLiteralTypeAnnotation;
-    exports2.assertBooleanTypeAnnotation = assertBooleanTypeAnnotation;
-    exports2.assertBreakStatement = assertBreakStatement;
-    exports2.assertCallExpression = assertCallExpression;
-    exports2.assertCatchClause = assertCatchClause;
-    exports2.assertClass = assertClass;
-    exports2.assertClassAccessorProperty = assertClassAccessorProperty;
-    exports2.assertClassBody = assertClassBody;
-    exports2.assertClassDeclaration = assertClassDeclaration;
-    exports2.assertClassExpression = assertClassExpression;
-    exports2.assertClassImplements = assertClassImplements;
-    exports2.assertClassMethod = assertClassMethod;
-    exports2.assertClassPrivateMethod = assertClassPrivateMethod;
-    exports2.assertClassPrivateProperty = assertClassPrivateProperty;
-    exports2.assertClassProperty = assertClassProperty;
-    exports2.assertCompletionStatement = assertCompletionStatement;
-    exports2.assertConditional = assertConditional;
-    exports2.assertConditionalExpression = assertConditionalExpression;
-    exports2.assertContinueStatement = assertContinueStatement;
-    exports2.assertDebuggerStatement = assertDebuggerStatement;
-    exports2.assertDecimalLiteral = assertDecimalLiteral;
-    exports2.assertDeclaration = assertDeclaration;
-    exports2.assertDeclareClass = assertDeclareClass;
-    exports2.assertDeclareExportAllDeclaration = assertDeclareExportAllDeclaration;
-    exports2.assertDeclareExportDeclaration = assertDeclareExportDeclaration;
-    exports2.assertDeclareFunction = assertDeclareFunction;
-    exports2.assertDeclareInterface = assertDeclareInterface;
-    exports2.assertDeclareModule = assertDeclareModule;
-    exports2.assertDeclareModuleExports = assertDeclareModuleExports;
-    exports2.assertDeclareOpaqueType = assertDeclareOpaqueType;
-    exports2.assertDeclareTypeAlias = assertDeclareTypeAlias;
-    exports2.assertDeclareVariable = assertDeclareVariable;
-    exports2.assertDeclaredPredicate = assertDeclaredPredicate;
-    exports2.assertDecorator = assertDecorator;
-    exports2.assertDirective = assertDirective;
-    exports2.assertDirectiveLiteral = assertDirectiveLiteral;
-    exports2.assertDoExpression = assertDoExpression;
-    exports2.assertDoWhileStatement = assertDoWhileStatement;
-    exports2.assertEmptyStatement = assertEmptyStatement;
-    exports2.assertEmptyTypeAnnotation = assertEmptyTypeAnnotation;
-    exports2.assertEnumBody = assertEnumBody;
-    exports2.assertEnumBooleanBody = assertEnumBooleanBody;
-    exports2.assertEnumBooleanMember = assertEnumBooleanMember;
-    exports2.assertEnumDeclaration = assertEnumDeclaration;
-    exports2.assertEnumDefaultedMember = assertEnumDefaultedMember;
-    exports2.assertEnumMember = assertEnumMember;
-    exports2.assertEnumNumberBody = assertEnumNumberBody;
-    exports2.assertEnumNumberMember = assertEnumNumberMember;
-    exports2.assertEnumStringBody = assertEnumStringBody;
-    exports2.assertEnumStringMember = assertEnumStringMember;
-    exports2.assertEnumSymbolBody = assertEnumSymbolBody;
-    exports2.assertExistsTypeAnnotation = assertExistsTypeAnnotation;
-    exports2.assertExportAllDeclaration = assertExportAllDeclaration;
-    exports2.assertExportDeclaration = assertExportDeclaration;
-    exports2.assertExportDefaultDeclaration = assertExportDefaultDeclaration;
-    exports2.assertExportDefaultSpecifier = assertExportDefaultSpecifier;
-    exports2.assertExportNamedDeclaration = assertExportNamedDeclaration;
-    exports2.assertExportNamespaceSpecifier = assertExportNamespaceSpecifier;
-    exports2.assertExportSpecifier = assertExportSpecifier;
-    exports2.assertExpression = assertExpression;
-    exports2.assertExpressionStatement = assertExpressionStatement;
-    exports2.assertExpressionWrapper = assertExpressionWrapper;
-    exports2.assertFile = assertFile;
-    exports2.assertFlow = assertFlow;
-    exports2.assertFlowBaseAnnotation = assertFlowBaseAnnotation;
-    exports2.assertFlowDeclaration = assertFlowDeclaration;
-    exports2.assertFlowPredicate = assertFlowPredicate;
-    exports2.assertFlowType = assertFlowType;
-    exports2.assertFor = assertFor;
-    exports2.assertForInStatement = assertForInStatement;
-    exports2.assertForOfStatement = assertForOfStatement;
-    exports2.assertForStatement = assertForStatement;
-    exports2.assertForXStatement = assertForXStatement;
-    exports2.assertFunction = assertFunction;
-    exports2.assertFunctionDeclaration = assertFunctionDeclaration;
-    exports2.assertFunctionExpression = assertFunctionExpression;
-    exports2.assertFunctionParent = assertFunctionParent;
-    exports2.assertFunctionTypeAnnotation = assertFunctionTypeAnnotation;
-    exports2.assertFunctionTypeParam = assertFunctionTypeParam;
-    exports2.assertGenericTypeAnnotation = assertGenericTypeAnnotation;
-    exports2.assertIdentifier = assertIdentifier;
-    exports2.assertIfStatement = assertIfStatement;
-    exports2.assertImmutable = assertImmutable;
-    exports2.assertImport = assertImport;
-    exports2.assertImportAttribute = assertImportAttribute;
-    exports2.assertImportDeclaration = assertImportDeclaration;
-    exports2.assertImportDefaultSpecifier = assertImportDefaultSpecifier;
-    exports2.assertImportNamespaceSpecifier = assertImportNamespaceSpecifier;
-    exports2.assertImportSpecifier = assertImportSpecifier;
-    exports2.assertIndexedAccessType = assertIndexedAccessType;
-    exports2.assertInferredPredicate = assertInferredPredicate;
-    exports2.assertInterfaceDeclaration = assertInterfaceDeclaration;
-    exports2.assertInterfaceExtends = assertInterfaceExtends;
-    exports2.assertInterfaceTypeAnnotation = assertInterfaceTypeAnnotation;
-    exports2.assertInterpreterDirective = assertInterpreterDirective;
-    exports2.assertIntersectionTypeAnnotation = assertIntersectionTypeAnnotation;
-    exports2.assertJSX = assertJSX;
-    exports2.assertJSXAttribute = assertJSXAttribute;
-    exports2.assertJSXClosingElement = assertJSXClosingElement;
-    exports2.assertJSXClosingFragment = assertJSXClosingFragment;
-    exports2.assertJSXElement = assertJSXElement;
-    exports2.assertJSXEmptyExpression = assertJSXEmptyExpression;
-    exports2.assertJSXExpressionContainer = assertJSXExpressionContainer;
-    exports2.assertJSXFragment = assertJSXFragment;
-    exports2.assertJSXIdentifier = assertJSXIdentifier;
-    exports2.assertJSXMemberExpression = assertJSXMemberExpression;
-    exports2.assertJSXNamespacedName = assertJSXNamespacedName;
-    exports2.assertJSXOpeningElement = assertJSXOpeningElement;
-    exports2.assertJSXOpeningFragment = assertJSXOpeningFragment;
-    exports2.assertJSXSpreadAttribute = assertJSXSpreadAttribute;
-    exports2.assertJSXSpreadChild = assertJSXSpreadChild;
-    exports2.assertJSXText = assertJSXText;
-    exports2.assertLVal = assertLVal;
-    exports2.assertLabeledStatement = assertLabeledStatement;
-    exports2.assertLiteral = assertLiteral;
-    exports2.assertLogicalExpression = assertLogicalExpression;
-    exports2.assertLoop = assertLoop;
-    exports2.assertMemberExpression = assertMemberExpression;
-    exports2.assertMetaProperty = assertMetaProperty;
-    exports2.assertMethod = assertMethod;
-    exports2.assertMiscellaneous = assertMiscellaneous;
-    exports2.assertMixedTypeAnnotation = assertMixedTypeAnnotation;
-    exports2.assertModuleDeclaration = assertModuleDeclaration;
-    exports2.assertModuleExpression = assertModuleExpression;
-    exports2.assertModuleSpecifier = assertModuleSpecifier;
-    exports2.assertNewExpression = assertNewExpression;
-    exports2.assertNoop = assertNoop;
-    exports2.assertNullLiteral = assertNullLiteral;
-    exports2.assertNullLiteralTypeAnnotation = assertNullLiteralTypeAnnotation;
-    exports2.assertNullableTypeAnnotation = assertNullableTypeAnnotation;
-    exports2.assertNumberLiteral = assertNumberLiteral;
-    exports2.assertNumberLiteralTypeAnnotation = assertNumberLiteralTypeAnnotation;
-    exports2.assertNumberTypeAnnotation = assertNumberTypeAnnotation;
-    exports2.assertNumericLiteral = assertNumericLiteral;
-    exports2.assertObjectExpression = assertObjectExpression;
-    exports2.assertObjectMember = assertObjectMember;
-    exports2.assertObjectMethod = assertObjectMethod;
-    exports2.assertObjectPattern = assertObjectPattern;
-    exports2.assertObjectProperty = assertObjectProperty;
-    exports2.assertObjectTypeAnnotation = assertObjectTypeAnnotation;
-    exports2.assertObjectTypeCallProperty = assertObjectTypeCallProperty;
-    exports2.assertObjectTypeIndexer = assertObjectTypeIndexer;
-    exports2.assertObjectTypeInternalSlot = assertObjectTypeInternalSlot;
-    exports2.assertObjectTypeProperty = assertObjectTypeProperty;
-    exports2.assertObjectTypeSpreadProperty = assertObjectTypeSpreadProperty;
-    exports2.assertOpaqueType = assertOpaqueType;
-    exports2.assertOptionalCallExpression = assertOptionalCallExpression;
-    exports2.assertOptionalIndexedAccessType = assertOptionalIndexedAccessType;
-    exports2.assertOptionalMemberExpression = assertOptionalMemberExpression;
-    exports2.assertParenthesizedExpression = assertParenthesizedExpression;
-    exports2.assertPattern = assertPattern;
-    exports2.assertPatternLike = assertPatternLike;
-    exports2.assertPipelineBareFunction = assertPipelineBareFunction;
-    exports2.assertPipelinePrimaryTopicReference = assertPipelinePrimaryTopicReference;
-    exports2.assertPipelineTopicExpression = assertPipelineTopicExpression;
-    exports2.assertPlaceholder = assertPlaceholder;
-    exports2.assertPrivate = assertPrivate;
-    exports2.assertPrivateName = assertPrivateName;
-    exports2.assertProgram = assertProgram;
-    exports2.assertProperty = assertProperty;
-    exports2.assertPureish = assertPureish;
-    exports2.assertQualifiedTypeIdentifier = assertQualifiedTypeIdentifier;
-    exports2.assertRecordExpression = assertRecordExpression;
-    exports2.assertRegExpLiteral = assertRegExpLiteral;
-    exports2.assertRegexLiteral = assertRegexLiteral;
-    exports2.assertRestElement = assertRestElement;
-    exports2.assertRestProperty = assertRestProperty;
-    exports2.assertReturnStatement = assertReturnStatement;
-    exports2.assertScopable = assertScopable;
-    exports2.assertSequenceExpression = assertSequenceExpression;
-    exports2.assertSpreadElement = assertSpreadElement;
-    exports2.assertSpreadProperty = assertSpreadProperty;
-    exports2.assertStandardized = assertStandardized;
-    exports2.assertStatement = assertStatement;
-    exports2.assertStaticBlock = assertStaticBlock;
-    exports2.assertStringLiteral = assertStringLiteral;
-    exports2.assertStringLiteralTypeAnnotation = assertStringLiteralTypeAnnotation;
-    exports2.assertStringTypeAnnotation = assertStringTypeAnnotation;
-    exports2.assertSuper = assertSuper;
-    exports2.assertSwitchCase = assertSwitchCase;
-    exports2.assertSwitchStatement = assertSwitchStatement;
-    exports2.assertSymbolTypeAnnotation = assertSymbolTypeAnnotation;
-    exports2.assertTSAnyKeyword = assertTSAnyKeyword;
-    exports2.assertTSArrayType = assertTSArrayType;
-    exports2.assertTSAsExpression = assertTSAsExpression;
-    exports2.assertTSBaseType = assertTSBaseType;
-    exports2.assertTSBigIntKeyword = assertTSBigIntKeyword;
-    exports2.assertTSBooleanKeyword = assertTSBooleanKeyword;
-    exports2.assertTSCallSignatureDeclaration = assertTSCallSignatureDeclaration;
-    exports2.assertTSConditionalType = assertTSConditionalType;
-    exports2.assertTSConstructSignatureDeclaration = assertTSConstructSignatureDeclaration;
-    exports2.assertTSConstructorType = assertTSConstructorType;
-    exports2.assertTSDeclareFunction = assertTSDeclareFunction;
-    exports2.assertTSDeclareMethod = assertTSDeclareMethod;
-    exports2.assertTSEntityName = assertTSEntityName;
-    exports2.assertTSEnumDeclaration = assertTSEnumDeclaration;
-    exports2.assertTSEnumMember = assertTSEnumMember;
-    exports2.assertTSExportAssignment = assertTSExportAssignment;
-    exports2.assertTSExpressionWithTypeArguments = assertTSExpressionWithTypeArguments;
-    exports2.assertTSExternalModuleReference = assertTSExternalModuleReference;
-    exports2.assertTSFunctionType = assertTSFunctionType;
-    exports2.assertTSImportEqualsDeclaration = assertTSImportEqualsDeclaration;
-    exports2.assertTSImportType = assertTSImportType;
-    exports2.assertTSIndexSignature = assertTSIndexSignature;
-    exports2.assertTSIndexedAccessType = assertTSIndexedAccessType;
-    exports2.assertTSInferType = assertTSInferType;
-    exports2.assertTSInstantiationExpression = assertTSInstantiationExpression;
-    exports2.assertTSInterfaceBody = assertTSInterfaceBody;
-    exports2.assertTSInterfaceDeclaration = assertTSInterfaceDeclaration;
-    exports2.assertTSIntersectionType = assertTSIntersectionType;
-    exports2.assertTSIntrinsicKeyword = assertTSIntrinsicKeyword;
-    exports2.assertTSLiteralType = assertTSLiteralType;
-    exports2.assertTSMappedType = assertTSMappedType;
-    exports2.assertTSMethodSignature = assertTSMethodSignature;
-    exports2.assertTSModuleBlock = assertTSModuleBlock;
-    exports2.assertTSModuleDeclaration = assertTSModuleDeclaration;
-    exports2.assertTSNamedTupleMember = assertTSNamedTupleMember;
-    exports2.assertTSNamespaceExportDeclaration = assertTSNamespaceExportDeclaration;
-    exports2.assertTSNeverKeyword = assertTSNeverKeyword;
-    exports2.assertTSNonNullExpression = assertTSNonNullExpression;
-    exports2.assertTSNullKeyword = assertTSNullKeyword;
-    exports2.assertTSNumberKeyword = assertTSNumberKeyword;
-    exports2.assertTSObjectKeyword = assertTSObjectKeyword;
-    exports2.assertTSOptionalType = assertTSOptionalType;
-    exports2.assertTSParameterProperty = assertTSParameterProperty;
-    exports2.assertTSParenthesizedType = assertTSParenthesizedType;
-    exports2.assertTSPropertySignature = assertTSPropertySignature;
-    exports2.assertTSQualifiedName = assertTSQualifiedName;
-    exports2.assertTSRestType = assertTSRestType;
-    exports2.assertTSStringKeyword = assertTSStringKeyword;
-    exports2.assertTSSymbolKeyword = assertTSSymbolKeyword;
-    exports2.assertTSThisType = assertTSThisType;
-    exports2.assertTSTupleType = assertTSTupleType;
-    exports2.assertTSType = assertTSType;
-    exports2.assertTSTypeAliasDeclaration = assertTSTypeAliasDeclaration;
-    exports2.assertTSTypeAnnotation = assertTSTypeAnnotation;
-    exports2.assertTSTypeAssertion = assertTSTypeAssertion;
-    exports2.assertTSTypeElement = assertTSTypeElement;
-    exports2.assertTSTypeLiteral = assertTSTypeLiteral;
-    exports2.assertTSTypeOperator = assertTSTypeOperator;
-    exports2.assertTSTypeParameter = assertTSTypeParameter;
-    exports2.assertTSTypeParameterDeclaration = assertTSTypeParameterDeclaration;
-    exports2.assertTSTypeParameterInstantiation = assertTSTypeParameterInstantiation;
-    exports2.assertTSTypePredicate = assertTSTypePredicate;
-    exports2.assertTSTypeQuery = assertTSTypeQuery;
-    exports2.assertTSTypeReference = assertTSTypeReference;
-    exports2.assertTSUndefinedKeyword = assertTSUndefinedKeyword;
-    exports2.assertTSUnionType = assertTSUnionType;
-    exports2.assertTSUnknownKeyword = assertTSUnknownKeyword;
-    exports2.assertTSVoidKeyword = assertTSVoidKeyword;
-    exports2.assertTaggedTemplateExpression = assertTaggedTemplateExpression;
-    exports2.assertTemplateElement = assertTemplateElement;
-    exports2.assertTemplateLiteral = assertTemplateLiteral;
-    exports2.assertTerminatorless = assertTerminatorless;
-    exports2.assertThisExpression = assertThisExpression;
-    exports2.assertThisTypeAnnotation = assertThisTypeAnnotation;
-    exports2.assertThrowStatement = assertThrowStatement;
-    exports2.assertTopicReference = assertTopicReference;
-    exports2.assertTryStatement = assertTryStatement;
-    exports2.assertTupleExpression = assertTupleExpression;
-    exports2.assertTupleTypeAnnotation = assertTupleTypeAnnotation;
-    exports2.assertTypeAlias = assertTypeAlias;
-    exports2.assertTypeAnnotation = assertTypeAnnotation;
-    exports2.assertTypeCastExpression = assertTypeCastExpression;
-    exports2.assertTypeParameter = assertTypeParameter;
-    exports2.assertTypeParameterDeclaration = assertTypeParameterDeclaration;
-    exports2.assertTypeParameterInstantiation = assertTypeParameterInstantiation;
-    exports2.assertTypeScript = assertTypeScript;
-    exports2.assertTypeofTypeAnnotation = assertTypeofTypeAnnotation;
-    exports2.assertUnaryExpression = assertUnaryExpression;
-    exports2.assertUnaryLike = assertUnaryLike;
-    exports2.assertUnionTypeAnnotation = assertUnionTypeAnnotation;
-    exports2.assertUpdateExpression = assertUpdateExpression;
-    exports2.assertUserWhitespacable = assertUserWhitespacable;
-    exports2.assertV8IntrinsicIdentifier = assertV8IntrinsicIdentifier;
-    exports2.assertVariableDeclaration = assertVariableDeclaration;
-    exports2.assertVariableDeclarator = assertVariableDeclarator;
-    exports2.assertVariance = assertVariance;
-    exports2.assertVoidTypeAnnotation = assertVoidTypeAnnotation;
-    exports2.assertWhile = assertWhile;
-    exports2.assertWhileStatement = assertWhileStatement;
-    exports2.assertWithStatement = assertWithStatement;
-    exports2.assertYieldExpression = assertYieldExpression;
+    exports.assertAccessor = assertAccessor;
+    exports.assertAnyTypeAnnotation = assertAnyTypeAnnotation;
+    exports.assertArgumentPlaceholder = assertArgumentPlaceholder;
+    exports.assertArrayExpression = assertArrayExpression;
+    exports.assertArrayPattern = assertArrayPattern;
+    exports.assertArrayTypeAnnotation = assertArrayTypeAnnotation;
+    exports.assertArrowFunctionExpression = assertArrowFunctionExpression;
+    exports.assertAssignmentExpression = assertAssignmentExpression;
+    exports.assertAssignmentPattern = assertAssignmentPattern;
+    exports.assertAwaitExpression = assertAwaitExpression;
+    exports.assertBigIntLiteral = assertBigIntLiteral;
+    exports.assertBinary = assertBinary;
+    exports.assertBinaryExpression = assertBinaryExpression;
+    exports.assertBindExpression = assertBindExpression;
+    exports.assertBlock = assertBlock;
+    exports.assertBlockParent = assertBlockParent;
+    exports.assertBlockStatement = assertBlockStatement;
+    exports.assertBooleanLiteral = assertBooleanLiteral;
+    exports.assertBooleanLiteralTypeAnnotation = assertBooleanLiteralTypeAnnotation;
+    exports.assertBooleanTypeAnnotation = assertBooleanTypeAnnotation;
+    exports.assertBreakStatement = assertBreakStatement;
+    exports.assertCallExpression = assertCallExpression;
+    exports.assertCatchClause = assertCatchClause;
+    exports.assertClass = assertClass;
+    exports.assertClassAccessorProperty = assertClassAccessorProperty;
+    exports.assertClassBody = assertClassBody;
+    exports.assertClassDeclaration = assertClassDeclaration;
+    exports.assertClassExpression = assertClassExpression;
+    exports.assertClassImplements = assertClassImplements;
+    exports.assertClassMethod = assertClassMethod;
+    exports.assertClassPrivateMethod = assertClassPrivateMethod;
+    exports.assertClassPrivateProperty = assertClassPrivateProperty;
+    exports.assertClassProperty = assertClassProperty;
+    exports.assertCompletionStatement = assertCompletionStatement;
+    exports.assertConditional = assertConditional;
+    exports.assertConditionalExpression = assertConditionalExpression;
+    exports.assertContinueStatement = assertContinueStatement;
+    exports.assertDebuggerStatement = assertDebuggerStatement;
+    exports.assertDecimalLiteral = assertDecimalLiteral;
+    exports.assertDeclaration = assertDeclaration;
+    exports.assertDeclareClass = assertDeclareClass;
+    exports.assertDeclareExportAllDeclaration = assertDeclareExportAllDeclaration;
+    exports.assertDeclareExportDeclaration = assertDeclareExportDeclaration;
+    exports.assertDeclareFunction = assertDeclareFunction;
+    exports.assertDeclareInterface = assertDeclareInterface;
+    exports.assertDeclareModule = assertDeclareModule;
+    exports.assertDeclareModuleExports = assertDeclareModuleExports;
+    exports.assertDeclareOpaqueType = assertDeclareOpaqueType;
+    exports.assertDeclareTypeAlias = assertDeclareTypeAlias;
+    exports.assertDeclareVariable = assertDeclareVariable;
+    exports.assertDeclaredPredicate = assertDeclaredPredicate;
+    exports.assertDecorator = assertDecorator;
+    exports.assertDirective = assertDirective;
+    exports.assertDirectiveLiteral = assertDirectiveLiteral;
+    exports.assertDoExpression = assertDoExpression;
+    exports.assertDoWhileStatement = assertDoWhileStatement;
+    exports.assertEmptyStatement = assertEmptyStatement;
+    exports.assertEmptyTypeAnnotation = assertEmptyTypeAnnotation;
+    exports.assertEnumBody = assertEnumBody;
+    exports.assertEnumBooleanBody = assertEnumBooleanBody;
+    exports.assertEnumBooleanMember = assertEnumBooleanMember;
+    exports.assertEnumDeclaration = assertEnumDeclaration;
+    exports.assertEnumDefaultedMember = assertEnumDefaultedMember;
+    exports.assertEnumMember = assertEnumMember;
+    exports.assertEnumNumberBody = assertEnumNumberBody;
+    exports.assertEnumNumberMember = assertEnumNumberMember;
+    exports.assertEnumStringBody = assertEnumStringBody;
+    exports.assertEnumStringMember = assertEnumStringMember;
+    exports.assertEnumSymbolBody = assertEnumSymbolBody;
+    exports.assertExistsTypeAnnotation = assertExistsTypeAnnotation;
+    exports.assertExportAllDeclaration = assertExportAllDeclaration;
+    exports.assertExportDeclaration = assertExportDeclaration;
+    exports.assertExportDefaultDeclaration = assertExportDefaultDeclaration;
+    exports.assertExportDefaultSpecifier = assertExportDefaultSpecifier;
+    exports.assertExportNamedDeclaration = assertExportNamedDeclaration;
+    exports.assertExportNamespaceSpecifier = assertExportNamespaceSpecifier;
+    exports.assertExportSpecifier = assertExportSpecifier;
+    exports.assertExpression = assertExpression;
+    exports.assertExpressionStatement = assertExpressionStatement;
+    exports.assertExpressionWrapper = assertExpressionWrapper;
+    exports.assertFile = assertFile;
+    exports.assertFlow = assertFlow;
+    exports.assertFlowBaseAnnotation = assertFlowBaseAnnotation;
+    exports.assertFlowDeclaration = assertFlowDeclaration;
+    exports.assertFlowPredicate = assertFlowPredicate;
+    exports.assertFlowType = assertFlowType;
+    exports.assertFor = assertFor;
+    exports.assertForInStatement = assertForInStatement;
+    exports.assertForOfStatement = assertForOfStatement;
+    exports.assertForStatement = assertForStatement;
+    exports.assertForXStatement = assertForXStatement;
+    exports.assertFunction = assertFunction;
+    exports.assertFunctionDeclaration = assertFunctionDeclaration;
+    exports.assertFunctionExpression = assertFunctionExpression;
+    exports.assertFunctionParent = assertFunctionParent;
+    exports.assertFunctionTypeAnnotation = assertFunctionTypeAnnotation;
+    exports.assertFunctionTypeParam = assertFunctionTypeParam;
+    exports.assertGenericTypeAnnotation = assertGenericTypeAnnotation;
+    exports.assertIdentifier = assertIdentifier;
+    exports.assertIfStatement = assertIfStatement;
+    exports.assertImmutable = assertImmutable;
+    exports.assertImport = assertImport;
+    exports.assertImportAttribute = assertImportAttribute;
+    exports.assertImportDeclaration = assertImportDeclaration;
+    exports.assertImportDefaultSpecifier = assertImportDefaultSpecifier;
+    exports.assertImportNamespaceSpecifier = assertImportNamespaceSpecifier;
+    exports.assertImportSpecifier = assertImportSpecifier;
+    exports.assertIndexedAccessType = assertIndexedAccessType;
+    exports.assertInferredPredicate = assertInferredPredicate;
+    exports.assertInterfaceDeclaration = assertInterfaceDeclaration;
+    exports.assertInterfaceExtends = assertInterfaceExtends;
+    exports.assertInterfaceTypeAnnotation = assertInterfaceTypeAnnotation;
+    exports.assertInterpreterDirective = assertInterpreterDirective;
+    exports.assertIntersectionTypeAnnotation = assertIntersectionTypeAnnotation;
+    exports.assertJSX = assertJSX;
+    exports.assertJSXAttribute = assertJSXAttribute;
+    exports.assertJSXClosingElement = assertJSXClosingElement;
+    exports.assertJSXClosingFragment = assertJSXClosingFragment;
+    exports.assertJSXElement = assertJSXElement;
+    exports.assertJSXEmptyExpression = assertJSXEmptyExpression;
+    exports.assertJSXExpressionContainer = assertJSXExpressionContainer;
+    exports.assertJSXFragment = assertJSXFragment;
+    exports.assertJSXIdentifier = assertJSXIdentifier;
+    exports.assertJSXMemberExpression = assertJSXMemberExpression;
+    exports.assertJSXNamespacedName = assertJSXNamespacedName;
+    exports.assertJSXOpeningElement = assertJSXOpeningElement;
+    exports.assertJSXOpeningFragment = assertJSXOpeningFragment;
+    exports.assertJSXSpreadAttribute = assertJSXSpreadAttribute;
+    exports.assertJSXSpreadChild = assertJSXSpreadChild;
+    exports.assertJSXText = assertJSXText;
+    exports.assertLVal = assertLVal;
+    exports.assertLabeledStatement = assertLabeledStatement;
+    exports.assertLiteral = assertLiteral;
+    exports.assertLogicalExpression = assertLogicalExpression;
+    exports.assertLoop = assertLoop;
+    exports.assertMemberExpression = assertMemberExpression;
+    exports.assertMetaProperty = assertMetaProperty;
+    exports.assertMethod = assertMethod;
+    exports.assertMiscellaneous = assertMiscellaneous;
+    exports.assertMixedTypeAnnotation = assertMixedTypeAnnotation;
+    exports.assertModuleDeclaration = assertModuleDeclaration;
+    exports.assertModuleExpression = assertModuleExpression;
+    exports.assertModuleSpecifier = assertModuleSpecifier;
+    exports.assertNewExpression = assertNewExpression;
+    exports.assertNoop = assertNoop;
+    exports.assertNullLiteral = assertNullLiteral;
+    exports.assertNullLiteralTypeAnnotation = assertNullLiteralTypeAnnotation;
+    exports.assertNullableTypeAnnotation = assertNullableTypeAnnotation;
+    exports.assertNumberLiteral = assertNumberLiteral;
+    exports.assertNumberLiteralTypeAnnotation = assertNumberLiteralTypeAnnotation;
+    exports.assertNumberTypeAnnotation = assertNumberTypeAnnotation;
+    exports.assertNumericLiteral = assertNumericLiteral;
+    exports.assertObjectExpression = assertObjectExpression;
+    exports.assertObjectMember = assertObjectMember;
+    exports.assertObjectMethod = assertObjectMethod;
+    exports.assertObjectPattern = assertObjectPattern;
+    exports.assertObjectProperty = assertObjectProperty;
+    exports.assertObjectTypeAnnotation = assertObjectTypeAnnotation;
+    exports.assertObjectTypeCallProperty = assertObjectTypeCallProperty;
+    exports.assertObjectTypeIndexer = assertObjectTypeIndexer;
+    exports.assertObjectTypeInternalSlot = assertObjectTypeInternalSlot;
+    exports.assertObjectTypeProperty = assertObjectTypeProperty;
+    exports.assertObjectTypeSpreadProperty = assertObjectTypeSpreadProperty;
+    exports.assertOpaqueType = assertOpaqueType;
+    exports.assertOptionalCallExpression = assertOptionalCallExpression;
+    exports.assertOptionalIndexedAccessType = assertOptionalIndexedAccessType;
+    exports.assertOptionalMemberExpression = assertOptionalMemberExpression;
+    exports.assertParenthesizedExpression = assertParenthesizedExpression;
+    exports.assertPattern = assertPattern;
+    exports.assertPatternLike = assertPatternLike;
+    exports.assertPipelineBareFunction = assertPipelineBareFunction;
+    exports.assertPipelinePrimaryTopicReference = assertPipelinePrimaryTopicReference;
+    exports.assertPipelineTopicExpression = assertPipelineTopicExpression;
+    exports.assertPlaceholder = assertPlaceholder;
+    exports.assertPrivate = assertPrivate;
+    exports.assertPrivateName = assertPrivateName;
+    exports.assertProgram = assertProgram;
+    exports.assertProperty = assertProperty;
+    exports.assertPureish = assertPureish;
+    exports.assertQualifiedTypeIdentifier = assertQualifiedTypeIdentifier;
+    exports.assertRecordExpression = assertRecordExpression;
+    exports.assertRegExpLiteral = assertRegExpLiteral;
+    exports.assertRegexLiteral = assertRegexLiteral;
+    exports.assertRestElement = assertRestElement;
+    exports.assertRestProperty = assertRestProperty;
+    exports.assertReturnStatement = assertReturnStatement;
+    exports.assertScopable = assertScopable;
+    exports.assertSequenceExpression = assertSequenceExpression;
+    exports.assertSpreadElement = assertSpreadElement;
+    exports.assertSpreadProperty = assertSpreadProperty;
+    exports.assertStandardized = assertStandardized;
+    exports.assertStatement = assertStatement;
+    exports.assertStaticBlock = assertStaticBlock;
+    exports.assertStringLiteral = assertStringLiteral;
+    exports.assertStringLiteralTypeAnnotation = assertStringLiteralTypeAnnotation;
+    exports.assertStringTypeAnnotation = assertStringTypeAnnotation;
+    exports.assertSuper = assertSuper;
+    exports.assertSwitchCase = assertSwitchCase;
+    exports.assertSwitchStatement = assertSwitchStatement;
+    exports.assertSymbolTypeAnnotation = assertSymbolTypeAnnotation;
+    exports.assertTSAnyKeyword = assertTSAnyKeyword;
+    exports.assertTSArrayType = assertTSArrayType;
+    exports.assertTSAsExpression = assertTSAsExpression;
+    exports.assertTSBaseType = assertTSBaseType;
+    exports.assertTSBigIntKeyword = assertTSBigIntKeyword;
+    exports.assertTSBooleanKeyword = assertTSBooleanKeyword;
+    exports.assertTSCallSignatureDeclaration = assertTSCallSignatureDeclaration;
+    exports.assertTSConditionalType = assertTSConditionalType;
+    exports.assertTSConstructSignatureDeclaration = assertTSConstructSignatureDeclaration;
+    exports.assertTSConstructorType = assertTSConstructorType;
+    exports.assertTSDeclareFunction = assertTSDeclareFunction;
+    exports.assertTSDeclareMethod = assertTSDeclareMethod;
+    exports.assertTSEntityName = assertTSEntityName;
+    exports.assertTSEnumDeclaration = assertTSEnumDeclaration;
+    exports.assertTSEnumMember = assertTSEnumMember;
+    exports.assertTSExportAssignment = assertTSExportAssignment;
+    exports.assertTSExpressionWithTypeArguments = assertTSExpressionWithTypeArguments;
+    exports.assertTSExternalModuleReference = assertTSExternalModuleReference;
+    exports.assertTSFunctionType = assertTSFunctionType;
+    exports.assertTSImportEqualsDeclaration = assertTSImportEqualsDeclaration;
+    exports.assertTSImportType = assertTSImportType;
+    exports.assertTSIndexSignature = assertTSIndexSignature;
+    exports.assertTSIndexedAccessType = assertTSIndexedAccessType;
+    exports.assertTSInferType = assertTSInferType;
+    exports.assertTSInstantiationExpression = assertTSInstantiationExpression;
+    exports.assertTSInterfaceBody = assertTSInterfaceBody;
+    exports.assertTSInterfaceDeclaration = assertTSInterfaceDeclaration;
+    exports.assertTSIntersectionType = assertTSIntersectionType;
+    exports.assertTSIntrinsicKeyword = assertTSIntrinsicKeyword;
+    exports.assertTSLiteralType = assertTSLiteralType;
+    exports.assertTSMappedType = assertTSMappedType;
+    exports.assertTSMethodSignature = assertTSMethodSignature;
+    exports.assertTSModuleBlock = assertTSModuleBlock;
+    exports.assertTSModuleDeclaration = assertTSModuleDeclaration;
+    exports.assertTSNamedTupleMember = assertTSNamedTupleMember;
+    exports.assertTSNamespaceExportDeclaration = assertTSNamespaceExportDeclaration;
+    exports.assertTSNeverKeyword = assertTSNeverKeyword;
+    exports.assertTSNonNullExpression = assertTSNonNullExpression;
+    exports.assertTSNullKeyword = assertTSNullKeyword;
+    exports.assertTSNumberKeyword = assertTSNumberKeyword;
+    exports.assertTSObjectKeyword = assertTSObjectKeyword;
+    exports.assertTSOptionalType = assertTSOptionalType;
+    exports.assertTSParameterProperty = assertTSParameterProperty;
+    exports.assertTSParenthesizedType = assertTSParenthesizedType;
+    exports.assertTSPropertySignature = assertTSPropertySignature;
+    exports.assertTSQualifiedName = assertTSQualifiedName;
+    exports.assertTSRestType = assertTSRestType;
+    exports.assertTSStringKeyword = assertTSStringKeyword;
+    exports.assertTSSymbolKeyword = assertTSSymbolKeyword;
+    exports.assertTSThisType = assertTSThisType;
+    exports.assertTSTupleType = assertTSTupleType;
+    exports.assertTSType = assertTSType;
+    exports.assertTSTypeAliasDeclaration = assertTSTypeAliasDeclaration;
+    exports.assertTSTypeAnnotation = assertTSTypeAnnotation;
+    exports.assertTSTypeAssertion = assertTSTypeAssertion;
+    exports.assertTSTypeElement = assertTSTypeElement;
+    exports.assertTSTypeLiteral = assertTSTypeLiteral;
+    exports.assertTSTypeOperator = assertTSTypeOperator;
+    exports.assertTSTypeParameter = assertTSTypeParameter;
+    exports.assertTSTypeParameterDeclaration = assertTSTypeParameterDeclaration;
+    exports.assertTSTypeParameterInstantiation = assertTSTypeParameterInstantiation;
+    exports.assertTSTypePredicate = assertTSTypePredicate;
+    exports.assertTSTypeQuery = assertTSTypeQuery;
+    exports.assertTSTypeReference = assertTSTypeReference;
+    exports.assertTSUndefinedKeyword = assertTSUndefinedKeyword;
+    exports.assertTSUnionType = assertTSUnionType;
+    exports.assertTSUnknownKeyword = assertTSUnknownKeyword;
+    exports.assertTSVoidKeyword = assertTSVoidKeyword;
+    exports.assertTaggedTemplateExpression = assertTaggedTemplateExpression;
+    exports.assertTemplateElement = assertTemplateElement;
+    exports.assertTemplateLiteral = assertTemplateLiteral;
+    exports.assertTerminatorless = assertTerminatorless;
+    exports.assertThisExpression = assertThisExpression;
+    exports.assertThisTypeAnnotation = assertThisTypeAnnotation;
+    exports.assertThrowStatement = assertThrowStatement;
+    exports.assertTopicReference = assertTopicReference;
+    exports.assertTryStatement = assertTryStatement;
+    exports.assertTupleExpression = assertTupleExpression;
+    exports.assertTupleTypeAnnotation = assertTupleTypeAnnotation;
+    exports.assertTypeAlias = assertTypeAlias;
+    exports.assertTypeAnnotation = assertTypeAnnotation;
+    exports.assertTypeCastExpression = assertTypeCastExpression;
+    exports.assertTypeParameter = assertTypeParameter;
+    exports.assertTypeParameterDeclaration = assertTypeParameterDeclaration;
+    exports.assertTypeParameterInstantiation = assertTypeParameterInstantiation;
+    exports.assertTypeScript = assertTypeScript;
+    exports.assertTypeofTypeAnnotation = assertTypeofTypeAnnotation;
+    exports.assertUnaryExpression = assertUnaryExpression;
+    exports.assertUnaryLike = assertUnaryLike;
+    exports.assertUnionTypeAnnotation = assertUnionTypeAnnotation;
+    exports.assertUpdateExpression = assertUpdateExpression;
+    exports.assertUserWhitespacable = assertUserWhitespacable;
+    exports.assertV8IntrinsicIdentifier = assertV8IntrinsicIdentifier;
+    exports.assertVariableDeclaration = assertVariableDeclaration;
+    exports.assertVariableDeclarator = assertVariableDeclarator;
+    exports.assertVariance = assertVariance;
+    exports.assertVoidTypeAnnotation = assertVoidTypeAnnotation;
+    exports.assertWhile = assertWhile;
+    exports.assertWhileStatement = assertWhileStatement;
+    exports.assertWithStatement = assertWithStatement;
+    exports.assertYieldExpression = assertYieldExpression;
     var _is = require_is2();
     function assert(type, node, opts) {
       if (!(0, _is.default)(type, node, opts)) {
@@ -51868,15 +52058,15 @@ var require_generated8 = __commonJS({
 
 // node_modules/@babel/template/node_modules/@babel/types/lib/builders/flow/createTypeAnnotationBasedOnTypeof.js
 var require_createTypeAnnotationBasedOnTypeof2 = __commonJS({
-  "node_modules/@babel/template/node_modules/@babel/types/lib/builders/flow/createTypeAnnotationBasedOnTypeof.js"(exports2) {
+  "node_modules/@babel/template/node_modules/@babel/types/lib/builders/flow/createTypeAnnotationBasedOnTypeof.js"(exports) {
     "use strict";
-    Object.defineProperty(exports2, "__esModule", {
+    Object.defineProperty(exports, "__esModule", {
       value: true
     });
-    exports2.default = void 0;
+    exports.default = void 0;
     var _generated = require_generated7();
     var _default = createTypeAnnotationBasedOnTypeof;
-    exports2.default = _default;
+    exports.default = _default;
     function createTypeAnnotationBasedOnTypeof(type) {
       switch (type) {
         case "string":
@@ -51904,12 +52094,12 @@ var require_createTypeAnnotationBasedOnTypeof2 = __commonJS({
 
 // node_modules/@babel/template/node_modules/@babel/types/lib/modifications/flow/removeTypeDuplicates.js
 var require_removeTypeDuplicates3 = __commonJS({
-  "node_modules/@babel/template/node_modules/@babel/types/lib/modifications/flow/removeTypeDuplicates.js"(exports2) {
+  "node_modules/@babel/template/node_modules/@babel/types/lib/modifications/flow/removeTypeDuplicates.js"(exports) {
     "use strict";
-    Object.defineProperty(exports2, "__esModule", {
+    Object.defineProperty(exports, "__esModule", {
       value: true
     });
-    exports2.default = removeTypeDuplicates;
+    exports.default = removeTypeDuplicates;
     var _generated = require_generated6();
     function getQualifiedName(node) {
       return (0, _generated.isIdentifier)(node) ? node.name : `${node.id.name}.${getQualifiedName(node.qualification)}`;
@@ -51975,12 +52165,12 @@ var require_removeTypeDuplicates3 = __commonJS({
 
 // node_modules/@babel/template/node_modules/@babel/types/lib/builders/flow/createFlowUnionType.js
 var require_createFlowUnionType2 = __commonJS({
-  "node_modules/@babel/template/node_modules/@babel/types/lib/builders/flow/createFlowUnionType.js"(exports2) {
+  "node_modules/@babel/template/node_modules/@babel/types/lib/builders/flow/createFlowUnionType.js"(exports) {
     "use strict";
-    Object.defineProperty(exports2, "__esModule", {
+    Object.defineProperty(exports, "__esModule", {
       value: true
     });
-    exports2.default = createFlowUnionType;
+    exports.default = createFlowUnionType;
     var _generated = require_generated7();
     var _removeTypeDuplicates = require_removeTypeDuplicates3();
     function createFlowUnionType(types) {
@@ -51997,12 +52187,12 @@ var require_createFlowUnionType2 = __commonJS({
 
 // node_modules/@babel/template/node_modules/@babel/types/lib/modifications/typescript/removeTypeDuplicates.js
 var require_removeTypeDuplicates4 = __commonJS({
-  "node_modules/@babel/template/node_modules/@babel/types/lib/modifications/typescript/removeTypeDuplicates.js"(exports2) {
+  "node_modules/@babel/template/node_modules/@babel/types/lib/modifications/typescript/removeTypeDuplicates.js"(exports) {
     "use strict";
-    Object.defineProperty(exports2, "__esModule", {
+    Object.defineProperty(exports, "__esModule", {
       value: true
     });
-    exports2.default = removeTypeDuplicates;
+    exports.default = removeTypeDuplicates;
     var _generated = require_generated6();
     function getQualifiedName(node) {
       return (0, _generated.isIdentifier)(node) ? node.name : `${node.right.name}.${getQualifiedName(node.left)}`;
@@ -52068,12 +52258,12 @@ var require_removeTypeDuplicates4 = __commonJS({
 
 // node_modules/@babel/template/node_modules/@babel/types/lib/builders/typescript/createTSUnionType.js
 var require_createTSUnionType2 = __commonJS({
-  "node_modules/@babel/template/node_modules/@babel/types/lib/builders/typescript/createTSUnionType.js"(exports2) {
+  "node_modules/@babel/template/node_modules/@babel/types/lib/builders/typescript/createTSUnionType.js"(exports) {
     "use strict";
-    Object.defineProperty(exports2, "__esModule", {
+    Object.defineProperty(exports, "__esModule", {
       value: true
     });
-    exports2.default = createTSUnionType;
+    exports.default = createTSUnionType;
     var _generated = require_generated7();
     var _removeTypeDuplicates = require_removeTypeDuplicates4();
     var _index = require_generated6();
@@ -52094,1518 +52284,1518 @@ var require_createTSUnionType2 = __commonJS({
 
 // node_modules/@babel/template/node_modules/@babel/types/lib/builders/generated/uppercase.js
 var require_uppercase2 = __commonJS({
-  "node_modules/@babel/template/node_modules/@babel/types/lib/builders/generated/uppercase.js"(exports2) {
+  "node_modules/@babel/template/node_modules/@babel/types/lib/builders/generated/uppercase.js"(exports) {
     "use strict";
-    Object.defineProperty(exports2, "__esModule", {
+    Object.defineProperty(exports, "__esModule", {
       value: true
     });
-    Object.defineProperty(exports2, "AnyTypeAnnotation", {
+    Object.defineProperty(exports, "AnyTypeAnnotation", {
       enumerable: true,
       get: function() {
         return _index.anyTypeAnnotation;
       }
     });
-    Object.defineProperty(exports2, "ArgumentPlaceholder", {
+    Object.defineProperty(exports, "ArgumentPlaceholder", {
       enumerable: true,
       get: function() {
         return _index.argumentPlaceholder;
       }
     });
-    Object.defineProperty(exports2, "ArrayExpression", {
+    Object.defineProperty(exports, "ArrayExpression", {
       enumerable: true,
       get: function() {
         return _index.arrayExpression;
       }
     });
-    Object.defineProperty(exports2, "ArrayPattern", {
+    Object.defineProperty(exports, "ArrayPattern", {
       enumerable: true,
       get: function() {
         return _index.arrayPattern;
       }
     });
-    Object.defineProperty(exports2, "ArrayTypeAnnotation", {
+    Object.defineProperty(exports, "ArrayTypeAnnotation", {
       enumerable: true,
       get: function() {
         return _index.arrayTypeAnnotation;
       }
     });
-    Object.defineProperty(exports2, "ArrowFunctionExpression", {
+    Object.defineProperty(exports, "ArrowFunctionExpression", {
       enumerable: true,
       get: function() {
         return _index.arrowFunctionExpression;
       }
     });
-    Object.defineProperty(exports2, "AssignmentExpression", {
+    Object.defineProperty(exports, "AssignmentExpression", {
       enumerable: true,
       get: function() {
         return _index.assignmentExpression;
       }
     });
-    Object.defineProperty(exports2, "AssignmentPattern", {
+    Object.defineProperty(exports, "AssignmentPattern", {
       enumerable: true,
       get: function() {
         return _index.assignmentPattern;
       }
     });
-    Object.defineProperty(exports2, "AwaitExpression", {
+    Object.defineProperty(exports, "AwaitExpression", {
       enumerable: true,
       get: function() {
         return _index.awaitExpression;
       }
     });
-    Object.defineProperty(exports2, "BigIntLiteral", {
+    Object.defineProperty(exports, "BigIntLiteral", {
       enumerable: true,
       get: function() {
         return _index.bigIntLiteral;
       }
     });
-    Object.defineProperty(exports2, "BinaryExpression", {
+    Object.defineProperty(exports, "BinaryExpression", {
       enumerable: true,
       get: function() {
         return _index.binaryExpression;
       }
     });
-    Object.defineProperty(exports2, "BindExpression", {
+    Object.defineProperty(exports, "BindExpression", {
       enumerable: true,
       get: function() {
         return _index.bindExpression;
       }
     });
-    Object.defineProperty(exports2, "BlockStatement", {
+    Object.defineProperty(exports, "BlockStatement", {
       enumerable: true,
       get: function() {
         return _index.blockStatement;
       }
     });
-    Object.defineProperty(exports2, "BooleanLiteral", {
+    Object.defineProperty(exports, "BooleanLiteral", {
       enumerable: true,
       get: function() {
         return _index.booleanLiteral;
       }
     });
-    Object.defineProperty(exports2, "BooleanLiteralTypeAnnotation", {
+    Object.defineProperty(exports, "BooleanLiteralTypeAnnotation", {
       enumerable: true,
       get: function() {
         return _index.booleanLiteralTypeAnnotation;
       }
     });
-    Object.defineProperty(exports2, "BooleanTypeAnnotation", {
+    Object.defineProperty(exports, "BooleanTypeAnnotation", {
       enumerable: true,
       get: function() {
         return _index.booleanTypeAnnotation;
       }
     });
-    Object.defineProperty(exports2, "BreakStatement", {
+    Object.defineProperty(exports, "BreakStatement", {
       enumerable: true,
       get: function() {
         return _index.breakStatement;
       }
     });
-    Object.defineProperty(exports2, "CallExpression", {
+    Object.defineProperty(exports, "CallExpression", {
       enumerable: true,
       get: function() {
         return _index.callExpression;
       }
     });
-    Object.defineProperty(exports2, "CatchClause", {
+    Object.defineProperty(exports, "CatchClause", {
       enumerable: true,
       get: function() {
         return _index.catchClause;
       }
     });
-    Object.defineProperty(exports2, "ClassAccessorProperty", {
+    Object.defineProperty(exports, "ClassAccessorProperty", {
       enumerable: true,
       get: function() {
         return _index.classAccessorProperty;
       }
     });
-    Object.defineProperty(exports2, "ClassBody", {
+    Object.defineProperty(exports, "ClassBody", {
       enumerable: true,
       get: function() {
         return _index.classBody;
       }
     });
-    Object.defineProperty(exports2, "ClassDeclaration", {
+    Object.defineProperty(exports, "ClassDeclaration", {
       enumerable: true,
       get: function() {
         return _index.classDeclaration;
       }
     });
-    Object.defineProperty(exports2, "ClassExpression", {
+    Object.defineProperty(exports, "ClassExpression", {
       enumerable: true,
       get: function() {
         return _index.classExpression;
       }
     });
-    Object.defineProperty(exports2, "ClassImplements", {
+    Object.defineProperty(exports, "ClassImplements", {
       enumerable: true,
       get: function() {
         return _index.classImplements;
       }
     });
-    Object.defineProperty(exports2, "ClassMethod", {
+    Object.defineProperty(exports, "ClassMethod", {
       enumerable: true,
       get: function() {
         return _index.classMethod;
       }
     });
-    Object.defineProperty(exports2, "ClassPrivateMethod", {
+    Object.defineProperty(exports, "ClassPrivateMethod", {
       enumerable: true,
       get: function() {
         return _index.classPrivateMethod;
       }
     });
-    Object.defineProperty(exports2, "ClassPrivateProperty", {
+    Object.defineProperty(exports, "ClassPrivateProperty", {
       enumerable: true,
       get: function() {
         return _index.classPrivateProperty;
       }
     });
-    Object.defineProperty(exports2, "ClassProperty", {
+    Object.defineProperty(exports, "ClassProperty", {
       enumerable: true,
       get: function() {
         return _index.classProperty;
       }
     });
-    Object.defineProperty(exports2, "ConditionalExpression", {
+    Object.defineProperty(exports, "ConditionalExpression", {
       enumerable: true,
       get: function() {
         return _index.conditionalExpression;
       }
     });
-    Object.defineProperty(exports2, "ContinueStatement", {
+    Object.defineProperty(exports, "ContinueStatement", {
       enumerable: true,
       get: function() {
         return _index.continueStatement;
       }
     });
-    Object.defineProperty(exports2, "DebuggerStatement", {
+    Object.defineProperty(exports, "DebuggerStatement", {
       enumerable: true,
       get: function() {
         return _index.debuggerStatement;
       }
     });
-    Object.defineProperty(exports2, "DecimalLiteral", {
+    Object.defineProperty(exports, "DecimalLiteral", {
       enumerable: true,
       get: function() {
         return _index.decimalLiteral;
       }
     });
-    Object.defineProperty(exports2, "DeclareClass", {
+    Object.defineProperty(exports, "DeclareClass", {
       enumerable: true,
       get: function() {
         return _index.declareClass;
       }
     });
-    Object.defineProperty(exports2, "DeclareExportAllDeclaration", {
+    Object.defineProperty(exports, "DeclareExportAllDeclaration", {
       enumerable: true,
       get: function() {
         return _index.declareExportAllDeclaration;
       }
     });
-    Object.defineProperty(exports2, "DeclareExportDeclaration", {
+    Object.defineProperty(exports, "DeclareExportDeclaration", {
       enumerable: true,
       get: function() {
         return _index.declareExportDeclaration;
       }
     });
-    Object.defineProperty(exports2, "DeclareFunction", {
+    Object.defineProperty(exports, "DeclareFunction", {
       enumerable: true,
       get: function() {
         return _index.declareFunction;
       }
     });
-    Object.defineProperty(exports2, "DeclareInterface", {
+    Object.defineProperty(exports, "DeclareInterface", {
       enumerable: true,
       get: function() {
         return _index.declareInterface;
       }
     });
-    Object.defineProperty(exports2, "DeclareModule", {
+    Object.defineProperty(exports, "DeclareModule", {
       enumerable: true,
       get: function() {
         return _index.declareModule;
       }
     });
-    Object.defineProperty(exports2, "DeclareModuleExports", {
+    Object.defineProperty(exports, "DeclareModuleExports", {
       enumerable: true,
       get: function() {
         return _index.declareModuleExports;
       }
     });
-    Object.defineProperty(exports2, "DeclareOpaqueType", {
+    Object.defineProperty(exports, "DeclareOpaqueType", {
       enumerable: true,
       get: function() {
         return _index.declareOpaqueType;
       }
     });
-    Object.defineProperty(exports2, "DeclareTypeAlias", {
+    Object.defineProperty(exports, "DeclareTypeAlias", {
       enumerable: true,
       get: function() {
         return _index.declareTypeAlias;
       }
     });
-    Object.defineProperty(exports2, "DeclareVariable", {
+    Object.defineProperty(exports, "DeclareVariable", {
       enumerable: true,
       get: function() {
         return _index.declareVariable;
       }
     });
-    Object.defineProperty(exports2, "DeclaredPredicate", {
+    Object.defineProperty(exports, "DeclaredPredicate", {
       enumerable: true,
       get: function() {
         return _index.declaredPredicate;
       }
     });
-    Object.defineProperty(exports2, "Decorator", {
+    Object.defineProperty(exports, "Decorator", {
       enumerable: true,
       get: function() {
         return _index.decorator;
       }
     });
-    Object.defineProperty(exports2, "Directive", {
+    Object.defineProperty(exports, "Directive", {
       enumerable: true,
       get: function() {
         return _index.directive;
       }
     });
-    Object.defineProperty(exports2, "DirectiveLiteral", {
+    Object.defineProperty(exports, "DirectiveLiteral", {
       enumerable: true,
       get: function() {
         return _index.directiveLiteral;
       }
     });
-    Object.defineProperty(exports2, "DoExpression", {
+    Object.defineProperty(exports, "DoExpression", {
       enumerable: true,
       get: function() {
         return _index.doExpression;
       }
     });
-    Object.defineProperty(exports2, "DoWhileStatement", {
+    Object.defineProperty(exports, "DoWhileStatement", {
       enumerable: true,
       get: function() {
         return _index.doWhileStatement;
       }
     });
-    Object.defineProperty(exports2, "EmptyStatement", {
+    Object.defineProperty(exports, "EmptyStatement", {
       enumerable: true,
       get: function() {
         return _index.emptyStatement;
       }
     });
-    Object.defineProperty(exports2, "EmptyTypeAnnotation", {
+    Object.defineProperty(exports, "EmptyTypeAnnotation", {
       enumerable: true,
       get: function() {
         return _index.emptyTypeAnnotation;
       }
     });
-    Object.defineProperty(exports2, "EnumBooleanBody", {
+    Object.defineProperty(exports, "EnumBooleanBody", {
       enumerable: true,
       get: function() {
         return _index.enumBooleanBody;
       }
     });
-    Object.defineProperty(exports2, "EnumBooleanMember", {
+    Object.defineProperty(exports, "EnumBooleanMember", {
       enumerable: true,
       get: function() {
         return _index.enumBooleanMember;
       }
     });
-    Object.defineProperty(exports2, "EnumDeclaration", {
+    Object.defineProperty(exports, "EnumDeclaration", {
       enumerable: true,
       get: function() {
         return _index.enumDeclaration;
       }
     });
-    Object.defineProperty(exports2, "EnumDefaultedMember", {
+    Object.defineProperty(exports, "EnumDefaultedMember", {
       enumerable: true,
       get: function() {
         return _index.enumDefaultedMember;
       }
     });
-    Object.defineProperty(exports2, "EnumNumberBody", {
+    Object.defineProperty(exports, "EnumNumberBody", {
       enumerable: true,
       get: function() {
         return _index.enumNumberBody;
       }
     });
-    Object.defineProperty(exports2, "EnumNumberMember", {
+    Object.defineProperty(exports, "EnumNumberMember", {
       enumerable: true,
       get: function() {
         return _index.enumNumberMember;
       }
     });
-    Object.defineProperty(exports2, "EnumStringBody", {
+    Object.defineProperty(exports, "EnumStringBody", {
       enumerable: true,
       get: function() {
         return _index.enumStringBody;
       }
     });
-    Object.defineProperty(exports2, "EnumStringMember", {
+    Object.defineProperty(exports, "EnumStringMember", {
       enumerable: true,
       get: function() {
         return _index.enumStringMember;
       }
     });
-    Object.defineProperty(exports2, "EnumSymbolBody", {
+    Object.defineProperty(exports, "EnumSymbolBody", {
       enumerable: true,
       get: function() {
         return _index.enumSymbolBody;
       }
     });
-    Object.defineProperty(exports2, "ExistsTypeAnnotation", {
+    Object.defineProperty(exports, "ExistsTypeAnnotation", {
       enumerable: true,
       get: function() {
         return _index.existsTypeAnnotation;
       }
     });
-    Object.defineProperty(exports2, "ExportAllDeclaration", {
+    Object.defineProperty(exports, "ExportAllDeclaration", {
       enumerable: true,
       get: function() {
         return _index.exportAllDeclaration;
       }
     });
-    Object.defineProperty(exports2, "ExportDefaultDeclaration", {
+    Object.defineProperty(exports, "ExportDefaultDeclaration", {
       enumerable: true,
       get: function() {
         return _index.exportDefaultDeclaration;
       }
     });
-    Object.defineProperty(exports2, "ExportDefaultSpecifier", {
+    Object.defineProperty(exports, "ExportDefaultSpecifier", {
       enumerable: true,
       get: function() {
         return _index.exportDefaultSpecifier;
       }
     });
-    Object.defineProperty(exports2, "ExportNamedDeclaration", {
+    Object.defineProperty(exports, "ExportNamedDeclaration", {
       enumerable: true,
       get: function() {
         return _index.exportNamedDeclaration;
       }
     });
-    Object.defineProperty(exports2, "ExportNamespaceSpecifier", {
+    Object.defineProperty(exports, "ExportNamespaceSpecifier", {
       enumerable: true,
       get: function() {
         return _index.exportNamespaceSpecifier;
       }
     });
-    Object.defineProperty(exports2, "ExportSpecifier", {
+    Object.defineProperty(exports, "ExportSpecifier", {
       enumerable: true,
       get: function() {
         return _index.exportSpecifier;
       }
     });
-    Object.defineProperty(exports2, "ExpressionStatement", {
+    Object.defineProperty(exports, "ExpressionStatement", {
       enumerable: true,
       get: function() {
         return _index.expressionStatement;
       }
     });
-    Object.defineProperty(exports2, "File", {
+    Object.defineProperty(exports, "File", {
       enumerable: true,
       get: function() {
         return _index.file;
       }
     });
-    Object.defineProperty(exports2, "ForInStatement", {
+    Object.defineProperty(exports, "ForInStatement", {
       enumerable: true,
       get: function() {
         return _index.forInStatement;
       }
     });
-    Object.defineProperty(exports2, "ForOfStatement", {
+    Object.defineProperty(exports, "ForOfStatement", {
       enumerable: true,
       get: function() {
         return _index.forOfStatement;
       }
     });
-    Object.defineProperty(exports2, "ForStatement", {
+    Object.defineProperty(exports, "ForStatement", {
       enumerable: true,
       get: function() {
         return _index.forStatement;
       }
     });
-    Object.defineProperty(exports2, "FunctionDeclaration", {
+    Object.defineProperty(exports, "FunctionDeclaration", {
       enumerable: true,
       get: function() {
         return _index.functionDeclaration;
       }
     });
-    Object.defineProperty(exports2, "FunctionExpression", {
+    Object.defineProperty(exports, "FunctionExpression", {
       enumerable: true,
       get: function() {
         return _index.functionExpression;
       }
     });
-    Object.defineProperty(exports2, "FunctionTypeAnnotation", {
+    Object.defineProperty(exports, "FunctionTypeAnnotation", {
       enumerable: true,
       get: function() {
         return _index.functionTypeAnnotation;
       }
     });
-    Object.defineProperty(exports2, "FunctionTypeParam", {
+    Object.defineProperty(exports, "FunctionTypeParam", {
       enumerable: true,
       get: function() {
         return _index.functionTypeParam;
       }
     });
-    Object.defineProperty(exports2, "GenericTypeAnnotation", {
+    Object.defineProperty(exports, "GenericTypeAnnotation", {
       enumerable: true,
       get: function() {
         return _index.genericTypeAnnotation;
       }
     });
-    Object.defineProperty(exports2, "Identifier", {
+    Object.defineProperty(exports, "Identifier", {
       enumerable: true,
       get: function() {
         return _index.identifier;
       }
     });
-    Object.defineProperty(exports2, "IfStatement", {
+    Object.defineProperty(exports, "IfStatement", {
       enumerable: true,
       get: function() {
         return _index.ifStatement;
       }
     });
-    Object.defineProperty(exports2, "Import", {
+    Object.defineProperty(exports, "Import", {
       enumerable: true,
       get: function() {
         return _index.import;
       }
     });
-    Object.defineProperty(exports2, "ImportAttribute", {
+    Object.defineProperty(exports, "ImportAttribute", {
       enumerable: true,
       get: function() {
         return _index.importAttribute;
       }
     });
-    Object.defineProperty(exports2, "ImportDeclaration", {
+    Object.defineProperty(exports, "ImportDeclaration", {
       enumerable: true,
       get: function() {
         return _index.importDeclaration;
       }
     });
-    Object.defineProperty(exports2, "ImportDefaultSpecifier", {
+    Object.defineProperty(exports, "ImportDefaultSpecifier", {
       enumerable: true,
       get: function() {
         return _index.importDefaultSpecifier;
       }
     });
-    Object.defineProperty(exports2, "ImportNamespaceSpecifier", {
+    Object.defineProperty(exports, "ImportNamespaceSpecifier", {
       enumerable: true,
       get: function() {
         return _index.importNamespaceSpecifier;
       }
     });
-    Object.defineProperty(exports2, "ImportSpecifier", {
+    Object.defineProperty(exports, "ImportSpecifier", {
       enumerable: true,
       get: function() {
         return _index.importSpecifier;
       }
     });
-    Object.defineProperty(exports2, "IndexedAccessType", {
+    Object.defineProperty(exports, "IndexedAccessType", {
       enumerable: true,
       get: function() {
         return _index.indexedAccessType;
       }
     });
-    Object.defineProperty(exports2, "InferredPredicate", {
+    Object.defineProperty(exports, "InferredPredicate", {
       enumerable: true,
       get: function() {
         return _index.inferredPredicate;
       }
     });
-    Object.defineProperty(exports2, "InterfaceDeclaration", {
+    Object.defineProperty(exports, "InterfaceDeclaration", {
       enumerable: true,
       get: function() {
         return _index.interfaceDeclaration;
       }
     });
-    Object.defineProperty(exports2, "InterfaceExtends", {
+    Object.defineProperty(exports, "InterfaceExtends", {
       enumerable: true,
       get: function() {
         return _index.interfaceExtends;
       }
     });
-    Object.defineProperty(exports2, "InterfaceTypeAnnotation", {
+    Object.defineProperty(exports, "InterfaceTypeAnnotation", {
       enumerable: true,
       get: function() {
         return _index.interfaceTypeAnnotation;
       }
     });
-    Object.defineProperty(exports2, "InterpreterDirective", {
+    Object.defineProperty(exports, "InterpreterDirective", {
       enumerable: true,
       get: function() {
         return _index.interpreterDirective;
       }
     });
-    Object.defineProperty(exports2, "IntersectionTypeAnnotation", {
+    Object.defineProperty(exports, "IntersectionTypeAnnotation", {
       enumerable: true,
       get: function() {
         return _index.intersectionTypeAnnotation;
       }
     });
-    Object.defineProperty(exports2, "JSXAttribute", {
+    Object.defineProperty(exports, "JSXAttribute", {
       enumerable: true,
       get: function() {
         return _index.jsxAttribute;
       }
     });
-    Object.defineProperty(exports2, "JSXClosingElement", {
+    Object.defineProperty(exports, "JSXClosingElement", {
       enumerable: true,
       get: function() {
         return _index.jsxClosingElement;
       }
     });
-    Object.defineProperty(exports2, "JSXClosingFragment", {
+    Object.defineProperty(exports, "JSXClosingFragment", {
       enumerable: true,
       get: function() {
         return _index.jsxClosingFragment;
       }
     });
-    Object.defineProperty(exports2, "JSXElement", {
+    Object.defineProperty(exports, "JSXElement", {
       enumerable: true,
       get: function() {
         return _index.jsxElement;
       }
     });
-    Object.defineProperty(exports2, "JSXEmptyExpression", {
+    Object.defineProperty(exports, "JSXEmptyExpression", {
       enumerable: true,
       get: function() {
         return _index.jsxEmptyExpression;
       }
     });
-    Object.defineProperty(exports2, "JSXExpressionContainer", {
+    Object.defineProperty(exports, "JSXExpressionContainer", {
       enumerable: true,
       get: function() {
         return _index.jsxExpressionContainer;
       }
     });
-    Object.defineProperty(exports2, "JSXFragment", {
+    Object.defineProperty(exports, "JSXFragment", {
       enumerable: true,
       get: function() {
         return _index.jsxFragment;
       }
     });
-    Object.defineProperty(exports2, "JSXIdentifier", {
+    Object.defineProperty(exports, "JSXIdentifier", {
       enumerable: true,
       get: function() {
         return _index.jsxIdentifier;
       }
     });
-    Object.defineProperty(exports2, "JSXMemberExpression", {
+    Object.defineProperty(exports, "JSXMemberExpression", {
       enumerable: true,
       get: function() {
         return _index.jsxMemberExpression;
       }
     });
-    Object.defineProperty(exports2, "JSXNamespacedName", {
+    Object.defineProperty(exports, "JSXNamespacedName", {
       enumerable: true,
       get: function() {
         return _index.jsxNamespacedName;
       }
     });
-    Object.defineProperty(exports2, "JSXOpeningElement", {
+    Object.defineProperty(exports, "JSXOpeningElement", {
       enumerable: true,
       get: function() {
         return _index.jsxOpeningElement;
       }
     });
-    Object.defineProperty(exports2, "JSXOpeningFragment", {
+    Object.defineProperty(exports, "JSXOpeningFragment", {
       enumerable: true,
       get: function() {
         return _index.jsxOpeningFragment;
       }
     });
-    Object.defineProperty(exports2, "JSXSpreadAttribute", {
+    Object.defineProperty(exports, "JSXSpreadAttribute", {
       enumerable: true,
       get: function() {
         return _index.jsxSpreadAttribute;
       }
     });
-    Object.defineProperty(exports2, "JSXSpreadChild", {
+    Object.defineProperty(exports, "JSXSpreadChild", {
       enumerable: true,
       get: function() {
         return _index.jsxSpreadChild;
       }
     });
-    Object.defineProperty(exports2, "JSXText", {
+    Object.defineProperty(exports, "JSXText", {
       enumerable: true,
       get: function() {
         return _index.jsxText;
       }
     });
-    Object.defineProperty(exports2, "LabeledStatement", {
+    Object.defineProperty(exports, "LabeledStatement", {
       enumerable: true,
       get: function() {
         return _index.labeledStatement;
       }
     });
-    Object.defineProperty(exports2, "LogicalExpression", {
+    Object.defineProperty(exports, "LogicalExpression", {
       enumerable: true,
       get: function() {
         return _index.logicalExpression;
       }
     });
-    Object.defineProperty(exports2, "MemberExpression", {
+    Object.defineProperty(exports, "MemberExpression", {
       enumerable: true,
       get: function() {
         return _index.memberExpression;
       }
     });
-    Object.defineProperty(exports2, "MetaProperty", {
+    Object.defineProperty(exports, "MetaProperty", {
       enumerable: true,
       get: function() {
         return _index.metaProperty;
       }
     });
-    Object.defineProperty(exports2, "MixedTypeAnnotation", {
+    Object.defineProperty(exports, "MixedTypeAnnotation", {
       enumerable: true,
       get: function() {
         return _index.mixedTypeAnnotation;
       }
     });
-    Object.defineProperty(exports2, "ModuleExpression", {
+    Object.defineProperty(exports, "ModuleExpression", {
       enumerable: true,
       get: function() {
         return _index.moduleExpression;
       }
     });
-    Object.defineProperty(exports2, "NewExpression", {
+    Object.defineProperty(exports, "NewExpression", {
       enumerable: true,
       get: function() {
         return _index.newExpression;
       }
     });
-    Object.defineProperty(exports2, "Noop", {
+    Object.defineProperty(exports, "Noop", {
       enumerable: true,
       get: function() {
         return _index.noop;
       }
     });
-    Object.defineProperty(exports2, "NullLiteral", {
+    Object.defineProperty(exports, "NullLiteral", {
       enumerable: true,
       get: function() {
         return _index.nullLiteral;
       }
     });
-    Object.defineProperty(exports2, "NullLiteralTypeAnnotation", {
+    Object.defineProperty(exports, "NullLiteralTypeAnnotation", {
       enumerable: true,
       get: function() {
         return _index.nullLiteralTypeAnnotation;
       }
     });
-    Object.defineProperty(exports2, "NullableTypeAnnotation", {
+    Object.defineProperty(exports, "NullableTypeAnnotation", {
       enumerable: true,
       get: function() {
         return _index.nullableTypeAnnotation;
       }
     });
-    Object.defineProperty(exports2, "NumberLiteral", {
+    Object.defineProperty(exports, "NumberLiteral", {
       enumerable: true,
       get: function() {
         return _index.numberLiteral;
       }
     });
-    Object.defineProperty(exports2, "NumberLiteralTypeAnnotation", {
+    Object.defineProperty(exports, "NumberLiteralTypeAnnotation", {
       enumerable: true,
       get: function() {
         return _index.numberLiteralTypeAnnotation;
       }
     });
-    Object.defineProperty(exports2, "NumberTypeAnnotation", {
+    Object.defineProperty(exports, "NumberTypeAnnotation", {
       enumerable: true,
       get: function() {
         return _index.numberTypeAnnotation;
       }
     });
-    Object.defineProperty(exports2, "NumericLiteral", {
+    Object.defineProperty(exports, "NumericLiteral", {
       enumerable: true,
       get: function() {
         return _index.numericLiteral;
       }
     });
-    Object.defineProperty(exports2, "ObjectExpression", {
+    Object.defineProperty(exports, "ObjectExpression", {
       enumerable: true,
       get: function() {
         return _index.objectExpression;
       }
     });
-    Object.defineProperty(exports2, "ObjectMethod", {
+    Object.defineProperty(exports, "ObjectMethod", {
       enumerable: true,
       get: function() {
         return _index.objectMethod;
       }
     });
-    Object.defineProperty(exports2, "ObjectPattern", {
+    Object.defineProperty(exports, "ObjectPattern", {
       enumerable: true,
       get: function() {
         return _index.objectPattern;
       }
     });
-    Object.defineProperty(exports2, "ObjectProperty", {
+    Object.defineProperty(exports, "ObjectProperty", {
       enumerable: true,
       get: function() {
         return _index.objectProperty;
       }
     });
-    Object.defineProperty(exports2, "ObjectTypeAnnotation", {
+    Object.defineProperty(exports, "ObjectTypeAnnotation", {
       enumerable: true,
       get: function() {
         return _index.objectTypeAnnotation;
       }
     });
-    Object.defineProperty(exports2, "ObjectTypeCallProperty", {
+    Object.defineProperty(exports, "ObjectTypeCallProperty", {
       enumerable: true,
       get: function() {
         return _index.objectTypeCallProperty;
       }
     });
-    Object.defineProperty(exports2, "ObjectTypeIndexer", {
+    Object.defineProperty(exports, "ObjectTypeIndexer", {
       enumerable: true,
       get: function() {
         return _index.objectTypeIndexer;
       }
     });
-    Object.defineProperty(exports2, "ObjectTypeInternalSlot", {
+    Object.defineProperty(exports, "ObjectTypeInternalSlot", {
       enumerable: true,
       get: function() {
         return _index.objectTypeInternalSlot;
       }
     });
-    Object.defineProperty(exports2, "ObjectTypeProperty", {
+    Object.defineProperty(exports, "ObjectTypeProperty", {
       enumerable: true,
       get: function() {
         return _index.objectTypeProperty;
       }
     });
-    Object.defineProperty(exports2, "ObjectTypeSpreadProperty", {
+    Object.defineProperty(exports, "ObjectTypeSpreadProperty", {
       enumerable: true,
       get: function() {
         return _index.objectTypeSpreadProperty;
       }
     });
-    Object.defineProperty(exports2, "OpaqueType", {
+    Object.defineProperty(exports, "OpaqueType", {
       enumerable: true,
       get: function() {
         return _index.opaqueType;
       }
     });
-    Object.defineProperty(exports2, "OptionalCallExpression", {
+    Object.defineProperty(exports, "OptionalCallExpression", {
       enumerable: true,
       get: function() {
         return _index.optionalCallExpression;
       }
     });
-    Object.defineProperty(exports2, "OptionalIndexedAccessType", {
+    Object.defineProperty(exports, "OptionalIndexedAccessType", {
       enumerable: true,
       get: function() {
         return _index.optionalIndexedAccessType;
       }
     });
-    Object.defineProperty(exports2, "OptionalMemberExpression", {
+    Object.defineProperty(exports, "OptionalMemberExpression", {
       enumerable: true,
       get: function() {
         return _index.optionalMemberExpression;
       }
     });
-    Object.defineProperty(exports2, "ParenthesizedExpression", {
+    Object.defineProperty(exports, "ParenthesizedExpression", {
       enumerable: true,
       get: function() {
         return _index.parenthesizedExpression;
       }
     });
-    Object.defineProperty(exports2, "PipelineBareFunction", {
+    Object.defineProperty(exports, "PipelineBareFunction", {
       enumerable: true,
       get: function() {
         return _index.pipelineBareFunction;
       }
     });
-    Object.defineProperty(exports2, "PipelinePrimaryTopicReference", {
+    Object.defineProperty(exports, "PipelinePrimaryTopicReference", {
       enumerable: true,
       get: function() {
         return _index.pipelinePrimaryTopicReference;
       }
     });
-    Object.defineProperty(exports2, "PipelineTopicExpression", {
+    Object.defineProperty(exports, "PipelineTopicExpression", {
       enumerable: true,
       get: function() {
         return _index.pipelineTopicExpression;
       }
     });
-    Object.defineProperty(exports2, "Placeholder", {
+    Object.defineProperty(exports, "Placeholder", {
       enumerable: true,
       get: function() {
         return _index.placeholder;
       }
     });
-    Object.defineProperty(exports2, "PrivateName", {
+    Object.defineProperty(exports, "PrivateName", {
       enumerable: true,
       get: function() {
         return _index.privateName;
       }
     });
-    Object.defineProperty(exports2, "Program", {
+    Object.defineProperty(exports, "Program", {
       enumerable: true,
       get: function() {
         return _index.program;
       }
     });
-    Object.defineProperty(exports2, "QualifiedTypeIdentifier", {
+    Object.defineProperty(exports, "QualifiedTypeIdentifier", {
       enumerable: true,
       get: function() {
         return _index.qualifiedTypeIdentifier;
       }
     });
-    Object.defineProperty(exports2, "RecordExpression", {
+    Object.defineProperty(exports, "RecordExpression", {
       enumerable: true,
       get: function() {
         return _index.recordExpression;
       }
     });
-    Object.defineProperty(exports2, "RegExpLiteral", {
+    Object.defineProperty(exports, "RegExpLiteral", {
       enumerable: true,
       get: function() {
         return _index.regExpLiteral;
       }
     });
-    Object.defineProperty(exports2, "RegexLiteral", {
+    Object.defineProperty(exports, "RegexLiteral", {
       enumerable: true,
       get: function() {
         return _index.regexLiteral;
       }
     });
-    Object.defineProperty(exports2, "RestElement", {
+    Object.defineProperty(exports, "RestElement", {
       enumerable: true,
       get: function() {
         return _index.restElement;
       }
     });
-    Object.defineProperty(exports2, "RestProperty", {
+    Object.defineProperty(exports, "RestProperty", {
       enumerable: true,
       get: function() {
         return _index.restProperty;
       }
     });
-    Object.defineProperty(exports2, "ReturnStatement", {
+    Object.defineProperty(exports, "ReturnStatement", {
       enumerable: true,
       get: function() {
         return _index.returnStatement;
       }
     });
-    Object.defineProperty(exports2, "SequenceExpression", {
+    Object.defineProperty(exports, "SequenceExpression", {
       enumerable: true,
       get: function() {
         return _index.sequenceExpression;
       }
     });
-    Object.defineProperty(exports2, "SpreadElement", {
+    Object.defineProperty(exports, "SpreadElement", {
       enumerable: true,
       get: function() {
         return _index.spreadElement;
       }
     });
-    Object.defineProperty(exports2, "SpreadProperty", {
+    Object.defineProperty(exports, "SpreadProperty", {
       enumerable: true,
       get: function() {
         return _index.spreadProperty;
       }
     });
-    Object.defineProperty(exports2, "StaticBlock", {
+    Object.defineProperty(exports, "StaticBlock", {
       enumerable: true,
       get: function() {
         return _index.staticBlock;
       }
     });
-    Object.defineProperty(exports2, "StringLiteral", {
+    Object.defineProperty(exports, "StringLiteral", {
       enumerable: true,
       get: function() {
         return _index.stringLiteral;
       }
     });
-    Object.defineProperty(exports2, "StringLiteralTypeAnnotation", {
+    Object.defineProperty(exports, "StringLiteralTypeAnnotation", {
       enumerable: true,
       get: function() {
         return _index.stringLiteralTypeAnnotation;
       }
     });
-    Object.defineProperty(exports2, "StringTypeAnnotation", {
+    Object.defineProperty(exports, "StringTypeAnnotation", {
       enumerable: true,
       get: function() {
         return _index.stringTypeAnnotation;
       }
     });
-    Object.defineProperty(exports2, "Super", {
+    Object.defineProperty(exports, "Super", {
       enumerable: true,
       get: function() {
         return _index.super;
       }
     });
-    Object.defineProperty(exports2, "SwitchCase", {
+    Object.defineProperty(exports, "SwitchCase", {
       enumerable: true,
       get: function() {
         return _index.switchCase;
       }
     });
-    Object.defineProperty(exports2, "SwitchStatement", {
+    Object.defineProperty(exports, "SwitchStatement", {
       enumerable: true,
       get: function() {
         return _index.switchStatement;
       }
     });
-    Object.defineProperty(exports2, "SymbolTypeAnnotation", {
+    Object.defineProperty(exports, "SymbolTypeAnnotation", {
       enumerable: true,
       get: function() {
         return _index.symbolTypeAnnotation;
       }
     });
-    Object.defineProperty(exports2, "TSAnyKeyword", {
+    Object.defineProperty(exports, "TSAnyKeyword", {
       enumerable: true,
       get: function() {
         return _index.tsAnyKeyword;
       }
     });
-    Object.defineProperty(exports2, "TSArrayType", {
+    Object.defineProperty(exports, "TSArrayType", {
       enumerable: true,
       get: function() {
         return _index.tsArrayType;
       }
     });
-    Object.defineProperty(exports2, "TSAsExpression", {
+    Object.defineProperty(exports, "TSAsExpression", {
       enumerable: true,
       get: function() {
         return _index.tsAsExpression;
       }
     });
-    Object.defineProperty(exports2, "TSBigIntKeyword", {
+    Object.defineProperty(exports, "TSBigIntKeyword", {
       enumerable: true,
       get: function() {
         return _index.tsBigIntKeyword;
       }
     });
-    Object.defineProperty(exports2, "TSBooleanKeyword", {
+    Object.defineProperty(exports, "TSBooleanKeyword", {
       enumerable: true,
       get: function() {
         return _index.tsBooleanKeyword;
       }
     });
-    Object.defineProperty(exports2, "TSCallSignatureDeclaration", {
+    Object.defineProperty(exports, "TSCallSignatureDeclaration", {
       enumerable: true,
       get: function() {
         return _index.tsCallSignatureDeclaration;
       }
     });
-    Object.defineProperty(exports2, "TSConditionalType", {
+    Object.defineProperty(exports, "TSConditionalType", {
       enumerable: true,
       get: function() {
         return _index.tsConditionalType;
       }
     });
-    Object.defineProperty(exports2, "TSConstructSignatureDeclaration", {
+    Object.defineProperty(exports, "TSConstructSignatureDeclaration", {
       enumerable: true,
       get: function() {
         return _index.tsConstructSignatureDeclaration;
       }
     });
-    Object.defineProperty(exports2, "TSConstructorType", {
+    Object.defineProperty(exports, "TSConstructorType", {
       enumerable: true,
       get: function() {
         return _index.tsConstructorType;
       }
     });
-    Object.defineProperty(exports2, "TSDeclareFunction", {
+    Object.defineProperty(exports, "TSDeclareFunction", {
       enumerable: true,
       get: function() {
         return _index.tsDeclareFunction;
       }
     });
-    Object.defineProperty(exports2, "TSDeclareMethod", {
+    Object.defineProperty(exports, "TSDeclareMethod", {
       enumerable: true,
       get: function() {
         return _index.tsDeclareMethod;
       }
     });
-    Object.defineProperty(exports2, "TSEnumDeclaration", {
+    Object.defineProperty(exports, "TSEnumDeclaration", {
       enumerable: true,
       get: function() {
         return _index.tsEnumDeclaration;
       }
     });
-    Object.defineProperty(exports2, "TSEnumMember", {
+    Object.defineProperty(exports, "TSEnumMember", {
       enumerable: true,
       get: function() {
         return _index.tsEnumMember;
       }
     });
-    Object.defineProperty(exports2, "TSExportAssignment", {
+    Object.defineProperty(exports, "TSExportAssignment", {
       enumerable: true,
       get: function() {
         return _index.tsExportAssignment;
       }
     });
-    Object.defineProperty(exports2, "TSExpressionWithTypeArguments", {
+    Object.defineProperty(exports, "TSExpressionWithTypeArguments", {
       enumerable: true,
       get: function() {
         return _index.tsExpressionWithTypeArguments;
       }
     });
-    Object.defineProperty(exports2, "TSExternalModuleReference", {
+    Object.defineProperty(exports, "TSExternalModuleReference", {
       enumerable: true,
       get: function() {
         return _index.tsExternalModuleReference;
       }
     });
-    Object.defineProperty(exports2, "TSFunctionType", {
+    Object.defineProperty(exports, "TSFunctionType", {
       enumerable: true,
       get: function() {
         return _index.tsFunctionType;
       }
     });
-    Object.defineProperty(exports2, "TSImportEqualsDeclaration", {
+    Object.defineProperty(exports, "TSImportEqualsDeclaration", {
       enumerable: true,
       get: function() {
         return _index.tsImportEqualsDeclaration;
       }
     });
-    Object.defineProperty(exports2, "TSImportType", {
+    Object.defineProperty(exports, "TSImportType", {
       enumerable: true,
       get: function() {
         return _index.tsImportType;
       }
     });
-    Object.defineProperty(exports2, "TSIndexSignature", {
+    Object.defineProperty(exports, "TSIndexSignature", {
       enumerable: true,
       get: function() {
         return _index.tsIndexSignature;
       }
     });
-    Object.defineProperty(exports2, "TSIndexedAccessType", {
+    Object.defineProperty(exports, "TSIndexedAccessType", {
       enumerable: true,
       get: function() {
         return _index.tsIndexedAccessType;
       }
     });
-    Object.defineProperty(exports2, "TSInferType", {
+    Object.defineProperty(exports, "TSInferType", {
       enumerable: true,
       get: function() {
         return _index.tsInferType;
       }
     });
-    Object.defineProperty(exports2, "TSInstantiationExpression", {
+    Object.defineProperty(exports, "TSInstantiationExpression", {
       enumerable: true,
       get: function() {
         return _index.tsInstantiationExpression;
       }
     });
-    Object.defineProperty(exports2, "TSInterfaceBody", {
+    Object.defineProperty(exports, "TSInterfaceBody", {
       enumerable: true,
       get: function() {
         return _index.tsInterfaceBody;
       }
     });
-    Object.defineProperty(exports2, "TSInterfaceDeclaration", {
+    Object.defineProperty(exports, "TSInterfaceDeclaration", {
       enumerable: true,
       get: function() {
         return _index.tsInterfaceDeclaration;
       }
     });
-    Object.defineProperty(exports2, "TSIntersectionType", {
+    Object.defineProperty(exports, "TSIntersectionType", {
       enumerable: true,
       get: function() {
         return _index.tsIntersectionType;
       }
     });
-    Object.defineProperty(exports2, "TSIntrinsicKeyword", {
+    Object.defineProperty(exports, "TSIntrinsicKeyword", {
       enumerable: true,
       get: function() {
         return _index.tsIntrinsicKeyword;
       }
     });
-    Object.defineProperty(exports2, "TSLiteralType", {
+    Object.defineProperty(exports, "TSLiteralType", {
       enumerable: true,
       get: function() {
         return _index.tsLiteralType;
       }
     });
-    Object.defineProperty(exports2, "TSMappedType", {
+    Object.defineProperty(exports, "TSMappedType", {
       enumerable: true,
       get: function() {
         return _index.tsMappedType;
       }
     });
-    Object.defineProperty(exports2, "TSMethodSignature", {
+    Object.defineProperty(exports, "TSMethodSignature", {
       enumerable: true,
       get: function() {
         return _index.tsMethodSignature;
       }
     });
-    Object.defineProperty(exports2, "TSModuleBlock", {
+    Object.defineProperty(exports, "TSModuleBlock", {
       enumerable: true,
       get: function() {
         return _index.tsModuleBlock;
       }
     });
-    Object.defineProperty(exports2, "TSModuleDeclaration", {
+    Object.defineProperty(exports, "TSModuleDeclaration", {
       enumerable: true,
       get: function() {
         return _index.tsModuleDeclaration;
       }
     });
-    Object.defineProperty(exports2, "TSNamedTupleMember", {
+    Object.defineProperty(exports, "TSNamedTupleMember", {
       enumerable: true,
       get: function() {
         return _index.tsNamedTupleMember;
       }
     });
-    Object.defineProperty(exports2, "TSNamespaceExportDeclaration", {
+    Object.defineProperty(exports, "TSNamespaceExportDeclaration", {
       enumerable: true,
       get: function() {
         return _index.tsNamespaceExportDeclaration;
       }
     });
-    Object.defineProperty(exports2, "TSNeverKeyword", {
+    Object.defineProperty(exports, "TSNeverKeyword", {
       enumerable: true,
       get: function() {
         return _index.tsNeverKeyword;
       }
     });
-    Object.defineProperty(exports2, "TSNonNullExpression", {
+    Object.defineProperty(exports, "TSNonNullExpression", {
       enumerable: true,
       get: function() {
         return _index.tsNonNullExpression;
       }
     });
-    Object.defineProperty(exports2, "TSNullKeyword", {
+    Object.defineProperty(exports, "TSNullKeyword", {
       enumerable: true,
       get: function() {
         return _index.tsNullKeyword;
       }
     });
-    Object.defineProperty(exports2, "TSNumberKeyword", {
+    Object.defineProperty(exports, "TSNumberKeyword", {
       enumerable: true,
       get: function() {
         return _index.tsNumberKeyword;
       }
     });
-    Object.defineProperty(exports2, "TSObjectKeyword", {
+    Object.defineProperty(exports, "TSObjectKeyword", {
       enumerable: true,
       get: function() {
         return _index.tsObjectKeyword;
       }
     });
-    Object.defineProperty(exports2, "TSOptionalType", {
+    Object.defineProperty(exports, "TSOptionalType", {
       enumerable: true,
       get: function() {
         return _index.tsOptionalType;
       }
     });
-    Object.defineProperty(exports2, "TSParameterProperty", {
+    Object.defineProperty(exports, "TSParameterProperty", {
       enumerable: true,
       get: function() {
         return _index.tsParameterProperty;
       }
     });
-    Object.defineProperty(exports2, "TSParenthesizedType", {
+    Object.defineProperty(exports, "TSParenthesizedType", {
       enumerable: true,
       get: function() {
         return _index.tsParenthesizedType;
       }
     });
-    Object.defineProperty(exports2, "TSPropertySignature", {
+    Object.defineProperty(exports, "TSPropertySignature", {
       enumerable: true,
       get: function() {
         return _index.tsPropertySignature;
       }
     });
-    Object.defineProperty(exports2, "TSQualifiedName", {
+    Object.defineProperty(exports, "TSQualifiedName", {
       enumerable: true,
       get: function() {
         return _index.tsQualifiedName;
       }
     });
-    Object.defineProperty(exports2, "TSRestType", {
+    Object.defineProperty(exports, "TSRestType", {
       enumerable: true,
       get: function() {
         return _index.tsRestType;
       }
     });
-    Object.defineProperty(exports2, "TSStringKeyword", {
+    Object.defineProperty(exports, "TSStringKeyword", {
       enumerable: true,
       get: function() {
         return _index.tsStringKeyword;
       }
     });
-    Object.defineProperty(exports2, "TSSymbolKeyword", {
+    Object.defineProperty(exports, "TSSymbolKeyword", {
       enumerable: true,
       get: function() {
         return _index.tsSymbolKeyword;
       }
     });
-    Object.defineProperty(exports2, "TSThisType", {
+    Object.defineProperty(exports, "TSThisType", {
       enumerable: true,
       get: function() {
         return _index.tsThisType;
       }
     });
-    Object.defineProperty(exports2, "TSTupleType", {
+    Object.defineProperty(exports, "TSTupleType", {
       enumerable: true,
       get: function() {
         return _index.tsTupleType;
       }
     });
-    Object.defineProperty(exports2, "TSTypeAliasDeclaration", {
+    Object.defineProperty(exports, "TSTypeAliasDeclaration", {
       enumerable: true,
       get: function() {
         return _index.tsTypeAliasDeclaration;
       }
     });
-    Object.defineProperty(exports2, "TSTypeAnnotation", {
+    Object.defineProperty(exports, "TSTypeAnnotation", {
       enumerable: true,
       get: function() {
         return _index.tsTypeAnnotation;
       }
     });
-    Object.defineProperty(exports2, "TSTypeAssertion", {
+    Object.defineProperty(exports, "TSTypeAssertion", {
       enumerable: true,
       get: function() {
         return _index.tsTypeAssertion;
       }
     });
-    Object.defineProperty(exports2, "TSTypeLiteral", {
+    Object.defineProperty(exports, "TSTypeLiteral", {
       enumerable: true,
       get: function() {
         return _index.tsTypeLiteral;
       }
     });
-    Object.defineProperty(exports2, "TSTypeOperator", {
+    Object.defineProperty(exports, "TSTypeOperator", {
       enumerable: true,
       get: function() {
         return _index.tsTypeOperator;
       }
     });
-    Object.defineProperty(exports2, "TSTypeParameter", {
+    Object.defineProperty(exports, "TSTypeParameter", {
       enumerable: true,
       get: function() {
         return _index.tsTypeParameter;
       }
     });
-    Object.defineProperty(exports2, "TSTypeParameterDeclaration", {
+    Object.defineProperty(exports, "TSTypeParameterDeclaration", {
       enumerable: true,
       get: function() {
         return _index.tsTypeParameterDeclaration;
       }
     });
-    Object.defineProperty(exports2, "TSTypeParameterInstantiation", {
+    Object.defineProperty(exports, "TSTypeParameterInstantiation", {
       enumerable: true,
       get: function() {
         return _index.tsTypeParameterInstantiation;
       }
     });
-    Object.defineProperty(exports2, "TSTypePredicate", {
+    Object.defineProperty(exports, "TSTypePredicate", {
       enumerable: true,
       get: function() {
         return _index.tsTypePredicate;
       }
     });
-    Object.defineProperty(exports2, "TSTypeQuery", {
+    Object.defineProperty(exports, "TSTypeQuery", {
       enumerable: true,
       get: function() {
         return _index.tsTypeQuery;
       }
     });
-    Object.defineProperty(exports2, "TSTypeReference", {
+    Object.defineProperty(exports, "TSTypeReference", {
       enumerable: true,
       get: function() {
         return _index.tsTypeReference;
       }
     });
-    Object.defineProperty(exports2, "TSUndefinedKeyword", {
+    Object.defineProperty(exports, "TSUndefinedKeyword", {
       enumerable: true,
       get: function() {
         return _index.tsUndefinedKeyword;
       }
     });
-    Object.defineProperty(exports2, "TSUnionType", {
+    Object.defineProperty(exports, "TSUnionType", {
       enumerable: true,
       get: function() {
         return _index.tsUnionType;
       }
     });
-    Object.defineProperty(exports2, "TSUnknownKeyword", {
+    Object.defineProperty(exports, "TSUnknownKeyword", {
       enumerable: true,
       get: function() {
         return _index.tsUnknownKeyword;
       }
     });
-    Object.defineProperty(exports2, "TSVoidKeyword", {
+    Object.defineProperty(exports, "TSVoidKeyword", {
       enumerable: true,
       get: function() {
         return _index.tsVoidKeyword;
       }
     });
-    Object.defineProperty(exports2, "TaggedTemplateExpression", {
+    Object.defineProperty(exports, "TaggedTemplateExpression", {
       enumerable: true,
       get: function() {
         return _index.taggedTemplateExpression;
       }
     });
-    Object.defineProperty(exports2, "TemplateElement", {
+    Object.defineProperty(exports, "TemplateElement", {
       enumerable: true,
       get: function() {
         return _index.templateElement;
       }
     });
-    Object.defineProperty(exports2, "TemplateLiteral", {
+    Object.defineProperty(exports, "TemplateLiteral", {
       enumerable: true,
       get: function() {
         return _index.templateLiteral;
       }
     });
-    Object.defineProperty(exports2, "ThisExpression", {
+    Object.defineProperty(exports, "ThisExpression", {
       enumerable: true,
       get: function() {
         return _index.thisExpression;
       }
     });
-    Object.defineProperty(exports2, "ThisTypeAnnotation", {
+    Object.defineProperty(exports, "ThisTypeAnnotation", {
       enumerable: true,
       get: function() {
         return _index.thisTypeAnnotation;
       }
     });
-    Object.defineProperty(exports2, "ThrowStatement", {
+    Object.defineProperty(exports, "ThrowStatement", {
       enumerable: true,
       get: function() {
         return _index.throwStatement;
       }
     });
-    Object.defineProperty(exports2, "TopicReference", {
+    Object.defineProperty(exports, "TopicReference", {
       enumerable: true,
       get: function() {
         return _index.topicReference;
       }
     });
-    Object.defineProperty(exports2, "TryStatement", {
+    Object.defineProperty(exports, "TryStatement", {
       enumerable: true,
       get: function() {
         return _index.tryStatement;
       }
     });
-    Object.defineProperty(exports2, "TupleExpression", {
+    Object.defineProperty(exports, "TupleExpression", {
       enumerable: true,
       get: function() {
         return _index.tupleExpression;
       }
     });
-    Object.defineProperty(exports2, "TupleTypeAnnotation", {
+    Object.defineProperty(exports, "TupleTypeAnnotation", {
       enumerable: true,
       get: function() {
         return _index.tupleTypeAnnotation;
       }
     });
-    Object.defineProperty(exports2, "TypeAlias", {
+    Object.defineProperty(exports, "TypeAlias", {
       enumerable: true,
       get: function() {
         return _index.typeAlias;
       }
     });
-    Object.defineProperty(exports2, "TypeAnnotation", {
+    Object.defineProperty(exports, "TypeAnnotation", {
       enumerable: true,
       get: function() {
         return _index.typeAnnotation;
       }
     });
-    Object.defineProperty(exports2, "TypeCastExpression", {
+    Object.defineProperty(exports, "TypeCastExpression", {
       enumerable: true,
       get: function() {
         return _index.typeCastExpression;
       }
     });
-    Object.defineProperty(exports2, "TypeParameter", {
+    Object.defineProperty(exports, "TypeParameter", {
       enumerable: true,
       get: function() {
         return _index.typeParameter;
       }
     });
-    Object.defineProperty(exports2, "TypeParameterDeclaration", {
+    Object.defineProperty(exports, "TypeParameterDeclaration", {
       enumerable: true,
       get: function() {
         return _index.typeParameterDeclaration;
       }
     });
-    Object.defineProperty(exports2, "TypeParameterInstantiation", {
+    Object.defineProperty(exports, "TypeParameterInstantiation", {
       enumerable: true,
       get: function() {
         return _index.typeParameterInstantiation;
       }
     });
-    Object.defineProperty(exports2, "TypeofTypeAnnotation", {
+    Object.defineProperty(exports, "TypeofTypeAnnotation", {
       enumerable: true,
       get: function() {
         return _index.typeofTypeAnnotation;
       }
     });
-    Object.defineProperty(exports2, "UnaryExpression", {
+    Object.defineProperty(exports, "UnaryExpression", {
       enumerable: true,
       get: function() {
         return _index.unaryExpression;
       }
     });
-    Object.defineProperty(exports2, "UnionTypeAnnotation", {
+    Object.defineProperty(exports, "UnionTypeAnnotation", {
       enumerable: true,
       get: function() {
         return _index.unionTypeAnnotation;
       }
     });
-    Object.defineProperty(exports2, "UpdateExpression", {
+    Object.defineProperty(exports, "UpdateExpression", {
       enumerable: true,
       get: function() {
         return _index.updateExpression;
       }
     });
-    Object.defineProperty(exports2, "V8IntrinsicIdentifier", {
+    Object.defineProperty(exports, "V8IntrinsicIdentifier", {
       enumerable: true,
       get: function() {
         return _index.v8IntrinsicIdentifier;
       }
     });
-    Object.defineProperty(exports2, "VariableDeclaration", {
+    Object.defineProperty(exports, "VariableDeclaration", {
       enumerable: true,
       get: function() {
         return _index.variableDeclaration;
       }
     });
-    Object.defineProperty(exports2, "VariableDeclarator", {
+    Object.defineProperty(exports, "VariableDeclarator", {
       enumerable: true,
       get: function() {
         return _index.variableDeclarator;
       }
     });
-    Object.defineProperty(exports2, "Variance", {
+    Object.defineProperty(exports, "Variance", {
       enumerable: true,
       get: function() {
         return _index.variance;
       }
     });
-    Object.defineProperty(exports2, "VoidTypeAnnotation", {
+    Object.defineProperty(exports, "VoidTypeAnnotation", {
       enumerable: true,
       get: function() {
         return _index.voidTypeAnnotation;
       }
     });
-    Object.defineProperty(exports2, "WhileStatement", {
+    Object.defineProperty(exports, "WhileStatement", {
       enumerable: true,
       get: function() {
         return _index.whileStatement;
       }
     });
-    Object.defineProperty(exports2, "WithStatement", {
+    Object.defineProperty(exports, "WithStatement", {
       enumerable: true,
       get: function() {
         return _index.withStatement;
       }
     });
-    Object.defineProperty(exports2, "YieldExpression", {
+    Object.defineProperty(exports, "YieldExpression", {
       enumerable: true,
       get: function() {
         return _index.yieldExpression;
@@ -53617,12 +53807,12 @@ var require_uppercase2 = __commonJS({
 
 // node_modules/@babel/template/node_modules/@babel/types/lib/clone/cloneNode.js
 var require_cloneNode2 = __commonJS({
-  "node_modules/@babel/template/node_modules/@babel/types/lib/clone/cloneNode.js"(exports2) {
+  "node_modules/@babel/template/node_modules/@babel/types/lib/clone/cloneNode.js"(exports) {
     "use strict";
-    Object.defineProperty(exports2, "__esModule", {
+    Object.defineProperty(exports, "__esModule", {
       value: true
     });
-    exports2.default = cloneNode;
+    exports.default = cloneNode;
     var _definitions = require_definitions2();
     var _generated = require_generated6();
     var has = Function.call.bind(Object.prototype.hasOwnProperty);
@@ -53721,12 +53911,12 @@ var require_cloneNode2 = __commonJS({
 
 // node_modules/@babel/template/node_modules/@babel/types/lib/clone/clone.js
 var require_clone3 = __commonJS({
-  "node_modules/@babel/template/node_modules/@babel/types/lib/clone/clone.js"(exports2) {
+  "node_modules/@babel/template/node_modules/@babel/types/lib/clone/clone.js"(exports) {
     "use strict";
-    Object.defineProperty(exports2, "__esModule", {
+    Object.defineProperty(exports, "__esModule", {
       value: true
     });
-    exports2.default = clone;
+    exports.default = clone;
     var _cloneNode = require_cloneNode2();
     function clone(node) {
       return (0, _cloneNode.default)(node, false);
@@ -53737,12 +53927,12 @@ var require_clone3 = __commonJS({
 
 // node_modules/@babel/template/node_modules/@babel/types/lib/clone/cloneDeep.js
 var require_cloneDeep2 = __commonJS({
-  "node_modules/@babel/template/node_modules/@babel/types/lib/clone/cloneDeep.js"(exports2) {
+  "node_modules/@babel/template/node_modules/@babel/types/lib/clone/cloneDeep.js"(exports) {
     "use strict";
-    Object.defineProperty(exports2, "__esModule", {
+    Object.defineProperty(exports, "__esModule", {
       value: true
     });
-    exports2.default = cloneDeep;
+    exports.default = cloneDeep;
     var _cloneNode = require_cloneNode2();
     function cloneDeep(node) {
       return (0, _cloneNode.default)(node);
@@ -53753,12 +53943,12 @@ var require_cloneDeep2 = __commonJS({
 
 // node_modules/@babel/template/node_modules/@babel/types/lib/clone/cloneDeepWithoutLoc.js
 var require_cloneDeepWithoutLoc2 = __commonJS({
-  "node_modules/@babel/template/node_modules/@babel/types/lib/clone/cloneDeepWithoutLoc.js"(exports2) {
+  "node_modules/@babel/template/node_modules/@babel/types/lib/clone/cloneDeepWithoutLoc.js"(exports) {
     "use strict";
-    Object.defineProperty(exports2, "__esModule", {
+    Object.defineProperty(exports, "__esModule", {
       value: true
     });
-    exports2.default = cloneDeepWithoutLoc;
+    exports.default = cloneDeepWithoutLoc;
     var _cloneNode = require_cloneNode2();
     function cloneDeepWithoutLoc(node) {
       return (0, _cloneNode.default)(node, true, true);
@@ -53769,12 +53959,12 @@ var require_cloneDeepWithoutLoc2 = __commonJS({
 
 // node_modules/@babel/template/node_modules/@babel/types/lib/clone/cloneWithoutLoc.js
 var require_cloneWithoutLoc2 = __commonJS({
-  "node_modules/@babel/template/node_modules/@babel/types/lib/clone/cloneWithoutLoc.js"(exports2) {
+  "node_modules/@babel/template/node_modules/@babel/types/lib/clone/cloneWithoutLoc.js"(exports) {
     "use strict";
-    Object.defineProperty(exports2, "__esModule", {
+    Object.defineProperty(exports, "__esModule", {
       value: true
     });
-    exports2.default = cloneWithoutLoc;
+    exports.default = cloneWithoutLoc;
     var _cloneNode = require_cloneNode2();
     function cloneWithoutLoc(node) {
       return (0, _cloneNode.default)(node, false, true);
@@ -53785,12 +53975,12 @@ var require_cloneWithoutLoc2 = __commonJS({
 
 // node_modules/@babel/template/node_modules/@babel/types/lib/comments/addComments.js
 var require_addComments2 = __commonJS({
-  "node_modules/@babel/template/node_modules/@babel/types/lib/comments/addComments.js"(exports2) {
+  "node_modules/@babel/template/node_modules/@babel/types/lib/comments/addComments.js"(exports) {
     "use strict";
-    Object.defineProperty(exports2, "__esModule", {
+    Object.defineProperty(exports, "__esModule", {
       value: true
     });
-    exports2.default = addComments;
+    exports.default = addComments;
     function addComments(node, type, comments) {
       if (!comments || !node)
         return node;
@@ -53812,12 +54002,12 @@ var require_addComments2 = __commonJS({
 
 // node_modules/@babel/template/node_modules/@babel/types/lib/comments/addComment.js
 var require_addComment2 = __commonJS({
-  "node_modules/@babel/template/node_modules/@babel/types/lib/comments/addComment.js"(exports2) {
+  "node_modules/@babel/template/node_modules/@babel/types/lib/comments/addComment.js"(exports) {
     "use strict";
-    Object.defineProperty(exports2, "__esModule", {
+    Object.defineProperty(exports, "__esModule", {
       value: true
     });
-    exports2.default = addComment;
+    exports.default = addComment;
     var _addComments = require_addComments2();
     function addComment(node, type, content, line) {
       return (0, _addComments.default)(node, type, [
@@ -53833,12 +54023,12 @@ var require_addComment2 = __commonJS({
 
 // node_modules/@babel/template/node_modules/@babel/types/lib/utils/inherit.js
 var require_inherit2 = __commonJS({
-  "node_modules/@babel/template/node_modules/@babel/types/lib/utils/inherit.js"(exports2) {
+  "node_modules/@babel/template/node_modules/@babel/types/lib/utils/inherit.js"(exports) {
     "use strict";
-    Object.defineProperty(exports2, "__esModule", {
+    Object.defineProperty(exports, "__esModule", {
       value: true
     });
-    exports2.default = inherit;
+    exports.default = inherit;
     function inherit(key, child, parent) {
       if (child && parent) {
         child[key] = Array.from(new Set([].concat(child[key], parent[key]).filter(Boolean)));
@@ -53850,12 +54040,12 @@ var require_inherit2 = __commonJS({
 
 // node_modules/@babel/template/node_modules/@babel/types/lib/comments/inheritInnerComments.js
 var require_inheritInnerComments2 = __commonJS({
-  "node_modules/@babel/template/node_modules/@babel/types/lib/comments/inheritInnerComments.js"(exports2) {
+  "node_modules/@babel/template/node_modules/@babel/types/lib/comments/inheritInnerComments.js"(exports) {
     "use strict";
-    Object.defineProperty(exports2, "__esModule", {
+    Object.defineProperty(exports, "__esModule", {
       value: true
     });
-    exports2.default = inheritInnerComments;
+    exports.default = inheritInnerComments;
     var _inherit = require_inherit2();
     function inheritInnerComments(child, parent) {
       (0, _inherit.default)("innerComments", child, parent);
@@ -53866,12 +54056,12 @@ var require_inheritInnerComments2 = __commonJS({
 
 // node_modules/@babel/template/node_modules/@babel/types/lib/comments/inheritLeadingComments.js
 var require_inheritLeadingComments2 = __commonJS({
-  "node_modules/@babel/template/node_modules/@babel/types/lib/comments/inheritLeadingComments.js"(exports2) {
+  "node_modules/@babel/template/node_modules/@babel/types/lib/comments/inheritLeadingComments.js"(exports) {
     "use strict";
-    Object.defineProperty(exports2, "__esModule", {
+    Object.defineProperty(exports, "__esModule", {
       value: true
     });
-    exports2.default = inheritLeadingComments;
+    exports.default = inheritLeadingComments;
     var _inherit = require_inherit2();
     function inheritLeadingComments(child, parent) {
       (0, _inherit.default)("leadingComments", child, parent);
@@ -53882,12 +54072,12 @@ var require_inheritLeadingComments2 = __commonJS({
 
 // node_modules/@babel/template/node_modules/@babel/types/lib/comments/inheritTrailingComments.js
 var require_inheritTrailingComments2 = __commonJS({
-  "node_modules/@babel/template/node_modules/@babel/types/lib/comments/inheritTrailingComments.js"(exports2) {
+  "node_modules/@babel/template/node_modules/@babel/types/lib/comments/inheritTrailingComments.js"(exports) {
     "use strict";
-    Object.defineProperty(exports2, "__esModule", {
+    Object.defineProperty(exports, "__esModule", {
       value: true
     });
-    exports2.default = inheritTrailingComments;
+    exports.default = inheritTrailingComments;
     var _inherit = require_inherit2();
     function inheritTrailingComments(child, parent) {
       (0, _inherit.default)("trailingComments", child, parent);
@@ -53898,12 +54088,12 @@ var require_inheritTrailingComments2 = __commonJS({
 
 // node_modules/@babel/template/node_modules/@babel/types/lib/comments/inheritsComments.js
 var require_inheritsComments2 = __commonJS({
-  "node_modules/@babel/template/node_modules/@babel/types/lib/comments/inheritsComments.js"(exports2) {
+  "node_modules/@babel/template/node_modules/@babel/types/lib/comments/inheritsComments.js"(exports) {
     "use strict";
-    Object.defineProperty(exports2, "__esModule", {
+    Object.defineProperty(exports, "__esModule", {
       value: true
     });
-    exports2.default = inheritsComments;
+    exports.default = inheritsComments;
     var _inheritTrailingComments = require_inheritTrailingComments2();
     var _inheritLeadingComments = require_inheritLeadingComments2();
     var _inheritInnerComments = require_inheritInnerComments2();
@@ -53919,12 +54109,12 @@ var require_inheritsComments2 = __commonJS({
 
 // node_modules/@babel/template/node_modules/@babel/types/lib/comments/removeComments.js
 var require_removeComments2 = __commonJS({
-  "node_modules/@babel/template/node_modules/@babel/types/lib/comments/removeComments.js"(exports2) {
+  "node_modules/@babel/template/node_modules/@babel/types/lib/comments/removeComments.js"(exports) {
     "use strict";
-    Object.defineProperty(exports2, "__esModule", {
+    Object.defineProperty(exports, "__esModule", {
       value: true
     });
-    exports2.default = removeComments;
+    exports.default = removeComments;
     var _constants = require_constants5();
     function removeComments(node) {
       _constants.COMMENT_KEYS.forEach((key) => {
@@ -53938,122 +54128,122 @@ var require_removeComments2 = __commonJS({
 
 // node_modules/@babel/template/node_modules/@babel/types/lib/constants/generated/index.js
 var require_generated9 = __commonJS({
-  "node_modules/@babel/template/node_modules/@babel/types/lib/constants/generated/index.js"(exports2) {
+  "node_modules/@babel/template/node_modules/@babel/types/lib/constants/generated/index.js"(exports) {
     "use strict";
-    Object.defineProperty(exports2, "__esModule", {
+    Object.defineProperty(exports, "__esModule", {
       value: true
     });
-    exports2.WHILE_TYPES = exports2.USERWHITESPACABLE_TYPES = exports2.UNARYLIKE_TYPES = exports2.TYPESCRIPT_TYPES = exports2.TSTYPE_TYPES = exports2.TSTYPEELEMENT_TYPES = exports2.TSENTITYNAME_TYPES = exports2.TSBASETYPE_TYPES = exports2.TERMINATORLESS_TYPES = exports2.STATEMENT_TYPES = exports2.STANDARDIZED_TYPES = exports2.SCOPABLE_TYPES = exports2.PUREISH_TYPES = exports2.PROPERTY_TYPES = exports2.PRIVATE_TYPES = exports2.PATTERN_TYPES = exports2.PATTERNLIKE_TYPES = exports2.OBJECTMEMBER_TYPES = exports2.MODULESPECIFIER_TYPES = exports2.MODULEDECLARATION_TYPES = exports2.MISCELLANEOUS_TYPES = exports2.METHOD_TYPES = exports2.LVAL_TYPES = exports2.LOOP_TYPES = exports2.LITERAL_TYPES = exports2.JSX_TYPES = exports2.IMMUTABLE_TYPES = exports2.FUNCTION_TYPES = exports2.FUNCTIONPARENT_TYPES = exports2.FOR_TYPES = exports2.FORXSTATEMENT_TYPES = exports2.FLOW_TYPES = exports2.FLOWTYPE_TYPES = exports2.FLOWPREDICATE_TYPES = exports2.FLOWDECLARATION_TYPES = exports2.FLOWBASEANNOTATION_TYPES = exports2.EXPRESSION_TYPES = exports2.EXPRESSIONWRAPPER_TYPES = exports2.EXPORTDECLARATION_TYPES = exports2.ENUMMEMBER_TYPES = exports2.ENUMBODY_TYPES = exports2.DECLARATION_TYPES = exports2.CONDITIONAL_TYPES = exports2.COMPLETIONSTATEMENT_TYPES = exports2.CLASS_TYPES = exports2.BLOCK_TYPES = exports2.BLOCKPARENT_TYPES = exports2.BINARY_TYPES = exports2.ACCESSOR_TYPES = void 0;
+    exports.WHILE_TYPES = exports.USERWHITESPACABLE_TYPES = exports.UNARYLIKE_TYPES = exports.TYPESCRIPT_TYPES = exports.TSTYPE_TYPES = exports.TSTYPEELEMENT_TYPES = exports.TSENTITYNAME_TYPES = exports.TSBASETYPE_TYPES = exports.TERMINATORLESS_TYPES = exports.STATEMENT_TYPES = exports.STANDARDIZED_TYPES = exports.SCOPABLE_TYPES = exports.PUREISH_TYPES = exports.PROPERTY_TYPES = exports.PRIVATE_TYPES = exports.PATTERN_TYPES = exports.PATTERNLIKE_TYPES = exports.OBJECTMEMBER_TYPES = exports.MODULESPECIFIER_TYPES = exports.MODULEDECLARATION_TYPES = exports.MISCELLANEOUS_TYPES = exports.METHOD_TYPES = exports.LVAL_TYPES = exports.LOOP_TYPES = exports.LITERAL_TYPES = exports.JSX_TYPES = exports.IMMUTABLE_TYPES = exports.FUNCTION_TYPES = exports.FUNCTIONPARENT_TYPES = exports.FOR_TYPES = exports.FORXSTATEMENT_TYPES = exports.FLOW_TYPES = exports.FLOWTYPE_TYPES = exports.FLOWPREDICATE_TYPES = exports.FLOWDECLARATION_TYPES = exports.FLOWBASEANNOTATION_TYPES = exports.EXPRESSION_TYPES = exports.EXPRESSIONWRAPPER_TYPES = exports.EXPORTDECLARATION_TYPES = exports.ENUMMEMBER_TYPES = exports.ENUMBODY_TYPES = exports.DECLARATION_TYPES = exports.CONDITIONAL_TYPES = exports.COMPLETIONSTATEMENT_TYPES = exports.CLASS_TYPES = exports.BLOCK_TYPES = exports.BLOCKPARENT_TYPES = exports.BINARY_TYPES = exports.ACCESSOR_TYPES = void 0;
     var _definitions = require_definitions2();
     var STANDARDIZED_TYPES = _definitions.FLIPPED_ALIAS_KEYS["Standardized"];
-    exports2.STANDARDIZED_TYPES = STANDARDIZED_TYPES;
+    exports.STANDARDIZED_TYPES = STANDARDIZED_TYPES;
     var EXPRESSION_TYPES = _definitions.FLIPPED_ALIAS_KEYS["Expression"];
-    exports2.EXPRESSION_TYPES = EXPRESSION_TYPES;
+    exports.EXPRESSION_TYPES = EXPRESSION_TYPES;
     var BINARY_TYPES = _definitions.FLIPPED_ALIAS_KEYS["Binary"];
-    exports2.BINARY_TYPES = BINARY_TYPES;
+    exports.BINARY_TYPES = BINARY_TYPES;
     var SCOPABLE_TYPES = _definitions.FLIPPED_ALIAS_KEYS["Scopable"];
-    exports2.SCOPABLE_TYPES = SCOPABLE_TYPES;
+    exports.SCOPABLE_TYPES = SCOPABLE_TYPES;
     var BLOCKPARENT_TYPES = _definitions.FLIPPED_ALIAS_KEYS["BlockParent"];
-    exports2.BLOCKPARENT_TYPES = BLOCKPARENT_TYPES;
+    exports.BLOCKPARENT_TYPES = BLOCKPARENT_TYPES;
     var BLOCK_TYPES = _definitions.FLIPPED_ALIAS_KEYS["Block"];
-    exports2.BLOCK_TYPES = BLOCK_TYPES;
+    exports.BLOCK_TYPES = BLOCK_TYPES;
     var STATEMENT_TYPES = _definitions.FLIPPED_ALIAS_KEYS["Statement"];
-    exports2.STATEMENT_TYPES = STATEMENT_TYPES;
+    exports.STATEMENT_TYPES = STATEMENT_TYPES;
     var TERMINATORLESS_TYPES = _definitions.FLIPPED_ALIAS_KEYS["Terminatorless"];
-    exports2.TERMINATORLESS_TYPES = TERMINATORLESS_TYPES;
+    exports.TERMINATORLESS_TYPES = TERMINATORLESS_TYPES;
     var COMPLETIONSTATEMENT_TYPES = _definitions.FLIPPED_ALIAS_KEYS["CompletionStatement"];
-    exports2.COMPLETIONSTATEMENT_TYPES = COMPLETIONSTATEMENT_TYPES;
+    exports.COMPLETIONSTATEMENT_TYPES = COMPLETIONSTATEMENT_TYPES;
     var CONDITIONAL_TYPES = _definitions.FLIPPED_ALIAS_KEYS["Conditional"];
-    exports2.CONDITIONAL_TYPES = CONDITIONAL_TYPES;
+    exports.CONDITIONAL_TYPES = CONDITIONAL_TYPES;
     var LOOP_TYPES = _definitions.FLIPPED_ALIAS_KEYS["Loop"];
-    exports2.LOOP_TYPES = LOOP_TYPES;
+    exports.LOOP_TYPES = LOOP_TYPES;
     var WHILE_TYPES = _definitions.FLIPPED_ALIAS_KEYS["While"];
-    exports2.WHILE_TYPES = WHILE_TYPES;
+    exports.WHILE_TYPES = WHILE_TYPES;
     var EXPRESSIONWRAPPER_TYPES = _definitions.FLIPPED_ALIAS_KEYS["ExpressionWrapper"];
-    exports2.EXPRESSIONWRAPPER_TYPES = EXPRESSIONWRAPPER_TYPES;
+    exports.EXPRESSIONWRAPPER_TYPES = EXPRESSIONWRAPPER_TYPES;
     var FOR_TYPES = _definitions.FLIPPED_ALIAS_KEYS["For"];
-    exports2.FOR_TYPES = FOR_TYPES;
+    exports.FOR_TYPES = FOR_TYPES;
     var FORXSTATEMENT_TYPES = _definitions.FLIPPED_ALIAS_KEYS["ForXStatement"];
-    exports2.FORXSTATEMENT_TYPES = FORXSTATEMENT_TYPES;
+    exports.FORXSTATEMENT_TYPES = FORXSTATEMENT_TYPES;
     var FUNCTION_TYPES = _definitions.FLIPPED_ALIAS_KEYS["Function"];
-    exports2.FUNCTION_TYPES = FUNCTION_TYPES;
+    exports.FUNCTION_TYPES = FUNCTION_TYPES;
     var FUNCTIONPARENT_TYPES = _definitions.FLIPPED_ALIAS_KEYS["FunctionParent"];
-    exports2.FUNCTIONPARENT_TYPES = FUNCTIONPARENT_TYPES;
+    exports.FUNCTIONPARENT_TYPES = FUNCTIONPARENT_TYPES;
     var PUREISH_TYPES = _definitions.FLIPPED_ALIAS_KEYS["Pureish"];
-    exports2.PUREISH_TYPES = PUREISH_TYPES;
+    exports.PUREISH_TYPES = PUREISH_TYPES;
     var DECLARATION_TYPES = _definitions.FLIPPED_ALIAS_KEYS["Declaration"];
-    exports2.DECLARATION_TYPES = DECLARATION_TYPES;
+    exports.DECLARATION_TYPES = DECLARATION_TYPES;
     var PATTERNLIKE_TYPES = _definitions.FLIPPED_ALIAS_KEYS["PatternLike"];
-    exports2.PATTERNLIKE_TYPES = PATTERNLIKE_TYPES;
+    exports.PATTERNLIKE_TYPES = PATTERNLIKE_TYPES;
     var LVAL_TYPES = _definitions.FLIPPED_ALIAS_KEYS["LVal"];
-    exports2.LVAL_TYPES = LVAL_TYPES;
+    exports.LVAL_TYPES = LVAL_TYPES;
     var TSENTITYNAME_TYPES = _definitions.FLIPPED_ALIAS_KEYS["TSEntityName"];
-    exports2.TSENTITYNAME_TYPES = TSENTITYNAME_TYPES;
+    exports.TSENTITYNAME_TYPES = TSENTITYNAME_TYPES;
     var LITERAL_TYPES = _definitions.FLIPPED_ALIAS_KEYS["Literal"];
-    exports2.LITERAL_TYPES = LITERAL_TYPES;
+    exports.LITERAL_TYPES = LITERAL_TYPES;
     var IMMUTABLE_TYPES = _definitions.FLIPPED_ALIAS_KEYS["Immutable"];
-    exports2.IMMUTABLE_TYPES = IMMUTABLE_TYPES;
+    exports.IMMUTABLE_TYPES = IMMUTABLE_TYPES;
     var USERWHITESPACABLE_TYPES = _definitions.FLIPPED_ALIAS_KEYS["UserWhitespacable"];
-    exports2.USERWHITESPACABLE_TYPES = USERWHITESPACABLE_TYPES;
+    exports.USERWHITESPACABLE_TYPES = USERWHITESPACABLE_TYPES;
     var METHOD_TYPES = _definitions.FLIPPED_ALIAS_KEYS["Method"];
-    exports2.METHOD_TYPES = METHOD_TYPES;
+    exports.METHOD_TYPES = METHOD_TYPES;
     var OBJECTMEMBER_TYPES = _definitions.FLIPPED_ALIAS_KEYS["ObjectMember"];
-    exports2.OBJECTMEMBER_TYPES = OBJECTMEMBER_TYPES;
+    exports.OBJECTMEMBER_TYPES = OBJECTMEMBER_TYPES;
     var PROPERTY_TYPES = _definitions.FLIPPED_ALIAS_KEYS["Property"];
-    exports2.PROPERTY_TYPES = PROPERTY_TYPES;
+    exports.PROPERTY_TYPES = PROPERTY_TYPES;
     var UNARYLIKE_TYPES = _definitions.FLIPPED_ALIAS_KEYS["UnaryLike"];
-    exports2.UNARYLIKE_TYPES = UNARYLIKE_TYPES;
+    exports.UNARYLIKE_TYPES = UNARYLIKE_TYPES;
     var PATTERN_TYPES = _definitions.FLIPPED_ALIAS_KEYS["Pattern"];
-    exports2.PATTERN_TYPES = PATTERN_TYPES;
+    exports.PATTERN_TYPES = PATTERN_TYPES;
     var CLASS_TYPES = _definitions.FLIPPED_ALIAS_KEYS["Class"];
-    exports2.CLASS_TYPES = CLASS_TYPES;
+    exports.CLASS_TYPES = CLASS_TYPES;
     var MODULEDECLARATION_TYPES = _definitions.FLIPPED_ALIAS_KEYS["ModuleDeclaration"];
-    exports2.MODULEDECLARATION_TYPES = MODULEDECLARATION_TYPES;
+    exports.MODULEDECLARATION_TYPES = MODULEDECLARATION_TYPES;
     var EXPORTDECLARATION_TYPES = _definitions.FLIPPED_ALIAS_KEYS["ExportDeclaration"];
-    exports2.EXPORTDECLARATION_TYPES = EXPORTDECLARATION_TYPES;
+    exports.EXPORTDECLARATION_TYPES = EXPORTDECLARATION_TYPES;
     var MODULESPECIFIER_TYPES = _definitions.FLIPPED_ALIAS_KEYS["ModuleSpecifier"];
-    exports2.MODULESPECIFIER_TYPES = MODULESPECIFIER_TYPES;
+    exports.MODULESPECIFIER_TYPES = MODULESPECIFIER_TYPES;
     var ACCESSOR_TYPES = _definitions.FLIPPED_ALIAS_KEYS["Accessor"];
-    exports2.ACCESSOR_TYPES = ACCESSOR_TYPES;
+    exports.ACCESSOR_TYPES = ACCESSOR_TYPES;
     var PRIVATE_TYPES = _definitions.FLIPPED_ALIAS_KEYS["Private"];
-    exports2.PRIVATE_TYPES = PRIVATE_TYPES;
+    exports.PRIVATE_TYPES = PRIVATE_TYPES;
     var FLOW_TYPES = _definitions.FLIPPED_ALIAS_KEYS["Flow"];
-    exports2.FLOW_TYPES = FLOW_TYPES;
+    exports.FLOW_TYPES = FLOW_TYPES;
     var FLOWTYPE_TYPES = _definitions.FLIPPED_ALIAS_KEYS["FlowType"];
-    exports2.FLOWTYPE_TYPES = FLOWTYPE_TYPES;
+    exports.FLOWTYPE_TYPES = FLOWTYPE_TYPES;
     var FLOWBASEANNOTATION_TYPES = _definitions.FLIPPED_ALIAS_KEYS["FlowBaseAnnotation"];
-    exports2.FLOWBASEANNOTATION_TYPES = FLOWBASEANNOTATION_TYPES;
+    exports.FLOWBASEANNOTATION_TYPES = FLOWBASEANNOTATION_TYPES;
     var FLOWDECLARATION_TYPES = _definitions.FLIPPED_ALIAS_KEYS["FlowDeclaration"];
-    exports2.FLOWDECLARATION_TYPES = FLOWDECLARATION_TYPES;
+    exports.FLOWDECLARATION_TYPES = FLOWDECLARATION_TYPES;
     var FLOWPREDICATE_TYPES = _definitions.FLIPPED_ALIAS_KEYS["FlowPredicate"];
-    exports2.FLOWPREDICATE_TYPES = FLOWPREDICATE_TYPES;
+    exports.FLOWPREDICATE_TYPES = FLOWPREDICATE_TYPES;
     var ENUMBODY_TYPES = _definitions.FLIPPED_ALIAS_KEYS["EnumBody"];
-    exports2.ENUMBODY_TYPES = ENUMBODY_TYPES;
+    exports.ENUMBODY_TYPES = ENUMBODY_TYPES;
     var ENUMMEMBER_TYPES = _definitions.FLIPPED_ALIAS_KEYS["EnumMember"];
-    exports2.ENUMMEMBER_TYPES = ENUMMEMBER_TYPES;
+    exports.ENUMMEMBER_TYPES = ENUMMEMBER_TYPES;
     var JSX_TYPES = _definitions.FLIPPED_ALIAS_KEYS["JSX"];
-    exports2.JSX_TYPES = JSX_TYPES;
+    exports.JSX_TYPES = JSX_TYPES;
     var MISCELLANEOUS_TYPES = _definitions.FLIPPED_ALIAS_KEYS["Miscellaneous"];
-    exports2.MISCELLANEOUS_TYPES = MISCELLANEOUS_TYPES;
+    exports.MISCELLANEOUS_TYPES = MISCELLANEOUS_TYPES;
     var TYPESCRIPT_TYPES = _definitions.FLIPPED_ALIAS_KEYS["TypeScript"];
-    exports2.TYPESCRIPT_TYPES = TYPESCRIPT_TYPES;
+    exports.TYPESCRIPT_TYPES = TYPESCRIPT_TYPES;
     var TSTYPEELEMENT_TYPES = _definitions.FLIPPED_ALIAS_KEYS["TSTypeElement"];
-    exports2.TSTYPEELEMENT_TYPES = TSTYPEELEMENT_TYPES;
+    exports.TSTYPEELEMENT_TYPES = TSTYPEELEMENT_TYPES;
     var TSTYPE_TYPES = _definitions.FLIPPED_ALIAS_KEYS["TSType"];
-    exports2.TSTYPE_TYPES = TSTYPE_TYPES;
+    exports.TSTYPE_TYPES = TSTYPE_TYPES;
     var TSBASETYPE_TYPES = _definitions.FLIPPED_ALIAS_KEYS["TSBaseType"];
-    exports2.TSBASETYPE_TYPES = TSBASETYPE_TYPES;
+    exports.TSBASETYPE_TYPES = TSBASETYPE_TYPES;
   }
 });
 
 // node_modules/@babel/template/node_modules/@babel/types/lib/converters/toBlock.js
 var require_toBlock2 = __commonJS({
-  "node_modules/@babel/template/node_modules/@babel/types/lib/converters/toBlock.js"(exports2) {
+  "node_modules/@babel/template/node_modules/@babel/types/lib/converters/toBlock.js"(exports) {
     "use strict";
-    Object.defineProperty(exports2, "__esModule", {
+    Object.defineProperty(exports, "__esModule", {
       value: true
     });
-    exports2.default = toBlock;
+    exports.default = toBlock;
     var _generated = require_generated6();
     var _generated2 = require_generated7();
     function toBlock(node, parent) {
@@ -54083,12 +54273,12 @@ var require_toBlock2 = __commonJS({
 
 // node_modules/@babel/template/node_modules/@babel/types/lib/converters/ensureBlock.js
 var require_ensureBlock2 = __commonJS({
-  "node_modules/@babel/template/node_modules/@babel/types/lib/converters/ensureBlock.js"(exports2) {
+  "node_modules/@babel/template/node_modules/@babel/types/lib/converters/ensureBlock.js"(exports) {
     "use strict";
-    Object.defineProperty(exports2, "__esModule", {
+    Object.defineProperty(exports, "__esModule", {
       value: true
     });
-    exports2.default = ensureBlock;
+    exports.default = ensureBlock;
     var _toBlock = require_toBlock2();
     function ensureBlock(node, key = "body") {
       const result = (0, _toBlock.default)(node[key], node);
@@ -54101,12 +54291,12 @@ var require_ensureBlock2 = __commonJS({
 
 // node_modules/@babel/template/node_modules/@babel/types/lib/converters/toIdentifier.js
 var require_toIdentifier2 = __commonJS({
-  "node_modules/@babel/template/node_modules/@babel/types/lib/converters/toIdentifier.js"(exports2) {
+  "node_modules/@babel/template/node_modules/@babel/types/lib/converters/toIdentifier.js"(exports) {
     "use strict";
-    Object.defineProperty(exports2, "__esModule", {
+    Object.defineProperty(exports, "__esModule", {
       value: true
     });
-    exports2.default = toIdentifier;
+    exports.default = toIdentifier;
     var _isValidIdentifier = require_isValidIdentifier2();
     var _helperValidatorIdentifier = require_lib();
     function toIdentifier(input) {
@@ -54130,12 +54320,12 @@ var require_toIdentifier2 = __commonJS({
 
 // node_modules/@babel/template/node_modules/@babel/types/lib/converters/toBindingIdentifierName.js
 var require_toBindingIdentifierName2 = __commonJS({
-  "node_modules/@babel/template/node_modules/@babel/types/lib/converters/toBindingIdentifierName.js"(exports2) {
+  "node_modules/@babel/template/node_modules/@babel/types/lib/converters/toBindingIdentifierName.js"(exports) {
     "use strict";
-    Object.defineProperty(exports2, "__esModule", {
+    Object.defineProperty(exports, "__esModule", {
       value: true
     });
-    exports2.default = toBindingIdentifierName;
+    exports.default = toBindingIdentifierName;
     var _toIdentifier = require_toIdentifier2();
     function toBindingIdentifierName(name) {
       name = (0, _toIdentifier.default)(name);
@@ -54149,12 +54339,12 @@ var require_toBindingIdentifierName2 = __commonJS({
 
 // node_modules/@babel/template/node_modules/@babel/types/lib/converters/toComputedKey.js
 var require_toComputedKey2 = __commonJS({
-  "node_modules/@babel/template/node_modules/@babel/types/lib/converters/toComputedKey.js"(exports2) {
+  "node_modules/@babel/template/node_modules/@babel/types/lib/converters/toComputedKey.js"(exports) {
     "use strict";
-    Object.defineProperty(exports2, "__esModule", {
+    Object.defineProperty(exports, "__esModule", {
       value: true
     });
-    exports2.default = toComputedKey;
+    exports.default = toComputedKey;
     var _generated = require_generated6();
     var _generated2 = require_generated7();
     function toComputedKey(node, key = node.key || node.property) {
@@ -54168,15 +54358,15 @@ var require_toComputedKey2 = __commonJS({
 
 // node_modules/@babel/template/node_modules/@babel/types/lib/converters/toExpression.js
 var require_toExpression2 = __commonJS({
-  "node_modules/@babel/template/node_modules/@babel/types/lib/converters/toExpression.js"(exports2) {
+  "node_modules/@babel/template/node_modules/@babel/types/lib/converters/toExpression.js"(exports) {
     "use strict";
-    Object.defineProperty(exports2, "__esModule", {
+    Object.defineProperty(exports, "__esModule", {
       value: true
     });
-    exports2.default = void 0;
+    exports.default = void 0;
     var _generated = require_generated6();
     var _default = toExpression;
-    exports2.default = _default;
+    exports.default = _default;
     function toExpression(node) {
       if ((0, _generated.isExpressionStatement)(node)) {
         node = node.expression;
@@ -54200,12 +54390,12 @@ var require_toExpression2 = __commonJS({
 
 // node_modules/@babel/template/node_modules/@babel/types/lib/traverse/traverseFast.js
 var require_traverseFast2 = __commonJS({
-  "node_modules/@babel/template/node_modules/@babel/types/lib/traverse/traverseFast.js"(exports2) {
+  "node_modules/@babel/template/node_modules/@babel/types/lib/traverse/traverseFast.js"(exports) {
     "use strict";
-    Object.defineProperty(exports2, "__esModule", {
+    Object.defineProperty(exports, "__esModule", {
       value: true
     });
-    exports2.default = traverseFast;
+    exports.default = traverseFast;
     var _definitions = require_definitions2();
     function traverseFast(node, enter, opts) {
       if (!node)
@@ -54232,12 +54422,12 @@ var require_traverseFast2 = __commonJS({
 
 // node_modules/@babel/template/node_modules/@babel/types/lib/modifications/removeProperties.js
 var require_removeProperties2 = __commonJS({
-  "node_modules/@babel/template/node_modules/@babel/types/lib/modifications/removeProperties.js"(exports2) {
+  "node_modules/@babel/template/node_modules/@babel/types/lib/modifications/removeProperties.js"(exports) {
     "use strict";
-    Object.defineProperty(exports2, "__esModule", {
+    Object.defineProperty(exports, "__esModule", {
       value: true
     });
-    exports2.default = removeProperties;
+    exports.default = removeProperties;
     var _constants = require_constants5();
     var CLEAR_KEYS = [
       "tokens",
@@ -54273,12 +54463,12 @@ var require_removeProperties2 = __commonJS({
 
 // node_modules/@babel/template/node_modules/@babel/types/lib/modifications/removePropertiesDeep.js
 var require_removePropertiesDeep2 = __commonJS({
-  "node_modules/@babel/template/node_modules/@babel/types/lib/modifications/removePropertiesDeep.js"(exports2) {
+  "node_modules/@babel/template/node_modules/@babel/types/lib/modifications/removePropertiesDeep.js"(exports) {
     "use strict";
-    Object.defineProperty(exports2, "__esModule", {
+    Object.defineProperty(exports, "__esModule", {
       value: true
     });
-    exports2.default = removePropertiesDeep;
+    exports.default = removePropertiesDeep;
     var _traverseFast = require_traverseFast2();
     var _removeProperties = require_removeProperties2();
     function removePropertiesDeep(tree, opts) {
@@ -54291,12 +54481,12 @@ var require_removePropertiesDeep2 = __commonJS({
 
 // node_modules/@babel/template/node_modules/@babel/types/lib/converters/toKeyAlias.js
 var require_toKeyAlias2 = __commonJS({
-  "node_modules/@babel/template/node_modules/@babel/types/lib/converters/toKeyAlias.js"(exports2) {
+  "node_modules/@babel/template/node_modules/@babel/types/lib/converters/toKeyAlias.js"(exports) {
     "use strict";
-    Object.defineProperty(exports2, "__esModule", {
+    Object.defineProperty(exports, "__esModule", {
       value: true
     });
-    exports2.default = toKeyAlias;
+    exports.default = toKeyAlias;
     var _generated = require_generated6();
     var _cloneNode = require_cloneNode2();
     var _removePropertiesDeep = require_removePropertiesDeep2();
@@ -54333,12 +54523,12 @@ var require_toKeyAlias2 = __commonJS({
 
 // node_modules/@babel/template/node_modules/@babel/types/lib/retrievers/getBindingIdentifiers.js
 var require_getBindingIdentifiers2 = __commonJS({
-  "node_modules/@babel/template/node_modules/@babel/types/lib/retrievers/getBindingIdentifiers.js"(exports2) {
+  "node_modules/@babel/template/node_modules/@babel/types/lib/retrievers/getBindingIdentifiers.js"(exports) {
     "use strict";
-    Object.defineProperty(exports2, "__esModule", {
+    Object.defineProperty(exports, "__esModule", {
       value: true
     });
-    exports2.default = getBindingIdentifiers;
+    exports.default = getBindingIdentifiers;
     var _generated = require_generated6();
     function getBindingIdentifiers(node, duplicates, outerOnly) {
       const search = [].concat(node);
@@ -54511,12 +54701,12 @@ var require_getBindingIdentifiers2 = __commonJS({
 
 // node_modules/@babel/template/node_modules/@babel/types/lib/converters/gatherSequenceExpressions.js
 var require_gatherSequenceExpressions2 = __commonJS({
-  "node_modules/@babel/template/node_modules/@babel/types/lib/converters/gatherSequenceExpressions.js"(exports2) {
+  "node_modules/@babel/template/node_modules/@babel/types/lib/converters/gatherSequenceExpressions.js"(exports) {
     "use strict";
-    Object.defineProperty(exports2, "__esModule", {
+    Object.defineProperty(exports, "__esModule", {
       value: true
     });
-    exports2.default = gatherSequenceExpressions;
+    exports.default = gatherSequenceExpressions;
     var _getBindingIdentifiers = require_getBindingIdentifiers2();
     var _generated = require_generated6();
     var _generated2 = require_generated7();
@@ -54586,12 +54776,12 @@ var require_gatherSequenceExpressions2 = __commonJS({
 
 // node_modules/@babel/template/node_modules/@babel/types/lib/converters/toSequenceExpression.js
 var require_toSequenceExpression2 = __commonJS({
-  "node_modules/@babel/template/node_modules/@babel/types/lib/converters/toSequenceExpression.js"(exports2) {
+  "node_modules/@babel/template/node_modules/@babel/types/lib/converters/toSequenceExpression.js"(exports) {
     "use strict";
-    Object.defineProperty(exports2, "__esModule", {
+    Object.defineProperty(exports, "__esModule", {
       value: true
     });
-    exports2.default = toSequenceExpression;
+    exports.default = toSequenceExpression;
     var _gatherSequenceExpressions = require_gatherSequenceExpressions2();
     function toSequenceExpression(nodes, scope) {
       if (!(nodes != null && nodes.length))
@@ -54611,16 +54801,16 @@ var require_toSequenceExpression2 = __commonJS({
 
 // node_modules/@babel/template/node_modules/@babel/types/lib/converters/toStatement.js
 var require_toStatement2 = __commonJS({
-  "node_modules/@babel/template/node_modules/@babel/types/lib/converters/toStatement.js"(exports2) {
+  "node_modules/@babel/template/node_modules/@babel/types/lib/converters/toStatement.js"(exports) {
     "use strict";
-    Object.defineProperty(exports2, "__esModule", {
+    Object.defineProperty(exports, "__esModule", {
       value: true
     });
-    exports2.default = void 0;
+    exports.default = void 0;
     var _generated = require_generated6();
     var _generated2 = require_generated7();
     var _default = toStatement;
-    exports2.default = _default;
+    exports.default = _default;
     function toStatement(node, ignore) {
       if ((0, _generated.isStatement)(node)) {
         return node;
@@ -54655,16 +54845,16 @@ var require_toStatement2 = __commonJS({
 
 // node_modules/@babel/template/node_modules/@babel/types/lib/converters/valueToNode.js
 var require_valueToNode2 = __commonJS({
-  "node_modules/@babel/template/node_modules/@babel/types/lib/converters/valueToNode.js"(exports2) {
+  "node_modules/@babel/template/node_modules/@babel/types/lib/converters/valueToNode.js"(exports) {
     "use strict";
-    Object.defineProperty(exports2, "__esModule", {
+    Object.defineProperty(exports, "__esModule", {
       value: true
     });
-    exports2.default = void 0;
+    exports.default = void 0;
     var _isValidIdentifier = require_isValidIdentifier2();
     var _generated = require_generated7();
     var _default = valueToNode;
-    exports2.default = _default;
+    exports.default = _default;
     var objectToString = Function.call.bind(Object.prototype.toString);
     function isRegExp(value) {
       return objectToString(value) === "[object RegExp]";
@@ -54738,12 +54928,12 @@ var require_valueToNode2 = __commonJS({
 
 // node_modules/@babel/template/node_modules/@babel/types/lib/modifications/appendToMemberExpression.js
 var require_appendToMemberExpression2 = __commonJS({
-  "node_modules/@babel/template/node_modules/@babel/types/lib/modifications/appendToMemberExpression.js"(exports2) {
+  "node_modules/@babel/template/node_modules/@babel/types/lib/modifications/appendToMemberExpression.js"(exports) {
     "use strict";
-    Object.defineProperty(exports2, "__esModule", {
+    Object.defineProperty(exports, "__esModule", {
       value: true
     });
-    exports2.default = appendToMemberExpression;
+    exports.default = appendToMemberExpression;
     var _generated = require_generated7();
     function appendToMemberExpression(member, append, computed = false) {
       member.object = (0, _generated.memberExpression)(member.object, member.property, member.computed);
@@ -54757,12 +54947,12 @@ var require_appendToMemberExpression2 = __commonJS({
 
 // node_modules/@babel/template/node_modules/@babel/types/lib/modifications/inherits.js
 var require_inherits3 = __commonJS({
-  "node_modules/@babel/template/node_modules/@babel/types/lib/modifications/inherits.js"(exports2) {
+  "node_modules/@babel/template/node_modules/@babel/types/lib/modifications/inherits.js"(exports) {
     "use strict";
-    Object.defineProperty(exports2, "__esModule", {
+    Object.defineProperty(exports, "__esModule", {
       value: true
     });
-    exports2.default = inherits;
+    exports.default = inherits;
     var _constants = require_constants5();
     var _inheritsComments = require_inheritsComments2();
     function inherits(child, parent) {
@@ -54790,12 +54980,12 @@ var require_inherits3 = __commonJS({
 
 // node_modules/@babel/template/node_modules/@babel/types/lib/modifications/prependToMemberExpression.js
 var require_prependToMemberExpression2 = __commonJS({
-  "node_modules/@babel/template/node_modules/@babel/types/lib/modifications/prependToMemberExpression.js"(exports2) {
+  "node_modules/@babel/template/node_modules/@babel/types/lib/modifications/prependToMemberExpression.js"(exports) {
     "use strict";
-    Object.defineProperty(exports2, "__esModule", {
+    Object.defineProperty(exports, "__esModule", {
       value: true
     });
-    exports2.default = prependToMemberExpression;
+    exports.default = prependToMemberExpression;
     var _generated = require_generated7();
     var _ = require_lib5();
     function prependToMemberExpression(member, prepend) {
@@ -54811,15 +55001,15 @@ var require_prependToMemberExpression2 = __commonJS({
 
 // node_modules/@babel/template/node_modules/@babel/types/lib/retrievers/getOuterBindingIdentifiers.js
 var require_getOuterBindingIdentifiers2 = __commonJS({
-  "node_modules/@babel/template/node_modules/@babel/types/lib/retrievers/getOuterBindingIdentifiers.js"(exports2) {
+  "node_modules/@babel/template/node_modules/@babel/types/lib/retrievers/getOuterBindingIdentifiers.js"(exports) {
     "use strict";
-    Object.defineProperty(exports2, "__esModule", {
+    Object.defineProperty(exports, "__esModule", {
       value: true
     });
-    exports2.default = void 0;
+    exports.default = void 0;
     var _getBindingIdentifiers = require_getBindingIdentifiers2();
     var _default = getOuterBindingIdentifiers;
-    exports2.default = _default;
+    exports.default = _default;
     function getOuterBindingIdentifiers(node, duplicates) {
       return (0, _getBindingIdentifiers.default)(node, duplicates, true);
     }
@@ -54829,12 +55019,12 @@ var require_getOuterBindingIdentifiers2 = __commonJS({
 
 // node_modules/@babel/template/node_modules/@babel/types/lib/traverse/traverse.js
 var require_traverse2 = __commonJS({
-  "node_modules/@babel/template/node_modules/@babel/types/lib/traverse/traverse.js"(exports2) {
+  "node_modules/@babel/template/node_modules/@babel/types/lib/traverse/traverse.js"(exports) {
     "use strict";
-    Object.defineProperty(exports2, "__esModule", {
+    Object.defineProperty(exports, "__esModule", {
       value: true
     });
-    exports2.default = traverse;
+    exports.default = traverse;
     var _definitions = require_definitions2();
     function traverse(node, handlers, state) {
       if (typeof handlers === "function") {
@@ -54885,12 +55075,12 @@ var require_traverse2 = __commonJS({
 
 // node_modules/@babel/template/node_modules/@babel/types/lib/validators/isBinding.js
 var require_isBinding2 = __commonJS({
-  "node_modules/@babel/template/node_modules/@babel/types/lib/validators/isBinding.js"(exports2) {
+  "node_modules/@babel/template/node_modules/@babel/types/lib/validators/isBinding.js"(exports) {
     "use strict";
-    Object.defineProperty(exports2, "__esModule", {
+    Object.defineProperty(exports, "__esModule", {
       value: true
     });
-    exports2.default = isBinding;
+    exports.default = isBinding;
     var _getBindingIdentifiers = require_getBindingIdentifiers2();
     function isBinding(node, parent, grandparent) {
       if (grandparent && node.type === "Identifier" && parent.type === "ObjectProperty" && grandparent.type === "ObjectExpression") {
@@ -54918,12 +55108,12 @@ var require_isBinding2 = __commonJS({
 
 // node_modules/@babel/template/node_modules/@babel/types/lib/validators/isLet.js
 var require_isLet2 = __commonJS({
-  "node_modules/@babel/template/node_modules/@babel/types/lib/validators/isLet.js"(exports2) {
+  "node_modules/@babel/template/node_modules/@babel/types/lib/validators/isLet.js"(exports) {
     "use strict";
-    Object.defineProperty(exports2, "__esModule", {
+    Object.defineProperty(exports, "__esModule", {
       value: true
     });
-    exports2.default = isLet;
+    exports.default = isLet;
     var _generated = require_generated6();
     var _constants = require_constants5();
     function isLet(node) {
@@ -54935,12 +55125,12 @@ var require_isLet2 = __commonJS({
 
 // node_modules/@babel/template/node_modules/@babel/types/lib/validators/isBlockScoped.js
 var require_isBlockScoped2 = __commonJS({
-  "node_modules/@babel/template/node_modules/@babel/types/lib/validators/isBlockScoped.js"(exports2) {
+  "node_modules/@babel/template/node_modules/@babel/types/lib/validators/isBlockScoped.js"(exports) {
     "use strict";
-    Object.defineProperty(exports2, "__esModule", {
+    Object.defineProperty(exports, "__esModule", {
       value: true
     });
-    exports2.default = isBlockScoped;
+    exports.default = isBlockScoped;
     var _generated = require_generated6();
     var _isLet = require_isLet2();
     function isBlockScoped(node) {
@@ -54952,12 +55142,12 @@ var require_isBlockScoped2 = __commonJS({
 
 // node_modules/@babel/template/node_modules/@babel/types/lib/validators/isImmutable.js
 var require_isImmutable2 = __commonJS({
-  "node_modules/@babel/template/node_modules/@babel/types/lib/validators/isImmutable.js"(exports2) {
+  "node_modules/@babel/template/node_modules/@babel/types/lib/validators/isImmutable.js"(exports) {
     "use strict";
-    Object.defineProperty(exports2, "__esModule", {
+    Object.defineProperty(exports, "__esModule", {
       value: true
     });
-    exports2.default = isImmutable;
+    exports.default = isImmutable;
     var _isType = require_isType2();
     var _generated = require_generated6();
     function isImmutable(node) {
@@ -54978,12 +55168,12 @@ var require_isImmutable2 = __commonJS({
 
 // node_modules/@babel/template/node_modules/@babel/types/lib/validators/isNodesEquivalent.js
 var require_isNodesEquivalent2 = __commonJS({
-  "node_modules/@babel/template/node_modules/@babel/types/lib/validators/isNodesEquivalent.js"(exports2) {
+  "node_modules/@babel/template/node_modules/@babel/types/lib/validators/isNodesEquivalent.js"(exports) {
     "use strict";
-    Object.defineProperty(exports2, "__esModule", {
+    Object.defineProperty(exports, "__esModule", {
       value: true
     });
-    exports2.default = isNodesEquivalent;
+    exports.default = isNodesEquivalent;
     var _definitions = require_definitions2();
     function isNodesEquivalent(a, b) {
       if (typeof a !== "object" || typeof b !== "object" || a == null || b == null) {
@@ -55039,12 +55229,12 @@ var require_isNodesEquivalent2 = __commonJS({
 
 // node_modules/@babel/template/node_modules/@babel/types/lib/validators/isReferenced.js
 var require_isReferenced2 = __commonJS({
-  "node_modules/@babel/template/node_modules/@babel/types/lib/validators/isReferenced.js"(exports2) {
+  "node_modules/@babel/template/node_modules/@babel/types/lib/validators/isReferenced.js"(exports) {
     "use strict";
-    Object.defineProperty(exports2, "__esModule", {
+    Object.defineProperty(exports, "__esModule", {
       value: true
     });
-    exports2.default = isReferenced;
+    exports.default = isReferenced;
     function isReferenced(node, parent, grandparent) {
       switch (parent.type) {
         case "MemberExpression":
@@ -55139,12 +55329,12 @@ var require_isReferenced2 = __commonJS({
 
 // node_modules/@babel/template/node_modules/@babel/types/lib/validators/isScope.js
 var require_isScope2 = __commonJS({
-  "node_modules/@babel/template/node_modules/@babel/types/lib/validators/isScope.js"(exports2) {
+  "node_modules/@babel/template/node_modules/@babel/types/lib/validators/isScope.js"(exports) {
     "use strict";
-    Object.defineProperty(exports2, "__esModule", {
+    Object.defineProperty(exports, "__esModule", {
       value: true
     });
-    exports2.default = isScope;
+    exports.default = isScope;
     var _generated = require_generated6();
     function isScope(node, parent) {
       if ((0, _generated.isBlockStatement)(node) && ((0, _generated.isFunction)(parent) || (0, _generated.isCatchClause)(parent))) {
@@ -55161,12 +55351,12 @@ var require_isScope2 = __commonJS({
 
 // node_modules/@babel/template/node_modules/@babel/types/lib/validators/isSpecifierDefault.js
 var require_isSpecifierDefault2 = __commonJS({
-  "node_modules/@babel/template/node_modules/@babel/types/lib/validators/isSpecifierDefault.js"(exports2) {
+  "node_modules/@babel/template/node_modules/@babel/types/lib/validators/isSpecifierDefault.js"(exports) {
     "use strict";
-    Object.defineProperty(exports2, "__esModule", {
+    Object.defineProperty(exports, "__esModule", {
       value: true
     });
-    exports2.default = isSpecifierDefault;
+    exports.default = isSpecifierDefault;
     var _generated = require_generated6();
     function isSpecifierDefault(specifier) {
       return (0, _generated.isImportDefaultSpecifier)(specifier) || (0, _generated.isIdentifier)(specifier.imported || specifier.exported, {
@@ -55179,12 +55369,12 @@ var require_isSpecifierDefault2 = __commonJS({
 
 // node_modules/@babel/template/node_modules/@babel/types/lib/validators/isValidES3Identifier.js
 var require_isValidES3Identifier2 = __commonJS({
-  "node_modules/@babel/template/node_modules/@babel/types/lib/validators/isValidES3Identifier.js"(exports2) {
+  "node_modules/@babel/template/node_modules/@babel/types/lib/validators/isValidES3Identifier.js"(exports) {
     "use strict";
-    Object.defineProperty(exports2, "__esModule", {
+    Object.defineProperty(exports, "__esModule", {
       value: true
     });
-    exports2.default = isValidES3Identifier;
+    exports.default = isValidES3Identifier;
     var _isValidIdentifier = require_isValidIdentifier2();
     var RESERVED_WORDS_ES3_ONLY = /* @__PURE__ */ new Set([
       "abstract",
@@ -55221,12 +55411,12 @@ var require_isValidES3Identifier2 = __commonJS({
 
 // node_modules/@babel/template/node_modules/@babel/types/lib/validators/isVar.js
 var require_isVar2 = __commonJS({
-  "node_modules/@babel/template/node_modules/@babel/types/lib/validators/isVar.js"(exports2) {
+  "node_modules/@babel/template/node_modules/@babel/types/lib/validators/isVar.js"(exports) {
     "use strict";
-    Object.defineProperty(exports2, "__esModule", {
+    Object.defineProperty(exports, "__esModule", {
       value: true
     });
-    exports2.default = isVar;
+    exports.default = isVar;
     var _generated = require_generated6();
     var _constants = require_constants5();
     function isVar(node) {
@@ -55246,9 +55436,9 @@ var require_generated10 = __commonJS({
 
 // node_modules/@babel/template/node_modules/@babel/types/lib/index.js
 var require_lib5 = __commonJS({
-  "node_modules/@babel/template/node_modules/@babel/types/lib/index.js"(exports2) {
+  "node_modules/@babel/template/node_modules/@babel/types/lib/index.js"(exports) {
     "use strict";
-    Object.defineProperty(exports2, "__esModule", {
+    Object.defineProperty(exports, "__esModule", {
       value: true
     });
     var _exportNames = {
@@ -55310,338 +55500,338 @@ var require_lib5 = __commonJS({
       validate: true,
       buildMatchMemberExpression: true
     };
-    Object.defineProperty(exports2, "addComment", {
+    Object.defineProperty(exports, "addComment", {
       enumerable: true,
       get: function() {
         return _addComment.default;
       }
     });
-    Object.defineProperty(exports2, "addComments", {
+    Object.defineProperty(exports, "addComments", {
       enumerable: true,
       get: function() {
         return _addComments.default;
       }
     });
-    Object.defineProperty(exports2, "appendToMemberExpression", {
+    Object.defineProperty(exports, "appendToMemberExpression", {
       enumerable: true,
       get: function() {
         return _appendToMemberExpression.default;
       }
     });
-    Object.defineProperty(exports2, "assertNode", {
+    Object.defineProperty(exports, "assertNode", {
       enumerable: true,
       get: function() {
         return _assertNode.default;
       }
     });
-    Object.defineProperty(exports2, "buildMatchMemberExpression", {
+    Object.defineProperty(exports, "buildMatchMemberExpression", {
       enumerable: true,
       get: function() {
         return _buildMatchMemberExpression.default;
       }
     });
-    Object.defineProperty(exports2, "clone", {
+    Object.defineProperty(exports, "clone", {
       enumerable: true,
       get: function() {
         return _clone.default;
       }
     });
-    Object.defineProperty(exports2, "cloneDeep", {
+    Object.defineProperty(exports, "cloneDeep", {
       enumerable: true,
       get: function() {
         return _cloneDeep.default;
       }
     });
-    Object.defineProperty(exports2, "cloneDeepWithoutLoc", {
+    Object.defineProperty(exports, "cloneDeepWithoutLoc", {
       enumerable: true,
       get: function() {
         return _cloneDeepWithoutLoc.default;
       }
     });
-    Object.defineProperty(exports2, "cloneNode", {
+    Object.defineProperty(exports, "cloneNode", {
       enumerable: true,
       get: function() {
         return _cloneNode.default;
       }
     });
-    Object.defineProperty(exports2, "cloneWithoutLoc", {
+    Object.defineProperty(exports, "cloneWithoutLoc", {
       enumerable: true,
       get: function() {
         return _cloneWithoutLoc.default;
       }
     });
-    Object.defineProperty(exports2, "createFlowUnionType", {
+    Object.defineProperty(exports, "createFlowUnionType", {
       enumerable: true,
       get: function() {
         return _createFlowUnionType.default;
       }
     });
-    Object.defineProperty(exports2, "createTSUnionType", {
+    Object.defineProperty(exports, "createTSUnionType", {
       enumerable: true,
       get: function() {
         return _createTSUnionType.default;
       }
     });
-    Object.defineProperty(exports2, "createTypeAnnotationBasedOnTypeof", {
+    Object.defineProperty(exports, "createTypeAnnotationBasedOnTypeof", {
       enumerable: true,
       get: function() {
         return _createTypeAnnotationBasedOnTypeof.default;
       }
     });
-    Object.defineProperty(exports2, "createUnionTypeAnnotation", {
+    Object.defineProperty(exports, "createUnionTypeAnnotation", {
       enumerable: true,
       get: function() {
         return _createFlowUnionType.default;
       }
     });
-    Object.defineProperty(exports2, "ensureBlock", {
+    Object.defineProperty(exports, "ensureBlock", {
       enumerable: true,
       get: function() {
         return _ensureBlock.default;
       }
     });
-    Object.defineProperty(exports2, "getBindingIdentifiers", {
+    Object.defineProperty(exports, "getBindingIdentifiers", {
       enumerable: true,
       get: function() {
         return _getBindingIdentifiers.default;
       }
     });
-    Object.defineProperty(exports2, "getOuterBindingIdentifiers", {
+    Object.defineProperty(exports, "getOuterBindingIdentifiers", {
       enumerable: true,
       get: function() {
         return _getOuterBindingIdentifiers.default;
       }
     });
-    Object.defineProperty(exports2, "inheritInnerComments", {
+    Object.defineProperty(exports, "inheritInnerComments", {
       enumerable: true,
       get: function() {
         return _inheritInnerComments.default;
       }
     });
-    Object.defineProperty(exports2, "inheritLeadingComments", {
+    Object.defineProperty(exports, "inheritLeadingComments", {
       enumerable: true,
       get: function() {
         return _inheritLeadingComments.default;
       }
     });
-    Object.defineProperty(exports2, "inheritTrailingComments", {
+    Object.defineProperty(exports, "inheritTrailingComments", {
       enumerable: true,
       get: function() {
         return _inheritTrailingComments.default;
       }
     });
-    Object.defineProperty(exports2, "inherits", {
+    Object.defineProperty(exports, "inherits", {
       enumerable: true,
       get: function() {
         return _inherits.default;
       }
     });
-    Object.defineProperty(exports2, "inheritsComments", {
+    Object.defineProperty(exports, "inheritsComments", {
       enumerable: true,
       get: function() {
         return _inheritsComments.default;
       }
     });
-    Object.defineProperty(exports2, "is", {
+    Object.defineProperty(exports, "is", {
       enumerable: true,
       get: function() {
         return _is.default;
       }
     });
-    Object.defineProperty(exports2, "isBinding", {
+    Object.defineProperty(exports, "isBinding", {
       enumerable: true,
       get: function() {
         return _isBinding.default;
       }
     });
-    Object.defineProperty(exports2, "isBlockScoped", {
+    Object.defineProperty(exports, "isBlockScoped", {
       enumerable: true,
       get: function() {
         return _isBlockScoped.default;
       }
     });
-    Object.defineProperty(exports2, "isImmutable", {
+    Object.defineProperty(exports, "isImmutable", {
       enumerable: true,
       get: function() {
         return _isImmutable.default;
       }
     });
-    Object.defineProperty(exports2, "isLet", {
+    Object.defineProperty(exports, "isLet", {
       enumerable: true,
       get: function() {
         return _isLet.default;
       }
     });
-    Object.defineProperty(exports2, "isNode", {
+    Object.defineProperty(exports, "isNode", {
       enumerable: true,
       get: function() {
         return _isNode.default;
       }
     });
-    Object.defineProperty(exports2, "isNodesEquivalent", {
+    Object.defineProperty(exports, "isNodesEquivalent", {
       enumerable: true,
       get: function() {
         return _isNodesEquivalent.default;
       }
     });
-    Object.defineProperty(exports2, "isPlaceholderType", {
+    Object.defineProperty(exports, "isPlaceholderType", {
       enumerable: true,
       get: function() {
         return _isPlaceholderType.default;
       }
     });
-    Object.defineProperty(exports2, "isReferenced", {
+    Object.defineProperty(exports, "isReferenced", {
       enumerable: true,
       get: function() {
         return _isReferenced.default;
       }
     });
-    Object.defineProperty(exports2, "isScope", {
+    Object.defineProperty(exports, "isScope", {
       enumerable: true,
       get: function() {
         return _isScope.default;
       }
     });
-    Object.defineProperty(exports2, "isSpecifierDefault", {
+    Object.defineProperty(exports, "isSpecifierDefault", {
       enumerable: true,
       get: function() {
         return _isSpecifierDefault.default;
       }
     });
-    Object.defineProperty(exports2, "isType", {
+    Object.defineProperty(exports, "isType", {
       enumerable: true,
       get: function() {
         return _isType.default;
       }
     });
-    Object.defineProperty(exports2, "isValidES3Identifier", {
+    Object.defineProperty(exports, "isValidES3Identifier", {
       enumerable: true,
       get: function() {
         return _isValidES3Identifier.default;
       }
     });
-    Object.defineProperty(exports2, "isValidIdentifier", {
+    Object.defineProperty(exports, "isValidIdentifier", {
       enumerable: true,
       get: function() {
         return _isValidIdentifier.default;
       }
     });
-    Object.defineProperty(exports2, "isVar", {
+    Object.defineProperty(exports, "isVar", {
       enumerable: true,
       get: function() {
         return _isVar.default;
       }
     });
-    Object.defineProperty(exports2, "matchesPattern", {
+    Object.defineProperty(exports, "matchesPattern", {
       enumerable: true,
       get: function() {
         return _matchesPattern.default;
       }
     });
-    Object.defineProperty(exports2, "prependToMemberExpression", {
+    Object.defineProperty(exports, "prependToMemberExpression", {
       enumerable: true,
       get: function() {
         return _prependToMemberExpression.default;
       }
     });
-    exports2.react = void 0;
-    Object.defineProperty(exports2, "removeComments", {
+    exports.react = void 0;
+    Object.defineProperty(exports, "removeComments", {
       enumerable: true,
       get: function() {
         return _removeComments.default;
       }
     });
-    Object.defineProperty(exports2, "removeProperties", {
+    Object.defineProperty(exports, "removeProperties", {
       enumerable: true,
       get: function() {
         return _removeProperties.default;
       }
     });
-    Object.defineProperty(exports2, "removePropertiesDeep", {
+    Object.defineProperty(exports, "removePropertiesDeep", {
       enumerable: true,
       get: function() {
         return _removePropertiesDeep.default;
       }
     });
-    Object.defineProperty(exports2, "removeTypeDuplicates", {
+    Object.defineProperty(exports, "removeTypeDuplicates", {
       enumerable: true,
       get: function() {
         return _removeTypeDuplicates.default;
       }
     });
-    Object.defineProperty(exports2, "shallowEqual", {
+    Object.defineProperty(exports, "shallowEqual", {
       enumerable: true,
       get: function() {
         return _shallowEqual.default;
       }
     });
-    Object.defineProperty(exports2, "toBindingIdentifierName", {
+    Object.defineProperty(exports, "toBindingIdentifierName", {
       enumerable: true,
       get: function() {
         return _toBindingIdentifierName.default;
       }
     });
-    Object.defineProperty(exports2, "toBlock", {
+    Object.defineProperty(exports, "toBlock", {
       enumerable: true,
       get: function() {
         return _toBlock.default;
       }
     });
-    Object.defineProperty(exports2, "toComputedKey", {
+    Object.defineProperty(exports, "toComputedKey", {
       enumerable: true,
       get: function() {
         return _toComputedKey.default;
       }
     });
-    Object.defineProperty(exports2, "toExpression", {
+    Object.defineProperty(exports, "toExpression", {
       enumerable: true,
       get: function() {
         return _toExpression.default;
       }
     });
-    Object.defineProperty(exports2, "toIdentifier", {
+    Object.defineProperty(exports, "toIdentifier", {
       enumerable: true,
       get: function() {
         return _toIdentifier.default;
       }
     });
-    Object.defineProperty(exports2, "toKeyAlias", {
+    Object.defineProperty(exports, "toKeyAlias", {
       enumerable: true,
       get: function() {
         return _toKeyAlias.default;
       }
     });
-    Object.defineProperty(exports2, "toSequenceExpression", {
+    Object.defineProperty(exports, "toSequenceExpression", {
       enumerable: true,
       get: function() {
         return _toSequenceExpression.default;
       }
     });
-    Object.defineProperty(exports2, "toStatement", {
+    Object.defineProperty(exports, "toStatement", {
       enumerable: true,
       get: function() {
         return _toStatement.default;
       }
     });
-    Object.defineProperty(exports2, "traverse", {
+    Object.defineProperty(exports, "traverse", {
       enumerable: true,
       get: function() {
         return _traverse.default;
       }
     });
-    Object.defineProperty(exports2, "traverseFast", {
+    Object.defineProperty(exports, "traverseFast", {
       enumerable: true,
       get: function() {
         return _traverseFast.default;
       }
     });
-    Object.defineProperty(exports2, "validate", {
+    Object.defineProperty(exports, "validate", {
       enumerable: true,
       get: function() {
         return _validate.default;
       }
     });
-    Object.defineProperty(exports2, "valueToNode", {
+    Object.defineProperty(exports, "valueToNode", {
       enumerable: true,
       get: function() {
         return _valueToNode.default;
@@ -55657,9 +55847,9 @@ var require_lib5 = __commonJS({
         return;
       if (Object.prototype.hasOwnProperty.call(_exportNames, key))
         return;
-      if (key in exports2 && exports2[key] === _generated[key])
+      if (key in exports && exports[key] === _generated[key])
         return;
-      Object.defineProperty(exports2, key, {
+      Object.defineProperty(exports, key, {
         enumerable: true,
         get: function() {
           return _generated[key];
@@ -55675,9 +55865,9 @@ var require_lib5 = __commonJS({
         return;
       if (Object.prototype.hasOwnProperty.call(_exportNames, key))
         return;
-      if (key in exports2 && exports2[key] === _generated2[key])
+      if (key in exports && exports[key] === _generated2[key])
         return;
-      Object.defineProperty(exports2, key, {
+      Object.defineProperty(exports, key, {
         enumerable: true,
         get: function() {
           return _generated2[key];
@@ -55690,9 +55880,9 @@ var require_lib5 = __commonJS({
         return;
       if (Object.prototype.hasOwnProperty.call(_exportNames, key))
         return;
-      if (key in exports2 && exports2[key] === _uppercase[key])
+      if (key in exports && exports[key] === _uppercase[key])
         return;
-      Object.defineProperty(exports2, key, {
+      Object.defineProperty(exports, key, {
         enumerable: true,
         get: function() {
           return _uppercase[key];
@@ -55717,9 +55907,9 @@ var require_lib5 = __commonJS({
         return;
       if (Object.prototype.hasOwnProperty.call(_exportNames, key))
         return;
-      if (key in exports2 && exports2[key] === _generated3[key])
+      if (key in exports && exports[key] === _generated3[key])
         return;
-      Object.defineProperty(exports2, key, {
+      Object.defineProperty(exports, key, {
         enumerable: true,
         get: function() {
           return _generated3[key];
@@ -55732,9 +55922,9 @@ var require_lib5 = __commonJS({
         return;
       if (Object.prototype.hasOwnProperty.call(_exportNames, key))
         return;
-      if (key in exports2 && exports2[key] === _constants[key])
+      if (key in exports && exports[key] === _constants[key])
         return;
-      Object.defineProperty(exports2, key, {
+      Object.defineProperty(exports, key, {
         enumerable: true,
         get: function() {
           return _constants[key];
@@ -55757,9 +55947,9 @@ var require_lib5 = __commonJS({
         return;
       if (Object.prototype.hasOwnProperty.call(_exportNames, key))
         return;
-      if (key in exports2 && exports2[key] === _definitions[key])
+      if (key in exports && exports[key] === _definitions[key])
         return;
-      Object.defineProperty(exports2, key, {
+      Object.defineProperty(exports, key, {
         enumerable: true,
         get: function() {
           return _definitions[key];
@@ -55780,9 +55970,9 @@ var require_lib5 = __commonJS({
         return;
       if (Object.prototype.hasOwnProperty.call(_exportNames, key))
         return;
-      if (key in exports2 && exports2[key] === _traverse[key])
+      if (key in exports && exports[key] === _traverse[key])
         return;
-      Object.defineProperty(exports2, key, {
+      Object.defineProperty(exports, key, {
         enumerable: true,
         get: function() {
           return _traverse[key];
@@ -55815,9 +56005,9 @@ var require_lib5 = __commonJS({
         return;
       if (Object.prototype.hasOwnProperty.call(_exportNames, key))
         return;
-      if (key in exports2 && exports2[key] === _generated4[key])
+      if (key in exports && exports[key] === _generated4[key])
         return;
-      Object.defineProperty(exports2, key, {
+      Object.defineProperty(exports, key, {
         enumerable: true,
         get: function() {
           return _generated4[key];
@@ -55830,9 +56020,9 @@ var require_lib5 = __commonJS({
         return;
       if (Object.prototype.hasOwnProperty.call(_exportNames, key))
         return;
-      if (key in exports2 && exports2[key] === _generated5[key])
+      if (key in exports && exports[key] === _generated5[key])
         return;
-      Object.defineProperty(exports2, key, {
+      Object.defineProperty(exports, key, {
         enumerable: true,
         get: function() {
           return _generated5[key];
@@ -55844,18 +56034,18 @@ var require_lib5 = __commonJS({
       isCompatTag: _isCompatTag.default,
       buildChildren: _buildChildren.default
     };
-    exports2.react = react;
+    exports.react = react;
   }
 });
 
 // node_modules/@babel/template/lib/formatters.js
 var require_formatters = __commonJS({
-  "node_modules/@babel/template/lib/formatters.js"(exports2) {
+  "node_modules/@babel/template/lib/formatters.js"(exports) {
     "use strict";
-    Object.defineProperty(exports2, "__esModule", {
+    Object.defineProperty(exports, "__esModule", {
       value: true
     });
-    exports2.statements = exports2.statement = exports2.smart = exports2.program = exports2.expression = void 0;
+    exports.statements = exports.statement = exports.smart = exports.program = exports.expression = void 0;
     var _t = require_lib5();
     var { assertExpressionStatement } = _t;
     function makeStatementFormatter(fn) {
@@ -55877,9 +56067,9 @@ ${str}`,
         return body[0];
       }
     });
-    exports2.smart = smart;
+    exports.smart = smart;
     var statements = makeStatementFormatter((body) => body);
-    exports2.statements = statements;
+    exports.statements = statements;
     var statement = makeStatementFormatter((body) => {
       if (body.length === 0) {
         throw new Error("Found nothing to return.");
@@ -55889,7 +56079,7 @@ ${str}`,
       }
       return body[0];
     });
-    exports2.statement = statement;
+    exports.statement = statement;
     var expression = {
       code: (str) => `(
 ${str}
@@ -55908,27 +56098,27 @@ ${str}
         return stmt.expression;
       }
     };
-    exports2.expression = expression;
+    exports.expression = expression;
     var program2 = {
       code: (str) => str,
       validate: () => {
       },
       unwrap: (ast) => ast.program
     };
-    exports2.program = program2;
+    exports.program = program2;
   }
 });
 
 // node_modules/@babel/template/lib/options.js
 var require_options = __commonJS({
-  "node_modules/@babel/template/lib/options.js"(exports2) {
+  "node_modules/@babel/template/lib/options.js"(exports) {
     "use strict";
-    Object.defineProperty(exports2, "__esModule", {
+    Object.defineProperty(exports, "__esModule", {
       value: true
     });
-    exports2.merge = merge;
-    exports2.normalizeReplacements = normalizeReplacements;
-    exports2.validate = validate;
+    exports.merge = merge;
+    exports.normalizeReplacements = normalizeReplacements;
+    exports.validate = validate;
     var _excluded = [
       "placeholderWhitelist",
       "placeholderPattern",
@@ -56007,9 +56197,9 @@ var require_options = __commonJS({
 
 // node_modules/@babel/parser/lib/index.js
 var require_lib6 = __commonJS({
-  "node_modules/@babel/parser/lib/index.js"(exports2) {
+  "node_modules/@babel/parser/lib/index.js"(exports) {
     "use strict";
-    Object.defineProperty(exports2, "__esModule", {
+    Object.defineProperty(exports, "__esModule", {
       value: true
     });
     function _objectWithoutPropertiesLoose(source, excluded) {
@@ -60130,15 +60320,15 @@ var require_lib6 = __commonJS({
       raise(toParseError, raiseProperties) {
         const { at } = raiseProperties, details = _objectWithoutPropertiesLoose(raiseProperties, _excluded);
         const loc = at instanceof Position ? at : at.loc.start;
-        const error2 = toParseError({
+        const error = toParseError({
           loc,
           details
         });
         if (!this.options.errorRecovery)
-          throw error2;
+          throw error;
         if (!this.isLookahead)
-          this.state.errors.push(error2);
-        return error2;
+          this.state.errors.push(error);
+        return error;
       }
       raiseOverwrite(toParseError, raiseProperties) {
         const { at } = raiseProperties, details = _objectWithoutPropertiesLoose(raiseProperties, _excluded2);
@@ -60146,14 +60336,14 @@ var require_lib6 = __commonJS({
         const pos = loc.index;
         const errors = this.state.errors;
         for (let i = errors.length - 1; i >= 0; i--) {
-          const error2 = errors[i];
-          if (error2.loc.index === pos) {
+          const error = errors[i];
+          if (error.loc.index === pos) {
             return errors[i] = toParseError({
               loc,
               details
             });
           }
-          if (error2.loc.index < pos)
+          if (error.loc.index < pos)
             break;
         }
         return this.raise(toParseError, raiseProperties);
@@ -60185,9 +60375,9 @@ var require_lib6 = __commonJS({
           });
         }
       }
-      errorBuilder(error2) {
+      errorBuilder(error) {
         return (pos, lineStart, curLine) => {
-          this.raise(error2, {
+          this.raise(error, {
             at: buildPosition(pos, lineStart, curLine)
           });
         };
@@ -60337,16 +60527,16 @@ var require_lib6 = __commonJS({
         }
         this.parser.raise(toParseError, origin);
       }
-      recordArrowParemeterBindingError(error2, { at: node }) {
+      recordArrowParemeterBindingError(error, { at: node }) {
         const { stack } = this;
         const scope = stack[stack.length - 1];
         const origin = {
           at: node.loc.start
         };
         if (scope.isCertainlyParameterDeclaration()) {
-          this.parser.raise(error2, origin);
+          this.parser.raise(error, origin);
         } else if (scope.canBeArrowParameterDeclaration()) {
-          scope.recordDeclarationError(error2, origin);
+          scope.recordDeclarationError(error, origin);
         } else {
           return;
         }
@@ -60530,19 +60720,19 @@ var require_lib6 = __commonJS({
             aborted: false,
             failState: null
           };
-        } catch (error2) {
+        } catch (error) {
           const failState1 = this.state;
           this.state = oldState;
-          if (error2 instanceof SyntaxError) {
+          if (error instanceof SyntaxError) {
             return {
               node: null,
-              error: error2,
+              error,
               thrown: true,
               aborted: false,
               failState: failState1
             };
           }
-          if (error2 === abortSignal) {
+          if (error === abortSignal) {
             return {
               node: abortSignal.node,
               error: null,
@@ -60551,7 +60741,7 @@ var require_lib6 = __commonJS({
               failState: failState1
             };
           }
-          throw error2;
+          throw error;
         }
       }
       checkExpressionErrors(refExpressionErrors, andThrow) {
@@ -66861,9 +67051,9 @@ var require_lib6 = __commonJS({
         throw new Error("The 'syntaxType' option of the 'recordAndTuple' plugin must be one of: " + RECORD_AND_TUPLE_SYNTAX_TYPES.map((p) => `'${p}'`).join(", "));
       }
       if (hasPlugin(plugins, "asyncDoExpressions") && !hasPlugin(plugins, "doExpressions")) {
-        const error2 = new Error("'asyncDoExpressions' requires 'doExpressions', please add 'doExpressions' to parser plugins.");
-        error2.missingPlugins = "doExpressions";
-        throw error2;
+        const error = new Error("'asyncDoExpressions' requires 'doExpressions', please add 'doExpressions' to parser plugins.");
+        error.missingPlugins = "doExpressions";
+        throw error;
       }
     }
     __name(validatePlugins, "validatePlugins");
@@ -70960,20 +71150,20 @@ var require_lib6 = __commonJS({
       return cls;
     }
     __name(getParserClass, "getParserClass");
-    exports2.parse = parse;
-    exports2.parseExpression = parseExpression;
-    exports2.tokTypes = tokTypes;
+    exports.parse = parse;
+    exports.parseExpression = parseExpression;
+    exports.tokTypes = tokTypes;
   }
 });
 
 // node_modules/js-tokens/index.js
 var require_js_tokens = __commonJS({
-  "node_modules/js-tokens/index.js"(exports2) {
-    Object.defineProperty(exports2, "__esModule", {
+  "node_modules/js-tokens/index.js"(exports) {
+    Object.defineProperty(exports, "__esModule", {
       value: true
     });
-    exports2.default = /((['"])(?:(?!\2|\\).|\\(?:\r\n|[\s\S]))*(\2)?|`(?:[^`\\$]|\\[\s\S]|\$(?!\{)|\$\{(?:[^{}]|\{[^}]*\}?)*\}?)*(`)?)|(\/\/.*)|(\/\*(?:[^*]|\*(?!\/))*(\*\/)?)|(\/(?!\*)(?:\[(?:(?![\]\\]).|\\.)*\]|(?![\/\]\\]).|\\.)+\/(?:(?!\s*(?:\b|[\u0080-\uFFFF$\\'"~({]|[+\-!](?!=)|\.?\d))|[gmiyus]{1,6}\b(?![\u0080-\uFFFF$\\]|\s*(?:[+\-*%&|^<>!=?({]|\/(?![\/*])))))|(0[xX][\da-fA-F]+|0[oO][0-7]+|0[bB][01]+|(?:\d*\.\d+|\d+\.?)(?:[eE][+-]?\d+)?)|((?!\d)(?:(?!\s)[$\w\u0080-\uFFFF]|\\u[\da-fA-F]{4}|\\u\{[\da-fA-F]+\})+)|(--|\+\+|&&|\|\||=>|\.{3}|(?:[+\-\/%&|^]|\*{1,2}|<{1,2}|>{1,3}|!=?|={1,2})=?|[?~.,:;[\](){}])|(\s+)|(^$|[\s\S])/g;
-    exports2.matchToToken = function(match) {
+    exports.default = /((['"])(?:(?!\2|\\).|\\(?:\r\n|[\s\S]))*(\2)?|`(?:[^`\\$]|\\[\s\S]|\$(?!\{)|\$\{(?:[^{}]|\{[^}]*\}?)*\}?)*(`)?)|(\/\/.*)|(\/\*(?:[^*]|\*(?!\/))*(\*\/)?)|(\/(?!\*)(?:\[(?:(?![\]\\]).|\\.)*\]|(?![\/\]\\]).|\\.)+\/(?:(?!\s*(?:\b|[\u0080-\uFFFF$\\'"~({]|[+\-!](?!=)|\.?\d))|[gmiyus]{1,6}\b(?![\u0080-\uFFFF$\\]|\s*(?:[+\-*%&|^<>!=?({]|\/(?![\/*])))))|(0[xX][\da-fA-F]+|0[oO][0-7]+|0[bB][01]+|(?:\d*\.\d+|\d+\.?)(?:[eE][+-]?\d+)?)|((?!\d)(?:(?!\s)[$\w\u0080-\uFFFF]|\\u[\da-fA-F]{4}|\\u\{[\da-fA-F]+\})+)|(--|\+\+|&&|\|\||=>|\.{3}|(?:[+\-\/%&|^]|\*{1,2}|<{1,2}|>{1,3}|!=?|={1,2})=?|[?~.,:;[\](){}])|(\s+)|(^$|[\s\S])/g;
+    exports.matchToToken = function(match) {
       var token = {
         type: "invalid",
         value: match[0],
@@ -71002,10 +71192,10 @@ var require_js_tokens = __commonJS({
 
 // node_modules/escape-string-regexp/index.js
 var require_escape_string_regexp = __commonJS({
-  "node_modules/escape-string-regexp/index.js"(exports2, module2) {
+  "node_modules/escape-string-regexp/index.js"(exports, module) {
     "use strict";
     var matchOperatorsRe = /[|\\{}()[\]^$+*?.]/g;
-    module2.exports = function(str) {
+    module.exports = function(str) {
       if (typeof str !== "string") {
         throw new TypeError("Expected a string");
       }
@@ -71016,9 +71206,9 @@ var require_escape_string_regexp = __commonJS({
 
 // node_modules/@babel/highlight/node_modules/color-name/index.js
 var require_color_name = __commonJS({
-  "node_modules/@babel/highlight/node_modules/color-name/index.js"(exports2, module2) {
+  "node_modules/@babel/highlight/node_modules/color-name/index.js"(exports, module) {
     "use strict";
-    module2.exports = {
+    module.exports = {
       "aliceblue": [
         240,
         248,
@@ -71765,7 +71955,7 @@ var require_color_name = __commonJS({
 
 // node_modules/@babel/highlight/node_modules/color-convert/conversions.js
 var require_conversions = __commonJS({
-  "node_modules/@babel/highlight/node_modules/color-convert/conversions.js"(exports2, module2) {
+  "node_modules/@babel/highlight/node_modules/color-convert/conversions.js"(exports, module) {
     var cssKeywords = require_color_name();
     var reverseKeywords = {};
     for (key in cssKeywords) {
@@ -71774,7 +71964,7 @@ var require_conversions = __commonJS({
       }
     }
     var key;
-    var convert = module2.exports = {
+    var convert = module.exports = {
       rgb: {
         channels: 3,
         labels: "rgb"
@@ -72726,7 +72916,7 @@ var require_conversions = __commonJS({
 
 // node_modules/@babel/highlight/node_modules/color-convert/route.js
 var require_route = __commonJS({
-  "node_modules/@babel/highlight/node_modules/color-convert/route.js"(exports2, module2) {
+  "node_modules/@babel/highlight/node_modules/color-convert/route.js"(exports, module) {
     var conversions = require_conversions();
     function buildGraph() {
       var graph = {};
@@ -72784,7 +72974,7 @@ var require_route = __commonJS({
       return fn;
     }
     __name(wrapConversion, "wrapConversion");
-    module2.exports = function(fromModel) {
+    module.exports = function(fromModel) {
       var graph = deriveBFS(fromModel);
       var conversion = {};
       var models = Object.keys(graph);
@@ -72803,7 +72993,7 @@ var require_route = __commonJS({
 
 // node_modules/@babel/highlight/node_modules/color-convert/index.js
 var require_color_convert = __commonJS({
-  "node_modules/@babel/highlight/node_modules/color-convert/index.js"(exports2, module2) {
+  "node_modules/@babel/highlight/node_modules/color-convert/index.js"(exports, module) {
     var conversions = require_conversions();
     var route = require_route();
     var convert = {};
@@ -72862,13 +73052,13 @@ var require_color_convert = __commonJS({
         convert[fromModel][toModel].raw = wrapRaw(fn);
       });
     });
-    module2.exports = convert;
+    module.exports = convert;
   }
 });
 
 // node_modules/@babel/highlight/node_modules/ansi-styles/index.js
 var require_ansi_styles = __commonJS({
-  "node_modules/@babel/highlight/node_modules/ansi-styles/index.js"(exports2, module2) {
+  "node_modules/@babel/highlight/node_modules/ansi-styles/index.js"(exports, module) {
     "use strict";
     var colorConvert = require_color_convert();
     var wrapAnsi16 = /* @__PURE__ */ __name((fn, offset) => function() {
@@ -73124,7 +73314,7 @@ var require_ansi_styles = __commonJS({
       return styles;
     }
     __name(assembleStyles, "assembleStyles");
-    Object.defineProperty(module2, "exports", {
+    Object.defineProperty(module, "exports", {
       enumerable: true,
       get: assembleStyles
     });
@@ -73133,9 +73323,9 @@ var require_ansi_styles = __commonJS({
 
 // node_modules/@babel/highlight/node_modules/has-flag/index.js
 var require_has_flag = __commonJS({
-  "node_modules/@babel/highlight/node_modules/has-flag/index.js"(exports2, module2) {
+  "node_modules/@babel/highlight/node_modules/has-flag/index.js"(exports, module) {
     "use strict";
-    module2.exports = (flag, argv) => {
+    module.exports = (flag, argv) => {
       argv = argv || process.argv;
       const prefix = flag.startsWith("-") ? "" : flag.length === 1 ? "-" : "--";
       const pos = argv.indexOf(prefix + flag);
@@ -73147,9 +73337,9 @@ var require_has_flag = __commonJS({
 
 // node_modules/@babel/highlight/node_modules/supports-color/index.js
 var require_supports_color = __commonJS({
-  "node_modules/@babel/highlight/node_modules/supports-color/index.js"(exports2, module2) {
+  "node_modules/@babel/highlight/node_modules/supports-color/index.js"(exports, module) {
     "use strict";
-    var os = require("os");
+    var os = __require("os");
     var hasFlag = require_has_flag();
     var env = process.env;
     var forceColor;
@@ -73240,7 +73430,7 @@ var require_supports_color = __commonJS({
       return translateLevel(level);
     }
     __name(getSupportLevel, "getSupportLevel");
-    module2.exports = {
+    module.exports = {
       supportsColor: getSupportLevel,
       stdout: getSupportLevel(process.stdout),
       stderr: getSupportLevel(process.stderr)
@@ -73250,7 +73440,7 @@ var require_supports_color = __commonJS({
 
 // node_modules/@babel/highlight/node_modules/chalk/templates.js
 var require_templates = __commonJS({
-  "node_modules/@babel/highlight/node_modules/chalk/templates.js"(exports2, module2) {
+  "node_modules/@babel/highlight/node_modules/chalk/templates.js"(exports, module) {
     "use strict";
     var TEMPLATE_REGEX = /(?:\\(u[a-f\d]{4}|x[a-f\d]{2}|.))|(?:\{(~)?(\w+(?:\([^)]*\))?(?:\.\w+(?:\([^)]*\))?)*)(?:[ \t]|(?=\r?\n)))|(\})|((?:.|[\r\n\f])+?)/gi;
     var STYLE_REGEX = /(?:^|\.)(\w+)(?:\(([^)]*)\))?/g;
@@ -73364,7 +73554,7 @@ var require_templates = __commonJS({
       return current;
     }
     __name(buildStyle, "buildStyle");
-    module2.exports = (chalk, tmp) => {
+    module.exports = (chalk, tmp) => {
       const styles = [];
       const chunks = [];
       let chunk = [];
@@ -73402,7 +73592,7 @@ var require_templates = __commonJS({
 
 // node_modules/@babel/highlight/node_modules/chalk/index.js
 var require_chalk = __commonJS({
-  "node_modules/@babel/highlight/node_modules/chalk/index.js"(exports2, module2) {
+  "node_modules/@babel/highlight/node_modules/chalk/index.js"(exports, module) {
     "use strict";
     var escapeStringRegexp = require_escape_string_regexp();
     var ansiStyles = require_ansi_styles();
@@ -73583,22 +73773,22 @@ var require_chalk = __commonJS({
     }
     __name(chalkTag, "chalkTag");
     Object.defineProperties(Chalk.prototype, styles);
-    module2.exports = Chalk();
-    module2.exports.supportsColor = stdoutColor;
-    module2.exports.default = module2.exports;
+    module.exports = Chalk();
+    module.exports.supportsColor = stdoutColor;
+    module.exports.default = module.exports;
   }
 });
 
 // node_modules/@babel/highlight/lib/index.js
 var require_lib7 = __commonJS({
-  "node_modules/@babel/highlight/lib/index.js"(exports2) {
+  "node_modules/@babel/highlight/lib/index.js"(exports) {
     "use strict";
-    Object.defineProperty(exports2, "__esModule", {
+    Object.defineProperty(exports, "__esModule", {
       value: true
     });
-    exports2.default = highlight;
-    exports2.getChalk = getChalk;
-    exports2.shouldHighlight = shouldHighlight;
+    exports.default = highlight;
+    exports.getChalk = getChalk;
+    exports.shouldHighlight = shouldHighlight;
     var _jsTokens = require_js_tokens();
     var _helperValidatorIdentifier = require_lib();
     var _chalk = require_chalk();
@@ -73699,13 +73889,13 @@ var require_lib7 = __commonJS({
 
 // node_modules/@babel/code-frame/lib/index.js
 var require_lib8 = __commonJS({
-  "node_modules/@babel/code-frame/lib/index.js"(exports2) {
+  "node_modules/@babel/code-frame/lib/index.js"(exports) {
     "use strict";
-    Object.defineProperty(exports2, "__esModule", {
+    Object.defineProperty(exports, "__esModule", {
       value: true
     });
-    exports2.codeFrameColumns = codeFrameColumns;
-    exports2.default = _default;
+    exports.codeFrameColumns = codeFrameColumns;
+    exports.default = _default;
     var _highlight = require_lib7();
     var deprecationWarningShown = false;
     function getDefs(chalk) {
@@ -73868,12 +74058,12 @@ ${frame}`;
 
 // node_modules/@babel/template/lib/parse.js
 var require_parse3 = __commonJS({
-  "node_modules/@babel/template/lib/parse.js"(exports2) {
+  "node_modules/@babel/template/lib/parse.js"(exports) {
     "use strict";
-    Object.defineProperty(exports2, "__esModule", {
+    Object.defineProperty(exports, "__esModule", {
       value: true
     });
-    exports2.default = parseAndBuildMetadata;
+    exports.default = parseAndBuildMetadata;
     var _t = require_lib5();
     var _parser = require_lib6();
     var _codeFrame = require_lib8();
@@ -74013,12 +74203,12 @@ var require_parse3 = __commonJS({
 
 // node_modules/@babel/template/lib/populate.js
 var require_populate = __commonJS({
-  "node_modules/@babel/template/lib/populate.js"(exports2) {
+  "node_modules/@babel/template/lib/populate.js"(exports) {
     "use strict";
-    Object.defineProperty(exports2, "__esModule", {
+    Object.defineProperty(exports, "__esModule", {
       value: true
     });
-    exports2.default = populatePlaceholders;
+    exports.default = populatePlaceholders;
     var _t = require_lib5();
     var { blockStatement: blockStatement3, cloneNode, emptyStatement, expressionStatement: expressionStatement3, identifier: identifier3, isStatement, isStringLiteral, stringLiteral: stringLiteral3, validate } = _t;
     function populatePlaceholders(metadata, replacements) {
@@ -74127,12 +74317,12 @@ var require_populate = __commonJS({
 
 // node_modules/@babel/template/lib/string.js
 var require_string2 = __commonJS({
-  "node_modules/@babel/template/lib/string.js"(exports2) {
+  "node_modules/@babel/template/lib/string.js"(exports) {
     "use strict";
-    Object.defineProperty(exports2, "__esModule", {
+    Object.defineProperty(exports, "__esModule", {
       value: true
     });
-    exports2.default = stringTemplate;
+    exports.default = stringTemplate;
     var _options = require_options();
     var _parse = require_parse3();
     var _populate = require_populate();
@@ -74152,12 +74342,12 @@ var require_string2 = __commonJS({
 
 // node_modules/@babel/template/lib/literal.js
 var require_literal = __commonJS({
-  "node_modules/@babel/template/lib/literal.js"(exports2) {
+  "node_modules/@babel/template/lib/literal.js"(exports) {
     "use strict";
-    Object.defineProperty(exports2, "__esModule", {
+    Object.defineProperty(exports, "__esModule", {
       value: true
     });
-    exports2.default = literalTemplate;
+    exports.default = literalTemplate;
     var _options = require_options();
     var _parse = require_parse3();
     var _populate = require_populate();
@@ -74225,12 +74415,12 @@ var require_literal = __commonJS({
 
 // node_modules/@babel/template/lib/builder.js
 var require_builder = __commonJS({
-  "node_modules/@babel/template/lib/builder.js"(exports2) {
+  "node_modules/@babel/template/lib/builder.js"(exports) {
     "use strict";
-    Object.defineProperty(exports2, "__esModule", {
+    Object.defineProperty(exports, "__esModule", {
       value: true
     });
-    exports2.default = createTemplateBuilder;
+    exports.default = createTemplateBuilder;
     var _options = require_options();
     var _string = require_string2();
     var _literal = require_literal();
@@ -74282,9 +74472,9 @@ var require_builder = __commonJS({
       let rootStack = "";
       try {
         throw new Error();
-      } catch (error2) {
-        if (error2.stack) {
-          rootStack = error2.stack.split("\n").slice(3).join("\n");
+      } catch (error) {
+        if (error.stack) {
+          rootStack = error.stack.split("\n").slice(3).join("\n");
         }
       }
       return (arg) => {
@@ -74304,24 +74494,24 @@ ${rootStack}`;
 
 // node_modules/@babel/template/lib/index.js
 var require_lib9 = __commonJS({
-  "node_modules/@babel/template/lib/index.js"(exports2) {
+  "node_modules/@babel/template/lib/index.js"(exports) {
     "use strict";
-    Object.defineProperty(exports2, "__esModule", {
+    Object.defineProperty(exports, "__esModule", {
       value: true
     });
-    exports2.statements = exports2.statement = exports2.smart = exports2.program = exports2.expression = exports2.default = void 0;
+    exports.statements = exports.statement = exports.smart = exports.program = exports.expression = exports.default = void 0;
     var formatters = require_formatters();
     var _builder = require_builder();
     var smart = (0, _builder.default)(formatters.smart);
-    exports2.smart = smart;
+    exports.smart = smart;
     var statement = (0, _builder.default)(formatters.statement);
-    exports2.statement = statement;
+    exports.statement = statement;
     var statements = (0, _builder.default)(formatters.statements);
-    exports2.statements = statements;
+    exports.statements = statements;
     var expression = (0, _builder.default)(formatters.expression);
-    exports2.expression = expression;
+    exports.expression = expression;
     var program2 = (0, _builder.default)(formatters.program);
-    exports2.program = program2;
+    exports.program = program2;
     var _default = Object.assign(smart.bind(void 0), {
       smart,
       statement,
@@ -74330,201 +74520,54 @@ var require_lib9 = __commonJS({
       program: program2,
       ast: smart.ast
     });
-    exports2.default = _default;
+    exports.default = _default;
   }
 });
 
-// bin/test-storybook.ts
-var import_child_process = require("child_process");
-var import_node_fetch = __toESM(require("node-fetch"));
-var import_can_bind_to_host = __toESM(require_dist());
-var import_fs = __toESM(require("fs"));
-
-// node_modules/ts-dedent/esm/index.js
-function dedent(templ) {
-  var values = [];
-  for (var _i = 1; _i < arguments.length; _i++) {
-    values[_i - 1] = arguments[_i];
-  }
-  var strings = Array.from(typeof templ === "string" ? [
-    templ
-  ] : templ);
-  strings[strings.length - 1] = strings[strings.length - 1].replace(/\r?\n([\t ]*)$/, "");
-  var indentLengths = strings.reduce(function(arr, str) {
-    var matches = str.match(/\n([\t ]+|(?!\s).)/g);
-    if (matches) {
-      return arr.concat(matches.map(function(match) {
-        var _a, _b;
-        return (_b = (_a = match.match(/[\t ]/g)) === null || _a === void 0 ? void 0 : _a.length) !== null && _b !== void 0 ? _b : 0;
-      }));
-    }
-    return arr;
-  }, []);
-  if (indentLengths.length) {
-    var pattern_1 = new RegExp("\n[	 ]{" + Math.min.apply(Math, indentLengths) + "}", "g");
-    strings = strings.map(function(str) {
-      return str.replace(pattern_1, "\n");
-    });
-  }
-  strings[0] = strings[0].replace(/^\r?\n/, "");
-  var string = strings[0];
-  values.forEach(function(value, i) {
-    var endentations = string.match(/(?:^|\n)( *)$/);
-    var endentation = endentations ? endentations[1] : "";
-    var indentedValue = value;
-    if (typeof value === "string" && value.includes("\n")) {
-      indentedValue = String(value).split("\n").map(function(str, i2) {
-        return i2 === 0 ? str : "" + endentation + str;
-      }).join("\n");
-    }
-    string += indentedValue + strings[i + 1];
-  });
-  return string;
-}
-__name(dedent, "dedent");
-var esm_default = dedent;
-
-// bin/test-storybook.ts
-var import_path3 = __toESM(require("path"));
-var import_tempy = __toESM(require_tempy());
-
-// src/util/getParsedCliOptions.ts
-var getParsedCliOptions = /* @__PURE__ */ __name(() => {
-  const { program: program2 } = require_commander();
-  program2.option("-i, --index-json", "Run in index json mode. Automatically detected (requires a compatible Storybook)").option("-s, --stories-json", "Run in index json mode. Automatically detected (requires a compatible Storybook) [deprecated, use --index-json]").option("--no-index-json", "Disable index json mode").option("--no-stories-json", "Disable index json mode [deprecated, use --no-index-json]").option("-c, --config-dir <directory>", "Directory where to load Storybook configurations from", ".storybook").option("--watch", "Watch files for changes and rerun tests related to changed files", false).option("--watchAll", "Watch files for changes and rerun all tests when something changes").option("--browsers <browsers...>", "Define browsers to run tests in. Could be one or multiple of: chromium, firefox, webkit", [
-    "chromium"
-  ]).option("--url <url>", "Define the URL to run tests in. Useful for custom Storybook URLs", "http://localhost:6006").option("--maxWorkers <amount>", "Specifies the maximum number of workers the worker-pool will spawn for running tests").option("--no-cache", "Disable the cache").option("--clearCache", "Deletes the Jest cache directory and then exits without running tests").option("--verbose", "Display individual test results with the test suite hierarchy").option("-u, --updateSnapshot", "Use this flag to re-record every snapshot that fails during this test run").option("--json", "Prints the test results in JSON. This mode will send all other test output and user messages to stderr.").option("--outputFile", "Write test results to a file when the --json option is also specified.").option("--coverage", "Indicates that test coverage information should be collected and reported in the output").option("--junit", "Indicates that test information should be reported in a junit file").option("--eject", "Creates a local configuration file to override defaults of the test-runner. Use it only if you want to have better control over the runner configurations").option("--ci", "Instead of the regular behavior of storing a new snapshot automatically, it will fail the test and require to be run with --updateSnapshot.");
-  program2.exitOverride();
-  try {
-    program2.parse();
-  } catch (err) {
-    switch (err.code) {
-      case "commander.unknownOption": {
-        program2.outputHelp();
-        console.warn(`
-If you'd like this option to be supported, please open an issue at https://github.com/storybookjs/test-runner/issues/new
-`);
-        process.exit(1);
-      }
-      case "commander.helpDisplayed": {
-        process.exit(0);
-      }
-      default: {
-        throw err;
-      }
-    }
-  }
-  const _a = program2.opts(), { storiesJson } = _a, options = __objRest(_a, ["storiesJson"]);
-  return {
-    options: __spreadValues({
-      indexJson: storiesJson
-    }, options),
-    extraArgs: program2.args
-  };
-}, "getParsedCliOptions");
-
-// src/util/getCliOptions.ts
-var STORYBOOK_RUNNER_COMMANDS = [
-  "indexJson",
-  "configDir",
-  "browsers",
-  "eject",
-  "url",
-  "coverage",
-  "junit"
-];
-var getCliOptions = /* @__PURE__ */ __name(() => {
-  const { options: allOptions, extraArgs } = getParsedCliOptions();
-  const defaultOptions = {
-    runnerOptions: {},
-    jestOptions: process.argv.splice(0, 2)
-  };
-  const finalOptions = Object.keys(allOptions).reduce((acc, key) => {
-    if (STORYBOOK_RUNNER_COMMANDS.includes(key)) {
-      acc.runnerOptions[key] = allOptions[key];
-    } else {
-      if (allOptions[key] === true) {
-        acc.jestOptions.push(`--${key}`);
-      } else if (allOptions[key] === false) {
-        acc.jestOptions.push(`--no-${key}`);
-      } else {
-        acc.jestOptions.push(`--${key}`, allOptions[key]);
-      }
-    }
-    return acc;
-  }, defaultOptions);
-  if (extraArgs.length) {
-    finalOptions.jestOptions.push(...extraArgs);
-  }
-  return finalOptions;
-}, "getCliOptions");
-
-// src/util/getStorybookMetadata.ts
-var import_path2 = require("path");
-var import_core_common2 = require("@storybook/core-common");
-
-// src/util/getStorybookMain.ts
-var import_path = require("path");
-var import_core_common = require("@storybook/core-common");
-var storybookMainConfig;
-var getStorybookMain = /* @__PURE__ */ __name((configDir) => {
-  if (storybookMainConfig) {
-    return storybookMainConfig;
-  }
-  storybookMainConfig = (0, import_core_common.serverRequire)((0, import_path.join)((0, import_path.resolve)(configDir), "main"));
-  if (!storybookMainConfig) {
-    throw new Error(`Could not load main.js in ${configDir}. Is the config directory correct? You can change it by using --config-dir <path-to-dir>`);
-  }
-  return storybookMainConfig;
-}, "getStorybookMain");
-
-// src/util/getStorybookMetadata.ts
-var getStorybookMetadata = /* @__PURE__ */ __name(() => {
-  var _a, _b, _c;
-  const workingDir = (0, import_path2.resolve)();
-  const configDir = process.env.STORYBOOK_CONFIG_DIR;
-  const main2 = getStorybookMain(configDir);
-  const normalizedStoriesEntries = (0, import_core_common2.normalizeStories)(main2.stories, {
-    configDir,
-    workingDir
-  }).map((specifier) => __spreadProps(__spreadValues({}, specifier), {
-    importPathMatcher: new RegExp(specifier.importPathMatcher)
-  }));
-  const storiesPaths = normalizedStoriesEntries.map((entry) => entry.directory + "/" + entry.files).map((dir) => "<rootDir>/" + (0, import_path2.relative)(workingDir, dir)).join(";");
-  const lazyCompilation = !!((_c = (_b = (_a = main2 == null ? void 0 : main2.core) == null ? void 0 : _a.builder) == null ? void 0 : _b.options) == null ? void 0 : _c.lazyCompilation);
-  return {
-    configDir,
-    workingDir,
-    storiesPaths,
-    normalizedStoriesEntries,
-    lazyCompilation
-  };
-}, "getStorybookMetadata");
-
-// src/playwright/transformPlaywrightJson.ts
-var t2 = __toESM(require_lib3());
-var import_generator2 = __toESM(require_lib4());
-var import_csf2 = require("@storybook/csf");
-
-// src/playwright/transformPlaywright.ts
-var import_template = __toESM(require_lib9());
-
 // src/util/getTestRunnerConfig.ts
-var import_core_common3 = require("@storybook/core-common");
+import { serverRequire as serverRequire2 } from "@storybook/core-common";
+var init_getTestRunnerConfig = __esm({
+  "src/util/getTestRunnerConfig.ts"() {
+  }
+});
+
+// src/util/index.ts
+var init_util = __esm({
+  "src/util/index.ts"() {
+    init_getCliOptions();
+    init_getTestRunnerConfig();
+    init_getStorybookMain();
+    init_getStorybookMetadata();
+    init_getParsedCliOptions();
+  }
+});
 
 // src/csf/transformCsf.ts
-var import_csf_tools = require("@storybook/csf-tools");
-var t = __toESM(require_lib3());
-var import_generator = __toESM(require_lib4());
-var import_csf = require("@storybook/csf");
+import { loadCsf } from "@storybook/csf-tools";
+import { toId, storyNameFromExport } from "@storybook/csf";
+var t, import_generator;
+var init_transformCsf = __esm({
+  "src/csf/transformCsf.ts"() {
+    t = __toESM(require_lib3());
+    import_generator = __toESM(require_lib4());
+    init_esm();
+  }
+});
 
 // src/playwright/transformPlaywright.ts
-var coverageErrorMessage = esm_default`
+var import_template, coverageErrorMessage, testPrefixer;
+var init_transformPlaywright = __esm({
+  "src/playwright/transformPlaywright.ts"() {
+    import_template = __toESM(require_lib9());
+    init_util();
+    init_transformCsf();
+    init_esm();
+    coverageErrorMessage = esm_default`
   [Test runner] An error occurred when evaluating code coverage:
   The code in this story is not instrumented, which means the coverage setup is likely not correct.
   More info: https://github.com/storybookjs/test-runner#setting-up-code-coverage
 `;
-var testPrefixer = (0, import_template.default)(`
+    testPrefixer = (0, import_template.default)(`
     console.log({ id: %%id%%, title: %%title%%, name: %%name%%, storyExport: %%storyExport%% });
     async () => {
       const testFn = async() => {
@@ -74572,32 +74615,15 @@ var testPrefixer = (0, import_template.default)(`
       }
     }
   `, {
-  plugins: [
-    "jsx"
-  ]
+      plugins: [
+        "jsx"
+      ]
+    });
+  }
 });
 
 // src/playwright/transformPlaywrightJson.ts
-var makeTest = /* @__PURE__ */ __name((entry) => {
-  const result = testPrefixer({
-    name: t2.stringLiteral(entry.name),
-    title: t2.stringLiteral(entry.title),
-    id: t2.stringLiteral(entry.id),
-    storyExport: t2.identifier(entry.id)
-  });
-  const stmt = result[1];
-  return t2.expressionStatement(t2.callExpression(t2.identifier("it"), [
-    t2.stringLiteral("test"),
-    stmt.expression
-  ]));
-}, "makeTest");
-var makeDescribe = /* @__PURE__ */ __name((title, stmts) => {
-  return t2.expressionStatement(t2.callExpression(t2.identifier("describe"), [
-    t2.stringLiteral(title),
-    t2.arrowFunctionExpression([], t2.blockStatement(stmts))
-  ]));
-}, "makeDescribe");
-var isV3DocsOnly = /* @__PURE__ */ __name((stories) => stories.length === 1 && stories[0].name === "Page", "isV3DocsOnly");
+import { toId as toId2 } from "@storybook/csf";
 function v3TitleMapToV4TitleMap(titleIdToStories) {
   return Object.fromEntries(Object.entries(titleIdToStories).map(([id, stories]) => [
     id,
@@ -74609,175 +74635,215 @@ function v3TitleMapToV4TitleMap(titleIdToStories) {
     })
   ]));
 }
-__name(v3TitleMapToV4TitleMap, "v3TitleMapToV4TitleMap");
 function groupByTitleId(entries) {
   return entries.reduce((acc, entry) => {
-    const titleId = (0, import_csf2.toId)(entry.title);
+    const titleId = toId2(entry.title);
     acc[titleId] = acc[titleId] || [];
     acc[titleId].push(entry);
     return acc;
   }, {});
 }
-__name(groupByTitleId, "groupByTitleId");
-var transformPlaywrightJson = /* @__PURE__ */ __name((index) => {
-  let titleIdToEntries;
-  if (index.v === 3) {
-    const titleIdToStories = groupByTitleId(Object.values(index.stories));
-    titleIdToEntries = v3TitleMapToV4TitleMap(titleIdToStories);
-  } else if (index.v === 4) {
-    titleIdToEntries = groupByTitleId(Object.values(index.entries));
-  } else {
-    throw new Error(`Unsupported version ${index.v}`);
-  }
-  const titleIdToTest = Object.entries(titleIdToEntries).reduce((acc, [titleId, entries]) => {
-    const stories = entries.filter((s) => s.type !== "docs");
-    if (stories.length) {
-      const storyTests = stories.map((story) => makeDescribe(story.name, [
-        makeTest(story)
+var t2, import_generator2, makeTest, makeDescribe, isV3DocsOnly, transformPlaywrightJson;
+var init_transformPlaywrightJson = __esm({
+  "src/playwright/transformPlaywrightJson.ts"() {
+    t2 = __toESM(require_lib3());
+    import_generator2 = __toESM(require_lib4());
+    init_transformPlaywright();
+    makeTest = /* @__PURE__ */ __name((entry) => {
+      const result = testPrefixer({
+        name: t2.stringLiteral(entry.name),
+        title: t2.stringLiteral(entry.title),
+        id: t2.stringLiteral(entry.id),
+        storyExport: t2.identifier(entry.id)
+      });
+      const stmt = result[1];
+      return t2.expressionStatement(t2.callExpression(t2.identifier("it"), [
+        t2.stringLiteral("test"),
+        stmt.expression
       ]));
-      const program2 = t2.program([
-        makeDescribe(stories[0].title, storyTests)
-      ]);
-      const { code } = (0, import_generator2.default)(program2, {});
-      acc[titleId] = code;
-    }
-    return acc;
-  }, {});
-  return titleIdToTest;
-}, "transformPlaywrightJson");
+    }, "makeTest");
+    makeDescribe = /* @__PURE__ */ __name((title, stmts) => {
+      return t2.expressionStatement(t2.callExpression(t2.identifier("describe"), [
+        t2.stringLiteral(title),
+        t2.arrowFunctionExpression([], t2.blockStatement(stmts))
+      ]));
+    }, "makeDescribe");
+    isV3DocsOnly = /* @__PURE__ */ __name((stories) => stories.length === 1 && stories[0].name === "Page", "isV3DocsOnly");
+    __name(v3TitleMapToV4TitleMap, "v3TitleMapToV4TitleMap");
+    __name(groupByTitleId, "groupByTitleId");
+    transformPlaywrightJson = /* @__PURE__ */ __name((index) => {
+      let titleIdToEntries;
+      if (index.v === 3) {
+        const titleIdToStories = groupByTitleId(Object.values(index.stories));
+        titleIdToEntries = v3TitleMapToV4TitleMap(titleIdToStories);
+      } else if (index.v === 4) {
+        titleIdToEntries = groupByTitleId(Object.values(index.entries));
+      } else {
+        throw new Error(`Unsupported version ${index.v}`);
+      }
+      const titleIdToTest = Object.entries(titleIdToEntries).reduce((acc, [titleId, entries]) => {
+        const stories = entries.filter((s) => s.type !== "docs");
+        if (stories.length) {
+          const storyTests = stories.map((story) => makeDescribe(story.name, [
+            makeTest(story)
+          ]));
+          const program2 = t2.program([
+            makeDescribe(stories[0].title, storyTests)
+          ]);
+          const { code } = (0, import_generator2.default)(program2, {});
+          acc[titleId] = code;
+        }
+        return acc;
+      }, {});
+      return titleIdToTest;
+    }, "transformPlaywrightJson");
+  }
+});
 
 // bin/test-storybook.ts
-process.env.BABEL_ENV = "test";
-process.env.NODE_ENV = "test";
-process.env.STORYBOOK_TEST_RUNNER = "true";
-process.env.PUBLIC_URL = "";
-process.on("unhandledRejection", (err) => {
-  throw err;
-});
-var log = /* @__PURE__ */ __name((message) => console.log(`[test-storybook] ${message}`), "log");
-var error = /* @__PURE__ */ __name((err) => {
-  if (err instanceof Error) {
-    console.error(`\x1B[31m[test-storybook]\x1B[0m ${err.message} 
+import { execSync } from "child_process";
+import fetch from "node-fetch";
+import fs from "fs";
+import path from "path";
+var require_test_storybook = __commonJS({
+  "bin/test-storybook.ts"(exports) {
+    var import_can_bind_to_host = __toESM(require_dist());
+    init_esm();
+    var import_tempy = __toESM(require_tempy());
+    init_getCliOptions();
+    init_getStorybookMetadata();
+    init_transformPlaywrightJson();
+    process.env.BABEL_ENV = "test";
+    process.env.NODE_ENV = "test";
+    process.env.STORYBOOK_TEST_RUNNER = "true";
+    process.env.PUBLIC_URL = "";
+    process.on("unhandledRejection", (err) => {
+      throw err;
+    });
+    var log = /* @__PURE__ */ __name((message) => console.log(`[test-storybook] ${message}`), "log");
+    var error = /* @__PURE__ */ __name((err) => {
+      if (err instanceof Error) {
+        console.error(`\x1B[31m[test-storybook]\x1B[0m ${err.message} 
 
 ${err.stack}`);
-  } else {
-    console.error(`\x1B[31m[test-storybook]\x1B[0m ${err}`);
-  }
-}, "error");
-var indexTmpDir;
-var cleanup = /* @__PURE__ */ __name(() => {
-  if (indexTmpDir) {
-    log(`Cleaning up ${indexTmpDir}`);
-    import_fs.default.rmSync(indexTmpDir, {
-      recursive: true,
-      force: true
-    });
-  }
-}, "cleanup");
-var isWatchMode = false;
-function reportCoverage() {
-  return __async(this, null, function* () {
-    if (isWatchMode || process.env.STORYBOOK_COLLECT_COVERAGE !== "true") {
-      return;
-    }
-    const coverageFolderE2E = import_path3.default.resolve(process.cwd(), ".nyc_output");
-    const coverageFolder = import_path3.default.resolve(process.cwd(), "coverage/storybook");
-    if (!import_fs.default.existsSync(coverageFolderE2E)) {
-      return;
-    }
-    if (!import_fs.default.existsSync(coverageFolder)) {
-      import_fs.default.mkdirSync(coverageFolder, {
-        recursive: true
+      } else {
+        console.error(`\x1B[31m[test-storybook]\x1B[0m ${err}`);
+      }
+    }, "error");
+    var indexTmpDir;
+    var cleanup = /* @__PURE__ */ __name(() => {
+      if (indexTmpDir) {
+        log(`Cleaning up ${indexTmpDir}`);
+        fs.rmSync(indexTmpDir, {
+          recursive: true,
+          force: true
+        });
+      }
+    }, "cleanup");
+    var isWatchMode = false;
+    function reportCoverage() {
+      return __async(this, null, function* () {
+        if (isWatchMode || process.env.STORYBOOK_COLLECT_COVERAGE !== "true") {
+          return;
+        }
+        const coverageFolderE2E = path.resolve(process.cwd(), ".nyc_output");
+        const coverageFolder = path.resolve(process.cwd(), "coverage/storybook");
+        if (!fs.existsSync(coverageFolderE2E)) {
+          return;
+        }
+        if (!fs.existsSync(coverageFolder)) {
+          fs.mkdirSync(coverageFolder, {
+            recursive: true
+          });
+        }
+        fs.renameSync(`${coverageFolderE2E}/coverage.json`, `${coverageFolder}/coverage-storybook.json`);
+        fs.rmSync(coverageFolderE2E, {
+          recursive: true
+        });
+        execSync(`npx nyc report --reporter=text -t ${coverageFolder} --report-dir ${coverageFolder}`, {
+          stdio: "inherit"
+        });
       });
     }
-    import_fs.default.renameSync(`${coverageFolderE2E}/coverage.json`, `${coverageFolder}/coverage-storybook.json`);
-    import_fs.default.rmSync(coverageFolderE2E, {
-      recursive: true
-    });
-    (0, import_child_process.execSync)(`npx nyc report --reporter=text -t ${coverageFolder} --report-dir ${coverageFolder}`, {
-      stdio: "inherit"
-    });
-  });
-}
-__name(reportCoverage, "reportCoverage");
-var onProcessEnd = /* @__PURE__ */ __name(() => {
-  cleanup();
-  reportCoverage();
-}, "onProcessEnd");
-process.on("SIGINT", onProcessEnd);
-process.on("exit", onProcessEnd);
-function sanitizeURL(url) {
-  let finalURL = url;
-  if (finalURL.indexOf("http://") === -1 && finalURL.indexOf("https://") === -1) {
-    finalURL = "http://" + finalURL;
-  }
-  finalURL = finalURL.replace(/iframe.html\s*$/, "");
-  finalURL = finalURL.replace(/index.html\s*$/, "");
-  if (finalURL.slice(-1) !== "/") {
-    finalURL = finalURL + "/";
-  }
-  return finalURL;
-}
-__name(sanitizeURL, "sanitizeURL");
-function executeJestPlaywright(args) {
-  return __async(this, null, function* () {
-    const jestPath = import_path3.default.dirname(require.resolve("jest", {
-      paths: [
-        import_path3.default.join(__dirname, "../@storybook/test-runner/node_modules")
-      ]
-    }));
-    const jest = require(jestPath);
-    let argv = args.slice(2);
-    const jestConfigPath = import_fs.default.existsSync("test-runner-jest.config.js") ? "test-runner-jest.config.js" : import_path3.default.resolve(__dirname, "../playwright/test-runner-jest.config.js");
-    argv.push("--config", jestConfigPath);
-    yield jest.run(argv);
-  });
-}
-__name(executeJestPlaywright, "executeJestPlaywright");
-function checkStorybook(url) {
-  return __async(this, null, function* () {
-    try {
-      const res = yield (0, import_node_fetch.default)(url, {
-        method: "HEAD"
+    __name(reportCoverage, "reportCoverage");
+    var onProcessEnd = /* @__PURE__ */ __name(() => {
+      cleanup();
+      reportCoverage();
+    }, "onProcessEnd");
+    process.on("SIGINT", onProcessEnd);
+    process.on("exit", onProcessEnd);
+    function sanitizeURL(url) {
+      let finalURL = url;
+      if (finalURL.indexOf("http://") === -1 && finalURL.indexOf("https://") === -1) {
+        finalURL = "http://" + finalURL;
+      }
+      finalURL = finalURL.replace(/iframe.html\s*$/, "");
+      finalURL = finalURL.replace(/index.html\s*$/, "");
+      if (finalURL.slice(-1) !== "/") {
+        finalURL = finalURL + "/";
+      }
+      return finalURL;
+    }
+    __name(sanitizeURL, "sanitizeURL");
+    function executeJestPlaywright(args) {
+      return __async(this, null, function* () {
+        const jestPath = path.dirname(__require.resolve("jest", {
+          paths: [
+            path.join(__dirname, "../@storybook/test-runner/node_modules")
+          ]
+        }));
+        const jest = __require(jestPath);
+        let argv = args.slice(2);
+        const jestConfigPath = fs.existsSync("test-runner-jest.config.js") ? "test-runner-jest.config.js" : path.resolve(__dirname, "../playwright/test-runner-jest.config.js");
+        argv.push("--config", jestConfigPath);
+        yield jest.run(argv);
       });
-      if (res.status !== 200)
-        throw new Error(`Unxpected status: ${res.status}`);
-    } catch (e) {
-      console.error(esm_default`\x1b[31m[test-storybook]\x1b[0m It seems that your Storybook instance is not running at: ${url}. Are you sure it's running?
+    }
+    __name(executeJestPlaywright, "executeJestPlaywright");
+    function checkStorybook(url) {
+      return __async(this, null, function* () {
+        try {
+          const res = yield fetch(url, {
+            method: "HEAD"
+          });
+          if (res.status !== 200)
+            throw new Error(`Unxpected status: ${res.status}`);
+        } catch (e) {
+          console.error(esm_default`\x1b[31m[test-storybook]\x1b[0m It seems that your Storybook instance is not running at: ${url}. Are you sure it's running?
       
       If you're not running Storybook on the default 6006 port or want to run the tests against any custom URL, you can pass the --url flag like so:
       
       yarn test-storybook --url http://localhost:9009
       
       More info at https://github.com/storybookjs/test-runner#getting-started`);
-      process.exit(1);
+          process.exit(1);
+        }
+      });
     }
-  });
-}
-__name(checkStorybook, "checkStorybook");
-function getIndexJson(url) {
-  return __async(this, null, function* () {
-    const indexJsonUrl = new URL("index.json", url).toString();
-    const storiesJsonUrl = new URL("stories.json", url).toString();
-    const [indexRes, storiesRes] = yield Promise.all([
-      (0, import_node_fetch.default)(indexJsonUrl),
-      (0, import_node_fetch.default)(storiesJsonUrl)
-    ]);
-    if (indexRes.ok) {
-      try {
-        const json = yield indexRes.text();
-        return JSON.parse(json);
-      } catch (err) {
-      }
-    }
-    if (storiesRes.ok) {
-      try {
-        const json1 = yield storiesRes.text();
-        return JSON.parse(json1);
-      } catch (err1) {
-      }
-    }
-    throw new Error(esm_default`
+    __name(checkStorybook, "checkStorybook");
+    function getIndexJson(url) {
+      return __async(this, null, function* () {
+        const indexJsonUrl = new URL("index.json", url).toString();
+        const storiesJsonUrl = new URL("stories.json", url).toString();
+        const [indexRes, storiesRes] = yield Promise.all([
+          fetch(indexJsonUrl),
+          fetch(storiesJsonUrl)
+        ]);
+        if (indexRes.ok) {
+          try {
+            const json = yield indexRes.text();
+            return JSON.parse(json);
+          } catch (err) {
+          }
+        }
+        if (storiesRes.ok) {
+          try {
+            const json1 = yield storiesRes.text();
+            return JSON.parse(json1);
+          } catch (err1) {
+          }
+        }
+        throw new Error(esm_default`
     Failed to fetch index data from the project.
 
     Make sure that either of these URLs are available with valid data in your Storybook:
@@ -74786,90 +74852,93 @@ function getIndexJson(url) {
 
     More info: https://github.com/storybookjs/test-runner/blob/main/README.md#indexjson-mode
   `);
-  });
-}
-__name(getIndexJson, "getIndexJson");
-function getIndexTempDir(url) {
-  return __async(this, null, function* () {
-    let tmpDir;
-    try {
-      const indexJson = yield getIndexJson(url);
-      const titleIdToTest = transformPlaywrightJson(indexJson);
-      tmpDir = import_tempy.default.directory();
-      Object.entries(titleIdToTest).forEach(([titleId, test]) => {
-        const tmpFile = import_path3.default.join(tmpDir, `${titleId}.test.js`);
-        import_fs.default.writeFileSync(tmpFile, test);
       });
-    } catch (err) {
-      error(err);
-      process.exit(1);
     }
-    return tmpDir;
-  });
-}
-__name(getIndexTempDir, "getIndexTempDir");
-function ejectConfiguration() {
-  const origin = import_path3.default.resolve(__dirname, "../playwright/test-runner-jest.config.js");
-  const destination = import_path3.default.resolve("test-runner-jest.config.js");
-  const fileAlreadyExists = import_fs.default.existsSync(destination);
-  if (fileAlreadyExists) {
-    throw new Error(esm_default`Found existing file at:
+    __name(getIndexJson, "getIndexJson");
+    function getIndexTempDir(url) {
+      return __async(this, null, function* () {
+        let tmpDir;
+        try {
+          const indexJson = yield getIndexJson(url);
+          const titleIdToTest = transformPlaywrightJson(indexJson);
+          tmpDir = import_tempy.default.directory();
+          Object.entries(titleIdToTest).forEach(([titleId, test]) => {
+            const tmpFile = path.join(tmpDir, `${titleId}.test.js`);
+            fs.writeFileSync(tmpFile, test);
+          });
+        } catch (err) {
+          error(err);
+          process.exit(1);
+        }
+        return tmpDir;
+      });
+    }
+    __name(getIndexTempDir, "getIndexTempDir");
+    function ejectConfiguration() {
+      const origin = path.resolve(__dirname, "../playwright/test-runner-jest.config.js");
+      const destination = path.resolve("test-runner-jest.config.js");
+      const fileAlreadyExists = fs.existsSync(destination);
+      if (fileAlreadyExists) {
+        throw new Error(esm_default`Found existing file at:
     
     ${destination}
     
     Please delete it and rerun this command.
     \n`);
+      }
+      fs.copyFileSync(origin, destination);
+      log("Configuration file successfully copied as test-runner-jest.config.js");
+    }
+    __name(ejectConfiguration, "ejectConfiguration");
+    var main = /* @__PURE__ */ __name(() => __async(exports, null, function* () {
+      const { jestOptions, runnerOptions } = getCliOptions();
+      if (runnerOptions.eject) {
+        ejectConfiguration();
+        process.exit(0);
+      }
+      isWatchMode = jestOptions.watch || jestOptions.watchAll;
+      const rawTargetURL = process.env.TARGET_URL || runnerOptions.url || "http://localhost:6006";
+      yield checkStorybook(rawTargetURL);
+      const targetURL = sanitizeURL(rawTargetURL);
+      process.env.TARGET_URL = targetURL;
+      if (runnerOptions.coverage) {
+        process.env.STORYBOOK_COLLECT_COVERAGE = "true";
+      }
+      if (runnerOptions.junit) {
+        process.env.STORYBOOK_JUNIT = "true";
+      }
+      if (process.env.REFERENCE_URL) {
+        process.env.REFERENCE_URL = sanitizeURL(process.env.REFERENCE_URL);
+      }
+      if (!process.env.TEST_BROWSERS && runnerOptions.browsers) {
+        process.env.TEST_BROWSERS = runnerOptions.browsers.join(",");
+      }
+      const { hostname } = new URL(targetURL);
+      const isLocalStorybookIp = yield (0, import_can_bind_to_host.default)(hostname);
+      const shouldRunIndexJson = runnerOptions.indexJson !== false && !isLocalStorybookIp;
+      if (shouldRunIndexJson) {
+        log("Detected a remote Storybook URL, running in index json mode. To disable this, run the command again with --no-index-json\n");
+      }
+      if (runnerOptions.indexJson || shouldRunIndexJson) {
+        indexTmpDir = yield getIndexTempDir(targetURL);
+        process.env.TEST_ROOT = indexTmpDir;
+        process.env.TEST_MATCH = "**/*.test.js";
+      }
+      process.env.STORYBOOK_CONFIG_DIR = runnerOptions.configDir;
+      const { storiesPaths, lazyCompilation } = getStorybookMetadata();
+      process.env.STORYBOOK_STORIES_PATTERN = storiesPaths;
+      if (lazyCompilation && isLocalStorybookIp) {
+        log(`You're running Storybook with lazy compilation enabled, and will likely cause issues with the test runner locally. Consider disabling 'lazyCompilation' in ${runnerOptions.configDir}/main.js when running 'test-storybook' locally.`);
+      }
+      yield executeJestPlaywright(jestOptions);
+    }), "main");
+    main().catch((e) => {
+      error(e);
+      process.exit(1);
+    });
   }
-  import_fs.default.copyFileSync(origin, destination);
-  log("Configuration file successfully copied as test-runner-jest.config.js");
-}
-__name(ejectConfiguration, "ejectConfiguration");
-var main = /* @__PURE__ */ __name(() => __async(exports, null, function* () {
-  const { jestOptions, runnerOptions } = getCliOptions();
-  if (runnerOptions.eject) {
-    ejectConfiguration();
-    process.exit(0);
-  }
-  isWatchMode = jestOptions.watch || jestOptions.watchAll;
-  const rawTargetURL = process.env.TARGET_URL || runnerOptions.url || "http://localhost:6006";
-  yield checkStorybook(rawTargetURL);
-  const targetURL = sanitizeURL(rawTargetURL);
-  process.env.TARGET_URL = targetURL;
-  if (runnerOptions.coverage) {
-    process.env.STORYBOOK_COLLECT_COVERAGE = "true";
-  }
-  if (runnerOptions.junit) {
-    process.env.STORYBOOK_JUNIT = "true";
-  }
-  if (process.env.REFERENCE_URL) {
-    process.env.REFERENCE_URL = sanitizeURL(process.env.REFERENCE_URL);
-  }
-  if (!process.env.TEST_BROWSERS && runnerOptions.browsers) {
-    process.env.TEST_BROWSERS = runnerOptions.browsers.join(",");
-  }
-  const { hostname } = new URL(targetURL);
-  const isLocalStorybookIp = yield (0, import_can_bind_to_host.default)(hostname);
-  const shouldRunIndexJson = runnerOptions.indexJson !== false && !isLocalStorybookIp;
-  if (shouldRunIndexJson) {
-    log("Detected a remote Storybook URL, running in index json mode. To disable this, run the command again with --no-index-json\n");
-  }
-  if (runnerOptions.indexJson || shouldRunIndexJson) {
-    indexTmpDir = yield getIndexTempDir(targetURL);
-    process.env.TEST_ROOT = indexTmpDir;
-    process.env.TEST_MATCH = "**/*.test.js";
-  }
-  process.env.STORYBOOK_CONFIG_DIR = runnerOptions.configDir;
-  const { storiesPaths, lazyCompilation } = getStorybookMetadata();
-  process.env.STORYBOOK_STORIES_PATTERN = storiesPaths;
-  if (lazyCompilation && isLocalStorybookIp) {
-    log(`You're running Storybook with lazy compilation enabled, and will likely cause issues with the test runner locally. Consider disabling 'lazyCompilation' in ${runnerOptions.configDir}/main.js when running 'test-storybook' locally.`);
-  }
-  yield executeJestPlaywright(jestOptions);
-}), "main");
-main().catch((e) => {
-  error(e);
-  process.exit(1);
 });
+export default require_test_storybook();
 /*!
  * fill-range <https://github.com/jonschlinkert/fill-range>
  *
