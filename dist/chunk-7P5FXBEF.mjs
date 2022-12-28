@@ -1,11 +1,8 @@
 import {
-  __async,
   __commonJS,
   __name,
-  __objRest,
-  __require,
-  __spreadValues
-} from "./chunk-2RV4EXUL.mjs";
+  __require
+} from "./chunk-AIG2NDDY.mjs";
 
 // node_modules/commander/lib/error.js
 var require_error = __commonJS({
@@ -969,15 +966,14 @@ Expecting one of '${allowedValues.join("', '")}'`);
         return this._optionValues[key];
       }
       setOptionValue(key, value) {
+        return this.setOptionValueWithSource(key, value, void 0);
+      }
+      setOptionValueWithSource(key, value, source) {
         if (this._storeOptionsAsProperties) {
           this[key] = value;
         } else {
           this._optionValues[key] = value;
         }
-        return this;
-      }
-      setOptionValueWithSource(key, value, source) {
-        this.setOptionValue(key, value);
         this._optionValueSources[key] = source;
         return this;
       }
@@ -1027,12 +1023,10 @@ Expecting one of '${allowedValues.join("', '")}'`);
         this._parseCommand([], userArgs);
         return this;
       }
-      parseAsync(argv, parseOptions) {
-        return __async(this, null, function* () {
-          const userArgs = this._prepareUserArgs(argv, parseOptions);
-          yield this._parseCommand([], userArgs);
-          return this;
-        });
+      async parseAsync(argv, parseOptions) {
+        const userArgs = this._prepareUserArgs(argv, parseOptions);
+        await this._parseCommand([], userArgs);
+        return this;
       }
       _executeSubCommand(subcommand, args) {
         args = args.slice();
@@ -1889,11 +1883,12 @@ If you'd like this option to be supported, please open an issue at https://githu
       }
     }
   }
-  const _a = program.opts(), { storiesJson } = _a, options = __objRest(_a, ["storiesJson"]);
+  const { storiesJson, ...options } = program.opts();
   return {
-    options: __spreadValues({
-      indexJson: storiesJson
-    }, options),
+    options: {
+      indexJson: storiesJson,
+      ...options
+    },
     extraArgs: program.args
   };
 }, "getParsedCliOptions");

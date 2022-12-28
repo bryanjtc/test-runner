@@ -1,25 +1,25 @@
 import {
   getStorybookMetadata
-} from "./chunk-BDLBAL3M.mjs";
+} from "./chunk-XHBBCDN7.mjs";
 import {
   require_lib as require_lib2
-} from "./chunk-6J2TR5JU.mjs";
+} from "./chunk-RYEG5IZ6.mjs";
 import {
   dedent,
   esm_default,
   require_lib as require_lib3,
   require_to_fast_properties,
   transformCsf
-} from "./chunk-JVSXUXAE.mjs";
+} from "./chunk-VZ65GJNG.mjs";
 import {
   require_lib
-} from "./chunk-ICZWPBDQ.mjs";
+} from "./chunk-2M227QDY.mjs";
 import {
   __commonJS,
   __name,
   __require,
   __toESM
-} from "./chunk-2RV4EXUL.mjs";
+} from "./chunk-AIG2NDDY.mjs";
 
 // node_modules/@babel/template/node_modules/@babel/types/lib/utils/shallowEqual.js
 var require_shallowEqual = __commonJS({
@@ -296,6 +296,7 @@ var require_generated = __commonJS({
     exports.isTSPropertySignature = isTSPropertySignature;
     exports.isTSQualifiedName = isTSQualifiedName;
     exports.isTSRestType = isTSRestType;
+    exports.isTSSatisfiesExpression = isTSSatisfiesExpression;
     exports.isTSStringKeyword = isTSStringKeyword;
     exports.isTSSymbolKeyword = isTSSymbolKeyword;
     exports.isTSThisType = isTSThisType;
@@ -3613,6 +3614,20 @@ var require_generated = __commonJS({
       return false;
     }
     __name(isTSAsExpression, "isTSAsExpression");
+    function isTSSatisfiesExpression(node, opts) {
+      if (!node)
+        return false;
+      const nodeType = node.type;
+      if (nodeType === "TSSatisfiesExpression") {
+        if (typeof opts === "undefined") {
+          return true;
+        } else {
+          return (0, _shallowEqual.default)(node, opts);
+        }
+      }
+      return false;
+    }
+    __name(isTSSatisfiesExpression, "isTSSatisfiesExpression");
     function isTSTypeAssertion(node, opts) {
       if (!node)
         return false;
@@ -3841,7 +3856,7 @@ var require_generated = __commonJS({
       if (!node)
         return false;
       const nodeType = node.type;
-      if ("ArrayExpression" === nodeType || "AssignmentExpression" === nodeType || "BinaryExpression" === nodeType || "CallExpression" === nodeType || "ConditionalExpression" === nodeType || "FunctionExpression" === nodeType || "Identifier" === nodeType || "StringLiteral" === nodeType || "NumericLiteral" === nodeType || "NullLiteral" === nodeType || "BooleanLiteral" === nodeType || "RegExpLiteral" === nodeType || "LogicalExpression" === nodeType || "MemberExpression" === nodeType || "NewExpression" === nodeType || "ObjectExpression" === nodeType || "SequenceExpression" === nodeType || "ParenthesizedExpression" === nodeType || "ThisExpression" === nodeType || "UnaryExpression" === nodeType || "UpdateExpression" === nodeType || "ArrowFunctionExpression" === nodeType || "ClassExpression" === nodeType || "MetaProperty" === nodeType || "Super" === nodeType || "TaggedTemplateExpression" === nodeType || "TemplateLiteral" === nodeType || "YieldExpression" === nodeType || "AwaitExpression" === nodeType || "Import" === nodeType || "BigIntLiteral" === nodeType || "OptionalMemberExpression" === nodeType || "OptionalCallExpression" === nodeType || "TypeCastExpression" === nodeType || "JSXElement" === nodeType || "JSXFragment" === nodeType || "BindExpression" === nodeType || "DoExpression" === nodeType || "RecordExpression" === nodeType || "TupleExpression" === nodeType || "DecimalLiteral" === nodeType || "ModuleExpression" === nodeType || "TopicReference" === nodeType || "PipelineTopicExpression" === nodeType || "PipelineBareFunction" === nodeType || "PipelinePrimaryTopicReference" === nodeType || "TSInstantiationExpression" === nodeType || "TSAsExpression" === nodeType || "TSTypeAssertion" === nodeType || "TSNonNullExpression" === nodeType || nodeType === "Placeholder" && ("Expression" === node.expectedNode || "Identifier" === node.expectedNode || "StringLiteral" === node.expectedNode)) {
+      if ("ArrayExpression" === nodeType || "AssignmentExpression" === nodeType || "BinaryExpression" === nodeType || "CallExpression" === nodeType || "ConditionalExpression" === nodeType || "FunctionExpression" === nodeType || "Identifier" === nodeType || "StringLiteral" === nodeType || "NumericLiteral" === nodeType || "NullLiteral" === nodeType || "BooleanLiteral" === nodeType || "RegExpLiteral" === nodeType || "LogicalExpression" === nodeType || "MemberExpression" === nodeType || "NewExpression" === nodeType || "ObjectExpression" === nodeType || "SequenceExpression" === nodeType || "ParenthesizedExpression" === nodeType || "ThisExpression" === nodeType || "UnaryExpression" === nodeType || "UpdateExpression" === nodeType || "ArrowFunctionExpression" === nodeType || "ClassExpression" === nodeType || "MetaProperty" === nodeType || "Super" === nodeType || "TaggedTemplateExpression" === nodeType || "TemplateLiteral" === nodeType || "YieldExpression" === nodeType || "AwaitExpression" === nodeType || "Import" === nodeType || "BigIntLiteral" === nodeType || "OptionalMemberExpression" === nodeType || "OptionalCallExpression" === nodeType || "TypeCastExpression" === nodeType || "JSXElement" === nodeType || "JSXFragment" === nodeType || "BindExpression" === nodeType || "DoExpression" === nodeType || "RecordExpression" === nodeType || "TupleExpression" === nodeType || "DecimalLiteral" === nodeType || "ModuleExpression" === nodeType || "TopicReference" === nodeType || "PipelineTopicExpression" === nodeType || "PipelineBareFunction" === nodeType || "PipelinePrimaryTopicReference" === nodeType || "TSInstantiationExpression" === nodeType || "TSAsExpression" === nodeType || "TSSatisfiesExpression" === nodeType || "TSTypeAssertion" === nodeType || "TSNonNullExpression" === nodeType || nodeType === "Placeholder" && ("Expression" === node.expectedNode || "Identifier" === node.expectedNode || "StringLiteral" === node.expectedNode)) {
         if (typeof opts === "undefined") {
           return true;
         } else {
@@ -4093,7 +4108,7 @@ var require_generated = __commonJS({
       if (!node)
         return false;
       const nodeType = node.type;
-      if ("Identifier" === nodeType || "RestElement" === nodeType || "AssignmentPattern" === nodeType || "ArrayPattern" === nodeType || "ObjectPattern" === nodeType || "TSAsExpression" === nodeType || "TSTypeAssertion" === nodeType || "TSNonNullExpression" === nodeType || nodeType === "Placeholder" && ("Pattern" === node.expectedNode || "Identifier" === node.expectedNode)) {
+      if ("Identifier" === nodeType || "RestElement" === nodeType || "AssignmentPattern" === nodeType || "ArrayPattern" === nodeType || "ObjectPattern" === nodeType || "TSAsExpression" === nodeType || "TSSatisfiesExpression" === nodeType || "TSTypeAssertion" === nodeType || "TSNonNullExpression" === nodeType || nodeType === "Placeholder" && ("Pattern" === node.expectedNode || "Identifier" === node.expectedNode)) {
         if (typeof opts === "undefined") {
           return true;
         } else {
@@ -4107,7 +4122,7 @@ var require_generated = __commonJS({
       if (!node)
         return false;
       const nodeType = node.type;
-      if ("Identifier" === nodeType || "MemberExpression" === nodeType || "RestElement" === nodeType || "AssignmentPattern" === nodeType || "ArrayPattern" === nodeType || "ObjectPattern" === nodeType || "TSParameterProperty" === nodeType || "TSAsExpression" === nodeType || "TSTypeAssertion" === nodeType || "TSNonNullExpression" === nodeType || nodeType === "Placeholder" && ("Pattern" === node.expectedNode || "Identifier" === node.expectedNode)) {
+      if ("Identifier" === nodeType || "MemberExpression" === nodeType || "RestElement" === nodeType || "AssignmentPattern" === nodeType || "ArrayPattern" === nodeType || "ObjectPattern" === nodeType || "TSParameterProperty" === nodeType || "TSAsExpression" === nodeType || "TSSatisfiesExpression" === nodeType || "TSTypeAssertion" === nodeType || "TSNonNullExpression" === nodeType || nodeType === "Placeholder" && ("Pattern" === node.expectedNode || "Identifier" === node.expectedNode)) {
         if (typeof opts === "undefined") {
           return true;
         } else {
@@ -4457,7 +4472,7 @@ var require_generated = __commonJS({
       if (!node)
         return false;
       const nodeType = node.type;
-      if ("TSParameterProperty" === nodeType || "TSDeclareFunction" === nodeType || "TSDeclareMethod" === nodeType || "TSQualifiedName" === nodeType || "TSCallSignatureDeclaration" === nodeType || "TSConstructSignatureDeclaration" === nodeType || "TSPropertySignature" === nodeType || "TSMethodSignature" === nodeType || "TSIndexSignature" === nodeType || "TSAnyKeyword" === nodeType || "TSBooleanKeyword" === nodeType || "TSBigIntKeyword" === nodeType || "TSIntrinsicKeyword" === nodeType || "TSNeverKeyword" === nodeType || "TSNullKeyword" === nodeType || "TSNumberKeyword" === nodeType || "TSObjectKeyword" === nodeType || "TSStringKeyword" === nodeType || "TSSymbolKeyword" === nodeType || "TSUndefinedKeyword" === nodeType || "TSUnknownKeyword" === nodeType || "TSVoidKeyword" === nodeType || "TSThisType" === nodeType || "TSFunctionType" === nodeType || "TSConstructorType" === nodeType || "TSTypeReference" === nodeType || "TSTypePredicate" === nodeType || "TSTypeQuery" === nodeType || "TSTypeLiteral" === nodeType || "TSArrayType" === nodeType || "TSTupleType" === nodeType || "TSOptionalType" === nodeType || "TSRestType" === nodeType || "TSNamedTupleMember" === nodeType || "TSUnionType" === nodeType || "TSIntersectionType" === nodeType || "TSConditionalType" === nodeType || "TSInferType" === nodeType || "TSParenthesizedType" === nodeType || "TSTypeOperator" === nodeType || "TSIndexedAccessType" === nodeType || "TSMappedType" === nodeType || "TSLiteralType" === nodeType || "TSExpressionWithTypeArguments" === nodeType || "TSInterfaceDeclaration" === nodeType || "TSInterfaceBody" === nodeType || "TSTypeAliasDeclaration" === nodeType || "TSInstantiationExpression" === nodeType || "TSAsExpression" === nodeType || "TSTypeAssertion" === nodeType || "TSEnumDeclaration" === nodeType || "TSEnumMember" === nodeType || "TSModuleDeclaration" === nodeType || "TSModuleBlock" === nodeType || "TSImportType" === nodeType || "TSImportEqualsDeclaration" === nodeType || "TSExternalModuleReference" === nodeType || "TSNonNullExpression" === nodeType || "TSExportAssignment" === nodeType || "TSNamespaceExportDeclaration" === nodeType || "TSTypeAnnotation" === nodeType || "TSTypeParameterInstantiation" === nodeType || "TSTypeParameterDeclaration" === nodeType || "TSTypeParameter" === nodeType) {
+      if ("TSParameterProperty" === nodeType || "TSDeclareFunction" === nodeType || "TSDeclareMethod" === nodeType || "TSQualifiedName" === nodeType || "TSCallSignatureDeclaration" === nodeType || "TSConstructSignatureDeclaration" === nodeType || "TSPropertySignature" === nodeType || "TSMethodSignature" === nodeType || "TSIndexSignature" === nodeType || "TSAnyKeyword" === nodeType || "TSBooleanKeyword" === nodeType || "TSBigIntKeyword" === nodeType || "TSIntrinsicKeyword" === nodeType || "TSNeverKeyword" === nodeType || "TSNullKeyword" === nodeType || "TSNumberKeyword" === nodeType || "TSObjectKeyword" === nodeType || "TSStringKeyword" === nodeType || "TSSymbolKeyword" === nodeType || "TSUndefinedKeyword" === nodeType || "TSUnknownKeyword" === nodeType || "TSVoidKeyword" === nodeType || "TSThisType" === nodeType || "TSFunctionType" === nodeType || "TSConstructorType" === nodeType || "TSTypeReference" === nodeType || "TSTypePredicate" === nodeType || "TSTypeQuery" === nodeType || "TSTypeLiteral" === nodeType || "TSArrayType" === nodeType || "TSTupleType" === nodeType || "TSOptionalType" === nodeType || "TSRestType" === nodeType || "TSNamedTupleMember" === nodeType || "TSUnionType" === nodeType || "TSIntersectionType" === nodeType || "TSConditionalType" === nodeType || "TSInferType" === nodeType || "TSParenthesizedType" === nodeType || "TSTypeOperator" === nodeType || "TSIndexedAccessType" === nodeType || "TSMappedType" === nodeType || "TSLiteralType" === nodeType || "TSExpressionWithTypeArguments" === nodeType || "TSInterfaceDeclaration" === nodeType || "TSInterfaceBody" === nodeType || "TSTypeAliasDeclaration" === nodeType || "TSInstantiationExpression" === nodeType || "TSAsExpression" === nodeType || "TSSatisfiesExpression" === nodeType || "TSTypeAssertion" === nodeType || "TSEnumDeclaration" === nodeType || "TSEnumMember" === nodeType || "TSModuleDeclaration" === nodeType || "TSModuleBlock" === nodeType || "TSImportType" === nodeType || "TSImportEqualsDeclaration" === nodeType || "TSExternalModuleReference" === nodeType || "TSNonNullExpression" === nodeType || "TSExportAssignment" === nodeType || "TSNamespaceExportDeclaration" === nodeType || "TSTypeAnnotation" === nodeType || "TSTypeParameterInstantiation" === nodeType || "TSTypeParameterDeclaration" === nodeType || "TSTypeParameter" === nodeType) {
         if (typeof opts === "undefined") {
           return true;
         } else {
@@ -4595,7 +4610,7 @@ var require_matchesPattern = __commonJS({
         return false;
       if (!allowPartial && nodes.length > parts.length)
         return false;
-      for (let i2 = 0, j = nodes.length - 1; i2 < parts.length; i2++, j--) {
+      for (let i = 0, j = nodes.length - 1; i < parts.length; i++, j--) {
         const node1 = nodes[j];
         let value;
         if ((0, _generated.isIdentifier)(node1)) {
@@ -4607,7 +4622,7 @@ var require_matchesPattern = __commonJS({
         } else {
           return false;
         }
-        if (parts[i2] !== value)
+        if (parts[i] !== value)
           return false;
       }
       return true;
@@ -4732,8 +4747,8 @@ var require_is = __commonJS({
     function is(type, node, opts) {
       if (!node)
         return false;
-      const matches = (0, _isType.default)(node.type, type);
-      if (!matches) {
+      const matches2 = (0, _isType.default)(node.type, type);
+      if (!matches2) {
         if (!opts && node.type === "Placeholder" && type in _definitions.FLIPPED_ALIAS_KEYS) {
           return (0, _isPlaceholderType.default)(node.expectedNode, type);
         }
@@ -5005,9 +5020,9 @@ var require_utils = __commonJS({
       function validator(node, key, val) {
         if (!Array.isArray(val))
           return;
-        for (let i2 = 0; i2 < val.length; i2++) {
-          const subkey = `${key}[${i2}]`;
-          const v = val[i2];
+        for (let i = 0; i < val.length; i++) {
+          const subkey = `${key}[${i}]`;
+          const v = val[i];
           callback(node, subkey, v);
           if (process.env.BABEL_TYPES_8_BREAKING)
             (0, _validate.validateChild)(node, subkey, v);
@@ -5149,6 +5164,7 @@ ${errors.join("\n")}`);
       "optional",
       "validate"
     ];
+    var store = {};
     function defineAliasedType(...aliases) {
       return (type, opts = {}) => {
         let defined = opts.aliases;
@@ -5159,7 +5175,7 @@ ${errors.join("\n")}`);
           (_defined = defined) != null ? _defined : defined = [];
           opts.aliases = defined;
         }
-        const additional = aliases.filter((a2) => !defined.includes(a2));
+        const additional = aliases.filter((a) => !defined.includes(a));
         defined.unshift(...additional);
         return defineType(type, opts);
       };
@@ -5230,7 +5246,6 @@ ${errors.join("\n")}`);
       store[type] = opts;
     }
     __name(defineType, "defineType");
-    var store = {};
   }
 });
 
@@ -5279,7 +5294,7 @@ var require_core = __commonJS({
           }()
         },
         left: {
-          validate: !process.env.BABEL_TYPES_8_BREAKING ? (0, _utils.assertNodeType)("LVal") : (0, _utils.assertNodeType)("Identifier", "MemberExpression", "ArrayPattern", "ObjectPattern", "TSAsExpression", "TSTypeAssertion", "TSNonNullExpression")
+          validate: !process.env.BABEL_TYPES_8_BREAKING ? (0, _utils.assertNodeType)("LVal") : (0, _utils.assertNodeType)("Identifier", "MemberExpression", "ArrayPattern", "ObjectPattern", "TSAsExpression", "TSSatisfiesExpression", "TSTypeAssertion", "TSNonNullExpression")
         },
         right: {
           validate: (0, _utils.assertNodeType)("Expression")
@@ -5597,7 +5612,7 @@ var require_core = __commonJS({
       ],
       fields: {
         left: {
-          validate: !process.env.BABEL_TYPES_8_BREAKING ? (0, _utils.assertNodeType)("VariableDeclaration", "LVal") : (0, _utils.assertNodeType)("VariableDeclaration", "Identifier", "MemberExpression", "ArrayPattern", "ObjectPattern", "TSAsExpression", "TSTypeAssertion", "TSNonNullExpression")
+          validate: !process.env.BABEL_TYPES_8_BREAKING ? (0, _utils.assertNodeType)("VariableDeclaration", "LVal") : (0, _utils.assertNodeType)("VariableDeclaration", "Identifier", "MemberExpression", "ArrayPattern", "ObjectPattern", "TSAsExpression", "TSSatisfiesExpression", "TSTypeAssertion", "TSNonNullExpression")
         },
         right: {
           validate: (0, _utils.assertNodeType)("Expression")
@@ -6212,7 +6227,7 @@ var require_core = __commonJS({
         "ObjectMember"
       ],
       validate: function() {
-        const pattern = (0, _utils.assertNodeType)("Identifier", "Pattern", "TSAsExpression", "TSNonNullExpression", "TSTypeAssertion");
+        const pattern = (0, _utils.assertNodeType)("Identifier", "Pattern", "TSAsExpression", "TSSatisfiesExpression", "TSNonNullExpression", "TSTypeAssertion");
         const expression = (0, _utils.assertNodeType)("Expression");
         return function(parent, key, node) {
           if (!process.env.BABEL_TYPES_8_BREAKING)
@@ -6237,7 +6252,7 @@ var require_core = __commonJS({
       deprecatedAlias: "RestProperty",
       fields: Object.assign({}, patternLikeCommon(), {
         argument: {
-          validate: !process.env.BABEL_TYPES_8_BREAKING ? (0, _utils.assertNodeType)("LVal") : (0, _utils.assertNodeType)("Identifier", "ArrayPattern", "ObjectPattern", "MemberExpression", "TSAsExpression", "TSTypeAssertion", "TSNonNullExpression")
+          validate: !process.env.BABEL_TYPES_8_BREAKING ? (0, _utils.assertNodeType)("LVal") : (0, _utils.assertNodeType)("Identifier", "ArrayPattern", "ObjectPattern", "MemberExpression", "TSAsExpression", "TSSatisfiesExpression", "TSTypeAssertion", "TSNonNullExpression")
         },
         optional: {
           validate: (0, _utils.assertValueType)("boolean"),
@@ -6453,7 +6468,7 @@ var require_core = __commonJS({
           optional: true
         },
         kind: {
-          validate: (0, _utils.assertOneOf)("var", "let", "const")
+          validate: (0, _utils.assertOneOf)("var", "let", "const", "using")
         },
         declarations: {
           validate: (0, _utils.chain)((0, _utils.assertValueType)("array"), (0, _utils.assertEach)((0, _utils.assertNodeType)("VariableDeclarator")))
@@ -6555,7 +6570,7 @@ var require_core = __commonJS({
       ],
       fields: Object.assign({}, patternLikeCommon(), {
         left: {
-          validate: (0, _utils.assertNodeType)("Identifier", "ObjectPattern", "ArrayPattern", "MemberExpression", "TSAsExpression", "TSTypeAssertion", "TSNonNullExpression")
+          validate: (0, _utils.assertNodeType)("Identifier", "ObjectPattern", "ArrayPattern", "MemberExpression", "TSAsExpression", "TSSatisfiesExpression", "TSTypeAssertion", "TSNonNullExpression")
         },
         right: {
           validate: (0, _utils.assertNodeType)("Expression")
@@ -6894,7 +6909,7 @@ var require_core = __commonJS({
               return (0, _utils.assertNodeType)("VariableDeclaration", "LVal");
             }
             const declaration = (0, _utils.assertNodeType)("VariableDeclaration");
-            const lval = (0, _utils.assertNodeType)("Identifier", "MemberExpression", "ArrayPattern", "ObjectPattern", "TSAsExpression", "TSTypeAssertion", "TSNonNullExpression");
+            const lval = (0, _utils.assertNodeType)("Identifier", "MemberExpression", "ArrayPattern", "ObjectPattern", "TSAsExpression", "TSSatisfiesExpression", "TSTypeAssertion", "TSNonNullExpression");
             return function(node, key, val) {
               if ((0, _is.default)("VariableDeclaration", val)) {
                 declaration(node, key, val);
@@ -6929,6 +6944,10 @@ var require_core = __commonJS({
         assertions: {
           optional: true,
           validate: (0, _utils.chain)((0, _utils.assertValueType)("array"), (0, _utils.assertEach)((0, _utils.assertNodeType)("ImportAttribute")))
+        },
+        module: {
+          optional: true,
+          validate: (0, _utils.assertValueType)("boolean")
         },
         specifiers: {
           validate: (0, _utils.chain)((0, _utils.assertValueType)("array"), (0, _utils.assertEach)((0, _utils.assertNodeType)("ImportSpecifier", "ImportDefaultSpecifier", "ImportNamespaceSpecifier")))
@@ -9508,7 +9527,7 @@ var require_typescript = __commonJS({
         typeParameters: (0, _utils.validateOptionalType)("TSTypeParameterInstantiation")
       }
     });
-    defineType("TSAsExpression", {
+    var TSTypeExpression = {
       aliases: [
         "Expression",
         "LVal",
@@ -9522,7 +9541,9 @@ var require_typescript = __commonJS({
         expression: (0, _utils.validateType)("Expression"),
         typeAnnotation: (0, _utils.validateType)("TSType")
       }
-    });
+    };
+    defineType("TSAsExpression", TSTypeExpression);
+    defineType("TSSatisfiesExpression", TSTypeExpression);
     defineType("TSTypeAssertion", {
       aliases: [
         "Expression",
@@ -10121,6 +10142,7 @@ var require_generated2 = __commonJS({
     exports.tSPropertySignature = exports.tsPropertySignature = tsPropertySignature;
     exports.tSQualifiedName = exports.tsQualifiedName = tsQualifiedName;
     exports.tSRestType = exports.tsRestType = tsRestType;
+    exports.tSSatisfiesExpression = exports.tsSatisfiesExpression = tsSatisfiesExpression;
     exports.tSStringKeyword = exports.tsStringKeyword = tsStringKeyword;
     exports.tSSymbolKeyword = exports.tsSymbolKeyword = tsSymbolKeyword;
     exports.tSThisType = exports.tsThisType = tsThisType;
@@ -11994,6 +12016,14 @@ var require_generated2 = __commonJS({
       });
     }
     __name(tsAsExpression, "tsAsExpression");
+    function tsSatisfiesExpression(expression, typeAnnotation2) {
+      return (0, _validateNode.default)({
+        type: "TSSatisfiesExpression",
+        expression,
+        typeAnnotation: typeAnnotation2
+      });
+    }
+    __name(tsSatisfiesExpression, "tsSatisfiesExpression");
     function tsTypeAssertion(typeAnnotation2, expression) {
       return (0, _validateNode.default)({
         type: "TSTypeAssertion",
@@ -12141,12 +12171,13 @@ var require_cleanJSXElementLiteralChild = __commonJS({
     });
     exports.default = cleanJSXElementLiteralChild;
     var _generated = require_generated2();
+    var _ = require_lib4();
     function cleanJSXElementLiteralChild(child, args) {
       const lines = child.value.split(/\r\n|\n|\r/);
       let lastNonEmptyLine = 0;
-      for (let i2 = 0; i2 < lines.length; i2++) {
-        if (lines[i2].match(/[^ \t]/)) {
-          lastNonEmptyLine = i2;
+      for (let i = 0; i < lines.length; i++) {
+        if (lines[i].match(/[^ \t]/)) {
+          lastNonEmptyLine = i;
         }
       }
       let str = "";
@@ -12170,7 +12201,7 @@ var require_cleanJSXElementLiteralChild = __commonJS({
         }
       }
       if (str)
-        args.push((0, _generated.stringLiteral)(str));
+        args.push((0, _.inherits)((0, _generated.stringLiteral)(str), child));
     }
     __name(cleanJSXElementLiteralChild, "cleanJSXElementLiteralChild");
   }
@@ -12188,8 +12219,8 @@ var require_buildChildren = __commonJS({
     var _cleanJSXElementLiteralChild = require_cleanJSXElementLiteralChild();
     function buildChildren(node) {
       const elements = [];
-      for (let i2 = 0; i2 < node.children.length; i2++) {
-        let child = node.children[i2];
+      for (let i = 0; i < node.children.length; i++) {
+        let child = node.children[i];
         if ((0, _generated.isJSXText)(child)) {
           (0, _cleanJSXElementLiteralChild.default)(child, elements);
           continue;
@@ -12496,6 +12527,7 @@ var require_generated3 = __commonJS({
     exports.assertTSPropertySignature = assertTSPropertySignature;
     exports.assertTSQualifiedName = assertTSQualifiedName;
     exports.assertTSRestType = assertTSRestType;
+    exports.assertTSSatisfiesExpression = assertTSSatisfiesExpression;
     exports.assertTSStringKeyword = assertTSStringKeyword;
     exports.assertTSSymbolKeyword = assertTSSymbolKeyword;
     exports.assertTSThisType = assertTSThisType;
@@ -13489,6 +13521,10 @@ var require_generated3 = __commonJS({
       assert("TSAsExpression", node, opts);
     }
     __name(assertTSAsExpression, "assertTSAsExpression");
+    function assertTSSatisfiesExpression(node, opts) {
+      assert("TSSatisfiesExpression", node, opts);
+    }
+    __name(assertTSSatisfiesExpression, "assertTSSatisfiesExpression");
     function assertTSTypeAssertion(node, opts) {
       assert("TSTypeAssertion", node, opts);
     }
@@ -13822,8 +13858,8 @@ var require_removeTypeDuplicates = __commonJS({
       const bases = /* @__PURE__ */ new Map();
       const typeGroups = /* @__PURE__ */ new Set();
       const types = [];
-      for (let i2 = 0; i2 < nodes.length; i2++) {
-        const node = nodes[i2];
+      for (let i = 0; i < nodes.length; i++) {
+        const node = nodes[i];
         if (!node)
           continue;
         if (types.indexOf(node) >= 0) {
@@ -13915,8 +13951,8 @@ var require_removeTypeDuplicates2 = __commonJS({
       const bases = /* @__PURE__ */ new Map();
       const typeGroups = /* @__PURE__ */ new Set();
       const types = [];
-      for (let i2 = 0; i2 < nodes.length; i2++) {
-        const node = nodes[i2];
+      for (let i = 0; i < nodes.length; i++) {
+        const node = nodes[i];
         if (!node)
           continue;
         if (types.indexOf(node) >= 0) {
@@ -15231,6 +15267,12 @@ var require_uppercase = __commonJS({
         return _index.tsRestType;
       }
     });
+    Object.defineProperty(exports, "TSSatisfiesExpression", {
+      enumerable: true,
+      get: function() {
+        return _index.tsSatisfiesExpression;
+      }
+    });
     Object.defineProperty(exports, "TSStringKeyword", {
       enumerable: true,
       get: function() {
@@ -16014,12 +16056,12 @@ var require_toIdentifier = __commonJS({
     function toIdentifier(input) {
       input = input + "";
       let name = "";
-      for (const c2 of input) {
-        name += (0, _helperValidatorIdentifier.isIdentifierChar)(c2.codePointAt(0)) ? c2 : "-";
+      for (const c of input) {
+        name += (0, _helperValidatorIdentifier.isIdentifierChar)(c.codePointAt(0)) ? c : "-";
       }
       name = name.replace(/^[-0-9]+/, "");
-      name = name.replace(/[-\s]+(.)?/g, function(match, c2) {
-        return c2 ? c2.toUpperCase() : "";
+      name = name.replace(/[-\s]+(.)?/g, function(match, c) {
+        return c ? c.toUpperCase() : "";
       });
       if (!(0, _isValidIdentifier.default)(name)) {
         name = `_${name}`;
@@ -16275,8 +16317,8 @@ var require_getBindingIdentifiers = __commonJS({
           }
         }
         if (keys) {
-          for (let i2 = 0; i2 < keys.length; i2++) {
-            const key = keys[i2];
+          for (let i = 0; i < keys.length; i++) {
+            const key = keys[i];
             const nodes = id[key];
             if (nodes) {
               Array.isArray(nodes) ? search.push(...nodes) : search.push(nodes);
@@ -16572,14 +16614,14 @@ var require_valueToNode = __commonJS({
       return objectToString(value) === "[object RegExp]";
     }
     __name(isRegExp, "isRegExp");
-    function isPlainObject(value) {
+    function isPlainObject3(value) {
       if (typeof value !== "object" || value === null || Object.prototype.toString.call(value) !== "[object Object]") {
         return false;
       }
       const proto = Object.getPrototypeOf(value);
       return proto === null || Object.getPrototypeOf(proto) === null;
     }
-    __name(isPlainObject, "isPlainObject");
+    __name(isPlainObject3, "isPlainObject");
     function valueToNode(value) {
       if (value === void 0) {
         return (0, _generated.identifier)("undefined");
@@ -16619,7 +16661,7 @@ var require_valueToNode = __commonJS({
       if (Array.isArray(value)) {
         return (0, _generated.arrayExpression)(value.map(valueToNode));
       }
-      if (isPlainObject(value)) {
+      if (isPlainObject3(value)) {
         const props = [];
         for (const key of Object.keys(value)) {
           let nodeKey;
@@ -16757,14 +16799,14 @@ var require_traverse = __commonJS({
       for (const key of keys) {
         const subNode = node[key];
         if (Array.isArray(subNode)) {
-          for (let i2 = 0; i2 < subNode.length; i2++) {
-            const child = subNode[i2];
+          for (let i = 0; i < subNode.length; i++) {
+            const child = subNode[i];
             if (!child)
               continue;
             ancestors.push({
               node,
               key,
-              index: i2
+              index: i
             });
             traverseSimpleImpl(child, enter, exit, state, ancestors);
             ancestors.pop();
@@ -16800,8 +16842,8 @@ var require_isBinding = __commonJS({
       }
       const keys = _getBindingIdentifiers.default.keys[parent.type];
       if (keys) {
-        for (let i2 = 0; i2 < keys.length; i2++) {
-          const key = keys[i2];
+        for (let i = 0; i < keys.length; i++) {
+          const key = keys[i];
           const val = parent[key];
           if (Array.isArray(val)) {
             if (val.indexOf(node) >= 0)
@@ -16887,18 +16929,18 @@ var require_isNodesEquivalent = __commonJS({
     });
     exports.default = isNodesEquivalent;
     var _definitions = require_definitions();
-    function isNodesEquivalent(a2, b2) {
-      if (typeof a2 !== "object" || typeof b2 !== "object" || a2 == null || b2 == null) {
-        return a2 === b2;
+    function isNodesEquivalent(a, b) {
+      if (typeof a !== "object" || typeof b !== "object" || a == null || b == null) {
+        return a === b;
       }
-      if (a2.type !== b2.type) {
+      if (a.type !== b.type) {
         return false;
       }
-      const fields = Object.keys(_definitions.NODE_FIELDS[a2.type] || a2.type);
-      const visitorKeys = _definitions.VISITOR_KEYS[a2.type];
+      const fields = Object.keys(_definitions.NODE_FIELDS[a.type] || a.type);
+      const visitorKeys = _definitions.VISITOR_KEYS[a.type];
       for (const field of fields) {
-        const val_a = a2[field];
-        const val_b = b2[field];
+        const val_a = a[field];
+        const val_b = b[field];
         if (typeof val_a !== typeof val_b) {
           return false;
         }
@@ -16914,8 +16956,8 @@ var require_isNodesEquivalent = __commonJS({
           if (val_a.length !== val_b.length) {
             return false;
           }
-          for (let i2 = 0; i2 < val_a.length; i2++) {
-            if (!isNodesEquivalent(val_a[i2], val_b[i2])) {
+          for (let i = 0; i < val_a.length; i++) {
+            if (!isNodesEquivalent(val_a[i], val_b[i])) {
               return false;
             }
           }
@@ -17842,9 +17884,9 @@ var require_options = __commonJS({
         return {};
       var target = {};
       var sourceKeys = Object.keys(source);
-      var key, i2;
-      for (i2 = 0; i2 < sourceKeys.length; i2++) {
-        key = sourceKeys[i2];
+      var key, i;
+      for (i = 0; i < sourceKeys.length; i++) {
+        key = sourceKeys[i];
         if (excluded.indexOf(key) >= 0)
           continue;
         target[key] = source[key];
@@ -17852,10 +17894,10 @@ var require_options = __commonJS({
       return target;
     }
     __name(_objectWithoutPropertiesLoose, "_objectWithoutPropertiesLoose");
-    function merge(a2, b2) {
-      const { placeholderWhitelist = a2.placeholderWhitelist, placeholderPattern = a2.placeholderPattern, preserveComments = a2.preserveComments, syntacticPlaceholders = a2.syntacticPlaceholders } = b2;
+    function merge(a, b) {
+      const { placeholderWhitelist = a.placeholderWhitelist, placeholderPattern = a.placeholderPattern, preserveComments = a.preserveComments, syntacticPlaceholders = a.syntacticPlaceholders } = b;
       return {
-        parser: Object.assign({}, a2.parser, b2.parser),
+        parser: Object.assign({}, a.parser, b.parser),
         placeholderWhitelist,
         placeholderPattern,
         preserveComments,
@@ -17894,8 +17936,8 @@ var require_options = __commonJS({
     __name(validate, "validate");
     function normalizeReplacements(replacements) {
       if (Array.isArray(replacements)) {
-        return replacements.reduce((acc, replacement, i2) => {
-          acc["$" + i2] = replacement;
+        return replacements.reduce((acc, replacement, i) => {
+          acc["$" + i] = replacement;
           return acc;
         }, {});
       } else if (typeof replacements === "object" || replacements == null) {
@@ -17919,9 +17961,9 @@ var require_lib5 = __commonJS({
         return {};
       var target = {};
       var sourceKeys = Object.keys(source);
-      var key, i2;
-      for (i2 = 0; i2 < sourceKeys.length; i2++) {
-        key = sourceKeys[i2];
+      var key, i;
+      for (i = 0; i < sourceKeys.length; i++) {
+        key = sourceKeys[i];
         if (excluded.indexOf(key) >= 0)
           continue;
         target[key] = source[key];
@@ -17963,7 +18005,7 @@ var require_lib5 = __commonJS({
         return keys.reduce((object, key) => object[key], this);
       },
       set(value) {
-        keys.reduce((item, key, i2) => i2 === last ? item[key] = value : item[key], this);
+        keys.reduce((item, key, i) => i === last ? item[key] = value : item[key], this);
       }
     }), "reflect");
     var instantiate = /* @__PURE__ */ __name((constructor, properties, descriptors) => Object.keys(descriptors).map((key) => [
@@ -18023,9 +18065,9 @@ var require_lib5 = __commonJS({
       AwaitExpressionFormalParameter: "'await' is not allowed in async function parameters.",
       AwaitNotInAsyncContext: "'await' is only allowed within async functions and at the top levels of modules.",
       AwaitNotInAsyncFunction: "'await' is only allowed within async functions.",
-      BadGetterArity: "A 'get' accesor must not have any formal parameters.",
-      BadSetterArity: "A 'set' accesor must have exactly one formal parameter.",
-      BadSetterRestParameter: "A 'set' accesor function argument must not be a rest parameter.",
+      BadGetterArity: "A 'get' accessor must not have any formal parameters.",
+      BadSetterArity: "A 'set' accessor must have exactly one formal parameter.",
+      BadSetterRestParameter: "A 'set' accessor function argument must not be a rest parameter.",
       ConstructorClassField: "Classes may not have a field named 'constructor'.",
       ConstructorClassPrivateField: "Classes may not have a private field named '#constructor'.",
       ConstructorIsAccessor: "Class constructor may not be an accessor.",
@@ -18051,6 +18093,7 @@ var require_lib5 = __commonJS({
 - Did you mean \`export { '${localName}' as '${exportName}' } from 'some-module'\`?`,
       ExportDefaultFromAsIdentifier: "'from' is not allowed as an identifier after 'export default'.",
       ForInOfLoopInitializer: ({ type }) => `'${type === "ForInStatement" ? "for-in" : "for-of"}' loop variable declaration may not have an initializer.`,
+      ForInUsing: "For-in loop may not start with 'using' declaration.",
       ForOfAsync: "The left-hand side of a for-of loop may not be 'async'.",
       ForOfLet: "The left-hand side of a for-of loop may not start with 'let'.",
       GeneratorInSingleStatementContext: "Generators can only be declared at the top level or inside a block.",
@@ -18064,6 +18107,8 @@ var require_lib5 = __commonJS({
       ImportCallNotNewExpression: "Cannot use new with import(...).",
       ImportCallSpreadArgument: "`...` is not allowed in `import()`.",
       ImportJSONBindingNotDefault: "A JSON module can only be imported with `default`.",
+      ImportReflectionHasAssertion: "`import module x` cannot have assertions.",
+      ImportReflectionNotBinding: 'Only `import module x from "./module"` is valid.',
       IncompatibleRegExpUVFlags: "The 'u' and 'v' regular expression flags cannot be enabled at the same time.",
       InvalidBigIntLiteral: "Invalid BigIntLiteral.",
       InvalidCodePoint: "Code point out of bounds.",
@@ -18141,6 +18186,7 @@ var require_lib5 = __commonJS({
       UnexpectedSuper: "'super' is only allowed in object methods and classes.",
       UnexpectedToken: ({ expected, unexpected }) => `Unexpected token${unexpected ? ` '${unexpected}'.` : ""}${expected ? `, expected "${expected}"` : ""}`,
       UnexpectedTokenUnaryExponentiation: "Illegal expression. Wrap left hand side or entire exponentiation in parentheses.",
+      UnexpectedUsingDeclaration: "Using declaration cannot appear in the top level when source type is `script`.",
       UnsupportedBind: "Binding should be performed on object property.",
       UnsupportedDecoratorExport: "A decorated export must export a class declaration.",
       UnsupportedDefaultExport: "Only expressions, functions or classes are allowed as the `default` export.",
@@ -18153,6 +18199,7 @@ var require_lib5 = __commonJS({
       UnterminatedRegExp: "Unterminated regular expression.",
       UnterminatedString: "Unterminated string constant.",
       UnterminatedTemplate: "Unterminated template.",
+      UsingDeclarationHasBindingPattern: "Using declaration cannot have destructuring patterns.",
       VarRedeclaration: ({ identifierName }) => `Identifier '${identifierName}' has already been declared.`,
       YieldBindingIdentifier: "Can not use 'yield' as identifier inside a generator.",
       YieldInParameter: "Yield expression is not allowed in formal parameters.",
@@ -18516,8 +18563,9 @@ var require_lib5 = __commonJS({
         }
         super.toReferencedArguments(node);
       }
-      parseExport(unfinished) {
-        const node = super.parseExport(unfinished);
+      parseExport(unfinished, decorators) {
+        const exportStartLoc = this.state.lastTokStartLoc;
+        const node = super.parseExport(unfinished, decorators);
         switch (node.type) {
           case "ExportAllDeclaration":
             node.exported = null;
@@ -18527,6 +18575,14 @@ var require_lib5 = __commonJS({
               node.type = "ExportAllDeclaration";
               node.exported = node.specifiers[0].exported;
               delete node.specifiers;
+            }
+          case "ExportDefaultDeclaration":
+            {
+              var _declaration$decorato;
+              const { declaration } = node;
+              if ((declaration == null ? void 0 : declaration.type) === "ClassDeclaration" && ((_declaration$decorato = declaration.decorators) == null ? void 0 : _declaration$decorato.length) > 0 && declaration.start === node.start) {
+                this.resetStartLocation(node, exportStartLoc);
+              }
             }
             break;
         }
@@ -18952,6 +19008,9 @@ var require_lib5 = __commonJS({
       _static: createKeywordLike("static", {
         startsExpr
       }),
+      _using: createKeywordLike("using", {
+        startsExpr
+      }),
       _yield: createKeywordLike("yield", {
         startsExpr
       }),
@@ -18986,6 +19045,9 @@ var require_lib5 = __commonJS({
         startsExpr
       }),
       _require: createKeywordLike("require", {
+        startsExpr
+      }),
+      _satisfies: createKeywordLike("satisfies", {
         startsExpr
       }),
       _keyof: createKeywordLike("keyof", {
@@ -19056,7 +19118,7 @@ var require_lib5 = __commonJS({
       })
     };
     function tokenIsIdentifier(token) {
-      return token >= 93 && token <= 128;
+      return token >= 93 && token <= 130;
     }
     __name(tokenIsIdentifier, "tokenIsIdentifier");
     function tokenKeywordOrIdentifierIsKeyword(token) {
@@ -19064,11 +19126,11 @@ var require_lib5 = __commonJS({
     }
     __name(tokenKeywordOrIdentifierIsKeyword, "tokenKeywordOrIdentifierIsKeyword");
     function tokenIsKeywordOrIdentifier(token) {
-      return token >= 58 && token <= 128;
+      return token >= 58 && token <= 130;
     }
     __name(tokenIsKeywordOrIdentifier, "tokenIsKeywordOrIdentifier");
     function tokenIsLiteralPropertyName(token) {
-      return token >= 58 && token <= 132;
+      return token >= 58 && token <= 134;
     }
     __name(tokenIsLiteralPropertyName, "tokenIsLiteralPropertyName");
     function tokenComesBeforeExpression(token) {
@@ -19084,7 +19146,7 @@ var require_lib5 = __commonJS({
     }
     __name(tokenIsAssignment, "tokenIsAssignment");
     function tokenIsFlowInterfaceOrTypeOrOpaque(token) {
-      return token >= 125 && token <= 127;
+      return token >= 127 && token <= 129;
     }
     __name(tokenIsFlowInterfaceOrTypeOrOpaque, "tokenIsFlowInterfaceOrTypeOrOpaque");
     function tokenIsLoop(token) {
@@ -19108,11 +19170,11 @@ var require_lib5 = __commonJS({
     }
     __name(tokenIsPrefix, "tokenIsPrefix");
     function tokenIsTSTypeOperator(token) {
-      return token >= 117 && token <= 119;
+      return token >= 119 && token <= 121;
     }
     __name(tokenIsTSTypeOperator, "tokenIsTSTypeOperator");
     function tokenIsTSDeclarationStart(token) {
-      return token >= 120 && token <= 126;
+      return token >= 122 && token <= 128;
     }
     __name(tokenIsTSDeclarationStart, "tokenIsTSDeclarationStart");
     function tokenLabelName(token) {
@@ -19149,7 +19211,7 @@ var require_lib5 = __commonJS({
           context.push(types.template);
         }
       };
-      tokenTypes[138].updateContext = (context) => {
+      tokenTypes[140].updateContext = (context) => {
         context.push(types.j_expr, types.j_oTag);
       };
     }
@@ -20012,11 +20074,11 @@ var require_lib5 = __commonJS({
     ];
     function isInAstralSet(code, set) {
       let pos = 65536;
-      for (let i2 = 0, length = set.length; i2 < length; i2 += 2) {
-        pos += set[i2];
+      for (let i = 0, length = set.length; i < length; i += 2) {
+        pos += set[i];
         if (pos > code)
           return false;
-        pos += set[i2 + 1];
+        pos += set[i + 1];
         if (pos >= code)
           return true;
       }
@@ -20202,7 +20264,7 @@ var require_lib5 = __commonJS({
     var SCOPE_CLASS = 64;
     var SCOPE_STATIC_BLOCK = 128;
     var SCOPE_TS_MODULE = 256;
-    var SCOPE_VAR = SCOPE_PROGRAM | SCOPE_FUNCTION | SCOPE_TS_MODULE;
+    var SCOPE_VAR = SCOPE_PROGRAM | SCOPE_FUNCTION | SCOPE_STATIC_BLOCK | SCOPE_TS_MODULE;
     var BIND_KIND_VALUE = 1;
     var BIND_KIND_TYPE = 2;
     var BIND_SCOPE_VAR = 4;
@@ -20255,6 +20317,9 @@ var require_lib5 = __commonJS({
         this.parser = parser;
         this.inModule = inModule;
       }
+      get inTopLevel() {
+        return (this.currentScope().flags & SCOPE_PROGRAM) > 0;
+      }
       get inFunction() {
         return (this.currentVarScopeFlags() & SCOPE_FUNCTION) > 0;
       }
@@ -20272,8 +20337,8 @@ var require_lib5 = __commonJS({
         return (flags & SCOPE_CLASS) > 0 && (flags & SCOPE_FUNCTION) === 0;
       }
       get inStaticBlock() {
-        for (let i2 = this.scopeStack.length - 1; ; i2--) {
-          const { flags } = this.scopeStack[i2];
+        for (let i = this.scopeStack.length - 1; ; i--) {
+          const { flags } = this.scopeStack[i];
           if (flags & SCOPE_STATIC_BLOCK) {
             return true;
           }
@@ -20314,8 +20379,8 @@ var require_lib5 = __commonJS({
             this.maybeExportDefined(scope, name);
           }
         } else if (bindingType & BIND_SCOPE_VAR) {
-          for (let i2 = this.scopeStack.length - 1; i2 >= 0; --i2) {
-            scope = this.scopeStack[i2];
+          for (let i = this.scopeStack.length - 1; i >= 0; --i) {
+            scope = this.scopeStack[i];
             this.checkRedeclarationInScope(scope, name, bindingType, loc);
             scope.var.add(name);
             this.maybeExportDefined(scope, name);
@@ -20362,16 +20427,16 @@ var require_lib5 = __commonJS({
         return this.scopeStack[this.scopeStack.length - 1];
       }
       currentVarScopeFlags() {
-        for (let i2 = this.scopeStack.length - 1; ; i2--) {
-          const { flags } = this.scopeStack[i2];
+        for (let i = this.scopeStack.length - 1; ; i--) {
+          const { flags } = this.scopeStack[i];
           if (flags & SCOPE_VAR) {
             return flags;
           }
         }
       }
       currentThisScopeFlags() {
-        for (let i2 = this.scopeStack.length - 1; ; i2--) {
-          const { flags } = this.scopeStack[i2];
+        for (let i = this.scopeStack.length - 1; ; i--) {
+          const { flags } = this.scopeStack[i];
           if (flags & (SCOPE_VAR | SCOPE_CLASS) && !(flags & SCOPE_ARROW)) {
             return flags;
           }
@@ -20465,9 +20530,9 @@ var require_lib5 = __commonJS({
     __name(setInnerComments, "setInnerComments");
     function adjustInnerComments(node, elements, commentWS) {
       let lastElement = null;
-      let i2 = elements.length;
-      while (lastElement === null && i2 > 0) {
-        lastElement = elements[--i2];
+      let i = elements.length;
+      while (lastElement === null && i > 0) {
+        lastElement = elements[--i];
       }
       if (lastElement === null || lastElement.start > commentWS.start) {
         setInnerComments(node, commentWS.comments);
@@ -20487,20 +20552,20 @@ var require_lib5 = __commonJS({
         const commentStackLength = commentStack.length;
         if (commentStackLength === 0)
           return;
-        let i2 = commentStackLength - 1;
-        const lastCommentWS = commentStack[i2];
+        let i = commentStackLength - 1;
+        const lastCommentWS = commentStack[i];
         if (lastCommentWS.start === node.end) {
           lastCommentWS.leadingNode = node;
-          i2--;
+          i--;
         }
         const { start: nodeStart } = node;
-        for (; i2 >= 0; i2--) {
-          const commentWS = commentStack[i2];
+        for (; i >= 0; i--) {
+          const commentWS = commentStack[i];
           const commentEnd = commentWS.end;
           if (commentEnd > nodeStart) {
             commentWS.containingNode = node;
             this.finalizeComment(commentWS);
-            commentStack.splice(i2, 1);
+            commentStack.splice(i, 1);
           } else {
             if (commentEnd === nodeStart) {
               commentWS.trailingNode = node;
@@ -20559,8 +20624,8 @@ var require_lib5 = __commonJS({
       }
       finalizeRemainingComments() {
         const { commentStack } = this.state;
-        for (let i2 = commentStack.length - 1; i2 >= 0; i2--) {
-          this.finalizeComment(commentStack[i2]);
+        for (let i = commentStack.length - 1; i >= 0; i--) {
+          this.finalizeComment(commentStack[i]);
         }
         this.state.commentStack = [];
       }
@@ -20579,9 +20644,9 @@ var require_lib5 = __commonJS({
         const commentStackLength = commentStack.length;
         if (commentStackLength === 0)
           return;
-        let i2 = commentStackLength - 1;
-        for (; i2 >= 0; i2--) {
-          const commentWS = commentStack[i2];
+        let i = commentStackLength - 1;
+        for (; i >= 0; i--) {
+          const commentWS = commentStack[i];
           const commentEnd = commentWS.end;
           const commentStart = commentWS.start;
           if (commentStart === end) {
@@ -20665,13 +20730,10 @@ var require_lib5 = __commonJS({
         this.soloAwait = false;
         this.inFSharpPipelineDirectBody = false;
         this.labels = [];
-        this.decoratorStack = [
-          []
-        ];
         this.comments = [];
         this.commentStack = [];
         this.pos = 0;
-        this.type = 135;
+        this.type = 137;
         this.value = null;
         this.start = 0;
         this.end = 0;
@@ -20699,8 +20761,8 @@ var require_lib5 = __commonJS({
       clone(skipArrays) {
         const state = new State2();
         const keys = Object.keys(this);
-        for (let i2 = 0, length = keys.length; i2 < length; i2++) {
-          const key = keys[i2];
+        for (let i = 0, length = keys.length; i < length; i++) {
+          const key = keys[i];
           let val = this[key];
           if (!skipArrays && Array.isArray(val)) {
             val = val.slice();
@@ -20884,9 +20946,9 @@ var require_lib5 = __commonJS({
     __name(readEscapedChar, "readEscapedChar");
     function readHexChar(input, pos, lineStart, curLine, len, forceLen, throwOnInvalid, errors) {
       const initialPos = pos;
-      let n2;
-      ({ n: n2, pos } = readInt(input, pos, lineStart, curLine, 16, len, forceLen, false, errors, !throwOnInvalid));
-      if (n2 === null) {
+      let n;
+      ({ n, pos } = readInt(input, pos, lineStart, curLine, 16, len, forceLen, false, errors, !throwOnInvalid));
+      if (n === null) {
         if (throwOnInvalid) {
           errors.invalidEscapeSequence(initialPos, lineStart, curLine);
         } else {
@@ -20894,7 +20956,7 @@ var require_lib5 = __commonJS({
         }
       }
       return {
-        code: n2,
+        code: n,
         pos
       };
     }
@@ -20905,7 +20967,7 @@ var require_lib5 = __commonJS({
       const isAllowedSibling = radix === 16 ? isAllowedNumericSeparatorSibling.hex : radix === 10 ? isAllowedNumericSeparatorSibling.dec : radix === 8 ? isAllowedNumericSeparatorSibling.oct : isAllowedNumericSeparatorSibling.bin;
       let invalid = false;
       let total = 0;
-      for (let i2 = 0, e = len == null ? Infinity : len; i2 < e; ++i2) {
+      for (let i = 0, e = len == null ? Infinity : len; i < e; ++i) {
         const code = input.charCodeAt(pos);
         let val;
         if (code === 95 && allowNumSeparator !== "bail") {
@@ -21163,7 +21225,7 @@ var require_lib5 = __commonJS({
         if (!this.isLookahead)
           this.state.startLoc = this.state.curPosition();
         if (this.state.pos >= this.length) {
-          this.finishToken(135);
+          this.finishToken(137);
           return;
         }
         this.getTokenFromCode(this.codePointAtPos(this.state.pos));
@@ -21356,10 +21418,10 @@ var require_lib5 = __commonJS({
           }
         } else if (isIdentifierStart(next)) {
           ++this.state.pos;
-          this.finishToken(134, this.readWord1(next));
+          this.finishToken(136, this.readWord1(next));
         } else if (next === 92) {
           ++this.state.pos;
-          this.finishToken(134, this.readWord1());
+          this.finishToken(136, this.readWord1());
         } else {
           this.finishOp(27, 1);
         }
@@ -21794,15 +21856,15 @@ var require_lib5 = __commonJS({
           mods += char;
         }
         this.state.pos = pos;
-        this.finishToken(133, {
+        this.finishToken(135, {
           pattern: content,
           flags: mods
         });
       }
       readInt(radix, len, forceLen = false, allowNumSeparator = true) {
-        const { n: n2, pos } = readInt(this.input, this.state.pos, this.state.lineStart, this.state.curLine, radix, len, forceLen, allowNumSeparator, this.errorHandlers_readInt, false);
+        const { n, pos } = readInt(this.input, this.state.pos, this.state.lineStart, this.state.curLine, radix, len, forceLen, allowNumSeparator, this.errorHandlers_readInt, false);
         this.state.pos = pos;
-        return n2;
+        return n;
       }
       readRadixNumber(radix) {
         const startLoc = this.state.curPosition();
@@ -21831,10 +21893,10 @@ var require_lib5 = __commonJS({
         }
         if (isBigInt) {
           const str = this.input.slice(startLoc.index, this.state.pos).replace(/[_n]/g, "");
-          this.finishToken(131, str);
+          this.finishToken(133, str);
           return;
         }
-        this.finishToken(130, val);
+        this.finishToken(132, val);
       }
       readNumber(startsWithDot) {
         const start = this.state.pos;
@@ -21912,15 +21974,15 @@ var require_lib5 = __commonJS({
         }
         const str = this.input.slice(start, this.state.pos).replace(/[_mn]/g, "");
         if (isBigInt) {
-          this.finishToken(131, str);
+          this.finishToken(133, str);
           return;
         }
         if (isDecimal) {
-          this.finishToken(132, str);
+          this.finishToken(134, str);
           return;
         }
         const val = isOctal ? parseInt(str, 8) : parseFloat(str);
-        this.finishToken(130, val);
+        this.finishToken(132, val);
       }
       readCodePoint(throwOnInvalid) {
         const { code, pos } = readCodePoint(this.input, this.state.pos, this.state.lineStart, this.state.curLine, throwOnInvalid, this.errorHandlers_readCodePoint);
@@ -21932,7 +21994,7 @@ var require_lib5 = __commonJS({
         this.state.pos = pos + 1;
         this.state.lineStart = lineStart;
         this.state.curLine = curLine;
-        this.finishToken(129, str);
+        this.finishToken(131, str);
       }
       readTemplateContinuation() {
         if (!this.match(8)) {
@@ -22017,7 +22079,7 @@ var require_lib5 = __commonJS({
         if (type !== void 0) {
           this.finishToken(type, tokenLabelName(type));
         } else {
-          this.finishToken(128, word);
+          this.finishToken(130, word);
         }
       }
       checkKeywordEscapes() {
@@ -22047,10 +22109,10 @@ var require_lib5 = __commonJS({
         const loc = at instanceof Position ? at : at.loc.start;
         const pos = loc.index;
         const errors = this.state.errors;
-        for (let i2 = errors.length - 1; i2 >= 0; i2--) {
-          const error = errors[i2];
+        for (let i = errors.length - 1; i >= 0; i--) {
+          const error = errors[i];
           if (error.loc.index === pos) {
-            return errors[i2] = toParseError({
+            return errors[i] = toParseError({
               loc,
               details
             });
@@ -22227,19 +22289,19 @@ var require_lib5 = __commonJS({
           at: node.loc.start
         };
         const { stack } = this;
-        let i2 = stack.length - 1;
-        let scope = stack[i2];
+        let i = stack.length - 1;
+        let scope = stack[i];
         while (!scope.isCertainlyParameterDeclaration()) {
           if (scope.canBeArrowParameterDeclaration()) {
             scope.recordDeclarationError(toParseError, origin);
           } else {
             return;
           }
-          scope = stack[--i2];
+          scope = stack[--i];
         }
         this.parser.raise(toParseError, origin);
       }
-      recordArrowParemeterBindingError(error, { at: node }) {
+      recordArrowParameterBindingError(error, { at: node }) {
         const { stack } = this;
         const scope = stack[stack.length - 1];
         const origin = {
@@ -22255,15 +22317,15 @@ var require_lib5 = __commonJS({
       }
       recordAsyncArrowParametersError({ at }) {
         const { stack } = this;
-        let i2 = stack.length - 1;
-        let scope = stack[i2];
+        let i = stack.length - 1;
+        let scope = stack[i];
         while (scope.canBeArrowParameterDeclaration()) {
           if (scope.type === kMaybeAsyncArrowParameterDeclaration) {
             scope.recordDeclarationError(Errors.AwaitBindingIdentifier, {
               at
             });
           }
-          scope = stack[--i2];
+          scope = stack[--i];
         }
       }
       validateAsPattern() {
@@ -22275,11 +22337,11 @@ var require_lib5 = __commonJS({
           this.parser.raise(toParseError, {
             at: loc
           });
-          let i2 = stack.length - 2;
-          let scope = stack[i2];
+          let i = stack.length - 2;
+          let scope = stack[i];
           while (scope.canBeArrowParameterDeclaration()) {
             scope.clearDeclarationError(loc.index);
-            scope = stack[--i2];
+            scope = stack[--i];
           }
         });
       }
@@ -22382,7 +22444,7 @@ var require_lib5 = __commonJS({
         }
       }
       canInsertSemicolon() {
-        return this.match(135) || this.match(8) || this.hasPrecedingLineBreak();
+        return this.match(137) || this.match(8) || this.hasPrecedingLineBreak();
       }
       hasPrecedingLineBreak() {
         return lineBreak.test(this.input.slice(this.state.lastTokEndLoc.index, this.state.start));
@@ -22573,8 +22635,8 @@ var require_lib5 = __commonJS({
       NodePrototype.__clone = function() {
         const newNode = new Node(void 0, this.start, this.loc.start);
         const keys = Object.keys(this);
-        for (let i2 = 0, length = keys.length; i2 < length; i2++) {
-          const key = keys[i2];
+        for (let i = 0, length = keys.length; i < length; i++) {
+          const key = keys[i];
           if (key !== "leadingComments" && key !== "trailingComments" && key !== "innerComments") {
             newNode[key] = this[key];
           }
@@ -22698,6 +22760,7 @@ var require_lib5 = __commonJS({
       EnumNumberMemberNotInitialized: ({ enumName, memberName }) => `Number enum members need to be initialized, e.g. \`${memberName} = 1\` in enum \`${enumName}\`.`,
       EnumStringMemberInconsistentlyInitailized: ({ enumName }) => `String enum members need to consistently either all use initializers, or use no initializers, in enum \`${enumName}\`.`,
       GetterMayNotHaveThisParam: "A getter cannot have a `this` parameter.",
+      ImportReflectionHasImportType: "An `import module` declaration can not use `type` or `typeof` keyword.",
       ImportTypeShorthandOnlyInPureImport: "The `type` and `typeof` keywords on named imports can only be used on regular `import` statements. It cannot be used with `import type` or `import typeof` statements.",
       InexactInsideExact: "Explicit inexact syntax cannot appear inside an explicit exact object type.",
       InexactInsideNonObject: "Explicit inexact syntax cannot appear in class or interface definitions.",
@@ -22753,8 +22816,8 @@ var require_lib5 = __commonJS({
     function partition(list, test) {
       const list1 = [];
       const list2 = [];
-      for (let i2 = 0; i2 < list.length; i2++) {
-        (test(list[i2], i2, list) ? list1 : list2).push(list[i2]);
+      for (let i = 0; i < list.length; i++) {
+        (test(list[i], i, list) ? list1 : list2).push(list[i]);
       }
       return [
         list1,
@@ -22778,7 +22841,7 @@ var require_lib5 = __commonJS({
         return !!this.getPluginOption("flow", "enums");
       }
       finishToken(type, val) {
-        if (type !== 129 && type !== 13 && type !== 28) {
+        if (type !== 131 && type !== 13 && type !== 28) {
           if (this.flowPragma === void 0) {
             this.flowPragma = null;
           }
@@ -22787,12 +22850,12 @@ var require_lib5 = __commonJS({
       }
       addComment(comment) {
         if (this.flowPragma === void 0) {
-          const matches = FLOW_PRAGMA_REGEX.exec(comment.value);
-          if (!matches)
+          const matches2 = FLOW_PRAGMA_REGEX.exec(comment.value);
+          if (!matches2)
             ;
-          else if (matches[1] === "flow") {
+          else if (matches2[1] === "flow") {
             this.flowPragma = "flow";
-          } else if (matches[1] === "noflow") {
+          } else if (matches2[1] === "noflow") {
             this.flowPragma = "noflow";
           } else {
             throw new Error("Unexpected flow pragma");
@@ -22812,7 +22875,7 @@ var require_lib5 = __commonJS({
         const node = this.startNode();
         const moduloLoc = this.state.startLoc;
         this.next();
-        this.expectContextual(107);
+        this.expectContextual(108);
         if (this.state.lastTokStart > moduloLoc.index + 1) {
           this.raise(FlowErrors.UnexpectedSpaceBetweenModuloChecks, {
             at: moduloLoc
@@ -22883,7 +22946,7 @@ var require_lib5 = __commonJS({
           return this.flowParseDeclareFunction(node);
         } else if (this.match(74)) {
           return this.flowParseDeclareVariable(node);
-        } else if (this.eatContextual(123)) {
+        } else if (this.eatContextual(125)) {
           if (this.match(16)) {
             return this.flowParseDeclareModuleExports(node);
           } else {
@@ -22894,11 +22957,11 @@ var require_lib5 = __commonJS({
             }
             return this.flowParseDeclareModule(node);
           }
-        } else if (this.isContextual(126)) {
+        } else if (this.isContextual(128)) {
           return this.flowParseDeclareTypeAlias(node);
-        } else if (this.isContextual(127)) {
+        } else if (this.isContextual(129)) {
           return this.flowParseDeclareOpaqueType(node);
-        } else if (this.isContextual(125)) {
+        } else if (this.isContextual(127)) {
           return this.flowParseDeclareInterface(node);
         } else if (this.match(82)) {
           return this.flowParseDeclareExportDeclaration(node, insideModule);
@@ -22915,7 +22978,7 @@ var require_lib5 = __commonJS({
       }
       flowParseDeclareModule(node) {
         this.scope.enter(SCOPE_OTHER);
-        if (this.match(129)) {
+        if (this.match(131)) {
           node.id = super.parseExprAtom();
         } else {
           node.id = this.parseIdentifier();
@@ -22927,14 +22990,14 @@ var require_lib5 = __commonJS({
           let bodyNode1 = this.startNode();
           if (this.match(83)) {
             this.next();
-            if (!this.isContextual(126) && !this.match(87)) {
+            if (!this.isContextual(128) && !this.match(87)) {
               this.raise(FlowErrors.InvalidNonTypeImportInDeclareModule, {
                 at: this.state.lastTokStartLoc
               });
             }
             super.parseImport(bodyNode1);
           } else {
-            this.expectContextual(121, FlowErrors.UnsupportedStatementInDeclareModule);
+            this.expectContextual(123, FlowErrors.UnsupportedStatementInDeclareModule);
             bodyNode1 = this.flowParseDeclare(bodyNode1, true);
           }
           body.push(bodyNode1);
@@ -22982,7 +23045,7 @@ var require_lib5 = __commonJS({
           node.default = true;
           return this.finishNode(node, "DeclareExportDeclaration");
         } else {
-          if (this.match(75) || this.isLet() || (this.isContextual(126) || this.isContextual(125)) && !insideModule) {
+          if (this.match(75) || this.isLet() || (this.isContextual(128) || this.isContextual(127)) && !insideModule) {
             const label = this.state.value;
             throw this.raise(FlowErrors.UnsupportedDeclareExportKind, {
               at: this.state.startLoc,
@@ -22990,12 +23053,12 @@ var require_lib5 = __commonJS({
               suggestion: exportSuggestions[label]
             });
           }
-          if (this.match(74) || this.match(68) || this.match(80) || this.isContextual(127)) {
+          if (this.match(74) || this.match(68) || this.match(80) || this.isContextual(129)) {
             node.declaration = this.flowParseDeclare(this.startNode());
             node.default = false;
             return this.finishNode(node, "DeclareExportDeclaration");
-          } else if (this.match(55) || this.match(5) || this.isContextual(125) || this.isContextual(126) || this.isContextual(127)) {
-            node = this.parseExport(node);
+          } else if (this.match(55) || this.match(5) || this.isContextual(127) || this.isContextual(128) || this.isContextual(129)) {
+            node = this.parseExport(node, null);
             if (node.type === "ExportNamedDeclaration") {
               node.type = "ExportDeclaration";
               node.default = false;
@@ -23009,7 +23072,7 @@ var require_lib5 = __commonJS({
       }
       flowParseDeclareModuleExports(node) {
         this.next();
-        this.expectContextual(108);
+        this.expectContextual(109);
         node.typeAnnotation = this.flowParseTypeAnnotation();
         this.semicolon();
         return this.finishNode(node, "DeclareModuleExports");
@@ -23047,13 +23110,13 @@ var require_lib5 = __commonJS({
             node.extends.push(this.flowParseInterfaceExtends());
           } while (!isClass && this.eat(12));
         }
-        if (this.isContextual(114)) {
+        if (this.isContextual(115)) {
           this.next();
           do {
             node.mixins.push(this.flowParseInterfaceExtends());
           } while (this.eat(12));
         }
-        if (this.isContextual(110)) {
+        if (this.isContextual(111)) {
           this.next();
           do {
             node.implements.push(this.flowParseInterfaceExtends());
@@ -23113,7 +23176,7 @@ var require_lib5 = __commonJS({
         return this.finishNode(node, "TypeAlias");
       }
       flowParseOpaqueType(node, declare) {
-        this.expectContextual(126);
+        this.expectContextual(128);
         node.id = this.flowParseRestrictedIdentifier(true, true);
         this.scope.declareName(node.id.name, BIND_LEXICAL, node.id.loc.start);
         if (this.match(47)) {
@@ -23157,7 +23220,7 @@ var require_lib5 = __commonJS({
         const node = this.startNode();
         node.params = [];
         this.state.inType = true;
-        if (this.match(47) || this.match(138)) {
+        if (this.match(47) || this.match(140)) {
           this.next();
         } else {
           this.unexpected();
@@ -23214,7 +23277,7 @@ var require_lib5 = __commonJS({
       }
       flowParseInterfaceType() {
         const node = this.startNode();
-        this.expectContextual(125);
+        this.expectContextual(127);
         node.extends = [];
         if (this.eat(81)) {
           do {
@@ -23231,7 +23294,7 @@ var require_lib5 = __commonJS({
         return this.finishNode(node, "InterfaceTypeAnnotation");
       }
       flowParseObjectPropertyKey() {
-        return this.match(130) || this.match(129) ? super.parseExprAtom() : this.parseIdentifier(true);
+        return this.match(132) || this.match(131) ? super.parseExprAtom() : this.parseIdentifier(true);
       }
       flowParseObjectTypeIndexer(node, isStatic, variance) {
         node.static = isStatic;
@@ -23326,7 +23389,7 @@ var require_lib5 = __commonJS({
           let protoStartLoc = null;
           let inexactStartLoc = null;
           const node = this.startNode();
-          if (allowProto && this.isContextual(115)) {
+          if (allowProto && this.isContextual(116)) {
             const lookahead = this.lookahead();
             if (lookahead.type !== 14 && lookahead.type !== 17) {
               this.next();
@@ -23691,7 +23754,7 @@ var require_lib5 = __commonJS({
             node.returnType = this.flowParseType();
             node.typeParameters = null;
             return this.finishNode(node, "FunctionTypeAnnotation");
-          case 129:
+          case 131:
             return this.parseLiteral(this.state.value, "StringLiteralTypeAnnotation");
           case 85:
           case 86:
@@ -23701,10 +23764,10 @@ var require_lib5 = __commonJS({
           case 53:
             if (this.state.value === "-") {
               this.next();
-              if (this.match(130)) {
+              if (this.match(132)) {
                 return this.parseLiteralAtNode(-this.state.value, "NumberLiteralTypeAnnotation", node);
               }
-              if (this.match(131)) {
+              if (this.match(133)) {
                 return this.parseLiteralAtNode(-this.state.value, "BigIntLiteralTypeAnnotation", node);
               }
               throw this.raise(FlowErrors.UnexpectedSubtractionOperand, {
@@ -23712,9 +23775,9 @@ var require_lib5 = __commonJS({
               });
             }
             throw this.unexpected();
-          case 130:
+          case 132:
             return this.parseLiteral(this.state.value, "NumberLiteralTypeAnnotation");
-          case 131:
+          case 133:
             return this.parseLiteral(this.state.value, "BigIntLiteralTypeAnnotation");
           case 88:
             this.next();
@@ -23736,7 +23799,7 @@ var require_lib5 = __commonJS({
               this.next();
               return super.createIdentifier(node, label);
             } else if (tokenIsIdentifier(this.state.type)) {
-              if (this.isContextual(125)) {
+              if (this.isContextual(127)) {
                 return this.flowParseInterfaceType();
               }
               return this.flowIdentToTypeAnnotation(startLoc, node, this.parseIdentifier());
@@ -23827,7 +23890,7 @@ var require_lib5 = __commonJS({
         return type;
       }
       flowParseTypeOrImplicitInstantiation() {
-        if (this.state.type === 128 && this.state.value === "_") {
+        if (this.state.type === 130 && this.state.value === "_") {
           const startLoc = this.state.startLoc;
           const node = this.parseIdentifier();
           return this.flowParseGenericType(startLoc, node);
@@ -23881,26 +23944,26 @@ var require_lib5 = __commonJS({
         }
         return super.parseFunctionBodyAndFinish(node, type, isMethod);
       }
-      parseStatement(context, topLevel) {
-        if (this.state.strict && this.isContextual(125)) {
+      parseStatementLike(flags) {
+        if (this.state.strict && this.isContextual(127)) {
           const lookahead = this.lookahead();
           if (tokenIsKeywordOrIdentifier(lookahead.type)) {
             const node = this.startNode();
             this.next();
             return this.flowParseInterface(node);
           }
-        } else if (this.shouldParseEnums() && this.isContextual(122)) {
+        } else if (this.shouldParseEnums() && this.isContextual(124)) {
           const node1 = this.startNode();
           this.next();
           return this.flowParseEnumDeclaration(node1);
         }
-        const stmt = super.parseStatement(context, topLevel);
+        const stmt = super.parseStatementLike(flags);
         if (this.flowPragma === void 0 && !this.isValidDirective(stmt)) {
           this.flowPragma = null;
         }
         return stmt;
       }
-      parseExpressionStatement(node, expr) {
+      parseExpressionStatement(node, expr, decorators) {
         if (expr.type === "Identifier") {
           if (expr.name === "declare") {
             if (this.match(80) || tokenIsIdentifier(this.state.type) || this.match(68) || this.match(74) || this.match(82)) {
@@ -23916,24 +23979,24 @@ var require_lib5 = __commonJS({
             }
           }
         }
-        return super.parseExpressionStatement(node, expr);
+        return super.parseExpressionStatement(node, expr, decorators);
       }
       shouldParseExportDeclaration() {
         const { type } = this.state;
-        if (tokenIsFlowInterfaceOrTypeOrOpaque(type) || this.shouldParseEnums() && type === 122) {
+        if (tokenIsFlowInterfaceOrTypeOrOpaque(type) || this.shouldParseEnums() && type === 124) {
           return !this.state.containsEsc;
         }
         return super.shouldParseExportDeclaration();
       }
       isExportDefaultSpecifier() {
         const { type } = this.state;
-        if (tokenIsFlowInterfaceOrTypeOrOpaque(type) || this.shouldParseEnums() && type === 122) {
+        if (tokenIsFlowInterfaceOrTypeOrOpaque(type) || this.shouldParseEnums() && type === 124) {
           return this.state.containsEsc;
         }
         return super.isExportDefaultSpecifier();
       }
       parseExportDefaultExpression() {
-        if (this.shouldParseEnums() && this.isContextual(122)) {
+        if (this.shouldParseEnums() && this.isContextual(124)) {
           const node = this.startNode();
           this.next();
           return this.flowParseEnumDeclaration(node);
@@ -23963,8 +24026,8 @@ var require_lib5 = __commonJS({
           if (invalid.length > 0) {
             this.state = state;
             this.state.noArrowAt = noArrowAt;
-            for (let i2 = 0; i2 < invalid.length; i2++) {
-              noArrowAt.push(invalid[i2].start);
+            for (let i = 0; i < invalid.length; i++) {
+              noArrowAt.push(invalid[i].start);
             }
             ({ consequent, failed } = this.tryParseConditionalConsequent());
             [valid, invalid] = this.getArrowLikeExpressions(consequent);
@@ -24065,15 +24128,15 @@ var require_lib5 = __commonJS({
         }
         super.assertModuleNodeAllowed(node);
       }
-      parseExport(node) {
-        const decl = super.parseExport(node);
+      parseExport(node, decorators) {
+        const decl = super.parseExport(node, decorators);
         if (decl.type === "ExportNamedDeclaration" || decl.type === "ExportAllDeclaration") {
           decl.exportKind = decl.exportKind || "value";
         }
         return decl;
       }
       parseExportDeclaration(node) {
-        if (this.isContextual(126)) {
+        if (this.isContextual(128)) {
           node.exportKind = "type";
           const declarationNode = this.startNode();
           this.next();
@@ -24084,17 +24147,17 @@ var require_lib5 = __commonJS({
           } else {
             return this.flowParseTypeAlias(declarationNode);
           }
-        } else if (this.isContextual(127)) {
+        } else if (this.isContextual(129)) {
           node.exportKind = "type";
           const declarationNode1 = this.startNode();
           this.next();
           return this.flowParseOpaqueType(declarationNode1, false);
-        } else if (this.isContextual(125)) {
+        } else if (this.isContextual(127)) {
           node.exportKind = "type";
           const declarationNode2 = this.startNode();
           this.next();
           return this.flowParseInterface(declarationNode2);
-        } else if (this.shouldParseEnums() && this.isContextual(122)) {
+        } else if (this.shouldParseEnums() && this.isContextual(124)) {
           node.exportKind = "value";
           const declarationNode3 = this.startNode();
           this.next();
@@ -24106,7 +24169,7 @@ var require_lib5 = __commonJS({
       eatExportStar(node) {
         if (super.eatExportStar(node))
           return true;
-        if (this.isContextual(126) && this.lookahead().type === 55) {
+        if (this.isContextual(128) && this.lookahead().type === 55) {
           node.exportKind = "type";
           this.next();
           this.next();
@@ -24130,7 +24193,7 @@ var require_lib5 = __commonJS({
       }
       parseClassMember(classBody, member, state) {
         const { startLoc } = this.state;
-        if (this.isContextual(121)) {
+        if (this.isContextual(123)) {
           if (super.parseClassMemberFromModifier(classBody, member)) {
             return;
           }
@@ -24161,7 +24224,7 @@ var require_lib5 = __commonJS({
             identifierName: fullWord
           });
         }
-        this.finishToken(128, fullWord);
+        this.finishToken(130, fullWord);
       }
       getTokenFromCode(code) {
         const next = this.input.charCodeAt(this.state.pos + 1);
@@ -24195,18 +24258,18 @@ var require_lib5 = __commonJS({
         super.toAssignable(node, isLHS);
       }
       toAssignableList(exprList, trailingCommaLoc, isLHS) {
-        for (let i2 = 0; i2 < exprList.length; i2++) {
-          const expr = exprList[i2];
+        for (let i = 0; i < exprList.length; i++) {
+          const expr = exprList[i];
           if ((expr == null ? void 0 : expr.type) === "TypeCastExpression") {
-            exprList[i2] = this.typeCastToParameter(expr);
+            exprList[i] = this.typeCastToParameter(expr);
           }
         }
         super.toAssignableList(exprList, trailingCommaLoc, isLHS);
       }
       toReferencedList(exprList, isParenthesizedExpr) {
-        for (let i2 = 0; i2 < exprList.length; i2++) {
+        for (let i = 0; i < exprList.length; i++) {
           var _expr$extra;
-          const expr = exprList[i2];
+          const expr = exprList[i];
           if (expr && expr.type === "TypeCastExpression" && !((_expr$extra = expr.extra) != null && _expr$extra.parenthesized) && (exprList.length > 1 || !isParenthesizedExpr)) {
             this.raise(FlowErrors.TypeCastInPattern, {
               at: expr.typeAnnotation
@@ -24286,7 +24349,7 @@ var require_lib5 = __commonJS({
         if (node.superClass && this.match(47)) {
           node.superTypeParameters = this.flowParseTypeParameterInstantiation();
         }
-        if (this.isContextual(110)) {
+        if (this.isContextual(111)) {
           this.next();
           const implemented = node.implements = [];
           do {
@@ -24381,6 +24444,14 @@ var require_lib5 = __commonJS({
         }
         return isMaybeDefaultImport(this.state.type);
       }
+      checkImportReflection(node) {
+        super.checkImportReflection(node);
+        if (node.module && node.importKind !== "value") {
+          this.raise(FlowErrors.ImportReflectionHasImportType, {
+            at: node.specifiers[0].loc.start
+          });
+        }
+      }
       parseImportSpecifierLocal(node, specifier, type) {
         specifier.local = hasTypeImportKind(node) ? this.flowParseRestrictedIdentifier(true, true) : this.parseIdentifier();
         node.specifiers.push(this.finishImportSpecifier(specifier, type));
@@ -24390,7 +24461,7 @@ var require_lib5 = __commonJS({
         let kind = null;
         if (this.match(87)) {
           kind = "typeof";
-        } else if (this.isContextual(126)) {
+        } else if (this.isContextual(128)) {
           kind = "type";
         }
         if (kind) {
@@ -24501,7 +24572,7 @@ var require_lib5 = __commonJS({
         var _jsx;
         let state = null;
         let jsx2;
-        if (this.hasPlugin("jsx") && (this.match(138) || this.match(47))) {
+        if (this.hasPlugin("jsx") && (this.match(140) || this.match(47))) {
           state = this.state.clone();
           jsx2 = this.tryParse(() => super.parseMaybeAssign(refExpressionErrors, afterLeftParse), state);
           if (!jsx2.error)
@@ -24599,10 +24670,10 @@ var require_lib5 = __commonJS({
         if (isArrowFunction && this.state.noArrowParamsConversionAt.indexOf(node.start) !== -1) {
           return;
         }
-        for (let i2 = 0; i2 < node.params.length; i2++) {
-          if (this.isThisParam(node.params[i2]) && i2 > 0) {
+        for (let i = 0; i < node.params.length; i++) {
+          if (this.isThisParam(node.params[i]) && i > 0) {
             this.raise(FlowErrors.ThisParamMustBeFirst, {
-              at: node.params[i2]
+              at: node.params[i]
             });
           }
         }
@@ -24791,7 +24862,7 @@ var require_lib5 = __commonJS({
         const startLoc = this.state.startLoc;
         const endOfInit = /* @__PURE__ */ __name(() => this.match(12) || this.match(8), "endOfInit");
         switch (this.state.type) {
-          case 130: {
+          case 132: {
             const literal = this.parseNumericLiteral(this.state.value);
             if (endOfInit()) {
               return {
@@ -24805,7 +24876,7 @@ var require_lib5 = __commonJS({
               loc: startLoc
             };
           }
-          case 129: {
+          case 131: {
             const literal1 = this.parseStringLiteral(this.state.value);
             if (endOfInit()) {
               return {
@@ -25390,12 +25461,12 @@ var require_lib5 = __commonJS({
               if (this.state.pos === this.state.start) {
                 if (ch === 60 && this.state.canStartJSXElement) {
                   ++this.state.pos;
-                  return this.finishToken(138);
+                  return this.finishToken(140);
                 }
                 return super.getTokenFromCode(ch);
               }
               out += this.input.slice(chunkStart, this.state.pos);
-              return this.finishToken(137, out);
+              return this.finishToken(139, out);
             case 38:
               out += this.input.slice(chunkStart, this.state.pos);
               out += this.jsxReadEntity();
@@ -25453,7 +25524,7 @@ var require_lib5 = __commonJS({
           }
         }
         out += this.input.slice(chunkStart, this.state.pos++);
-        return this.finishToken(129, out);
+        return this.finishToken(131, out);
       }
       jsxReadEntity() {
         const startPos = ++this.state.pos;
@@ -25493,11 +25564,11 @@ var require_lib5 = __commonJS({
         do {
           ch = this.input.charCodeAt(++this.state.pos);
         } while (isIdentifierChar(ch) || ch === 45);
-        return this.finishToken(136, this.input.slice(start, this.state.pos));
+        return this.finishToken(138, this.input.slice(start, this.state.pos));
       }
       jsxParseIdentifier() {
         const node = this.startNode();
-        if (this.match(136)) {
+        if (this.match(138)) {
           node.name = this.state.value;
         } else if (tokenIsKeyword(this.state.type)) {
           node.name = tokenLabelName(this.state.type);
@@ -25545,8 +25616,8 @@ var require_lib5 = __commonJS({
               });
             }
             return node;
-          case 138:
-          case 129:
+          case 140:
+          case 131:
             return this.parseExprAtom();
           default:
             throw this.raise(JsxErrors.UnsupportedJsxValue, {
@@ -25596,7 +25667,7 @@ var require_lib5 = __commonJS({
       }
       jsxParseOpeningElementAt(startLoc) {
         const node = this.startNodeAt(startLoc);
-        if (this.eat(139)) {
+        if (this.eat(141)) {
           return this.finishNode(node, "JSXOpeningFragment");
         }
         node.name = this.jsxParseElementName();
@@ -25604,21 +25675,21 @@ var require_lib5 = __commonJS({
       }
       jsxParseOpeningElementAfterName(node) {
         const attributes = [];
-        while (!this.match(56) && !this.match(139)) {
+        while (!this.match(56) && !this.match(141)) {
           attributes.push(this.jsxParseAttribute());
         }
         node.attributes = attributes;
         node.selfClosing = this.eat(56);
-        this.expect(139);
+        this.expect(141);
         return this.finishNode(node, "JSXOpeningElement");
       }
       jsxParseClosingElementAt(startLoc) {
         const node = this.startNodeAt(startLoc);
-        if (this.eat(139)) {
+        if (this.eat(141)) {
           return this.finishNode(node, "JSXClosingFragment");
         }
         node.name = this.jsxParseElementName();
-        this.expect(139);
+        this.expect(141);
         return this.finishNode(node, "JSXClosingElement");
       }
       jsxParseElementAt(startLoc) {
@@ -25630,7 +25701,7 @@ var require_lib5 = __commonJS({
           contents:
             for (; ; ) {
               switch (this.state.type) {
-                case 138:
+                case 140:
                   startLoc = this.state.startLoc;
                   this.next();
                   if (this.eat(56)) {
@@ -25639,7 +25710,7 @@ var require_lib5 = __commonJS({
                   }
                   children.push(this.jsxParseElementAt(startLoc));
                   break;
-                case 137:
+                case 139:
                   children.push(this.parseExprAtom());
                   break;
                 case 5: {
@@ -25700,12 +25771,12 @@ var require_lib5 = __commonJS({
         context[context.length - 1] = newContext;
       }
       parseExprAtom(refExpressionErrors) {
-        if (this.match(137)) {
+        if (this.match(139)) {
           return this.parseLiteral(this.state.value, "JSXText");
-        } else if (this.match(138)) {
+        } else if (this.match(140)) {
           return this.jsxParseElement();
         } else if (this.match(47) && this.input.charCodeAt(this.state.pos) !== 33) {
-          this.replaceToken(138);
+          this.replaceToken(140);
           return this.jsxParseElement();
         } else {
           return super.parseExprAtom(refExpressionErrors);
@@ -25727,7 +25798,7 @@ var require_lib5 = __commonJS({
           }
           if (code === 62) {
             ++this.state.pos;
-            return this.finishToken(139);
+            return this.finishToken(141);
           }
           if ((code === 34 || code === 39) && context === types.j_oTag) {
             return this.jsxReadString(code);
@@ -25735,18 +25806,18 @@ var require_lib5 = __commonJS({
         }
         if (code === 60 && this.state.canStartJSXElement && this.input.charCodeAt(this.state.pos + 1) !== 33) {
           ++this.state.pos;
-          return this.finishToken(138);
+          return this.finishToken(140);
         }
         return super.getTokenFromCode(code);
       }
       updateContext(prevType) {
         const { context, type } = this.state;
-        if (type === 56 && prevType === 138) {
+        if (type === 56 && prevType === 140) {
           context.splice(-2, 2, types.j_cTag);
           this.state.canStartJSXElement = false;
-        } else if (type === 138) {
+        } else if (type === 140) {
           context.push(types.j_oTag);
-        } else if (type === 139) {
+        } else if (type === 141) {
           const out = context[context.length - 1];
           if (out === types.j_oTag && prevType === 56 || out === types.j_cTag) {
             context.pop();
@@ -25798,8 +25869,8 @@ var require_lib5 = __commonJS({
           return true;
         }
         if (!allowShadow && len > 1) {
-          for (let i2 = 0; i2 < len - 1; i2++) {
-            if (this.importsStack[i2].has(name))
+          for (let i = 0; i < len - 1; i++) {
+            if (this.importsStack[i].has(name))
               return true;
           }
         }
@@ -25863,8 +25934,8 @@ var require_lib5 = __commonJS({
         if (this.hasImport(name))
           return;
         const len = this.scopeStack.length;
-        for (let i2 = len - 1; i2 >= 0; i2--) {
-          const scope = this.scopeStack[i2];
+        for (let i = len - 1; i >= 0; i--) {
+          const scope = this.scopeStack[i];
           if (scope.types.has(name) || scope.exportOnlyBindings.has(name))
             return;
         }
@@ -25872,15 +25943,15 @@ var require_lib5 = __commonJS({
       }
     }, "TypeScriptScopeHandler");
     var getOwn$1 = /* @__PURE__ */ __name((object, key) => Object.hasOwnProperty.call(object, key) && object[key], "getOwn$1");
-    function nonNull(x2) {
-      if (x2 == null) {
-        throw new Error(`Unexpected ${x2} value.`);
+    function nonNull(x) {
+      if (x == null) {
+        throw new Error(`Unexpected ${x} value.`);
       }
-      return x2;
+      return x;
     }
     __name(nonNull, "nonNull");
-    function assert(x2) {
-      if (!x2) {
+    function assert(x) {
+      if (!x) {
         throw new Error("Assert fail");
       }
     }
@@ -25890,7 +25961,7 @@ var require_lib5 = __commonJS({
       AbstractPropertyHasInitializer: ({ propertyName }) => `Property '${propertyName}' cannot have an initializer because it is marked abstract.`,
       AccesorCannotDeclareThisParameter: "'get' and 'set' accessors cannot declare 'this' parameters.",
       AccesorCannotHaveTypeParameters: "An accessor cannot have type parameters.",
-      CannotFindName: ({ name }) => `Cannot find name '${name}'.`,
+      AccessorCannotBeOptional: "An 'accessor' property cannot be declared optional.",
       ClassMethodHasDeclare: "Class methods cannot have the 'declare' modifier.",
       ClassMethodHasReadonly: "Class methods cannot have the 'readonly' modifier.",
       ConstInitiailizerMustBeStringOrNumericLiteralOrLiteralEnumReference: "A 'const' initializer in an ambient context must be a string or numeric literal or literal enum reference.",
@@ -25905,6 +25976,7 @@ var require_lib5 = __commonJS({
       EmptyTypeParameters: "Type parameter list cannot be empty.",
       ExpectedAmbientAfterExportDeclare: "'export declare' must be followed by an ambient declaration.",
       ImportAliasHasImportType: "An import alias can not use 'import type'.",
+      ImportReflectionHasImportType: "An `import module` declaration can not use `type` modifier",
       IncompatibleModifiers: ({ modifiers }) => `'${modifiers[0]}' modifier cannot be used with '${modifiers[1]}' modifier.`,
       IndexSignatureHasAbstract: "Index signatures cannot have the 'abstract' modifier.",
       IndexSignatureHasAccessibility: ({ modifier }) => `Index signatures cannot have an accessibility modifier ('${modifier}').`,
@@ -25990,7 +26062,7 @@ var require_lib5 = __commonJS({
         return tokenIsIdentifier(this.state.type);
       }
       tsTokenCanFollowModifier() {
-        return (this.match(0) || this.match(5) || this.match(55) || this.match(21) || this.match(134) || this.isLiteralPropertyName()) && !this.hasPrecedingLineBreak();
+        return (this.match(0) || this.match(5) || this.match(55) || this.match(21) || this.match(136) || this.isLiteralPropertyName()) && !this.hasPrecedingLineBreak();
       }
       tsNextTokenCanFollowModifier() {
         this.next();
@@ -26158,7 +26230,7 @@ var require_lib5 = __commonJS({
         const node = this.startNode();
         this.expect(83);
         this.expect(10);
-        if (!this.match(129)) {
+        if (!this.match(131)) {
           this.raise(TSErrors.UnsupportedImportTypeArgument, {
             at: this.state.startLoc
           });
@@ -26262,7 +26334,7 @@ var require_lib5 = __commonJS({
       }
       tsParseTypeParameters(parseModifiers) {
         const node = this.startNode();
-        if (this.match(47) || this.match(138)) {
+        if (this.match(47) || this.match(140)) {
           this.next();
         } else {
           this.unexpected();
@@ -26280,19 +26352,6 @@ var require_lib5 = __commonJS({
           this.addExtra(node, "trailingComma", refTrailingCommaPos.value);
         }
         return this.finishNode(node, "TSTypeParameterDeclaration");
-      }
-      tsTryNextParseConstantContext() {
-        if (this.lookahead().type !== 75)
-          return null;
-        this.next();
-        const typeReference = this.tsParseTypeReference();
-        if (typeReference.typeParameters) {
-          this.raise(TSErrors.CannotFindName, {
-            at: typeReference.typeName,
-            name: "const"
-          });
-        }
-        return typeReference;
       }
       tsFillSignature(returnToken, signature) {
         const returnTokenRequired = returnToken === 19;
@@ -26483,9 +26542,9 @@ var require_lib5 = __commonJS({
       tsIsStartOfMappedType() {
         this.next();
         if (this.eat(53)) {
-          return this.isContextual(118);
+          return this.isContextual(120);
         }
-        if (this.isContextual(118)) {
+        if (this.isContextual(120)) {
           this.next();
         }
         if (!this.match(0)) {
@@ -26510,8 +26569,8 @@ var require_lib5 = __commonJS({
         if (this.match(53)) {
           node.readonly = this.state.value;
           this.next();
-          this.expectContextual(118);
-        } else if (this.eatContextual(118)) {
+          this.expectContextual(120);
+        } else if (this.eatContextual(120)) {
           node.readonly = true;
         }
         this.expect(0);
@@ -26612,9 +26671,9 @@ var require_lib5 = __commonJS({
         const node = this.startNode();
         node.literal = (() => {
           switch (this.state.type) {
-            case 130:
+            case 132:
+            case 133:
             case 131:
-            case 129:
             case 85:
             case 86:
               return super.parseExprAtom();
@@ -26636,7 +26695,7 @@ var require_lib5 = __commonJS({
       }
       tsParseThisTypeOrThisTypePredicate() {
         const thisKeyword = this.tsParseThisTypeNode();
-        if (this.isContextual(113) && !this.hasPrecedingLineBreak()) {
+        if (this.isContextual(114) && !this.hasPrecedingLineBreak()) {
           return this.tsParseThisTypePredicate(thisKeyword);
         } else {
           return thisKeyword;
@@ -26644,9 +26703,9 @@ var require_lib5 = __commonJS({
       }
       tsParseNonArrayType() {
         switch (this.state.type) {
-          case 129:
-          case 130:
           case 131:
+          case 132:
+          case 133:
           case 85:
           case 86:
             return this.tsParseLiteralTypeNode();
@@ -26654,7 +26713,7 @@ var require_lib5 = __commonJS({
             if (this.state.value === "-") {
               const node = this.startNode();
               const nextToken = this.lookahead();
-              if (nextToken.type !== 130 && nextToken.type !== 131) {
+              if (nextToken.type !== 132 && nextToken.type !== 133) {
                 throw this.unexpected();
               }
               node.literal = this.parseMaybeUnary();
@@ -26733,7 +26792,7 @@ var require_lib5 = __commonJS({
       }
       tsParseInferType() {
         const node = this.startNode();
-        this.expectContextual(112);
+        this.expectContextual(113);
         const typeParameter = this.startNode();
         typeParameter.name = this.tsParseTypeParameterName();
         typeParameter.constraint = this.tsTryParse(() => this.tsParseConstraintForInferType());
@@ -26750,7 +26809,7 @@ var require_lib5 = __commonJS({
       }
       tsParseTypeOperatorOrHigher() {
         const isTypeOperator = tokenIsTSTypeOperator(this.state.type) && !this.state.containsEsc;
-        return isTypeOperator ? this.tsParseTypeOperator() : this.isContextual(112) ? this.tsParseInferType() : this.tsInAllowConditionalTypesContext(() => this.tsParseArrayTypeOrHigher());
+        return isTypeOperator ? this.tsParseTypeOperator() : this.isContextual(113) ? this.tsParseInferType() : this.tsInAllowConditionalTypesContext(() => this.tsParseArrayTypeOrHigher());
       }
       tsParseUnionOrIntersectionType(kind, parseConstituentType, operator) {
         const node = this.startNode();
@@ -26873,13 +26932,13 @@ var require_lib5 = __commonJS({
       }
       tsParseTypePredicatePrefix() {
         const id = this.parseIdentifier();
-        if (this.isContextual(113) && !this.hasPrecedingLineBreak()) {
+        if (this.isContextual(114) && !this.hasPrecedingLineBreak()) {
           this.next();
           return id;
         }
       }
       tsParseTypePredicateAsserts() {
-        if (this.state.type !== 106) {
+        if (this.state.type !== 107) {
           return false;
         }
         const containsEsc = this.state.containsEsc;
@@ -26919,7 +26978,7 @@ var require_lib5 = __commonJS({
         return this.finishNode(node, "TSConditionalType");
       }
       isAbstractConstructorSignature() {
-        return this.isContextual(120) && this.lookahead().type === 77;
+        return this.isContextual(122) && this.lookahead().type === 77;
       }
       tsParseNonConditionalType() {
         if (this.tsIsStartOfFunctionType()) {
@@ -26939,8 +26998,10 @@ var require_lib5 = __commonJS({
           });
         }
         const node = this.startNode();
-        const _const = this.tsTryNextParseConstantContext();
-        node.typeAnnotation = _const || this.tsNextThenParseType();
+        node.typeAnnotation = this.tsInType(() => {
+          this.next();
+          return this.match(75) ? this.tsParseTypeReference() : this.tsParseType();
+        });
         this.expect(48);
         node.expression = this.parseMaybeUnary();
         return this.finishNode(node, "TSTypeAssertion");
@@ -26966,7 +27027,7 @@ var require_lib5 = __commonJS({
       tsParseInterfaceDeclaration(node, properties = {}) {
         if (this.hasFollowingLineBreak())
           return null;
-        this.expectContextual(125);
+        this.expectContextual(127);
         if (properties.declare)
           node.declare = true;
         if (tokenIsIdentifier(this.state.type)) {
@@ -26993,7 +27054,7 @@ var require_lib5 = __commonJS({
         node.typeAnnotation = this.tsInType(() => {
           node.typeParameters = this.tsTryParseTypeParameters(this.tsParseInOutModifiers.bind(this));
           this.expect(29);
-          if (this.isContextual(111) && this.lookahead().type !== 16) {
+          if (this.isContextual(112) && this.lookahead().type !== 16) {
             const node1 = this.startNode();
             this.next();
             return this.finishNode(node1, "TSIntrinsicKeyword");
@@ -27058,7 +27119,7 @@ var require_lib5 = __commonJS({
       }
       tsParseEnumMember() {
         const node = this.startNode();
-        node.id = this.match(129) ? super.parseStringLiteral(this.state.value) : this.parseIdentifier(true);
+        node.id = this.match(131) ? super.parseStringLiteral(this.state.value) : this.parseIdentifier(true);
         if (this.eat(29)) {
           node.initializer = super.parseMaybeAssignAllowIn();
         }
@@ -27069,7 +27130,7 @@ var require_lib5 = __commonJS({
           node.const = true;
         if (properties.declare)
           node.declare = true;
-        this.expectContextual(122);
+        this.expectContextual(124);
         node.id = this.parseIdentifier();
         this.checkIdentifier(node.id, node.const ? BIND_TS_CONST_ENUM : BIND_TS_ENUM);
         this.expect(5);
@@ -27104,10 +27165,10 @@ var require_lib5 = __commonJS({
         return this.finishNode(node, "TSModuleDeclaration");
       }
       tsParseAmbientExternalModuleDeclaration(node) {
-        if (this.isContextual(109)) {
+        if (this.isContextual(110)) {
           node.global = true;
           node.id = this.parseIdentifier();
-        } else if (this.match(129)) {
+        } else if (this.match(131)) {
           node.id = super.parseStringLiteral(this.state.value);
         } else {
           this.unexpected();
@@ -27139,39 +27200,39 @@ var require_lib5 = __commonJS({
         return this.finishNode(node, "TSImportEqualsDeclaration");
       }
       tsIsExternalModuleReference() {
-        return this.isContextual(116) && this.lookaheadCharCode() === 40;
+        return this.isContextual(117) && this.lookaheadCharCode() === 40;
       }
       tsParseModuleReference() {
         return this.tsIsExternalModuleReference() ? this.tsParseExternalModuleReference() : this.tsParseEntityName(false);
       }
       tsParseExternalModuleReference() {
         const node = this.startNode();
-        this.expectContextual(116);
+        this.expectContextual(117);
         this.expect(10);
-        if (!this.match(129)) {
+        if (!this.match(131)) {
           throw this.unexpected();
         }
         node.expression = super.parseExprAtom();
         this.expect(11);
         return this.finishNode(node, "TSExternalModuleReference");
       }
-      tsLookAhead(f2) {
+      tsLookAhead(f) {
         const state = this.state.clone();
-        const res = f2();
+        const res = f();
         this.state = state;
         return res;
       }
-      tsTryParseAndCatch(f2) {
-        const result = this.tryParse((abort) => f2() || abort());
+      tsTryParseAndCatch(f) {
+        const result = this.tryParse((abort) => f() || abort());
         if (result.aborted || !result.node)
           return void 0;
         if (result.error)
           this.state = result.failState;
         return result.node;
       }
-      tsTryParse(f2) {
+      tsTryParse(f) {
         const state = this.state.clone();
-        const result = f2();
+        const result = f();
         if (result !== void 0 && result !== false) {
           return result;
         } else {
@@ -27192,18 +27253,18 @@ var require_lib5 = __commonJS({
         return this.tsInAmbientContext(() => {
           if (starttype === 68) {
             nany.declare = true;
-            return super.parseFunctionStatement(nany, false, true);
+            return super.parseFunctionStatement(nany, false, false);
           }
           if (starttype === 80) {
             nany.declare = true;
             return this.parseClass(nany, true, false);
           }
-          if (starttype === 122) {
+          if (starttype === 124) {
             return this.tsParseEnumDeclaration(nany, {
               declare: true
             });
           }
-          if (starttype === 109) {
+          if (starttype === 110) {
             return this.tsParseAmbientExternalModuleDeclaration(nany);
           }
           if (starttype === 75 || starttype === 74) {
@@ -27217,7 +27278,7 @@ var require_lib5 = __commonJS({
               declare: true
             });
           }
-          if (starttype === 125) {
+          if (starttype === 127) {
             const result = this.tsParseInterfaceDeclaration(nany, {
               declare: true
             });
@@ -27225,14 +27286,14 @@ var require_lib5 = __commonJS({
               return result;
           }
           if (tokenIsIdentifier(starttype)) {
-            return this.tsParseDeclaration(nany, this.state.value, true);
+            return this.tsParseDeclaration(nany, this.state.value, true, null);
           }
         });
       }
       tsTryParseExportDeclaration() {
-        return this.tsParseDeclaration(this.startNode(), this.state.value, true);
+        return this.tsParseDeclaration(this.startNode(), this.state.value, true, null);
       }
-      tsParseExpressionStatement(node, expr) {
+      tsParseExpressionStatement(node, expr, decorators) {
         switch (expr.name) {
           case "declare": {
             const declaration = this.tsTryParseDeclare(node);
@@ -27256,19 +27317,19 @@ var require_lib5 = __commonJS({
             }
             break;
           default:
-            return this.tsParseDeclaration(node, expr.name, false);
+            return this.tsParseDeclaration(node, expr.name, false, decorators);
         }
       }
-      tsParseDeclaration(node, value, next) {
+      tsParseDeclaration(node, value, next, decorators) {
         switch (value) {
           case "abstract":
             if (this.tsCheckLineTerminator(next) && (this.match(80) || tokenIsIdentifier(this.state.type))) {
-              return this.tsParseAbstractDeclaration(node);
+              return this.tsParseAbstractDeclaration(node, decorators);
             }
             break;
           case "module":
             if (this.tsCheckLineTerminator(next)) {
-              if (this.match(129)) {
+              if (this.match(131)) {
                 return this.tsParseAmbientExternalModuleDeclaration(node);
               } else if (tokenIsIdentifier(this.state.type)) {
                 return this.tsParseModuleOrNamespaceDeclaration(node);
@@ -27527,16 +27588,24 @@ var require_lib5 = __commonJS({
         }
       }
       parseExprOp(left, leftStartLoc, minPrec) {
-        if (tokenOperatorPrecedence(58) > minPrec && !this.hasPrecedingLineBreak() && this.isContextual(93)) {
+        let isSatisfies;
+        if (tokenOperatorPrecedence(58) > minPrec && !this.hasPrecedingLineBreak() && (this.isContextual(93) || (isSatisfies = this.isContextual(118)))) {
           const node = this.startNodeAt(leftStartLoc);
           node.expression = left;
-          const _const = this.tsTryNextParseConstantContext();
-          if (_const) {
-            node.typeAnnotation = _const;
-          } else {
-            node.typeAnnotation = this.tsNextThenParseType();
-          }
-          this.finishNode(node, "TSAsExpression");
+          node.typeAnnotation = this.tsInType(() => {
+            this.next();
+            if (this.match(75)) {
+              if (isSatisfies) {
+                this.raise(Errors.UnexpectedKeyword, {
+                  at: this.state.startLoc,
+                  keyword: "const"
+                });
+              }
+              return this.tsParseTypeReference();
+            }
+            return this.tsParseType();
+          });
+          this.finishNode(node, isSatisfies ? "TSSatisfiesExpression" : "TSAsExpression");
           this.reScan_lt_gt();
           return this.parseExprOp(node, leftStartLoc, minPrec);
         }
@@ -27547,13 +27616,21 @@ var require_lib5 = __commonJS({
           super.checkReservedWord(word, startLoc, checkKeywords, isBinding);
         }
       }
+      checkImportReflection(node) {
+        super.checkImportReflection(node);
+        if (node.module && node.importKind !== "value") {
+          this.raise(TSErrors.ImportReflectionHasImportType, {
+            at: node.specifiers[0].loc.start
+          });
+        }
+      }
       checkDuplicateExports() {
       }
       parseImport(node) {
         node.importKind = "value";
         if (tokenIsIdentifier(this.state.type) || this.match(55) || this.match(5)) {
           let ahead = this.lookahead();
-          if (this.isContextual(126) && ahead.type !== 12 && ahead.type !== 97 && ahead.type !== 29) {
+          if (this.isContextual(128) && ahead.type !== 12 && ahead.type !== 97 && ahead.type !== 29) {
             node.importKind = "type";
             this.next();
             ahead = this.lookahead();
@@ -27570,10 +27647,10 @@ var require_lib5 = __commonJS({
         }
         return importNode;
       }
-      parseExport(node) {
+      parseExport(node, decorators) {
         if (this.match(83)) {
           this.next();
-          if (this.isContextual(126) && this.lookaheadCharCode() !== 61) {
+          if (this.isContextual(128) && this.lookaheadCharCode() !== 61) {
             node.importKind = "type";
             this.next();
           } else {
@@ -27587,22 +27664,22 @@ var require_lib5 = __commonJS({
           return this.finishNode(assign, "TSExportAssignment");
         } else if (this.eatContextual(93)) {
           const decl = node;
-          this.expectContextual(124);
+          this.expectContextual(126);
           decl.id = this.parseIdentifier();
           this.semicolon();
           return this.finishNode(decl, "TSNamespaceExportDeclaration");
         } else {
-          if (this.isContextual(126) && this.lookahead().type === 5) {
+          if (this.isContextual(128) && this.lookahead().type === 5) {
             this.next();
             node.exportKind = "type";
           } else {
             node.exportKind = "value";
           }
-          return super.parseExport(node);
+          return super.parseExport(node, decorators);
         }
       }
       isAbstractClass() {
-        return this.isContextual(120) && this.lookahead().type === 80;
+        return this.isContextual(122) && this.lookahead().type === 80;
       }
       parseExportDefaultExpression() {
         if (this.isAbstractClass()) {
@@ -27611,7 +27688,7 @@ var require_lib5 = __commonJS({
           cls.abstract = true;
           return this.parseClass(cls, true, true);
         }
-        if (this.match(125)) {
+        if (this.match(127)) {
           const result = this.tsParseInterfaceDeclaration(this.startNode());
           if (result)
             return result;
@@ -27638,7 +27715,7 @@ var require_lib5 = __commonJS({
         }
         return declaration;
       }
-      parseStatementContent(context, topLevel) {
+      parseStatementContent(flags, decorators) {
         if (this.match(75) && this.isLookaheadContextual("enum")) {
           const node = this.startNode();
           this.expect(75);
@@ -27646,15 +27723,15 @@ var require_lib5 = __commonJS({
             const: true
           });
         }
-        if (this.isContextual(122)) {
+        if (this.isContextual(124)) {
           return this.tsParseEnumDeclaration(this.startNode());
         }
-        if (this.isContextual(125)) {
+        if (this.isContextual(127)) {
           const result = this.tsParseInterfaceDeclaration(this.startNode());
           if (result)
             return result;
         }
-        return super.parseStatementContent(context, topLevel);
+        return super.parseStatementContent(flags, decorators);
       }
       parseAccessModifier() {
         return this.tsParseModifier([
@@ -27771,9 +27848,9 @@ var require_lib5 = __commonJS({
           });
         }
       }
-      parseExpressionStatement(node, expr) {
-        const decl = expr.type === "Identifier" ? this.tsParseExpressionStatement(node, expr) : void 0;
-        return decl || super.parseExpressionStatement(node, expr);
+      parseExpressionStatement(node, expr, decorators) {
+        const decl = expr.type === "Identifier" ? this.tsParseExpressionStatement(node, expr, decorators) : void 0;
+        return decl || super.parseExpressionStatement(node, expr, decorators);
       }
       shouldParseExportDeclaration() {
         if (this.tsIsDeclarationStart())
@@ -27810,12 +27887,12 @@ var require_lib5 = __commonJS({
         return node;
       }
       parseExportDeclaration(node) {
-        if (!this.state.isAmbientContext && this.isContextual(121)) {
+        if (!this.state.isAmbientContext && this.isContextual(123)) {
           return this.tsInAmbientContext(() => this.parseExportDeclaration(node));
         }
         const startLoc = this.state.startLoc;
-        const isDeclare = this.eatContextual(121);
-        if (isDeclare && (this.isContextual(121) || !this.shouldParseExportDeclaration())) {
+        const isDeclare = this.eatContextual(123);
+        if (isDeclare && (this.isContextual(123) || !this.shouldParseExportDeclaration())) {
           throw this.raise(TSErrors.ExpectedAmbientAfterExportDeclare, {
             at: this.state.startLoc
           });
@@ -27834,7 +27911,7 @@ var require_lib5 = __commonJS({
         return declaration;
       }
       parseClassId(node, isStatement, optionalId, bindingType) {
-        if ((!isStatement || optionalId) && this.isContextual(110)) {
+        if ((!isStatement || optionalId) && this.isContextual(111)) {
           return;
         }
         super.parseClassId(node, isStatement, optionalId, node.declare ? BIND_TS_AMBIENT : BIND_CLASS);
@@ -27843,8 +27920,12 @@ var require_lib5 = __commonJS({
           node.typeParameters = typeParameters;
       }
       parseClassPropertyAnnotation(node) {
-        if (!node.optional && this.eat(35)) {
-          node.definite = true;
+        if (!node.optional) {
+          if (this.eat(35)) {
+            node.definite = true;
+          } else if (this.eat(17)) {
+            node.optional = true;
+          }
         }
         const type = this.tsTryParseTypeAnnotation();
         if (type)
@@ -27880,6 +27961,15 @@ var require_lib5 = __commonJS({
         }
         this.parseClassPropertyAnnotation(node);
         return super.parseClassPrivateProperty(node);
+      }
+      parseClassAccessorProperty(node) {
+        this.parseClassPropertyAnnotation(node);
+        if (node.optional) {
+          this.raise(TSErrors.AccessorCannotBeOptional, {
+            at: node
+          });
+        }
+        return super.parseClassAccessorProperty(node);
       }
       pushClassMethod(classBody, method, isGenerator, isAsync, isConstructor, allowsDirectSuper) {
         const typeParameters = this.tsTryParseTypeParameters();
@@ -27917,7 +28007,7 @@ var require_lib5 = __commonJS({
         if (node.superClass && (this.match(47) || this.match(51))) {
           node.superTypeParameters = this.tsParseTypeArgumentsInExpression();
         }
-        if (this.eatContextual(110)) {
+        if (this.eatContextual(111)) {
           node.implements = this.tsParseHeritageClause("implements");
         }
       }
@@ -27955,7 +28045,7 @@ var require_lib5 = __commonJS({
         let state;
         let jsx2;
         let typeCast;
-        if (this.hasPlugin("jsx") && (this.match(138) || this.match(47))) {
+        if (this.hasPlugin("jsx") && (this.match(140) || this.match(47))) {
           state = this.state.clone();
           jsx2 = this.tryParse(() => super.parseMaybeAssign(refExpressionErrors, afterLeftParse), state);
           if (!jsx2.error)
@@ -28082,10 +28172,11 @@ var require_lib5 = __commonJS({
             this.toAssignableParenthesizedExpression(node, isLHS);
             break;
           case "TSAsExpression":
+          case "TSSatisfiesExpression":
           case "TSNonNullExpression":
           case "TSTypeAssertion":
             if (isLHS) {
-              this.expressionScope.recordArrowParemeterBindingError(TSErrors.UnexpectedTypeCastInParameter, {
+              this.expressionScope.recordArrowParameterBindingError(TSErrors.UnexpectedTypeCastInParameter, {
                 at: node
               });
             } else {
@@ -28106,6 +28197,7 @@ var require_lib5 = __commonJS({
       toAssignableParenthesizedExpression(node, isLHS) {
         switch (node.expression.type) {
           case "TSAsExpression":
+          case "TSSatisfiesExpression":
           case "TSNonNullExpression":
           case "TSTypeAssertion":
           case "ParenthesizedExpression":
@@ -28118,6 +28210,7 @@ var require_lib5 = __commonJS({
       checkToRestConversion(node, allowPattern) {
         switch (node.type) {
           case "TSAsExpression":
+          case "TSSatisfiesExpression":
           case "TSTypeAssertion":
           case "TSNonNullExpression":
             this.checkToRestConversion(node.expression, false);
@@ -28132,6 +28225,10 @@ var require_lib5 = __commonJS({
           TSParameterProperty: "parameter",
           TSNonNullExpression: "expression",
           TSAsExpression: (binding !== BIND_NONE || !isUnparenthesizedInAssign) && [
+            "expression",
+            true
+          ],
+          TSSatisfiesExpression: (binding !== BIND_NONE || !isUnparenthesizedInAssign) && [
             "expression",
             true
           ],
@@ -28215,10 +28312,10 @@ var require_lib5 = __commonJS({
         return type;
       }
       toAssignableList(exprList, trailingCommaLoc, isLHS) {
-        for (let i2 = 0; i2 < exprList.length; i2++) {
-          const expr = exprList[i2];
+        for (let i = 0; i < exprList.length; i++) {
+          const expr = exprList[i];
           if ((expr == null ? void 0 : expr.type) === "TSTypeCastExpression") {
-            exprList[i2] = this.typeCastToParameter(expr);
+            exprList[i] = this.typeCastToParameter(expr);
           }
         }
         super.toAssignableList(exprList, trailingCommaLoc, isLHS);
@@ -28282,11 +28379,11 @@ var require_lib5 = __commonJS({
           this.state.inAbstractClass = oldInAbstractClass;
         }
       }
-      tsParseAbstractDeclaration(node) {
+      tsParseAbstractDeclaration(node, decorators) {
         if (this.match(80)) {
           node.abstract = true;
-          return this.parseClass(node, true, false);
-        } else if (this.isContextual(125)) {
+          return this.maybeTakeDecorators(decorators, this.parseClass(node, true, false));
+        } else if (this.isContextual(127)) {
           if (!this.hasFollowingLineBreak()) {
             node.abstract = true;
             this.raise(TSErrors.NonClassMethodPropertyHasAbstractModifer, {
@@ -28432,13 +28529,13 @@ var require_lib5 = __commonJS({
     });
     var placeholders = /* @__PURE__ */ __name((superClass) => /* @__PURE__ */ __name(class PlaceholdersParserMixin extends superClass {
       parsePlaceholder(expectedNode) {
-        if (this.match(140)) {
+        if (this.match(142)) {
           const node = this.startNode();
           this.next();
           this.assertNoSpace();
           node.name = super.parseIdentifier(true);
           this.assertNoSpace();
-          this.expect(140);
+          this.expect(142);
           return this.finishPlaceholder(node, expectedNode);
         }
       }
@@ -28449,7 +28546,7 @@ var require_lib5 = __commonJS({
       }
       getTokenFromCode(code) {
         if (code === 37 && this.input.charCodeAt(this.state.pos + 1) === 37) {
-          return this.finishOp(140, 2);
+          return this.finishOp(142, 2);
         }
         return super.getTokenFromCode(code);
       }
@@ -28477,17 +28574,12 @@ var require_lib5 = __commonJS({
           super.toAssignable(node, isLHS);
         }
       }
-      isLet(context) {
-        if (super.isLet(context)) {
+      chStartsBindingIdentifier(ch, pos) {
+        if (super.chStartsBindingIdentifier(ch, pos)) {
           return true;
         }
-        if (!this.isContextual(99)) {
-          return false;
-        }
-        if (context)
-          return false;
         const nextToken = this.lookahead();
-        if (nextToken.type === 140) {
+        if (nextToken.type === 142) {
           return true;
         }
         return false;
@@ -28505,7 +28597,7 @@ var require_lib5 = __commonJS({
           const stmt = node;
           stmt.label = this.finishPlaceholder(expr, "Identifier");
           this.next();
-          stmt.body = super.parseStatement("label");
+          stmt.body = super.parseStatementOrFunctionDeclaration(false);
           return this.finishNode(stmt, "LabeledStatement");
         }
         this.semicolon();
@@ -28521,11 +28613,10 @@ var require_lib5 = __commonJS({
       parseClass(node, isStatement, optionalId) {
         const type = isStatement ? "ClassDeclaration" : "ClassExpression";
         this.next();
-        this.takeDecorators(node);
         const oldStrict = this.state.strict;
         const placeholder = this.parsePlaceholder("Identifier");
         if (placeholder) {
-          if (this.match(81) || this.match(140) || this.match(5)) {
+          if (this.match(81) || this.match(142) || this.match(5)) {
             node.id = placeholder;
           } else if (optionalId || !isStatement) {
             node.id = null;
@@ -28543,10 +28634,10 @@ var require_lib5 = __commonJS({
         node.body = this.parsePlaceholder("ClassBody") || super.parseClassBody(!!node.superClass, oldStrict);
         return this.finishNode(node, type);
       }
-      parseExport(node) {
+      parseExport(node, decorators) {
         const placeholder = this.parsePlaceholder("Identifier");
         if (!placeholder)
-          return super.parseExport(node);
+          return super.parseExport(node, decorators);
         if (!this.isContextual(97) && !this.match(12)) {
           node.specifiers = [];
           node.source = null;
@@ -28559,13 +28650,13 @@ var require_lib5 = __commonJS({
         node.specifiers = [
           this.finishNode(specifier, "ExportDefaultSpecifier")
         ];
-        return super.parseExport(node);
+        return super.parseExport(node, decorators);
       }
       isExportDefaultSpecifier() {
         if (this.match(65)) {
           const next = this.nextTokenStart();
           if (this.isUnparsedContextual(next, "from")) {
-            if (this.input.startsWith(tokenLabelName(140), this.nextTokenStartSince(next + 4))) {
+            if (this.input.startsWith(tokenLabelName(142), this.nextTokenStartSince(next + 4))) {
               return true;
             }
           }
@@ -28648,11 +28739,11 @@ var require_lib5 = __commonJS({
       ] : expectedConfig;
       const expectedKeys = Object.keys(expectedOptions);
       const expectedOptionsIsEmpty = expectedKeys.length === 0;
-      return plugins.some((p2) => {
-        if (typeof p2 === "string") {
-          return expectedOptionsIsEmpty && p2 === expectedName;
+      return plugins.some((p) => {
+        if (typeof p === "string") {
+          return expectedOptionsIsEmpty && p === expectedName;
         } else {
-          const [pluginName, pluginOptions] = p2;
+          const [pluginName, pluginOptions] = p;
           if (pluginName !== expectedName) {
             return false;
           }
@@ -28720,7 +28811,7 @@ var require_lib5 = __commonJS({
       if (hasPlugin(plugins, "pipelineOperator")) {
         const proposal = getPluginOption(plugins, "pipelineOperator", "proposal");
         if (!PIPELINE_PROPOSALS.includes(proposal)) {
-          const proposalList = PIPELINE_PROPOSALS.map((p2) => `"${p2}"`).join(", ");
+          const proposalList = PIPELINE_PROPOSALS.map((p) => `"${p}"`).join(", ");
           throw new Error(`"pipelineOperator" requires "proposal" option whose value must be one of: ${proposalList}.`);
         }
         const tupleSyntaxIsHash = hasPlugin(plugins, [
@@ -28760,7 +28851,7 @@ var require_lib5 = __commonJS({
         }
       }
       if (hasPlugin(plugins, "recordAndTuple") && getPluginOption(plugins, "recordAndTuple", "syntaxType") != null && !RECORD_AND_TUPLE_SYNTAX_TYPES.includes(getPluginOption(plugins, "recordAndTuple", "syntaxType"))) {
-        throw new Error("The 'syntaxType' option of the 'recordAndTuple' plugin must be one of: " + RECORD_AND_TUPLE_SYNTAX_TYPES.map((p2) => `'${p2}'`).join(", "));
+        throw new Error("The 'syntaxType' option of the 'recordAndTuple' plugin must be one of: " + RECORD_AND_TUPLE_SYNTAX_TYPES.map((p) => `'${p}'`).join(", "));
       }
       if (hasPlugin(plugins, "asyncDoExpressions") && !hasPlugin(plugins, "doExpressions")) {
         const error = new Error("'asyncDoExpressions' requires 'doExpressions', please add 'doExpressions' to parser plugins.");
@@ -28816,7 +28907,7 @@ var require_lib5 = __commonJS({
           parenthesized = unwrapParenthesizedExpression(node);
           if (isLHS) {
             if (parenthesized.type === "Identifier") {
-              this.expressionScope.recordArrowParemeterBindingError(Errors.InvalidParenthesizedAssignment, {
+              this.expressionScope.recordArrowParameterBindingError(Errors.InvalidParenthesizedAssignment, {
                 at: node
               });
             } else if (parenthesized.type !== "MemberExpression") {
@@ -28839,10 +28930,10 @@ var require_lib5 = __commonJS({
             break;
           case "ObjectExpression":
             node.type = "ObjectPattern";
-            for (let i2 = 0, length = node.properties.length, last = length - 1; i2 < length; i2++) {
+            for (let i = 0, length = node.properties.length, last = length - 1; i < length; i++) {
               var _node$extra2;
-              const prop = node.properties[i2];
-              const isLast = i2 === last;
+              const prop = node.properties[i];
+              const isLast = i === last;
               this.toAssignableObjectExpressionProp(prop, isLast, isLHS);
               if (isLast && prop.type === "RestElement" && (_node$extra2 = node.extra) != null && _node$extra2.trailingCommaLoc) {
                 this.raise(Errors.RestTrailingComma, {
@@ -28902,8 +28993,8 @@ var require_lib5 = __commonJS({
       }
       toAssignableList(exprList, trailingCommaLoc, isLHS) {
         const end = exprList.length - 1;
-        for (let i2 = 0; i2 <= end; i2++) {
-          const elt = exprList[i2];
+        for (let i = 0; i <= end; i++) {
+          const elt = exprList[i];
           if (!elt)
             continue;
           if (elt.type === "SpreadElement") {
@@ -28915,7 +29006,7 @@ var require_lib5 = __commonJS({
             this.toAssignable(elt, isLHS);
           }
           if (elt.type === "RestElement") {
-            if (i2 < end) {
+            if (i < end) {
               this.raise(Errors.RestTrailingComma, {
                 at: elt
               });
@@ -28937,8 +29028,8 @@ var require_lib5 = __commonJS({
             return true;
           case "ObjectExpression": {
             const last = node.properties.length - 1;
-            return node.properties.every((prop, i2) => {
-              return prop.type !== "ObjectMethod" && (i2 === last || prop.type !== "SpreadElement") && this.isAssignable(prop);
+            return node.properties.every((prop, i) => {
+              return prop.type !== "ObjectMethod" && (i === last || prop.type !== "SpreadElement") && this.isAssignable(prop);
             });
           }
           case "ObjectProperty":
@@ -29039,7 +29130,7 @@ var require_lib5 = __commonJS({
         const { type, startLoc } = this.state;
         if (type === 21) {
           return this.parseBindingRestProperty(prop);
-        } else if (type === 134) {
+        } else if (type === 136) {
           this.expectPlugin("destructuringPrivate", startLoc);
           this.classScope.usePrivateName(this.state.value, startLoc);
           prop.key = this.parsePrivateName();
@@ -29232,7 +29323,7 @@ var require_lib5 = __commonJS({
         this.enterInitialScopes();
         this.nextToken();
         const expr = this.parseExpression();
-        if (!this.match(135)) {
+        if (!this.match(137)) {
           this.unexpected();
         }
         this.finalizeRemainingComments();
@@ -29277,7 +29368,7 @@ var require_lib5 = __commonJS({
       }
       parseMaybeAssign(refExpressionErrors, afterLeftParse) {
         const startLoc = this.state.startLoc;
-        if (this.isContextual(105)) {
+        if (this.isContextual(106)) {
           if (this.prodParam.hasYield) {
             let left = this.parseYield();
             if (afterLeftParse) {
@@ -29354,7 +29445,7 @@ var require_lib5 = __commonJS({
         return expr;
       }
       parseMaybeUnaryOrPrivate(refExpressionErrors) {
-        return this.match(134) ? this.parsePrivateName() : this.parseMaybeUnary(refExpressionErrors);
+        return this.match(136) ? this.parsePrivateName() : this.parseMaybeUnary(refExpressionErrors);
       }
       parseExprOps(refExpressionErrors) {
         const startLoc = this.state.startLoc;
@@ -29432,7 +29523,7 @@ var require_lib5 = __commonJS({
                 });
               case "smart":
                 return this.withTopicBindingContext(() => {
-                  if (this.prodParam.hasYield && this.isContextual(105)) {
+                  if (this.prodParam.hasYield && this.isContextual(106)) {
                     throw this.raise(Errors.PipeBodyIsTighter, {
                       at: this.state.startLoc
                     });
@@ -29611,7 +29702,7 @@ var require_lib5 = __commonJS({
         if (computed) {
           node.property = this.parseExpression();
           this.expect(3);
-        } else if (this.match(134)) {
+        } else if (this.match(136)) {
           if (base.type === "Super") {
             this.raise(Errors.SuperPrivateField, {
               at: startLoc
@@ -29767,6 +29858,7 @@ var require_lib5 = __commonJS({
       }
       parseExprAtom(refExpressionErrors) {
         let node;
+        let decorators = null;
         const { type } = this.state;
         switch (type) {
           case 79:
@@ -29795,13 +29887,13 @@ var require_lib5 = __commonJS({
             this.readRegexp();
             return this.parseRegExpLiteral(this.state.value);
           }
-          case 130:
-            return this.parseNumericLiteral(this.state.value);
-          case 131:
-            return this.parseBigIntLiteral(this.state.value);
           case 132:
+            return this.parseNumericLiteral(this.state.value);
+          case 133:
+            return this.parseBigIntLiteral(this.state.value);
+          case 134:
             return this.parseDecimalLiteral(this.state.value);
-          case 129:
+          case 131:
             return this.parseStringLiteral(this.state.value);
           case 84:
             return this.parseNullLiteral();
@@ -29830,11 +29922,9 @@ var require_lib5 = __commonJS({
           case 68:
             return this.parseFunctionOrFunctionSent();
           case 26:
-            this.parseDecorators();
+            decorators = this.parseDecorators();
           case 80:
-            node = this.startNode();
-            this.takeDecorators(node);
-            return this.parseClass(node, false);
+            return this.parseClass(this.maybeTakeDecorators(decorators, this.startNode()), false);
           case 77:
             return this.parseNewOrNewTarget();
           case 25:
@@ -29853,7 +29943,7 @@ var require_lib5 = __commonJS({
               });
             }
           }
-          case 134: {
+          case 136: {
             this.raise(Errors.PrivateInExpectedIn, {
               at: this.state.startLoc,
               identifierName: this.state.value
@@ -29895,7 +29985,7 @@ var require_lib5 = __commonJS({
           }
           default:
             if (tokenIsIdentifier(type)) {
-              if (this.isContextual(123) && this.lookaheadCharCode() === 123 && !this.hasFollowingLineBreak()) {
+              if (this.isContextual(125) && this.lookaheadCharCode() === 123 && !this.hasFollowingLineBreak()) {
                 return this.parseModuleExpression();
               }
               const canBeArrow1 = this.state.potentialArrowAt === this.state.start;
@@ -29906,7 +29996,7 @@ var require_lib5 = __commonJS({
                 if (type1 === 68) {
                   this.resetPreviousNodeTrailingComments(id);
                   this.next();
-                  return this.parseFunction(this.startNodeAtNode(id), void 0, true);
+                  return this.parseAsyncFunctionExpression(this.startNodeAtNode(id));
                 } else if (tokenIsIdentifier(type1)) {
                   if (this.lookaheadCharCode() === 61) {
                     return this.parseAsyncArrowUnaryFunction(this.startNodeAtNode(id));
@@ -30495,19 +30585,19 @@ var require_lib5 = __commonJS({
             key = this.parseIdentifier(true);
           } else {
             switch (type) {
-              case 130:
+              case 132:
                 key = this.parseNumericLiteral(value);
                 break;
-              case 129:
+              case 131:
                 key = this.parseStringLiteral(value);
                 break;
-              case 131:
+              case 133:
                 key = this.parseBigIntLiteral(value);
                 break;
-              case 132:
+              case 134:
                 key = this.parseDecimalLiteral(value);
                 break;
-              case 134: {
+              case 136: {
                 const privateKeyLoc = this.state.startLoc;
                 if (refExpressionErrors != null) {
                   if (refExpressionErrors.privateKeyLoc === null) {
@@ -30526,7 +30616,7 @@ var require_lib5 = __commonJS({
             }
           }
           prop.key = key;
-          if (type !== 134) {
+          if (type !== 136) {
             prop.computed = false;
           }
         }
@@ -30535,11 +30625,11 @@ var require_lib5 = __commonJS({
       initFunction(node, isAsync) {
         node.id = null;
         node.generator = false;
-        node.async = !!isAsync;
+        node.async = isAsync;
       }
       parseMethod(node, isGenerator, isAsync, isConstructor, allowDirectSuper, type, inClassScope = false) {
         this.initFunction(node, isAsync);
-        node.generator = !!isGenerator;
+        node.generator = isGenerator;
         const allowModifiers = isConstructor;
         this.scope.enter(SCOPE_FUNCTION | SCOPE_SUPER | (inClassScope ? SCOPE_CLASS : 0) | (allowDirectSuper ? SCOPE_DIRECT_SUPER : 0));
         this.prodParam.enter(functionFlags(isAsync, node.generator));
@@ -30622,8 +30712,8 @@ var require_lib5 = __commonJS({
         return node.type === "Identifier";
       }
       isSimpleParamList(params) {
-        for (let i2 = 0, len = params.length; i2 < len; i2++) {
-          if (!this.isSimpleParameter(params[i2]))
+        for (let i = 0, len = params.length; i < len; i++) {
+          if (!this.isSimpleParameter(params[i]))
             return false;
         }
         return true;
@@ -30711,7 +30801,7 @@ var require_lib5 = __commonJS({
         const tokenIsKeyword2 = tokenKeywordOrIdentifierIsKeyword(type);
         if (liberal) {
           if (tokenIsKeyword2) {
-            this.replaceToken(128);
+            this.replaceToken(130);
           }
         } else {
           this.checkReservedWord(name, startLoc, tokenIsKeyword2, false);
@@ -30806,7 +30896,7 @@ var require_lib5 = __commonJS({
         if (this.hasPrecedingLineBreak())
           return true;
         const { type } = this.state;
-        return type === 53 || type === 10 || type === 0 || tokenIsTemplate(type) || type === 133 || type === 56 || this.hasPlugin("v8intrinsic") && type === 54;
+        return type === 53 || type === 10 || type === 0 || tokenIsTemplate(type) || type === 101 && !this.state.containsEsc || type === 135 || type === 56 || this.hasPlugin("v8intrinsic") && type === 54;
       }
       parseYield() {
         const node = this.startNode();
@@ -30820,7 +30910,7 @@ var require_lib5 = __commonJS({
           delegating = this.eat(55);
           switch (this.state.type) {
             case 13:
-            case 135:
+            case 137:
             case 8:
             case 11:
             case 3:
@@ -30998,23 +31088,33 @@ var require_lib5 = __commonJS({
     var switchLabel = {
       kind: "switch"
     };
-    var FUNC_NO_FLAGS = 0;
-    var FUNC_STATEMENT = 1;
-    var FUNC_HANGING_STATEMENT = 2;
-    var FUNC_NULLABLE_ID = 4;
+    var ParseFunctionFlag = {
+      Expression: 0,
+      Declaration: 1,
+      HangingDeclaration: 2,
+      NullableId: 4,
+      Async: 8
+    };
+    var ParseStatementFlag = {
+      StatementOnly: 0,
+      AllowImportExport: 1,
+      AllowDeclaration: 2,
+      AllowFunctionDeclaration: 4,
+      AllowLabeledFunction: 8
+    };
     var loneSurrogate = /[\uD800-\uDFFF]/u;
     var keywordRelationalOperator = /in(?:stanceof)?/y;
     function babel7CompatTokens(tokens, input) {
-      for (let i2 = 0; i2 < tokens.length; i2++) {
-        const token = tokens[i2];
+      for (let i = 0; i < tokens.length; i++) {
+        const token = tokens[i];
         const { type } = token;
         if (typeof type === "number") {
           {
-            if (type === 134) {
+            if (type === 136) {
               const { loc, start, value, end } = token;
               const hashEndPos = start + 1;
               const hashEndLoc = createPositionWithColumnOffset(loc.start, 1);
-              tokens.splice(i2, 1, new Token({
+              tokens.splice(i, 1, new Token({
                 type: getExportedToken(27),
                 value: "#",
                 start,
@@ -31022,14 +31122,14 @@ var require_lib5 = __commonJS({
                 startLoc: loc.start,
                 endLoc: hashEndLoc
               }), new Token({
-                type: getExportedToken(128),
+                type: getExportedToken(130),
                 value,
                 start: hashEndPos,
                 end,
                 startLoc: hashEndLoc,
                 endLoc: loc.end
               }));
-              i2++;
+              i++;
               continue;
             }
             if (tokenIsTemplate(type)) {
@@ -31082,7 +31182,7 @@ var require_lib5 = __commonJS({
                   endLoc: loc1.end
                 });
               }
-              tokens.splice(i2, 1, startToken, new Token({
+              tokens.splice(i, 1, startToken, new Token({
                 type: getExportedToken(20),
                 value: templateValue,
                 start: backquoteEnd,
@@ -31090,7 +31190,7 @@ var require_lib5 = __commonJS({
                 startLoc: backquoteEndLoc,
                 endLoc: templateElementEndLoc
               }), endToken);
-              i2 += 2;
+              i += 2;
               continue;
             }
           }
@@ -31109,7 +31209,7 @@ var require_lib5 = __commonJS({
         }
         return this.finishNode(file, "File");
       }
-      parseProgram(program, end = 135, sourceType = this.options.sourceType) {
+      parseProgram(program, end = 137, sourceType = this.options.sourceType) {
         program.sourceType = sourceType;
         program.interpreter = this.parseInterpreterDirective();
         this.parseBlockBody(program, true, true, end);
@@ -31122,7 +31222,7 @@ var require_lib5 = __commonJS({
           }
         }
         let finishedProgram;
-        if (end === 135) {
+        if (end === 137) {
           finishedProgram = this.finishNode(program, "Program");
         } else {
           finishedProgram = this.finishNodeAt(program, "Program", createPositionWithColumnOffset(this.state.startLoc, -1));
@@ -31153,24 +31253,15 @@ var require_lib5 = __commonJS({
         this.next();
         return this.finishNode(node, "InterpreterDirective");
       }
-      isLet(context) {
+      isLet() {
         if (!this.isContextual(99)) {
           return false;
         }
-        return this.isLetKeyword(context);
+        return this.hasFollowingBindingAtom();
       }
-      isLetKeyword(context) {
-        const next = this.nextTokenStart();
-        const nextCh = this.codePointAtPos(next);
-        if (nextCh === 92 || nextCh === 91) {
-          return true;
-        }
-        if (context)
-          return false;
-        if (nextCh === 123)
-          return true;
-        if (isIdentifierStart(nextCh)) {
-          keywordRelationalOperator.lastIndex = next;
+      chStartsBindingIdentifier(ch, pos) {
+        if (isIdentifierStart(ch)) {
+          keywordRelationalOperator.lastIndex = pos;
           if (keywordRelationalOperator.test(this.input)) {
             const endCh = this.codePointAtPos(keywordRelationalOperator.lastIndex);
             if (!isIdentifierChar(endCh) && endCh !== 92) {
@@ -31178,23 +31269,59 @@ var require_lib5 = __commonJS({
             }
           }
           return true;
+        } else if (ch === 92) {
+          return true;
+        } else {
+          return false;
         }
-        return false;
       }
-      parseStatement(context, topLevel) {
+      chStartsBindingPattern(ch) {
+        return ch === 91 || ch === 123;
+      }
+      hasFollowingBindingAtom() {
+        const next = this.nextTokenStart();
+        const nextCh = this.codePointAtPos(next);
+        return this.chStartsBindingPattern(nextCh) || this.chStartsBindingIdentifier(nextCh, next);
+      }
+      hasFollowingBindingIdentifier() {
+        const next = this.nextTokenStart();
+        const nextCh = this.codePointAtPos(next);
+        return this.chStartsBindingIdentifier(nextCh, next);
+      }
+      startsUsingForOf() {
+        const lookahead = this.lookahead();
+        if (lookahead.type === 101 && !lookahead.containsEsc) {
+          return false;
+        } else {
+          this.expectPlugin("explicitResourceManagement");
+          return true;
+        }
+      }
+      parseModuleItem() {
+        return this.parseStatementLike(ParseStatementFlag.AllowImportExport | ParseStatementFlag.AllowDeclaration | ParseStatementFlag.AllowFunctionDeclaration | ParseStatementFlag.AllowLabeledFunction);
+      }
+      parseStatementListItem() {
+        return this.parseStatementLike(ParseStatementFlag.AllowDeclaration | ParseStatementFlag.AllowFunctionDeclaration | ParseStatementFlag.AllowLabeledFunction);
+      }
+      parseStatementOrFunctionDeclaration(disallowLabeledFunction) {
+        return this.parseStatementLike(ParseStatementFlag.AllowFunctionDeclaration | (disallowLabeledFunction ? 0 : ParseStatementFlag.AllowLabeledFunction));
+      }
+      parseStatement() {
+        return this.parseStatementLike(ParseStatementFlag.StatementOnly);
+      }
+      parseStatementLike(flags) {
+        let decorators = null;
         if (this.match(26)) {
-          this.parseDecorators(true);
+          decorators = this.parseDecorators(true);
         }
-        return this.parseStatementContent(context, topLevel);
+        return this.parseStatementContent(flags, decorators);
       }
-      parseStatementContent(context, topLevel) {
-        let starttype = this.state.type;
+      parseStatementContent(flags, decorators) {
+        const starttype = this.state.type;
         const node = this.startNode();
-        let kind;
-        if (this.isLet(context)) {
-          starttype = 74;
-          kind = "let";
-        }
+        const allowDeclaration = !!(flags & ParseStatementFlag.AllowDeclaration);
+        const allowFunctionDeclaration = !!(flags & ParseStatementFlag.AllowFunctionDeclaration);
+        const topLevel = flags & ParseStatementFlag.AllowImportExport;
         switch (starttype) {
           case 60:
             return this.parseBreakContinueStatement(node, true);
@@ -31203,28 +31330,28 @@ var require_lib5 = __commonJS({
           case 64:
             return this.parseDebuggerStatement(node);
           case 90:
-            return this.parseDoStatement(node);
+            return this.parseDoWhileStatement(node);
           case 91:
             return this.parseForStatement(node);
           case 68:
             if (this.lookaheadCharCode() === 46)
               break;
-            if (context) {
+            if (!allowDeclaration) {
               if (this.state.strict) {
                 this.raise(Errors.StrictFunction, {
                   at: this.state.startLoc
                 });
-              } else if (context !== "if" && context !== "label") {
+              } else if (!allowFunctionDeclaration) {
                 this.raise(Errors.SloppyFunction, {
                   at: this.state.startLoc
                 });
               }
             }
-            return this.parseFunctionStatement(node, false, !context);
+            return this.parseFunctionStatement(node, false, !allowDeclaration && allowFunctionDeclaration);
           case 80:
-            if (context)
+            if (!allowDeclaration)
               this.unexpected();
-            return this.parseClass(node, true);
+            return this.parseClass(this.maybeTakeDecorators(decorators, node), true);
           case 69:
             return this.parseIfStatement(node);
           case 70:
@@ -31235,15 +31362,46 @@ var require_lib5 = __commonJS({
             return this.parseThrowStatement(node);
           case 73:
             return this.parseTryStatement(node);
-          case 75:
-          case 74:
-            kind = kind || this.state.value;
-            if (context && kind !== "var") {
+          case 105:
+            if (this.hasFollowingLineBreak() || this.state.containsEsc || !this.hasFollowingBindingIdentifier()) {
+              break;
+            }
+            this.expectPlugin("explicitResourceManagement");
+            if (!this.scope.inModule && this.scope.inTopLevel) {
+              this.raise(Errors.UnexpectedUsingDeclaration, {
+                at: this.state.startLoc
+              });
+            } else if (!allowDeclaration) {
               this.raise(Errors.UnexpectedLexicalDeclaration, {
                 at: this.state.startLoc
               });
             }
+            return this.parseVarStatement(node, "using");
+          case 99: {
+            if (this.state.containsEsc) {
+              break;
+            }
+            const next = this.nextTokenStart();
+            const nextCh = this.codePointAtPos(next);
+            if (nextCh !== 91) {
+              if (!allowDeclaration && this.hasFollowingLineBreak())
+                break;
+              if (!this.chStartsBindingIdentifier(nextCh, next) && nextCh !== 123) {
+                break;
+              }
+            }
+          }
+          case 75: {
+            if (!allowDeclaration) {
+              this.raise(Errors.UnexpectedLexicalDeclaration, {
+                at: this.state.startLoc
+              });
+            }
+          }
+          case 74: {
+            const kind = this.state.value;
             return this.parseVarStatement(node, kind);
+          }
           case 92:
             return this.parseWhileStatement(node);
           case 76:
@@ -31272,7 +31430,7 @@ var require_lib5 = __commonJS({
                 this.sawUnambiguousESM = true;
               }
             } else {
-              result = this.parseExport(node);
+              result = this.parseExport(node, decorators);
               if (result.type === "ExportNamedDeclaration" && (!result.exportKind || result.exportKind === "value") || result.type === "ExportAllDeclaration" && (!result.exportKind || result.exportKind === "value") || result.type === "ExportDefaultDeclaration") {
                 this.sawUnambiguousESM = true;
               }
@@ -31282,22 +31440,22 @@ var require_lib5 = __commonJS({
           }
           default: {
             if (this.isAsyncFunction()) {
-              if (context) {
+              if (!allowDeclaration) {
                 this.raise(Errors.AsyncFunctionInSingleStatementContext, {
                   at: this.state.startLoc
                 });
               }
               this.next();
-              return this.parseFunctionStatement(node, true, !context);
+              return this.parseFunctionStatement(node, true, !allowDeclaration && allowFunctionDeclaration);
             }
           }
         }
         const maybeName = this.state.value;
         const expr = this.parseExpression();
         if (tokenIsIdentifier(starttype) && expr.type === "Identifier" && this.eat(14)) {
-          return this.parseLabeledStatement(node, maybeName, expr, context);
+          return this.parseLabeledStatement(node, maybeName, expr, flags);
         } else {
-          return this.parseExpressionStatement(node, expr);
+          return this.parseExpressionStatement(node, expr, decorators);
         }
       }
       assertModuleNodeAllowed(node) {
@@ -31307,28 +31465,33 @@ var require_lib5 = __commonJS({
           });
         }
       }
-      takeDecorators(node) {
-        const decorators = this.state.decoratorStack[this.state.decoratorStack.length - 1];
-        if (decorators.length) {
-          node.decorators = decorators;
-          this.resetStartLocationFromNode(node, decorators[0]);
-          this.state.decoratorStack[this.state.decoratorStack.length - 1] = [];
+      decoratorsEnabledBeforeExport() {
+        if (this.hasPlugin("decorators-legacy"))
+          return true;
+        return this.hasPlugin("decorators") && !!this.getPluginOption("decorators", "decoratorsBeforeExport");
+      }
+      maybeTakeDecorators(maybeDecorators, classNode, exportNode) {
+        if (maybeDecorators) {
+          classNode.decorators = maybeDecorators;
+          this.resetStartLocationFromNode(classNode, maybeDecorators[0]);
+          if (exportNode)
+            this.resetStartLocationFromNode(exportNode, classNode);
         }
+        return classNode;
       }
       canHaveLeadingDecorator() {
         return this.match(80);
       }
       parseDecorators(allowExport) {
-        const currentContextDecorators = this.state.decoratorStack[this.state.decoratorStack.length - 1];
-        while (this.match(26)) {
-          const decorator = this.parseDecorator();
-          currentContextDecorators.push(decorator);
-        }
+        const decorators = [];
+        do {
+          decorators.push(this.parseDecorator());
+        } while (this.match(26));
         if (this.match(82)) {
           if (!allowExport) {
             this.unexpected();
           }
-          if (this.hasPlugin("decorators") && !this.getPluginOption("decorators", "decoratorsBeforeExport")) {
+          if (!this.decoratorsEnabledBeforeExport()) {
             this.raise(Errors.DecoratorExportClass, {
               at: this.state.startLoc
             });
@@ -31338,6 +31501,7 @@ var require_lib5 = __commonJS({
             at: this.state.startLoc
           });
         }
+        return decorators;
       }
       parseDecorator() {
         this.expectOnePlugin([
@@ -31347,7 +31511,6 @@ var require_lib5 = __commonJS({
         const node = this.startNode();
         this.next();
         if (this.hasPlugin("decorators")) {
-          this.state.decoratorStack.push([]);
           const startLoc = this.state.startLoc;
           let expr;
           if (this.match(10)) {
@@ -31368,7 +31531,7 @@ var require_lib5 = __commonJS({
             while (this.eat(16)) {
               const node1 = this.startNodeAt(startLoc);
               node1.object = expr;
-              if (this.match(134)) {
+              if (this.match(136)) {
                 this.classScope.usePrivateName(this.state.value, this.state.startLoc);
                 node1.property = this.parsePrivateName();
               } else {
@@ -31379,7 +31542,6 @@ var require_lib5 = __commonJS({
             }
             node.expression = this.parseMaybeDecoratorArguments(expr);
           }
-          this.state.decoratorStack.pop();
         } else {
           node.expression = this.parseExprSubscripts();
         }
@@ -31407,9 +31569,9 @@ var require_lib5 = __commonJS({
         return this.finishNode(node, isBreak ? "BreakStatement" : "ContinueStatement");
       }
       verifyBreakContinue(node, isBreak) {
-        let i2;
-        for (i2 = 0; i2 < this.state.labels.length; ++i2) {
-          const lab = this.state.labels[i2];
+        let i;
+        for (i = 0; i < this.state.labels.length; ++i) {
+          const lab = this.state.labels[i];
           if (node.label == null || lab.name === node.label.name) {
             if (lab.kind != null && (isBreak || lab.kind === "loop"))
               break;
@@ -31417,7 +31579,7 @@ var require_lib5 = __commonJS({
               break;
           }
         }
-        if (i2 === this.state.labels.length) {
+        if (i === this.state.labels.length) {
           const type = isBreak ? "BreakStatement" : "ContinueStatement";
           this.raise(Errors.IllegalBreakContinue, {
             at: node,
@@ -31436,10 +31598,10 @@ var require_lib5 = __commonJS({
         this.expect(11);
         return val;
       }
-      parseDoStatement(node) {
+      parseDoWhileStatement(node) {
         this.next();
         this.state.labels.push(loopLabel);
-        node.body = this.withSmartMixTopicForbiddingContext(() => this.parseStatement("do"));
+        node.body = this.withSmartMixTopicForbiddingContext(() => this.parseStatement());
         this.state.labels.pop();
         this.expect(92);
         node.test = this.parseHeaderExpression();
@@ -31462,14 +31624,21 @@ var require_lib5 = __commonJS({
           return this.parseFor(node, null);
         }
         const startsWithLet = this.isContextual(99);
-        const isLet = startsWithLet && this.isLetKeyword();
-        if (this.match(74) || this.match(75) || isLet) {
+        const startsWithUsing = this.isContextual(105) && !this.hasFollowingLineBreak();
+        const isLetOrUsing = startsWithLet && this.hasFollowingBindingAtom() || startsWithUsing && this.hasFollowingBindingIdentifier() && this.startsUsingForOf();
+        if (this.match(74) || this.match(75) || isLetOrUsing) {
           const initNode = this.startNode();
-          const kind = isLet ? "let" : this.state.value;
+          const kind = this.state.value;
           this.next();
           this.parseVar(initNode, true, kind);
           const init = this.finishNode(initNode, "VariableDeclaration");
-          if ((this.match(58) || this.isContextual(101)) && init.declarations.length === 1) {
+          const isForIn = this.match(58);
+          if (isForIn && startsWithUsing) {
+            this.raise(Errors.ForInUsing, {
+              at: init
+            });
+          }
+          if ((isForIn || this.isContextual(101)) && init.declarations.length === 1) {
             return this.parseForIn(node, init, awaitAt);
           }
           if (awaitAt !== null) {
@@ -31511,15 +31680,15 @@ var require_lib5 = __commonJS({
         }
         return this.parseFor(node, init1);
       }
-      parseFunctionStatement(node, isAsync, declarationPosition) {
+      parseFunctionStatement(node, isAsync, isHangingDeclaration) {
         this.next();
-        return this.parseFunction(node, FUNC_STATEMENT | (declarationPosition ? 0 : FUNC_HANGING_STATEMENT), isAsync);
+        return this.parseFunction(node, ParseFunctionFlag.Declaration | (isHangingDeclaration ? ParseFunctionFlag.HangingDeclaration : 0) | (isAsync ? ParseFunctionFlag.Async : 0));
       }
       parseIfStatement(node) {
         this.next();
         node.test = this.parseHeaderExpression();
-        node.consequent = this.parseStatement("if");
-        node.alternate = this.eat(66) ? this.parseStatement("if") : null;
+        node.consequent = this.parseStatementOrFunctionDeclaration(true);
+        node.alternate = this.eat(66) ? this.parseStatementOrFunctionDeclaration(true) : null;
         return this.finishNode(node, "IfStatement");
       }
       parseReturnStatement(node) {
@@ -31567,7 +31736,7 @@ var require_lib5 = __commonJS({
             this.expect(14);
           } else {
             if (cur) {
-              cur.consequent.push(this.parseStatement(null));
+              cur.consequent.push(this.parseStatementListItem());
             } else {
               this.unexpected();
             }
@@ -31641,7 +31810,7 @@ var require_lib5 = __commonJS({
         this.next();
         node.test = this.parseHeaderExpression();
         this.state.labels.push(loopLabel);
-        node.body = this.withSmartMixTopicForbiddingContext(() => this.parseStatement("while"));
+        node.body = this.withSmartMixTopicForbiddingContext(() => this.parseStatement());
         this.state.labels.pop();
         return this.finishNode(node, "WhileStatement");
       }
@@ -31653,14 +31822,14 @@ var require_lib5 = __commonJS({
         }
         this.next();
         node.object = this.parseHeaderExpression();
-        node.body = this.withSmartMixTopicForbiddingContext(() => this.parseStatement("with"));
+        node.body = this.withSmartMixTopicForbiddingContext(() => this.parseStatement());
         return this.finishNode(node, "WithStatement");
       }
       parseEmptyStatement(node) {
         this.next();
         return this.finishNode(node, "EmptyStatement");
       }
-      parseLabeledStatement(node, maybeName, expr, context) {
+      parseLabeledStatement(node, maybeName, expr, flags) {
         for (const label of this.state.labels) {
           if (label.name === maybeName) {
             this.raise(Errors.LabelRedeclaration, {
@@ -31670,8 +31839,8 @@ var require_lib5 = __commonJS({
           }
         }
         const kind = tokenIsLoop(this.state.type) ? "loop" : this.match(71) ? "switch" : null;
-        for (let i2 = this.state.labels.length - 1; i2 >= 0; i2--) {
-          const label1 = this.state.labels[i2];
+        for (let i = this.state.labels.length - 1; i >= 0; i--) {
+          const label1 = this.state.labels[i];
           if (label1.statementStart === node.start) {
             label1.statementStart = this.state.start;
             label1.kind = kind;
@@ -31684,12 +31853,12 @@ var require_lib5 = __commonJS({
           kind,
           statementStart: this.state.start
         });
-        node.body = this.parseStatement(context ? context.indexOf("label") === -1 ? context + "label" : context : "label");
+        node.body = flags & ParseStatementFlag.AllowLabeledFunction ? this.parseStatementOrFunctionDeclaration(false) : this.parseStatement();
         this.state.labels.pop();
         node.label = expr;
         return this.finishNode(node, "LabeledStatement");
       }
-      parseExpressionStatement(node, expr) {
+      parseExpressionStatement(node, expr, decorators) {
         node.expression = expr;
         this.semicolon();
         return this.finishNode(node, "ExpressionStatement");
@@ -31722,7 +31891,7 @@ var require_lib5 = __commonJS({
         let hasStrictModeDirective = false;
         let parsedNonDirective = false;
         while (!this.match(end)) {
-          const stmt = this.parseStatement(null, topLevel);
+          const stmt = topLevel ? this.parseModuleItem() : this.parseStatementListItem();
           if (directives && !parsedNonDirective) {
             if (this.isValidDirective(stmt)) {
               const directive = this.stmtToDirective(stmt);
@@ -31753,7 +31922,7 @@ var require_lib5 = __commonJS({
         this.semicolon(false);
         node.update = this.match(11) ? null : this.parseExpression();
         this.expect(11);
-        node.body = this.withSmartMixTopicForbiddingContext(() => this.parseStatement("for"));
+        node.body = this.withSmartMixTopicForbiddingContext(() => this.parseStatement());
         this.scope.exit();
         this.state.labels.pop();
         return this.finishNode(node, "ForStatement");
@@ -31784,7 +31953,7 @@ var require_lib5 = __commonJS({
         node.left = init;
         node.right = isForIn ? this.parseExpression() : this.parseMaybeAssignAllowIn();
         this.expect(11);
-        node.body = this.withSmartMixTopicForbiddingContext(() => this.parseStatement("for"));
+        node.body = this.withSmartMixTopicForbiddingContext(() => this.parseStatement());
         this.scope.exit();
         this.state.labels.pop();
         return this.finishNode(node, isForIn ? "ForInStatement" : "ForOfStatement");
@@ -31816,42 +31985,50 @@ var require_lib5 = __commonJS({
         return node;
       }
       parseVarId(decl, kind) {
-        decl.id = this.parseBindingAtom();
-        this.checkLVal(decl.id, {
+        const id = this.parseBindingAtom();
+        this.checkLVal(id, {
           in: {
             type: "VariableDeclarator"
           },
           binding: kind === "var" ? BIND_VAR : BIND_LEXICAL
         });
+        decl.id = id;
       }
-      parseFunction(node, statement = FUNC_NO_FLAGS, isAsync = false) {
-        const isStatement = statement & FUNC_STATEMENT;
-        const isHangingStatement = statement & FUNC_HANGING_STATEMENT;
-        const requireId = !!isStatement && !(statement & FUNC_NULLABLE_ID);
+      parseAsyncFunctionExpression(node) {
+        return this.parseFunction(node, ParseFunctionFlag.Async);
+      }
+      parseFunction(node, flags = ParseFunctionFlag.Expression) {
+        const hangingDeclaration = flags & ParseFunctionFlag.HangingDeclaration;
+        const isDeclaration = !!(flags & ParseFunctionFlag.Declaration);
+        const requireId = isDeclaration && !(flags & ParseFunctionFlag.NullableId);
+        const isAsync = !!(flags & ParseFunctionFlag.Async);
         this.initFunction(node, isAsync);
-        if (this.match(55) && isHangingStatement) {
-          this.raise(Errors.GeneratorInSingleStatementContext, {
-            at: this.state.startLoc
-          });
+        if (this.match(55)) {
+          if (hangingDeclaration) {
+            this.raise(Errors.GeneratorInSingleStatementContext, {
+              at: this.state.startLoc
+            });
+          }
+          this.next();
+          node.generator = true;
         }
-        node.generator = this.eat(55);
-        if (isStatement) {
+        if (isDeclaration) {
           node.id = this.parseFunctionId(requireId);
         }
         const oldMaybeInArrowParameters = this.state.maybeInArrowParameters;
         this.state.maybeInArrowParameters = false;
         this.scope.enter(SCOPE_FUNCTION);
         this.prodParam.enter(functionFlags(isAsync, node.generator));
-        if (!isStatement) {
+        if (!isDeclaration) {
           node.id = this.parseFunctionId();
         }
         this.parseFunctionParams(node, false);
         this.withSmartMixTopicForbiddingContext(() => {
-          this.parseFunctionBodyAndFinish(node, isStatement ? "FunctionDeclaration" : "FunctionExpression");
+          this.parseFunctionBodyAndFinish(node, isDeclaration ? "FunctionDeclaration" : "FunctionExpression");
         });
         this.prodParam.exit();
         this.scope.exit();
-        if (isStatement && !isHangingStatement) {
+        if (isDeclaration && !hangingDeclaration) {
           this.registerFunctionStatementId(node);
         }
         this.state.maybeInArrowParameters = oldMaybeInArrowParameters;
@@ -31873,7 +32050,6 @@ var require_lib5 = __commonJS({
       }
       parseClass(node, isStatement, optionalId) {
         this.next();
-        this.takeDecorators(node);
         const oldStrict = this.state.strict;
         this.state.strict = true;
         this.parseClassId(node, isStatement, optionalId);
@@ -31984,7 +32160,7 @@ var require_lib5 = __commonJS({
         this.parsePropertyNamePrefixOperator(member);
         if (this.eat(55)) {
           method.kind = "method";
-          const isPrivateName = this.match(134);
+          const isPrivateName = this.match(136);
           this.parseClassElementName(method);
           if (isPrivateName) {
             this.pushClassPrivateMethod(classBody, privateMethod, true, false);
@@ -31999,7 +32175,7 @@ var require_lib5 = __commonJS({
           return;
         }
         const isContextual = tokenIsIdentifier(this.state.type) && !this.state.containsEsc;
-        const isPrivate = this.match(134);
+        const isPrivate = this.match(136);
         const key = this.parseClassElementName(member);
         const maybeQuestionTokenStartLoc = this.state.startLoc;
         this.parsePostMemberNameModifiers(publicMember);
@@ -32040,7 +32216,7 @@ var require_lib5 = __commonJS({
             this.unexpected(maybeQuestionTokenStartLoc);
           }
           method.kind = "method";
-          const isPrivate1 = this.match(134);
+          const isPrivate1 = this.match(136);
           this.parseClassElementName(method);
           this.parsePostMemberNameModifiers(publicMember);
           if (isPrivate1) {
@@ -32056,7 +32232,7 @@ var require_lib5 = __commonJS({
         } else if (isContextual && (key.name === "get" || key.name === "set") && !(this.match(55) && this.isLineTerminator())) {
           this.resetPreviousNodeTrailingComments(key);
           method.kind = key.name;
-          const isPrivate2 = this.match(134);
+          const isPrivate2 = this.match(136);
           this.parseClassElementName(publicMethod);
           if (isPrivate2) {
             this.pushClassPrivateMethod(classBody, privateMethod, false, false);
@@ -32072,7 +32248,7 @@ var require_lib5 = __commonJS({
         } else if (isContextual && key.name === "accessor" && !this.isLineTerminator()) {
           this.expectPlugin("decoratorAutoAccessors");
           this.resetPreviousNodeTrailingComments(key);
-          const isPrivate3 = this.match(134);
+          const isPrivate3 = this.match(136);
           this.parseClassElementName(publicProp);
           this.pushClassAccessorProperty(classBody, accessorProp, isPrivate3);
         } else if (this.isLineTerminator()) {
@@ -32087,12 +32263,12 @@ var require_lib5 = __commonJS({
       }
       parseClassElementName(member) {
         const { type, value } = this.state;
-        if ((type === 128 || type === 129) && member.static && value === "prototype") {
+        if ((type === 130 || type === 131) && member.static && value === "prototype") {
           this.raise(Errors.StaticPrototype, {
             at: this.state.startLoc
           });
         }
-        if (type === 134) {
+        if (type === 136) {
           if (value === "constructor") {
             this.raise(Errors.ConstructorClassPrivateField, {
               at: this.state.startLoc
@@ -32207,7 +32383,7 @@ var require_lib5 = __commonJS({
       parseClassSuper(node) {
         node.superClass = this.eat(81) ? this.parseExprSubscripts() : null;
       }
-      parseExport(node) {
+      parseExport(node, decorators) {
         const hasDefault = this.maybeParseExportDefaultSpecifier(node);
         const parseAfterDefault = !hasDefault || this.eat(12);
         const hasStar = parseAfterDefault && this.eatExportStar(node);
@@ -32217,6 +32393,11 @@ var require_lib5 = __commonJS({
         if (hasStar && !hasNamespace) {
           if (hasDefault)
             this.unexpected();
+          if (decorators) {
+            throw this.raise(Errors.UnsupportedDecoratorExport, {
+              at: node
+            });
+          }
           this.parseExportFrom(node, true);
           return this.finishNode(node, "ExportAllDeclaration");
         }
@@ -32227,18 +32408,41 @@ var require_lib5 = __commonJS({
         let hasDeclaration;
         if (isFromRequired || hasSpecifiers) {
           hasDeclaration = false;
+          if (decorators) {
+            throw this.raise(Errors.UnsupportedDecoratorExport, {
+              at: node
+            });
+          }
           this.parseExportFrom(node, isFromRequired);
         } else {
           hasDeclaration = this.maybeParseExportDeclaration(node);
         }
         if (isFromRequired || hasSpecifiers || hasDeclaration) {
-          this.checkExport(node, true, false, !!node.source);
-          return this.finishNode(node, "ExportNamedDeclaration");
+          var _node2$declaration;
+          const node2 = node;
+          this.checkExport(node2, true, false, !!node2.source);
+          if (((_node2$declaration = node2.declaration) == null ? void 0 : _node2$declaration.type) === "ClassDeclaration") {
+            this.maybeTakeDecorators(decorators, node2.declaration, node2);
+          } else if (decorators) {
+            throw this.raise(Errors.UnsupportedDecoratorExport, {
+              at: node
+            });
+          }
+          return this.finishNode(node2, "ExportNamedDeclaration");
         }
         if (this.eat(65)) {
-          node.declaration = this.parseExportDefaultExpression();
-          this.checkExport(node, true, true);
-          return this.finishNode(node, "ExportDefaultDeclaration");
+          const node21 = node;
+          const decl = this.parseExportDefaultExpression();
+          node21.declaration = decl;
+          if (decl.type === "ClassDeclaration") {
+            this.maybeTakeDecorators(decorators, decl, node21);
+          } else if (decorators) {
+            throw this.raise(Errors.UnsupportedDecoratorExport, {
+              at: node
+            });
+          }
+          this.checkExport(node21, true, true);
+          return this.finishNode(node21, "ExportDefaultDeclaration");
         }
         throw this.unexpected(null, 5);
       }
@@ -32304,13 +32508,13 @@ var require_lib5 = __commonJS({
       }
       parseExportDefaultExpression() {
         const expr = this.startNode();
-        const isAsync = this.isAsyncFunction();
-        if (this.match(68) || isAsync) {
+        if (this.match(68)) {
           this.next();
-          if (isAsync) {
-            this.next();
-          }
-          return this.parseFunction(expr, FUNC_STATEMENT | FUNC_NULLABLE_ID, isAsync);
+          return this.parseFunction(expr, ParseFunctionFlag.Declaration | ParseFunctionFlag.NullableId);
+        } else if (this.isAsyncFunction()) {
+          this.next();
+          this.next();
+          return this.parseFunction(expr, ParseFunctionFlag.Declaration | ParseFunctionFlag.NullableId | ParseFunctionFlag.Async);
         }
         if (this.match(80)) {
           return this.parseClass(expr, true, true);
@@ -32321,8 +32525,7 @@ var require_lib5 = __commonJS({
               at: this.state.startLoc
             });
           }
-          this.parseDecorators(false);
-          return this.parseClass(expr, true, true);
+          return this.parseClass(this.maybeTakeDecorators(this.parseDecorators(false), this.startNode()), true, true);
         }
         if (this.match(75) || this.match(74) || this.isLet()) {
           throw this.raise(Errors.UnsupportedDefaultExport, {
@@ -32334,7 +32537,11 @@ var require_lib5 = __commonJS({
         return res;
       }
       parseExportDeclaration(node) {
-        return this.parseStatement(null);
+        if (this.match(80)) {
+          const node1 = this.parseClass(this.startNode(), true, false);
+          return node1;
+        }
+        return this.parseStatementListItem();
       }
       isExportDefaultSpecifier() {
         const { type } = this.state;
@@ -32342,7 +32549,7 @@ var require_lib5 = __commonJS({
           if (type === 95 && !this.state.containsEsc || type === 99) {
             return false;
           }
-          if ((type === 126 || type === 125) && !this.state.containsEsc) {
+          if ((type === 128 || type === 127) && !this.state.containsEsc) {
             const { type: nextType } = this.lookahead();
             if (tokenIsIdentifier(nextType) && nextType !== 97 || nextType === 5) {
               this.expectOnePlugin([
@@ -32443,12 +32650,6 @@ var require_lib5 = __commonJS({
             }
           }
         }
-        const currentContextDecorators = this.state.decoratorStack[this.state.decoratorStack.length - 1];
-        if (currentContextDecorators.length) {
-          throw this.raise(Errors.UnsupportedDecoratorExport, {
-            at: node
-          });
-        }
       }
       checkDeclaration(node) {
         if (node.type === "Identifier") {
@@ -32498,8 +32699,8 @@ var require_lib5 = __commonJS({
             if (this.eat(8))
               break;
           }
-          const isMaybeTypeOnly = this.isContextual(126);
-          const isString = this.match(129);
+          const isMaybeTypeOnly = this.isContextual(128);
+          const isString = this.match(131);
           const node = this.startNode();
           node.local = this.parseModuleExportName();
           nodes.push(this.parseExportSpecifier(node, isString, isInTypeExport, isMaybeTypeOnly));
@@ -32517,7 +32718,7 @@ var require_lib5 = __commonJS({
         return this.finishNode(node, "ExportSpecifier");
       }
       parseModuleExportName() {
-        if (this.match(129)) {
+        if (this.match(131)) {
           const result = this.parseStringLiteral(this.state.value);
           const surrogate = result.value.match(loneSurrogate);
           if (surrogate) {
@@ -32537,6 +32738,21 @@ var require_lib5 = __commonJS({
           });
         }
         return false;
+      }
+      checkImportReflection(node) {
+        if (node.module) {
+          var _node$assertions;
+          if (node.specifiers.length !== 1 || node.specifiers[0].type !== "ImportDefaultSpecifier") {
+            this.raise(Errors.ImportReflectionNotBinding, {
+              at: node.specifiers[0].loc.start
+            });
+          }
+          if (((_node$assertions = node.assertions) == null ? void 0 : _node$assertions.length) > 0) {
+            this.raise(Errors.ImportReflectionHasAssertion, {
+              at: node.specifiers[0].loc.start
+            });
+          }
+        }
       }
       checkJSONModuleImport(node) {
         if (this.isJSONModuleImport(node) && node.type !== "ExportAllDeclaration") {
@@ -32561,9 +32777,36 @@ var require_lib5 = __commonJS({
           }
         }
       }
+      parseMaybeImportReflection(node) {
+        let isImportReflection = false;
+        if (this.isContextual(125)) {
+          const lookahead = this.lookahead();
+          const nextType = lookahead.type;
+          if (tokenIsIdentifier(nextType)) {
+            if (nextType !== 97) {
+              isImportReflection = true;
+            } else {
+              const nextNextTokenFirstChar = this.input.charCodeAt(this.nextTokenStartSince(lookahead.end));
+              if (nextNextTokenFirstChar === 102) {
+                isImportReflection = true;
+              }
+            }
+          } else if (nextType !== 12) {
+            isImportReflection = true;
+          }
+        }
+        if (isImportReflection) {
+          this.expectPlugin("importReflection");
+          this.next();
+          node.module = true;
+        } else if (this.hasPlugin("importReflection")) {
+          node.module = false;
+        }
+      }
       parseImport(node) {
         node.specifiers = [];
-        if (!this.match(129)) {
+        if (!this.match(131)) {
+          this.parseMaybeImportReflection(node);
           const hasDefault = this.maybeParseDefaultImportSpecifier(node);
           const parseNext = !hasDefault || this.eat(12);
           const hasStar = parseNext && this.maybeParseStarImportSpecifier(node);
@@ -32581,12 +32824,13 @@ var require_lib5 = __commonJS({
             node.attributes = attributes;
           }
         }
+        this.checkImportReflection(node);
         this.checkJSONModuleImport(node);
         this.semicolon();
         return this.finishNode(node, "ImportDeclaration");
       }
       parseImportSource() {
-        if (!this.match(129))
+        if (!this.match(131))
           this.unexpected();
         return this.parseExprAtom();
       }
@@ -32620,13 +32864,13 @@ var require_lib5 = __commonJS({
             });
           }
           attrNames.add(keyName);
-          if (this.match(129)) {
+          if (this.match(131)) {
             node.key = this.parseStringLiteral(keyName);
           } else {
             node.key = this.parseIdentifier(true);
           }
           this.expect(14);
-          if (!this.match(129)) {
+          if (!this.match(131)) {
             throw this.raise(Errors.ModuleAttributeInvalidValue, {
               at: this.state.startLoc
             });
@@ -32663,7 +32907,7 @@ var require_lib5 = __commonJS({
           }
           attributes.add(node.key.name);
           this.expect(14);
-          if (!this.match(129)) {
+          if (!this.match(131)) {
             throw this.raise(Errors.ModuleAttributeInvalidValue, {
               at: this.state.startLoc
             });
@@ -32722,8 +32966,8 @@ var require_lib5 = __commonJS({
               break;
           }
           const specifier = this.startNode();
-          const importedIsString = this.match(129);
-          const isMaybeTypeOnly = this.isContextual(126);
+          const importedIsString = this.match(131);
+          const isMaybeTypeOnly = this.isContextual(128);
           specifier.imported = this.parseModuleExportName();
           const importSpecifier = this.parseImportSpecifier(specifier, importedIsString, node.importKind === "type" || node.importKind === "typeof", isMaybeTypeOnly, void 0);
           node.specifiers.push(importSpecifier);
@@ -32968,8 +33212,8 @@ var require_parse = __commonJS({
     __name(placeholderVisitorHandler, "placeholderVisitorHandler");
     function resolveAncestors(ast, ancestors) {
       let parent = ast;
-      for (let i2 = 0; i2 < ancestors.length - 1; i2++) {
-        const { key, index } = ancestors[i2];
+      for (let i = 0; i < ancestors.length - 1; i++) {
+        const { key, index } = ancestors[i];
         if (index === void 0) {
           parent = parent[key];
         } else {
@@ -33167,8 +33411,8 @@ var require_literal = __commonJS({
       const { metadata, names } = buildLiteralData(formatter, tpl, opts);
       return (arg) => {
         const defaultReplacements = {};
-        arg.forEach((replacement, i2) => {
-          defaultReplacements[names[i2]] = replacement;
+        arg.forEach((replacement, i) => {
+          defaultReplacements[names[i]] = replacement;
         });
         return (arg2) => {
           const replacements = (0, _options.normalizeReplacements)(arg2);
@@ -33211,10 +33455,10 @@ var require_literal = __commonJS({
     function buildTemplateCode(tpl, prefix) {
       const names = [];
       let code = tpl[0];
-      for (let i2 = 1; i2 < tpl.length; i2++) {
-        const value = `${prefix}${i2 - 1}`;
+      for (let i = 1; i < tpl.length; i++) {
+        const value = `${prefix}${i - 1}`;
         names.push(value);
-        code += value + tpl[i2];
+        code += value + tpl[i];
       }
       return {
         names,
@@ -33336,6 +33580,157 @@ var require_lib6 = __commonJS({
   }
 });
 
+// node_modules/@storybook/global/dist/index.js
+var require_dist = __commonJS({
+  "node_modules/@storybook/global/dist/index.js"(exports, module) {
+    "use strict";
+    var __defProp = Object.defineProperty;
+    var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
+    var __getOwnPropNames = Object.getOwnPropertyNames;
+    var __hasOwnProp = Object.prototype.hasOwnProperty;
+    var __export = /* @__PURE__ */ __name((target, all) => {
+      for (var name in all)
+        __defProp(target, name, {
+          get: all[name],
+          enumerable: true
+        });
+    }, "__export");
+    var __copyProps = /* @__PURE__ */ __name((to, from, except, desc) => {
+      if (from && typeof from === "object" || typeof from === "function") {
+        for (let key of __getOwnPropNames(from))
+          if (!__hasOwnProp.call(to, key) && key !== except)
+            __defProp(to, key, {
+              get: () => from[key],
+              enumerable: !(desc = __getOwnPropDesc(from, key)) || desc.enumerable
+            });
+      }
+      return to;
+    }, "__copyProps");
+    var __toCommonJS = /* @__PURE__ */ __name((mod) => __copyProps(__defProp({}, "__esModule", {
+      value: true
+    }), mod), "__toCommonJS");
+    var src_exports = {};
+    __export(src_exports, {
+      global: () => scope
+    });
+    module.exports = __toCommonJS(src_exports);
+    var scope = (() => {
+      let win;
+      if (typeof window !== "undefined") {
+        win = window;
+      } else if (typeof globalThis !== "undefined") {
+        win = globalThis;
+      } else if (typeof global !== "undefined") {
+        win = global;
+      } else if (typeof self !== "undefined") {
+        win = self;
+      } else {
+        win = {};
+      }
+      return win;
+    })();
+  }
+});
+
+// node_modules/@storybook/client-logger/dist/index.js
+var require_dist2 = __commonJS({
+  "node_modules/@storybook/client-logger/dist/index.js"(exports, module) {
+    "use strict";
+    var __defProp = Object.defineProperty;
+    var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
+    var __getOwnPropNames = Object.getOwnPropertyNames;
+    var __hasOwnProp = Object.prototype.hasOwnProperty;
+    var __export = /* @__PURE__ */ __name((target, all) => {
+      for (var name in all)
+        __defProp(target, name, {
+          get: all[name],
+          enumerable: true
+        });
+    }, "__export");
+    var __copyProps = /* @__PURE__ */ __name((to, from, except, desc) => {
+      if (from && typeof from == "object" || typeof from == "function")
+        for (let key of __getOwnPropNames(from))
+          !__hasOwnProp.call(to, key) && key !== except && __defProp(to, key, {
+            get: () => from[key],
+            enumerable: !(desc = __getOwnPropDesc(from, key)) || desc.enumerable
+          });
+      return to;
+    }, "__copyProps");
+    var __toCommonJS = /* @__PURE__ */ __name((mod) => __copyProps(__defProp({}, "__esModule", {
+      value: true
+    }), mod), "__toCommonJS");
+    var src_exports = {};
+    __export(src_exports, {
+      deprecate: () => deprecate3,
+      logger: () => logger,
+      once: () => once,
+      pretty: () => pretty
+    });
+    module.exports = __toCommonJS(src_exports);
+    var import_global = require_dist();
+    var { LOGLEVEL } = import_global.global;
+    var levels = {
+      trace: 1,
+      debug: 2,
+      info: 3,
+      warn: 4,
+      error: 5,
+      silent: 10
+    };
+    var currentLogLevelString = LOGLEVEL;
+    var currentLogLevelNumber = levels[currentLogLevelString] || levels.info;
+    var logger = {
+      trace: (message, ...rest) => {
+        currentLogLevelNumber <= levels.trace && console.trace(message, ...rest);
+      },
+      debug: (message, ...rest) => {
+        currentLogLevelNumber <= levels.debug && console.debug(message, ...rest);
+      },
+      info: (message, ...rest) => {
+        currentLogLevelNumber <= levels.info && console.info(message, ...rest);
+      },
+      warn: (message, ...rest) => {
+        currentLogLevelNumber <= levels.warn && console.warn(message, ...rest);
+      },
+      error: (message, ...rest) => {
+        currentLogLevelNumber <= levels.error && console.error(message, ...rest);
+      },
+      log: (message, ...rest) => {
+        currentLogLevelNumber < levels.silent && console.log(message, ...rest);
+      }
+    };
+    var logged = /* @__PURE__ */ new Set();
+    var once = /* @__PURE__ */ __name((type) => (message, ...rest) => {
+      if (!logged.has(message))
+        return logged.add(message), logger[type](message, ...rest);
+    }, "once");
+    once.clear = () => logged.clear();
+    once.trace = once("trace");
+    once.debug = once("debug");
+    once.info = once("info");
+    once.warn = once("warn");
+    once.error = once("error");
+    once.log = once("log");
+    var deprecate3 = once("warn");
+    var pretty = /* @__PURE__ */ __name((type) => (...args) => {
+      let argArray = [];
+      if (args.length) {
+        let startTagRe = /<span\s+style=(['"])([^'"]*)\1\s*>/gi, endTagRe = /<\/span>/gi, reResultArray;
+        for (argArray.push(args[0].replace(startTagRe, "%c").replace(endTagRe, "%c")); reResultArray = startTagRe.exec(args[0]); )
+          argArray.push(reResultArray[2]), argArray.push("");
+        for (let j = 1; j < args.length; j++)
+          argArray.push(args[j]);
+      }
+      logger[type].apply(logger, argArray);
+    }, "pretty");
+    pretty.trace = pretty("trace");
+    pretty.debug = pretty("debug");
+    pretty.info = pretty("info");
+    pretty.warn = pretty("warn");
+    pretty.error = pretty("error");
+  }
+});
+
 // node_modules/map-or-similar/src/similar.js
 var require_similar = __commonJS({
   "node_modules/map-or-similar/src/similar.js"(exports, module) {
@@ -33403,16 +33798,16 @@ var require_similar = __commonJS({
       return false;
     };
     Similar.prototype.forEach = function(callback, thisArg) {
-      var i2;
-      for (i2 = 0; i2 < this.size; i2++) {
-        callback.call(thisArg || this, this.list[i2].val, this.list[i2].key, this);
+      var i;
+      for (i = 0; i < this.size; i++) {
+        callback.call(thisArg || this, this.list[i].val, this.list[i].key, this);
       }
     };
     Similar.prototype.indexOf = function(key) {
-      var i2;
-      for (i2 = 0; i2 < this.size; i2++) {
-        if (this.isEqual(this.list[i2].key, key)) {
-          return i2;
+      var i;
+      for (i = 0; i < this.size; i++) {
+        if (this.isEqual(this.list[i].key, key)) {
+          return i;
         }
       }
       return -1;
@@ -33446,22 +33841,22 @@ var require_memoizerific = __commonJS({
       var cache = new MapOrSimilar(process.env.FORCE_SIMILAR_INSTEAD_OF_MAP === "true"), lru = [];
       return function(fn) {
         var memoizerific = /* @__PURE__ */ __name(function() {
-          var currentCache = cache, newMap, fnResult, argsLengthMinusOne = arguments.length - 1, lruPath = Array(argsLengthMinusOne + 1), isMemoized = true, i2;
+          var currentCache = cache, newMap, fnResult, argsLengthMinusOne = arguments.length - 1, lruPath = Array(argsLengthMinusOne + 1), isMemoized = true, i;
           if ((memoizerific.numArgs || memoizerific.numArgs === 0) && memoizerific.numArgs !== argsLengthMinusOne + 1) {
             throw new Error("Memoizerific functions should always be called with the same number of arguments");
           }
-          for (i2 = 0; i2 < argsLengthMinusOne; i2++) {
-            lruPath[i2] = {
+          for (i = 0; i < argsLengthMinusOne; i++) {
+            lruPath[i] = {
               cacheItem: currentCache,
-              arg: arguments[i2]
+              arg: arguments[i]
             };
-            if (currentCache.has(arguments[i2])) {
-              currentCache = currentCache.get(arguments[i2]);
+            if (currentCache.has(arguments[i])) {
+              currentCache = currentCache.get(arguments[i]);
               continue;
             }
             isMemoized = false;
             newMap = new MapOrSimilar(process.env.FORCE_SIMILAR_INSTEAD_OF_MAP === "true");
-            currentCache.set(arguments[i2], newMap);
+            currentCache.set(arguments[i], newMap);
             currentCache = newMap;
           }
           if (isMemoized) {
@@ -33501,11 +33896,11 @@ var require_memoizerific = __commonJS({
       };
     };
     function moveToMostRecentLru(lru, lruPath) {
-      var lruLen = lru.length, lruPathLen = lruPath.length, isMatch, i2, ii;
-      for (i2 = 0; i2 < lruLen; i2++) {
+      var lruLen = lru.length, lruPathLen = lruPath.length, isMatch, i, ii;
+      for (i = 0; i < lruLen; i++) {
         isMatch = true;
         for (ii = 0; ii < lruPathLen; ii++) {
-          if (!isEqual(lru[i2][ii].arg, lruPath[ii].arg)) {
+          if (!isEqual(lru[i][ii].arg, lruPath[ii].arg)) {
             isMatch = false;
             break;
           }
@@ -33514,14 +33909,14 @@ var require_memoizerific = __commonJS({
           break;
         }
       }
-      lru.push(lru.splice(i2, 1)[0]);
+      lru.push(lru.splice(i, 1)[0]);
     }
     __name(moveToMostRecentLru, "moveToMostRecentLru");
     function removeCachedResult(removedLru) {
-      var removedLruLen = removedLru.length, currentLru = removedLru[removedLruLen - 1], tmp, i2;
+      var removedLruLen = removedLru.length, currentLru = removedLru[removedLruLen - 1], tmp, i;
       currentLru.cacheItem.delete(currentLru.arg);
-      for (i2 = removedLruLen - 2; i2 >= 0; i2--) {
-        currentLru = removedLru[i2];
+      for (i = removedLruLen - 2; i >= 0; i--) {
+        currentLru = removedLru[i];
         tmp = currentLru.cacheItem.get(currentLru.arg);
         if (!tmp || !tmp.size) {
           currentLru.cacheItem.delete(currentLru.arg);
@@ -33829,9 +34224,9 @@ var require_baseFor = __commonJS({
 // node_modules/lodash/_baseTimes.js
 var require_baseTimes = __commonJS({
   "node_modules/lodash/_baseTimes.js"(exports, module) {
-    function baseTimes(n2, iteratee) {
-      var index = -1, result = Array(n2);
-      while (++index < n2) {
+    function baseTimes(n, iteratee) {
+      var index = -1, result = Array(n);
+      while (++index < n) {
         result[index] = iteratee(index);
       }
       return result;
@@ -35345,7 +35740,7 @@ var require_memoize = __commonJS({
   "node_modules/lodash/memoize.js"(exports, module) {
     var MapCache = require_MapCache();
     var FUNC_ERROR_TEXT = "Expected a function";
-    function memoize(func, resolver) {
+    function memoize3(func, resolver) {
       if (typeof func != "function" || resolver != null && typeof resolver != "function") {
         throw new TypeError(FUNC_ERROR_TEXT);
       }
@@ -35358,22 +35753,22 @@ var require_memoize = __commonJS({
         memoized.cache = cache.set(key, result) || cache;
         return result;
       }, "memoized");
-      memoized.cache = new (memoize.Cache || MapCache)();
+      memoized.cache = new (memoize3.Cache || MapCache)();
       return memoized;
     }
-    __name(memoize, "memoize");
-    memoize.Cache = MapCache;
-    module.exports = memoize;
+    __name(memoize3, "memoize");
+    memoize3.Cache = MapCache;
+    module.exports = memoize3;
   }
 });
 
 // node_modules/lodash/_memoizeCapped.js
 var require_memoizeCapped = __commonJS({
   "node_modules/lodash/_memoizeCapped.js"(exports, module) {
-    var memoize = require_memoize();
+    var memoize3 = require_memoize();
     var MAX_MEMOIZE_SIZE = 500;
     function memoizeCapped(func) {
-      var result = memoize(func, function(key) {
+      var result = memoize3(func, function(key) {
         if (cache.size === MAX_MEMOIZE_SIZE) {
           cache.clear();
         }
@@ -35694,7 +36089,7 @@ var require_mapValues = __commonJS({
     var baseAssignValue = require_baseAssignValue();
     var baseForOwn = require_baseForOwn();
     var baseIteratee = require_baseIteratee();
-    function mapValues(object, iteratee) {
+    function mapValues5(object, iteratee) {
       var result = {};
       iteratee = baseIteratee(iteratee, 3);
       baseForOwn(object, function(value, key, object2) {
@@ -35702,8 +36097,8 @@ var require_mapValues = __commonJS({
       });
       return result;
     }
-    __name(mapValues, "mapValues");
-    module.exports = mapValues;
+    __name(mapValues5, "mapValues");
+    module.exports = mapValues5;
   }
 });
 
@@ -35986,10 +36381,10 @@ var require_pick = __commonJS({
   "node_modules/lodash/pick.js"(exports, module) {
     var basePick = require_basePick();
     var flatRest = require_flatRest();
-    var pick = flatRest(function(object, paths) {
+    var pick2 = flatRest(function(object, paths) {
       return object == null ? {} : basePick(object, paths);
     });
-    module.exports = pick;
+    module.exports = pick2;
   }
 });
 
@@ -36004,7 +36399,7 @@ var require_synchronous_promise = __commonJS({
     var PENDING = "pending";
     var RESOLVED = "resolved";
     var REJECTED = "rejected";
-    function SynchronousPromise(handler) {
+    function SynchronousPromise2(handler) {
       this.status = PENDING;
       this._continuations = [];
       this._parent = null;
@@ -36013,7 +36408,7 @@ var require_synchronous_promise = __commonJS({
         handler.call(this, this._continueWith.bind(this), this._failWith.bind(this));
       }
     }
-    __name(SynchronousPromise, "SynchronousPromise");
+    __name(SynchronousPromise2, "SynchronousPromise");
     function looksLikeAPromise(obj) {
       return obj && typeof obj.then === "function";
     }
@@ -36022,9 +36417,9 @@ var require_synchronous_promise = __commonJS({
       return value;
     }
     __name(passThrough, "passThrough");
-    SynchronousPromise.prototype = {
+    SynchronousPromise2.prototype = {
       then: function(nextFn, catchFn) {
-        var next = SynchronousPromise.unresolved()._setParent(this);
+        var next = SynchronousPromise2.unresolved()._setParent(this);
         if (this._isRejected()) {
           if (this._paused) {
             this._continuations.push({
@@ -36041,13 +36436,13 @@ var require_synchronous_promise = __commonJS({
                 this._chainPromiseData(catchResult, next);
                 return next;
               } else {
-                return SynchronousPromise.resolve(catchResult)._setParent(this);
+                return SynchronousPromise2.resolve(catchResult)._setParent(this);
               }
             } catch (e) {
-              return SynchronousPromise.reject(e)._setParent(this);
+              return SynchronousPromise2.reject(e)._setParent(this);
             }
           }
-          return SynchronousPromise.reject(this._error)._setParent(this);
+          return SynchronousPromise2.reject(this._error)._setParent(this);
         }
         this._continuations.push({
           promise: next,
@@ -36059,9 +36454,9 @@ var require_synchronous_promise = __commonJS({
       },
       catch: function(handler) {
         if (this._isResolved()) {
-          return SynchronousPromise.resolve(this._data)._setParent(this);
+          return SynchronousPromise2.resolve(this._data)._setParent(this);
         }
-        var next = SynchronousPromise.unresolved()._setParent(this);
+        var next = SynchronousPromise2.unresolved()._setParent(this);
         this._continuations.push({
           promise: next,
           catchFn: handler
@@ -36269,8 +36664,8 @@ var require_synchronous_promise = __commonJS({
         return this.status === REJECTED;
       }
     };
-    SynchronousPromise.resolve = function(result) {
-      return new SynchronousPromise(function(resolve, reject) {
+    SynchronousPromise2.resolve = function(result) {
+      return new SynchronousPromise2(function(resolve, reject) {
         if (looksLikeAPromise(result)) {
           result.then(function(newResult) {
             resolve(newResult);
@@ -36282,26 +36677,26 @@ var require_synchronous_promise = __commonJS({
         }
       });
     };
-    SynchronousPromise.reject = function(result) {
-      return new SynchronousPromise(function(resolve, reject) {
+    SynchronousPromise2.reject = function(result) {
+      return new SynchronousPromise2(function(resolve, reject) {
         reject(result);
       });
     };
-    SynchronousPromise.unresolved = function() {
-      return new SynchronousPromise(function(resolve, reject) {
+    SynchronousPromise2.unresolved = function() {
+      return new SynchronousPromise2(function(resolve, reject) {
         this.resolve = resolve;
         this.reject = reject;
       });
     };
-    SynchronousPromise.all = function() {
+    SynchronousPromise2.all = function() {
       var args = makeArrayFrom(arguments);
       if (Array.isArray(args[0])) {
         args = args[0];
       }
       if (!args.length) {
-        return SynchronousPromise.resolve([]);
+        return SynchronousPromise2.resolve([]);
       }
-      return new SynchronousPromise(function(resolve, reject) {
+      return new SynchronousPromise2(function(resolve, reject) {
         var allData = [], numResolved = 0, doResolve = /* @__PURE__ */ __name(function() {
           if (numResolved === args.length) {
             resolve(allData);
@@ -36314,7 +36709,7 @@ var require_synchronous_promise = __commonJS({
           reject(err);
         }, "doReject");
         args.forEach(function(arg, idx) {
-          SynchronousPromise.resolve(arg).then(function(thisResult) {
+          SynchronousPromise2.resolve(arg).then(function(thisResult) {
             allData[idx] = thisResult;
             numResolved += 1;
             doResolve();
@@ -36333,15 +36728,15 @@ var require_synchronous_promise = __commonJS({
       };
     }
     __name(createAggregateErrorFrom, "createAggregateErrorFrom");
-    SynchronousPromise.any = function() {
+    SynchronousPromise2.any = function() {
       var args = makeArrayFrom(arguments);
       if (Array.isArray(args[0])) {
         args = args[0];
       }
       if (!args.length) {
-        return SynchronousPromise.reject(createAggregateErrorFrom([]));
+        return SynchronousPromise2.reject(createAggregateErrorFrom([]));
       }
-      return new SynchronousPromise(function(resolve, reject) {
+      return new SynchronousPromise2(function(resolve, reject) {
         var allErrors = [], numRejected = 0, doReject = /* @__PURE__ */ __name(function() {
           if (numRejected === args.length) {
             reject(createAggregateErrorFrom(allErrors));
@@ -36354,7 +36749,7 @@ var require_synchronous_promise = __commonJS({
           resolve(result);
         }, "doResolve");
         args.forEach(function(arg, idx) {
-          SynchronousPromise.resolve(arg).then(function(thisResult) {
+          SynchronousPromise2.resolve(arg).then(function(thisResult) {
             doResolve(thisResult);
           }).catch(function(err) {
             allErrors[idx] = err;
@@ -36364,15 +36759,15 @@ var require_synchronous_promise = __commonJS({
         });
       });
     };
-    SynchronousPromise.allSettled = function() {
+    SynchronousPromise2.allSettled = function() {
       var args = makeArrayFrom(arguments);
       if (Array.isArray(args[0])) {
         args = args[0];
       }
       if (!args.length) {
-        return SynchronousPromise.resolve([]);
+        return SynchronousPromise2.resolve([]);
       }
-      return new SynchronousPromise(function(resolve) {
+      return new SynchronousPromise2(function(resolve) {
         var allData = [], numSettled = 0, doSettled = /* @__PURE__ */ __name(function() {
           numSettled += 1;
           if (numSettled === args.length) {
@@ -36380,7 +36775,7 @@ var require_synchronous_promise = __commonJS({
           }
         }, "doSettled");
         args.forEach(function(arg, idx) {
-          SynchronousPromise.resolve(arg).then(function(thisResult) {
+          SynchronousPromise2.resolve(arg).then(function(thisResult) {
             allData[idx] = {
               status: "fulfilled",
               value: thisResult
@@ -36396,20 +36791,20 @@ var require_synchronous_promise = __commonJS({
         });
       });
     };
-    if (Promise === SynchronousPromise) {
+    if (Promise === SynchronousPromise2) {
       throw new Error("Please use SynchronousPromise.installGlobally() to install globally");
     }
     var RealPromise = Promise;
-    SynchronousPromise.installGlobally = function(__awaiter) {
-      if (Promise === SynchronousPromise) {
+    SynchronousPromise2.installGlobally = function(__awaiter) {
+      if (Promise === SynchronousPromise2) {
         return __awaiter;
       }
       var result = patchAwaiterIfRequired(__awaiter);
-      Promise = SynchronousPromise;
+      Promise = SynchronousPromise2;
       return result;
     };
-    SynchronousPromise.uninstallGlobally = function() {
-      if (Promise === SynchronousPromise) {
+    SynchronousPromise2.uninstallGlobally = function() {
+      if (Promise === SynchronousPromise2) {
         Promise = RealPromise;
       }
     };
@@ -36427,25 +36822,8 @@ var require_synchronous_promise = __commonJS({
     }
     __name(patchAwaiterIfRequired, "patchAwaiterIfRequired");
     module.exports = {
-      SynchronousPromise
+      SynchronousPromise: SynchronousPromise2
     };
-  }
-});
-
-// node_modules/global/window.js
-var require_window = __commonJS({
-  "node_modules/global/window.js"(exports, module) {
-    var win;
-    if (typeof window !== "undefined") {
-      win = window;
-    } else if (typeof global !== "undefined") {
-      win = global;
-    } else if (typeof self !== "undefined") {
-      win = self;
-    } else {
-      win = {};
-    }
-    module.exports = win;
   }
 });
 
@@ -36470,7 +36848,7 @@ var require_isPlainObject = __commonJS({
     var funcToString = funcProto.toString;
     var hasOwnProperty = objectProto.hasOwnProperty;
     var objectCtorString = funcToString.call(Object);
-    function isPlainObject(value) {
+    function isPlainObject3(value) {
       if (!isObjectLike(value) || baseGetTag(value) != objectTag) {
         return false;
       }
@@ -36481,8 +36859,8 @@ var require_isPlainObject = __commonJS({
       var Ctor = hasOwnProperty.call(proto, "constructor") && proto.constructor;
       return typeof Ctor == "function" && Ctor instanceof Ctor && funcToString.call(Ctor) == objectCtorString;
     }
-    __name(isPlainObject, "isPlainObject");
-    module.exports = isPlainObject;
+    __name(isPlainObject3, "isPlainObject");
+    module.exports = isPlainObject3;
   }
 });
 
@@ -36590,7 +36968,7 @@ var require_pickBy = __commonJS({
     var baseIteratee = require_baseIteratee();
     var basePickBy = require_basePickBy();
     var getAllKeysIn = require_getAllKeysIn();
-    function pickBy(object, predicate) {
+    function pickBy2(object, predicate) {
       if (object == null) {
         return {};
       }
@@ -36604,8 +36982,8 @@ var require_pickBy = __commonJS({
         return predicate(value, path[0]);
       });
     }
-    __name(pickBy, "pickBy");
-    module.exports = pickBy;
+    __name(pickBy2, "pickBy");
+    module.exports = pickBy2;
   }
 });
 
@@ -36628,150 +37006,97 @@ var require_slash = __commonJS({
 var import_template = __toESM(require_lib6());
 import { relative } from "path";
 
-// node_modules/@storybook/store/dist/index.mjs
+// node_modules/@storybook/preview-api/dist/chunk-RRZ2SPWM.mjs
 var import_memoizerific = __toESM(require_memoizerific(), 1);
 var import_mapValues = __toESM(require_mapValues(), 1);
 var import_pick = __toESM(require_pick(), 1);
 var import_synchronous_promise = __toESM(require_synchronous_promise(), 1);
 var import_memoizerific2 = __toESM(require_memoizerific(), 1);
-
-// node_modules/@storybook/client-logger/dist/index.mjs
-var import_global = __toESM(require_window(), 1);
-var { LOGLEVEL: f, console: g } = import_global.default;
-var a = { trace: 1, debug: 2, info: 3, warn: 4, error: 5, silent: 10 };
-var L = f;
-var c = a[L] || a.info;
-var i = { trace: (r, ...e) => c <= a.trace && g.trace(r, ...e), debug: (r, ...e) => c <= a.debug && g.debug(r, ...e), info: (r, ...e) => c <= a.info && g.info(r, ...e), warn: (r, ...e) => c <= a.warn && g.warn(r, ...e), error: (r, ...e) => c <= a.error && g.error(r, ...e), log: (r, ...e) => c < a.silent && g.log(r, ...e) };
-var s = /* @__PURE__ */ new Set();
-var n = /* @__PURE__ */ __name((r) => (e, ...t) => {
-  if (!s.has(e))
-    return s.add(e), i[r](e, ...t);
-}, "n");
-n.clear = () => s.clear();
-n.trace = n("trace");
-n.debug = n("debug");
-n.info = n("info");
-n.warn = n("warn");
-n.error = n("error");
-n.log = n("log");
-var w = n("warn");
-var o = /* @__PURE__ */ __name((r) => (...e) => {
-  let t = [];
-  if (e.length) {
-    let y = /<span\s+style=(['"])([^'"]*)\1\s*>/gi, u = /<\/span>/gi, d;
-    for (t.push(e[0].replace(y, "%c").replace(u, "%c")); d = y.exec(e[0]); )
-      t.push(d[2]), t.push("");
-    for (let l = 1; l < e.length; l++)
-      t.push(e[l]);
-  }
-  i[r].apply(i, t);
-}, "o");
-o.trace = o("trace");
-o.debug = o("debug");
-o.info = o("info");
-o.warn = o("warn");
-o.error = o("error");
-
-// node_modules/@storybook/store/dist/index.mjs
 var import_isPlainObject = __toESM(require_isPlainObject(), 1);
-var import_util_deprecate = __toESM(require_node(), 1);
 var import_mapValues2 = __toESM(require_mapValues(), 1);
-import { storyNameFromExport as qr, toId as Kr } from "@storybook/csf";
+import { storyNameFromExport, toId } from "@storybook/csf";
+var import_util_deprecate = __toESM(require_node(), 1);
+import { isExportStory } from "@storybook/csf";
+import { sanitize } from "@storybook/csf";
 var import_util_deprecate2 = __toESM(require_node(), 1);
-import { isExportStory as oe } from "@storybook/csf";
-import { sanitize as te } from "@storybook/csf";
-var import_util_deprecate3 = __toESM(require_node(), 1);
-var import_global2 = __toESM(require_window(), 1);
 var import_isPlainObject2 = __toESM(require_isPlainObject(), 1);
-import { includeConditionalArg as ge } from "@storybook/csf";
 var import_mapValues3 = __toESM(require_mapValues(), 1);
+import { includeConditionalArg } from "@storybook/csf";
+var import_client_logger = __toESM(require_dist2(), 1);
 var import_mapValues4 = __toESM(require_mapValues(), 1);
+var import_client_logger2 = __toESM(require_dist2(), 1);
 var import_pickBy = __toESM(require_pickBy(), 1);
+import { isExportStory as isExportStory2 } from "@storybook/csf";
 var import_slash = __toESM(require_slash(), 1);
-import { isExportStory as xe } from "@storybook/csf";
-var _r = (0, import_memoizerific2.default)(1)((e) => Object.values(e).reduce((r, t) => (r[t.importPath] = r[t.importPath] || t, r), {}));
-var x = Symbol("incompatible");
-var b = Symbol("Deeply equal");
-var Wr = (0, import_util_deprecate.default)(() => {
-}, dedent`
-    Setting a global value that is undeclared (i.e. not in the user's initial set of globals
-    or globalTypes) is deprecated and will have no effect in 7.0.
-  `);
-var re = dedent`
+var import_client_logger3 = __toESM(require_dist2(), 1);
+var getImportPathMap = (0, import_memoizerific2.default)(1)((entries) => Object.values(entries).reduce((acc, entry) => (acc[entry.importPath] = acc[entry.importPath] || entry, acc), {}));
+var INCOMPATIBLE = Symbol("incompatible");
+var DEEPLY_EQUAL = Symbol("Deeply equal");
+var deprecatedStoryAnnotation = dedent`
 CSF .story annotations deprecated; annotate story functions directly:
 - StoryFn.story.name => StoryFn.storyName
 - StoryFn.story.(parameters|decorators) => StoryFn.(parameters|decorators)
 See https://github.com/storybookjs/storybook/blob/next/MIGRATION.md#hoisted-csf-annotations for details and codemod.
 `;
-var ee = (0, import_util_deprecate2.default)(() => {
-}, re);
-var F = /* @__PURE__ */ __name((...e) => {
-  let r = {}, t = e.filter(Boolean), o2 = t.reduce((n2, s2) => (Object.entries(s2).forEach(([i2, a2]) => {
-    let m = n2[i2];
-    Array.isArray(a2) || typeof m > "u" ? n2[i2] = a2 : (0, import_isPlainObject2.default)(a2) && (0, import_isPlainObject2.default)(m) ? r[i2] = true : typeof a2 < "u" && (n2[i2] = a2);
-  }), n2), {});
-  return Object.keys(r).forEach((n2) => {
-    let s2 = t.filter(Boolean).map((i2) => i2[n2]).filter((i2) => typeof i2 < "u");
-    s2.every((i2) => (0, import_isPlainObject2.default)(i2)) ? o2[n2] = F(...s2) : o2[n2] = s2[s2.length - 1];
-  }), o2;
-}, "F");
-var Se = (0, import_util_deprecate3.default)(() => {
+var deprecatedStoryAnnotationWarning = (0, import_util_deprecate.default)(() => {
+}, deprecatedStoryAnnotation);
+var combineParameters = /* @__PURE__ */ __name((...parameterSets) => {
+  let mergeKeys = {}, definedParametersSets = parameterSets.filter(Boolean), combined = definedParametersSets.reduce((acc, parameters) => (Object.entries(parameters).forEach(([key, value]) => {
+    let existing = acc[key];
+    Array.isArray(value) || typeof existing > "u" ? acc[key] = value : (0, import_isPlainObject2.default)(value) && (0, import_isPlainObject2.default)(existing) ? mergeKeys[key] = true : typeof value < "u" && (acc[key] = value);
+  }), acc), {});
+  return Object.keys(mergeKeys).forEach((key) => {
+    let mergeValues = definedParametersSets.filter(Boolean).map((p) => p[key]).filter((value) => typeof value < "u");
+    mergeValues.every((value) => (0, import_isPlainObject2.default)(value)) ? combined[key] = combineParameters(...mergeValues) : combined[key] = mergeValues[mergeValues.length - 1];
+  }), combined;
+}, "combineParameters");
+var argTypeDefaultValueWarning = (0, import_util_deprecate2.default)(() => {
 }, dedent`
   \`argType.defaultValue\` is deprecated and will be removed in Storybook 7.0.
 
   https://github.com/storybookjs/storybook/blob/next/MIGRATION.md#no-longer-inferring-default-values-of-args`);
-var rr = /* @__PURE__ */ __name((e, r, t) => {
-  let o2 = typeof e;
-  switch (o2) {
+var inferType = /* @__PURE__ */ __name((value, name, visited) => {
+  let type = typeof value;
+  switch (type) {
     case "boolean":
     case "string":
     case "number":
     case "function":
     case "symbol":
-      return { name: o2 };
+      return { name: type };
     default:
       break;
   }
-  if (e) {
-    if (t.has(e))
-      return i.warn(dedent`
-        We've detected a cycle in arg '${r}'. Args should be JSON-serializable.
+  return value ? visited.has(value) ? (import_client_logger.logger.warn(dedent`
+        We've detected a cycle in arg '${name}'. Args should be JSON-serializable.
 
         Consider using the mapping feature or fully custom args:
         - Mapping: https://storybook.js.org/docs/react/writing-stories/args#mapping-to-complex-arg-values
         - Custom args: https://storybook.js.org/docs/react/essentials/controls#fully-custom-args
-      `), { name: "other", value: "cyclic object" };
-    if (t.add(e), Array.isArray(e)) {
-      let s2 = e.length > 0 ? rr(e[0], r, new Set(t)) : { name: "other", value: "unknown" };
-      return { name: "array", value: s2 };
-    }
-    let n2 = (0, import_mapValues3.default)(e, (s2) => rr(s2, r, new Set(t)));
-    return { name: "object", value: n2 };
-  }
-  return { name: "object", value: {} };
-}, "rr");
-var er = /* @__PURE__ */ __name((e) => {
-  let { id: r, argTypes: t = {}, initialArgs: o2 = {} } = e, n2 = (0, import_mapValues3.default)(o2, (i2, a2) => ({ name: a2, type: rr(i2, `${r}.${a2}`, /* @__PURE__ */ new Set()) })), s2 = (0, import_mapValues3.default)(t, (i2, a2) => ({ name: a2 }));
-  return F(n2, s2, t);
-}, "er");
-er.secondPass = true;
-var Tr = /* @__PURE__ */ __name((e, r) => Array.isArray(r) ? r.includes(e) : e.match(r), "Tr");
-var tr = /* @__PURE__ */ __name((e, r, t) => !r && !t ? e : e && (0, import_pickBy.default)(e, (o2, n2) => {
-  let s2 = o2.name || n2;
-  return (!r || Tr(s2, r)) && (!t || !Tr(s2, t));
-}), "tr");
-var we = /* @__PURE__ */ __name((e, r, t) => {
-  let { type: o2, options: n2 } = e;
-  if (!!o2) {
-    if (t.color && t.color.test(r)) {
-      let s2 = o2.name;
-      if (s2 === "string")
+      `), { name: "other", value: "cyclic object" }) : (visited.add(value), Array.isArray(value) ? { name: "array", value: value.length > 0 ? inferType(value[0], name, new Set(visited)) : { name: "other", value: "unknown" } } : { name: "object", value: (0, import_mapValues3.default)(value, (field) => inferType(field, name, new Set(visited))) }) : { name: "object", value: {} };
+}, "inferType");
+var inferArgTypes = /* @__PURE__ */ __name((context) => {
+  let { id, argTypes: userArgTypes = {}, initialArgs = {} } = context, argTypes = (0, import_mapValues3.default)(initialArgs, (arg, key) => ({ name: key, type: inferType(arg, `${id}.${key}`, /* @__PURE__ */ new Set()) })), userArgTypesNames = (0, import_mapValues3.default)(userArgTypes, (argType, key) => ({ name: key }));
+  return combineParameters(argTypes, userArgTypesNames, userArgTypes);
+}, "inferArgTypes");
+inferArgTypes.secondPass = true;
+var matches = /* @__PURE__ */ __name((name, descriptor) => Array.isArray(descriptor) ? descriptor.includes(name) : name.match(descriptor), "matches");
+var filterArgTypes = /* @__PURE__ */ __name((argTypes, include, exclude) => !include && !exclude ? argTypes : argTypes && (0, import_pickBy.default)(argTypes, (argType, key) => {
+  let name = argType.name || key;
+  return (!include || matches(name, include)) && (!exclude || !matches(name, exclude));
+}), "filterArgTypes");
+var inferControl = /* @__PURE__ */ __name((argType, name, matchers) => {
+  let { type, options } = argType;
+  if (type) {
+    if (matchers.color && matchers.color.test(name)) {
+      let controlType = type.name;
+      if (controlType === "string")
         return { control: { type: "color" } };
-      s2 !== "enum" && i.warn(`Addon controls: Control of type color only supports string, received "${s2}" instead`);
+      controlType !== "enum" && import_client_logger2.logger.warn(`Addon controls: Control of type color only supports string, received "${controlType}" instead`);
     }
-    if (t.date && t.date.test(r))
+    if (matchers.date && matchers.date.test(name))
       return { control: { type: "date" } };
-    switch (o2.name) {
+    switch (type.name) {
       case "array":
         return { control: { type: "object" } };
       case "boolean":
@@ -36781,65 +37106,65 @@ var we = /* @__PURE__ */ __name((e, r, t) => {
       case "number":
         return { control: { type: "number" } };
       case "enum": {
-        let { value: s2 } = o2;
-        return { control: { type: (s2 == null ? void 0 : s2.length) <= 5 ? "radio" : "select" }, options: s2 };
+        let { value } = type;
+        return { control: { type: value?.length <= 5 ? "radio" : "select" }, options: value };
       }
       case "function":
       case "symbol":
         return null;
       default:
-        return { control: { type: n2 ? "select" : "object" } };
+        return { control: { type: options ? "select" : "object" } };
     }
   }
-}, "we");
-var V = /* @__PURE__ */ __name((e) => {
-  let { argTypes: r, parameters: { __isArgsStory: t, controls: { include: o2 = null, exclude: n2 = null, matchers: s2 = {} } = {} } } = e;
-  if (!t)
-    return r;
-  let i2 = tr(r, o2, n2), a2 = (0, import_mapValues4.default)(i2, (m, l) => (m == null ? void 0 : m.type) && we(m, l, s2));
-  return F(a2, i2);
-}, "V");
-V.secondPass = true;
-var Oe = /* @__PURE__ */ __name((e) => {
-  let r = [...e], t = r[r.length - 1], o2 = t.indexOf("."), n2 = o2 > 0 ? t.substr(0, o2) : t;
-  r[r.length - 1] = n2;
-  let [s2, ...i2] = r;
-  return s2 === "" && (r = i2), r;
-}, "Oe");
-var je = /^index$/i;
-var ze = /* @__PURE__ */ __name((e) => {
-  let r;
-  return e.filter((t, o2) => o2 === e.length - 1 && (t === r || je.test(t)) ? false : (r = t, true));
-}, "ze");
-function Cr(e) {
-  let r = new RegExp("/{1,}", "g");
-  return e.join("/").replace(r, "/");
+}, "inferControl");
+var inferControls = /* @__PURE__ */ __name((context) => {
+  let { argTypes, parameters: { __isArgsStory, controls: { include = null, exclude = null, matchers = {} } = {} } } = context;
+  if (!__isArgsStory)
+    return argTypes;
+  let filteredArgTypes = filterArgTypes(argTypes, include, exclude), withControls = (0, import_mapValues4.default)(filteredArgTypes, (argType, name) => argType?.type && inferControl(argType, name, matchers));
+  return combineParameters(withControls, filteredArgTypes);
+}, "inferControls");
+inferControls.secondPass = true;
+var stripExtension = /* @__PURE__ */ __name((path) => {
+  let parts = [...path], last = parts[parts.length - 1], dotIndex = last.indexOf("."), stripped = dotIndex > 0 ? last.substr(0, dotIndex) : last;
+  parts[parts.length - 1] = stripped;
+  let [first, ...rest] = parts;
+  return first === "" && (parts = rest), parts;
+}, "stripExtension");
+var indexRe = /^index$/i;
+var removeRedundantFilename = /* @__PURE__ */ __name((paths) => {
+  let prevVal;
+  return paths.filter((val, index) => index === paths.length - 1 && (val === prevVal || indexRe.test(val)) ? false : (prevVal = val, true));
+}, "removeRedundantFilename");
+function pathJoin(paths) {
+  let slashes = new RegExp("/{1,}", "g");
+  return paths.join("/").replace(slashes, "/");
 }
-__name(Cr, "Cr");
-var Ne = /* @__PURE__ */ __name((e, r, t) => {
-  let { directory: o2, importPathMatcher: n2, titlePrefix: s2 = "" } = r || {};
-  typeof e == "number" && n.warn(dedent`
+__name(pathJoin, "pathJoin");
+var userOrAutoTitleFromSpecifier = /* @__PURE__ */ __name((fileName, entry, userTitle) => {
+  let { directory, importPathMatcher, titlePrefix = "" } = entry || {};
+  typeof fileName == "number" && import_client_logger3.once.warn(dedent`
       CSF Auto-title received a numeric fileName. This typically happens when
       webpack is mis-configured in production mode. To force webpack to produce
       filenames, set optimization.moduleIds = "named" in your webpack config.
     `);
-  let i2 = (0, import_slash.default)(String(e));
-  if (n2.exec(i2)) {
-    if (!t) {
-      let a2 = i2.replace(o2, ""), l = (0, import_slash.default)(Cr([s2, a2])).split("/");
-      return l = Oe(l), l = ze(l), l.join("/");
+  let normalizedFileName = (0, import_slash.default)(String(fileName));
+  if (importPathMatcher.exec(normalizedFileName)) {
+    if (!userTitle) {
+      let suffix = normalizedFileName.replace(directory, ""), path = (0, import_slash.default)(pathJoin([titlePrefix, suffix])).split("/");
+      return path = stripExtension(path), path = removeRedundantFilename(path), path.join("/");
     }
-    return s2 ? (0, import_slash.default)(Cr([s2, t])) : t;
+    return titlePrefix ? (0, import_slash.default)(pathJoin([titlePrefix, userTitle])) : userTitle;
   }
-}, "Ne");
-var vo = /* @__PURE__ */ __name((e, r, t) => {
-  for (let o2 = 0; o2 < r.length; o2 += 1) {
-    let n2 = Ne(e, r[o2], t);
-    if (n2)
-      return n2;
+}, "userOrAutoTitleFromSpecifier");
+var userOrAutoTitle = /* @__PURE__ */ __name((fileName, storiesEntries, userTitle) => {
+  for (let i = 0; i < storiesEntries.length; i += 1) {
+    let title = userOrAutoTitleFromSpecifier(fileName, storiesEntries[i], userTitle);
+    if (title)
+      return title;
   }
-  return t || void 0;
-}, "vo");
+  return userTitle || void 0;
+}, "userOrAutoTitle");
 
 // src/playwright/transformPlaywright.ts
 var coverageErrorMessage = esm_default`
@@ -36902,7 +37227,7 @@ var testPrefixer = (0, import_template.default)(`
 var makeTitleFactory = /* @__PURE__ */ __name((filename) => {
   const { workingDir, normalizedStoriesEntries } = getStorybookMetadata();
   const filePath = "./" + relative(workingDir, filename);
-  return (userTitle) => vo(filePath, normalizedStoriesEntries, userTitle);
+  return (userTitle) => userOrAutoTitle(filePath, normalizedStoriesEntries, userTitle);
 }, "makeTitleFactory");
 var transformPlaywright = /* @__PURE__ */ __name((src, filename) => {
   const result = transformCsf(src, {
@@ -36915,6 +37240,7 @@ var transformPlaywright = /* @__PURE__ */ __name((src, filename) => {
 }, "transformPlaywright");
 
 export {
+  require_slash,
   testPrefixer,
   transformPlaywright
 };

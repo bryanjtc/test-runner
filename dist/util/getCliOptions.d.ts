@@ -1,6 +1,9 @@
 import { BrowserType } from 'jest-playwright-preset';
 
-declare type CliOptions = {
+type JestOptions = {
+    [key: string]: any;
+};
+type CliOptions = {
     runnerOptions: {
         indexJson?: boolean;
         url?: string;
@@ -10,8 +13,8 @@ declare type CliOptions = {
         junit?: boolean;
         browsers?: BrowserType | BrowserType[];
     };
-    jestOptions: string[];
+    jestOptions: JestOptions;
 };
 declare const getCliOptions: () => CliOptions;
 
-export { getCliOptions };
+export { CliOptions, JestOptions, getCliOptions };

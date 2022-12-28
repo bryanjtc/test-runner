@@ -6,9 +6,9 @@ interface TestContext {
     title: t.Literal;
     id: t.Literal;
 }
-declare type TemplateResult = t.Statement | t.Statement[];
-declare type FilePrefixer = () => TemplateResult;
-declare type TestPrefixer = (context: TestContext) => TemplateResult;
+type TemplateResult = t.Statement | t.Statement[];
+type FilePrefixer = () => TemplateResult;
+type TestPrefixer = (context: TestContext) => TemplateResult;
 interface TransformOptions {
     clearBody?: boolean;
     beforeEachPrefixer?: FilePrefixer;

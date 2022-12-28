@@ -1,12 +1,12 @@
 import { Page } from 'playwright';
 import { StoryContext } from '@storybook/csf';
 
-declare type TestContext = {
+type TestContext = {
     id: string;
     title: string;
     name: string;
 };
-declare type TestHook = (page: Page, context: TestContext) => Promise<void>;
+type TestHook = (page: Page, context: TestContext) => Promise<void>;
 interface TestRunnerConfig {
     setup?: () => void;
     preRender?: TestHook;

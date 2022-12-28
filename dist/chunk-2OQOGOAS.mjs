@@ -1,8 +1,7 @@
 import {
   __name,
-  __require,
-  __spreadValues
-} from "./chunk-2RV4EXUL.mjs";
+  __require
+} from "./chunk-AIG2NDDY.mjs";
 
 // src/config/jest-playwright.ts
 import path from "path";
@@ -52,7 +51,7 @@ var getJestConfig = /* @__PURE__ */ __name(() => {
   ] : [
     "default"
   ];
-  let config = __spreadValues({
+  let config = {
     rootDir: process.cwd(),
     roots: TEST_ROOT ? [
       TEST_ROOT
@@ -80,8 +79,9 @@ var getJestConfig = /* @__PURE__ */ __name(() => {
       "coverage",
       ".nyc_output",
       ".cache"
-    ]
-  }, getJestPlaywrightConfig());
+    ],
+    ...getJestPlaywrightConfig()
+  };
   if (TEST_MATCH) {
     config.testMatch = [
       TEST_MATCH

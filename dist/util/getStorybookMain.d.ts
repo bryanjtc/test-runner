@@ -1,4 +1,4 @@
-import { StorybookConfig } from '@storybook/core-common';
+import { StorybookConfig } from '@storybook/types';
 
 declare const getStorybookMain: (configDir: string) => StorybookConfig;
 

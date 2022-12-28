@@ -1,37 +1,8 @@
 var __defProp = Object.defineProperty;
-var __defProps = Object.defineProperties;
 var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
-var __getOwnPropDescs = Object.getOwnPropertyDescriptors;
 var __getOwnPropNames = Object.getOwnPropertyNames;
-var __getOwnPropSymbols = Object.getOwnPropertySymbols;
 var __hasOwnProp = Object.prototype.hasOwnProperty;
-var __propIsEnum = Object.prototype.propertyIsEnumerable;
-var __defNormalProp = (obj, key, value) => key in obj ? __defProp(obj, key, { enumerable: true, configurable: true, writable: true, value }) : obj[key] = value;
-var __spreadValues = (a, b) => {
-  for (var prop in b || (b = {}))
-    if (__hasOwnProp.call(b, prop))
-      __defNormalProp(a, prop, b[prop]);
-  if (__getOwnPropSymbols)
-    for (var prop of __getOwnPropSymbols(b)) {
-      if (__propIsEnum.call(b, prop))
-        __defNormalProp(a, prop, b[prop]);
-    }
-  return a;
-};
-var __spreadProps = (a, b) => __defProps(a, __getOwnPropDescs(b));
 var __name = (target, value) => __defProp(target, "name", { value, configurable: true });
-var __objRest = (source, exclude) => {
-  var target = {};
-  for (var prop in source)
-    if (__hasOwnProp.call(source, prop) && exclude.indexOf(prop) < 0)
-      target[prop] = source[prop];
-  if (source != null && __getOwnPropSymbols)
-    for (var prop of __getOwnPropSymbols(source)) {
-      if (exclude.indexOf(prop) < 0 && __propIsEnum.call(source, prop))
-        target[prop] = source[prop];
-    }
-  return target;
-};
 var __commonJS = (cb, mod) => function __require() {
   return mod || (0, cb[__getOwnPropNames(cb)[0]])((mod = { exports: {} }).exports, mod), mod.exports;
 };
@@ -48,26 +19,6 @@ var __copyProps = (to, from, except, desc) => {
   return to;
 };
 var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
-var __async = (__this, __arguments, generator) => {
-  return new Promise((resolve4, reject) => {
-    var fulfilled = (value) => {
-      try {
-        step(generator.next(value));
-      } catch (e) {
-        reject(e);
-      }
-    };
-    var rejected = (value) => {
-      try {
-        step(generator.throw(value));
-      } catch (e) {
-        reject(e);
-      }
-    };
-    var step = (x) => x.done ? resolve4(x.value) : Promise.resolve(x.value).then(fulfilled, rejected);
-    step((generator = generator.apply(__this, __arguments)).next());
-  });
-};
 
 // node_modules/commander/lib/error.js
 var require_error = __commonJS({
@@ -1031,15 +982,14 @@ Expecting one of '${allowedValues.join("', '")}'`);
         return this._optionValues[key];
       }
       setOptionValue(key, value) {
+        return this.setOptionValueWithSource(key, value, void 0);
+      }
+      setOptionValueWithSource(key, value, source) {
         if (this._storeOptionsAsProperties) {
           this[key] = value;
         } else {
           this._optionValues[key] = value;
         }
-        return this;
-      }
-      setOptionValueWithSource(key, value, source) {
-        this.setOptionValue(key, value);
         this._optionValueSources[key] = source;
         return this;
       }
@@ -1089,12 +1039,10 @@ Expecting one of '${allowedValues.join("', '")}'`);
         this._parseCommand([], userArgs);
         return this;
       }
-      parseAsync(argv, parseOptions) {
-        return __async(this, null, function* () {
-          const userArgs = this._prepareUserArgs(argv, parseOptions);
-          yield this._parseCommand([], userArgs);
-          return this;
-        });
+      async parseAsync(argv, parseOptions) {
+        const userArgs = this._prepareUserArgs(argv, parseOptions);
+        await this._parseCommand([], userArgs);
+        return this;
       }
       _executeSubCommand(subcommand, args) {
         args = args.slice();
@@ -1962,11 +1910,12 @@ If you'd like this option to be supported, please open an issue at https://githu
       }
     }
   }
-  const _a = program.opts(), { storiesJson } = _a, options = __objRest(_a, ["storiesJson"]);
+  const { storiesJson, ...options } = program.opts();
   return {
-    options: __spreadValues({
-      indexJson: storiesJson
-    }, options),
+    options: {
+      indexJson: storiesJson,
+      ...options
+    },
     extraArgs: program.args
   };
 }, "getParsedCliOptions");
@@ -1981,6 +1930,10 @@ var STORYBOOK_RUNNER_COMMANDS = [
   "coverage",
   "junit"
 ];
+function copyOption(obj, key, value) {
+  obj[key] = value;
+}
+__name(copyOption, "copyOption");
 var getCliOptions = /* @__PURE__ */ __name(() => {
   const { options: allOptions, extraArgs } = getParsedCliOptions();
   const defaultOptions = {
@@ -1989,7 +1942,7 @@ var getCliOptions = /* @__PURE__ */ __name(() => {
   };
   const finalOptions = Object.keys(allOptions).reduce((acc, key) => {
     if (STORYBOOK_RUNNER_COMMANDS.includes(key)) {
-      acc.runnerOptions[key] = allOptions[key];
+      copyOption(acc.runnerOptions, key, allOptions[key]);
     } else {
       if (allOptions[key] === true) {
         acc.jestOptions.push(`--${key}`);
@@ -2002,7 +1955,9 @@ var getCliOptions = /* @__PURE__ */ __name(() => {
     return acc;
   }, defaultOptions);
   if (extraArgs.length) {
-    finalOptions.jestOptions.push(...extraArgs);
+    finalOptions.jestOptions.push(...[
+      extraArgs
+    ]);
   }
   return finalOptions;
 }, "getCliOptions");
@@ -2040,18 +1995,18 @@ var getStorybookMain = /* @__PURE__ */ __name((configDir) => {
 var import_path3 = require("path");
 var import_core_common3 = require("@storybook/core-common");
 var getStorybookMetadata = /* @__PURE__ */ __name(() => {
-  var _a, _b, _c;
   const workingDir = (0, import_path3.resolve)();
   const configDir = process.env.STORYBOOK_CONFIG_DIR;
   const main = getStorybookMain(configDir);
   const normalizedStoriesEntries = (0, import_core_common3.normalizeStories)(main.stories, {
     configDir,
     workingDir
-  }).map((specifier) => __spreadProps(__spreadValues({}, specifier), {
+  }).map((specifier) => ({
+    ...specifier,
     importPathMatcher: new RegExp(specifier.importPathMatcher)
   }));
   const storiesPaths = normalizedStoriesEntries.map((entry) => entry.directory + "/" + entry.files).map((dir) => "<rootDir>/" + (0, import_path3.relative)(workingDir, dir)).join(";");
-  const lazyCompilation = !!((_c = (_b = (_a = main == null ? void 0 : main.core) == null ? void 0 : _a.builder) == null ? void 0 : _b.options) == null ? void 0 : _c.lazyCompilation);
+  const lazyCompilation = !!main?.core?.builder?.options?.lazyCompilation;
   return {
     configDir,
     workingDir,

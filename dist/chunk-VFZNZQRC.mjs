@@ -1,6 +1,6 @@
 import {
   __name
-} from "./chunk-2RV4EXUL.mjs";
+} from "./chunk-AIG2NDDY.mjs";
 
 // src/util/getTestRunnerConfig.ts
 import { join, resolve } from "path";

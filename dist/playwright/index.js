@@ -1,26 +1,9 @@
 var __create = Object.create;
 var __defProp = Object.defineProperty;
-var __defProps = Object.defineProperties;
 var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
-var __getOwnPropDescs = Object.getOwnPropertyDescriptors;
 var __getOwnPropNames = Object.getOwnPropertyNames;
-var __getOwnPropSymbols = Object.getOwnPropertySymbols;
 var __getProtoOf = Object.getPrototypeOf;
 var __hasOwnProp = Object.prototype.hasOwnProperty;
-var __propIsEnum = Object.prototype.propertyIsEnumerable;
-var __defNormalProp = (obj, key, value) => key in obj ? __defProp(obj, key, { enumerable: true, configurable: true, writable: true, value }) : obj[key] = value;
-var __spreadValues = (a2, b2) => {
-  for (var prop in b2 || (b2 = {}))
-    if (__hasOwnProp.call(b2, prop))
-      __defNormalProp(a2, prop, b2[prop]);
-  if (__getOwnPropSymbols)
-    for (var prop of __getOwnPropSymbols(b2)) {
-      if (__propIsEnum.call(b2, prop))
-        __defNormalProp(a2, prop, b2[prop]);
-    }
-  return a2;
-};
-var __spreadProps = (a2, b2) => __defProps(a2, __getOwnPropDescs(b2));
 var __name = (target, value) => __defProp(target, "name", { value, configurable: true });
 var __commonJS = (cb, mod) => function __require() {
   return mod || (0, cb[__getOwnPropNames(cb)[0]])((mod = { exports: {} }).exports, mod), mod.exports;
@@ -318,6 +301,7 @@ var require_generated = __commonJS({
     exports.isTSPropertySignature = isTSPropertySignature;
     exports.isTSQualifiedName = isTSQualifiedName;
     exports.isTSRestType = isTSRestType;
+    exports.isTSSatisfiesExpression = isTSSatisfiesExpression;
     exports.isTSStringKeyword = isTSStringKeyword;
     exports.isTSSymbolKeyword = isTSSymbolKeyword;
     exports.isTSThisType = isTSThisType;
@@ -3635,6 +3619,20 @@ var require_generated = __commonJS({
       return false;
     }
     __name(isTSAsExpression, "isTSAsExpression");
+    function isTSSatisfiesExpression(node, opts) {
+      if (!node)
+        return false;
+      const nodeType = node.type;
+      if (nodeType === "TSSatisfiesExpression") {
+        if (typeof opts === "undefined") {
+          return true;
+        } else {
+          return (0, _shallowEqual.default)(node, opts);
+        }
+      }
+      return false;
+    }
+    __name(isTSSatisfiesExpression, "isTSSatisfiesExpression");
     function isTSTypeAssertion(node, opts) {
       if (!node)
         return false;
@@ -3863,7 +3861,7 @@ var require_generated = __commonJS({
       if (!node)
         return false;
       const nodeType = node.type;
-      if ("ArrayExpression" === nodeType || "AssignmentExpression" === nodeType || "BinaryExpression" === nodeType || "CallExpression" === nodeType || "ConditionalExpression" === nodeType || "FunctionExpression" === nodeType || "Identifier" === nodeType || "StringLiteral" === nodeType || "NumericLiteral" === nodeType || "NullLiteral" === nodeType || "BooleanLiteral" === nodeType || "RegExpLiteral" === nodeType || "LogicalExpression" === nodeType || "MemberExpression" === nodeType || "NewExpression" === nodeType || "ObjectExpression" === nodeType || "SequenceExpression" === nodeType || "ParenthesizedExpression" === nodeType || "ThisExpression" === nodeType || "UnaryExpression" === nodeType || "UpdateExpression" === nodeType || "ArrowFunctionExpression" === nodeType || "ClassExpression" === nodeType || "MetaProperty" === nodeType || "Super" === nodeType || "TaggedTemplateExpression" === nodeType || "TemplateLiteral" === nodeType || "YieldExpression" === nodeType || "AwaitExpression" === nodeType || "Import" === nodeType || "BigIntLiteral" === nodeType || "OptionalMemberExpression" === nodeType || "OptionalCallExpression" === nodeType || "TypeCastExpression" === nodeType || "JSXElement" === nodeType || "JSXFragment" === nodeType || "BindExpression" === nodeType || "DoExpression" === nodeType || "RecordExpression" === nodeType || "TupleExpression" === nodeType || "DecimalLiteral" === nodeType || "ModuleExpression" === nodeType || "TopicReference" === nodeType || "PipelineTopicExpression" === nodeType || "PipelineBareFunction" === nodeType || "PipelinePrimaryTopicReference" === nodeType || "TSInstantiationExpression" === nodeType || "TSAsExpression" === nodeType || "TSTypeAssertion" === nodeType || "TSNonNullExpression" === nodeType || nodeType === "Placeholder" && ("Expression" === node.expectedNode || "Identifier" === node.expectedNode || "StringLiteral" === node.expectedNode)) {
+      if ("ArrayExpression" === nodeType || "AssignmentExpression" === nodeType || "BinaryExpression" === nodeType || "CallExpression" === nodeType || "ConditionalExpression" === nodeType || "FunctionExpression" === nodeType || "Identifier" === nodeType || "StringLiteral" === nodeType || "NumericLiteral" === nodeType || "NullLiteral" === nodeType || "BooleanLiteral" === nodeType || "RegExpLiteral" === nodeType || "LogicalExpression" === nodeType || "MemberExpression" === nodeType || "NewExpression" === nodeType || "ObjectExpression" === nodeType || "SequenceExpression" === nodeType || "ParenthesizedExpression" === nodeType || "ThisExpression" === nodeType || "UnaryExpression" === nodeType || "UpdateExpression" === nodeType || "ArrowFunctionExpression" === nodeType || "ClassExpression" === nodeType || "MetaProperty" === nodeType || "Super" === nodeType || "TaggedTemplateExpression" === nodeType || "TemplateLiteral" === nodeType || "YieldExpression" === nodeType || "AwaitExpression" === nodeType || "Import" === nodeType || "BigIntLiteral" === nodeType || "OptionalMemberExpression" === nodeType || "OptionalCallExpression" === nodeType || "TypeCastExpression" === nodeType || "JSXElement" === nodeType || "JSXFragment" === nodeType || "BindExpression" === nodeType || "DoExpression" === nodeType || "RecordExpression" === nodeType || "TupleExpression" === nodeType || "DecimalLiteral" === nodeType || "ModuleExpression" === nodeType || "TopicReference" === nodeType || "PipelineTopicExpression" === nodeType || "PipelineBareFunction" === nodeType || "PipelinePrimaryTopicReference" === nodeType || "TSInstantiationExpression" === nodeType || "TSAsExpression" === nodeType || "TSSatisfiesExpression" === nodeType || "TSTypeAssertion" === nodeType || "TSNonNullExpression" === nodeType || nodeType === "Placeholder" && ("Expression" === node.expectedNode || "Identifier" === node.expectedNode || "StringLiteral" === node.expectedNode)) {
         if (typeof opts === "undefined") {
           return true;
         } else {
@@ -4115,7 +4113,7 @@ var require_generated = __commonJS({
       if (!node)
         return false;
       const nodeType = node.type;
-      if ("Identifier" === nodeType || "RestElement" === nodeType || "AssignmentPattern" === nodeType || "ArrayPattern" === nodeType || "ObjectPattern" === nodeType || "TSAsExpression" === nodeType || "TSTypeAssertion" === nodeType || "TSNonNullExpression" === nodeType || nodeType === "Placeholder" && ("Pattern" === node.expectedNode || "Identifier" === node.expectedNode)) {
+      if ("Identifier" === nodeType || "RestElement" === nodeType || "AssignmentPattern" === nodeType || "ArrayPattern" === nodeType || "ObjectPattern" === nodeType || "TSAsExpression" === nodeType || "TSSatisfiesExpression" === nodeType || "TSTypeAssertion" === nodeType || "TSNonNullExpression" === nodeType || nodeType === "Placeholder" && ("Pattern" === node.expectedNode || "Identifier" === node.expectedNode)) {
         if (typeof opts === "undefined") {
           return true;
         } else {
@@ -4129,7 +4127,7 @@ var require_generated = __commonJS({
       if (!node)
         return false;
       const nodeType = node.type;
-      if ("Identifier" === nodeType || "MemberExpression" === nodeType || "RestElement" === nodeType || "AssignmentPattern" === nodeType || "ArrayPattern" === nodeType || "ObjectPattern" === nodeType || "TSParameterProperty" === nodeType || "TSAsExpression" === nodeType || "TSTypeAssertion" === nodeType || "TSNonNullExpression" === nodeType || nodeType === "Placeholder" && ("Pattern" === node.expectedNode || "Identifier" === node.expectedNode)) {
+      if ("Identifier" === nodeType || "MemberExpression" === nodeType || "RestElement" === nodeType || "AssignmentPattern" === nodeType || "ArrayPattern" === nodeType || "ObjectPattern" === nodeType || "TSParameterProperty" === nodeType || "TSAsExpression" === nodeType || "TSSatisfiesExpression" === nodeType || "TSTypeAssertion" === nodeType || "TSNonNullExpression" === nodeType || nodeType === "Placeholder" && ("Pattern" === node.expectedNode || "Identifier" === node.expectedNode)) {
         if (typeof opts === "undefined") {
           return true;
         } else {
@@ -4479,7 +4477,7 @@ var require_generated = __commonJS({
       if (!node)
         return false;
       const nodeType = node.type;
-      if ("TSParameterProperty" === nodeType || "TSDeclareFunction" === nodeType || "TSDeclareMethod" === nodeType || "TSQualifiedName" === nodeType || "TSCallSignatureDeclaration" === nodeType || "TSConstructSignatureDeclaration" === nodeType || "TSPropertySignature" === nodeType || "TSMethodSignature" === nodeType || "TSIndexSignature" === nodeType || "TSAnyKeyword" === nodeType || "TSBooleanKeyword" === nodeType || "TSBigIntKeyword" === nodeType || "TSIntrinsicKeyword" === nodeType || "TSNeverKeyword" === nodeType || "TSNullKeyword" === nodeType || "TSNumberKeyword" === nodeType || "TSObjectKeyword" === nodeType || "TSStringKeyword" === nodeType || "TSSymbolKeyword" === nodeType || "TSUndefinedKeyword" === nodeType || "TSUnknownKeyword" === nodeType || "TSVoidKeyword" === nodeType || "TSThisType" === nodeType || "TSFunctionType" === nodeType || "TSConstructorType" === nodeType || "TSTypeReference" === nodeType || "TSTypePredicate" === nodeType || "TSTypeQuery" === nodeType || "TSTypeLiteral" === nodeType || "TSArrayType" === nodeType || "TSTupleType" === nodeType || "TSOptionalType" === nodeType || "TSRestType" === nodeType || "TSNamedTupleMember" === nodeType || "TSUnionType" === nodeType || "TSIntersectionType" === nodeType || "TSConditionalType" === nodeType || "TSInferType" === nodeType || "TSParenthesizedType" === nodeType || "TSTypeOperator" === nodeType || "TSIndexedAccessType" === nodeType || "TSMappedType" === nodeType || "TSLiteralType" === nodeType || "TSExpressionWithTypeArguments" === nodeType || "TSInterfaceDeclaration" === nodeType || "TSInterfaceBody" === nodeType || "TSTypeAliasDeclaration" === nodeType || "TSInstantiationExpression" === nodeType || "TSAsExpression" === nodeType || "TSTypeAssertion" === nodeType || "TSEnumDeclaration" === nodeType || "TSEnumMember" === nodeType || "TSModuleDeclaration" === nodeType || "TSModuleBlock" === nodeType || "TSImportType" === nodeType || "TSImportEqualsDeclaration" === nodeType || "TSExternalModuleReference" === nodeType || "TSNonNullExpression" === nodeType || "TSExportAssignment" === nodeType || "TSNamespaceExportDeclaration" === nodeType || "TSTypeAnnotation" === nodeType || "TSTypeParameterInstantiation" === nodeType || "TSTypeParameterDeclaration" === nodeType || "TSTypeParameter" === nodeType) {
+      if ("TSParameterProperty" === nodeType || "TSDeclareFunction" === nodeType || "TSDeclareMethod" === nodeType || "TSQualifiedName" === nodeType || "TSCallSignatureDeclaration" === nodeType || "TSConstructSignatureDeclaration" === nodeType || "TSPropertySignature" === nodeType || "TSMethodSignature" === nodeType || "TSIndexSignature" === nodeType || "TSAnyKeyword" === nodeType || "TSBooleanKeyword" === nodeType || "TSBigIntKeyword" === nodeType || "TSIntrinsicKeyword" === nodeType || "TSNeverKeyword" === nodeType || "TSNullKeyword" === nodeType || "TSNumberKeyword" === nodeType || "TSObjectKeyword" === nodeType || "TSStringKeyword" === nodeType || "TSSymbolKeyword" === nodeType || "TSUndefinedKeyword" === nodeType || "TSUnknownKeyword" === nodeType || "TSVoidKeyword" === nodeType || "TSThisType" === nodeType || "TSFunctionType" === nodeType || "TSConstructorType" === nodeType || "TSTypeReference" === nodeType || "TSTypePredicate" === nodeType || "TSTypeQuery" === nodeType || "TSTypeLiteral" === nodeType || "TSArrayType" === nodeType || "TSTupleType" === nodeType || "TSOptionalType" === nodeType || "TSRestType" === nodeType || "TSNamedTupleMember" === nodeType || "TSUnionType" === nodeType || "TSIntersectionType" === nodeType || "TSConditionalType" === nodeType || "TSInferType" === nodeType || "TSParenthesizedType" === nodeType || "TSTypeOperator" === nodeType || "TSIndexedAccessType" === nodeType || "TSMappedType" === nodeType || "TSLiteralType" === nodeType || "TSExpressionWithTypeArguments" === nodeType || "TSInterfaceDeclaration" === nodeType || "TSInterfaceBody" === nodeType || "TSTypeAliasDeclaration" === nodeType || "TSInstantiationExpression" === nodeType || "TSAsExpression" === nodeType || "TSSatisfiesExpression" === nodeType || "TSTypeAssertion" === nodeType || "TSEnumDeclaration" === nodeType || "TSEnumMember" === nodeType || "TSModuleDeclaration" === nodeType || "TSModuleBlock" === nodeType || "TSImportType" === nodeType || "TSImportEqualsDeclaration" === nodeType || "TSExternalModuleReference" === nodeType || "TSNonNullExpression" === nodeType || "TSExportAssignment" === nodeType || "TSNamespaceExportDeclaration" === nodeType || "TSTypeAnnotation" === nodeType || "TSTypeParameterInstantiation" === nodeType || "TSTypeParameterDeclaration" === nodeType || "TSTypeParameter" === nodeType) {
         if (typeof opts === "undefined") {
           return true;
         } else {
@@ -4617,7 +4615,7 @@ var require_matchesPattern = __commonJS({
         return false;
       if (!allowPartial && nodes.length > parts.length)
         return false;
-      for (let i2 = 0, j = nodes.length - 1; i2 < parts.length; i2++, j--) {
+      for (let i = 0, j = nodes.length - 1; i < parts.length; i++, j--) {
         const node1 = nodes[j];
         let value;
         if ((0, _generated.isIdentifier)(node1)) {
@@ -4629,7 +4627,7 @@ var require_matchesPattern = __commonJS({
         } else {
           return false;
         }
-        if (parts[i2] !== value)
+        if (parts[i] !== value)
           return false;
       }
       return true;
@@ -4690,19 +4688,19 @@ var require_to_fast_properties = __commonJS({
   "node_modules/to-fast-properties/index.js"(exports, module2) {
     "use strict";
     var fastProto = null;
-    function FastObject(o2) {
+    function FastObject(o) {
       if (fastProto !== null && typeof fastProto.property) {
         const result = fastProto;
         fastProto = FastObject.prototype = null;
         return result;
       }
-      fastProto = FastObject.prototype = o2 == null ? /* @__PURE__ */ Object.create(null) : o2;
+      fastProto = FastObject.prototype = o == null ? /* @__PURE__ */ Object.create(null) : o;
       return new FastObject();
     }
     __name(FastObject, "FastObject");
     FastObject();
-    module2.exports = /* @__PURE__ */ __name(function toFastproperties(o2) {
-      return FastObject(o2);
+    module2.exports = /* @__PURE__ */ __name(function toFastproperties(o) {
+      return FastObject(o);
     }, "toFastproperties");
   }
 });
@@ -4776,8 +4774,8 @@ var require_is = __commonJS({
     function is(type, node, opts) {
       if (!node)
         return false;
-      const matches = (0, _isType.default)(node.type, type);
-      if (!matches) {
+      const matches2 = (0, _isType.default)(node.type, type);
+      if (!matches2) {
         if (!opts && node.type === "Placeholder" && type in _definitions.FLIPPED_ALIAS_KEYS) {
           return (0, _isPlaceholderType.default)(node.expectedNode, type);
         }
@@ -5662,11 +5660,11 @@ var require_identifier = __commonJS({
     ];
     function isInAstralSet(code, set) {
       let pos = 65536;
-      for (let i2 = 0, length = set.length; i2 < length; i2 += 2) {
-        pos += set[i2];
+      for (let i = 0, length = set.length; i < length; i += 2) {
+        pos += set[i];
         if (pos > code)
           return false;
-        pos += set[i2 + 1];
+        pos += set[i + 1];
         if (pos >= code)
           return true;
       }
@@ -5709,10 +5707,10 @@ var require_identifier = __commonJS({
     __name(isIdentifierChar, "isIdentifierChar");
     function isIdentifierName(name) {
       let isFirst = true;
-      for (let i2 = 0; i2 < name.length; i2++) {
-        let cp = name.charCodeAt(i2);
-        if ((cp & 64512) === 55296 && i2 + 1 < name.length) {
-          const trail = name.charCodeAt(++i2);
+      for (let i = 0; i < name.length; i++) {
+        let cp = name.charCodeAt(i);
+        if ((cp & 64512) === 55296 && i + 1 < name.length) {
+          const trail = name.charCodeAt(++i);
           if ((trail & 64512) === 56320) {
             cp = 65536 + ((cp & 1023) << 10) + (trail & 1023);
           }
@@ -6091,9 +6089,9 @@ var require_lib2 = __commonJS({
     __name(readEscapedChar, "readEscapedChar");
     function readHexChar(input, pos, lineStart, curLine, len, forceLen, throwOnInvalid, errors) {
       const initialPos = pos;
-      let n2;
-      ({ n: n2, pos } = readInt(input, pos, lineStart, curLine, 16, len, forceLen, false, errors, !throwOnInvalid));
-      if (n2 === null) {
+      let n;
+      ({ n, pos } = readInt(input, pos, lineStart, curLine, 16, len, forceLen, false, errors, !throwOnInvalid));
+      if (n === null) {
         if (throwOnInvalid) {
           errors.invalidEscapeSequence(initialPos, lineStart, curLine);
         } else {
@@ -6101,7 +6099,7 @@ var require_lib2 = __commonJS({
         }
       }
       return {
-        code: n2,
+        code: n,
         pos
       };
     }
@@ -6112,7 +6110,7 @@ var require_lib2 = __commonJS({
       const isAllowedSibling = radix === 16 ? isAllowedNumericSeparatorSibling.hex : radix === 10 ? isAllowedNumericSeparatorSibling.dec : radix === 8 ? isAllowedNumericSeparatorSibling.oct : isAllowedNumericSeparatorSibling.bin;
       let invalid = false;
       let total = 0;
-      for (let i2 = 0, e = len == null ? Infinity : len; i2 < e; ++i2) {
+      for (let i = 0, e = len == null ? Infinity : len; i < e; ++i) {
         const code = input.charCodeAt(pos);
         let val;
         if (code === 95 && allowNumSeparator !== "bail") {
@@ -6437,9 +6435,9 @@ var require_utils = __commonJS({
       function validator(node, key, val) {
         if (!Array.isArray(val))
           return;
-        for (let i2 = 0; i2 < val.length; i2++) {
-          const subkey = `${key}[${i2}]`;
-          const v = val[i2];
+        for (let i = 0; i < val.length; i++) {
+          const subkey = `${key}[${i}]`;
+          const v = val[i];
           callback(node, subkey, v);
           if (process.env.BABEL_TYPES_8_BREAKING)
             (0, _validate.validateChild)(node, subkey, v);
@@ -6581,6 +6579,7 @@ ${errors.join("\n")}`);
       "optional",
       "validate"
     ];
+    var store = {};
     function defineAliasedType(...aliases) {
       return (type, opts = {}) => {
         let defined = opts.aliases;
@@ -6591,7 +6590,7 @@ ${errors.join("\n")}`);
           (_defined = defined) != null ? _defined : defined = [];
           opts.aliases = defined;
         }
-        const additional = aliases.filter((a2) => !defined.includes(a2));
+        const additional = aliases.filter((a) => !defined.includes(a));
         defined.unshift(...additional);
         return defineType(type, opts);
       };
@@ -6662,7 +6661,6 @@ ${errors.join("\n")}`);
       store[type] = opts;
     }
     __name(defineType, "defineType");
-    var store = {};
   }
 });
 
@@ -6711,7 +6709,7 @@ var require_core = __commonJS({
           }()
         },
         left: {
-          validate: !process.env.BABEL_TYPES_8_BREAKING ? (0, _utils.assertNodeType)("LVal") : (0, _utils.assertNodeType)("Identifier", "MemberExpression", "ArrayPattern", "ObjectPattern", "TSAsExpression", "TSTypeAssertion", "TSNonNullExpression")
+          validate: !process.env.BABEL_TYPES_8_BREAKING ? (0, _utils.assertNodeType)("LVal") : (0, _utils.assertNodeType)("Identifier", "MemberExpression", "ArrayPattern", "ObjectPattern", "TSAsExpression", "TSSatisfiesExpression", "TSTypeAssertion", "TSNonNullExpression")
         },
         right: {
           validate: (0, _utils.assertNodeType)("Expression")
@@ -7029,7 +7027,7 @@ var require_core = __commonJS({
       ],
       fields: {
         left: {
-          validate: !process.env.BABEL_TYPES_8_BREAKING ? (0, _utils.assertNodeType)("VariableDeclaration", "LVal") : (0, _utils.assertNodeType)("VariableDeclaration", "Identifier", "MemberExpression", "ArrayPattern", "ObjectPattern", "TSAsExpression", "TSTypeAssertion", "TSNonNullExpression")
+          validate: !process.env.BABEL_TYPES_8_BREAKING ? (0, _utils.assertNodeType)("VariableDeclaration", "LVal") : (0, _utils.assertNodeType)("VariableDeclaration", "Identifier", "MemberExpression", "ArrayPattern", "ObjectPattern", "TSAsExpression", "TSSatisfiesExpression", "TSTypeAssertion", "TSNonNullExpression")
         },
         right: {
           validate: (0, _utils.assertNodeType)("Expression")
@@ -7644,7 +7642,7 @@ var require_core = __commonJS({
         "ObjectMember"
       ],
       validate: function() {
-        const pattern = (0, _utils.assertNodeType)("Identifier", "Pattern", "TSAsExpression", "TSNonNullExpression", "TSTypeAssertion");
+        const pattern = (0, _utils.assertNodeType)("Identifier", "Pattern", "TSAsExpression", "TSSatisfiesExpression", "TSNonNullExpression", "TSTypeAssertion");
         const expression = (0, _utils.assertNodeType)("Expression");
         return function(parent, key, node) {
           if (!process.env.BABEL_TYPES_8_BREAKING)
@@ -7669,7 +7667,7 @@ var require_core = __commonJS({
       deprecatedAlias: "RestProperty",
       fields: Object.assign({}, patternLikeCommon(), {
         argument: {
-          validate: !process.env.BABEL_TYPES_8_BREAKING ? (0, _utils.assertNodeType)("LVal") : (0, _utils.assertNodeType)("Identifier", "ArrayPattern", "ObjectPattern", "MemberExpression", "TSAsExpression", "TSTypeAssertion", "TSNonNullExpression")
+          validate: !process.env.BABEL_TYPES_8_BREAKING ? (0, _utils.assertNodeType)("LVal") : (0, _utils.assertNodeType)("Identifier", "ArrayPattern", "ObjectPattern", "MemberExpression", "TSAsExpression", "TSSatisfiesExpression", "TSTypeAssertion", "TSNonNullExpression")
         },
         optional: {
           validate: (0, _utils.assertValueType)("boolean"),
@@ -7885,7 +7883,7 @@ var require_core = __commonJS({
           optional: true
         },
         kind: {
-          validate: (0, _utils.assertOneOf)("var", "let", "const")
+          validate: (0, _utils.assertOneOf)("var", "let", "const", "using")
         },
         declarations: {
           validate: (0, _utils.chain)((0, _utils.assertValueType)("array"), (0, _utils.assertEach)((0, _utils.assertNodeType)("VariableDeclarator")))
@@ -7987,7 +7985,7 @@ var require_core = __commonJS({
       ],
       fields: Object.assign({}, patternLikeCommon(), {
         left: {
-          validate: (0, _utils.assertNodeType)("Identifier", "ObjectPattern", "ArrayPattern", "MemberExpression", "TSAsExpression", "TSTypeAssertion", "TSNonNullExpression")
+          validate: (0, _utils.assertNodeType)("Identifier", "ObjectPattern", "ArrayPattern", "MemberExpression", "TSAsExpression", "TSSatisfiesExpression", "TSTypeAssertion", "TSNonNullExpression")
         },
         right: {
           validate: (0, _utils.assertNodeType)("Expression")
@@ -8326,7 +8324,7 @@ var require_core = __commonJS({
               return (0, _utils.assertNodeType)("VariableDeclaration", "LVal");
             }
             const declaration = (0, _utils.assertNodeType)("VariableDeclaration");
-            const lval = (0, _utils.assertNodeType)("Identifier", "MemberExpression", "ArrayPattern", "ObjectPattern", "TSAsExpression", "TSTypeAssertion", "TSNonNullExpression");
+            const lval = (0, _utils.assertNodeType)("Identifier", "MemberExpression", "ArrayPattern", "ObjectPattern", "TSAsExpression", "TSSatisfiesExpression", "TSTypeAssertion", "TSNonNullExpression");
             return function(node, key, val) {
               if ((0, _is.default)("VariableDeclaration", val)) {
                 declaration(node, key, val);
@@ -8361,6 +8359,10 @@ var require_core = __commonJS({
         assertions: {
           optional: true,
           validate: (0, _utils.chain)((0, _utils.assertValueType)("array"), (0, _utils.assertEach)((0, _utils.assertNodeType)("ImportAttribute")))
+        },
+        module: {
+          optional: true,
+          validate: (0, _utils.assertValueType)("boolean")
         },
         specifiers: {
           validate: (0, _utils.chain)((0, _utils.assertValueType)("array"), (0, _utils.assertEach)((0, _utils.assertNodeType)("ImportSpecifier", "ImportDefaultSpecifier", "ImportNamespaceSpecifier")))
@@ -10940,7 +10942,7 @@ var require_typescript = __commonJS({
         typeParameters: (0, _utils.validateOptionalType)("TSTypeParameterInstantiation")
       }
     });
-    defineType("TSAsExpression", {
+    var TSTypeExpression = {
       aliases: [
         "Expression",
         "LVal",
@@ -10954,7 +10956,9 @@ var require_typescript = __commonJS({
         expression: (0, _utils.validateType)("Expression"),
         typeAnnotation: (0, _utils.validateType)("TSType")
       }
-    });
+    };
+    defineType("TSAsExpression", TSTypeExpression);
+    defineType("TSSatisfiesExpression", TSTypeExpression);
     defineType("TSTypeAssertion", {
       aliases: [
         "Expression",
@@ -11553,6 +11557,7 @@ var require_generated2 = __commonJS({
     exports.tSPropertySignature = exports.tsPropertySignature = tsPropertySignature;
     exports.tSQualifiedName = exports.tsQualifiedName = tsQualifiedName;
     exports.tSRestType = exports.tsRestType = tsRestType;
+    exports.tSSatisfiesExpression = exports.tsSatisfiesExpression = tsSatisfiesExpression;
     exports.tSStringKeyword = exports.tsStringKeyword = tsStringKeyword;
     exports.tSSymbolKeyword = exports.tsSymbolKeyword = tsSymbolKeyword;
     exports.tSThisType = exports.tsThisType = tsThisType;
@@ -13426,6 +13431,14 @@ var require_generated2 = __commonJS({
       });
     }
     __name(tsAsExpression, "tsAsExpression");
+    function tsSatisfiesExpression(expression, typeAnnotation2) {
+      return (0, _validateNode.default)({
+        type: "TSSatisfiesExpression",
+        expression,
+        typeAnnotation: typeAnnotation2
+      });
+    }
+    __name(tsSatisfiesExpression, "tsSatisfiesExpression");
     function tsTypeAssertion(typeAnnotation2, expression) {
       return (0, _validateNode.default)({
         type: "TSTypeAssertion",
@@ -13573,12 +13586,13 @@ var require_cleanJSXElementLiteralChild = __commonJS({
     });
     exports.default = cleanJSXElementLiteralChild;
     var _generated = require_generated2();
+    var _ = require_lib3();
     function cleanJSXElementLiteralChild(child, args) {
       const lines = child.value.split(/\r\n|\n|\r/);
       let lastNonEmptyLine = 0;
-      for (let i2 = 0; i2 < lines.length; i2++) {
-        if (lines[i2].match(/[^ \t]/)) {
-          lastNonEmptyLine = i2;
+      for (let i = 0; i < lines.length; i++) {
+        if (lines[i].match(/[^ \t]/)) {
+          lastNonEmptyLine = i;
         }
       }
       let str = "";
@@ -13602,7 +13616,7 @@ var require_cleanJSXElementLiteralChild = __commonJS({
         }
       }
       if (str)
-        args.push((0, _generated.stringLiteral)(str));
+        args.push((0, _.inherits)((0, _generated.stringLiteral)(str), child));
     }
     __name(cleanJSXElementLiteralChild, "cleanJSXElementLiteralChild");
   }
@@ -13620,8 +13634,8 @@ var require_buildChildren = __commonJS({
     var _cleanJSXElementLiteralChild = require_cleanJSXElementLiteralChild();
     function buildChildren(node) {
       const elements = [];
-      for (let i2 = 0; i2 < node.children.length; i2++) {
-        let child = node.children[i2];
+      for (let i = 0; i < node.children.length; i++) {
+        let child = node.children[i];
         if ((0, _generated.isJSXText)(child)) {
           (0, _cleanJSXElementLiteralChild.default)(child, elements);
           continue;
@@ -13928,6 +13942,7 @@ var require_generated3 = __commonJS({
     exports.assertTSPropertySignature = assertTSPropertySignature;
     exports.assertTSQualifiedName = assertTSQualifiedName;
     exports.assertTSRestType = assertTSRestType;
+    exports.assertTSSatisfiesExpression = assertTSSatisfiesExpression;
     exports.assertTSStringKeyword = assertTSStringKeyword;
     exports.assertTSSymbolKeyword = assertTSSymbolKeyword;
     exports.assertTSThisType = assertTSThisType;
@@ -14921,6 +14936,10 @@ var require_generated3 = __commonJS({
       assert("TSAsExpression", node, opts);
     }
     __name(assertTSAsExpression, "assertTSAsExpression");
+    function assertTSSatisfiesExpression(node, opts) {
+      assert("TSSatisfiesExpression", node, opts);
+    }
+    __name(assertTSSatisfiesExpression, "assertTSSatisfiesExpression");
     function assertTSTypeAssertion(node, opts) {
       assert("TSTypeAssertion", node, opts);
     }
@@ -15254,8 +15273,8 @@ var require_removeTypeDuplicates = __commonJS({
       const bases = /* @__PURE__ */ new Map();
       const typeGroups = /* @__PURE__ */ new Set();
       const types = [];
-      for (let i2 = 0; i2 < nodes.length; i2++) {
-        const node = nodes[i2];
+      for (let i = 0; i < nodes.length; i++) {
+        const node = nodes[i];
         if (!node)
           continue;
         if (types.indexOf(node) >= 0) {
@@ -15347,8 +15366,8 @@ var require_removeTypeDuplicates2 = __commonJS({
       const bases = /* @__PURE__ */ new Map();
       const typeGroups = /* @__PURE__ */ new Set();
       const types = [];
-      for (let i2 = 0; i2 < nodes.length; i2++) {
-        const node = nodes[i2];
+      for (let i = 0; i < nodes.length; i++) {
+        const node = nodes[i];
         if (!node)
           continue;
         if (types.indexOf(node) >= 0) {
@@ -16663,6 +16682,12 @@ var require_uppercase = __commonJS({
         return _index.tsRestType;
       }
     });
+    Object.defineProperty(exports, "TSSatisfiesExpression", {
+      enumerable: true,
+      get: function() {
+        return _index.tsSatisfiesExpression;
+      }
+    });
     Object.defineProperty(exports, "TSStringKeyword", {
       enumerable: true,
       get: function() {
@@ -17446,12 +17471,12 @@ var require_toIdentifier = __commonJS({
     function toIdentifier(input) {
       input = input + "";
       let name = "";
-      for (const c2 of input) {
-        name += (0, _helperValidatorIdentifier.isIdentifierChar)(c2.codePointAt(0)) ? c2 : "-";
+      for (const c of input) {
+        name += (0, _helperValidatorIdentifier.isIdentifierChar)(c.codePointAt(0)) ? c : "-";
       }
       name = name.replace(/^[-0-9]+/, "");
-      name = name.replace(/[-\s]+(.)?/g, function(match, c2) {
-        return c2 ? c2.toUpperCase() : "";
+      name = name.replace(/[-\s]+(.)?/g, function(match, c) {
+        return c ? c.toUpperCase() : "";
       });
       if (!(0, _isValidIdentifier.default)(name)) {
         name = `_${name}`;
@@ -17707,8 +17732,8 @@ var require_getBindingIdentifiers = __commonJS({
           }
         }
         if (keys) {
-          for (let i2 = 0; i2 < keys.length; i2++) {
-            const key = keys[i2];
+          for (let i = 0; i < keys.length; i++) {
+            const key = keys[i];
             const nodes = id[key];
             if (nodes) {
               Array.isArray(nodes) ? search.push(...nodes) : search.push(nodes);
@@ -18004,14 +18029,14 @@ var require_valueToNode = __commonJS({
       return objectToString(value) === "[object RegExp]";
     }
     __name(isRegExp, "isRegExp");
-    function isPlainObject(value) {
+    function isPlainObject3(value) {
       if (typeof value !== "object" || value === null || Object.prototype.toString.call(value) !== "[object Object]") {
         return false;
       }
       const proto = Object.getPrototypeOf(value);
       return proto === null || Object.getPrototypeOf(proto) === null;
     }
-    __name(isPlainObject, "isPlainObject");
+    __name(isPlainObject3, "isPlainObject");
     function valueToNode(value) {
       if (value === void 0) {
         return (0, _generated.identifier)("undefined");
@@ -18051,7 +18076,7 @@ var require_valueToNode = __commonJS({
       if (Array.isArray(value)) {
         return (0, _generated.arrayExpression)(value.map(valueToNode));
       }
-      if (isPlainObject(value)) {
+      if (isPlainObject3(value)) {
         const props = [];
         for (const key of Object.keys(value)) {
           let nodeKey;
@@ -18189,14 +18214,14 @@ var require_traverse = __commonJS({
       for (const key of keys) {
         const subNode = node[key];
         if (Array.isArray(subNode)) {
-          for (let i2 = 0; i2 < subNode.length; i2++) {
-            const child = subNode[i2];
+          for (let i = 0; i < subNode.length; i++) {
+            const child = subNode[i];
             if (!child)
               continue;
             ancestors.push({
               node,
               key,
-              index: i2
+              index: i
             });
             traverseSimpleImpl(child, enter, exit, state, ancestors);
             ancestors.pop();
@@ -18232,8 +18257,8 @@ var require_isBinding = __commonJS({
       }
       const keys = _getBindingIdentifiers.default.keys[parent.type];
       if (keys) {
-        for (let i2 = 0; i2 < keys.length; i2++) {
-          const key = keys[i2];
+        for (let i = 0; i < keys.length; i++) {
+          const key = keys[i];
           const val = parent[key];
           if (Array.isArray(val)) {
             if (val.indexOf(node) >= 0)
@@ -18319,18 +18344,18 @@ var require_isNodesEquivalent = __commonJS({
     });
     exports.default = isNodesEquivalent;
     var _definitions = require_definitions();
-    function isNodesEquivalent(a2, b2) {
-      if (typeof a2 !== "object" || typeof b2 !== "object" || a2 == null || b2 == null) {
-        return a2 === b2;
+    function isNodesEquivalent(a, b) {
+      if (typeof a !== "object" || typeof b !== "object" || a == null || b == null) {
+        return a === b;
       }
-      if (a2.type !== b2.type) {
+      if (a.type !== b.type) {
         return false;
       }
-      const fields = Object.keys(_definitions.NODE_FIELDS[a2.type] || a2.type);
-      const visitorKeys = _definitions.VISITOR_KEYS[a2.type];
+      const fields = Object.keys(_definitions.NODE_FIELDS[a.type] || a.type);
+      const visitorKeys = _definitions.VISITOR_KEYS[a.type];
       for (const field of fields) {
-        const val_a = a2[field];
-        const val_b = b2[field];
+        const val_a = a[field];
+        const val_b = b[field];
         if (typeof val_a !== typeof val_b) {
           return false;
         }
@@ -18346,8 +18371,8 @@ var require_isNodesEquivalent = __commonJS({
           if (val_a.length !== val_b.length) {
             return false;
           }
-          for (let i2 = 0; i2 < val_a.length; i2++) {
-            if (!isNodesEquivalent(val_a[i2], val_b[i2])) {
+          for (let i = 0; i < val_a.length; i++) {
+            if (!isNodesEquivalent(val_a[i], val_b[i])) {
               return false;
             }
           }
@@ -19274,9 +19299,9 @@ var require_options = __commonJS({
         return {};
       var target = {};
       var sourceKeys = Object.keys(source);
-      var key, i2;
-      for (i2 = 0; i2 < sourceKeys.length; i2++) {
-        key = sourceKeys[i2];
+      var key, i;
+      for (i = 0; i < sourceKeys.length; i++) {
+        key = sourceKeys[i];
         if (excluded.indexOf(key) >= 0)
           continue;
         target[key] = source[key];
@@ -19284,10 +19309,10 @@ var require_options = __commonJS({
       return target;
     }
     __name(_objectWithoutPropertiesLoose, "_objectWithoutPropertiesLoose");
-    function merge(a2, b2) {
-      const { placeholderWhitelist = a2.placeholderWhitelist, placeholderPattern = a2.placeholderPattern, preserveComments = a2.preserveComments, syntacticPlaceholders = a2.syntacticPlaceholders } = b2;
+    function merge(a, b) {
+      const { placeholderWhitelist = a.placeholderWhitelist, placeholderPattern = a.placeholderPattern, preserveComments = a.preserveComments, syntacticPlaceholders = a.syntacticPlaceholders } = b;
       return {
-        parser: Object.assign({}, a2.parser, b2.parser),
+        parser: Object.assign({}, a.parser, b.parser),
         placeholderWhitelist,
         placeholderPattern,
         preserveComments,
@@ -19326,8 +19351,8 @@ var require_options = __commonJS({
     __name(validate, "validate");
     function normalizeReplacements(replacements) {
       if (Array.isArray(replacements)) {
-        return replacements.reduce((acc, replacement, i2) => {
-          acc["$" + i2] = replacement;
+        return replacements.reduce((acc, replacement, i) => {
+          acc["$" + i] = replacement;
           return acc;
         }, {});
       } else if (typeof replacements === "object" || replacements == null) {
@@ -19351,9 +19376,9 @@ var require_lib4 = __commonJS({
         return {};
       var target = {};
       var sourceKeys = Object.keys(source);
-      var key, i2;
-      for (i2 = 0; i2 < sourceKeys.length; i2++) {
-        key = sourceKeys[i2];
+      var key, i;
+      for (i = 0; i < sourceKeys.length; i++) {
+        key = sourceKeys[i];
         if (excluded.indexOf(key) >= 0)
           continue;
         target[key] = source[key];
@@ -19395,7 +19420,7 @@ var require_lib4 = __commonJS({
         return keys.reduce((object, key) => object[key], this);
       },
       set(value) {
-        keys.reduce((item, key, i2) => i2 === last ? item[key] = value : item[key], this);
+        keys.reduce((item, key, i) => i === last ? item[key] = value : item[key], this);
       }
     }), "reflect");
     var instantiate = /* @__PURE__ */ __name((constructor, properties, descriptors) => Object.keys(descriptors).map((key) => [
@@ -19455,9 +19480,9 @@ var require_lib4 = __commonJS({
       AwaitExpressionFormalParameter: "'await' is not allowed in async function parameters.",
       AwaitNotInAsyncContext: "'await' is only allowed within async functions and at the top levels of modules.",
       AwaitNotInAsyncFunction: "'await' is only allowed within async functions.",
-      BadGetterArity: "A 'get' accesor must not have any formal parameters.",
-      BadSetterArity: "A 'set' accesor must have exactly one formal parameter.",
-      BadSetterRestParameter: "A 'set' accesor function argument must not be a rest parameter.",
+      BadGetterArity: "A 'get' accessor must not have any formal parameters.",
+      BadSetterArity: "A 'set' accessor must have exactly one formal parameter.",
+      BadSetterRestParameter: "A 'set' accessor function argument must not be a rest parameter.",
       ConstructorClassField: "Classes may not have a field named 'constructor'.",
       ConstructorClassPrivateField: "Classes may not have a private field named '#constructor'.",
       ConstructorIsAccessor: "Class constructor may not be an accessor.",
@@ -19483,6 +19508,7 @@ var require_lib4 = __commonJS({
 - Did you mean \`export { '${localName}' as '${exportName}' } from 'some-module'\`?`,
       ExportDefaultFromAsIdentifier: "'from' is not allowed as an identifier after 'export default'.",
       ForInOfLoopInitializer: ({ type }) => `'${type === "ForInStatement" ? "for-in" : "for-of"}' loop variable declaration may not have an initializer.`,
+      ForInUsing: "For-in loop may not start with 'using' declaration.",
       ForOfAsync: "The left-hand side of a for-of loop may not be 'async'.",
       ForOfLet: "The left-hand side of a for-of loop may not start with 'let'.",
       GeneratorInSingleStatementContext: "Generators can only be declared at the top level or inside a block.",
@@ -19496,6 +19522,8 @@ var require_lib4 = __commonJS({
       ImportCallNotNewExpression: "Cannot use new with import(...).",
       ImportCallSpreadArgument: "`...` is not allowed in `import()`.",
       ImportJSONBindingNotDefault: "A JSON module can only be imported with `default`.",
+      ImportReflectionHasAssertion: "`import module x` cannot have assertions.",
+      ImportReflectionNotBinding: 'Only `import module x from "./module"` is valid.',
       IncompatibleRegExpUVFlags: "The 'u' and 'v' regular expression flags cannot be enabled at the same time.",
       InvalidBigIntLiteral: "Invalid BigIntLiteral.",
       InvalidCodePoint: "Code point out of bounds.",
@@ -19573,6 +19601,7 @@ var require_lib4 = __commonJS({
       UnexpectedSuper: "'super' is only allowed in object methods and classes.",
       UnexpectedToken: ({ expected, unexpected }) => `Unexpected token${unexpected ? ` '${unexpected}'.` : ""}${expected ? `, expected "${expected}"` : ""}`,
       UnexpectedTokenUnaryExponentiation: "Illegal expression. Wrap left hand side or entire exponentiation in parentheses.",
+      UnexpectedUsingDeclaration: "Using declaration cannot appear in the top level when source type is `script`.",
       UnsupportedBind: "Binding should be performed on object property.",
       UnsupportedDecoratorExport: "A decorated export must export a class declaration.",
       UnsupportedDefaultExport: "Only expressions, functions or classes are allowed as the `default` export.",
@@ -19585,6 +19614,7 @@ var require_lib4 = __commonJS({
       UnterminatedRegExp: "Unterminated regular expression.",
       UnterminatedString: "Unterminated string constant.",
       UnterminatedTemplate: "Unterminated template.",
+      UsingDeclarationHasBindingPattern: "Using declaration cannot have destructuring patterns.",
       VarRedeclaration: ({ identifierName }) => `Identifier '${identifierName}' has already been declared.`,
       YieldBindingIdentifier: "Can not use 'yield' as identifier inside a generator.",
       YieldInParameter: "Yield expression is not allowed in formal parameters.",
@@ -19948,8 +19978,9 @@ var require_lib4 = __commonJS({
         }
         super.toReferencedArguments(node);
       }
-      parseExport(unfinished) {
-        const node = super.parseExport(unfinished);
+      parseExport(unfinished, decorators) {
+        const exportStartLoc = this.state.lastTokStartLoc;
+        const node = super.parseExport(unfinished, decorators);
         switch (node.type) {
           case "ExportAllDeclaration":
             node.exported = null;
@@ -19959,6 +19990,14 @@ var require_lib4 = __commonJS({
               node.type = "ExportAllDeclaration";
               node.exported = node.specifiers[0].exported;
               delete node.specifiers;
+            }
+          case "ExportDefaultDeclaration":
+            {
+              var _declaration$decorato;
+              const { declaration } = node;
+              if ((declaration == null ? void 0 : declaration.type) === "ClassDeclaration" && ((_declaration$decorato = declaration.decorators) == null ? void 0 : _declaration$decorato.length) > 0 && declaration.start === node.start) {
+                this.resetStartLocation(node, exportStartLoc);
+              }
             }
             break;
         }
@@ -20384,6 +20423,9 @@ var require_lib4 = __commonJS({
       _static: createKeywordLike("static", {
         startsExpr
       }),
+      _using: createKeywordLike("using", {
+        startsExpr
+      }),
       _yield: createKeywordLike("yield", {
         startsExpr
       }),
@@ -20418,6 +20460,9 @@ var require_lib4 = __commonJS({
         startsExpr
       }),
       _require: createKeywordLike("require", {
+        startsExpr
+      }),
+      _satisfies: createKeywordLike("satisfies", {
         startsExpr
       }),
       _keyof: createKeywordLike("keyof", {
@@ -20488,7 +20533,7 @@ var require_lib4 = __commonJS({
       })
     };
     function tokenIsIdentifier(token) {
-      return token >= 93 && token <= 128;
+      return token >= 93 && token <= 130;
     }
     __name(tokenIsIdentifier, "tokenIsIdentifier");
     function tokenKeywordOrIdentifierIsKeyword(token) {
@@ -20496,11 +20541,11 @@ var require_lib4 = __commonJS({
     }
     __name(tokenKeywordOrIdentifierIsKeyword, "tokenKeywordOrIdentifierIsKeyword");
     function tokenIsKeywordOrIdentifier(token) {
-      return token >= 58 && token <= 128;
+      return token >= 58 && token <= 130;
     }
     __name(tokenIsKeywordOrIdentifier, "tokenIsKeywordOrIdentifier");
     function tokenIsLiteralPropertyName(token) {
-      return token >= 58 && token <= 132;
+      return token >= 58 && token <= 134;
     }
     __name(tokenIsLiteralPropertyName, "tokenIsLiteralPropertyName");
     function tokenComesBeforeExpression(token) {
@@ -20516,7 +20561,7 @@ var require_lib4 = __commonJS({
     }
     __name(tokenIsAssignment, "tokenIsAssignment");
     function tokenIsFlowInterfaceOrTypeOrOpaque(token) {
-      return token >= 125 && token <= 127;
+      return token >= 127 && token <= 129;
     }
     __name(tokenIsFlowInterfaceOrTypeOrOpaque, "tokenIsFlowInterfaceOrTypeOrOpaque");
     function tokenIsLoop(token) {
@@ -20540,11 +20585,11 @@ var require_lib4 = __commonJS({
     }
     __name(tokenIsPrefix, "tokenIsPrefix");
     function tokenIsTSTypeOperator(token) {
-      return token >= 117 && token <= 119;
+      return token >= 119 && token <= 121;
     }
     __name(tokenIsTSTypeOperator, "tokenIsTSTypeOperator");
     function tokenIsTSDeclarationStart(token) {
-      return token >= 120 && token <= 126;
+      return token >= 122 && token <= 128;
     }
     __name(tokenIsTSDeclarationStart, "tokenIsTSDeclarationStart");
     function tokenLabelName(token) {
@@ -20581,7 +20626,7 @@ var require_lib4 = __commonJS({
           context.push(types.template);
         }
       };
-      tokenTypes[138].updateContext = (context) => {
+      tokenTypes[140].updateContext = (context) => {
         context.push(types.j_expr, types.j_oTag);
       };
     }
@@ -21444,11 +21489,11 @@ var require_lib4 = __commonJS({
     ];
     function isInAstralSet(code, set) {
       let pos = 65536;
-      for (let i2 = 0, length = set.length; i2 < length; i2 += 2) {
-        pos += set[i2];
+      for (let i = 0, length = set.length; i < length; i += 2) {
+        pos += set[i];
         if (pos > code)
           return false;
-        pos += set[i2 + 1];
+        pos += set[i + 1];
         if (pos >= code)
           return true;
       }
@@ -21634,7 +21679,7 @@ var require_lib4 = __commonJS({
     var SCOPE_CLASS = 64;
     var SCOPE_STATIC_BLOCK = 128;
     var SCOPE_TS_MODULE = 256;
-    var SCOPE_VAR = SCOPE_PROGRAM | SCOPE_FUNCTION | SCOPE_TS_MODULE;
+    var SCOPE_VAR = SCOPE_PROGRAM | SCOPE_FUNCTION | SCOPE_STATIC_BLOCK | SCOPE_TS_MODULE;
     var BIND_KIND_VALUE = 1;
     var BIND_KIND_TYPE = 2;
     var BIND_SCOPE_VAR = 4;
@@ -21687,6 +21732,9 @@ var require_lib4 = __commonJS({
         this.parser = parser;
         this.inModule = inModule;
       }
+      get inTopLevel() {
+        return (this.currentScope().flags & SCOPE_PROGRAM) > 0;
+      }
       get inFunction() {
         return (this.currentVarScopeFlags() & SCOPE_FUNCTION) > 0;
       }
@@ -21704,8 +21752,8 @@ var require_lib4 = __commonJS({
         return (flags & SCOPE_CLASS) > 0 && (flags & SCOPE_FUNCTION) === 0;
       }
       get inStaticBlock() {
-        for (let i2 = this.scopeStack.length - 1; ; i2--) {
-          const { flags } = this.scopeStack[i2];
+        for (let i = this.scopeStack.length - 1; ; i--) {
+          const { flags } = this.scopeStack[i];
           if (flags & SCOPE_STATIC_BLOCK) {
             return true;
           }
@@ -21746,8 +21794,8 @@ var require_lib4 = __commonJS({
             this.maybeExportDefined(scope, name);
           }
         } else if (bindingType & BIND_SCOPE_VAR) {
-          for (let i2 = this.scopeStack.length - 1; i2 >= 0; --i2) {
-            scope = this.scopeStack[i2];
+          for (let i = this.scopeStack.length - 1; i >= 0; --i) {
+            scope = this.scopeStack[i];
             this.checkRedeclarationInScope(scope, name, bindingType, loc);
             scope.var.add(name);
             this.maybeExportDefined(scope, name);
@@ -21794,16 +21842,16 @@ var require_lib4 = __commonJS({
         return this.scopeStack[this.scopeStack.length - 1];
       }
       currentVarScopeFlags() {
-        for (let i2 = this.scopeStack.length - 1; ; i2--) {
-          const { flags } = this.scopeStack[i2];
+        for (let i = this.scopeStack.length - 1; ; i--) {
+          const { flags } = this.scopeStack[i];
           if (flags & SCOPE_VAR) {
             return flags;
           }
         }
       }
       currentThisScopeFlags() {
-        for (let i2 = this.scopeStack.length - 1; ; i2--) {
-          const { flags } = this.scopeStack[i2];
+        for (let i = this.scopeStack.length - 1; ; i--) {
+          const { flags } = this.scopeStack[i];
           if (flags & (SCOPE_VAR | SCOPE_CLASS) && !(flags & SCOPE_ARROW)) {
             return flags;
           }
@@ -21897,9 +21945,9 @@ var require_lib4 = __commonJS({
     __name(setInnerComments, "setInnerComments");
     function adjustInnerComments(node, elements, commentWS) {
       let lastElement = null;
-      let i2 = elements.length;
-      while (lastElement === null && i2 > 0) {
-        lastElement = elements[--i2];
+      let i = elements.length;
+      while (lastElement === null && i > 0) {
+        lastElement = elements[--i];
       }
       if (lastElement === null || lastElement.start > commentWS.start) {
         setInnerComments(node, commentWS.comments);
@@ -21919,20 +21967,20 @@ var require_lib4 = __commonJS({
         const commentStackLength = commentStack.length;
         if (commentStackLength === 0)
           return;
-        let i2 = commentStackLength - 1;
-        const lastCommentWS = commentStack[i2];
+        let i = commentStackLength - 1;
+        const lastCommentWS = commentStack[i];
         if (lastCommentWS.start === node.end) {
           lastCommentWS.leadingNode = node;
-          i2--;
+          i--;
         }
         const { start: nodeStart } = node;
-        for (; i2 >= 0; i2--) {
-          const commentWS = commentStack[i2];
+        for (; i >= 0; i--) {
+          const commentWS = commentStack[i];
           const commentEnd = commentWS.end;
           if (commentEnd > nodeStart) {
             commentWS.containingNode = node;
             this.finalizeComment(commentWS);
-            commentStack.splice(i2, 1);
+            commentStack.splice(i, 1);
           } else {
             if (commentEnd === nodeStart) {
               commentWS.trailingNode = node;
@@ -21991,8 +22039,8 @@ var require_lib4 = __commonJS({
       }
       finalizeRemainingComments() {
         const { commentStack } = this.state;
-        for (let i2 = commentStack.length - 1; i2 >= 0; i2--) {
-          this.finalizeComment(commentStack[i2]);
+        for (let i = commentStack.length - 1; i >= 0; i--) {
+          this.finalizeComment(commentStack[i]);
         }
         this.state.commentStack = [];
       }
@@ -22011,9 +22059,9 @@ var require_lib4 = __commonJS({
         const commentStackLength = commentStack.length;
         if (commentStackLength === 0)
           return;
-        let i2 = commentStackLength - 1;
-        for (; i2 >= 0; i2--) {
-          const commentWS = commentStack[i2];
+        let i = commentStackLength - 1;
+        for (; i >= 0; i--) {
+          const commentWS = commentStack[i];
           const commentEnd = commentWS.end;
           const commentStart = commentWS.start;
           if (commentStart === end) {
@@ -22097,13 +22145,10 @@ var require_lib4 = __commonJS({
         this.soloAwait = false;
         this.inFSharpPipelineDirectBody = false;
         this.labels = [];
-        this.decoratorStack = [
-          []
-        ];
         this.comments = [];
         this.commentStack = [];
         this.pos = 0;
-        this.type = 135;
+        this.type = 137;
         this.value = null;
         this.start = 0;
         this.end = 0;
@@ -22131,8 +22176,8 @@ var require_lib4 = __commonJS({
       clone(skipArrays) {
         const state = new State2();
         const keys = Object.keys(this);
-        for (let i2 = 0, length = keys.length; i2 < length; i2++) {
-          const key = keys[i2];
+        for (let i = 0, length = keys.length; i < length; i++) {
+          const key = keys[i];
           let val = this[key];
           if (!skipArrays && Array.isArray(val)) {
             val = val.slice();
@@ -22316,9 +22361,9 @@ var require_lib4 = __commonJS({
     __name(readEscapedChar, "readEscapedChar");
     function readHexChar(input, pos, lineStart, curLine, len, forceLen, throwOnInvalid, errors) {
       const initialPos = pos;
-      let n2;
-      ({ n: n2, pos } = readInt(input, pos, lineStart, curLine, 16, len, forceLen, false, errors, !throwOnInvalid));
-      if (n2 === null) {
+      let n;
+      ({ n, pos } = readInt(input, pos, lineStart, curLine, 16, len, forceLen, false, errors, !throwOnInvalid));
+      if (n === null) {
         if (throwOnInvalid) {
           errors.invalidEscapeSequence(initialPos, lineStart, curLine);
         } else {
@@ -22326,7 +22371,7 @@ var require_lib4 = __commonJS({
         }
       }
       return {
-        code: n2,
+        code: n,
         pos
       };
     }
@@ -22337,7 +22382,7 @@ var require_lib4 = __commonJS({
       const isAllowedSibling = radix === 16 ? isAllowedNumericSeparatorSibling.hex : radix === 10 ? isAllowedNumericSeparatorSibling.dec : radix === 8 ? isAllowedNumericSeparatorSibling.oct : isAllowedNumericSeparatorSibling.bin;
       let invalid = false;
       let total = 0;
-      for (let i2 = 0, e = len == null ? Infinity : len; i2 < e; ++i2) {
+      for (let i = 0, e = len == null ? Infinity : len; i < e; ++i) {
         const code = input.charCodeAt(pos);
         let val;
         if (code === 95 && allowNumSeparator !== "bail") {
@@ -22595,7 +22640,7 @@ var require_lib4 = __commonJS({
         if (!this.isLookahead)
           this.state.startLoc = this.state.curPosition();
         if (this.state.pos >= this.length) {
-          this.finishToken(135);
+          this.finishToken(137);
           return;
         }
         this.getTokenFromCode(this.codePointAtPos(this.state.pos));
@@ -22788,10 +22833,10 @@ var require_lib4 = __commonJS({
           }
         } else if (isIdentifierStart(next)) {
           ++this.state.pos;
-          this.finishToken(134, this.readWord1(next));
+          this.finishToken(136, this.readWord1(next));
         } else if (next === 92) {
           ++this.state.pos;
-          this.finishToken(134, this.readWord1());
+          this.finishToken(136, this.readWord1());
         } else {
           this.finishOp(27, 1);
         }
@@ -23226,15 +23271,15 @@ var require_lib4 = __commonJS({
           mods += char;
         }
         this.state.pos = pos;
-        this.finishToken(133, {
+        this.finishToken(135, {
           pattern: content,
           flags: mods
         });
       }
       readInt(radix, len, forceLen = false, allowNumSeparator = true) {
-        const { n: n2, pos } = readInt(this.input, this.state.pos, this.state.lineStart, this.state.curLine, radix, len, forceLen, allowNumSeparator, this.errorHandlers_readInt, false);
+        const { n, pos } = readInt(this.input, this.state.pos, this.state.lineStart, this.state.curLine, radix, len, forceLen, allowNumSeparator, this.errorHandlers_readInt, false);
         this.state.pos = pos;
-        return n2;
+        return n;
       }
       readRadixNumber(radix) {
         const startLoc = this.state.curPosition();
@@ -23263,10 +23308,10 @@ var require_lib4 = __commonJS({
         }
         if (isBigInt) {
           const str = this.input.slice(startLoc.index, this.state.pos).replace(/[_n]/g, "");
-          this.finishToken(131, str);
+          this.finishToken(133, str);
           return;
         }
-        this.finishToken(130, val);
+        this.finishToken(132, val);
       }
       readNumber(startsWithDot) {
         const start = this.state.pos;
@@ -23344,15 +23389,15 @@ var require_lib4 = __commonJS({
         }
         const str = this.input.slice(start, this.state.pos).replace(/[_mn]/g, "");
         if (isBigInt) {
-          this.finishToken(131, str);
+          this.finishToken(133, str);
           return;
         }
         if (isDecimal) {
-          this.finishToken(132, str);
+          this.finishToken(134, str);
           return;
         }
         const val = isOctal ? parseInt(str, 8) : parseFloat(str);
-        this.finishToken(130, val);
+        this.finishToken(132, val);
       }
       readCodePoint(throwOnInvalid) {
         const { code, pos } = readCodePoint(this.input, this.state.pos, this.state.lineStart, this.state.curLine, throwOnInvalid, this.errorHandlers_readCodePoint);
@@ -23364,7 +23409,7 @@ var require_lib4 = __commonJS({
         this.state.pos = pos + 1;
         this.state.lineStart = lineStart;
         this.state.curLine = curLine;
-        this.finishToken(129, str);
+        this.finishToken(131, str);
       }
       readTemplateContinuation() {
         if (!this.match(8)) {
@@ -23449,7 +23494,7 @@ var require_lib4 = __commonJS({
         if (type !== void 0) {
           this.finishToken(type, tokenLabelName(type));
         } else {
-          this.finishToken(128, word);
+          this.finishToken(130, word);
         }
       }
       checkKeywordEscapes() {
@@ -23479,10 +23524,10 @@ var require_lib4 = __commonJS({
         const loc = at instanceof Position ? at : at.loc.start;
         const pos = loc.index;
         const errors = this.state.errors;
-        for (let i2 = errors.length - 1; i2 >= 0; i2--) {
-          const error = errors[i2];
+        for (let i = errors.length - 1; i >= 0; i--) {
+          const error = errors[i];
           if (error.loc.index === pos) {
-            return errors[i2] = toParseError({
+            return errors[i] = toParseError({
               loc,
               details
             });
@@ -23659,19 +23704,19 @@ var require_lib4 = __commonJS({
           at: node.loc.start
         };
         const { stack } = this;
-        let i2 = stack.length - 1;
-        let scope = stack[i2];
+        let i = stack.length - 1;
+        let scope = stack[i];
         while (!scope.isCertainlyParameterDeclaration()) {
           if (scope.canBeArrowParameterDeclaration()) {
             scope.recordDeclarationError(toParseError, origin);
           } else {
             return;
           }
-          scope = stack[--i2];
+          scope = stack[--i];
         }
         this.parser.raise(toParseError, origin);
       }
-      recordArrowParemeterBindingError(error, { at: node }) {
+      recordArrowParameterBindingError(error, { at: node }) {
         const { stack } = this;
         const scope = stack[stack.length - 1];
         const origin = {
@@ -23687,15 +23732,15 @@ var require_lib4 = __commonJS({
       }
       recordAsyncArrowParametersError({ at }) {
         const { stack } = this;
-        let i2 = stack.length - 1;
-        let scope = stack[i2];
+        let i = stack.length - 1;
+        let scope = stack[i];
         while (scope.canBeArrowParameterDeclaration()) {
           if (scope.type === kMaybeAsyncArrowParameterDeclaration) {
             scope.recordDeclarationError(Errors.AwaitBindingIdentifier, {
               at
             });
           }
-          scope = stack[--i2];
+          scope = stack[--i];
         }
       }
       validateAsPattern() {
@@ -23707,11 +23752,11 @@ var require_lib4 = __commonJS({
           this.parser.raise(toParseError, {
             at: loc
           });
-          let i2 = stack.length - 2;
-          let scope = stack[i2];
+          let i = stack.length - 2;
+          let scope = stack[i];
           while (scope.canBeArrowParameterDeclaration()) {
             scope.clearDeclarationError(loc.index);
-            scope = stack[--i2];
+            scope = stack[--i];
           }
         });
       }
@@ -23814,7 +23859,7 @@ var require_lib4 = __commonJS({
         }
       }
       canInsertSemicolon() {
-        return this.match(135) || this.match(8) || this.hasPrecedingLineBreak();
+        return this.match(137) || this.match(8) || this.hasPrecedingLineBreak();
       }
       hasPrecedingLineBreak() {
         return lineBreak.test(this.input.slice(this.state.lastTokEndLoc.index, this.state.start));
@@ -24005,8 +24050,8 @@ var require_lib4 = __commonJS({
       NodePrototype.__clone = function() {
         const newNode = new Node(void 0, this.start, this.loc.start);
         const keys = Object.keys(this);
-        for (let i2 = 0, length = keys.length; i2 < length; i2++) {
-          const key = keys[i2];
+        for (let i = 0, length = keys.length; i < length; i++) {
+          const key = keys[i];
           if (key !== "leadingComments" && key !== "trailingComments" && key !== "innerComments") {
             newNode[key] = this[key];
           }
@@ -24130,6 +24175,7 @@ var require_lib4 = __commonJS({
       EnumNumberMemberNotInitialized: ({ enumName, memberName }) => `Number enum members need to be initialized, e.g. \`${memberName} = 1\` in enum \`${enumName}\`.`,
       EnumStringMemberInconsistentlyInitailized: ({ enumName }) => `String enum members need to consistently either all use initializers, or use no initializers, in enum \`${enumName}\`.`,
       GetterMayNotHaveThisParam: "A getter cannot have a `this` parameter.",
+      ImportReflectionHasImportType: "An `import module` declaration can not use `type` or `typeof` keyword.",
       ImportTypeShorthandOnlyInPureImport: "The `type` and `typeof` keywords on named imports can only be used on regular `import` statements. It cannot be used with `import type` or `import typeof` statements.",
       InexactInsideExact: "Explicit inexact syntax cannot appear inside an explicit exact object type.",
       InexactInsideNonObject: "Explicit inexact syntax cannot appear in class or interface definitions.",
@@ -24185,8 +24231,8 @@ var require_lib4 = __commonJS({
     function partition(list, test) {
       const list1 = [];
       const list2 = [];
-      for (let i2 = 0; i2 < list.length; i2++) {
-        (test(list[i2], i2, list) ? list1 : list2).push(list[i2]);
+      for (let i = 0; i < list.length; i++) {
+        (test(list[i], i, list) ? list1 : list2).push(list[i]);
       }
       return [
         list1,
@@ -24210,7 +24256,7 @@ var require_lib4 = __commonJS({
         return !!this.getPluginOption("flow", "enums");
       }
       finishToken(type, val) {
-        if (type !== 129 && type !== 13 && type !== 28) {
+        if (type !== 131 && type !== 13 && type !== 28) {
           if (this.flowPragma === void 0) {
             this.flowPragma = null;
           }
@@ -24219,12 +24265,12 @@ var require_lib4 = __commonJS({
       }
       addComment(comment) {
         if (this.flowPragma === void 0) {
-          const matches = FLOW_PRAGMA_REGEX.exec(comment.value);
-          if (!matches)
+          const matches2 = FLOW_PRAGMA_REGEX.exec(comment.value);
+          if (!matches2)
             ;
-          else if (matches[1] === "flow") {
+          else if (matches2[1] === "flow") {
             this.flowPragma = "flow";
-          } else if (matches[1] === "noflow") {
+          } else if (matches2[1] === "noflow") {
             this.flowPragma = "noflow";
           } else {
             throw new Error("Unexpected flow pragma");
@@ -24244,7 +24290,7 @@ var require_lib4 = __commonJS({
         const node = this.startNode();
         const moduloLoc = this.state.startLoc;
         this.next();
-        this.expectContextual(107);
+        this.expectContextual(108);
         if (this.state.lastTokStart > moduloLoc.index + 1) {
           this.raise(FlowErrors.UnexpectedSpaceBetweenModuloChecks, {
             at: moduloLoc
@@ -24315,7 +24361,7 @@ var require_lib4 = __commonJS({
           return this.flowParseDeclareFunction(node);
         } else if (this.match(74)) {
           return this.flowParseDeclareVariable(node);
-        } else if (this.eatContextual(123)) {
+        } else if (this.eatContextual(125)) {
           if (this.match(16)) {
             return this.flowParseDeclareModuleExports(node);
           } else {
@@ -24326,11 +24372,11 @@ var require_lib4 = __commonJS({
             }
             return this.flowParseDeclareModule(node);
           }
-        } else if (this.isContextual(126)) {
+        } else if (this.isContextual(128)) {
           return this.flowParseDeclareTypeAlias(node);
-        } else if (this.isContextual(127)) {
+        } else if (this.isContextual(129)) {
           return this.flowParseDeclareOpaqueType(node);
-        } else if (this.isContextual(125)) {
+        } else if (this.isContextual(127)) {
           return this.flowParseDeclareInterface(node);
         } else if (this.match(82)) {
           return this.flowParseDeclareExportDeclaration(node, insideModule);
@@ -24347,7 +24393,7 @@ var require_lib4 = __commonJS({
       }
       flowParseDeclareModule(node) {
         this.scope.enter(SCOPE_OTHER);
-        if (this.match(129)) {
+        if (this.match(131)) {
           node.id = super.parseExprAtom();
         } else {
           node.id = this.parseIdentifier();
@@ -24359,14 +24405,14 @@ var require_lib4 = __commonJS({
           let bodyNode1 = this.startNode();
           if (this.match(83)) {
             this.next();
-            if (!this.isContextual(126) && !this.match(87)) {
+            if (!this.isContextual(128) && !this.match(87)) {
               this.raise(FlowErrors.InvalidNonTypeImportInDeclareModule, {
                 at: this.state.lastTokStartLoc
               });
             }
             super.parseImport(bodyNode1);
           } else {
-            this.expectContextual(121, FlowErrors.UnsupportedStatementInDeclareModule);
+            this.expectContextual(123, FlowErrors.UnsupportedStatementInDeclareModule);
             bodyNode1 = this.flowParseDeclare(bodyNode1, true);
           }
           body.push(bodyNode1);
@@ -24414,7 +24460,7 @@ var require_lib4 = __commonJS({
           node.default = true;
           return this.finishNode(node, "DeclareExportDeclaration");
         } else {
-          if (this.match(75) || this.isLet() || (this.isContextual(126) || this.isContextual(125)) && !insideModule) {
+          if (this.match(75) || this.isLet() || (this.isContextual(128) || this.isContextual(127)) && !insideModule) {
             const label = this.state.value;
             throw this.raise(FlowErrors.UnsupportedDeclareExportKind, {
               at: this.state.startLoc,
@@ -24422,12 +24468,12 @@ var require_lib4 = __commonJS({
               suggestion: exportSuggestions[label]
             });
           }
-          if (this.match(74) || this.match(68) || this.match(80) || this.isContextual(127)) {
+          if (this.match(74) || this.match(68) || this.match(80) || this.isContextual(129)) {
             node.declaration = this.flowParseDeclare(this.startNode());
             node.default = false;
             return this.finishNode(node, "DeclareExportDeclaration");
-          } else if (this.match(55) || this.match(5) || this.isContextual(125) || this.isContextual(126) || this.isContextual(127)) {
-            node = this.parseExport(node);
+          } else if (this.match(55) || this.match(5) || this.isContextual(127) || this.isContextual(128) || this.isContextual(129)) {
+            node = this.parseExport(node, null);
             if (node.type === "ExportNamedDeclaration") {
               node.type = "ExportDeclaration";
               node.default = false;
@@ -24441,7 +24487,7 @@ var require_lib4 = __commonJS({
       }
       flowParseDeclareModuleExports(node) {
         this.next();
-        this.expectContextual(108);
+        this.expectContextual(109);
         node.typeAnnotation = this.flowParseTypeAnnotation();
         this.semicolon();
         return this.finishNode(node, "DeclareModuleExports");
@@ -24479,13 +24525,13 @@ var require_lib4 = __commonJS({
             node.extends.push(this.flowParseInterfaceExtends());
           } while (!isClass && this.eat(12));
         }
-        if (this.isContextual(114)) {
+        if (this.isContextual(115)) {
           this.next();
           do {
             node.mixins.push(this.flowParseInterfaceExtends());
           } while (this.eat(12));
         }
-        if (this.isContextual(110)) {
+        if (this.isContextual(111)) {
           this.next();
           do {
             node.implements.push(this.flowParseInterfaceExtends());
@@ -24545,7 +24591,7 @@ var require_lib4 = __commonJS({
         return this.finishNode(node, "TypeAlias");
       }
       flowParseOpaqueType(node, declare) {
-        this.expectContextual(126);
+        this.expectContextual(128);
         node.id = this.flowParseRestrictedIdentifier(true, true);
         this.scope.declareName(node.id.name, BIND_LEXICAL, node.id.loc.start);
         if (this.match(47)) {
@@ -24589,7 +24635,7 @@ var require_lib4 = __commonJS({
         const node = this.startNode();
         node.params = [];
         this.state.inType = true;
-        if (this.match(47) || this.match(138)) {
+        if (this.match(47) || this.match(140)) {
           this.next();
         } else {
           this.unexpected();
@@ -24646,7 +24692,7 @@ var require_lib4 = __commonJS({
       }
       flowParseInterfaceType() {
         const node = this.startNode();
-        this.expectContextual(125);
+        this.expectContextual(127);
         node.extends = [];
         if (this.eat(81)) {
           do {
@@ -24663,7 +24709,7 @@ var require_lib4 = __commonJS({
         return this.finishNode(node, "InterfaceTypeAnnotation");
       }
       flowParseObjectPropertyKey() {
-        return this.match(130) || this.match(129) ? super.parseExprAtom() : this.parseIdentifier(true);
+        return this.match(132) || this.match(131) ? super.parseExprAtom() : this.parseIdentifier(true);
       }
       flowParseObjectTypeIndexer(node, isStatic, variance) {
         node.static = isStatic;
@@ -24758,7 +24804,7 @@ var require_lib4 = __commonJS({
           let protoStartLoc = null;
           let inexactStartLoc = null;
           const node = this.startNode();
-          if (allowProto && this.isContextual(115)) {
+          if (allowProto && this.isContextual(116)) {
             const lookahead = this.lookahead();
             if (lookahead.type !== 14 && lookahead.type !== 17) {
               this.next();
@@ -25123,7 +25169,7 @@ var require_lib4 = __commonJS({
             node.returnType = this.flowParseType();
             node.typeParameters = null;
             return this.finishNode(node, "FunctionTypeAnnotation");
-          case 129:
+          case 131:
             return this.parseLiteral(this.state.value, "StringLiteralTypeAnnotation");
           case 85:
           case 86:
@@ -25133,10 +25179,10 @@ var require_lib4 = __commonJS({
           case 53:
             if (this.state.value === "-") {
               this.next();
-              if (this.match(130)) {
+              if (this.match(132)) {
                 return this.parseLiteralAtNode(-this.state.value, "NumberLiteralTypeAnnotation", node);
               }
-              if (this.match(131)) {
+              if (this.match(133)) {
                 return this.parseLiteralAtNode(-this.state.value, "BigIntLiteralTypeAnnotation", node);
               }
               throw this.raise(FlowErrors.UnexpectedSubtractionOperand, {
@@ -25144,9 +25190,9 @@ var require_lib4 = __commonJS({
               });
             }
             throw this.unexpected();
-          case 130:
+          case 132:
             return this.parseLiteral(this.state.value, "NumberLiteralTypeAnnotation");
-          case 131:
+          case 133:
             return this.parseLiteral(this.state.value, "BigIntLiteralTypeAnnotation");
           case 88:
             this.next();
@@ -25168,7 +25214,7 @@ var require_lib4 = __commonJS({
               this.next();
               return super.createIdentifier(node, label);
             } else if (tokenIsIdentifier(this.state.type)) {
-              if (this.isContextual(125)) {
+              if (this.isContextual(127)) {
                 return this.flowParseInterfaceType();
               }
               return this.flowIdentToTypeAnnotation(startLoc, node, this.parseIdentifier());
@@ -25259,7 +25305,7 @@ var require_lib4 = __commonJS({
         return type;
       }
       flowParseTypeOrImplicitInstantiation() {
-        if (this.state.type === 128 && this.state.value === "_") {
+        if (this.state.type === 130 && this.state.value === "_") {
           const startLoc = this.state.startLoc;
           const node = this.parseIdentifier();
           return this.flowParseGenericType(startLoc, node);
@@ -25313,26 +25359,26 @@ var require_lib4 = __commonJS({
         }
         return super.parseFunctionBodyAndFinish(node, type, isMethod);
       }
-      parseStatement(context, topLevel) {
-        if (this.state.strict && this.isContextual(125)) {
+      parseStatementLike(flags) {
+        if (this.state.strict && this.isContextual(127)) {
           const lookahead = this.lookahead();
           if (tokenIsKeywordOrIdentifier(lookahead.type)) {
             const node = this.startNode();
             this.next();
             return this.flowParseInterface(node);
           }
-        } else if (this.shouldParseEnums() && this.isContextual(122)) {
+        } else if (this.shouldParseEnums() && this.isContextual(124)) {
           const node1 = this.startNode();
           this.next();
           return this.flowParseEnumDeclaration(node1);
         }
-        const stmt = super.parseStatement(context, topLevel);
+        const stmt = super.parseStatementLike(flags);
         if (this.flowPragma === void 0 && !this.isValidDirective(stmt)) {
           this.flowPragma = null;
         }
         return stmt;
       }
-      parseExpressionStatement(node, expr) {
+      parseExpressionStatement(node, expr, decorators) {
         if (expr.type === "Identifier") {
           if (expr.name === "declare") {
             if (this.match(80) || tokenIsIdentifier(this.state.type) || this.match(68) || this.match(74) || this.match(82)) {
@@ -25348,24 +25394,24 @@ var require_lib4 = __commonJS({
             }
           }
         }
-        return super.parseExpressionStatement(node, expr);
+        return super.parseExpressionStatement(node, expr, decorators);
       }
       shouldParseExportDeclaration() {
         const { type } = this.state;
-        if (tokenIsFlowInterfaceOrTypeOrOpaque(type) || this.shouldParseEnums() && type === 122) {
+        if (tokenIsFlowInterfaceOrTypeOrOpaque(type) || this.shouldParseEnums() && type === 124) {
           return !this.state.containsEsc;
         }
         return super.shouldParseExportDeclaration();
       }
       isExportDefaultSpecifier() {
         const { type } = this.state;
-        if (tokenIsFlowInterfaceOrTypeOrOpaque(type) || this.shouldParseEnums() && type === 122) {
+        if (tokenIsFlowInterfaceOrTypeOrOpaque(type) || this.shouldParseEnums() && type === 124) {
           return this.state.containsEsc;
         }
         return super.isExportDefaultSpecifier();
       }
       parseExportDefaultExpression() {
-        if (this.shouldParseEnums() && this.isContextual(122)) {
+        if (this.shouldParseEnums() && this.isContextual(124)) {
           const node = this.startNode();
           this.next();
           return this.flowParseEnumDeclaration(node);
@@ -25395,8 +25441,8 @@ var require_lib4 = __commonJS({
           if (invalid.length > 0) {
             this.state = state;
             this.state.noArrowAt = noArrowAt;
-            for (let i2 = 0; i2 < invalid.length; i2++) {
-              noArrowAt.push(invalid[i2].start);
+            for (let i = 0; i < invalid.length; i++) {
+              noArrowAt.push(invalid[i].start);
             }
             ({ consequent, failed } = this.tryParseConditionalConsequent());
             [valid, invalid] = this.getArrowLikeExpressions(consequent);
@@ -25497,15 +25543,15 @@ var require_lib4 = __commonJS({
         }
         super.assertModuleNodeAllowed(node);
       }
-      parseExport(node) {
-        const decl = super.parseExport(node);
+      parseExport(node, decorators) {
+        const decl = super.parseExport(node, decorators);
         if (decl.type === "ExportNamedDeclaration" || decl.type === "ExportAllDeclaration") {
           decl.exportKind = decl.exportKind || "value";
         }
         return decl;
       }
       parseExportDeclaration(node) {
-        if (this.isContextual(126)) {
+        if (this.isContextual(128)) {
           node.exportKind = "type";
           const declarationNode = this.startNode();
           this.next();
@@ -25516,17 +25562,17 @@ var require_lib4 = __commonJS({
           } else {
             return this.flowParseTypeAlias(declarationNode);
           }
-        } else if (this.isContextual(127)) {
+        } else if (this.isContextual(129)) {
           node.exportKind = "type";
           const declarationNode1 = this.startNode();
           this.next();
           return this.flowParseOpaqueType(declarationNode1, false);
-        } else if (this.isContextual(125)) {
+        } else if (this.isContextual(127)) {
           node.exportKind = "type";
           const declarationNode2 = this.startNode();
           this.next();
           return this.flowParseInterface(declarationNode2);
-        } else if (this.shouldParseEnums() && this.isContextual(122)) {
+        } else if (this.shouldParseEnums() && this.isContextual(124)) {
           node.exportKind = "value";
           const declarationNode3 = this.startNode();
           this.next();
@@ -25538,7 +25584,7 @@ var require_lib4 = __commonJS({
       eatExportStar(node) {
         if (super.eatExportStar(node))
           return true;
-        if (this.isContextual(126) && this.lookahead().type === 55) {
+        if (this.isContextual(128) && this.lookahead().type === 55) {
           node.exportKind = "type";
           this.next();
           this.next();
@@ -25562,7 +25608,7 @@ var require_lib4 = __commonJS({
       }
       parseClassMember(classBody, member, state) {
         const { startLoc } = this.state;
-        if (this.isContextual(121)) {
+        if (this.isContextual(123)) {
           if (super.parseClassMemberFromModifier(classBody, member)) {
             return;
           }
@@ -25593,7 +25639,7 @@ var require_lib4 = __commonJS({
             identifierName: fullWord
           });
         }
-        this.finishToken(128, fullWord);
+        this.finishToken(130, fullWord);
       }
       getTokenFromCode(code) {
         const next = this.input.charCodeAt(this.state.pos + 1);
@@ -25627,18 +25673,18 @@ var require_lib4 = __commonJS({
         super.toAssignable(node, isLHS);
       }
       toAssignableList(exprList, trailingCommaLoc, isLHS) {
-        for (let i2 = 0; i2 < exprList.length; i2++) {
-          const expr = exprList[i2];
+        for (let i = 0; i < exprList.length; i++) {
+          const expr = exprList[i];
           if ((expr == null ? void 0 : expr.type) === "TypeCastExpression") {
-            exprList[i2] = this.typeCastToParameter(expr);
+            exprList[i] = this.typeCastToParameter(expr);
           }
         }
         super.toAssignableList(exprList, trailingCommaLoc, isLHS);
       }
       toReferencedList(exprList, isParenthesizedExpr) {
-        for (let i2 = 0; i2 < exprList.length; i2++) {
+        for (let i = 0; i < exprList.length; i++) {
           var _expr$extra;
-          const expr = exprList[i2];
+          const expr = exprList[i];
           if (expr && expr.type === "TypeCastExpression" && !((_expr$extra = expr.extra) != null && _expr$extra.parenthesized) && (exprList.length > 1 || !isParenthesizedExpr)) {
             this.raise(FlowErrors.TypeCastInPattern, {
               at: expr.typeAnnotation
@@ -25718,7 +25764,7 @@ var require_lib4 = __commonJS({
         if (node.superClass && this.match(47)) {
           node.superTypeParameters = this.flowParseTypeParameterInstantiation();
         }
-        if (this.isContextual(110)) {
+        if (this.isContextual(111)) {
           this.next();
           const implemented = node.implements = [];
           do {
@@ -25813,6 +25859,14 @@ var require_lib4 = __commonJS({
         }
         return isMaybeDefaultImport(this.state.type);
       }
+      checkImportReflection(node) {
+        super.checkImportReflection(node);
+        if (node.module && node.importKind !== "value") {
+          this.raise(FlowErrors.ImportReflectionHasImportType, {
+            at: node.specifiers[0].loc.start
+          });
+        }
+      }
       parseImportSpecifierLocal(node, specifier, type) {
         specifier.local = hasTypeImportKind(node) ? this.flowParseRestrictedIdentifier(true, true) : this.parseIdentifier();
         node.specifiers.push(this.finishImportSpecifier(specifier, type));
@@ -25822,7 +25876,7 @@ var require_lib4 = __commonJS({
         let kind = null;
         if (this.match(87)) {
           kind = "typeof";
-        } else if (this.isContextual(126)) {
+        } else if (this.isContextual(128)) {
           kind = "type";
         }
         if (kind) {
@@ -25933,7 +25987,7 @@ var require_lib4 = __commonJS({
         var _jsx;
         let state = null;
         let jsx2;
-        if (this.hasPlugin("jsx") && (this.match(138) || this.match(47))) {
+        if (this.hasPlugin("jsx") && (this.match(140) || this.match(47))) {
           state = this.state.clone();
           jsx2 = this.tryParse(() => super.parseMaybeAssign(refExpressionErrors, afterLeftParse), state);
           if (!jsx2.error)
@@ -26031,10 +26085,10 @@ var require_lib4 = __commonJS({
         if (isArrowFunction && this.state.noArrowParamsConversionAt.indexOf(node.start) !== -1) {
           return;
         }
-        for (let i2 = 0; i2 < node.params.length; i2++) {
-          if (this.isThisParam(node.params[i2]) && i2 > 0) {
+        for (let i = 0; i < node.params.length; i++) {
+          if (this.isThisParam(node.params[i]) && i > 0) {
             this.raise(FlowErrors.ThisParamMustBeFirst, {
-              at: node.params[i2]
+              at: node.params[i]
             });
           }
         }
@@ -26223,7 +26277,7 @@ var require_lib4 = __commonJS({
         const startLoc = this.state.startLoc;
         const endOfInit = /* @__PURE__ */ __name(() => this.match(12) || this.match(8), "endOfInit");
         switch (this.state.type) {
-          case 130: {
+          case 132: {
             const literal = this.parseNumericLiteral(this.state.value);
             if (endOfInit()) {
               return {
@@ -26237,7 +26291,7 @@ var require_lib4 = __commonJS({
               loc: startLoc
             };
           }
-          case 129: {
+          case 131: {
             const literal1 = this.parseStringLiteral(this.state.value);
             if (endOfInit()) {
               return {
@@ -26822,12 +26876,12 @@ var require_lib4 = __commonJS({
               if (this.state.pos === this.state.start) {
                 if (ch === 60 && this.state.canStartJSXElement) {
                   ++this.state.pos;
-                  return this.finishToken(138);
+                  return this.finishToken(140);
                 }
                 return super.getTokenFromCode(ch);
               }
               out += this.input.slice(chunkStart, this.state.pos);
-              return this.finishToken(137, out);
+              return this.finishToken(139, out);
             case 38:
               out += this.input.slice(chunkStart, this.state.pos);
               out += this.jsxReadEntity();
@@ -26885,7 +26939,7 @@ var require_lib4 = __commonJS({
           }
         }
         out += this.input.slice(chunkStart, this.state.pos++);
-        return this.finishToken(129, out);
+        return this.finishToken(131, out);
       }
       jsxReadEntity() {
         const startPos = ++this.state.pos;
@@ -26925,11 +26979,11 @@ var require_lib4 = __commonJS({
         do {
           ch = this.input.charCodeAt(++this.state.pos);
         } while (isIdentifierChar(ch) || ch === 45);
-        return this.finishToken(136, this.input.slice(start, this.state.pos));
+        return this.finishToken(138, this.input.slice(start, this.state.pos));
       }
       jsxParseIdentifier() {
         const node = this.startNode();
-        if (this.match(136)) {
+        if (this.match(138)) {
           node.name = this.state.value;
         } else if (tokenIsKeyword(this.state.type)) {
           node.name = tokenLabelName(this.state.type);
@@ -26977,8 +27031,8 @@ var require_lib4 = __commonJS({
               });
             }
             return node;
-          case 138:
-          case 129:
+          case 140:
+          case 131:
             return this.parseExprAtom();
           default:
             throw this.raise(JsxErrors.UnsupportedJsxValue, {
@@ -27028,7 +27082,7 @@ var require_lib4 = __commonJS({
       }
       jsxParseOpeningElementAt(startLoc) {
         const node = this.startNodeAt(startLoc);
-        if (this.eat(139)) {
+        if (this.eat(141)) {
           return this.finishNode(node, "JSXOpeningFragment");
         }
         node.name = this.jsxParseElementName();
@@ -27036,21 +27090,21 @@ var require_lib4 = __commonJS({
       }
       jsxParseOpeningElementAfterName(node) {
         const attributes = [];
-        while (!this.match(56) && !this.match(139)) {
+        while (!this.match(56) && !this.match(141)) {
           attributes.push(this.jsxParseAttribute());
         }
         node.attributes = attributes;
         node.selfClosing = this.eat(56);
-        this.expect(139);
+        this.expect(141);
         return this.finishNode(node, "JSXOpeningElement");
       }
       jsxParseClosingElementAt(startLoc) {
         const node = this.startNodeAt(startLoc);
-        if (this.eat(139)) {
+        if (this.eat(141)) {
           return this.finishNode(node, "JSXClosingFragment");
         }
         node.name = this.jsxParseElementName();
-        this.expect(139);
+        this.expect(141);
         return this.finishNode(node, "JSXClosingElement");
       }
       jsxParseElementAt(startLoc) {
@@ -27062,7 +27116,7 @@ var require_lib4 = __commonJS({
           contents:
             for (; ; ) {
               switch (this.state.type) {
-                case 138:
+                case 140:
                   startLoc = this.state.startLoc;
                   this.next();
                   if (this.eat(56)) {
@@ -27071,7 +27125,7 @@ var require_lib4 = __commonJS({
                   }
                   children.push(this.jsxParseElementAt(startLoc));
                   break;
-                case 137:
+                case 139:
                   children.push(this.parseExprAtom());
                   break;
                 case 5: {
@@ -27132,12 +27186,12 @@ var require_lib4 = __commonJS({
         context[context.length - 1] = newContext;
       }
       parseExprAtom(refExpressionErrors) {
-        if (this.match(137)) {
+        if (this.match(139)) {
           return this.parseLiteral(this.state.value, "JSXText");
-        } else if (this.match(138)) {
+        } else if (this.match(140)) {
           return this.jsxParseElement();
         } else if (this.match(47) && this.input.charCodeAt(this.state.pos) !== 33) {
-          this.replaceToken(138);
+          this.replaceToken(140);
           return this.jsxParseElement();
         } else {
           return super.parseExprAtom(refExpressionErrors);
@@ -27159,7 +27213,7 @@ var require_lib4 = __commonJS({
           }
           if (code === 62) {
             ++this.state.pos;
-            return this.finishToken(139);
+            return this.finishToken(141);
           }
           if ((code === 34 || code === 39) && context === types.j_oTag) {
             return this.jsxReadString(code);
@@ -27167,18 +27221,18 @@ var require_lib4 = __commonJS({
         }
         if (code === 60 && this.state.canStartJSXElement && this.input.charCodeAt(this.state.pos + 1) !== 33) {
           ++this.state.pos;
-          return this.finishToken(138);
+          return this.finishToken(140);
         }
         return super.getTokenFromCode(code);
       }
       updateContext(prevType) {
         const { context, type } = this.state;
-        if (type === 56 && prevType === 138) {
+        if (type === 56 && prevType === 140) {
           context.splice(-2, 2, types.j_cTag);
           this.state.canStartJSXElement = false;
-        } else if (type === 138) {
+        } else if (type === 140) {
           context.push(types.j_oTag);
-        } else if (type === 139) {
+        } else if (type === 141) {
           const out = context[context.length - 1];
           if (out === types.j_oTag && prevType === 56 || out === types.j_cTag) {
             context.pop();
@@ -27230,8 +27284,8 @@ var require_lib4 = __commonJS({
           return true;
         }
         if (!allowShadow && len > 1) {
-          for (let i2 = 0; i2 < len - 1; i2++) {
-            if (this.importsStack[i2].has(name))
+          for (let i = 0; i < len - 1; i++) {
+            if (this.importsStack[i].has(name))
               return true;
           }
         }
@@ -27295,8 +27349,8 @@ var require_lib4 = __commonJS({
         if (this.hasImport(name))
           return;
         const len = this.scopeStack.length;
-        for (let i2 = len - 1; i2 >= 0; i2--) {
-          const scope = this.scopeStack[i2];
+        for (let i = len - 1; i >= 0; i--) {
+          const scope = this.scopeStack[i];
           if (scope.types.has(name) || scope.exportOnlyBindings.has(name))
             return;
         }
@@ -27304,15 +27358,15 @@ var require_lib4 = __commonJS({
       }
     }, "TypeScriptScopeHandler");
     var getOwn$1 = /* @__PURE__ */ __name((object, key) => Object.hasOwnProperty.call(object, key) && object[key], "getOwn$1");
-    function nonNull(x2) {
-      if (x2 == null) {
-        throw new Error(`Unexpected ${x2} value.`);
+    function nonNull(x) {
+      if (x == null) {
+        throw new Error(`Unexpected ${x} value.`);
       }
-      return x2;
+      return x;
     }
     __name(nonNull, "nonNull");
-    function assert(x2) {
-      if (!x2) {
+    function assert(x) {
+      if (!x) {
         throw new Error("Assert fail");
       }
     }
@@ -27322,7 +27376,7 @@ var require_lib4 = __commonJS({
       AbstractPropertyHasInitializer: ({ propertyName }) => `Property '${propertyName}' cannot have an initializer because it is marked abstract.`,
       AccesorCannotDeclareThisParameter: "'get' and 'set' accessors cannot declare 'this' parameters.",
       AccesorCannotHaveTypeParameters: "An accessor cannot have type parameters.",
-      CannotFindName: ({ name }) => `Cannot find name '${name}'.`,
+      AccessorCannotBeOptional: "An 'accessor' property cannot be declared optional.",
       ClassMethodHasDeclare: "Class methods cannot have the 'declare' modifier.",
       ClassMethodHasReadonly: "Class methods cannot have the 'readonly' modifier.",
       ConstInitiailizerMustBeStringOrNumericLiteralOrLiteralEnumReference: "A 'const' initializer in an ambient context must be a string or numeric literal or literal enum reference.",
@@ -27337,6 +27391,7 @@ var require_lib4 = __commonJS({
       EmptyTypeParameters: "Type parameter list cannot be empty.",
       ExpectedAmbientAfterExportDeclare: "'export declare' must be followed by an ambient declaration.",
       ImportAliasHasImportType: "An import alias can not use 'import type'.",
+      ImportReflectionHasImportType: "An `import module` declaration can not use `type` modifier",
       IncompatibleModifiers: ({ modifiers }) => `'${modifiers[0]}' modifier cannot be used with '${modifiers[1]}' modifier.`,
       IndexSignatureHasAbstract: "Index signatures cannot have the 'abstract' modifier.",
       IndexSignatureHasAccessibility: ({ modifier }) => `Index signatures cannot have an accessibility modifier ('${modifier}').`,
@@ -27422,7 +27477,7 @@ var require_lib4 = __commonJS({
         return tokenIsIdentifier(this.state.type);
       }
       tsTokenCanFollowModifier() {
-        return (this.match(0) || this.match(5) || this.match(55) || this.match(21) || this.match(134) || this.isLiteralPropertyName()) && !this.hasPrecedingLineBreak();
+        return (this.match(0) || this.match(5) || this.match(55) || this.match(21) || this.match(136) || this.isLiteralPropertyName()) && !this.hasPrecedingLineBreak();
       }
       tsNextTokenCanFollowModifier() {
         this.next();
@@ -27590,7 +27645,7 @@ var require_lib4 = __commonJS({
         const node = this.startNode();
         this.expect(83);
         this.expect(10);
-        if (!this.match(129)) {
+        if (!this.match(131)) {
           this.raise(TSErrors.UnsupportedImportTypeArgument, {
             at: this.state.startLoc
           });
@@ -27694,7 +27749,7 @@ var require_lib4 = __commonJS({
       }
       tsParseTypeParameters(parseModifiers) {
         const node = this.startNode();
-        if (this.match(47) || this.match(138)) {
+        if (this.match(47) || this.match(140)) {
           this.next();
         } else {
           this.unexpected();
@@ -27712,19 +27767,6 @@ var require_lib4 = __commonJS({
           this.addExtra(node, "trailingComma", refTrailingCommaPos.value);
         }
         return this.finishNode(node, "TSTypeParameterDeclaration");
-      }
-      tsTryNextParseConstantContext() {
-        if (this.lookahead().type !== 75)
-          return null;
-        this.next();
-        const typeReference = this.tsParseTypeReference();
-        if (typeReference.typeParameters) {
-          this.raise(TSErrors.CannotFindName, {
-            at: typeReference.typeName,
-            name: "const"
-          });
-        }
-        return typeReference;
       }
       tsFillSignature(returnToken, signature) {
         const returnTokenRequired = returnToken === 19;
@@ -27915,9 +27957,9 @@ var require_lib4 = __commonJS({
       tsIsStartOfMappedType() {
         this.next();
         if (this.eat(53)) {
-          return this.isContextual(118);
+          return this.isContextual(120);
         }
-        if (this.isContextual(118)) {
+        if (this.isContextual(120)) {
           this.next();
         }
         if (!this.match(0)) {
@@ -27942,8 +27984,8 @@ var require_lib4 = __commonJS({
         if (this.match(53)) {
           node.readonly = this.state.value;
           this.next();
-          this.expectContextual(118);
-        } else if (this.eatContextual(118)) {
+          this.expectContextual(120);
+        } else if (this.eatContextual(120)) {
           node.readonly = true;
         }
         this.expect(0);
@@ -28044,9 +28086,9 @@ var require_lib4 = __commonJS({
         const node = this.startNode();
         node.literal = (() => {
           switch (this.state.type) {
-            case 130:
+            case 132:
+            case 133:
             case 131:
-            case 129:
             case 85:
             case 86:
               return super.parseExprAtom();
@@ -28068,7 +28110,7 @@ var require_lib4 = __commonJS({
       }
       tsParseThisTypeOrThisTypePredicate() {
         const thisKeyword = this.tsParseThisTypeNode();
-        if (this.isContextual(113) && !this.hasPrecedingLineBreak()) {
+        if (this.isContextual(114) && !this.hasPrecedingLineBreak()) {
           return this.tsParseThisTypePredicate(thisKeyword);
         } else {
           return thisKeyword;
@@ -28076,9 +28118,9 @@ var require_lib4 = __commonJS({
       }
       tsParseNonArrayType() {
         switch (this.state.type) {
-          case 129:
-          case 130:
           case 131:
+          case 132:
+          case 133:
           case 85:
           case 86:
             return this.tsParseLiteralTypeNode();
@@ -28086,7 +28128,7 @@ var require_lib4 = __commonJS({
             if (this.state.value === "-") {
               const node = this.startNode();
               const nextToken = this.lookahead();
-              if (nextToken.type !== 130 && nextToken.type !== 131) {
+              if (nextToken.type !== 132 && nextToken.type !== 133) {
                 throw this.unexpected();
               }
               node.literal = this.parseMaybeUnary();
@@ -28165,7 +28207,7 @@ var require_lib4 = __commonJS({
       }
       tsParseInferType() {
         const node = this.startNode();
-        this.expectContextual(112);
+        this.expectContextual(113);
         const typeParameter = this.startNode();
         typeParameter.name = this.tsParseTypeParameterName();
         typeParameter.constraint = this.tsTryParse(() => this.tsParseConstraintForInferType());
@@ -28182,7 +28224,7 @@ var require_lib4 = __commonJS({
       }
       tsParseTypeOperatorOrHigher() {
         const isTypeOperator = tokenIsTSTypeOperator(this.state.type) && !this.state.containsEsc;
-        return isTypeOperator ? this.tsParseTypeOperator() : this.isContextual(112) ? this.tsParseInferType() : this.tsInAllowConditionalTypesContext(() => this.tsParseArrayTypeOrHigher());
+        return isTypeOperator ? this.tsParseTypeOperator() : this.isContextual(113) ? this.tsParseInferType() : this.tsInAllowConditionalTypesContext(() => this.tsParseArrayTypeOrHigher());
       }
       tsParseUnionOrIntersectionType(kind, parseConstituentType, operator) {
         const node = this.startNode();
@@ -28305,13 +28347,13 @@ var require_lib4 = __commonJS({
       }
       tsParseTypePredicatePrefix() {
         const id = this.parseIdentifier();
-        if (this.isContextual(113) && !this.hasPrecedingLineBreak()) {
+        if (this.isContextual(114) && !this.hasPrecedingLineBreak()) {
           this.next();
           return id;
         }
       }
       tsParseTypePredicateAsserts() {
-        if (this.state.type !== 106) {
+        if (this.state.type !== 107) {
           return false;
         }
         const containsEsc = this.state.containsEsc;
@@ -28351,7 +28393,7 @@ var require_lib4 = __commonJS({
         return this.finishNode(node, "TSConditionalType");
       }
       isAbstractConstructorSignature() {
-        return this.isContextual(120) && this.lookahead().type === 77;
+        return this.isContextual(122) && this.lookahead().type === 77;
       }
       tsParseNonConditionalType() {
         if (this.tsIsStartOfFunctionType()) {
@@ -28371,8 +28413,10 @@ var require_lib4 = __commonJS({
           });
         }
         const node = this.startNode();
-        const _const = this.tsTryNextParseConstantContext();
-        node.typeAnnotation = _const || this.tsNextThenParseType();
+        node.typeAnnotation = this.tsInType(() => {
+          this.next();
+          return this.match(75) ? this.tsParseTypeReference() : this.tsParseType();
+        });
         this.expect(48);
         node.expression = this.parseMaybeUnary();
         return this.finishNode(node, "TSTypeAssertion");
@@ -28398,7 +28442,7 @@ var require_lib4 = __commonJS({
       tsParseInterfaceDeclaration(node, properties = {}) {
         if (this.hasFollowingLineBreak())
           return null;
-        this.expectContextual(125);
+        this.expectContextual(127);
         if (properties.declare)
           node.declare = true;
         if (tokenIsIdentifier(this.state.type)) {
@@ -28425,7 +28469,7 @@ var require_lib4 = __commonJS({
         node.typeAnnotation = this.tsInType(() => {
           node.typeParameters = this.tsTryParseTypeParameters(this.tsParseInOutModifiers.bind(this));
           this.expect(29);
-          if (this.isContextual(111) && this.lookahead().type !== 16) {
+          if (this.isContextual(112) && this.lookahead().type !== 16) {
             const node1 = this.startNode();
             this.next();
             return this.finishNode(node1, "TSIntrinsicKeyword");
@@ -28490,7 +28534,7 @@ var require_lib4 = __commonJS({
       }
       tsParseEnumMember() {
         const node = this.startNode();
-        node.id = this.match(129) ? super.parseStringLiteral(this.state.value) : this.parseIdentifier(true);
+        node.id = this.match(131) ? super.parseStringLiteral(this.state.value) : this.parseIdentifier(true);
         if (this.eat(29)) {
           node.initializer = super.parseMaybeAssignAllowIn();
         }
@@ -28501,7 +28545,7 @@ var require_lib4 = __commonJS({
           node.const = true;
         if (properties.declare)
           node.declare = true;
-        this.expectContextual(122);
+        this.expectContextual(124);
         node.id = this.parseIdentifier();
         this.checkIdentifier(node.id, node.const ? BIND_TS_CONST_ENUM : BIND_TS_ENUM);
         this.expect(5);
@@ -28536,10 +28580,10 @@ var require_lib4 = __commonJS({
         return this.finishNode(node, "TSModuleDeclaration");
       }
       tsParseAmbientExternalModuleDeclaration(node) {
-        if (this.isContextual(109)) {
+        if (this.isContextual(110)) {
           node.global = true;
           node.id = this.parseIdentifier();
-        } else if (this.match(129)) {
+        } else if (this.match(131)) {
           node.id = super.parseStringLiteral(this.state.value);
         } else {
           this.unexpected();
@@ -28571,39 +28615,39 @@ var require_lib4 = __commonJS({
         return this.finishNode(node, "TSImportEqualsDeclaration");
       }
       tsIsExternalModuleReference() {
-        return this.isContextual(116) && this.lookaheadCharCode() === 40;
+        return this.isContextual(117) && this.lookaheadCharCode() === 40;
       }
       tsParseModuleReference() {
         return this.tsIsExternalModuleReference() ? this.tsParseExternalModuleReference() : this.tsParseEntityName(false);
       }
       tsParseExternalModuleReference() {
         const node = this.startNode();
-        this.expectContextual(116);
+        this.expectContextual(117);
         this.expect(10);
-        if (!this.match(129)) {
+        if (!this.match(131)) {
           throw this.unexpected();
         }
         node.expression = super.parseExprAtom();
         this.expect(11);
         return this.finishNode(node, "TSExternalModuleReference");
       }
-      tsLookAhead(f2) {
+      tsLookAhead(f) {
         const state = this.state.clone();
-        const res = f2();
+        const res = f();
         this.state = state;
         return res;
       }
-      tsTryParseAndCatch(f2) {
-        const result = this.tryParse((abort) => f2() || abort());
+      tsTryParseAndCatch(f) {
+        const result = this.tryParse((abort) => f() || abort());
         if (result.aborted || !result.node)
           return void 0;
         if (result.error)
           this.state = result.failState;
         return result.node;
       }
-      tsTryParse(f2) {
+      tsTryParse(f) {
         const state = this.state.clone();
-        const result = f2();
+        const result = f();
         if (result !== void 0 && result !== false) {
           return result;
         } else {
@@ -28624,18 +28668,18 @@ var require_lib4 = __commonJS({
         return this.tsInAmbientContext(() => {
           if (starttype === 68) {
             nany.declare = true;
-            return super.parseFunctionStatement(nany, false, true);
+            return super.parseFunctionStatement(nany, false, false);
           }
           if (starttype === 80) {
             nany.declare = true;
             return this.parseClass(nany, true, false);
           }
-          if (starttype === 122) {
+          if (starttype === 124) {
             return this.tsParseEnumDeclaration(nany, {
               declare: true
             });
           }
-          if (starttype === 109) {
+          if (starttype === 110) {
             return this.tsParseAmbientExternalModuleDeclaration(nany);
           }
           if (starttype === 75 || starttype === 74) {
@@ -28649,7 +28693,7 @@ var require_lib4 = __commonJS({
               declare: true
             });
           }
-          if (starttype === 125) {
+          if (starttype === 127) {
             const result = this.tsParseInterfaceDeclaration(nany, {
               declare: true
             });
@@ -28657,14 +28701,14 @@ var require_lib4 = __commonJS({
               return result;
           }
           if (tokenIsIdentifier(starttype)) {
-            return this.tsParseDeclaration(nany, this.state.value, true);
+            return this.tsParseDeclaration(nany, this.state.value, true, null);
           }
         });
       }
       tsTryParseExportDeclaration() {
-        return this.tsParseDeclaration(this.startNode(), this.state.value, true);
+        return this.tsParseDeclaration(this.startNode(), this.state.value, true, null);
       }
-      tsParseExpressionStatement(node, expr) {
+      tsParseExpressionStatement(node, expr, decorators) {
         switch (expr.name) {
           case "declare": {
             const declaration = this.tsTryParseDeclare(node);
@@ -28688,19 +28732,19 @@ var require_lib4 = __commonJS({
             }
             break;
           default:
-            return this.tsParseDeclaration(node, expr.name, false);
+            return this.tsParseDeclaration(node, expr.name, false, decorators);
         }
       }
-      tsParseDeclaration(node, value, next) {
+      tsParseDeclaration(node, value, next, decorators) {
         switch (value) {
           case "abstract":
             if (this.tsCheckLineTerminator(next) && (this.match(80) || tokenIsIdentifier(this.state.type))) {
-              return this.tsParseAbstractDeclaration(node);
+              return this.tsParseAbstractDeclaration(node, decorators);
             }
             break;
           case "module":
             if (this.tsCheckLineTerminator(next)) {
-              if (this.match(129)) {
+              if (this.match(131)) {
                 return this.tsParseAmbientExternalModuleDeclaration(node);
               } else if (tokenIsIdentifier(this.state.type)) {
                 return this.tsParseModuleOrNamespaceDeclaration(node);
@@ -28959,16 +29003,24 @@ var require_lib4 = __commonJS({
         }
       }
       parseExprOp(left, leftStartLoc, minPrec) {
-        if (tokenOperatorPrecedence(58) > minPrec && !this.hasPrecedingLineBreak() && this.isContextual(93)) {
+        let isSatisfies;
+        if (tokenOperatorPrecedence(58) > minPrec && !this.hasPrecedingLineBreak() && (this.isContextual(93) || (isSatisfies = this.isContextual(118)))) {
           const node = this.startNodeAt(leftStartLoc);
           node.expression = left;
-          const _const = this.tsTryNextParseConstantContext();
-          if (_const) {
-            node.typeAnnotation = _const;
-          } else {
-            node.typeAnnotation = this.tsNextThenParseType();
-          }
-          this.finishNode(node, "TSAsExpression");
+          node.typeAnnotation = this.tsInType(() => {
+            this.next();
+            if (this.match(75)) {
+              if (isSatisfies) {
+                this.raise(Errors.UnexpectedKeyword, {
+                  at: this.state.startLoc,
+                  keyword: "const"
+                });
+              }
+              return this.tsParseTypeReference();
+            }
+            return this.tsParseType();
+          });
+          this.finishNode(node, isSatisfies ? "TSSatisfiesExpression" : "TSAsExpression");
           this.reScan_lt_gt();
           return this.parseExprOp(node, leftStartLoc, minPrec);
         }
@@ -28979,13 +29031,21 @@ var require_lib4 = __commonJS({
           super.checkReservedWord(word, startLoc, checkKeywords, isBinding);
         }
       }
+      checkImportReflection(node) {
+        super.checkImportReflection(node);
+        if (node.module && node.importKind !== "value") {
+          this.raise(TSErrors.ImportReflectionHasImportType, {
+            at: node.specifiers[0].loc.start
+          });
+        }
+      }
       checkDuplicateExports() {
       }
       parseImport(node) {
         node.importKind = "value";
         if (tokenIsIdentifier(this.state.type) || this.match(55) || this.match(5)) {
           let ahead = this.lookahead();
-          if (this.isContextual(126) && ahead.type !== 12 && ahead.type !== 97 && ahead.type !== 29) {
+          if (this.isContextual(128) && ahead.type !== 12 && ahead.type !== 97 && ahead.type !== 29) {
             node.importKind = "type";
             this.next();
             ahead = this.lookahead();
@@ -29002,10 +29062,10 @@ var require_lib4 = __commonJS({
         }
         return importNode;
       }
-      parseExport(node) {
+      parseExport(node, decorators) {
         if (this.match(83)) {
           this.next();
-          if (this.isContextual(126) && this.lookaheadCharCode() !== 61) {
+          if (this.isContextual(128) && this.lookaheadCharCode() !== 61) {
             node.importKind = "type";
             this.next();
           } else {
@@ -29019,22 +29079,22 @@ var require_lib4 = __commonJS({
           return this.finishNode(assign, "TSExportAssignment");
         } else if (this.eatContextual(93)) {
           const decl = node;
-          this.expectContextual(124);
+          this.expectContextual(126);
           decl.id = this.parseIdentifier();
           this.semicolon();
           return this.finishNode(decl, "TSNamespaceExportDeclaration");
         } else {
-          if (this.isContextual(126) && this.lookahead().type === 5) {
+          if (this.isContextual(128) && this.lookahead().type === 5) {
             this.next();
             node.exportKind = "type";
           } else {
             node.exportKind = "value";
           }
-          return super.parseExport(node);
+          return super.parseExport(node, decorators);
         }
       }
       isAbstractClass() {
-        return this.isContextual(120) && this.lookahead().type === 80;
+        return this.isContextual(122) && this.lookahead().type === 80;
       }
       parseExportDefaultExpression() {
         if (this.isAbstractClass()) {
@@ -29043,7 +29103,7 @@ var require_lib4 = __commonJS({
           cls.abstract = true;
           return this.parseClass(cls, true, true);
         }
-        if (this.match(125)) {
+        if (this.match(127)) {
           const result = this.tsParseInterfaceDeclaration(this.startNode());
           if (result)
             return result;
@@ -29070,7 +29130,7 @@ var require_lib4 = __commonJS({
         }
         return declaration;
       }
-      parseStatementContent(context, topLevel) {
+      parseStatementContent(flags, decorators) {
         if (this.match(75) && this.isLookaheadContextual("enum")) {
           const node = this.startNode();
           this.expect(75);
@@ -29078,15 +29138,15 @@ var require_lib4 = __commonJS({
             const: true
           });
         }
-        if (this.isContextual(122)) {
+        if (this.isContextual(124)) {
           return this.tsParseEnumDeclaration(this.startNode());
         }
-        if (this.isContextual(125)) {
+        if (this.isContextual(127)) {
           const result = this.tsParseInterfaceDeclaration(this.startNode());
           if (result)
             return result;
         }
-        return super.parseStatementContent(context, topLevel);
+        return super.parseStatementContent(flags, decorators);
       }
       parseAccessModifier() {
         return this.tsParseModifier([
@@ -29203,9 +29263,9 @@ var require_lib4 = __commonJS({
           });
         }
       }
-      parseExpressionStatement(node, expr) {
-        const decl = expr.type === "Identifier" ? this.tsParseExpressionStatement(node, expr) : void 0;
-        return decl || super.parseExpressionStatement(node, expr);
+      parseExpressionStatement(node, expr, decorators) {
+        const decl = expr.type === "Identifier" ? this.tsParseExpressionStatement(node, expr, decorators) : void 0;
+        return decl || super.parseExpressionStatement(node, expr, decorators);
       }
       shouldParseExportDeclaration() {
         if (this.tsIsDeclarationStart())
@@ -29242,12 +29302,12 @@ var require_lib4 = __commonJS({
         return node;
       }
       parseExportDeclaration(node) {
-        if (!this.state.isAmbientContext && this.isContextual(121)) {
+        if (!this.state.isAmbientContext && this.isContextual(123)) {
           return this.tsInAmbientContext(() => this.parseExportDeclaration(node));
         }
         const startLoc = this.state.startLoc;
-        const isDeclare = this.eatContextual(121);
-        if (isDeclare && (this.isContextual(121) || !this.shouldParseExportDeclaration())) {
+        const isDeclare = this.eatContextual(123);
+        if (isDeclare && (this.isContextual(123) || !this.shouldParseExportDeclaration())) {
           throw this.raise(TSErrors.ExpectedAmbientAfterExportDeclare, {
             at: this.state.startLoc
           });
@@ -29266,7 +29326,7 @@ var require_lib4 = __commonJS({
         return declaration;
       }
       parseClassId(node, isStatement, optionalId, bindingType) {
-        if ((!isStatement || optionalId) && this.isContextual(110)) {
+        if ((!isStatement || optionalId) && this.isContextual(111)) {
           return;
         }
         super.parseClassId(node, isStatement, optionalId, node.declare ? BIND_TS_AMBIENT : BIND_CLASS);
@@ -29275,8 +29335,12 @@ var require_lib4 = __commonJS({
           node.typeParameters = typeParameters;
       }
       parseClassPropertyAnnotation(node) {
-        if (!node.optional && this.eat(35)) {
-          node.definite = true;
+        if (!node.optional) {
+          if (this.eat(35)) {
+            node.definite = true;
+          } else if (this.eat(17)) {
+            node.optional = true;
+          }
         }
         const type = this.tsTryParseTypeAnnotation();
         if (type)
@@ -29312,6 +29376,15 @@ var require_lib4 = __commonJS({
         }
         this.parseClassPropertyAnnotation(node);
         return super.parseClassPrivateProperty(node);
+      }
+      parseClassAccessorProperty(node) {
+        this.parseClassPropertyAnnotation(node);
+        if (node.optional) {
+          this.raise(TSErrors.AccessorCannotBeOptional, {
+            at: node
+          });
+        }
+        return super.parseClassAccessorProperty(node);
       }
       pushClassMethod(classBody, method, isGenerator, isAsync, isConstructor, allowsDirectSuper) {
         const typeParameters = this.tsTryParseTypeParameters();
@@ -29349,7 +29422,7 @@ var require_lib4 = __commonJS({
         if (node.superClass && (this.match(47) || this.match(51))) {
           node.superTypeParameters = this.tsParseTypeArgumentsInExpression();
         }
-        if (this.eatContextual(110)) {
+        if (this.eatContextual(111)) {
           node.implements = this.tsParseHeritageClause("implements");
         }
       }
@@ -29387,7 +29460,7 @@ var require_lib4 = __commonJS({
         let state;
         let jsx2;
         let typeCast;
-        if (this.hasPlugin("jsx") && (this.match(138) || this.match(47))) {
+        if (this.hasPlugin("jsx") && (this.match(140) || this.match(47))) {
           state = this.state.clone();
           jsx2 = this.tryParse(() => super.parseMaybeAssign(refExpressionErrors, afterLeftParse), state);
           if (!jsx2.error)
@@ -29514,10 +29587,11 @@ var require_lib4 = __commonJS({
             this.toAssignableParenthesizedExpression(node, isLHS);
             break;
           case "TSAsExpression":
+          case "TSSatisfiesExpression":
           case "TSNonNullExpression":
           case "TSTypeAssertion":
             if (isLHS) {
-              this.expressionScope.recordArrowParemeterBindingError(TSErrors.UnexpectedTypeCastInParameter, {
+              this.expressionScope.recordArrowParameterBindingError(TSErrors.UnexpectedTypeCastInParameter, {
                 at: node
               });
             } else {
@@ -29538,6 +29612,7 @@ var require_lib4 = __commonJS({
       toAssignableParenthesizedExpression(node, isLHS) {
         switch (node.expression.type) {
           case "TSAsExpression":
+          case "TSSatisfiesExpression":
           case "TSNonNullExpression":
           case "TSTypeAssertion":
           case "ParenthesizedExpression":
@@ -29550,6 +29625,7 @@ var require_lib4 = __commonJS({
       checkToRestConversion(node, allowPattern) {
         switch (node.type) {
           case "TSAsExpression":
+          case "TSSatisfiesExpression":
           case "TSTypeAssertion":
           case "TSNonNullExpression":
             this.checkToRestConversion(node.expression, false);
@@ -29564,6 +29640,10 @@ var require_lib4 = __commonJS({
           TSParameterProperty: "parameter",
           TSNonNullExpression: "expression",
           TSAsExpression: (binding !== BIND_NONE || !isUnparenthesizedInAssign) && [
+            "expression",
+            true
+          ],
+          TSSatisfiesExpression: (binding !== BIND_NONE || !isUnparenthesizedInAssign) && [
             "expression",
             true
           ],
@@ -29647,10 +29727,10 @@ var require_lib4 = __commonJS({
         return type;
       }
       toAssignableList(exprList, trailingCommaLoc, isLHS) {
-        for (let i2 = 0; i2 < exprList.length; i2++) {
-          const expr = exprList[i2];
+        for (let i = 0; i < exprList.length; i++) {
+          const expr = exprList[i];
           if ((expr == null ? void 0 : expr.type) === "TSTypeCastExpression") {
-            exprList[i2] = this.typeCastToParameter(expr);
+            exprList[i] = this.typeCastToParameter(expr);
           }
         }
         super.toAssignableList(exprList, trailingCommaLoc, isLHS);
@@ -29714,11 +29794,11 @@ var require_lib4 = __commonJS({
           this.state.inAbstractClass = oldInAbstractClass;
         }
       }
-      tsParseAbstractDeclaration(node) {
+      tsParseAbstractDeclaration(node, decorators) {
         if (this.match(80)) {
           node.abstract = true;
-          return this.parseClass(node, true, false);
-        } else if (this.isContextual(125)) {
+          return this.maybeTakeDecorators(decorators, this.parseClass(node, true, false));
+        } else if (this.isContextual(127)) {
           if (!this.hasFollowingLineBreak()) {
             node.abstract = true;
             this.raise(TSErrors.NonClassMethodPropertyHasAbstractModifer, {
@@ -29864,13 +29944,13 @@ var require_lib4 = __commonJS({
     });
     var placeholders = /* @__PURE__ */ __name((superClass) => /* @__PURE__ */ __name(class PlaceholdersParserMixin extends superClass {
       parsePlaceholder(expectedNode) {
-        if (this.match(140)) {
+        if (this.match(142)) {
           const node = this.startNode();
           this.next();
           this.assertNoSpace();
           node.name = super.parseIdentifier(true);
           this.assertNoSpace();
-          this.expect(140);
+          this.expect(142);
           return this.finishPlaceholder(node, expectedNode);
         }
       }
@@ -29881,7 +29961,7 @@ var require_lib4 = __commonJS({
       }
       getTokenFromCode(code) {
         if (code === 37 && this.input.charCodeAt(this.state.pos + 1) === 37) {
-          return this.finishOp(140, 2);
+          return this.finishOp(142, 2);
         }
         return super.getTokenFromCode(code);
       }
@@ -29909,17 +29989,12 @@ var require_lib4 = __commonJS({
           super.toAssignable(node, isLHS);
         }
       }
-      isLet(context) {
-        if (super.isLet(context)) {
+      chStartsBindingIdentifier(ch, pos) {
+        if (super.chStartsBindingIdentifier(ch, pos)) {
           return true;
         }
-        if (!this.isContextual(99)) {
-          return false;
-        }
-        if (context)
-          return false;
         const nextToken = this.lookahead();
-        if (nextToken.type === 140) {
+        if (nextToken.type === 142) {
           return true;
         }
         return false;
@@ -29937,7 +30012,7 @@ var require_lib4 = __commonJS({
           const stmt = node;
           stmt.label = this.finishPlaceholder(expr, "Identifier");
           this.next();
-          stmt.body = super.parseStatement("label");
+          stmt.body = super.parseStatementOrFunctionDeclaration(false);
           return this.finishNode(stmt, "LabeledStatement");
         }
         this.semicolon();
@@ -29953,11 +30028,10 @@ var require_lib4 = __commonJS({
       parseClass(node, isStatement, optionalId) {
         const type = isStatement ? "ClassDeclaration" : "ClassExpression";
         this.next();
-        this.takeDecorators(node);
         const oldStrict = this.state.strict;
         const placeholder = this.parsePlaceholder("Identifier");
         if (placeholder) {
-          if (this.match(81) || this.match(140) || this.match(5)) {
+          if (this.match(81) || this.match(142) || this.match(5)) {
             node.id = placeholder;
           } else if (optionalId || !isStatement) {
             node.id = null;
@@ -29975,10 +30049,10 @@ var require_lib4 = __commonJS({
         node.body = this.parsePlaceholder("ClassBody") || super.parseClassBody(!!node.superClass, oldStrict);
         return this.finishNode(node, type);
       }
-      parseExport(node) {
+      parseExport(node, decorators) {
         const placeholder = this.parsePlaceholder("Identifier");
         if (!placeholder)
-          return super.parseExport(node);
+          return super.parseExport(node, decorators);
         if (!this.isContextual(97) && !this.match(12)) {
           node.specifiers = [];
           node.source = null;
@@ -29991,13 +30065,13 @@ var require_lib4 = __commonJS({
         node.specifiers = [
           this.finishNode(specifier, "ExportDefaultSpecifier")
         ];
-        return super.parseExport(node);
+        return super.parseExport(node, decorators);
       }
       isExportDefaultSpecifier() {
         if (this.match(65)) {
           const next = this.nextTokenStart();
           if (this.isUnparsedContextual(next, "from")) {
-            if (this.input.startsWith(tokenLabelName(140), this.nextTokenStartSince(next + 4))) {
+            if (this.input.startsWith(tokenLabelName(142), this.nextTokenStartSince(next + 4))) {
               return true;
             }
           }
@@ -30080,11 +30154,11 @@ var require_lib4 = __commonJS({
       ] : expectedConfig;
       const expectedKeys = Object.keys(expectedOptions);
       const expectedOptionsIsEmpty = expectedKeys.length === 0;
-      return plugins.some((p2) => {
-        if (typeof p2 === "string") {
-          return expectedOptionsIsEmpty && p2 === expectedName;
+      return plugins.some((p) => {
+        if (typeof p === "string") {
+          return expectedOptionsIsEmpty && p === expectedName;
         } else {
-          const [pluginName, pluginOptions] = p2;
+          const [pluginName, pluginOptions] = p;
           if (pluginName !== expectedName) {
             return false;
           }
@@ -30152,7 +30226,7 @@ var require_lib4 = __commonJS({
       if (hasPlugin(plugins, "pipelineOperator")) {
         const proposal = getPluginOption(plugins, "pipelineOperator", "proposal");
         if (!PIPELINE_PROPOSALS.includes(proposal)) {
-          const proposalList = PIPELINE_PROPOSALS.map((p2) => `"${p2}"`).join(", ");
+          const proposalList = PIPELINE_PROPOSALS.map((p) => `"${p}"`).join(", ");
           throw new Error(`"pipelineOperator" requires "proposal" option whose value must be one of: ${proposalList}.`);
         }
         const tupleSyntaxIsHash = hasPlugin(plugins, [
@@ -30192,7 +30266,7 @@ var require_lib4 = __commonJS({
         }
       }
       if (hasPlugin(plugins, "recordAndTuple") && getPluginOption(plugins, "recordAndTuple", "syntaxType") != null && !RECORD_AND_TUPLE_SYNTAX_TYPES.includes(getPluginOption(plugins, "recordAndTuple", "syntaxType"))) {
-        throw new Error("The 'syntaxType' option of the 'recordAndTuple' plugin must be one of: " + RECORD_AND_TUPLE_SYNTAX_TYPES.map((p2) => `'${p2}'`).join(", "));
+        throw new Error("The 'syntaxType' option of the 'recordAndTuple' plugin must be one of: " + RECORD_AND_TUPLE_SYNTAX_TYPES.map((p) => `'${p}'`).join(", "));
       }
       if (hasPlugin(plugins, "asyncDoExpressions") && !hasPlugin(plugins, "doExpressions")) {
         const error = new Error("'asyncDoExpressions' requires 'doExpressions', please add 'doExpressions' to parser plugins.");
@@ -30248,7 +30322,7 @@ var require_lib4 = __commonJS({
           parenthesized = unwrapParenthesizedExpression(node);
           if (isLHS) {
             if (parenthesized.type === "Identifier") {
-              this.expressionScope.recordArrowParemeterBindingError(Errors.InvalidParenthesizedAssignment, {
+              this.expressionScope.recordArrowParameterBindingError(Errors.InvalidParenthesizedAssignment, {
                 at: node
               });
             } else if (parenthesized.type !== "MemberExpression") {
@@ -30271,10 +30345,10 @@ var require_lib4 = __commonJS({
             break;
           case "ObjectExpression":
             node.type = "ObjectPattern";
-            for (let i2 = 0, length = node.properties.length, last = length - 1; i2 < length; i2++) {
+            for (let i = 0, length = node.properties.length, last = length - 1; i < length; i++) {
               var _node$extra2;
-              const prop = node.properties[i2];
-              const isLast = i2 === last;
+              const prop = node.properties[i];
+              const isLast = i === last;
               this.toAssignableObjectExpressionProp(prop, isLast, isLHS);
               if (isLast && prop.type === "RestElement" && (_node$extra2 = node.extra) != null && _node$extra2.trailingCommaLoc) {
                 this.raise(Errors.RestTrailingComma, {
@@ -30334,8 +30408,8 @@ var require_lib4 = __commonJS({
       }
       toAssignableList(exprList, trailingCommaLoc, isLHS) {
         const end = exprList.length - 1;
-        for (let i2 = 0; i2 <= end; i2++) {
-          const elt = exprList[i2];
+        for (let i = 0; i <= end; i++) {
+          const elt = exprList[i];
           if (!elt)
             continue;
           if (elt.type === "SpreadElement") {
@@ -30347,7 +30421,7 @@ var require_lib4 = __commonJS({
             this.toAssignable(elt, isLHS);
           }
           if (elt.type === "RestElement") {
-            if (i2 < end) {
+            if (i < end) {
               this.raise(Errors.RestTrailingComma, {
                 at: elt
               });
@@ -30369,8 +30443,8 @@ var require_lib4 = __commonJS({
             return true;
           case "ObjectExpression": {
             const last = node.properties.length - 1;
-            return node.properties.every((prop, i2) => {
-              return prop.type !== "ObjectMethod" && (i2 === last || prop.type !== "SpreadElement") && this.isAssignable(prop);
+            return node.properties.every((prop, i) => {
+              return prop.type !== "ObjectMethod" && (i === last || prop.type !== "SpreadElement") && this.isAssignable(prop);
             });
           }
           case "ObjectProperty":
@@ -30471,7 +30545,7 @@ var require_lib4 = __commonJS({
         const { type, startLoc } = this.state;
         if (type === 21) {
           return this.parseBindingRestProperty(prop);
-        } else if (type === 134) {
+        } else if (type === 136) {
           this.expectPlugin("destructuringPrivate", startLoc);
           this.classScope.usePrivateName(this.state.value, startLoc);
           prop.key = this.parsePrivateName();
@@ -30664,7 +30738,7 @@ var require_lib4 = __commonJS({
         this.enterInitialScopes();
         this.nextToken();
         const expr = this.parseExpression();
-        if (!this.match(135)) {
+        if (!this.match(137)) {
           this.unexpected();
         }
         this.finalizeRemainingComments();
@@ -30709,7 +30783,7 @@ var require_lib4 = __commonJS({
       }
       parseMaybeAssign(refExpressionErrors, afterLeftParse) {
         const startLoc = this.state.startLoc;
-        if (this.isContextual(105)) {
+        if (this.isContextual(106)) {
           if (this.prodParam.hasYield) {
             let left = this.parseYield();
             if (afterLeftParse) {
@@ -30786,7 +30860,7 @@ var require_lib4 = __commonJS({
         return expr;
       }
       parseMaybeUnaryOrPrivate(refExpressionErrors) {
-        return this.match(134) ? this.parsePrivateName() : this.parseMaybeUnary(refExpressionErrors);
+        return this.match(136) ? this.parsePrivateName() : this.parseMaybeUnary(refExpressionErrors);
       }
       parseExprOps(refExpressionErrors) {
         const startLoc = this.state.startLoc;
@@ -30864,7 +30938,7 @@ var require_lib4 = __commonJS({
                 });
               case "smart":
                 return this.withTopicBindingContext(() => {
-                  if (this.prodParam.hasYield && this.isContextual(105)) {
+                  if (this.prodParam.hasYield && this.isContextual(106)) {
                     throw this.raise(Errors.PipeBodyIsTighter, {
                       at: this.state.startLoc
                     });
@@ -31043,7 +31117,7 @@ var require_lib4 = __commonJS({
         if (computed) {
           node.property = this.parseExpression();
           this.expect(3);
-        } else if (this.match(134)) {
+        } else if (this.match(136)) {
           if (base.type === "Super") {
             this.raise(Errors.SuperPrivateField, {
               at: startLoc
@@ -31199,6 +31273,7 @@ var require_lib4 = __commonJS({
       }
       parseExprAtom(refExpressionErrors) {
         let node;
+        let decorators = null;
         const { type } = this.state;
         switch (type) {
           case 79:
@@ -31227,13 +31302,13 @@ var require_lib4 = __commonJS({
             this.readRegexp();
             return this.parseRegExpLiteral(this.state.value);
           }
-          case 130:
-            return this.parseNumericLiteral(this.state.value);
-          case 131:
-            return this.parseBigIntLiteral(this.state.value);
           case 132:
+            return this.parseNumericLiteral(this.state.value);
+          case 133:
+            return this.parseBigIntLiteral(this.state.value);
+          case 134:
             return this.parseDecimalLiteral(this.state.value);
-          case 129:
+          case 131:
             return this.parseStringLiteral(this.state.value);
           case 84:
             return this.parseNullLiteral();
@@ -31262,11 +31337,9 @@ var require_lib4 = __commonJS({
           case 68:
             return this.parseFunctionOrFunctionSent();
           case 26:
-            this.parseDecorators();
+            decorators = this.parseDecorators();
           case 80:
-            node = this.startNode();
-            this.takeDecorators(node);
-            return this.parseClass(node, false);
+            return this.parseClass(this.maybeTakeDecorators(decorators, this.startNode()), false);
           case 77:
             return this.parseNewOrNewTarget();
           case 25:
@@ -31285,7 +31358,7 @@ var require_lib4 = __commonJS({
               });
             }
           }
-          case 134: {
+          case 136: {
             this.raise(Errors.PrivateInExpectedIn, {
               at: this.state.startLoc,
               identifierName: this.state.value
@@ -31327,7 +31400,7 @@ var require_lib4 = __commonJS({
           }
           default:
             if (tokenIsIdentifier(type)) {
-              if (this.isContextual(123) && this.lookaheadCharCode() === 123 && !this.hasFollowingLineBreak()) {
+              if (this.isContextual(125) && this.lookaheadCharCode() === 123 && !this.hasFollowingLineBreak()) {
                 return this.parseModuleExpression();
               }
               const canBeArrow1 = this.state.potentialArrowAt === this.state.start;
@@ -31338,7 +31411,7 @@ var require_lib4 = __commonJS({
                 if (type1 === 68) {
                   this.resetPreviousNodeTrailingComments(id);
                   this.next();
-                  return this.parseFunction(this.startNodeAtNode(id), void 0, true);
+                  return this.parseAsyncFunctionExpression(this.startNodeAtNode(id));
                 } else if (tokenIsIdentifier(type1)) {
                   if (this.lookaheadCharCode() === 61) {
                     return this.parseAsyncArrowUnaryFunction(this.startNodeAtNode(id));
@@ -31927,19 +32000,19 @@ var require_lib4 = __commonJS({
             key = this.parseIdentifier(true);
           } else {
             switch (type) {
-              case 130:
+              case 132:
                 key = this.parseNumericLiteral(value);
                 break;
-              case 129:
+              case 131:
                 key = this.parseStringLiteral(value);
                 break;
-              case 131:
+              case 133:
                 key = this.parseBigIntLiteral(value);
                 break;
-              case 132:
+              case 134:
                 key = this.parseDecimalLiteral(value);
                 break;
-              case 134: {
+              case 136: {
                 const privateKeyLoc = this.state.startLoc;
                 if (refExpressionErrors != null) {
                   if (refExpressionErrors.privateKeyLoc === null) {
@@ -31958,7 +32031,7 @@ var require_lib4 = __commonJS({
             }
           }
           prop.key = key;
-          if (type !== 134) {
+          if (type !== 136) {
             prop.computed = false;
           }
         }
@@ -31967,11 +32040,11 @@ var require_lib4 = __commonJS({
       initFunction(node, isAsync) {
         node.id = null;
         node.generator = false;
-        node.async = !!isAsync;
+        node.async = isAsync;
       }
       parseMethod(node, isGenerator, isAsync, isConstructor, allowDirectSuper, type, inClassScope = false) {
         this.initFunction(node, isAsync);
-        node.generator = !!isGenerator;
+        node.generator = isGenerator;
         const allowModifiers = isConstructor;
         this.scope.enter(SCOPE_FUNCTION | SCOPE_SUPER | (inClassScope ? SCOPE_CLASS : 0) | (allowDirectSuper ? SCOPE_DIRECT_SUPER : 0));
         this.prodParam.enter(functionFlags(isAsync, node.generator));
@@ -32054,8 +32127,8 @@ var require_lib4 = __commonJS({
         return node.type === "Identifier";
       }
       isSimpleParamList(params) {
-        for (let i2 = 0, len = params.length; i2 < len; i2++) {
-          if (!this.isSimpleParameter(params[i2]))
+        for (let i = 0, len = params.length; i < len; i++) {
+          if (!this.isSimpleParameter(params[i]))
             return false;
         }
         return true;
@@ -32143,7 +32216,7 @@ var require_lib4 = __commonJS({
         const tokenIsKeyword2 = tokenKeywordOrIdentifierIsKeyword(type);
         if (liberal) {
           if (tokenIsKeyword2) {
-            this.replaceToken(128);
+            this.replaceToken(130);
           }
         } else {
           this.checkReservedWord(name, startLoc, tokenIsKeyword2, false);
@@ -32238,7 +32311,7 @@ var require_lib4 = __commonJS({
         if (this.hasPrecedingLineBreak())
           return true;
         const { type } = this.state;
-        return type === 53 || type === 10 || type === 0 || tokenIsTemplate(type) || type === 133 || type === 56 || this.hasPlugin("v8intrinsic") && type === 54;
+        return type === 53 || type === 10 || type === 0 || tokenIsTemplate(type) || type === 101 && !this.state.containsEsc || type === 135 || type === 56 || this.hasPlugin("v8intrinsic") && type === 54;
       }
       parseYield() {
         const node = this.startNode();
@@ -32252,7 +32325,7 @@ var require_lib4 = __commonJS({
           delegating = this.eat(55);
           switch (this.state.type) {
             case 13:
-            case 135:
+            case 137:
             case 8:
             case 11:
             case 3:
@@ -32430,23 +32503,33 @@ var require_lib4 = __commonJS({
     var switchLabel = {
       kind: "switch"
     };
-    var FUNC_NO_FLAGS = 0;
-    var FUNC_STATEMENT = 1;
-    var FUNC_HANGING_STATEMENT = 2;
-    var FUNC_NULLABLE_ID = 4;
+    var ParseFunctionFlag = {
+      Expression: 0,
+      Declaration: 1,
+      HangingDeclaration: 2,
+      NullableId: 4,
+      Async: 8
+    };
+    var ParseStatementFlag = {
+      StatementOnly: 0,
+      AllowImportExport: 1,
+      AllowDeclaration: 2,
+      AllowFunctionDeclaration: 4,
+      AllowLabeledFunction: 8
+    };
     var loneSurrogate = /[\uD800-\uDFFF]/u;
     var keywordRelationalOperator = /in(?:stanceof)?/y;
     function babel7CompatTokens(tokens, input) {
-      for (let i2 = 0; i2 < tokens.length; i2++) {
-        const token = tokens[i2];
+      for (let i = 0; i < tokens.length; i++) {
+        const token = tokens[i];
         const { type } = token;
         if (typeof type === "number") {
           {
-            if (type === 134) {
+            if (type === 136) {
               const { loc, start, value, end } = token;
               const hashEndPos = start + 1;
               const hashEndLoc = createPositionWithColumnOffset(loc.start, 1);
-              tokens.splice(i2, 1, new Token({
+              tokens.splice(i, 1, new Token({
                 type: getExportedToken(27),
                 value: "#",
                 start,
@@ -32454,14 +32537,14 @@ var require_lib4 = __commonJS({
                 startLoc: loc.start,
                 endLoc: hashEndLoc
               }), new Token({
-                type: getExportedToken(128),
+                type: getExportedToken(130),
                 value,
                 start: hashEndPos,
                 end,
                 startLoc: hashEndLoc,
                 endLoc: loc.end
               }));
-              i2++;
+              i++;
               continue;
             }
             if (tokenIsTemplate(type)) {
@@ -32514,7 +32597,7 @@ var require_lib4 = __commonJS({
                   endLoc: loc1.end
                 });
               }
-              tokens.splice(i2, 1, startToken, new Token({
+              tokens.splice(i, 1, startToken, new Token({
                 type: getExportedToken(20),
                 value: templateValue,
                 start: backquoteEnd,
@@ -32522,7 +32605,7 @@ var require_lib4 = __commonJS({
                 startLoc: backquoteEndLoc,
                 endLoc: templateElementEndLoc
               }), endToken);
-              i2 += 2;
+              i += 2;
               continue;
             }
           }
@@ -32541,7 +32624,7 @@ var require_lib4 = __commonJS({
         }
         return this.finishNode(file, "File");
       }
-      parseProgram(program, end = 135, sourceType = this.options.sourceType) {
+      parseProgram(program, end = 137, sourceType = this.options.sourceType) {
         program.sourceType = sourceType;
         program.interpreter = this.parseInterpreterDirective();
         this.parseBlockBody(program, true, true, end);
@@ -32554,7 +32637,7 @@ var require_lib4 = __commonJS({
           }
         }
         let finishedProgram;
-        if (end === 135) {
+        if (end === 137) {
           finishedProgram = this.finishNode(program, "Program");
         } else {
           finishedProgram = this.finishNodeAt(program, "Program", createPositionWithColumnOffset(this.state.startLoc, -1));
@@ -32585,24 +32668,15 @@ var require_lib4 = __commonJS({
         this.next();
         return this.finishNode(node, "InterpreterDirective");
       }
-      isLet(context) {
+      isLet() {
         if (!this.isContextual(99)) {
           return false;
         }
-        return this.isLetKeyword(context);
+        return this.hasFollowingBindingAtom();
       }
-      isLetKeyword(context) {
-        const next = this.nextTokenStart();
-        const nextCh = this.codePointAtPos(next);
-        if (nextCh === 92 || nextCh === 91) {
-          return true;
-        }
-        if (context)
-          return false;
-        if (nextCh === 123)
-          return true;
-        if (isIdentifierStart(nextCh)) {
-          keywordRelationalOperator.lastIndex = next;
+      chStartsBindingIdentifier(ch, pos) {
+        if (isIdentifierStart(ch)) {
+          keywordRelationalOperator.lastIndex = pos;
           if (keywordRelationalOperator.test(this.input)) {
             const endCh = this.codePointAtPos(keywordRelationalOperator.lastIndex);
             if (!isIdentifierChar(endCh) && endCh !== 92) {
@@ -32610,23 +32684,59 @@ var require_lib4 = __commonJS({
             }
           }
           return true;
+        } else if (ch === 92) {
+          return true;
+        } else {
+          return false;
         }
-        return false;
       }
-      parseStatement(context, topLevel) {
+      chStartsBindingPattern(ch) {
+        return ch === 91 || ch === 123;
+      }
+      hasFollowingBindingAtom() {
+        const next = this.nextTokenStart();
+        const nextCh = this.codePointAtPos(next);
+        return this.chStartsBindingPattern(nextCh) || this.chStartsBindingIdentifier(nextCh, next);
+      }
+      hasFollowingBindingIdentifier() {
+        const next = this.nextTokenStart();
+        const nextCh = this.codePointAtPos(next);
+        return this.chStartsBindingIdentifier(nextCh, next);
+      }
+      startsUsingForOf() {
+        const lookahead = this.lookahead();
+        if (lookahead.type === 101 && !lookahead.containsEsc) {
+          return false;
+        } else {
+          this.expectPlugin("explicitResourceManagement");
+          return true;
+        }
+      }
+      parseModuleItem() {
+        return this.parseStatementLike(ParseStatementFlag.AllowImportExport | ParseStatementFlag.AllowDeclaration | ParseStatementFlag.AllowFunctionDeclaration | ParseStatementFlag.AllowLabeledFunction);
+      }
+      parseStatementListItem() {
+        return this.parseStatementLike(ParseStatementFlag.AllowDeclaration | ParseStatementFlag.AllowFunctionDeclaration | ParseStatementFlag.AllowLabeledFunction);
+      }
+      parseStatementOrFunctionDeclaration(disallowLabeledFunction) {
+        return this.parseStatementLike(ParseStatementFlag.AllowFunctionDeclaration | (disallowLabeledFunction ? 0 : ParseStatementFlag.AllowLabeledFunction));
+      }
+      parseStatement() {
+        return this.parseStatementLike(ParseStatementFlag.StatementOnly);
+      }
+      parseStatementLike(flags) {
+        let decorators = null;
         if (this.match(26)) {
-          this.parseDecorators(true);
+          decorators = this.parseDecorators(true);
         }
-        return this.parseStatementContent(context, topLevel);
+        return this.parseStatementContent(flags, decorators);
       }
-      parseStatementContent(context, topLevel) {
-        let starttype = this.state.type;
+      parseStatementContent(flags, decorators) {
+        const starttype = this.state.type;
         const node = this.startNode();
-        let kind;
-        if (this.isLet(context)) {
-          starttype = 74;
-          kind = "let";
-        }
+        const allowDeclaration = !!(flags & ParseStatementFlag.AllowDeclaration);
+        const allowFunctionDeclaration = !!(flags & ParseStatementFlag.AllowFunctionDeclaration);
+        const topLevel = flags & ParseStatementFlag.AllowImportExport;
         switch (starttype) {
           case 60:
             return this.parseBreakContinueStatement(node, true);
@@ -32635,28 +32745,28 @@ var require_lib4 = __commonJS({
           case 64:
             return this.parseDebuggerStatement(node);
           case 90:
-            return this.parseDoStatement(node);
+            return this.parseDoWhileStatement(node);
           case 91:
             return this.parseForStatement(node);
           case 68:
             if (this.lookaheadCharCode() === 46)
               break;
-            if (context) {
+            if (!allowDeclaration) {
               if (this.state.strict) {
                 this.raise(Errors.StrictFunction, {
                   at: this.state.startLoc
                 });
-              } else if (context !== "if" && context !== "label") {
+              } else if (!allowFunctionDeclaration) {
                 this.raise(Errors.SloppyFunction, {
                   at: this.state.startLoc
                 });
               }
             }
-            return this.parseFunctionStatement(node, false, !context);
+            return this.parseFunctionStatement(node, false, !allowDeclaration && allowFunctionDeclaration);
           case 80:
-            if (context)
+            if (!allowDeclaration)
               this.unexpected();
-            return this.parseClass(node, true);
+            return this.parseClass(this.maybeTakeDecorators(decorators, node), true);
           case 69:
             return this.parseIfStatement(node);
           case 70:
@@ -32667,15 +32777,46 @@ var require_lib4 = __commonJS({
             return this.parseThrowStatement(node);
           case 73:
             return this.parseTryStatement(node);
-          case 75:
-          case 74:
-            kind = kind || this.state.value;
-            if (context && kind !== "var") {
+          case 105:
+            if (this.hasFollowingLineBreak() || this.state.containsEsc || !this.hasFollowingBindingIdentifier()) {
+              break;
+            }
+            this.expectPlugin("explicitResourceManagement");
+            if (!this.scope.inModule && this.scope.inTopLevel) {
+              this.raise(Errors.UnexpectedUsingDeclaration, {
+                at: this.state.startLoc
+              });
+            } else if (!allowDeclaration) {
               this.raise(Errors.UnexpectedLexicalDeclaration, {
                 at: this.state.startLoc
               });
             }
+            return this.parseVarStatement(node, "using");
+          case 99: {
+            if (this.state.containsEsc) {
+              break;
+            }
+            const next = this.nextTokenStart();
+            const nextCh = this.codePointAtPos(next);
+            if (nextCh !== 91) {
+              if (!allowDeclaration && this.hasFollowingLineBreak())
+                break;
+              if (!this.chStartsBindingIdentifier(nextCh, next) && nextCh !== 123) {
+                break;
+              }
+            }
+          }
+          case 75: {
+            if (!allowDeclaration) {
+              this.raise(Errors.UnexpectedLexicalDeclaration, {
+                at: this.state.startLoc
+              });
+            }
+          }
+          case 74: {
+            const kind = this.state.value;
             return this.parseVarStatement(node, kind);
+          }
           case 92:
             return this.parseWhileStatement(node);
           case 76:
@@ -32704,7 +32845,7 @@ var require_lib4 = __commonJS({
                 this.sawUnambiguousESM = true;
               }
             } else {
-              result = this.parseExport(node);
+              result = this.parseExport(node, decorators);
               if (result.type === "ExportNamedDeclaration" && (!result.exportKind || result.exportKind === "value") || result.type === "ExportAllDeclaration" && (!result.exportKind || result.exportKind === "value") || result.type === "ExportDefaultDeclaration") {
                 this.sawUnambiguousESM = true;
               }
@@ -32714,22 +32855,22 @@ var require_lib4 = __commonJS({
           }
           default: {
             if (this.isAsyncFunction()) {
-              if (context) {
+              if (!allowDeclaration) {
                 this.raise(Errors.AsyncFunctionInSingleStatementContext, {
                   at: this.state.startLoc
                 });
               }
               this.next();
-              return this.parseFunctionStatement(node, true, !context);
+              return this.parseFunctionStatement(node, true, !allowDeclaration && allowFunctionDeclaration);
             }
           }
         }
         const maybeName = this.state.value;
         const expr = this.parseExpression();
         if (tokenIsIdentifier(starttype) && expr.type === "Identifier" && this.eat(14)) {
-          return this.parseLabeledStatement(node, maybeName, expr, context);
+          return this.parseLabeledStatement(node, maybeName, expr, flags);
         } else {
-          return this.parseExpressionStatement(node, expr);
+          return this.parseExpressionStatement(node, expr, decorators);
         }
       }
       assertModuleNodeAllowed(node) {
@@ -32739,28 +32880,33 @@ var require_lib4 = __commonJS({
           });
         }
       }
-      takeDecorators(node) {
-        const decorators = this.state.decoratorStack[this.state.decoratorStack.length - 1];
-        if (decorators.length) {
-          node.decorators = decorators;
-          this.resetStartLocationFromNode(node, decorators[0]);
-          this.state.decoratorStack[this.state.decoratorStack.length - 1] = [];
+      decoratorsEnabledBeforeExport() {
+        if (this.hasPlugin("decorators-legacy"))
+          return true;
+        return this.hasPlugin("decorators") && !!this.getPluginOption("decorators", "decoratorsBeforeExport");
+      }
+      maybeTakeDecorators(maybeDecorators, classNode, exportNode) {
+        if (maybeDecorators) {
+          classNode.decorators = maybeDecorators;
+          this.resetStartLocationFromNode(classNode, maybeDecorators[0]);
+          if (exportNode)
+            this.resetStartLocationFromNode(exportNode, classNode);
         }
+        return classNode;
       }
       canHaveLeadingDecorator() {
         return this.match(80);
       }
       parseDecorators(allowExport) {
-        const currentContextDecorators = this.state.decoratorStack[this.state.decoratorStack.length - 1];
-        while (this.match(26)) {
-          const decorator = this.parseDecorator();
-          currentContextDecorators.push(decorator);
-        }
+        const decorators = [];
+        do {
+          decorators.push(this.parseDecorator());
+        } while (this.match(26));
         if (this.match(82)) {
           if (!allowExport) {
             this.unexpected();
           }
-          if (this.hasPlugin("decorators") && !this.getPluginOption("decorators", "decoratorsBeforeExport")) {
+          if (!this.decoratorsEnabledBeforeExport()) {
             this.raise(Errors.DecoratorExportClass, {
               at: this.state.startLoc
             });
@@ -32770,6 +32916,7 @@ var require_lib4 = __commonJS({
             at: this.state.startLoc
           });
         }
+        return decorators;
       }
       parseDecorator() {
         this.expectOnePlugin([
@@ -32779,7 +32926,6 @@ var require_lib4 = __commonJS({
         const node = this.startNode();
         this.next();
         if (this.hasPlugin("decorators")) {
-          this.state.decoratorStack.push([]);
           const startLoc = this.state.startLoc;
           let expr;
           if (this.match(10)) {
@@ -32800,7 +32946,7 @@ var require_lib4 = __commonJS({
             while (this.eat(16)) {
               const node1 = this.startNodeAt(startLoc);
               node1.object = expr;
-              if (this.match(134)) {
+              if (this.match(136)) {
                 this.classScope.usePrivateName(this.state.value, this.state.startLoc);
                 node1.property = this.parsePrivateName();
               } else {
@@ -32811,7 +32957,6 @@ var require_lib4 = __commonJS({
             }
             node.expression = this.parseMaybeDecoratorArguments(expr);
           }
-          this.state.decoratorStack.pop();
         } else {
           node.expression = this.parseExprSubscripts();
         }
@@ -32839,9 +32984,9 @@ var require_lib4 = __commonJS({
         return this.finishNode(node, isBreak ? "BreakStatement" : "ContinueStatement");
       }
       verifyBreakContinue(node, isBreak) {
-        let i2;
-        for (i2 = 0; i2 < this.state.labels.length; ++i2) {
-          const lab = this.state.labels[i2];
+        let i;
+        for (i = 0; i < this.state.labels.length; ++i) {
+          const lab = this.state.labels[i];
           if (node.label == null || lab.name === node.label.name) {
             if (lab.kind != null && (isBreak || lab.kind === "loop"))
               break;
@@ -32849,7 +32994,7 @@ var require_lib4 = __commonJS({
               break;
           }
         }
-        if (i2 === this.state.labels.length) {
+        if (i === this.state.labels.length) {
           const type = isBreak ? "BreakStatement" : "ContinueStatement";
           this.raise(Errors.IllegalBreakContinue, {
             at: node,
@@ -32868,10 +33013,10 @@ var require_lib4 = __commonJS({
         this.expect(11);
         return val;
       }
-      parseDoStatement(node) {
+      parseDoWhileStatement(node) {
         this.next();
         this.state.labels.push(loopLabel);
-        node.body = this.withSmartMixTopicForbiddingContext(() => this.parseStatement("do"));
+        node.body = this.withSmartMixTopicForbiddingContext(() => this.parseStatement());
         this.state.labels.pop();
         this.expect(92);
         node.test = this.parseHeaderExpression();
@@ -32894,14 +33039,21 @@ var require_lib4 = __commonJS({
           return this.parseFor(node, null);
         }
         const startsWithLet = this.isContextual(99);
-        const isLet = startsWithLet && this.isLetKeyword();
-        if (this.match(74) || this.match(75) || isLet) {
+        const startsWithUsing = this.isContextual(105) && !this.hasFollowingLineBreak();
+        const isLetOrUsing = startsWithLet && this.hasFollowingBindingAtom() || startsWithUsing && this.hasFollowingBindingIdentifier() && this.startsUsingForOf();
+        if (this.match(74) || this.match(75) || isLetOrUsing) {
           const initNode = this.startNode();
-          const kind = isLet ? "let" : this.state.value;
+          const kind = this.state.value;
           this.next();
           this.parseVar(initNode, true, kind);
           const init = this.finishNode(initNode, "VariableDeclaration");
-          if ((this.match(58) || this.isContextual(101)) && init.declarations.length === 1) {
+          const isForIn = this.match(58);
+          if (isForIn && startsWithUsing) {
+            this.raise(Errors.ForInUsing, {
+              at: init
+            });
+          }
+          if ((isForIn || this.isContextual(101)) && init.declarations.length === 1) {
             return this.parseForIn(node, init, awaitAt);
           }
           if (awaitAt !== null) {
@@ -32943,15 +33095,15 @@ var require_lib4 = __commonJS({
         }
         return this.parseFor(node, init1);
       }
-      parseFunctionStatement(node, isAsync, declarationPosition) {
+      parseFunctionStatement(node, isAsync, isHangingDeclaration) {
         this.next();
-        return this.parseFunction(node, FUNC_STATEMENT | (declarationPosition ? 0 : FUNC_HANGING_STATEMENT), isAsync);
+        return this.parseFunction(node, ParseFunctionFlag.Declaration | (isHangingDeclaration ? ParseFunctionFlag.HangingDeclaration : 0) | (isAsync ? ParseFunctionFlag.Async : 0));
       }
       parseIfStatement(node) {
         this.next();
         node.test = this.parseHeaderExpression();
-        node.consequent = this.parseStatement("if");
-        node.alternate = this.eat(66) ? this.parseStatement("if") : null;
+        node.consequent = this.parseStatementOrFunctionDeclaration(true);
+        node.alternate = this.eat(66) ? this.parseStatementOrFunctionDeclaration(true) : null;
         return this.finishNode(node, "IfStatement");
       }
       parseReturnStatement(node) {
@@ -32999,7 +33151,7 @@ var require_lib4 = __commonJS({
             this.expect(14);
           } else {
             if (cur) {
-              cur.consequent.push(this.parseStatement(null));
+              cur.consequent.push(this.parseStatementListItem());
             } else {
               this.unexpected();
             }
@@ -33073,7 +33225,7 @@ var require_lib4 = __commonJS({
         this.next();
         node.test = this.parseHeaderExpression();
         this.state.labels.push(loopLabel);
-        node.body = this.withSmartMixTopicForbiddingContext(() => this.parseStatement("while"));
+        node.body = this.withSmartMixTopicForbiddingContext(() => this.parseStatement());
         this.state.labels.pop();
         return this.finishNode(node, "WhileStatement");
       }
@@ -33085,14 +33237,14 @@ var require_lib4 = __commonJS({
         }
         this.next();
         node.object = this.parseHeaderExpression();
-        node.body = this.withSmartMixTopicForbiddingContext(() => this.parseStatement("with"));
+        node.body = this.withSmartMixTopicForbiddingContext(() => this.parseStatement());
         return this.finishNode(node, "WithStatement");
       }
       parseEmptyStatement(node) {
         this.next();
         return this.finishNode(node, "EmptyStatement");
       }
-      parseLabeledStatement(node, maybeName, expr, context) {
+      parseLabeledStatement(node, maybeName, expr, flags) {
         for (const label of this.state.labels) {
           if (label.name === maybeName) {
             this.raise(Errors.LabelRedeclaration, {
@@ -33102,8 +33254,8 @@ var require_lib4 = __commonJS({
           }
         }
         const kind = tokenIsLoop(this.state.type) ? "loop" : this.match(71) ? "switch" : null;
-        for (let i2 = this.state.labels.length - 1; i2 >= 0; i2--) {
-          const label1 = this.state.labels[i2];
+        for (let i = this.state.labels.length - 1; i >= 0; i--) {
+          const label1 = this.state.labels[i];
           if (label1.statementStart === node.start) {
             label1.statementStart = this.state.start;
             label1.kind = kind;
@@ -33116,12 +33268,12 @@ var require_lib4 = __commonJS({
           kind,
           statementStart: this.state.start
         });
-        node.body = this.parseStatement(context ? context.indexOf("label") === -1 ? context + "label" : context : "label");
+        node.body = flags & ParseStatementFlag.AllowLabeledFunction ? this.parseStatementOrFunctionDeclaration(false) : this.parseStatement();
         this.state.labels.pop();
         node.label = expr;
         return this.finishNode(node, "LabeledStatement");
       }
-      parseExpressionStatement(node, expr) {
+      parseExpressionStatement(node, expr, decorators) {
         node.expression = expr;
         this.semicolon();
         return this.finishNode(node, "ExpressionStatement");
@@ -33154,7 +33306,7 @@ var require_lib4 = __commonJS({
         let hasStrictModeDirective = false;
         let parsedNonDirective = false;
         while (!this.match(end)) {
-          const stmt = this.parseStatement(null, topLevel);
+          const stmt = topLevel ? this.parseModuleItem() : this.parseStatementListItem();
           if (directives && !parsedNonDirective) {
             if (this.isValidDirective(stmt)) {
               const directive = this.stmtToDirective(stmt);
@@ -33185,7 +33337,7 @@ var require_lib4 = __commonJS({
         this.semicolon(false);
         node.update = this.match(11) ? null : this.parseExpression();
         this.expect(11);
-        node.body = this.withSmartMixTopicForbiddingContext(() => this.parseStatement("for"));
+        node.body = this.withSmartMixTopicForbiddingContext(() => this.parseStatement());
         this.scope.exit();
         this.state.labels.pop();
         return this.finishNode(node, "ForStatement");
@@ -33216,7 +33368,7 @@ var require_lib4 = __commonJS({
         node.left = init;
         node.right = isForIn ? this.parseExpression() : this.parseMaybeAssignAllowIn();
         this.expect(11);
-        node.body = this.withSmartMixTopicForbiddingContext(() => this.parseStatement("for"));
+        node.body = this.withSmartMixTopicForbiddingContext(() => this.parseStatement());
         this.scope.exit();
         this.state.labels.pop();
         return this.finishNode(node, isForIn ? "ForInStatement" : "ForOfStatement");
@@ -33248,42 +33400,50 @@ var require_lib4 = __commonJS({
         return node;
       }
       parseVarId(decl, kind) {
-        decl.id = this.parseBindingAtom();
-        this.checkLVal(decl.id, {
+        const id = this.parseBindingAtom();
+        this.checkLVal(id, {
           in: {
             type: "VariableDeclarator"
           },
           binding: kind === "var" ? BIND_VAR : BIND_LEXICAL
         });
+        decl.id = id;
       }
-      parseFunction(node, statement = FUNC_NO_FLAGS, isAsync = false) {
-        const isStatement = statement & FUNC_STATEMENT;
-        const isHangingStatement = statement & FUNC_HANGING_STATEMENT;
-        const requireId = !!isStatement && !(statement & FUNC_NULLABLE_ID);
+      parseAsyncFunctionExpression(node) {
+        return this.parseFunction(node, ParseFunctionFlag.Async);
+      }
+      parseFunction(node, flags = ParseFunctionFlag.Expression) {
+        const hangingDeclaration = flags & ParseFunctionFlag.HangingDeclaration;
+        const isDeclaration = !!(flags & ParseFunctionFlag.Declaration);
+        const requireId = isDeclaration && !(flags & ParseFunctionFlag.NullableId);
+        const isAsync = !!(flags & ParseFunctionFlag.Async);
         this.initFunction(node, isAsync);
-        if (this.match(55) && isHangingStatement) {
-          this.raise(Errors.GeneratorInSingleStatementContext, {
-            at: this.state.startLoc
-          });
+        if (this.match(55)) {
+          if (hangingDeclaration) {
+            this.raise(Errors.GeneratorInSingleStatementContext, {
+              at: this.state.startLoc
+            });
+          }
+          this.next();
+          node.generator = true;
         }
-        node.generator = this.eat(55);
-        if (isStatement) {
+        if (isDeclaration) {
           node.id = this.parseFunctionId(requireId);
         }
         const oldMaybeInArrowParameters = this.state.maybeInArrowParameters;
         this.state.maybeInArrowParameters = false;
         this.scope.enter(SCOPE_FUNCTION);
         this.prodParam.enter(functionFlags(isAsync, node.generator));
-        if (!isStatement) {
+        if (!isDeclaration) {
           node.id = this.parseFunctionId();
         }
         this.parseFunctionParams(node, false);
         this.withSmartMixTopicForbiddingContext(() => {
-          this.parseFunctionBodyAndFinish(node, isStatement ? "FunctionDeclaration" : "FunctionExpression");
+          this.parseFunctionBodyAndFinish(node, isDeclaration ? "FunctionDeclaration" : "FunctionExpression");
         });
         this.prodParam.exit();
         this.scope.exit();
-        if (isStatement && !isHangingStatement) {
+        if (isDeclaration && !hangingDeclaration) {
           this.registerFunctionStatementId(node);
         }
         this.state.maybeInArrowParameters = oldMaybeInArrowParameters;
@@ -33305,7 +33465,6 @@ var require_lib4 = __commonJS({
       }
       parseClass(node, isStatement, optionalId) {
         this.next();
-        this.takeDecorators(node);
         const oldStrict = this.state.strict;
         this.state.strict = true;
         this.parseClassId(node, isStatement, optionalId);
@@ -33416,7 +33575,7 @@ var require_lib4 = __commonJS({
         this.parsePropertyNamePrefixOperator(member);
         if (this.eat(55)) {
           method.kind = "method";
-          const isPrivateName = this.match(134);
+          const isPrivateName = this.match(136);
           this.parseClassElementName(method);
           if (isPrivateName) {
             this.pushClassPrivateMethod(classBody, privateMethod, true, false);
@@ -33431,7 +33590,7 @@ var require_lib4 = __commonJS({
           return;
         }
         const isContextual = tokenIsIdentifier(this.state.type) && !this.state.containsEsc;
-        const isPrivate = this.match(134);
+        const isPrivate = this.match(136);
         const key = this.parseClassElementName(member);
         const maybeQuestionTokenStartLoc = this.state.startLoc;
         this.parsePostMemberNameModifiers(publicMember);
@@ -33472,7 +33631,7 @@ var require_lib4 = __commonJS({
             this.unexpected(maybeQuestionTokenStartLoc);
           }
           method.kind = "method";
-          const isPrivate1 = this.match(134);
+          const isPrivate1 = this.match(136);
           this.parseClassElementName(method);
           this.parsePostMemberNameModifiers(publicMember);
           if (isPrivate1) {
@@ -33488,7 +33647,7 @@ var require_lib4 = __commonJS({
         } else if (isContextual && (key.name === "get" || key.name === "set") && !(this.match(55) && this.isLineTerminator())) {
           this.resetPreviousNodeTrailingComments(key);
           method.kind = key.name;
-          const isPrivate2 = this.match(134);
+          const isPrivate2 = this.match(136);
           this.parseClassElementName(publicMethod);
           if (isPrivate2) {
             this.pushClassPrivateMethod(classBody, privateMethod, false, false);
@@ -33504,7 +33663,7 @@ var require_lib4 = __commonJS({
         } else if (isContextual && key.name === "accessor" && !this.isLineTerminator()) {
           this.expectPlugin("decoratorAutoAccessors");
           this.resetPreviousNodeTrailingComments(key);
-          const isPrivate3 = this.match(134);
+          const isPrivate3 = this.match(136);
           this.parseClassElementName(publicProp);
           this.pushClassAccessorProperty(classBody, accessorProp, isPrivate3);
         } else if (this.isLineTerminator()) {
@@ -33519,12 +33678,12 @@ var require_lib4 = __commonJS({
       }
       parseClassElementName(member) {
         const { type, value } = this.state;
-        if ((type === 128 || type === 129) && member.static && value === "prototype") {
+        if ((type === 130 || type === 131) && member.static && value === "prototype") {
           this.raise(Errors.StaticPrototype, {
             at: this.state.startLoc
           });
         }
-        if (type === 134) {
+        if (type === 136) {
           if (value === "constructor") {
             this.raise(Errors.ConstructorClassPrivateField, {
               at: this.state.startLoc
@@ -33639,7 +33798,7 @@ var require_lib4 = __commonJS({
       parseClassSuper(node) {
         node.superClass = this.eat(81) ? this.parseExprSubscripts() : null;
       }
-      parseExport(node) {
+      parseExport(node, decorators) {
         const hasDefault = this.maybeParseExportDefaultSpecifier(node);
         const parseAfterDefault = !hasDefault || this.eat(12);
         const hasStar = parseAfterDefault && this.eatExportStar(node);
@@ -33649,6 +33808,11 @@ var require_lib4 = __commonJS({
         if (hasStar && !hasNamespace) {
           if (hasDefault)
             this.unexpected();
+          if (decorators) {
+            throw this.raise(Errors.UnsupportedDecoratorExport, {
+              at: node
+            });
+          }
           this.parseExportFrom(node, true);
           return this.finishNode(node, "ExportAllDeclaration");
         }
@@ -33659,18 +33823,41 @@ var require_lib4 = __commonJS({
         let hasDeclaration;
         if (isFromRequired || hasSpecifiers) {
           hasDeclaration = false;
+          if (decorators) {
+            throw this.raise(Errors.UnsupportedDecoratorExport, {
+              at: node
+            });
+          }
           this.parseExportFrom(node, isFromRequired);
         } else {
           hasDeclaration = this.maybeParseExportDeclaration(node);
         }
         if (isFromRequired || hasSpecifiers || hasDeclaration) {
-          this.checkExport(node, true, false, !!node.source);
-          return this.finishNode(node, "ExportNamedDeclaration");
+          var _node2$declaration;
+          const node2 = node;
+          this.checkExport(node2, true, false, !!node2.source);
+          if (((_node2$declaration = node2.declaration) == null ? void 0 : _node2$declaration.type) === "ClassDeclaration") {
+            this.maybeTakeDecorators(decorators, node2.declaration, node2);
+          } else if (decorators) {
+            throw this.raise(Errors.UnsupportedDecoratorExport, {
+              at: node
+            });
+          }
+          return this.finishNode(node2, "ExportNamedDeclaration");
         }
         if (this.eat(65)) {
-          node.declaration = this.parseExportDefaultExpression();
-          this.checkExport(node, true, true);
-          return this.finishNode(node, "ExportDefaultDeclaration");
+          const node21 = node;
+          const decl = this.parseExportDefaultExpression();
+          node21.declaration = decl;
+          if (decl.type === "ClassDeclaration") {
+            this.maybeTakeDecorators(decorators, decl, node21);
+          } else if (decorators) {
+            throw this.raise(Errors.UnsupportedDecoratorExport, {
+              at: node
+            });
+          }
+          this.checkExport(node21, true, true);
+          return this.finishNode(node21, "ExportDefaultDeclaration");
         }
         throw this.unexpected(null, 5);
       }
@@ -33736,13 +33923,13 @@ var require_lib4 = __commonJS({
       }
       parseExportDefaultExpression() {
         const expr = this.startNode();
-        const isAsync = this.isAsyncFunction();
-        if (this.match(68) || isAsync) {
+        if (this.match(68)) {
           this.next();
-          if (isAsync) {
-            this.next();
-          }
-          return this.parseFunction(expr, FUNC_STATEMENT | FUNC_NULLABLE_ID, isAsync);
+          return this.parseFunction(expr, ParseFunctionFlag.Declaration | ParseFunctionFlag.NullableId);
+        } else if (this.isAsyncFunction()) {
+          this.next();
+          this.next();
+          return this.parseFunction(expr, ParseFunctionFlag.Declaration | ParseFunctionFlag.NullableId | ParseFunctionFlag.Async);
         }
         if (this.match(80)) {
           return this.parseClass(expr, true, true);
@@ -33753,8 +33940,7 @@ var require_lib4 = __commonJS({
               at: this.state.startLoc
             });
           }
-          this.parseDecorators(false);
-          return this.parseClass(expr, true, true);
+          return this.parseClass(this.maybeTakeDecorators(this.parseDecorators(false), this.startNode()), true, true);
         }
         if (this.match(75) || this.match(74) || this.isLet()) {
           throw this.raise(Errors.UnsupportedDefaultExport, {
@@ -33766,7 +33952,11 @@ var require_lib4 = __commonJS({
         return res;
       }
       parseExportDeclaration(node) {
-        return this.parseStatement(null);
+        if (this.match(80)) {
+          const node1 = this.parseClass(this.startNode(), true, false);
+          return node1;
+        }
+        return this.parseStatementListItem();
       }
       isExportDefaultSpecifier() {
         const { type } = this.state;
@@ -33774,7 +33964,7 @@ var require_lib4 = __commonJS({
           if (type === 95 && !this.state.containsEsc || type === 99) {
             return false;
           }
-          if ((type === 126 || type === 125) && !this.state.containsEsc) {
+          if ((type === 128 || type === 127) && !this.state.containsEsc) {
             const { type: nextType } = this.lookahead();
             if (tokenIsIdentifier(nextType) && nextType !== 97 || nextType === 5) {
               this.expectOnePlugin([
@@ -33875,12 +34065,6 @@ var require_lib4 = __commonJS({
             }
           }
         }
-        const currentContextDecorators = this.state.decoratorStack[this.state.decoratorStack.length - 1];
-        if (currentContextDecorators.length) {
-          throw this.raise(Errors.UnsupportedDecoratorExport, {
-            at: node
-          });
-        }
       }
       checkDeclaration(node) {
         if (node.type === "Identifier") {
@@ -33930,8 +34114,8 @@ var require_lib4 = __commonJS({
             if (this.eat(8))
               break;
           }
-          const isMaybeTypeOnly = this.isContextual(126);
-          const isString = this.match(129);
+          const isMaybeTypeOnly = this.isContextual(128);
+          const isString = this.match(131);
           const node = this.startNode();
           node.local = this.parseModuleExportName();
           nodes.push(this.parseExportSpecifier(node, isString, isInTypeExport, isMaybeTypeOnly));
@@ -33949,7 +34133,7 @@ var require_lib4 = __commonJS({
         return this.finishNode(node, "ExportSpecifier");
       }
       parseModuleExportName() {
-        if (this.match(129)) {
+        if (this.match(131)) {
           const result = this.parseStringLiteral(this.state.value);
           const surrogate = result.value.match(loneSurrogate);
           if (surrogate) {
@@ -33969,6 +34153,21 @@ var require_lib4 = __commonJS({
           });
         }
         return false;
+      }
+      checkImportReflection(node) {
+        if (node.module) {
+          var _node$assertions;
+          if (node.specifiers.length !== 1 || node.specifiers[0].type !== "ImportDefaultSpecifier") {
+            this.raise(Errors.ImportReflectionNotBinding, {
+              at: node.specifiers[0].loc.start
+            });
+          }
+          if (((_node$assertions = node.assertions) == null ? void 0 : _node$assertions.length) > 0) {
+            this.raise(Errors.ImportReflectionHasAssertion, {
+              at: node.specifiers[0].loc.start
+            });
+          }
+        }
       }
       checkJSONModuleImport(node) {
         if (this.isJSONModuleImport(node) && node.type !== "ExportAllDeclaration") {
@@ -33993,9 +34192,36 @@ var require_lib4 = __commonJS({
           }
         }
       }
+      parseMaybeImportReflection(node) {
+        let isImportReflection = false;
+        if (this.isContextual(125)) {
+          const lookahead = this.lookahead();
+          const nextType = lookahead.type;
+          if (tokenIsIdentifier(nextType)) {
+            if (nextType !== 97) {
+              isImportReflection = true;
+            } else {
+              const nextNextTokenFirstChar = this.input.charCodeAt(this.nextTokenStartSince(lookahead.end));
+              if (nextNextTokenFirstChar === 102) {
+                isImportReflection = true;
+              }
+            }
+          } else if (nextType !== 12) {
+            isImportReflection = true;
+          }
+        }
+        if (isImportReflection) {
+          this.expectPlugin("importReflection");
+          this.next();
+          node.module = true;
+        } else if (this.hasPlugin("importReflection")) {
+          node.module = false;
+        }
+      }
       parseImport(node) {
         node.specifiers = [];
-        if (!this.match(129)) {
+        if (!this.match(131)) {
+          this.parseMaybeImportReflection(node);
           const hasDefault = this.maybeParseDefaultImportSpecifier(node);
           const parseNext = !hasDefault || this.eat(12);
           const hasStar = parseNext && this.maybeParseStarImportSpecifier(node);
@@ -34013,12 +34239,13 @@ var require_lib4 = __commonJS({
             node.attributes = attributes;
           }
         }
+        this.checkImportReflection(node);
         this.checkJSONModuleImport(node);
         this.semicolon();
         return this.finishNode(node, "ImportDeclaration");
       }
       parseImportSource() {
-        if (!this.match(129))
+        if (!this.match(131))
           this.unexpected();
         return this.parseExprAtom();
       }
@@ -34052,13 +34279,13 @@ var require_lib4 = __commonJS({
             });
           }
           attrNames.add(keyName);
-          if (this.match(129)) {
+          if (this.match(131)) {
             node.key = this.parseStringLiteral(keyName);
           } else {
             node.key = this.parseIdentifier(true);
           }
           this.expect(14);
-          if (!this.match(129)) {
+          if (!this.match(131)) {
             throw this.raise(Errors.ModuleAttributeInvalidValue, {
               at: this.state.startLoc
             });
@@ -34095,7 +34322,7 @@ var require_lib4 = __commonJS({
           }
           attributes.add(node.key.name);
           this.expect(14);
-          if (!this.match(129)) {
+          if (!this.match(131)) {
             throw this.raise(Errors.ModuleAttributeInvalidValue, {
               at: this.state.startLoc
             });
@@ -34154,8 +34381,8 @@ var require_lib4 = __commonJS({
               break;
           }
           const specifier = this.startNode();
-          const importedIsString = this.match(129);
-          const isMaybeTypeOnly = this.isContextual(126);
+          const importedIsString = this.match(131);
+          const isMaybeTypeOnly = this.isContextual(128);
           specifier.imported = this.parseModuleExportName();
           const importSpecifier = this.parseImportSpecifier(specifier, importedIsString, node.importKind === "type" || node.importKind === "typeof", isMaybeTypeOnly, void 0);
           node.specifiers.push(importSpecifier);
@@ -35216,22 +35443,22 @@ var require_conversions = __commonJS({
     var model;
     convert.rgb.hsl = function(rgb) {
       var r = rgb[0] / 255;
-      var g2 = rgb[1] / 255;
-      var b2 = rgb[2] / 255;
-      var min = Math.min(r, g2, b2);
-      var max = Math.max(r, g2, b2);
+      var g = rgb[1] / 255;
+      var b = rgb[2] / 255;
+      var min = Math.min(r, g, b);
+      var max = Math.max(r, g, b);
       var delta = max - min;
       var h;
-      var s2;
+      var s;
       var l;
       if (max === min) {
         h = 0;
       } else if (r === max) {
-        h = (g2 - b2) / delta;
-      } else if (g2 === max) {
-        h = 2 + (b2 - r) / delta;
-      } else if (b2 === max) {
-        h = 4 + (r - g2) / delta;
+        h = (g - b) / delta;
+      } else if (g === max) {
+        h = 2 + (b - r) / delta;
+      } else if (b === max) {
+        h = 4 + (r - g) / delta;
       }
       h = Math.min(h * 60, 360);
       if (h < 0) {
@@ -35239,15 +35466,15 @@ var require_conversions = __commonJS({
       }
       l = (min + max) / 2;
       if (max === min) {
-        s2 = 0;
+        s = 0;
       } else if (l <= 0.5) {
-        s2 = delta / (max + min);
+        s = delta / (max + min);
       } else {
-        s2 = delta / (2 - max - min);
+        s = delta / (2 - max - min);
       }
       return [
         h,
-        s2 * 100,
+        s * 100,
         l * 100
       ];
     };
@@ -35256,27 +35483,27 @@ var require_conversions = __commonJS({
       var gdif;
       var bdif;
       var h;
-      var s2;
+      var s;
       var r = rgb[0] / 255;
-      var g2 = rgb[1] / 255;
-      var b2 = rgb[2] / 255;
-      var v = Math.max(r, g2, b2);
-      var diff = v - Math.min(r, g2, b2);
-      var diffc = /* @__PURE__ */ __name(function(c2) {
-        return (v - c2) / 6 / diff + 1 / 2;
+      var g = rgb[1] / 255;
+      var b = rgb[2] / 255;
+      var v = Math.max(r, g, b);
+      var diff = v - Math.min(r, g, b);
+      var diffc = /* @__PURE__ */ __name(function(c) {
+        return (v - c) / 6 / diff + 1 / 2;
       }, "diffc");
       if (diff === 0) {
-        h = s2 = 0;
+        h = s = 0;
       } else {
-        s2 = diff / v;
+        s = diff / v;
         rdif = diffc(r);
-        gdif = diffc(g2);
-        bdif = diffc(b2);
+        gdif = diffc(g);
+        bdif = diffc(b);
         if (r === v) {
           h = bdif - gdif;
-        } else if (g2 === v) {
+        } else if (g === v) {
           h = 1 / 3 + rdif - bdif;
-        } else if (b2 === v) {
+        } else if (b === v) {
           h = 2 / 3 + gdif - rdif;
         }
         if (h < 0) {
@@ -35287,44 +35514,44 @@ var require_conversions = __commonJS({
       }
       return [
         h * 360,
-        s2 * 100,
+        s * 100,
         v * 100
       ];
     };
     convert.rgb.hwb = function(rgb) {
       var r = rgb[0];
-      var g2 = rgb[1];
-      var b2 = rgb[2];
+      var g = rgb[1];
+      var b = rgb[2];
       var h = convert.rgb.hsl(rgb)[0];
-      var w2 = 1 / 255 * Math.min(r, Math.min(g2, b2));
-      b2 = 1 - 1 / 255 * Math.max(r, Math.max(g2, b2));
+      var w = 1 / 255 * Math.min(r, Math.min(g, b));
+      b = 1 - 1 / 255 * Math.max(r, Math.max(g, b));
       return [
         h,
-        w2 * 100,
-        b2 * 100
+        w * 100,
+        b * 100
       ];
     };
     convert.rgb.cmyk = function(rgb) {
       var r = rgb[0] / 255;
-      var g2 = rgb[1] / 255;
-      var b2 = rgb[2] / 255;
-      var c2;
+      var g = rgb[1] / 255;
+      var b = rgb[2] / 255;
+      var c;
       var m;
       var y;
       var k;
-      k = Math.min(1 - r, 1 - g2, 1 - b2);
-      c2 = (1 - r - k) / (1 - k) || 0;
-      m = (1 - g2 - k) / (1 - k) || 0;
-      y = (1 - b2 - k) / (1 - k) || 0;
+      k = Math.min(1 - r, 1 - g, 1 - b);
+      c = (1 - r - k) / (1 - k) || 0;
+      m = (1 - g - k) / (1 - k) || 0;
+      y = (1 - b - k) / (1 - k) || 0;
       return [
-        c2 * 100,
+        c * 100,
         m * 100,
         y * 100,
         k * 100
       ];
     };
-    function comparativeDistance(x2, y) {
-      return Math.pow(x2[0] - y[0], 2) + Math.pow(x2[1] - y[1], 2) + Math.pow(x2[2] - y[2], 2);
+    function comparativeDistance(x, y) {
+      return Math.pow(x[0] - y[0], 2) + Math.pow(x[1] - y[1], 2) + Math.pow(x[2] - y[2], 2);
     }
     __name(comparativeDistance, "comparativeDistance");
     convert.rgb.keyword = function(rgb) {
@@ -35351,53 +35578,53 @@ var require_conversions = __commonJS({
     };
     convert.rgb.xyz = function(rgb) {
       var r = rgb[0] / 255;
-      var g2 = rgb[1] / 255;
-      var b2 = rgb[2] / 255;
+      var g = rgb[1] / 255;
+      var b = rgb[2] / 255;
       r = r > 0.04045 ? Math.pow((r + 0.055) / 1.055, 2.4) : r / 12.92;
-      g2 = g2 > 0.04045 ? Math.pow((g2 + 0.055) / 1.055, 2.4) : g2 / 12.92;
-      b2 = b2 > 0.04045 ? Math.pow((b2 + 0.055) / 1.055, 2.4) : b2 / 12.92;
-      var x2 = r * 0.4124 + g2 * 0.3576 + b2 * 0.1805;
-      var y = r * 0.2126 + g2 * 0.7152 + b2 * 0.0722;
-      var z = r * 0.0193 + g2 * 0.1192 + b2 * 0.9505;
+      g = g > 0.04045 ? Math.pow((g + 0.055) / 1.055, 2.4) : g / 12.92;
+      b = b > 0.04045 ? Math.pow((b + 0.055) / 1.055, 2.4) : b / 12.92;
+      var x = r * 0.4124 + g * 0.3576 + b * 0.1805;
+      var y = r * 0.2126 + g * 0.7152 + b * 0.0722;
+      var z = r * 0.0193 + g * 0.1192 + b * 0.9505;
       return [
-        x2 * 100,
+        x * 100,
         y * 100,
         z * 100
       ];
     };
     convert.rgb.lab = function(rgb) {
       var xyz = convert.rgb.xyz(rgb);
-      var x2 = xyz[0];
+      var x = xyz[0];
       var y = xyz[1];
       var z = xyz[2];
       var l;
-      var a2;
-      var b2;
-      x2 /= 95.047;
+      var a;
+      var b;
+      x /= 95.047;
       y /= 100;
       z /= 108.883;
-      x2 = x2 > 8856e-6 ? Math.pow(x2, 1 / 3) : 7.787 * x2 + 16 / 116;
+      x = x > 8856e-6 ? Math.pow(x, 1 / 3) : 7.787 * x + 16 / 116;
       y = y > 8856e-6 ? Math.pow(y, 1 / 3) : 7.787 * y + 16 / 116;
       z = z > 8856e-6 ? Math.pow(z, 1 / 3) : 7.787 * z + 16 / 116;
       l = 116 * y - 16;
-      a2 = 500 * (x2 - y);
-      b2 = 200 * (y - z);
+      a = 500 * (x - y);
+      b = 200 * (y - z);
       return [
         l,
-        a2,
-        b2
+        a,
+        b
       ];
     };
     convert.hsl.rgb = function(hsl) {
       var h = hsl[0] / 360;
-      var s2 = hsl[1] / 100;
+      var s = hsl[1] / 100;
       var l = hsl[2] / 100;
       var t1;
       var t2;
       var t3;
       var rgb;
       var val;
-      if (s2 === 0) {
+      if (s === 0) {
         val = l * 255;
         return [
           val,
@@ -35406,9 +35633,9 @@ var require_conversions = __commonJS({
         ];
       }
       if (l < 0.5) {
-        t2 = l * (1 + s2);
+        t2 = l * (1 + s);
       } else {
-        t2 = l + s2 - l * s2;
+        t2 = l + s - l * s;
       }
       t1 = 2 * l - t2;
       rgb = [
@@ -35416,8 +35643,8 @@ var require_conversions = __commonJS({
         0,
         0
       ];
-      for (var i2 = 0; i2 < 3; i2++) {
-        t3 = h + 1 / 3 * -(i2 - 1);
+      for (var i = 0; i < 3; i++) {
+        t3 = h + 1 / 3 * -(i - 1);
         if (t3 < 0) {
           t3++;
         }
@@ -35433,23 +35660,23 @@ var require_conversions = __commonJS({
         } else {
           val = t1;
         }
-        rgb[i2] = val * 255;
+        rgb[i] = val * 255;
       }
       return rgb;
     };
     convert.hsl.hsv = function(hsl) {
       var h = hsl[0];
-      var s2 = hsl[1] / 100;
+      var s = hsl[1] / 100;
       var l = hsl[2] / 100;
-      var smin = s2;
+      var smin = s;
       var lmin = Math.max(l, 0.01);
       var sv;
       var v;
       l *= 2;
-      s2 *= l <= 1 ? l : 2 - l;
+      s *= l <= 1 ? l : 2 - l;
       smin *= lmin <= 1 ? lmin : 2 - lmin;
-      v = (l + s2) / 2;
-      sv = l === 0 ? 2 * smin / (lmin + smin) : 2 * s2 / (l + s2);
+      v = (l + s) / 2;
+      sv = l === 0 ? 2 * smin / (lmin + smin) : 2 * s / (l + s);
       return [
         h,
         sv * 100,
@@ -35458,64 +35685,64 @@ var require_conversions = __commonJS({
     };
     convert.hsv.rgb = function(hsv) {
       var h = hsv[0] / 60;
-      var s2 = hsv[1] / 100;
+      var s = hsv[1] / 100;
       var v = hsv[2] / 100;
       var hi = Math.floor(h) % 6;
-      var f2 = h - Math.floor(h);
-      var p2 = 255 * v * (1 - s2);
-      var q = 255 * v * (1 - s2 * f2);
-      var t2 = 255 * v * (1 - s2 * (1 - f2));
+      var f = h - Math.floor(h);
+      var p = 255 * v * (1 - s);
+      var q = 255 * v * (1 - s * f);
+      var t2 = 255 * v * (1 - s * (1 - f));
       v *= 255;
       switch (hi) {
         case 0:
           return [
             v,
             t2,
-            p2
+            p
           ];
         case 1:
           return [
             q,
             v,
-            p2
+            p
           ];
         case 2:
           return [
-            p2,
+            p,
             v,
             t2
           ];
         case 3:
           return [
-            p2,
+            p,
             q,
             v
           ];
         case 4:
           return [
             t2,
-            p2,
+            p,
             v
           ];
         case 5:
           return [
             v,
-            p2,
+            p,
             q
           ];
       }
     };
     convert.hsv.hsl = function(hsv) {
       var h = hsv[0];
-      var s2 = hsv[1] / 100;
+      var s = hsv[1] / 100;
       var v = hsv[2] / 100;
       var vmin = Math.max(v, 0.01);
       var lmin;
       var sl;
       var l;
-      l = (2 - s2) * v;
-      lmin = (2 - s2) * vmin;
-      sl = s2 * vmin;
+      l = (2 - s) * v;
+      lmin = (2 - s) * vmin;
+      sl = s * vmin;
       sl /= lmin <= 1 ? lmin : 2 - lmin;
       sl = sl || 0;
       l /= 2;
@@ -35530,195 +35757,195 @@ var require_conversions = __commonJS({
       var wh = hwb[1] / 100;
       var bl = hwb[2] / 100;
       var ratio = wh + bl;
-      var i2;
+      var i;
       var v;
-      var f2;
-      var n2;
+      var f;
+      var n;
       if (ratio > 1) {
         wh /= ratio;
         bl /= ratio;
       }
-      i2 = Math.floor(6 * h);
+      i = Math.floor(6 * h);
       v = 1 - bl;
-      f2 = 6 * h - i2;
-      if ((i2 & 1) !== 0) {
-        f2 = 1 - f2;
+      f = 6 * h - i;
+      if ((i & 1) !== 0) {
+        f = 1 - f;
       }
-      n2 = wh + f2 * (v - wh);
+      n = wh + f * (v - wh);
       var r;
-      var g2;
-      var b2;
-      switch (i2) {
+      var g;
+      var b;
+      switch (i) {
         default:
         case 6:
         case 0:
           r = v;
-          g2 = n2;
-          b2 = wh;
+          g = n;
+          b = wh;
           break;
         case 1:
-          r = n2;
-          g2 = v;
-          b2 = wh;
+          r = n;
+          g = v;
+          b = wh;
           break;
         case 2:
           r = wh;
-          g2 = v;
-          b2 = n2;
+          g = v;
+          b = n;
           break;
         case 3:
           r = wh;
-          g2 = n2;
-          b2 = v;
+          g = n;
+          b = v;
           break;
         case 4:
-          r = n2;
-          g2 = wh;
-          b2 = v;
+          r = n;
+          g = wh;
+          b = v;
           break;
         case 5:
           r = v;
-          g2 = wh;
-          b2 = n2;
+          g = wh;
+          b = n;
           break;
       }
       return [
         r * 255,
-        g2 * 255,
-        b2 * 255
+        g * 255,
+        b * 255
       ];
     };
     convert.cmyk.rgb = function(cmyk) {
-      var c2 = cmyk[0] / 100;
+      var c = cmyk[0] / 100;
       var m = cmyk[1] / 100;
       var y = cmyk[2] / 100;
       var k = cmyk[3] / 100;
       var r;
-      var g2;
-      var b2;
-      r = 1 - Math.min(1, c2 * (1 - k) + k);
-      g2 = 1 - Math.min(1, m * (1 - k) + k);
-      b2 = 1 - Math.min(1, y * (1 - k) + k);
+      var g;
+      var b;
+      r = 1 - Math.min(1, c * (1 - k) + k);
+      g = 1 - Math.min(1, m * (1 - k) + k);
+      b = 1 - Math.min(1, y * (1 - k) + k);
       return [
         r * 255,
-        g2 * 255,
-        b2 * 255
+        g * 255,
+        b * 255
       ];
     };
     convert.xyz.rgb = function(xyz) {
-      var x2 = xyz[0] / 100;
+      var x = xyz[0] / 100;
       var y = xyz[1] / 100;
       var z = xyz[2] / 100;
       var r;
-      var g2;
-      var b2;
-      r = x2 * 3.2406 + y * -1.5372 + z * -0.4986;
-      g2 = x2 * -0.9689 + y * 1.8758 + z * 0.0415;
-      b2 = x2 * 0.0557 + y * -0.204 + z * 1.057;
+      var g;
+      var b;
+      r = x * 3.2406 + y * -1.5372 + z * -0.4986;
+      g = x * -0.9689 + y * 1.8758 + z * 0.0415;
+      b = x * 0.0557 + y * -0.204 + z * 1.057;
       r = r > 31308e-7 ? 1.055 * Math.pow(r, 1 / 2.4) - 0.055 : r * 12.92;
-      g2 = g2 > 31308e-7 ? 1.055 * Math.pow(g2, 1 / 2.4) - 0.055 : g2 * 12.92;
-      b2 = b2 > 31308e-7 ? 1.055 * Math.pow(b2, 1 / 2.4) - 0.055 : b2 * 12.92;
+      g = g > 31308e-7 ? 1.055 * Math.pow(g, 1 / 2.4) - 0.055 : g * 12.92;
+      b = b > 31308e-7 ? 1.055 * Math.pow(b, 1 / 2.4) - 0.055 : b * 12.92;
       r = Math.min(Math.max(0, r), 1);
-      g2 = Math.min(Math.max(0, g2), 1);
-      b2 = Math.min(Math.max(0, b2), 1);
+      g = Math.min(Math.max(0, g), 1);
+      b = Math.min(Math.max(0, b), 1);
       return [
         r * 255,
-        g2 * 255,
-        b2 * 255
+        g * 255,
+        b * 255
       ];
     };
     convert.xyz.lab = function(xyz) {
-      var x2 = xyz[0];
+      var x = xyz[0];
       var y = xyz[1];
       var z = xyz[2];
       var l;
-      var a2;
-      var b2;
-      x2 /= 95.047;
+      var a;
+      var b;
+      x /= 95.047;
       y /= 100;
       z /= 108.883;
-      x2 = x2 > 8856e-6 ? Math.pow(x2, 1 / 3) : 7.787 * x2 + 16 / 116;
+      x = x > 8856e-6 ? Math.pow(x, 1 / 3) : 7.787 * x + 16 / 116;
       y = y > 8856e-6 ? Math.pow(y, 1 / 3) : 7.787 * y + 16 / 116;
       z = z > 8856e-6 ? Math.pow(z, 1 / 3) : 7.787 * z + 16 / 116;
       l = 116 * y - 16;
-      a2 = 500 * (x2 - y);
-      b2 = 200 * (y - z);
+      a = 500 * (x - y);
+      b = 200 * (y - z);
       return [
         l,
-        a2,
-        b2
+        a,
+        b
       ];
     };
     convert.lab.xyz = function(lab) {
       var l = lab[0];
-      var a2 = lab[1];
-      var b2 = lab[2];
-      var x2;
+      var a = lab[1];
+      var b = lab[2];
+      var x;
       var y;
       var z;
       y = (l + 16) / 116;
-      x2 = a2 / 500 + y;
-      z = y - b2 / 200;
+      x = a / 500 + y;
+      z = y - b / 200;
       var y2 = Math.pow(y, 3);
-      var x22 = Math.pow(x2, 3);
+      var x2 = Math.pow(x, 3);
       var z2 = Math.pow(z, 3);
       y = y2 > 8856e-6 ? y2 : (y - 16 / 116) / 7.787;
-      x2 = x22 > 8856e-6 ? x22 : (x2 - 16 / 116) / 7.787;
+      x = x2 > 8856e-6 ? x2 : (x - 16 / 116) / 7.787;
       z = z2 > 8856e-6 ? z2 : (z - 16 / 116) / 7.787;
-      x2 *= 95.047;
+      x *= 95.047;
       y *= 100;
       z *= 108.883;
       return [
-        x2,
+        x,
         y,
         z
       ];
     };
     convert.lab.lch = function(lab) {
       var l = lab[0];
-      var a2 = lab[1];
-      var b2 = lab[2];
-      var hr2;
+      var a = lab[1];
+      var b = lab[2];
+      var hr;
       var h;
-      var c2;
-      hr2 = Math.atan2(b2, a2);
-      h = hr2 * 360 / 2 / Math.PI;
+      var c;
+      hr = Math.atan2(b, a);
+      h = hr * 360 / 2 / Math.PI;
       if (h < 0) {
         h += 360;
       }
-      c2 = Math.sqrt(a2 * a2 + b2 * b2);
+      c = Math.sqrt(a * a + b * b);
       return [
         l,
-        c2,
+        c,
         h
       ];
     };
     convert.lch.lab = function(lch) {
       var l = lch[0];
-      var c2 = lch[1];
+      var c = lch[1];
       var h = lch[2];
-      var a2;
-      var b2;
-      var hr2;
-      hr2 = h / 360 * 2 * Math.PI;
-      a2 = c2 * Math.cos(hr2);
-      b2 = c2 * Math.sin(hr2);
+      var a;
+      var b;
+      var hr;
+      hr = h / 360 * 2 * Math.PI;
+      a = c * Math.cos(hr);
+      b = c * Math.sin(hr);
       return [
         l,
-        a2,
-        b2
+        a,
+        b
       ];
     };
     convert.rgb.ansi16 = function(args) {
       var r = args[0];
-      var g2 = args[1];
-      var b2 = args[2];
+      var g = args[1];
+      var b = args[2];
       var value = 1 in arguments ? arguments[1] : convert.rgb.hsv(args)[2];
       value = Math.round(value / 50);
       if (value === 0) {
         return 30;
       }
-      var ansi = 30 + (Math.round(b2 / 255) << 2 | Math.round(g2 / 255) << 1 | Math.round(r / 255));
+      var ansi = 30 + (Math.round(b / 255) << 2 | Math.round(g / 255) << 1 | Math.round(r / 255));
       if (value === 2) {
         ansi += 60;
       }
@@ -35729,9 +35956,9 @@ var require_conversions = __commonJS({
     };
     convert.rgb.ansi256 = function(args) {
       var r = args[0];
-      var g2 = args[1];
-      var b2 = args[2];
-      if (r === g2 && g2 === b2) {
+      var g = args[1];
+      var b = args[2];
+      if (r === g && g === b) {
         if (r < 8) {
           return 16;
         }
@@ -35740,7 +35967,7 @@ var require_conversions = __commonJS({
         }
         return Math.round((r - 8) / 247 * 24) + 232;
       }
-      var ansi = 16 + 36 * Math.round(r / 255 * 5) + 6 * Math.round(g2 / 255 * 5) + Math.round(b2 / 255 * 5);
+      var ansi = 16 + 36 * Math.round(r / 255 * 5) + 6 * Math.round(g / 255 * 5) + Math.round(b / 255 * 5);
       return ansi;
     };
     convert.ansi16.rgb = function(args) {
@@ -35758,32 +35985,32 @@ var require_conversions = __commonJS({
       }
       var mult = (~~(args > 50) + 1) * 0.5;
       var r = (color & 1) * mult * 255;
-      var g2 = (color >> 1 & 1) * mult * 255;
-      var b2 = (color >> 2 & 1) * mult * 255;
+      var g = (color >> 1 & 1) * mult * 255;
+      var b = (color >> 2 & 1) * mult * 255;
       return [
         r,
-        g2,
-        b2
+        g,
+        b
       ];
     };
     convert.ansi256.rgb = function(args) {
       if (args >= 232) {
-        var c2 = (args - 232) * 10 + 8;
+        var c = (args - 232) * 10 + 8;
         return [
-          c2,
-          c2,
-          c2
+          c,
+          c,
+          c
         ];
       }
       args -= 16;
       var rem;
       var r = Math.floor(args / 36) / 5 * 255;
-      var g2 = Math.floor((rem = args % 36) / 6) / 5 * 255;
-      var b2 = rem % 6 / 5 * 255;
+      var g = Math.floor((rem = args % 36) / 6) / 5 * 255;
+      var b = rem % 6 / 5 * 255;
       return [
         r,
-        g2,
-        b2
+        g,
+        b
       ];
     };
     convert.rgb.hex = function(args) {
@@ -35808,20 +36035,20 @@ var require_conversions = __commonJS({
       }
       var integer = parseInt(colorString, 16);
       var r = integer >> 16 & 255;
-      var g2 = integer >> 8 & 255;
-      var b2 = integer & 255;
+      var g = integer >> 8 & 255;
+      var b = integer & 255;
       return [
         r,
-        g2,
-        b2
+        g,
+        b
       ];
     };
     convert.rgb.hcg = function(rgb) {
       var r = rgb[0] / 255;
-      var g2 = rgb[1] / 255;
-      var b2 = rgb[2] / 255;
-      var max = Math.max(Math.max(r, g2), b2);
-      var min = Math.min(Math.min(r, g2), b2);
+      var g = rgb[1] / 255;
+      var b = rgb[2] / 255;
+      var max = Math.max(Math.max(r, g), b);
+      var min = Math.min(Math.min(r, g), b);
       var chroma = max - min;
       var grayscale;
       var hue;
@@ -35833,11 +36060,11 @@ var require_conversions = __commonJS({
       if (chroma <= 0) {
         hue = 0;
       } else if (max === r) {
-        hue = (g2 - b2) / chroma % 6;
-      } else if (max === g2) {
-        hue = 2 + (b2 - r) / chroma;
+        hue = (g - b) / chroma % 6;
+      } else if (max === g) {
+        hue = 2 + (b - r) / chroma;
       } else {
-        hue = 4 + (r - g2) / chroma + 4;
+        hue = 4 + (r - g) / chroma + 4;
       }
       hue /= 6;
       hue %= 1;
@@ -35848,47 +36075,47 @@ var require_conversions = __commonJS({
       ];
     };
     convert.hsl.hcg = function(hsl) {
-      var s2 = hsl[1] / 100;
+      var s = hsl[1] / 100;
       var l = hsl[2] / 100;
-      var c2 = 1;
-      var f2 = 0;
+      var c = 1;
+      var f = 0;
       if (l < 0.5) {
-        c2 = 2 * s2 * l;
+        c = 2 * s * l;
       } else {
-        c2 = 2 * s2 * (1 - l);
+        c = 2 * s * (1 - l);
       }
-      if (c2 < 1) {
-        f2 = (l - 0.5 * c2) / (1 - c2);
+      if (c < 1) {
+        f = (l - 0.5 * c) / (1 - c);
       }
       return [
         hsl[0],
-        c2 * 100,
-        f2 * 100
+        c * 100,
+        f * 100
       ];
     };
     convert.hsv.hcg = function(hsv) {
-      var s2 = hsv[1] / 100;
+      var s = hsv[1] / 100;
       var v = hsv[2] / 100;
-      var c2 = s2 * v;
-      var f2 = 0;
-      if (c2 < 1) {
-        f2 = (v - c2) / (1 - c2);
+      var c = s * v;
+      var f = 0;
+      if (c < 1) {
+        f = (v - c) / (1 - c);
       }
       return [
         hsv[0],
-        c2 * 100,
-        f2 * 100
+        c * 100,
+        f * 100
       ];
     };
     convert.hcg.rgb = function(hcg) {
       var h = hcg[0] / 360;
-      var c2 = hcg[1] / 100;
-      var g2 = hcg[2] / 100;
-      if (c2 === 0) {
+      var c = hcg[1] / 100;
+      var g = hcg[2] / 100;
+      if (c === 0) {
         return [
-          g2 * 255,
-          g2 * 255,
-          g2 * 255
+          g * 255,
+          g * 255,
+          g * 255
         ];
       }
       var pure = [
@@ -35898,7 +36125,7 @@ var require_conversions = __commonJS({
       ];
       var hi = h % 1 * 6;
       var v = hi % 1;
-      var w2 = 1 - v;
+      var w = 1 - v;
       var mg = 0;
       switch (Math.floor(hi)) {
         case 0:
@@ -35907,7 +36134,7 @@ var require_conversions = __commonJS({
           pure[2] = 0;
           break;
         case 1:
-          pure[0] = w2;
+          pure[0] = w;
           pure[1] = 1;
           pure[2] = 0;
           break;
@@ -35918,7 +36145,7 @@ var require_conversions = __commonJS({
           break;
         case 3:
           pure[0] = 0;
-          pure[1] = w2;
+          pure[1] = w;
           pure[2] = 1;
           break;
         case 4:
@@ -35929,68 +36156,68 @@ var require_conversions = __commonJS({
         default:
           pure[0] = 1;
           pure[1] = 0;
-          pure[2] = w2;
+          pure[2] = w;
       }
-      mg = (1 - c2) * g2;
+      mg = (1 - c) * g;
       return [
-        (c2 * pure[0] + mg) * 255,
-        (c2 * pure[1] + mg) * 255,
-        (c2 * pure[2] + mg) * 255
+        (c * pure[0] + mg) * 255,
+        (c * pure[1] + mg) * 255,
+        (c * pure[2] + mg) * 255
       ];
     };
     convert.hcg.hsv = function(hcg) {
-      var c2 = hcg[1] / 100;
-      var g2 = hcg[2] / 100;
-      var v = c2 + g2 * (1 - c2);
-      var f2 = 0;
+      var c = hcg[1] / 100;
+      var g = hcg[2] / 100;
+      var v = c + g * (1 - c);
+      var f = 0;
       if (v > 0) {
-        f2 = c2 / v;
+        f = c / v;
       }
       return [
         hcg[0],
-        f2 * 100,
+        f * 100,
         v * 100
       ];
     };
     convert.hcg.hsl = function(hcg) {
-      var c2 = hcg[1] / 100;
-      var g2 = hcg[2] / 100;
-      var l = g2 * (1 - c2) + 0.5 * c2;
-      var s2 = 0;
+      var c = hcg[1] / 100;
+      var g = hcg[2] / 100;
+      var l = g * (1 - c) + 0.5 * c;
+      var s = 0;
       if (l > 0 && l < 0.5) {
-        s2 = c2 / (2 * l);
+        s = c / (2 * l);
       } else if (l >= 0.5 && l < 1) {
-        s2 = c2 / (2 * (1 - l));
+        s = c / (2 * (1 - l));
       }
       return [
         hcg[0],
-        s2 * 100,
+        s * 100,
         l * 100
       ];
     };
     convert.hcg.hwb = function(hcg) {
-      var c2 = hcg[1] / 100;
-      var g2 = hcg[2] / 100;
-      var v = c2 + g2 * (1 - c2);
+      var c = hcg[1] / 100;
+      var g = hcg[2] / 100;
+      var v = c + g * (1 - c);
       return [
         hcg[0],
-        (v - c2) * 100,
+        (v - c) * 100,
         (1 - v) * 100
       ];
     };
     convert.hwb.hcg = function(hwb) {
-      var w2 = hwb[1] / 100;
-      var b2 = hwb[2] / 100;
-      var v = 1 - b2;
-      var c2 = v - w2;
-      var g2 = 0;
-      if (c2 < 1) {
-        g2 = (v - c2) / (1 - c2);
+      var w = hwb[1] / 100;
+      var b = hwb[2] / 100;
+      var v = 1 - b;
+      var c = v - w;
+      var g = 0;
+      if (c < 1) {
+        g = (v - c) / (1 - c);
       }
       return [
         hwb[0],
-        c2 * 100,
-        g2 * 100
+        c * 100,
+        g * 100
       ];
     };
     convert.apple.rgb = function(apple) {
@@ -36065,8 +36292,8 @@ var require_route = __commonJS({
     function buildGraph() {
       var graph = {};
       var models = Object.keys(conversions);
-      for (var len = models.length, i2 = 0; i2 < len; i2++) {
-        graph[models[i2]] = {
+      for (var len = models.length, i = 0; i < len; i++) {
+        graph[models[i]] = {
           distance: -1,
           parent: null
         };
@@ -36083,8 +36310,8 @@ var require_route = __commonJS({
       while (queue.length) {
         var current = queue.pop();
         var adjacents = Object.keys(conversions[current]);
-        for (var len = adjacents.length, i2 = 0; i2 < len; i2++) {
-          var adjacent = adjacents[i2];
+        for (var len = adjacents.length, i = 0; i < len; i++) {
+          var adjacent = adjacents[i];
           var node = graph[adjacent];
           if (node.distance === -1) {
             node.distance = graph[current].distance + 1;
@@ -36122,8 +36349,8 @@ var require_route = __commonJS({
       var graph = deriveBFS(fromModel);
       var conversion = {};
       var models = Object.keys(graph);
-      for (var len = models.length, i2 = 0; i2 < len; i2++) {
-        var toModel = models[i2];
+      for (var len = models.length, i = 0; i < len; i++) {
+        var toModel = models[i];
         var node = graph[toModel];
         if (node.parent === null) {
           continue;
@@ -36168,8 +36395,8 @@ var require_color_convert = __commonJS({
         }
         var result = fn(args);
         if (typeof result === "object") {
-          for (var len = result.length, i2 = 0; i2 < len; i2++) {
-            result[i2] = Math.round(result[i2]);
+          for (var len = result.length, i = 0; i < len; i++) {
+            result[i] = Math.round(result[i]);
           }
         }
         return result;
@@ -36408,11 +36635,11 @@ var require_ansi_styles = __commonJS({
           enumerable: false
         });
       }
-      const ansi2ansi = /* @__PURE__ */ __name((n2) => n2, "ansi2ansi");
-      const rgb2rgb = /* @__PURE__ */ __name((r, g2, b2) => [
+      const ansi2ansi = /* @__PURE__ */ __name((n) => n, "ansi2ansi");
+      const rgb2rgb = /* @__PURE__ */ __name((r, g, b) => [
         r,
-        g2,
-        b2
+        g,
+        b
       ], "rgb2rgb");
       styles.color.close = "\x1B[39m";
       styles.bgColor.close = "\x1B[49m";
@@ -36632,22 +36859,22 @@ var require_templates = __commonJS({
         "\x07"
       ]
     ]);
-    function unescape(c2) {
-      if (c2[0] === "u" && c2.length === 5 || c2[0] === "x" && c2.length === 3) {
-        return String.fromCharCode(parseInt(c2.slice(1), 16));
+    function unescape(c) {
+      if (c[0] === "u" && c.length === 5 || c[0] === "x" && c.length === 3) {
+        return String.fromCharCode(parseInt(c.slice(1), 16));
       }
-      return ESCAPES.get(c2) || c2;
+      return ESCAPES.get(c) || c;
     }
     __name(unescape, "unescape");
     function parseArguments(name, args) {
       const results = [];
       const chunks = args.trim().split(/\s*,\s*/g);
-      let matches;
+      let matches2;
       for (const chunk of chunks) {
         if (!isNaN(chunk)) {
           results.push(Number(chunk));
-        } else if (matches = chunk.match(STRING_REGEX)) {
-          results.push(matches[2].replace(ESCAPE_REGEX, (m, escape, chr) => escape ? unescape(escape) : chr));
+        } else if (matches2 = chunk.match(STRING_REGEX)) {
+          results.push(matches2[2].replace(ESCAPE_REGEX, (m, escape, chr) => escape ? unescape(escape) : chr));
         } else {
           throw new Error(`Invalid Chalk template style argument: ${chunk} (in style '${name}')`);
         }
@@ -36658,11 +36885,11 @@ var require_templates = __commonJS({
     function parseStyle(style) {
       STYLE_REGEX.lastIndex = 0;
       const results = [];
-      let matches;
-      while ((matches = STYLE_REGEX.exec(style)) !== null) {
-        const name = matches[1];
-        if (matches[2]) {
-          const args = parseArguments(name, matches[2]);
+      let matches2;
+      while ((matches2 = STYLE_REGEX.exec(style)) !== null) {
+        const name = matches2[1];
+        if (matches2[2]) {
+          const args = parseArguments(name, matches2[2]);
           results.push([
             name
           ].concat(args));
@@ -36882,8 +37109,8 @@ var require_chalk = __commonJS({
         return "";
       }
       if (argsLen > 1) {
-        for (let a2 = 1; a2 < argsLen; a2++) {
-          str += " " + args[a2];
+        for (let a = 1; a < argsLen; a++) {
+          str += " " + args[a];
         }
       }
       if (!this.enabled || this.level <= 0 || !str) {
@@ -36909,9 +37136,9 @@ var require_chalk = __commonJS({
       const parts = [
         strings.raw[0]
       ];
-      for (let i2 = 1; i2 < strings.length; i2++) {
-        parts.push(String(args[i2 - 1]).replace(/[{}\\]/g, "\\$&"));
-        parts.push(String(strings.raw[i2]));
+      for (let i = 1; i < strings.length; i++) {
+        parts.push(String(args[i - 1]).replace(/[{}\\]/g, "\\$&"));
+        parts.push(String(strings.raw[i]));
       }
       return template2(chalk, parts.join(""));
     }
@@ -37073,23 +37300,23 @@ var require_lib6 = __commonJS({
       const lineDiff = endLine - startLine;
       const markerLines = {};
       if (lineDiff) {
-        for (let i2 = 0; i2 <= lineDiff; i2++) {
-          const lineNumber = i2 + startLine;
+        for (let i = 0; i <= lineDiff; i++) {
+          const lineNumber = i + startLine;
           if (!startColumn) {
             markerLines[lineNumber] = true;
-          } else if (i2 === 0) {
+          } else if (i === 0) {
             const sourceLength = source[lineNumber - 1].length;
             markerLines[lineNumber] = [
               startColumn,
               sourceLength - startColumn + 1
             ];
-          } else if (i2 === lineDiff) {
+          } else if (i === lineDiff) {
             markerLines[lineNumber] = [
               0,
               endColumn
             ];
           } else {
-            const sourceLength1 = source[lineNumber - i2].length;
+            const sourceLength1 = source[lineNumber - i].length;
             markerLines[lineNumber] = [
               0,
               sourceLength1
@@ -37300,8 +37527,8 @@ var require_parse = __commonJS({
     __name(placeholderVisitorHandler, "placeholderVisitorHandler");
     function resolveAncestors(ast, ancestors) {
       let parent = ast;
-      for (let i2 = 0; i2 < ancestors.length - 1; i2++) {
-        const { key, index } = ancestors[i2];
+      for (let i = 0; i < ancestors.length - 1; i++) {
+        const { key, index } = ancestors[i];
         if (index === void 0) {
           parent = parent[key];
         } else {
@@ -37499,8 +37726,8 @@ var require_literal = __commonJS({
       const { metadata, names } = buildLiteralData(formatter, tpl, opts);
       return (arg) => {
         const defaultReplacements = {};
-        arg.forEach((replacement, i2) => {
-          defaultReplacements[names[i2]] = replacement;
+        arg.forEach((replacement, i) => {
+          defaultReplacements[names[i]] = replacement;
         });
         return (arg2) => {
           const replacements = (0, _options.normalizeReplacements)(arg2);
@@ -37543,10 +37770,10 @@ var require_literal = __commonJS({
     function buildTemplateCode(tpl, prefix) {
       const names = [];
       let code = tpl[0];
-      for (let i2 = 1; i2 < tpl.length; i2++) {
-        const value = `${prefix}${i2 - 1}`;
+      for (let i = 1; i < tpl.length; i++) {
+        const value = `${prefix}${i - 1}`;
         names.push(value);
-        code += value + tpl[i2];
+        code += value + tpl[i];
       }
       return {
         names,
@@ -37668,6 +37895,157 @@ var require_lib7 = __commonJS({
   }
 });
 
+// node_modules/@storybook/global/dist/index.js
+var require_dist = __commonJS({
+  "node_modules/@storybook/global/dist/index.js"(exports, module2) {
+    "use strict";
+    var __defProp2 = Object.defineProperty;
+    var __getOwnPropDesc2 = Object.getOwnPropertyDescriptor;
+    var __getOwnPropNames2 = Object.getOwnPropertyNames;
+    var __hasOwnProp2 = Object.prototype.hasOwnProperty;
+    var __export2 = /* @__PURE__ */ __name((target, all) => {
+      for (var name in all)
+        __defProp2(target, name, {
+          get: all[name],
+          enumerable: true
+        });
+    }, "__export");
+    var __copyProps2 = /* @__PURE__ */ __name((to, from, except, desc) => {
+      if (from && typeof from === "object" || typeof from === "function") {
+        for (let key of __getOwnPropNames2(from))
+          if (!__hasOwnProp2.call(to, key) && key !== except)
+            __defProp2(to, key, {
+              get: () => from[key],
+              enumerable: !(desc = __getOwnPropDesc2(from, key)) || desc.enumerable
+            });
+      }
+      return to;
+    }, "__copyProps");
+    var __toCommonJS2 = /* @__PURE__ */ __name((mod) => __copyProps2(__defProp2({}, "__esModule", {
+      value: true
+    }), mod), "__toCommonJS");
+    var src_exports = {};
+    __export2(src_exports, {
+      global: () => scope
+    });
+    module2.exports = __toCommonJS2(src_exports);
+    var scope = (() => {
+      let win;
+      if (typeof window !== "undefined") {
+        win = window;
+      } else if (typeof globalThis !== "undefined") {
+        win = globalThis;
+      } else if (typeof global !== "undefined") {
+        win = global;
+      } else if (typeof self !== "undefined") {
+        win = self;
+      } else {
+        win = {};
+      }
+      return win;
+    })();
+  }
+});
+
+// node_modules/@storybook/client-logger/dist/index.js
+var require_dist2 = __commonJS({
+  "node_modules/@storybook/client-logger/dist/index.js"(exports, module2) {
+    "use strict";
+    var __defProp2 = Object.defineProperty;
+    var __getOwnPropDesc2 = Object.getOwnPropertyDescriptor;
+    var __getOwnPropNames2 = Object.getOwnPropertyNames;
+    var __hasOwnProp2 = Object.prototype.hasOwnProperty;
+    var __export2 = /* @__PURE__ */ __name((target, all) => {
+      for (var name in all)
+        __defProp2(target, name, {
+          get: all[name],
+          enumerable: true
+        });
+    }, "__export");
+    var __copyProps2 = /* @__PURE__ */ __name((to, from, except, desc) => {
+      if (from && typeof from == "object" || typeof from == "function")
+        for (let key of __getOwnPropNames2(from))
+          !__hasOwnProp2.call(to, key) && key !== except && __defProp2(to, key, {
+            get: () => from[key],
+            enumerable: !(desc = __getOwnPropDesc2(from, key)) || desc.enumerable
+          });
+      return to;
+    }, "__copyProps");
+    var __toCommonJS2 = /* @__PURE__ */ __name((mod) => __copyProps2(__defProp2({}, "__esModule", {
+      value: true
+    }), mod), "__toCommonJS");
+    var src_exports = {};
+    __export2(src_exports, {
+      deprecate: () => deprecate3,
+      logger: () => logger,
+      once: () => once,
+      pretty: () => pretty
+    });
+    module2.exports = __toCommonJS2(src_exports);
+    var import_global = require_dist();
+    var { LOGLEVEL } = import_global.global;
+    var levels = {
+      trace: 1,
+      debug: 2,
+      info: 3,
+      warn: 4,
+      error: 5,
+      silent: 10
+    };
+    var currentLogLevelString = LOGLEVEL;
+    var currentLogLevelNumber = levels[currentLogLevelString] || levels.info;
+    var logger = {
+      trace: (message, ...rest) => {
+        currentLogLevelNumber <= levels.trace && console.trace(message, ...rest);
+      },
+      debug: (message, ...rest) => {
+        currentLogLevelNumber <= levels.debug && console.debug(message, ...rest);
+      },
+      info: (message, ...rest) => {
+        currentLogLevelNumber <= levels.info && console.info(message, ...rest);
+      },
+      warn: (message, ...rest) => {
+        currentLogLevelNumber <= levels.warn && console.warn(message, ...rest);
+      },
+      error: (message, ...rest) => {
+        currentLogLevelNumber <= levels.error && console.error(message, ...rest);
+      },
+      log: (message, ...rest) => {
+        currentLogLevelNumber < levels.silent && console.log(message, ...rest);
+      }
+    };
+    var logged = /* @__PURE__ */ new Set();
+    var once = /* @__PURE__ */ __name((type) => (message, ...rest) => {
+      if (!logged.has(message))
+        return logged.add(message), logger[type](message, ...rest);
+    }, "once");
+    once.clear = () => logged.clear();
+    once.trace = once("trace");
+    once.debug = once("debug");
+    once.info = once("info");
+    once.warn = once("warn");
+    once.error = once("error");
+    once.log = once("log");
+    var deprecate3 = once("warn");
+    var pretty = /* @__PURE__ */ __name((type) => (...args) => {
+      let argArray = [];
+      if (args.length) {
+        let startTagRe = /<span\s+style=(['"])([^'"]*)\1\s*>/gi, endTagRe = /<\/span>/gi, reResultArray;
+        for (argArray.push(args[0].replace(startTagRe, "%c").replace(endTagRe, "%c")); reResultArray = startTagRe.exec(args[0]); )
+          argArray.push(reResultArray[2]), argArray.push("");
+        for (let j = 1; j < args.length; j++)
+          argArray.push(args[j]);
+      }
+      logger[type].apply(logger, argArray);
+    }, "pretty");
+    pretty.trace = pretty("trace");
+    pretty.debug = pretty("debug");
+    pretty.info = pretty("info");
+    pretty.warn = pretty("warn");
+    pretty.error = pretty("error");
+  }
+});
+
 // node_modules/map-or-similar/src/similar.js
 var require_similar = __commonJS({
   "node_modules/map-or-similar/src/similar.js"(exports, module2) {
@@ -37735,16 +38113,16 @@ var require_similar = __commonJS({
       return false;
     };
     Similar.prototype.forEach = function(callback, thisArg) {
-      var i2;
-      for (i2 = 0; i2 < this.size; i2++) {
-        callback.call(thisArg || this, this.list[i2].val, this.list[i2].key, this);
+      var i;
+      for (i = 0; i < this.size; i++) {
+        callback.call(thisArg || this, this.list[i].val, this.list[i].key, this);
       }
     };
     Similar.prototype.indexOf = function(key) {
-      var i2;
-      for (i2 = 0; i2 < this.size; i2++) {
-        if (this.isEqual(this.list[i2].key, key)) {
-          return i2;
+      var i;
+      for (i = 0; i < this.size; i++) {
+        if (this.isEqual(this.list[i].key, key)) {
+          return i;
         }
       }
       return -1;
@@ -37778,22 +38156,22 @@ var require_memoizerific = __commonJS({
       var cache = new MapOrSimilar(process.env.FORCE_SIMILAR_INSTEAD_OF_MAP === "true"), lru = [];
       return function(fn) {
         var memoizerific = /* @__PURE__ */ __name(function() {
-          var currentCache = cache, newMap, fnResult, argsLengthMinusOne = arguments.length - 1, lruPath = Array(argsLengthMinusOne + 1), isMemoized = true, i2;
+          var currentCache = cache, newMap, fnResult, argsLengthMinusOne = arguments.length - 1, lruPath = Array(argsLengthMinusOne + 1), isMemoized = true, i;
           if ((memoizerific.numArgs || memoizerific.numArgs === 0) && memoizerific.numArgs !== argsLengthMinusOne + 1) {
             throw new Error("Memoizerific functions should always be called with the same number of arguments");
           }
-          for (i2 = 0; i2 < argsLengthMinusOne; i2++) {
-            lruPath[i2] = {
+          for (i = 0; i < argsLengthMinusOne; i++) {
+            lruPath[i] = {
               cacheItem: currentCache,
-              arg: arguments[i2]
+              arg: arguments[i]
             };
-            if (currentCache.has(arguments[i2])) {
-              currentCache = currentCache.get(arguments[i2]);
+            if (currentCache.has(arguments[i])) {
+              currentCache = currentCache.get(arguments[i]);
               continue;
             }
             isMemoized = false;
             newMap = new MapOrSimilar(process.env.FORCE_SIMILAR_INSTEAD_OF_MAP === "true");
-            currentCache.set(arguments[i2], newMap);
+            currentCache.set(arguments[i], newMap);
             currentCache = newMap;
           }
           if (isMemoized) {
@@ -37833,11 +38211,11 @@ var require_memoizerific = __commonJS({
       };
     };
     function moveToMostRecentLru(lru, lruPath) {
-      var lruLen = lru.length, lruPathLen = lruPath.length, isMatch, i2, ii;
-      for (i2 = 0; i2 < lruLen; i2++) {
+      var lruLen = lru.length, lruPathLen = lruPath.length, isMatch, i, ii;
+      for (i = 0; i < lruLen; i++) {
         isMatch = true;
         for (ii = 0; ii < lruPathLen; ii++) {
-          if (!isEqual(lru[i2][ii].arg, lruPath[ii].arg)) {
+          if (!isEqual(lru[i][ii].arg, lruPath[ii].arg)) {
             isMatch = false;
             break;
           }
@@ -37846,14 +38224,14 @@ var require_memoizerific = __commonJS({
           break;
         }
       }
-      lru.push(lru.splice(i2, 1)[0]);
+      lru.push(lru.splice(i, 1)[0]);
     }
     __name(moveToMostRecentLru, "moveToMostRecentLru");
     function removeCachedResult(removedLru) {
-      var removedLruLen = removedLru.length, currentLru = removedLru[removedLruLen - 1], tmp, i2;
+      var removedLruLen = removedLru.length, currentLru = removedLru[removedLruLen - 1], tmp, i;
       currentLru.cacheItem.delete(currentLru.arg);
-      for (i2 = removedLruLen - 2; i2 >= 0; i2--) {
-        currentLru = removedLru[i2];
+      for (i = removedLruLen - 2; i >= 0; i--) {
+        currentLru = removedLru[i];
         tmp = currentLru.cacheItem.get(currentLru.arg);
         if (!tmp || !tmp.size) {
           currentLru.cacheItem.delete(currentLru.arg);
@@ -38161,9 +38539,9 @@ var require_baseFor = __commonJS({
 // node_modules/lodash/_baseTimes.js
 var require_baseTimes = __commonJS({
   "node_modules/lodash/_baseTimes.js"(exports, module2) {
-    function baseTimes(n2, iteratee) {
-      var index = -1, result = Array(n2);
-      while (++index < n2) {
+    function baseTimes(n, iteratee) {
+      var index = -1, result = Array(n);
+      while (++index < n) {
         result[index] = iteratee(index);
       }
       return result;
@@ -39677,7 +40055,7 @@ var require_memoize = __commonJS({
   "node_modules/lodash/memoize.js"(exports, module2) {
     var MapCache = require_MapCache();
     var FUNC_ERROR_TEXT = "Expected a function";
-    function memoize(func, resolver) {
+    function memoize3(func, resolver) {
       if (typeof func != "function" || resolver != null && typeof resolver != "function") {
         throw new TypeError(FUNC_ERROR_TEXT);
       }
@@ -39690,22 +40068,22 @@ var require_memoize = __commonJS({
         memoized.cache = cache.set(key, result) || cache;
         return result;
       }, "memoized");
-      memoized.cache = new (memoize.Cache || MapCache)();
+      memoized.cache = new (memoize3.Cache || MapCache)();
       return memoized;
     }
-    __name(memoize, "memoize");
-    memoize.Cache = MapCache;
-    module2.exports = memoize;
+    __name(memoize3, "memoize");
+    memoize3.Cache = MapCache;
+    module2.exports = memoize3;
   }
 });
 
 // node_modules/lodash/_memoizeCapped.js
 var require_memoizeCapped = __commonJS({
   "node_modules/lodash/_memoizeCapped.js"(exports, module2) {
-    var memoize = require_memoize();
+    var memoize3 = require_memoize();
     var MAX_MEMOIZE_SIZE = 500;
     function memoizeCapped(func) {
-      var result = memoize(func, function(key) {
+      var result = memoize3(func, function(key) {
         if (cache.size === MAX_MEMOIZE_SIZE) {
           cache.clear();
         }
@@ -40026,7 +40404,7 @@ var require_mapValues = __commonJS({
     var baseAssignValue = require_baseAssignValue();
     var baseForOwn = require_baseForOwn();
     var baseIteratee = require_baseIteratee();
-    function mapValues(object, iteratee) {
+    function mapValues5(object, iteratee) {
       var result = {};
       iteratee = baseIteratee(iteratee, 3);
       baseForOwn(object, function(value, key, object2) {
@@ -40034,8 +40412,8 @@ var require_mapValues = __commonJS({
       });
       return result;
     }
-    __name(mapValues, "mapValues");
-    module2.exports = mapValues;
+    __name(mapValues5, "mapValues");
+    module2.exports = mapValues5;
   }
 });
 
@@ -40318,10 +40696,10 @@ var require_pick = __commonJS({
   "node_modules/lodash/pick.js"(exports, module2) {
     var basePick = require_basePick();
     var flatRest = require_flatRest();
-    var pick = flatRest(function(object, paths) {
+    var pick2 = flatRest(function(object, paths) {
       return object == null ? {} : basePick(object, paths);
     });
-    module2.exports = pick;
+    module2.exports = pick2;
   }
 });
 
@@ -40336,7 +40714,7 @@ var require_synchronous_promise = __commonJS({
     var PENDING = "pending";
     var RESOLVED = "resolved";
     var REJECTED = "rejected";
-    function SynchronousPromise(handler) {
+    function SynchronousPromise2(handler) {
       this.status = PENDING;
       this._continuations = [];
       this._parent = null;
@@ -40345,7 +40723,7 @@ var require_synchronous_promise = __commonJS({
         handler.call(this, this._continueWith.bind(this), this._failWith.bind(this));
       }
     }
-    __name(SynchronousPromise, "SynchronousPromise");
+    __name(SynchronousPromise2, "SynchronousPromise");
     function looksLikeAPromise(obj) {
       return obj && typeof obj.then === "function";
     }
@@ -40354,9 +40732,9 @@ var require_synchronous_promise = __commonJS({
       return value;
     }
     __name(passThrough, "passThrough");
-    SynchronousPromise.prototype = {
+    SynchronousPromise2.prototype = {
       then: function(nextFn, catchFn) {
-        var next = SynchronousPromise.unresolved()._setParent(this);
+        var next = SynchronousPromise2.unresolved()._setParent(this);
         if (this._isRejected()) {
           if (this._paused) {
             this._continuations.push({
@@ -40373,13 +40751,13 @@ var require_synchronous_promise = __commonJS({
                 this._chainPromiseData(catchResult, next);
                 return next;
               } else {
-                return SynchronousPromise.resolve(catchResult)._setParent(this);
+                return SynchronousPromise2.resolve(catchResult)._setParent(this);
               }
             } catch (e) {
-              return SynchronousPromise.reject(e)._setParent(this);
+              return SynchronousPromise2.reject(e)._setParent(this);
             }
           }
-          return SynchronousPromise.reject(this._error)._setParent(this);
+          return SynchronousPromise2.reject(this._error)._setParent(this);
         }
         this._continuations.push({
           promise: next,
@@ -40391,9 +40769,9 @@ var require_synchronous_promise = __commonJS({
       },
       catch: function(handler) {
         if (this._isResolved()) {
-          return SynchronousPromise.resolve(this._data)._setParent(this);
+          return SynchronousPromise2.resolve(this._data)._setParent(this);
         }
-        var next = SynchronousPromise.unresolved()._setParent(this);
+        var next = SynchronousPromise2.unresolved()._setParent(this);
         this._continuations.push({
           promise: next,
           catchFn: handler
@@ -40601,8 +40979,8 @@ var require_synchronous_promise = __commonJS({
         return this.status === REJECTED;
       }
     };
-    SynchronousPromise.resolve = function(result) {
-      return new SynchronousPromise(function(resolve3, reject) {
+    SynchronousPromise2.resolve = function(result) {
+      return new SynchronousPromise2(function(resolve3, reject) {
         if (looksLikeAPromise(result)) {
           result.then(function(newResult) {
             resolve3(newResult);
@@ -40614,26 +40992,26 @@ var require_synchronous_promise = __commonJS({
         }
       });
     };
-    SynchronousPromise.reject = function(result) {
-      return new SynchronousPromise(function(resolve3, reject) {
+    SynchronousPromise2.reject = function(result) {
+      return new SynchronousPromise2(function(resolve3, reject) {
         reject(result);
       });
     };
-    SynchronousPromise.unresolved = function() {
-      return new SynchronousPromise(function(resolve3, reject) {
+    SynchronousPromise2.unresolved = function() {
+      return new SynchronousPromise2(function(resolve3, reject) {
         this.resolve = resolve3;
         this.reject = reject;
       });
     };
-    SynchronousPromise.all = function() {
+    SynchronousPromise2.all = function() {
       var args = makeArrayFrom(arguments);
       if (Array.isArray(args[0])) {
         args = args[0];
       }
       if (!args.length) {
-        return SynchronousPromise.resolve([]);
+        return SynchronousPromise2.resolve([]);
       }
-      return new SynchronousPromise(function(resolve3, reject) {
+      return new SynchronousPromise2(function(resolve3, reject) {
         var allData = [], numResolved = 0, doResolve = /* @__PURE__ */ __name(function() {
           if (numResolved === args.length) {
             resolve3(allData);
@@ -40646,7 +41024,7 @@ var require_synchronous_promise = __commonJS({
           reject(err);
         }, "doReject");
         args.forEach(function(arg, idx) {
-          SynchronousPromise.resolve(arg).then(function(thisResult) {
+          SynchronousPromise2.resolve(arg).then(function(thisResult) {
             allData[idx] = thisResult;
             numResolved += 1;
             doResolve();
@@ -40665,15 +41043,15 @@ var require_synchronous_promise = __commonJS({
       };
     }
     __name(createAggregateErrorFrom, "createAggregateErrorFrom");
-    SynchronousPromise.any = function() {
+    SynchronousPromise2.any = function() {
       var args = makeArrayFrom(arguments);
       if (Array.isArray(args[0])) {
         args = args[0];
       }
       if (!args.length) {
-        return SynchronousPromise.reject(createAggregateErrorFrom([]));
+        return SynchronousPromise2.reject(createAggregateErrorFrom([]));
       }
-      return new SynchronousPromise(function(resolve3, reject) {
+      return new SynchronousPromise2(function(resolve3, reject) {
         var allErrors = [], numRejected = 0, doReject = /* @__PURE__ */ __name(function() {
           if (numRejected === args.length) {
             reject(createAggregateErrorFrom(allErrors));
@@ -40686,7 +41064,7 @@ var require_synchronous_promise = __commonJS({
           resolve3(result);
         }, "doResolve");
         args.forEach(function(arg, idx) {
-          SynchronousPromise.resolve(arg).then(function(thisResult) {
+          SynchronousPromise2.resolve(arg).then(function(thisResult) {
             doResolve(thisResult);
           }).catch(function(err) {
             allErrors[idx] = err;
@@ -40696,15 +41074,15 @@ var require_synchronous_promise = __commonJS({
         });
       });
     };
-    SynchronousPromise.allSettled = function() {
+    SynchronousPromise2.allSettled = function() {
       var args = makeArrayFrom(arguments);
       if (Array.isArray(args[0])) {
         args = args[0];
       }
       if (!args.length) {
-        return SynchronousPromise.resolve([]);
+        return SynchronousPromise2.resolve([]);
       }
-      return new SynchronousPromise(function(resolve3) {
+      return new SynchronousPromise2(function(resolve3) {
         var allData = [], numSettled = 0, doSettled = /* @__PURE__ */ __name(function() {
           numSettled += 1;
           if (numSettled === args.length) {
@@ -40712,7 +41090,7 @@ var require_synchronous_promise = __commonJS({
           }
         }, "doSettled");
         args.forEach(function(arg, idx) {
-          SynchronousPromise.resolve(arg).then(function(thisResult) {
+          SynchronousPromise2.resolve(arg).then(function(thisResult) {
             allData[idx] = {
               status: "fulfilled",
               value: thisResult
@@ -40728,20 +41106,20 @@ var require_synchronous_promise = __commonJS({
         });
       });
     };
-    if (Promise === SynchronousPromise) {
+    if (Promise === SynchronousPromise2) {
       throw new Error("Please use SynchronousPromise.installGlobally() to install globally");
     }
     var RealPromise = Promise;
-    SynchronousPromise.installGlobally = function(__awaiter) {
-      if (Promise === SynchronousPromise) {
+    SynchronousPromise2.installGlobally = function(__awaiter) {
+      if (Promise === SynchronousPromise2) {
         return __awaiter;
       }
       var result = patchAwaiterIfRequired(__awaiter);
-      Promise = SynchronousPromise;
+      Promise = SynchronousPromise2;
       return result;
     };
-    SynchronousPromise.uninstallGlobally = function() {
-      if (Promise === SynchronousPromise) {
+    SynchronousPromise2.uninstallGlobally = function() {
+      if (Promise === SynchronousPromise2) {
         Promise = RealPromise;
       }
     };
@@ -40759,25 +41137,8 @@ var require_synchronous_promise = __commonJS({
     }
     __name(patchAwaiterIfRequired, "patchAwaiterIfRequired");
     module2.exports = {
-      SynchronousPromise
+      SynchronousPromise: SynchronousPromise2
     };
-  }
-});
-
-// node_modules/global/window.js
-var require_window = __commonJS({
-  "node_modules/global/window.js"(exports, module2) {
-    var win;
-    if (typeof window !== "undefined") {
-      win = window;
-    } else if (typeof global !== "undefined") {
-      win = global;
-    } else if (typeof self !== "undefined") {
-      win = self;
-    } else {
-      win = {};
-    }
-    module2.exports = win;
   }
 });
 
@@ -40802,7 +41163,7 @@ var require_isPlainObject = __commonJS({
     var funcToString = funcProto.toString;
     var hasOwnProperty = objectProto.hasOwnProperty;
     var objectCtorString = funcToString.call(Object);
-    function isPlainObject(value) {
+    function isPlainObject3(value) {
       if (!isObjectLike(value) || baseGetTag(value) != objectTag) {
         return false;
       }
@@ -40813,8 +41174,8 @@ var require_isPlainObject = __commonJS({
       var Ctor = hasOwnProperty.call(proto, "constructor") && proto.constructor;
       return typeof Ctor == "function" && Ctor instanceof Ctor && funcToString.call(Ctor) == objectCtorString;
     }
-    __name(isPlainObject, "isPlainObject");
-    module2.exports = isPlainObject;
+    __name(isPlainObject3, "isPlainObject");
+    module2.exports = isPlainObject3;
   }
 });
 
@@ -40922,7 +41283,7 @@ var require_pickBy = __commonJS({
     var baseIteratee = require_baseIteratee();
     var basePickBy = require_basePickBy();
     var getAllKeysIn = require_getAllKeysIn();
-    function pickBy(object, predicate) {
+    function pickBy2(object, predicate) {
       if (object == null) {
         return {};
       }
@@ -40936,8 +41297,8 @@ var require_pickBy = __commonJS({
         return predicate(value, path[0]);
       });
     }
-    __name(pickBy, "pickBy");
-    module2.exports = pickBy;
+    __name(pickBy2, "pickBy");
+    module2.exports = pickBy2;
   }
 });
 
@@ -45545,7 +45906,7 @@ var require_matchesPattern2 = __commonJS({
         return false;
       if (!allowPartial && nodes.length > parts.length)
         return false;
-      for (let i2 = 0, j = nodes.length - 1; i2 < parts.length; i2++, j--) {
+      for (let i = 0, j = nodes.length - 1; i < parts.length; i++, j--) {
         const node1 = nodes[j];
         let value;
         if ((0, _generated.isIdentifier)(node1)) {
@@ -45557,7 +45918,7 @@ var require_matchesPattern2 = __commonJS({
         } else {
           return false;
         }
-        if (parts[i2] !== value)
+        if (parts[i] !== value)
           return false;
       }
       return true;
@@ -45682,8 +46043,8 @@ var require_is2 = __commonJS({
     function is(type, node, opts) {
       if (!node)
         return false;
-      const matches = (0, _isType.default)(node.type, type);
-      if (!matches) {
+      const matches2 = (0, _isType.default)(node.type, type);
+      if (!matches2) {
         if (!opts && node.type === "Placeholder" && type in _definitions.FLIPPED_ALIAS_KEYS) {
           return (0, _isPlaceholderType.default)(node.expectedNode, type);
         }
@@ -45955,9 +46316,9 @@ var require_utils2 = __commonJS({
       function validator(node, key, val) {
         if (!Array.isArray(val))
           return;
-        for (let i2 = 0; i2 < val.length; i2++) {
-          const subkey = `${key}[${i2}]`;
-          const v = val[i2];
+        for (let i = 0; i < val.length; i++) {
+          const subkey = `${key}[${i}]`;
+          const v = val[i];
           callback(node, subkey, v);
           if (process.env.BABEL_TYPES_8_BREAKING)
             (0, _validate.validateChild)(node, subkey, v);
@@ -46110,7 +46471,7 @@ ${errors.join("\n")}`);
           (_defined = defined) != null ? _defined : defined = [];
           opts.aliases = defined;
         }
-        const additional = aliases.filter((a2) => !defined.includes(a2));
+        const additional = aliases.filter((a) => !defined.includes(a));
         defined.unshift(...additional);
         return defineType(type, opts);
       };
@@ -53109,9 +53470,9 @@ var require_cleanJSXElementLiteralChild2 = __commonJS({
     function cleanJSXElementLiteralChild(child, args) {
       const lines = child.value.split(/\r\n|\n|\r/);
       let lastNonEmptyLine = 0;
-      for (let i2 = 0; i2 < lines.length; i2++) {
-        if (lines[i2].match(/[^ \t]/)) {
-          lastNonEmptyLine = i2;
+      for (let i = 0; i < lines.length; i++) {
+        if (lines[i].match(/[^ \t]/)) {
+          lastNonEmptyLine = i;
         }
       }
       let str = "";
@@ -53153,8 +53514,8 @@ var require_buildChildren2 = __commonJS({
     var _cleanJSXElementLiteralChild = require_cleanJSXElementLiteralChild2();
     function buildChildren(node) {
       const elements = [];
-      for (let i2 = 0; i2 < node.children.length; i2++) {
-        let child = node.children[i2];
+      for (let i = 0; i < node.children.length; i++) {
+        let child = node.children[i];
         if ((0, _generated.isJSXText)(child)) {
           (0, _cleanJSXElementLiteralChild.default)(child, elements);
           continue;
@@ -54792,8 +55153,8 @@ var require_removeTypeDuplicates3 = __commonJS({
       const bases = /* @__PURE__ */ new Map();
       const typeGroups = /* @__PURE__ */ new Set();
       const types = [];
-      for (let i2 = 0; i2 < nodes.length; i2++) {
-        const node = nodes[i2];
+      for (let i = 0; i < nodes.length; i++) {
+        const node = nodes[i];
         if (!node)
           continue;
         if (types.indexOf(node) >= 0) {
@@ -54885,8 +55246,8 @@ var require_removeTypeDuplicates4 = __commonJS({
       const bases = /* @__PURE__ */ new Map();
       const typeGroups = /* @__PURE__ */ new Set();
       const types = [];
-      for (let i2 = 0; i2 < nodes.length; i2++) {
-        const node = nodes[i2];
+      for (let i = 0; i < nodes.length; i++) {
+        const node = nodes[i];
         if (!node)
           continue;
         if (types.indexOf(node) >= 0) {
@@ -56990,12 +57351,12 @@ var require_toIdentifier2 = __commonJS({
     function toIdentifier(input) {
       input = input + "";
       let name = "";
-      for (const c2 of input) {
-        name += (0, _helperValidatorIdentifier.isIdentifierChar)(c2.codePointAt(0)) ? c2 : "-";
+      for (const c of input) {
+        name += (0, _helperValidatorIdentifier.isIdentifierChar)(c.codePointAt(0)) ? c : "-";
       }
       name = name.replace(/^[-0-9]+/, "");
-      name = name.replace(/[-\s]+(.)?/g, function(match, c2) {
-        return c2 ? c2.toUpperCase() : "";
+      name = name.replace(/[-\s]+(.)?/g, function(match, c) {
+        return c ? c.toUpperCase() : "";
       });
       if (!(0, _isValidIdentifier.default)(name)) {
         name = `_${name}`;
@@ -57251,8 +57612,8 @@ var require_getBindingIdentifiers2 = __commonJS({
           }
         }
         if (keys) {
-          for (let i2 = 0; i2 < keys.length; i2++) {
-            const key = keys[i2];
+          for (let i = 0; i < keys.length; i++) {
+            const key = keys[i];
             const nodes = id[key];
             if (nodes) {
               Array.isArray(nodes) ? search.push(...nodes) : search.push(nodes);
@@ -57548,14 +57909,14 @@ var require_valueToNode2 = __commonJS({
       return objectToString(value) === "[object RegExp]";
     }
     __name(isRegExp, "isRegExp");
-    function isPlainObject(value) {
+    function isPlainObject3(value) {
       if (typeof value !== "object" || value === null || Object.prototype.toString.call(value) !== "[object Object]") {
         return false;
       }
       const proto = Object.getPrototypeOf(value);
       return proto === null || Object.getPrototypeOf(proto) === null;
     }
-    __name(isPlainObject, "isPlainObject");
+    __name(isPlainObject3, "isPlainObject");
     function valueToNode(value) {
       if (value === void 0) {
         return (0, _generated.identifier)("undefined");
@@ -57595,7 +57956,7 @@ var require_valueToNode2 = __commonJS({
       if (Array.isArray(value)) {
         return (0, _generated.arrayExpression)(value.map(valueToNode));
       }
-      if (isPlainObject(value)) {
+      if (isPlainObject3(value)) {
         const props = [];
         for (const key of Object.keys(value)) {
           let nodeKey;
@@ -57733,14 +58094,14 @@ var require_traverse2 = __commonJS({
       for (const key of keys) {
         const subNode = node[key];
         if (Array.isArray(subNode)) {
-          for (let i2 = 0; i2 < subNode.length; i2++) {
-            const child = subNode[i2];
+          for (let i = 0; i < subNode.length; i++) {
+            const child = subNode[i];
             if (!child)
               continue;
             ancestors.push({
               node,
               key,
-              index: i2
+              index: i
             });
             traverseSimpleImpl(child, enter, exit, state, ancestors);
             ancestors.pop();
@@ -57776,8 +58137,8 @@ var require_isBinding2 = __commonJS({
       }
       const keys = _getBindingIdentifiers.default.keys[parent.type];
       if (keys) {
-        for (let i2 = 0; i2 < keys.length; i2++) {
-          const key = keys[i2];
+        for (let i = 0; i < keys.length; i++) {
+          const key = keys[i];
           const val = parent[key];
           if (Array.isArray(val)) {
             if (val.indexOf(node) >= 0)
@@ -57863,18 +58224,18 @@ var require_isNodesEquivalent2 = __commonJS({
     });
     exports.default = isNodesEquivalent;
     var _definitions = require_definitions2();
-    function isNodesEquivalent(a2, b2) {
-      if (typeof a2 !== "object" || typeof b2 !== "object" || a2 == null || b2 == null) {
-        return a2 === b2;
+    function isNodesEquivalent(a, b) {
+      if (typeof a !== "object" || typeof b !== "object" || a == null || b == null) {
+        return a === b;
       }
-      if (a2.type !== b2.type) {
+      if (a.type !== b.type) {
         return false;
       }
-      const fields = Object.keys(_definitions.NODE_FIELDS[a2.type] || a2.type);
-      const visitorKeys = _definitions.VISITOR_KEYS[a2.type];
+      const fields = Object.keys(_definitions.NODE_FIELDS[a.type] || a.type);
+      const visitorKeys = _definitions.VISITOR_KEYS[a.type];
       for (const field of fields) {
-        const val_a = a2[field];
-        const val_b = b2[field];
+        const val_a = a[field];
+        const val_b = b[field];
         if (typeof val_a !== typeof val_b) {
           return false;
         }
@@ -57890,8 +58251,8 @@ var require_isNodesEquivalent2 = __commonJS({
           if (val_a.length !== val_b.length) {
             return false;
           }
-          for (let i2 = 0; i2 < val_a.length; i2++) {
-            if (!isNodesEquivalent(val_a[i2], val_b[i2])) {
+          for (let i = 0; i < val_a.length; i++) {
+            if (!isNodesEquivalent(val_a[i], val_b[i])) {
               return false;
             }
           }
@@ -58785,10 +59146,10 @@ var require_sourcemap_codec_umd = __commonJS({
       const chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/";
       const intToChar = new Uint8Array(64);
       const charToInt = new Uint8Array(128);
-      for (let i2 = 0; i2 < chars.length; i2++) {
-        const c2 = chars.charCodeAt(i2);
-        intToChar[i2] = c2;
-        charToInt[c2] = i2;
+      for (let i = 0; i < chars.length; i++) {
+        const c = chars.charCodeAt(i);
+        intToChar[i] = c;
+        charToInt[c] = i;
       }
       const td = typeof TextDecoder !== "undefined" ? /* @__PURE__ */ new TextDecoder() : typeof Buffer !== "undefined" ? {
         decode(buf) {
@@ -58798,8 +59159,8 @@ var require_sourcemap_codec_umd = __commonJS({
       } : {
         decode(buf) {
           let out = "";
-          for (let i2 = 0; i2 < buf.length; i2++) {
-            out += String.fromCharCode(buf[i2]);
+          for (let i = 0; i < buf.length; i++) {
+            out += String.fromCharCode(buf[i]);
           }
           return out;
         }
@@ -58814,19 +59175,19 @@ var require_sourcemap_codec_umd = __commonJS({
           let sorted = true;
           let lastCol = 0;
           state[0] = 0;
-          for (let i2 = index; i2 < semi; i2++) {
+          for (let i = index; i < semi; i++) {
             let seg;
-            i2 = decodeInteger(mappings, i2, state, 0);
+            i = decodeInteger(mappings, i, state, 0);
             const col = state[0];
             if (col < lastCol)
               sorted = false;
             lastCol = col;
-            if (hasMoreVlq(mappings, i2, semi)) {
-              i2 = decodeInteger(mappings, i2, state, 1);
-              i2 = decodeInteger(mappings, i2, state, 2);
-              i2 = decodeInteger(mappings, i2, state, 3);
-              if (hasMoreVlq(mappings, i2, semi)) {
-                i2 = decodeInteger(mappings, i2, state, 4);
+            if (hasMoreVlq(mappings, i, semi)) {
+              i = decodeInteger(mappings, i, state, 1);
+              i = decodeInteger(mappings, i, state, 2);
+              i = decodeInteger(mappings, i, state, 3);
+              if (hasMoreVlq(mappings, i, semi)) {
+                i = decodeInteger(mappings, i, state, 4);
                 seg = [
                   col,
                   state[1],
@@ -58867,8 +59228,8 @@ var require_sourcemap_codec_umd = __commonJS({
         let shift = 0;
         let integer = 0;
         do {
-          const c2 = mappings.charCodeAt(pos++);
-          integer = charToInt[c2];
+          const c = mappings.charCodeAt(pos++);
+          integer = charToInt[c];
           value |= (integer & 31) << shift;
           shift += 5;
         } while (integer & 32);
@@ -58881,18 +59242,18 @@ var require_sourcemap_codec_umd = __commonJS({
         return pos;
       }
       __name(decodeInteger, "decodeInteger");
-      function hasMoreVlq(mappings, i2, length) {
-        if (i2 >= length)
+      function hasMoreVlq(mappings, i, length) {
+        if (i >= length)
           return false;
-        return mappings.charCodeAt(i2) !== comma;
+        return mappings.charCodeAt(i) !== comma;
       }
       __name(hasMoreVlq, "hasMoreVlq");
       function sort(line) {
         line.sort(sortComparator);
       }
       __name(sort, "sort");
-      function sortComparator(a2, b2) {
-        return a2[0] - b2[0];
+      function sortComparator(a, b) {
+        return a[0] - b[0];
       }
       __name(sortComparator, "sortComparator");
       function encode(decoded) {
@@ -58903,9 +59264,9 @@ var require_sourcemap_codec_umd = __commonJS({
         const sub = buf.subarray(0, subLength);
         let pos = 0;
         let out = "";
-        for (let i2 = 0; i2 < decoded.length; i2++) {
-          const line = decoded[i2];
-          if (i2 > 0) {
+        for (let i = 0; i < decoded.length; i++) {
+          const line = decoded[i];
+          if (i > 0) {
             if (pos === bufLength) {
               out += td.decode(buf);
               pos = 0;
@@ -59073,8 +59434,8 @@ var require_resolve_uri_umd = __commonJS({
         let pointer = 1;
         let positive = 0;
         let addTrailingSlash = false;
-        for (let i2 = 1; i2 < pieces.length; i2++) {
-          const piece = pieces[i2];
+        for (let i = 1; i < pieces.length; i++) {
+          const piece = pieces[i];
           if (!piece) {
             addTrailingSlash = true;
             continue;
@@ -59158,9 +59519,9 @@ var require_resolve_uri_umd = __commonJS({
   }
 });
 
-// node_modules/@jridgewell/gen-mapping/node_modules/@jridgewell/trace-mapping/dist/trace-mapping.umd.js
+// node_modules/@jridgewell/trace-mapping/dist/trace-mapping.umd.js
 var require_trace_mapping_umd = __commonJS({
-  "node_modules/@jridgewell/gen-mapping/node_modules/@jridgewell/trace-mapping/dist/trace-mapping.umd.js"(exports, module2) {
+  "node_modules/@jridgewell/trace-mapping/dist/trace-mapping.umd.js"(exports, module2) {
     (function(global2, factory) {
       typeof exports === "object" && typeof module2 !== "undefined" ? factory(exports, require_sourcemap_codec_umd(), require_resolve_uri_umd()) : typeof define === "function" && define.amd ? define([
         "exports",
@@ -59202,16 +59563,16 @@ var require_trace_mapping_umd = __commonJS({
           return mappings;
         if (!owned)
           mappings = mappings.slice();
-        for (let i2 = unsortedIndex; i2 < mappings.length; i2 = nextUnsortedSegmentLine(mappings, i2 + 1)) {
-          mappings[i2] = sortSegments(mappings[i2], owned);
+        for (let i = unsortedIndex; i < mappings.length; i = nextUnsortedSegmentLine(mappings, i + 1)) {
+          mappings[i] = sortSegments(mappings[i], owned);
         }
         return mappings;
       }
       __name(maybeSort, "maybeSort");
       function nextUnsortedSegmentLine(mappings, start) {
-        for (let i2 = start; i2 < mappings.length; i2++) {
-          if (!isSorted(mappings[i2]))
-            return i2;
+        for (let i = start; i < mappings.length; i++) {
+          if (!isSorted(mappings[i]))
+            return i;
         }
         return mappings.length;
       }
@@ -59231,8 +59592,8 @@ var require_trace_mapping_umd = __commonJS({
         return line.sort(sortComparator);
       }
       __name(sortSegments, "sortSegments");
-      function sortComparator(a2, b2) {
-        return a2[COLUMN] - b2[COLUMN];
+      function sortComparator(a, b) {
+        return a[COLUMN] - b[COLUMN];
       }
       __name(sortComparator, "sortComparator");
       let found = false;
@@ -59255,16 +59616,16 @@ var require_trace_mapping_umd = __commonJS({
       }
       __name(binarySearch, "binarySearch");
       function upperBound(haystack, needle, index) {
-        for (let i2 = index + 1; i2 < haystack.length; index = i2++) {
-          if (haystack[i2][COLUMN] !== needle)
+        for (let i = index + 1; i < haystack.length; index = i++) {
+          if (haystack[i][COLUMN] !== needle)
             break;
         }
         return index;
       }
       __name(upperBound, "upperBound");
       function lowerBound(haystack, needle, index) {
-        for (let i2 = index - 1; i2 >= 0; index = i2--) {
-          if (haystack[i2][COLUMN] !== needle)
+        for (let i = index - 1; i >= 0; index = i--) {
+          if (haystack[i][COLUMN] !== needle)
             break;
         }
         return index;
@@ -59300,8 +59661,8 @@ var require_trace_mapping_umd = __commonJS({
       __name(memoizedBinarySearch, "memoizedBinarySearch");
       function buildBySources(decoded, memos) {
         const sources = memos.map(buildNullArray);
-        for (let i2 = 0; i2 < decoded.length; i2++) {
-          const line = decoded[i2];
+        for (let i = 0; i < decoded.length; i++) {
+          const line = decoded[i];
           for (let j = 0; j < line.length; j++) {
             const seg = line[j];
             if (seg.length === 1)
@@ -59315,7 +59676,7 @@ var require_trace_mapping_umd = __commonJS({
             const index = upperBound(originalLine, sourceColumn, memoizedBinarySearch(originalLine, sourceColumn, memo, sourceLine));
             insert(originalLine, memo.lastIndex = index + 1, [
               sourceColumn,
-              i2,
+              i,
               seg[COLUMN]
             ]);
           }
@@ -59324,8 +59685,8 @@ var require_trace_mapping_umd = __commonJS({
       }
       __name(buildBySources, "buildBySources");
       function insert(array, index, value) {
-        for (let i2 = array.length; i2 > index; i2--) {
-          array[i2] = array[i2 - 1];
+        for (let i = array.length; i > index; i--) {
+          array[i] = array[i - 1];
         }
         array[index] = value;
       }
@@ -59357,12 +59718,12 @@ var require_trace_mapping_umd = __commonJS({
       }, "AnyMap");
       function recurse(input, mapUrl, mappings, sources, sourcesContent, names, lineOffset, columnOffset, stopLine, stopColumn) {
         const { sections } = input;
-        for (let i2 = 0; i2 < sections.length; i2++) {
-          const { map, offset } = sections[i2];
+        for (let i = 0; i < sections.length; i++) {
+          const { map, offset } = sections[i];
           let sl = stopLine;
           let sc = stopColumn;
-          if (i2 + 1 < sections.length) {
-            const nextOffset = sections[i2 + 1].offset;
+          if (i + 1 < sections.length) {
+            const nextOffset = sections[i + 1].offset;
             sl = Math.min(stopLine, lineOffset + nextOffset.line);
             if (sl === stopLine) {
               sc = Math.min(stopColumn, columnOffset + nextOffset.column);
@@ -59387,7 +59748,7 @@ var require_trace_mapping_umd = __commonJS({
         if (contents)
           append(sourcesContent, contents);
         else
-          for (let i2 = 0; i2 < resolvedSources.length; i2++)
+          for (let i = 0; i < resolvedSources.length; i++)
             sourcesContent.push(null);
         for (let i1 = 0; i1 < decoded.length; i1++) {
           const lineI = lineOffset + i1;
@@ -59427,13 +59788,13 @@ var require_trace_mapping_umd = __commonJS({
       }
       __name(addSection, "addSection");
       function append(arr, other) {
-        for (let i2 = 0; i2 < other.length; i2++)
-          arr.push(other[i2]);
+        for (let i = 0; i < other.length; i++)
+          arr.push(other[i]);
       }
       __name(append, "append");
       function getLine(arr, index) {
-        for (let i2 = arr.length; i2 <= index; i2++)
-          arr[i2] = [];
+        for (let i = arr.length; i <= index; i++)
+          arr[i] = [];
         return arr[index];
       }
       __name(getLine, "getLine");
@@ -59466,7 +59827,7 @@ var require_trace_mapping_umd = __commonJS({
           this.sources = sources;
           this.sourcesContent = sourcesContent;
           const from = resolve3(sourceRoot || "", stripFilename(mapUrl));
-          this.resolvedSources = sources.map((s2) => resolve3(s2 || "", from));
+          this.resolvedSources = sources.map((s) => resolve3(s || "", from));
           const { mappings } = parsed;
           if (typeof mappings === "string") {
             this._encoded = mappings;
@@ -59524,11 +59885,11 @@ var require_trace_mapping_umd = __commonJS({
         exports1.eachMapping = (map, cb) => {
           const decoded = exports1.decodedMappings(map);
           const { names, resolvedSources } = map;
-          for (let i2 = 0; i2 < decoded.length; i2++) {
-            const line = decoded[i2];
+          for (let i = 0; i < decoded.length; i++) {
+            const line = decoded[i];
             for (let j = 0; j < line.length; j++) {
               const seg = line[j];
-              const generatedLine = i2 + 1;
+              const generatedLine = i + 1;
               const generatedColumn = seg[0];
               let source = null;
               let originalLine = null;
@@ -59744,12 +60105,12 @@ var require_gen_mapping_umd = __commonJS({
         exports1.allMappings = (map) => {
           const out = [];
           const { _mappings: mappings, _sources: sources, _names: names } = map;
-          for (let i2 = 0; i2 < mappings.length; i2++) {
-            const line = mappings[i2];
+          for (let i = 0; i < mappings.length; i++) {
+            const line = mappings[i];
             for (let j = 0; j < line.length; j++) {
               const seg = line[j];
               const generated = {
-                line: i2 + 1,
+                line: i + 1,
                 column: seg[COLUMN]
               };
               let source = void 0;
@@ -59819,16 +60180,16 @@ var require_gen_mapping_umd = __commonJS({
         }, "addSegmentInternal");
       })();
       function getLine(mappings, index) {
-        for (let i2 = mappings.length; i2 <= index; i2++) {
-          mappings[i2] = [];
+        for (let i = mappings.length; i <= index; i++) {
+          mappings[i] = [];
         }
         return mappings[index];
       }
       __name(getLine, "getLine");
       function getColumnIndex(line, genColumn) {
         let index = line.length;
-        for (let i2 = index - 1; i2 >= 0; index = i2--) {
-          const current = line[i2];
+        for (let i = index - 1; i >= 0; index = i--) {
+          const current = line[i];
           if (genColumn >= current[COLUMN])
             break;
         }
@@ -59836,8 +60197,8 @@ var require_gen_mapping_umd = __commonJS({
       }
       __name(getColumnIndex, "getColumnIndex");
       function insert(array, index, value) {
-        for (let i2 = array.length; i2 > index; i2--) {
-          array[i2] = array[i2 - 1];
+        for (let i = array.length; i > index; i--) {
+          array[i] = array[i - 1];
         }
         array[index] = value;
       }
@@ -59845,8 +60206,8 @@ var require_gen_mapping_umd = __commonJS({
       function removeEmptyFinalLines(mappings) {
         const { length } = mappings;
         let len = length;
-        for (let i2 = len - 1; i2 >= 0; len = i2, i2--) {
-          if (mappings[i2].length > 0)
+        for (let i = len - 1; i >= 0; len = i, i--) {
+          if (mappings[i].length > 0)
             break;
         }
         if (len < length)
@@ -59854,8 +60215,8 @@ var require_gen_mapping_umd = __commonJS({
       }
       __name(removeEmptyFinalLines, "removeEmptyFinalLines");
       function putAll(strarr, array) {
-        for (let i2 = 0; i2 < array.length; i2++)
-          setArray.put(strarr, array[i2]);
+        for (let i = 0; i < array.length; i++)
+          setArray.put(strarr, array[i]);
       }
       __name(putAll, "putAll");
       function skipSourceless(line, index) {
@@ -59879,8 +60240,8 @@ var require_gen_mapping_umd = __commonJS({
         if (!source) {
           return addSegmentInternal(skipable, map, generated.line - 1, generated.column, null, null, null, null, null);
         }
-        const s2 = source;
-        return addSegmentInternal(skipable, map, generated.line - 1, generated.column, s2, original.line - 1, original.column, name, content);
+        const s = source;
+        return addSegmentInternal(skipable, map, generated.line - 1, generated.column, s, original.line - 1, original.column, name, content);
       }
       __name(addMappingInternal, "addMappingInternal");
       exports1.GenMapping = GenMapping;
@@ -59980,7 +60341,7 @@ var require_buffer = __commonJS({
       }
       _allocQueue() {
         const queue = this._queue;
-        for (let i2 = 0; i2 < 16; i2++) {
+        for (let i = 0; i < 16; i++) {
           queue.push({
             char: 0,
             repeat: 1,
@@ -60069,8 +60430,8 @@ var require_buffer = __commonJS({
       _flush() {
         const queueCursor = this._queueCursor;
         const queue = this._queue;
-        for (let i2 = 0; i2 < queueCursor; i2++) {
-          const item = queue[i2];
+        for (let i = 0; i < queueCursor; i++) {
+          const item = queue[i];
           this._appendChar(item.char, item.repeat, item);
         }
         this._queueCursor = 0;
@@ -60104,19 +60465,19 @@ var require_buffer = __commonJS({
         }
         const { column, identifierName, filename } = sourcePos;
         let line = sourcePos.line;
-        let i2 = str.indexOf("\n");
+        let i = str.indexOf("\n");
         let last = 0;
-        if (i2 !== 0) {
+        if (i !== 0) {
           this._mark(line, column, identifierName, filename);
         }
-        while (i2 !== -1) {
+        while (i !== -1) {
           position.line++;
           position.column = 0;
-          last = i2 + 1;
+          last = i + 1;
           if (last < len) {
             this._mark(++line, 0, identifierName, filename);
           }
-          i2 = str.indexOf("\n", last);
+          i = str.indexOf("\n", last);
         }
         position.column += len - last;
       }
@@ -60145,8 +60506,8 @@ var require_buffer = __commonJS({
         let count = 0;
         if (queueCursor === 0)
           return this._last === 10 ? 1 : 0;
-        for (let i2 = queueCursor - 1; i2 >= 0; i2--) {
-          if (this._queue[i2].char !== 10) {
+        for (let i = queueCursor - 1; i >= 0; i--) {
+          if (this._queue[i].char !== 10) {
             break;
           }
           count++;
@@ -60208,8 +60569,8 @@ var require_buffer = __commonJS({
         const queueCursor = this._queueCursor;
         let lastIndex = -1;
         let len = 0;
-        for (let i2 = 0; i2 < queueCursor; i2++) {
-          const item = queue[i2];
+        for (let i = 0; i < queueCursor; i++) {
+          const item = queue[i];
           if (item.char === 10) {
             lastIndex = len;
           }
@@ -60220,8 +60581,8 @@ var require_buffer = __commonJS({
       getCurrentLine() {
         let count = 0;
         const queue = this._queue;
-        for (let i2 = 0; i2 < this._queueCursor; i2++) {
-          if (queue[i2].char === 10) {
+        for (let i = 0; i < this._queueCursor; i++) {
+          if (queue[i].char === 10) {
             count++;
           }
         }
@@ -60229,6 +60590,17777 @@ var require_buffer = __commonJS({
       }
     }, "Buffer");
     exports.default = Buffer2;
+  }
+});
+
+// node_modules/@babel/generator/node_modules/@babel/types/lib/utils/shallowEqual.js
+var require_shallowEqual3 = __commonJS({
+  "node_modules/@babel/generator/node_modules/@babel/types/lib/utils/shallowEqual.js"(exports) {
+    "use strict";
+    Object.defineProperty(exports, "__esModule", {
+      value: true
+    });
+    exports.default = shallowEqual;
+    function shallowEqual(actual, expected) {
+      const keys = Object.keys(expected);
+      for (const key of keys) {
+        if (actual[key] !== expected[key]) {
+          return false;
+        }
+      }
+      return true;
+    }
+    __name(shallowEqual, "shallowEqual");
+  }
+});
+
+// node_modules/@babel/generator/node_modules/@babel/types/lib/validators/generated/index.js
+var require_generated11 = __commonJS({
+  "node_modules/@babel/generator/node_modules/@babel/types/lib/validators/generated/index.js"(exports) {
+    "use strict";
+    Object.defineProperty(exports, "__esModule", {
+      value: true
+    });
+    exports.isAccessor = isAccessor;
+    exports.isAnyTypeAnnotation = isAnyTypeAnnotation;
+    exports.isArgumentPlaceholder = isArgumentPlaceholder;
+    exports.isArrayExpression = isArrayExpression;
+    exports.isArrayPattern = isArrayPattern;
+    exports.isArrayTypeAnnotation = isArrayTypeAnnotation;
+    exports.isArrowFunctionExpression = isArrowFunctionExpression;
+    exports.isAssignmentExpression = isAssignmentExpression;
+    exports.isAssignmentPattern = isAssignmentPattern;
+    exports.isAwaitExpression = isAwaitExpression;
+    exports.isBigIntLiteral = isBigIntLiteral;
+    exports.isBinary = isBinary;
+    exports.isBinaryExpression = isBinaryExpression;
+    exports.isBindExpression = isBindExpression;
+    exports.isBlock = isBlock;
+    exports.isBlockParent = isBlockParent;
+    exports.isBlockStatement = isBlockStatement;
+    exports.isBooleanLiteral = isBooleanLiteral;
+    exports.isBooleanLiteralTypeAnnotation = isBooleanLiteralTypeAnnotation;
+    exports.isBooleanTypeAnnotation = isBooleanTypeAnnotation;
+    exports.isBreakStatement = isBreakStatement;
+    exports.isCallExpression = isCallExpression;
+    exports.isCatchClause = isCatchClause;
+    exports.isClass = isClass;
+    exports.isClassAccessorProperty = isClassAccessorProperty;
+    exports.isClassBody = isClassBody;
+    exports.isClassDeclaration = isClassDeclaration;
+    exports.isClassExpression = isClassExpression;
+    exports.isClassImplements = isClassImplements;
+    exports.isClassMethod = isClassMethod;
+    exports.isClassPrivateMethod = isClassPrivateMethod;
+    exports.isClassPrivateProperty = isClassPrivateProperty;
+    exports.isClassProperty = isClassProperty;
+    exports.isCompletionStatement = isCompletionStatement;
+    exports.isConditional = isConditional;
+    exports.isConditionalExpression = isConditionalExpression;
+    exports.isContinueStatement = isContinueStatement;
+    exports.isDebuggerStatement = isDebuggerStatement;
+    exports.isDecimalLiteral = isDecimalLiteral;
+    exports.isDeclaration = isDeclaration;
+    exports.isDeclareClass = isDeclareClass;
+    exports.isDeclareExportAllDeclaration = isDeclareExportAllDeclaration;
+    exports.isDeclareExportDeclaration = isDeclareExportDeclaration;
+    exports.isDeclareFunction = isDeclareFunction;
+    exports.isDeclareInterface = isDeclareInterface;
+    exports.isDeclareModule = isDeclareModule;
+    exports.isDeclareModuleExports = isDeclareModuleExports;
+    exports.isDeclareOpaqueType = isDeclareOpaqueType;
+    exports.isDeclareTypeAlias = isDeclareTypeAlias;
+    exports.isDeclareVariable = isDeclareVariable;
+    exports.isDeclaredPredicate = isDeclaredPredicate;
+    exports.isDecorator = isDecorator;
+    exports.isDirective = isDirective;
+    exports.isDirectiveLiteral = isDirectiveLiteral;
+    exports.isDoExpression = isDoExpression;
+    exports.isDoWhileStatement = isDoWhileStatement;
+    exports.isEmptyStatement = isEmptyStatement;
+    exports.isEmptyTypeAnnotation = isEmptyTypeAnnotation;
+    exports.isEnumBody = isEnumBody;
+    exports.isEnumBooleanBody = isEnumBooleanBody;
+    exports.isEnumBooleanMember = isEnumBooleanMember;
+    exports.isEnumDeclaration = isEnumDeclaration;
+    exports.isEnumDefaultedMember = isEnumDefaultedMember;
+    exports.isEnumMember = isEnumMember;
+    exports.isEnumNumberBody = isEnumNumberBody;
+    exports.isEnumNumberMember = isEnumNumberMember;
+    exports.isEnumStringBody = isEnumStringBody;
+    exports.isEnumStringMember = isEnumStringMember;
+    exports.isEnumSymbolBody = isEnumSymbolBody;
+    exports.isExistsTypeAnnotation = isExistsTypeAnnotation;
+    exports.isExportAllDeclaration = isExportAllDeclaration;
+    exports.isExportDeclaration = isExportDeclaration;
+    exports.isExportDefaultDeclaration = isExportDefaultDeclaration;
+    exports.isExportDefaultSpecifier = isExportDefaultSpecifier;
+    exports.isExportNamedDeclaration = isExportNamedDeclaration;
+    exports.isExportNamespaceSpecifier = isExportNamespaceSpecifier;
+    exports.isExportSpecifier = isExportSpecifier;
+    exports.isExpression = isExpression;
+    exports.isExpressionStatement = isExpressionStatement;
+    exports.isExpressionWrapper = isExpressionWrapper;
+    exports.isFile = isFile;
+    exports.isFlow = isFlow;
+    exports.isFlowBaseAnnotation = isFlowBaseAnnotation;
+    exports.isFlowDeclaration = isFlowDeclaration;
+    exports.isFlowPredicate = isFlowPredicate;
+    exports.isFlowType = isFlowType;
+    exports.isFor = isFor;
+    exports.isForInStatement = isForInStatement;
+    exports.isForOfStatement = isForOfStatement;
+    exports.isForStatement = isForStatement;
+    exports.isForXStatement = isForXStatement;
+    exports.isFunction = isFunction;
+    exports.isFunctionDeclaration = isFunctionDeclaration;
+    exports.isFunctionExpression = isFunctionExpression;
+    exports.isFunctionParent = isFunctionParent;
+    exports.isFunctionTypeAnnotation = isFunctionTypeAnnotation;
+    exports.isFunctionTypeParam = isFunctionTypeParam;
+    exports.isGenericTypeAnnotation = isGenericTypeAnnotation;
+    exports.isIdentifier = isIdentifier;
+    exports.isIfStatement = isIfStatement;
+    exports.isImmutable = isImmutable;
+    exports.isImport = isImport;
+    exports.isImportAttribute = isImportAttribute;
+    exports.isImportDeclaration = isImportDeclaration;
+    exports.isImportDefaultSpecifier = isImportDefaultSpecifier;
+    exports.isImportNamespaceSpecifier = isImportNamespaceSpecifier;
+    exports.isImportSpecifier = isImportSpecifier;
+    exports.isIndexedAccessType = isIndexedAccessType;
+    exports.isInferredPredicate = isInferredPredicate;
+    exports.isInterfaceDeclaration = isInterfaceDeclaration;
+    exports.isInterfaceExtends = isInterfaceExtends;
+    exports.isInterfaceTypeAnnotation = isInterfaceTypeAnnotation;
+    exports.isInterpreterDirective = isInterpreterDirective;
+    exports.isIntersectionTypeAnnotation = isIntersectionTypeAnnotation;
+    exports.isJSX = isJSX;
+    exports.isJSXAttribute = isJSXAttribute;
+    exports.isJSXClosingElement = isJSXClosingElement;
+    exports.isJSXClosingFragment = isJSXClosingFragment;
+    exports.isJSXElement = isJSXElement;
+    exports.isJSXEmptyExpression = isJSXEmptyExpression;
+    exports.isJSXExpressionContainer = isJSXExpressionContainer;
+    exports.isJSXFragment = isJSXFragment;
+    exports.isJSXIdentifier = isJSXIdentifier;
+    exports.isJSXMemberExpression = isJSXMemberExpression;
+    exports.isJSXNamespacedName = isJSXNamespacedName;
+    exports.isJSXOpeningElement = isJSXOpeningElement;
+    exports.isJSXOpeningFragment = isJSXOpeningFragment;
+    exports.isJSXSpreadAttribute = isJSXSpreadAttribute;
+    exports.isJSXSpreadChild = isJSXSpreadChild;
+    exports.isJSXText = isJSXText;
+    exports.isLVal = isLVal;
+    exports.isLabeledStatement = isLabeledStatement;
+    exports.isLiteral = isLiteral;
+    exports.isLogicalExpression = isLogicalExpression;
+    exports.isLoop = isLoop;
+    exports.isMemberExpression = isMemberExpression;
+    exports.isMetaProperty = isMetaProperty;
+    exports.isMethod = isMethod;
+    exports.isMiscellaneous = isMiscellaneous;
+    exports.isMixedTypeAnnotation = isMixedTypeAnnotation;
+    exports.isModuleDeclaration = isModuleDeclaration;
+    exports.isModuleExpression = isModuleExpression;
+    exports.isModuleSpecifier = isModuleSpecifier;
+    exports.isNewExpression = isNewExpression;
+    exports.isNoop = isNoop;
+    exports.isNullLiteral = isNullLiteral;
+    exports.isNullLiteralTypeAnnotation = isNullLiteralTypeAnnotation;
+    exports.isNullableTypeAnnotation = isNullableTypeAnnotation;
+    exports.isNumberLiteral = isNumberLiteral;
+    exports.isNumberLiteralTypeAnnotation = isNumberLiteralTypeAnnotation;
+    exports.isNumberTypeAnnotation = isNumberTypeAnnotation;
+    exports.isNumericLiteral = isNumericLiteral;
+    exports.isObjectExpression = isObjectExpression;
+    exports.isObjectMember = isObjectMember;
+    exports.isObjectMethod = isObjectMethod;
+    exports.isObjectPattern = isObjectPattern;
+    exports.isObjectProperty = isObjectProperty;
+    exports.isObjectTypeAnnotation = isObjectTypeAnnotation;
+    exports.isObjectTypeCallProperty = isObjectTypeCallProperty;
+    exports.isObjectTypeIndexer = isObjectTypeIndexer;
+    exports.isObjectTypeInternalSlot = isObjectTypeInternalSlot;
+    exports.isObjectTypeProperty = isObjectTypeProperty;
+    exports.isObjectTypeSpreadProperty = isObjectTypeSpreadProperty;
+    exports.isOpaqueType = isOpaqueType;
+    exports.isOptionalCallExpression = isOptionalCallExpression;
+    exports.isOptionalIndexedAccessType = isOptionalIndexedAccessType;
+    exports.isOptionalMemberExpression = isOptionalMemberExpression;
+    exports.isParenthesizedExpression = isParenthesizedExpression;
+    exports.isPattern = isPattern;
+    exports.isPatternLike = isPatternLike;
+    exports.isPipelineBareFunction = isPipelineBareFunction;
+    exports.isPipelinePrimaryTopicReference = isPipelinePrimaryTopicReference;
+    exports.isPipelineTopicExpression = isPipelineTopicExpression;
+    exports.isPlaceholder = isPlaceholder;
+    exports.isPrivate = isPrivate;
+    exports.isPrivateName = isPrivateName;
+    exports.isProgram = isProgram;
+    exports.isProperty = isProperty;
+    exports.isPureish = isPureish;
+    exports.isQualifiedTypeIdentifier = isQualifiedTypeIdentifier;
+    exports.isRecordExpression = isRecordExpression;
+    exports.isRegExpLiteral = isRegExpLiteral;
+    exports.isRegexLiteral = isRegexLiteral;
+    exports.isRestElement = isRestElement;
+    exports.isRestProperty = isRestProperty;
+    exports.isReturnStatement = isReturnStatement;
+    exports.isScopable = isScopable;
+    exports.isSequenceExpression = isSequenceExpression;
+    exports.isSpreadElement = isSpreadElement;
+    exports.isSpreadProperty = isSpreadProperty;
+    exports.isStandardized = isStandardized;
+    exports.isStatement = isStatement;
+    exports.isStaticBlock = isStaticBlock;
+    exports.isStringLiteral = isStringLiteral;
+    exports.isStringLiteralTypeAnnotation = isStringLiteralTypeAnnotation;
+    exports.isStringTypeAnnotation = isStringTypeAnnotation;
+    exports.isSuper = isSuper;
+    exports.isSwitchCase = isSwitchCase;
+    exports.isSwitchStatement = isSwitchStatement;
+    exports.isSymbolTypeAnnotation = isSymbolTypeAnnotation;
+    exports.isTSAnyKeyword = isTSAnyKeyword;
+    exports.isTSArrayType = isTSArrayType;
+    exports.isTSAsExpression = isTSAsExpression;
+    exports.isTSBaseType = isTSBaseType;
+    exports.isTSBigIntKeyword = isTSBigIntKeyword;
+    exports.isTSBooleanKeyword = isTSBooleanKeyword;
+    exports.isTSCallSignatureDeclaration = isTSCallSignatureDeclaration;
+    exports.isTSConditionalType = isTSConditionalType;
+    exports.isTSConstructSignatureDeclaration = isTSConstructSignatureDeclaration;
+    exports.isTSConstructorType = isTSConstructorType;
+    exports.isTSDeclareFunction = isTSDeclareFunction;
+    exports.isTSDeclareMethod = isTSDeclareMethod;
+    exports.isTSEntityName = isTSEntityName;
+    exports.isTSEnumDeclaration = isTSEnumDeclaration;
+    exports.isTSEnumMember = isTSEnumMember;
+    exports.isTSExportAssignment = isTSExportAssignment;
+    exports.isTSExpressionWithTypeArguments = isTSExpressionWithTypeArguments;
+    exports.isTSExternalModuleReference = isTSExternalModuleReference;
+    exports.isTSFunctionType = isTSFunctionType;
+    exports.isTSImportEqualsDeclaration = isTSImportEqualsDeclaration;
+    exports.isTSImportType = isTSImportType;
+    exports.isTSIndexSignature = isTSIndexSignature;
+    exports.isTSIndexedAccessType = isTSIndexedAccessType;
+    exports.isTSInferType = isTSInferType;
+    exports.isTSInstantiationExpression = isTSInstantiationExpression;
+    exports.isTSInterfaceBody = isTSInterfaceBody;
+    exports.isTSInterfaceDeclaration = isTSInterfaceDeclaration;
+    exports.isTSIntersectionType = isTSIntersectionType;
+    exports.isTSIntrinsicKeyword = isTSIntrinsicKeyword;
+    exports.isTSLiteralType = isTSLiteralType;
+    exports.isTSMappedType = isTSMappedType;
+    exports.isTSMethodSignature = isTSMethodSignature;
+    exports.isTSModuleBlock = isTSModuleBlock;
+    exports.isTSModuleDeclaration = isTSModuleDeclaration;
+    exports.isTSNamedTupleMember = isTSNamedTupleMember;
+    exports.isTSNamespaceExportDeclaration = isTSNamespaceExportDeclaration;
+    exports.isTSNeverKeyword = isTSNeverKeyword;
+    exports.isTSNonNullExpression = isTSNonNullExpression;
+    exports.isTSNullKeyword = isTSNullKeyword;
+    exports.isTSNumberKeyword = isTSNumberKeyword;
+    exports.isTSObjectKeyword = isTSObjectKeyword;
+    exports.isTSOptionalType = isTSOptionalType;
+    exports.isTSParameterProperty = isTSParameterProperty;
+    exports.isTSParenthesizedType = isTSParenthesizedType;
+    exports.isTSPropertySignature = isTSPropertySignature;
+    exports.isTSQualifiedName = isTSQualifiedName;
+    exports.isTSRestType = isTSRestType;
+    exports.isTSSatisfiesExpression = isTSSatisfiesExpression;
+    exports.isTSStringKeyword = isTSStringKeyword;
+    exports.isTSSymbolKeyword = isTSSymbolKeyword;
+    exports.isTSThisType = isTSThisType;
+    exports.isTSTupleType = isTSTupleType;
+    exports.isTSType = isTSType;
+    exports.isTSTypeAliasDeclaration = isTSTypeAliasDeclaration;
+    exports.isTSTypeAnnotation = isTSTypeAnnotation;
+    exports.isTSTypeAssertion = isTSTypeAssertion;
+    exports.isTSTypeElement = isTSTypeElement;
+    exports.isTSTypeLiteral = isTSTypeLiteral;
+    exports.isTSTypeOperator = isTSTypeOperator;
+    exports.isTSTypeParameter = isTSTypeParameter;
+    exports.isTSTypeParameterDeclaration = isTSTypeParameterDeclaration;
+    exports.isTSTypeParameterInstantiation = isTSTypeParameterInstantiation;
+    exports.isTSTypePredicate = isTSTypePredicate;
+    exports.isTSTypeQuery = isTSTypeQuery;
+    exports.isTSTypeReference = isTSTypeReference;
+    exports.isTSUndefinedKeyword = isTSUndefinedKeyword;
+    exports.isTSUnionType = isTSUnionType;
+    exports.isTSUnknownKeyword = isTSUnknownKeyword;
+    exports.isTSVoidKeyword = isTSVoidKeyword;
+    exports.isTaggedTemplateExpression = isTaggedTemplateExpression;
+    exports.isTemplateElement = isTemplateElement;
+    exports.isTemplateLiteral = isTemplateLiteral;
+    exports.isTerminatorless = isTerminatorless;
+    exports.isThisExpression = isThisExpression;
+    exports.isThisTypeAnnotation = isThisTypeAnnotation;
+    exports.isThrowStatement = isThrowStatement;
+    exports.isTopicReference = isTopicReference;
+    exports.isTryStatement = isTryStatement;
+    exports.isTupleExpression = isTupleExpression;
+    exports.isTupleTypeAnnotation = isTupleTypeAnnotation;
+    exports.isTypeAlias = isTypeAlias;
+    exports.isTypeAnnotation = isTypeAnnotation;
+    exports.isTypeCastExpression = isTypeCastExpression;
+    exports.isTypeParameter = isTypeParameter;
+    exports.isTypeParameterDeclaration = isTypeParameterDeclaration;
+    exports.isTypeParameterInstantiation = isTypeParameterInstantiation;
+    exports.isTypeScript = isTypeScript;
+    exports.isTypeofTypeAnnotation = isTypeofTypeAnnotation;
+    exports.isUnaryExpression = isUnaryExpression;
+    exports.isUnaryLike = isUnaryLike;
+    exports.isUnionTypeAnnotation = isUnionTypeAnnotation;
+    exports.isUpdateExpression = isUpdateExpression;
+    exports.isUserWhitespacable = isUserWhitespacable;
+    exports.isV8IntrinsicIdentifier = isV8IntrinsicIdentifier;
+    exports.isVariableDeclaration = isVariableDeclaration;
+    exports.isVariableDeclarator = isVariableDeclarator;
+    exports.isVariance = isVariance;
+    exports.isVoidTypeAnnotation = isVoidTypeAnnotation;
+    exports.isWhile = isWhile;
+    exports.isWhileStatement = isWhileStatement;
+    exports.isWithStatement = isWithStatement;
+    exports.isYieldExpression = isYieldExpression;
+    var _shallowEqual = require_shallowEqual3();
+    function isArrayExpression(node, opts) {
+      if (!node)
+        return false;
+      const nodeType = node.type;
+      if (nodeType === "ArrayExpression") {
+        if (typeof opts === "undefined") {
+          return true;
+        } else {
+          return (0, _shallowEqual.default)(node, opts);
+        }
+      }
+      return false;
+    }
+    __name(isArrayExpression, "isArrayExpression");
+    function isAssignmentExpression(node, opts) {
+      if (!node)
+        return false;
+      const nodeType = node.type;
+      if (nodeType === "AssignmentExpression") {
+        if (typeof opts === "undefined") {
+          return true;
+        } else {
+          return (0, _shallowEqual.default)(node, opts);
+        }
+      }
+      return false;
+    }
+    __name(isAssignmentExpression, "isAssignmentExpression");
+    function isBinaryExpression(node, opts) {
+      if (!node)
+        return false;
+      const nodeType = node.type;
+      if (nodeType === "BinaryExpression") {
+        if (typeof opts === "undefined") {
+          return true;
+        } else {
+          return (0, _shallowEqual.default)(node, opts);
+        }
+      }
+      return false;
+    }
+    __name(isBinaryExpression, "isBinaryExpression");
+    function isInterpreterDirective(node, opts) {
+      if (!node)
+        return false;
+      const nodeType = node.type;
+      if (nodeType === "InterpreterDirective") {
+        if (typeof opts === "undefined") {
+          return true;
+        } else {
+          return (0, _shallowEqual.default)(node, opts);
+        }
+      }
+      return false;
+    }
+    __name(isInterpreterDirective, "isInterpreterDirective");
+    function isDirective(node, opts) {
+      if (!node)
+        return false;
+      const nodeType = node.type;
+      if (nodeType === "Directive") {
+        if (typeof opts === "undefined") {
+          return true;
+        } else {
+          return (0, _shallowEqual.default)(node, opts);
+        }
+      }
+      return false;
+    }
+    __name(isDirective, "isDirective");
+    function isDirectiveLiteral(node, opts) {
+      if (!node)
+        return false;
+      const nodeType = node.type;
+      if (nodeType === "DirectiveLiteral") {
+        if (typeof opts === "undefined") {
+          return true;
+        } else {
+          return (0, _shallowEqual.default)(node, opts);
+        }
+      }
+      return false;
+    }
+    __name(isDirectiveLiteral, "isDirectiveLiteral");
+    function isBlockStatement(node, opts) {
+      if (!node)
+        return false;
+      const nodeType = node.type;
+      if (nodeType === "BlockStatement") {
+        if (typeof opts === "undefined") {
+          return true;
+        } else {
+          return (0, _shallowEqual.default)(node, opts);
+        }
+      }
+      return false;
+    }
+    __name(isBlockStatement, "isBlockStatement");
+    function isBreakStatement(node, opts) {
+      if (!node)
+        return false;
+      const nodeType = node.type;
+      if (nodeType === "BreakStatement") {
+        if (typeof opts === "undefined") {
+          return true;
+        } else {
+          return (0, _shallowEqual.default)(node, opts);
+        }
+      }
+      return false;
+    }
+    __name(isBreakStatement, "isBreakStatement");
+    function isCallExpression(node, opts) {
+      if (!node)
+        return false;
+      const nodeType = node.type;
+      if (nodeType === "CallExpression") {
+        if (typeof opts === "undefined") {
+          return true;
+        } else {
+          return (0, _shallowEqual.default)(node, opts);
+        }
+      }
+      return false;
+    }
+    __name(isCallExpression, "isCallExpression");
+    function isCatchClause(node, opts) {
+      if (!node)
+        return false;
+      const nodeType = node.type;
+      if (nodeType === "CatchClause") {
+        if (typeof opts === "undefined") {
+          return true;
+        } else {
+          return (0, _shallowEqual.default)(node, opts);
+        }
+      }
+      return false;
+    }
+    __name(isCatchClause, "isCatchClause");
+    function isConditionalExpression(node, opts) {
+      if (!node)
+        return false;
+      const nodeType = node.type;
+      if (nodeType === "ConditionalExpression") {
+        if (typeof opts === "undefined") {
+          return true;
+        } else {
+          return (0, _shallowEqual.default)(node, opts);
+        }
+      }
+      return false;
+    }
+    __name(isConditionalExpression, "isConditionalExpression");
+    function isContinueStatement(node, opts) {
+      if (!node)
+        return false;
+      const nodeType = node.type;
+      if (nodeType === "ContinueStatement") {
+        if (typeof opts === "undefined") {
+          return true;
+        } else {
+          return (0, _shallowEqual.default)(node, opts);
+        }
+      }
+      return false;
+    }
+    __name(isContinueStatement, "isContinueStatement");
+    function isDebuggerStatement(node, opts) {
+      if (!node)
+        return false;
+      const nodeType = node.type;
+      if (nodeType === "DebuggerStatement") {
+        if (typeof opts === "undefined") {
+          return true;
+        } else {
+          return (0, _shallowEqual.default)(node, opts);
+        }
+      }
+      return false;
+    }
+    __name(isDebuggerStatement, "isDebuggerStatement");
+    function isDoWhileStatement(node, opts) {
+      if (!node)
+        return false;
+      const nodeType = node.type;
+      if (nodeType === "DoWhileStatement") {
+        if (typeof opts === "undefined") {
+          return true;
+        } else {
+          return (0, _shallowEqual.default)(node, opts);
+        }
+      }
+      return false;
+    }
+    __name(isDoWhileStatement, "isDoWhileStatement");
+    function isEmptyStatement(node, opts) {
+      if (!node)
+        return false;
+      const nodeType = node.type;
+      if (nodeType === "EmptyStatement") {
+        if (typeof opts === "undefined") {
+          return true;
+        } else {
+          return (0, _shallowEqual.default)(node, opts);
+        }
+      }
+      return false;
+    }
+    __name(isEmptyStatement, "isEmptyStatement");
+    function isExpressionStatement(node, opts) {
+      if (!node)
+        return false;
+      const nodeType = node.type;
+      if (nodeType === "ExpressionStatement") {
+        if (typeof opts === "undefined") {
+          return true;
+        } else {
+          return (0, _shallowEqual.default)(node, opts);
+        }
+      }
+      return false;
+    }
+    __name(isExpressionStatement, "isExpressionStatement");
+    function isFile(node, opts) {
+      if (!node)
+        return false;
+      const nodeType = node.type;
+      if (nodeType === "File") {
+        if (typeof opts === "undefined") {
+          return true;
+        } else {
+          return (0, _shallowEqual.default)(node, opts);
+        }
+      }
+      return false;
+    }
+    __name(isFile, "isFile");
+    function isForInStatement(node, opts) {
+      if (!node)
+        return false;
+      const nodeType = node.type;
+      if (nodeType === "ForInStatement") {
+        if (typeof opts === "undefined") {
+          return true;
+        } else {
+          return (0, _shallowEqual.default)(node, opts);
+        }
+      }
+      return false;
+    }
+    __name(isForInStatement, "isForInStatement");
+    function isForStatement(node, opts) {
+      if (!node)
+        return false;
+      const nodeType = node.type;
+      if (nodeType === "ForStatement") {
+        if (typeof opts === "undefined") {
+          return true;
+        } else {
+          return (0, _shallowEqual.default)(node, opts);
+        }
+      }
+      return false;
+    }
+    __name(isForStatement, "isForStatement");
+    function isFunctionDeclaration(node, opts) {
+      if (!node)
+        return false;
+      const nodeType = node.type;
+      if (nodeType === "FunctionDeclaration") {
+        if (typeof opts === "undefined") {
+          return true;
+        } else {
+          return (0, _shallowEqual.default)(node, opts);
+        }
+      }
+      return false;
+    }
+    __name(isFunctionDeclaration, "isFunctionDeclaration");
+    function isFunctionExpression(node, opts) {
+      if (!node)
+        return false;
+      const nodeType = node.type;
+      if (nodeType === "FunctionExpression") {
+        if (typeof opts === "undefined") {
+          return true;
+        } else {
+          return (0, _shallowEqual.default)(node, opts);
+        }
+      }
+      return false;
+    }
+    __name(isFunctionExpression, "isFunctionExpression");
+    function isIdentifier(node, opts) {
+      if (!node)
+        return false;
+      const nodeType = node.type;
+      if (nodeType === "Identifier") {
+        if (typeof opts === "undefined") {
+          return true;
+        } else {
+          return (0, _shallowEqual.default)(node, opts);
+        }
+      }
+      return false;
+    }
+    __name(isIdentifier, "isIdentifier");
+    function isIfStatement(node, opts) {
+      if (!node)
+        return false;
+      const nodeType = node.type;
+      if (nodeType === "IfStatement") {
+        if (typeof opts === "undefined") {
+          return true;
+        } else {
+          return (0, _shallowEqual.default)(node, opts);
+        }
+      }
+      return false;
+    }
+    __name(isIfStatement, "isIfStatement");
+    function isLabeledStatement(node, opts) {
+      if (!node)
+        return false;
+      const nodeType = node.type;
+      if (nodeType === "LabeledStatement") {
+        if (typeof opts === "undefined") {
+          return true;
+        } else {
+          return (0, _shallowEqual.default)(node, opts);
+        }
+      }
+      return false;
+    }
+    __name(isLabeledStatement, "isLabeledStatement");
+    function isStringLiteral(node, opts) {
+      if (!node)
+        return false;
+      const nodeType = node.type;
+      if (nodeType === "StringLiteral") {
+        if (typeof opts === "undefined") {
+          return true;
+        } else {
+          return (0, _shallowEqual.default)(node, opts);
+        }
+      }
+      return false;
+    }
+    __name(isStringLiteral, "isStringLiteral");
+    function isNumericLiteral(node, opts) {
+      if (!node)
+        return false;
+      const nodeType = node.type;
+      if (nodeType === "NumericLiteral") {
+        if (typeof opts === "undefined") {
+          return true;
+        } else {
+          return (0, _shallowEqual.default)(node, opts);
+        }
+      }
+      return false;
+    }
+    __name(isNumericLiteral, "isNumericLiteral");
+    function isNullLiteral(node, opts) {
+      if (!node)
+        return false;
+      const nodeType = node.type;
+      if (nodeType === "NullLiteral") {
+        if (typeof opts === "undefined") {
+          return true;
+        } else {
+          return (0, _shallowEqual.default)(node, opts);
+        }
+      }
+      return false;
+    }
+    __name(isNullLiteral, "isNullLiteral");
+    function isBooleanLiteral(node, opts) {
+      if (!node)
+        return false;
+      const nodeType = node.type;
+      if (nodeType === "BooleanLiteral") {
+        if (typeof opts === "undefined") {
+          return true;
+        } else {
+          return (0, _shallowEqual.default)(node, opts);
+        }
+      }
+      return false;
+    }
+    __name(isBooleanLiteral, "isBooleanLiteral");
+    function isRegExpLiteral(node, opts) {
+      if (!node)
+        return false;
+      const nodeType = node.type;
+      if (nodeType === "RegExpLiteral") {
+        if (typeof opts === "undefined") {
+          return true;
+        } else {
+          return (0, _shallowEqual.default)(node, opts);
+        }
+      }
+      return false;
+    }
+    __name(isRegExpLiteral, "isRegExpLiteral");
+    function isLogicalExpression(node, opts) {
+      if (!node)
+        return false;
+      const nodeType = node.type;
+      if (nodeType === "LogicalExpression") {
+        if (typeof opts === "undefined") {
+          return true;
+        } else {
+          return (0, _shallowEqual.default)(node, opts);
+        }
+      }
+      return false;
+    }
+    __name(isLogicalExpression, "isLogicalExpression");
+    function isMemberExpression(node, opts) {
+      if (!node)
+        return false;
+      const nodeType = node.type;
+      if (nodeType === "MemberExpression") {
+        if (typeof opts === "undefined") {
+          return true;
+        } else {
+          return (0, _shallowEqual.default)(node, opts);
+        }
+      }
+      return false;
+    }
+    __name(isMemberExpression, "isMemberExpression");
+    function isNewExpression(node, opts) {
+      if (!node)
+        return false;
+      const nodeType = node.type;
+      if (nodeType === "NewExpression") {
+        if (typeof opts === "undefined") {
+          return true;
+        } else {
+          return (0, _shallowEqual.default)(node, opts);
+        }
+      }
+      return false;
+    }
+    __name(isNewExpression, "isNewExpression");
+    function isProgram(node, opts) {
+      if (!node)
+        return false;
+      const nodeType = node.type;
+      if (nodeType === "Program") {
+        if (typeof opts === "undefined") {
+          return true;
+        } else {
+          return (0, _shallowEqual.default)(node, opts);
+        }
+      }
+      return false;
+    }
+    __name(isProgram, "isProgram");
+    function isObjectExpression(node, opts) {
+      if (!node)
+        return false;
+      const nodeType = node.type;
+      if (nodeType === "ObjectExpression") {
+        if (typeof opts === "undefined") {
+          return true;
+        } else {
+          return (0, _shallowEqual.default)(node, opts);
+        }
+      }
+      return false;
+    }
+    __name(isObjectExpression, "isObjectExpression");
+    function isObjectMethod(node, opts) {
+      if (!node)
+        return false;
+      const nodeType = node.type;
+      if (nodeType === "ObjectMethod") {
+        if (typeof opts === "undefined") {
+          return true;
+        } else {
+          return (0, _shallowEqual.default)(node, opts);
+        }
+      }
+      return false;
+    }
+    __name(isObjectMethod, "isObjectMethod");
+    function isObjectProperty(node, opts) {
+      if (!node)
+        return false;
+      const nodeType = node.type;
+      if (nodeType === "ObjectProperty") {
+        if (typeof opts === "undefined") {
+          return true;
+        } else {
+          return (0, _shallowEqual.default)(node, opts);
+        }
+      }
+      return false;
+    }
+    __name(isObjectProperty, "isObjectProperty");
+    function isRestElement(node, opts) {
+      if (!node)
+        return false;
+      const nodeType = node.type;
+      if (nodeType === "RestElement") {
+        if (typeof opts === "undefined") {
+          return true;
+        } else {
+          return (0, _shallowEqual.default)(node, opts);
+        }
+      }
+      return false;
+    }
+    __name(isRestElement, "isRestElement");
+    function isReturnStatement(node, opts) {
+      if (!node)
+        return false;
+      const nodeType = node.type;
+      if (nodeType === "ReturnStatement") {
+        if (typeof opts === "undefined") {
+          return true;
+        } else {
+          return (0, _shallowEqual.default)(node, opts);
+        }
+      }
+      return false;
+    }
+    __name(isReturnStatement, "isReturnStatement");
+    function isSequenceExpression(node, opts) {
+      if (!node)
+        return false;
+      const nodeType = node.type;
+      if (nodeType === "SequenceExpression") {
+        if (typeof opts === "undefined") {
+          return true;
+        } else {
+          return (0, _shallowEqual.default)(node, opts);
+        }
+      }
+      return false;
+    }
+    __name(isSequenceExpression, "isSequenceExpression");
+    function isParenthesizedExpression(node, opts) {
+      if (!node)
+        return false;
+      const nodeType = node.type;
+      if (nodeType === "ParenthesizedExpression") {
+        if (typeof opts === "undefined") {
+          return true;
+        } else {
+          return (0, _shallowEqual.default)(node, opts);
+        }
+      }
+      return false;
+    }
+    __name(isParenthesizedExpression, "isParenthesizedExpression");
+    function isSwitchCase(node, opts) {
+      if (!node)
+        return false;
+      const nodeType = node.type;
+      if (nodeType === "SwitchCase") {
+        if (typeof opts === "undefined") {
+          return true;
+        } else {
+          return (0, _shallowEqual.default)(node, opts);
+        }
+      }
+      return false;
+    }
+    __name(isSwitchCase, "isSwitchCase");
+    function isSwitchStatement(node, opts) {
+      if (!node)
+        return false;
+      const nodeType = node.type;
+      if (nodeType === "SwitchStatement") {
+        if (typeof opts === "undefined") {
+          return true;
+        } else {
+          return (0, _shallowEqual.default)(node, opts);
+        }
+      }
+      return false;
+    }
+    __name(isSwitchStatement, "isSwitchStatement");
+    function isThisExpression(node, opts) {
+      if (!node)
+        return false;
+      const nodeType = node.type;
+      if (nodeType === "ThisExpression") {
+        if (typeof opts === "undefined") {
+          return true;
+        } else {
+          return (0, _shallowEqual.default)(node, opts);
+        }
+      }
+      return false;
+    }
+    __name(isThisExpression, "isThisExpression");
+    function isThrowStatement(node, opts) {
+      if (!node)
+        return false;
+      const nodeType = node.type;
+      if (nodeType === "ThrowStatement") {
+        if (typeof opts === "undefined") {
+          return true;
+        } else {
+          return (0, _shallowEqual.default)(node, opts);
+        }
+      }
+      return false;
+    }
+    __name(isThrowStatement, "isThrowStatement");
+    function isTryStatement(node, opts) {
+      if (!node)
+        return false;
+      const nodeType = node.type;
+      if (nodeType === "TryStatement") {
+        if (typeof opts === "undefined") {
+          return true;
+        } else {
+          return (0, _shallowEqual.default)(node, opts);
+        }
+      }
+      return false;
+    }
+    __name(isTryStatement, "isTryStatement");
+    function isUnaryExpression(node, opts) {
+      if (!node)
+        return false;
+      const nodeType = node.type;
+      if (nodeType === "UnaryExpression") {
+        if (typeof opts === "undefined") {
+          return true;
+        } else {
+          return (0, _shallowEqual.default)(node, opts);
+        }
+      }
+      return false;
+    }
+    __name(isUnaryExpression, "isUnaryExpression");
+    function isUpdateExpression(node, opts) {
+      if (!node)
+        return false;
+      const nodeType = node.type;
+      if (nodeType === "UpdateExpression") {
+        if (typeof opts === "undefined") {
+          return true;
+        } else {
+          return (0, _shallowEqual.default)(node, opts);
+        }
+      }
+      return false;
+    }
+    __name(isUpdateExpression, "isUpdateExpression");
+    function isVariableDeclaration(node, opts) {
+      if (!node)
+        return false;
+      const nodeType = node.type;
+      if (nodeType === "VariableDeclaration") {
+        if (typeof opts === "undefined") {
+          return true;
+        } else {
+          return (0, _shallowEqual.default)(node, opts);
+        }
+      }
+      return false;
+    }
+    __name(isVariableDeclaration, "isVariableDeclaration");
+    function isVariableDeclarator(node, opts) {
+      if (!node)
+        return false;
+      const nodeType = node.type;
+      if (nodeType === "VariableDeclarator") {
+        if (typeof opts === "undefined") {
+          return true;
+        } else {
+          return (0, _shallowEqual.default)(node, opts);
+        }
+      }
+      return false;
+    }
+    __name(isVariableDeclarator, "isVariableDeclarator");
+    function isWhileStatement(node, opts) {
+      if (!node)
+        return false;
+      const nodeType = node.type;
+      if (nodeType === "WhileStatement") {
+        if (typeof opts === "undefined") {
+          return true;
+        } else {
+          return (0, _shallowEqual.default)(node, opts);
+        }
+      }
+      return false;
+    }
+    __name(isWhileStatement, "isWhileStatement");
+    function isWithStatement(node, opts) {
+      if (!node)
+        return false;
+      const nodeType = node.type;
+      if (nodeType === "WithStatement") {
+        if (typeof opts === "undefined") {
+          return true;
+        } else {
+          return (0, _shallowEqual.default)(node, opts);
+        }
+      }
+      return false;
+    }
+    __name(isWithStatement, "isWithStatement");
+    function isAssignmentPattern(node, opts) {
+      if (!node)
+        return false;
+      const nodeType = node.type;
+      if (nodeType === "AssignmentPattern") {
+        if (typeof opts === "undefined") {
+          return true;
+        } else {
+          return (0, _shallowEqual.default)(node, opts);
+        }
+      }
+      return false;
+    }
+    __name(isAssignmentPattern, "isAssignmentPattern");
+    function isArrayPattern(node, opts) {
+      if (!node)
+        return false;
+      const nodeType = node.type;
+      if (nodeType === "ArrayPattern") {
+        if (typeof opts === "undefined") {
+          return true;
+        } else {
+          return (0, _shallowEqual.default)(node, opts);
+        }
+      }
+      return false;
+    }
+    __name(isArrayPattern, "isArrayPattern");
+    function isArrowFunctionExpression(node, opts) {
+      if (!node)
+        return false;
+      const nodeType = node.type;
+      if (nodeType === "ArrowFunctionExpression") {
+        if (typeof opts === "undefined") {
+          return true;
+        } else {
+          return (0, _shallowEqual.default)(node, opts);
+        }
+      }
+      return false;
+    }
+    __name(isArrowFunctionExpression, "isArrowFunctionExpression");
+    function isClassBody(node, opts) {
+      if (!node)
+        return false;
+      const nodeType = node.type;
+      if (nodeType === "ClassBody") {
+        if (typeof opts === "undefined") {
+          return true;
+        } else {
+          return (0, _shallowEqual.default)(node, opts);
+        }
+      }
+      return false;
+    }
+    __name(isClassBody, "isClassBody");
+    function isClassExpression(node, opts) {
+      if (!node)
+        return false;
+      const nodeType = node.type;
+      if (nodeType === "ClassExpression") {
+        if (typeof opts === "undefined") {
+          return true;
+        } else {
+          return (0, _shallowEqual.default)(node, opts);
+        }
+      }
+      return false;
+    }
+    __name(isClassExpression, "isClassExpression");
+    function isClassDeclaration(node, opts) {
+      if (!node)
+        return false;
+      const nodeType = node.type;
+      if (nodeType === "ClassDeclaration") {
+        if (typeof opts === "undefined") {
+          return true;
+        } else {
+          return (0, _shallowEqual.default)(node, opts);
+        }
+      }
+      return false;
+    }
+    __name(isClassDeclaration, "isClassDeclaration");
+    function isExportAllDeclaration(node, opts) {
+      if (!node)
+        return false;
+      const nodeType = node.type;
+      if (nodeType === "ExportAllDeclaration") {
+        if (typeof opts === "undefined") {
+          return true;
+        } else {
+          return (0, _shallowEqual.default)(node, opts);
+        }
+      }
+      return false;
+    }
+    __name(isExportAllDeclaration, "isExportAllDeclaration");
+    function isExportDefaultDeclaration(node, opts) {
+      if (!node)
+        return false;
+      const nodeType = node.type;
+      if (nodeType === "ExportDefaultDeclaration") {
+        if (typeof opts === "undefined") {
+          return true;
+        } else {
+          return (0, _shallowEqual.default)(node, opts);
+        }
+      }
+      return false;
+    }
+    __name(isExportDefaultDeclaration, "isExportDefaultDeclaration");
+    function isExportNamedDeclaration(node, opts) {
+      if (!node)
+        return false;
+      const nodeType = node.type;
+      if (nodeType === "ExportNamedDeclaration") {
+        if (typeof opts === "undefined") {
+          return true;
+        } else {
+          return (0, _shallowEqual.default)(node, opts);
+        }
+      }
+      return false;
+    }
+    __name(isExportNamedDeclaration, "isExportNamedDeclaration");
+    function isExportSpecifier(node, opts) {
+      if (!node)
+        return false;
+      const nodeType = node.type;
+      if (nodeType === "ExportSpecifier") {
+        if (typeof opts === "undefined") {
+          return true;
+        } else {
+          return (0, _shallowEqual.default)(node, opts);
+        }
+      }
+      return false;
+    }
+    __name(isExportSpecifier, "isExportSpecifier");
+    function isForOfStatement(node, opts) {
+      if (!node)
+        return false;
+      const nodeType = node.type;
+      if (nodeType === "ForOfStatement") {
+        if (typeof opts === "undefined") {
+          return true;
+        } else {
+          return (0, _shallowEqual.default)(node, opts);
+        }
+      }
+      return false;
+    }
+    __name(isForOfStatement, "isForOfStatement");
+    function isImportDeclaration(node, opts) {
+      if (!node)
+        return false;
+      const nodeType = node.type;
+      if (nodeType === "ImportDeclaration") {
+        if (typeof opts === "undefined") {
+          return true;
+        } else {
+          return (0, _shallowEqual.default)(node, opts);
+        }
+      }
+      return false;
+    }
+    __name(isImportDeclaration, "isImportDeclaration");
+    function isImportDefaultSpecifier(node, opts) {
+      if (!node)
+        return false;
+      const nodeType = node.type;
+      if (nodeType === "ImportDefaultSpecifier") {
+        if (typeof opts === "undefined") {
+          return true;
+        } else {
+          return (0, _shallowEqual.default)(node, opts);
+        }
+      }
+      return false;
+    }
+    __name(isImportDefaultSpecifier, "isImportDefaultSpecifier");
+    function isImportNamespaceSpecifier(node, opts) {
+      if (!node)
+        return false;
+      const nodeType = node.type;
+      if (nodeType === "ImportNamespaceSpecifier") {
+        if (typeof opts === "undefined") {
+          return true;
+        } else {
+          return (0, _shallowEqual.default)(node, opts);
+        }
+      }
+      return false;
+    }
+    __name(isImportNamespaceSpecifier, "isImportNamespaceSpecifier");
+    function isImportSpecifier(node, opts) {
+      if (!node)
+        return false;
+      const nodeType = node.type;
+      if (nodeType === "ImportSpecifier") {
+        if (typeof opts === "undefined") {
+          return true;
+        } else {
+          return (0, _shallowEqual.default)(node, opts);
+        }
+      }
+      return false;
+    }
+    __name(isImportSpecifier, "isImportSpecifier");
+    function isMetaProperty(node, opts) {
+      if (!node)
+        return false;
+      const nodeType = node.type;
+      if (nodeType === "MetaProperty") {
+        if (typeof opts === "undefined") {
+          return true;
+        } else {
+          return (0, _shallowEqual.default)(node, opts);
+        }
+      }
+      return false;
+    }
+    __name(isMetaProperty, "isMetaProperty");
+    function isClassMethod(node, opts) {
+      if (!node)
+        return false;
+      const nodeType = node.type;
+      if (nodeType === "ClassMethod") {
+        if (typeof opts === "undefined") {
+          return true;
+        } else {
+          return (0, _shallowEqual.default)(node, opts);
+        }
+      }
+      return false;
+    }
+    __name(isClassMethod, "isClassMethod");
+    function isObjectPattern(node, opts) {
+      if (!node)
+        return false;
+      const nodeType = node.type;
+      if (nodeType === "ObjectPattern") {
+        if (typeof opts === "undefined") {
+          return true;
+        } else {
+          return (0, _shallowEqual.default)(node, opts);
+        }
+      }
+      return false;
+    }
+    __name(isObjectPattern, "isObjectPattern");
+    function isSpreadElement(node, opts) {
+      if (!node)
+        return false;
+      const nodeType = node.type;
+      if (nodeType === "SpreadElement") {
+        if (typeof opts === "undefined") {
+          return true;
+        } else {
+          return (0, _shallowEqual.default)(node, opts);
+        }
+      }
+      return false;
+    }
+    __name(isSpreadElement, "isSpreadElement");
+    function isSuper(node, opts) {
+      if (!node)
+        return false;
+      const nodeType = node.type;
+      if (nodeType === "Super") {
+        if (typeof opts === "undefined") {
+          return true;
+        } else {
+          return (0, _shallowEqual.default)(node, opts);
+        }
+      }
+      return false;
+    }
+    __name(isSuper, "isSuper");
+    function isTaggedTemplateExpression(node, opts) {
+      if (!node)
+        return false;
+      const nodeType = node.type;
+      if (nodeType === "TaggedTemplateExpression") {
+        if (typeof opts === "undefined") {
+          return true;
+        } else {
+          return (0, _shallowEqual.default)(node, opts);
+        }
+      }
+      return false;
+    }
+    __name(isTaggedTemplateExpression, "isTaggedTemplateExpression");
+    function isTemplateElement(node, opts) {
+      if (!node)
+        return false;
+      const nodeType = node.type;
+      if (nodeType === "TemplateElement") {
+        if (typeof opts === "undefined") {
+          return true;
+        } else {
+          return (0, _shallowEqual.default)(node, opts);
+        }
+      }
+      return false;
+    }
+    __name(isTemplateElement, "isTemplateElement");
+    function isTemplateLiteral(node, opts) {
+      if (!node)
+        return false;
+      const nodeType = node.type;
+      if (nodeType === "TemplateLiteral") {
+        if (typeof opts === "undefined") {
+          return true;
+        } else {
+          return (0, _shallowEqual.default)(node, opts);
+        }
+      }
+      return false;
+    }
+    __name(isTemplateLiteral, "isTemplateLiteral");
+    function isYieldExpression(node, opts) {
+      if (!node)
+        return false;
+      const nodeType = node.type;
+      if (nodeType === "YieldExpression") {
+        if (typeof opts === "undefined") {
+          return true;
+        } else {
+          return (0, _shallowEqual.default)(node, opts);
+        }
+      }
+      return false;
+    }
+    __name(isYieldExpression, "isYieldExpression");
+    function isAwaitExpression(node, opts) {
+      if (!node)
+        return false;
+      const nodeType = node.type;
+      if (nodeType === "AwaitExpression") {
+        if (typeof opts === "undefined") {
+          return true;
+        } else {
+          return (0, _shallowEqual.default)(node, opts);
+        }
+      }
+      return false;
+    }
+    __name(isAwaitExpression, "isAwaitExpression");
+    function isImport(node, opts) {
+      if (!node)
+        return false;
+      const nodeType = node.type;
+      if (nodeType === "Import") {
+        if (typeof opts === "undefined") {
+          return true;
+        } else {
+          return (0, _shallowEqual.default)(node, opts);
+        }
+      }
+      return false;
+    }
+    __name(isImport, "isImport");
+    function isBigIntLiteral(node, opts) {
+      if (!node)
+        return false;
+      const nodeType = node.type;
+      if (nodeType === "BigIntLiteral") {
+        if (typeof opts === "undefined") {
+          return true;
+        } else {
+          return (0, _shallowEqual.default)(node, opts);
+        }
+      }
+      return false;
+    }
+    __name(isBigIntLiteral, "isBigIntLiteral");
+    function isExportNamespaceSpecifier(node, opts) {
+      if (!node)
+        return false;
+      const nodeType = node.type;
+      if (nodeType === "ExportNamespaceSpecifier") {
+        if (typeof opts === "undefined") {
+          return true;
+        } else {
+          return (0, _shallowEqual.default)(node, opts);
+        }
+      }
+      return false;
+    }
+    __name(isExportNamespaceSpecifier, "isExportNamespaceSpecifier");
+    function isOptionalMemberExpression(node, opts) {
+      if (!node)
+        return false;
+      const nodeType = node.type;
+      if (nodeType === "OptionalMemberExpression") {
+        if (typeof opts === "undefined") {
+          return true;
+        } else {
+          return (0, _shallowEqual.default)(node, opts);
+        }
+      }
+      return false;
+    }
+    __name(isOptionalMemberExpression, "isOptionalMemberExpression");
+    function isOptionalCallExpression(node, opts) {
+      if (!node)
+        return false;
+      const nodeType = node.type;
+      if (nodeType === "OptionalCallExpression") {
+        if (typeof opts === "undefined") {
+          return true;
+        } else {
+          return (0, _shallowEqual.default)(node, opts);
+        }
+      }
+      return false;
+    }
+    __name(isOptionalCallExpression, "isOptionalCallExpression");
+    function isClassProperty(node, opts) {
+      if (!node)
+        return false;
+      const nodeType = node.type;
+      if (nodeType === "ClassProperty") {
+        if (typeof opts === "undefined") {
+          return true;
+        } else {
+          return (0, _shallowEqual.default)(node, opts);
+        }
+      }
+      return false;
+    }
+    __name(isClassProperty, "isClassProperty");
+    function isClassAccessorProperty(node, opts) {
+      if (!node)
+        return false;
+      const nodeType = node.type;
+      if (nodeType === "ClassAccessorProperty") {
+        if (typeof opts === "undefined") {
+          return true;
+        } else {
+          return (0, _shallowEqual.default)(node, opts);
+        }
+      }
+      return false;
+    }
+    __name(isClassAccessorProperty, "isClassAccessorProperty");
+    function isClassPrivateProperty(node, opts) {
+      if (!node)
+        return false;
+      const nodeType = node.type;
+      if (nodeType === "ClassPrivateProperty") {
+        if (typeof opts === "undefined") {
+          return true;
+        } else {
+          return (0, _shallowEqual.default)(node, opts);
+        }
+      }
+      return false;
+    }
+    __name(isClassPrivateProperty, "isClassPrivateProperty");
+    function isClassPrivateMethod(node, opts) {
+      if (!node)
+        return false;
+      const nodeType = node.type;
+      if (nodeType === "ClassPrivateMethod") {
+        if (typeof opts === "undefined") {
+          return true;
+        } else {
+          return (0, _shallowEqual.default)(node, opts);
+        }
+      }
+      return false;
+    }
+    __name(isClassPrivateMethod, "isClassPrivateMethod");
+    function isPrivateName(node, opts) {
+      if (!node)
+        return false;
+      const nodeType = node.type;
+      if (nodeType === "PrivateName") {
+        if (typeof opts === "undefined") {
+          return true;
+        } else {
+          return (0, _shallowEqual.default)(node, opts);
+        }
+      }
+      return false;
+    }
+    __name(isPrivateName, "isPrivateName");
+    function isStaticBlock(node, opts) {
+      if (!node)
+        return false;
+      const nodeType = node.type;
+      if (nodeType === "StaticBlock") {
+        if (typeof opts === "undefined") {
+          return true;
+        } else {
+          return (0, _shallowEqual.default)(node, opts);
+        }
+      }
+      return false;
+    }
+    __name(isStaticBlock, "isStaticBlock");
+    function isAnyTypeAnnotation(node, opts) {
+      if (!node)
+        return false;
+      const nodeType = node.type;
+      if (nodeType === "AnyTypeAnnotation") {
+        if (typeof opts === "undefined") {
+          return true;
+        } else {
+          return (0, _shallowEqual.default)(node, opts);
+        }
+      }
+      return false;
+    }
+    __name(isAnyTypeAnnotation, "isAnyTypeAnnotation");
+    function isArrayTypeAnnotation(node, opts) {
+      if (!node)
+        return false;
+      const nodeType = node.type;
+      if (nodeType === "ArrayTypeAnnotation") {
+        if (typeof opts === "undefined") {
+          return true;
+        } else {
+          return (0, _shallowEqual.default)(node, opts);
+        }
+      }
+      return false;
+    }
+    __name(isArrayTypeAnnotation, "isArrayTypeAnnotation");
+    function isBooleanTypeAnnotation(node, opts) {
+      if (!node)
+        return false;
+      const nodeType = node.type;
+      if (nodeType === "BooleanTypeAnnotation") {
+        if (typeof opts === "undefined") {
+          return true;
+        } else {
+          return (0, _shallowEqual.default)(node, opts);
+        }
+      }
+      return false;
+    }
+    __name(isBooleanTypeAnnotation, "isBooleanTypeAnnotation");
+    function isBooleanLiteralTypeAnnotation(node, opts) {
+      if (!node)
+        return false;
+      const nodeType = node.type;
+      if (nodeType === "BooleanLiteralTypeAnnotation") {
+        if (typeof opts === "undefined") {
+          return true;
+        } else {
+          return (0, _shallowEqual.default)(node, opts);
+        }
+      }
+      return false;
+    }
+    __name(isBooleanLiteralTypeAnnotation, "isBooleanLiteralTypeAnnotation");
+    function isNullLiteralTypeAnnotation(node, opts) {
+      if (!node)
+        return false;
+      const nodeType = node.type;
+      if (nodeType === "NullLiteralTypeAnnotation") {
+        if (typeof opts === "undefined") {
+          return true;
+        } else {
+          return (0, _shallowEqual.default)(node, opts);
+        }
+      }
+      return false;
+    }
+    __name(isNullLiteralTypeAnnotation, "isNullLiteralTypeAnnotation");
+    function isClassImplements(node, opts) {
+      if (!node)
+        return false;
+      const nodeType = node.type;
+      if (nodeType === "ClassImplements") {
+        if (typeof opts === "undefined") {
+          return true;
+        } else {
+          return (0, _shallowEqual.default)(node, opts);
+        }
+      }
+      return false;
+    }
+    __name(isClassImplements, "isClassImplements");
+    function isDeclareClass(node, opts) {
+      if (!node)
+        return false;
+      const nodeType = node.type;
+      if (nodeType === "DeclareClass") {
+        if (typeof opts === "undefined") {
+          return true;
+        } else {
+          return (0, _shallowEqual.default)(node, opts);
+        }
+      }
+      return false;
+    }
+    __name(isDeclareClass, "isDeclareClass");
+    function isDeclareFunction(node, opts) {
+      if (!node)
+        return false;
+      const nodeType = node.type;
+      if (nodeType === "DeclareFunction") {
+        if (typeof opts === "undefined") {
+          return true;
+        } else {
+          return (0, _shallowEqual.default)(node, opts);
+        }
+      }
+      return false;
+    }
+    __name(isDeclareFunction, "isDeclareFunction");
+    function isDeclareInterface(node, opts) {
+      if (!node)
+        return false;
+      const nodeType = node.type;
+      if (nodeType === "DeclareInterface") {
+        if (typeof opts === "undefined") {
+          return true;
+        } else {
+          return (0, _shallowEqual.default)(node, opts);
+        }
+      }
+      return false;
+    }
+    __name(isDeclareInterface, "isDeclareInterface");
+    function isDeclareModule(node, opts) {
+      if (!node)
+        return false;
+      const nodeType = node.type;
+      if (nodeType === "DeclareModule") {
+        if (typeof opts === "undefined") {
+          return true;
+        } else {
+          return (0, _shallowEqual.default)(node, opts);
+        }
+      }
+      return false;
+    }
+    __name(isDeclareModule, "isDeclareModule");
+    function isDeclareModuleExports(node, opts) {
+      if (!node)
+        return false;
+      const nodeType = node.type;
+      if (nodeType === "DeclareModuleExports") {
+        if (typeof opts === "undefined") {
+          return true;
+        } else {
+          return (0, _shallowEqual.default)(node, opts);
+        }
+      }
+      return false;
+    }
+    __name(isDeclareModuleExports, "isDeclareModuleExports");
+    function isDeclareTypeAlias(node, opts) {
+      if (!node)
+        return false;
+      const nodeType = node.type;
+      if (nodeType === "DeclareTypeAlias") {
+        if (typeof opts === "undefined") {
+          return true;
+        } else {
+          return (0, _shallowEqual.default)(node, opts);
+        }
+      }
+      return false;
+    }
+    __name(isDeclareTypeAlias, "isDeclareTypeAlias");
+    function isDeclareOpaqueType(node, opts) {
+      if (!node)
+        return false;
+      const nodeType = node.type;
+      if (nodeType === "DeclareOpaqueType") {
+        if (typeof opts === "undefined") {
+          return true;
+        } else {
+          return (0, _shallowEqual.default)(node, opts);
+        }
+      }
+      return false;
+    }
+    __name(isDeclareOpaqueType, "isDeclareOpaqueType");
+    function isDeclareVariable(node, opts) {
+      if (!node)
+        return false;
+      const nodeType = node.type;
+      if (nodeType === "DeclareVariable") {
+        if (typeof opts === "undefined") {
+          return true;
+        } else {
+          return (0, _shallowEqual.default)(node, opts);
+        }
+      }
+      return false;
+    }
+    __name(isDeclareVariable, "isDeclareVariable");
+    function isDeclareExportDeclaration(node, opts) {
+      if (!node)
+        return false;
+      const nodeType = node.type;
+      if (nodeType === "DeclareExportDeclaration") {
+        if (typeof opts === "undefined") {
+          return true;
+        } else {
+          return (0, _shallowEqual.default)(node, opts);
+        }
+      }
+      return false;
+    }
+    __name(isDeclareExportDeclaration, "isDeclareExportDeclaration");
+    function isDeclareExportAllDeclaration(node, opts) {
+      if (!node)
+        return false;
+      const nodeType = node.type;
+      if (nodeType === "DeclareExportAllDeclaration") {
+        if (typeof opts === "undefined") {
+          return true;
+        } else {
+          return (0, _shallowEqual.default)(node, opts);
+        }
+      }
+      return false;
+    }
+    __name(isDeclareExportAllDeclaration, "isDeclareExportAllDeclaration");
+    function isDeclaredPredicate(node, opts) {
+      if (!node)
+        return false;
+      const nodeType = node.type;
+      if (nodeType === "DeclaredPredicate") {
+        if (typeof opts === "undefined") {
+          return true;
+        } else {
+          return (0, _shallowEqual.default)(node, opts);
+        }
+      }
+      return false;
+    }
+    __name(isDeclaredPredicate, "isDeclaredPredicate");
+    function isExistsTypeAnnotation(node, opts) {
+      if (!node)
+        return false;
+      const nodeType = node.type;
+      if (nodeType === "ExistsTypeAnnotation") {
+        if (typeof opts === "undefined") {
+          return true;
+        } else {
+          return (0, _shallowEqual.default)(node, opts);
+        }
+      }
+      return false;
+    }
+    __name(isExistsTypeAnnotation, "isExistsTypeAnnotation");
+    function isFunctionTypeAnnotation(node, opts) {
+      if (!node)
+        return false;
+      const nodeType = node.type;
+      if (nodeType === "FunctionTypeAnnotation") {
+        if (typeof opts === "undefined") {
+          return true;
+        } else {
+          return (0, _shallowEqual.default)(node, opts);
+        }
+      }
+      return false;
+    }
+    __name(isFunctionTypeAnnotation, "isFunctionTypeAnnotation");
+    function isFunctionTypeParam(node, opts) {
+      if (!node)
+        return false;
+      const nodeType = node.type;
+      if (nodeType === "FunctionTypeParam") {
+        if (typeof opts === "undefined") {
+          return true;
+        } else {
+          return (0, _shallowEqual.default)(node, opts);
+        }
+      }
+      return false;
+    }
+    __name(isFunctionTypeParam, "isFunctionTypeParam");
+    function isGenericTypeAnnotation(node, opts) {
+      if (!node)
+        return false;
+      const nodeType = node.type;
+      if (nodeType === "GenericTypeAnnotation") {
+        if (typeof opts === "undefined") {
+          return true;
+        } else {
+          return (0, _shallowEqual.default)(node, opts);
+        }
+      }
+      return false;
+    }
+    __name(isGenericTypeAnnotation, "isGenericTypeAnnotation");
+    function isInferredPredicate(node, opts) {
+      if (!node)
+        return false;
+      const nodeType = node.type;
+      if (nodeType === "InferredPredicate") {
+        if (typeof opts === "undefined") {
+          return true;
+        } else {
+          return (0, _shallowEqual.default)(node, opts);
+        }
+      }
+      return false;
+    }
+    __name(isInferredPredicate, "isInferredPredicate");
+    function isInterfaceExtends(node, opts) {
+      if (!node)
+        return false;
+      const nodeType = node.type;
+      if (nodeType === "InterfaceExtends") {
+        if (typeof opts === "undefined") {
+          return true;
+        } else {
+          return (0, _shallowEqual.default)(node, opts);
+        }
+      }
+      return false;
+    }
+    __name(isInterfaceExtends, "isInterfaceExtends");
+    function isInterfaceDeclaration(node, opts) {
+      if (!node)
+        return false;
+      const nodeType = node.type;
+      if (nodeType === "InterfaceDeclaration") {
+        if (typeof opts === "undefined") {
+          return true;
+        } else {
+          return (0, _shallowEqual.default)(node, opts);
+        }
+      }
+      return false;
+    }
+    __name(isInterfaceDeclaration, "isInterfaceDeclaration");
+    function isInterfaceTypeAnnotation(node, opts) {
+      if (!node)
+        return false;
+      const nodeType = node.type;
+      if (nodeType === "InterfaceTypeAnnotation") {
+        if (typeof opts === "undefined") {
+          return true;
+        } else {
+          return (0, _shallowEqual.default)(node, opts);
+        }
+      }
+      return false;
+    }
+    __name(isInterfaceTypeAnnotation, "isInterfaceTypeAnnotation");
+    function isIntersectionTypeAnnotation(node, opts) {
+      if (!node)
+        return false;
+      const nodeType = node.type;
+      if (nodeType === "IntersectionTypeAnnotation") {
+        if (typeof opts === "undefined") {
+          return true;
+        } else {
+          return (0, _shallowEqual.default)(node, opts);
+        }
+      }
+      return false;
+    }
+    __name(isIntersectionTypeAnnotation, "isIntersectionTypeAnnotation");
+    function isMixedTypeAnnotation(node, opts) {
+      if (!node)
+        return false;
+      const nodeType = node.type;
+      if (nodeType === "MixedTypeAnnotation") {
+        if (typeof opts === "undefined") {
+          return true;
+        } else {
+          return (0, _shallowEqual.default)(node, opts);
+        }
+      }
+      return false;
+    }
+    __name(isMixedTypeAnnotation, "isMixedTypeAnnotation");
+    function isEmptyTypeAnnotation(node, opts) {
+      if (!node)
+        return false;
+      const nodeType = node.type;
+      if (nodeType === "EmptyTypeAnnotation") {
+        if (typeof opts === "undefined") {
+          return true;
+        } else {
+          return (0, _shallowEqual.default)(node, opts);
+        }
+      }
+      return false;
+    }
+    __name(isEmptyTypeAnnotation, "isEmptyTypeAnnotation");
+    function isNullableTypeAnnotation(node, opts) {
+      if (!node)
+        return false;
+      const nodeType = node.type;
+      if (nodeType === "NullableTypeAnnotation") {
+        if (typeof opts === "undefined") {
+          return true;
+        } else {
+          return (0, _shallowEqual.default)(node, opts);
+        }
+      }
+      return false;
+    }
+    __name(isNullableTypeAnnotation, "isNullableTypeAnnotation");
+    function isNumberLiteralTypeAnnotation(node, opts) {
+      if (!node)
+        return false;
+      const nodeType = node.type;
+      if (nodeType === "NumberLiteralTypeAnnotation") {
+        if (typeof opts === "undefined") {
+          return true;
+        } else {
+          return (0, _shallowEqual.default)(node, opts);
+        }
+      }
+      return false;
+    }
+    __name(isNumberLiteralTypeAnnotation, "isNumberLiteralTypeAnnotation");
+    function isNumberTypeAnnotation(node, opts) {
+      if (!node)
+        return false;
+      const nodeType = node.type;
+      if (nodeType === "NumberTypeAnnotation") {
+        if (typeof opts === "undefined") {
+          return true;
+        } else {
+          return (0, _shallowEqual.default)(node, opts);
+        }
+      }
+      return false;
+    }
+    __name(isNumberTypeAnnotation, "isNumberTypeAnnotation");
+    function isObjectTypeAnnotation(node, opts) {
+      if (!node)
+        return false;
+      const nodeType = node.type;
+      if (nodeType === "ObjectTypeAnnotation") {
+        if (typeof opts === "undefined") {
+          return true;
+        } else {
+          return (0, _shallowEqual.default)(node, opts);
+        }
+      }
+      return false;
+    }
+    __name(isObjectTypeAnnotation, "isObjectTypeAnnotation");
+    function isObjectTypeInternalSlot(node, opts) {
+      if (!node)
+        return false;
+      const nodeType = node.type;
+      if (nodeType === "ObjectTypeInternalSlot") {
+        if (typeof opts === "undefined") {
+          return true;
+        } else {
+          return (0, _shallowEqual.default)(node, opts);
+        }
+      }
+      return false;
+    }
+    __name(isObjectTypeInternalSlot, "isObjectTypeInternalSlot");
+    function isObjectTypeCallProperty(node, opts) {
+      if (!node)
+        return false;
+      const nodeType = node.type;
+      if (nodeType === "ObjectTypeCallProperty") {
+        if (typeof opts === "undefined") {
+          return true;
+        } else {
+          return (0, _shallowEqual.default)(node, opts);
+        }
+      }
+      return false;
+    }
+    __name(isObjectTypeCallProperty, "isObjectTypeCallProperty");
+    function isObjectTypeIndexer(node, opts) {
+      if (!node)
+        return false;
+      const nodeType = node.type;
+      if (nodeType === "ObjectTypeIndexer") {
+        if (typeof opts === "undefined") {
+          return true;
+        } else {
+          return (0, _shallowEqual.default)(node, opts);
+        }
+      }
+      return false;
+    }
+    __name(isObjectTypeIndexer, "isObjectTypeIndexer");
+    function isObjectTypeProperty(node, opts) {
+      if (!node)
+        return false;
+      const nodeType = node.type;
+      if (nodeType === "ObjectTypeProperty") {
+        if (typeof opts === "undefined") {
+          return true;
+        } else {
+          return (0, _shallowEqual.default)(node, opts);
+        }
+      }
+      return false;
+    }
+    __name(isObjectTypeProperty, "isObjectTypeProperty");
+    function isObjectTypeSpreadProperty(node, opts) {
+      if (!node)
+        return false;
+      const nodeType = node.type;
+      if (nodeType === "ObjectTypeSpreadProperty") {
+        if (typeof opts === "undefined") {
+          return true;
+        } else {
+          return (0, _shallowEqual.default)(node, opts);
+        }
+      }
+      return false;
+    }
+    __name(isObjectTypeSpreadProperty, "isObjectTypeSpreadProperty");
+    function isOpaqueType(node, opts) {
+      if (!node)
+        return false;
+      const nodeType = node.type;
+      if (nodeType === "OpaqueType") {
+        if (typeof opts === "undefined") {
+          return true;
+        } else {
+          return (0, _shallowEqual.default)(node, opts);
+        }
+      }
+      return false;
+    }
+    __name(isOpaqueType, "isOpaqueType");
+    function isQualifiedTypeIdentifier(node, opts) {
+      if (!node)
+        return false;
+      const nodeType = node.type;
+      if (nodeType === "QualifiedTypeIdentifier") {
+        if (typeof opts === "undefined") {
+          return true;
+        } else {
+          return (0, _shallowEqual.default)(node, opts);
+        }
+      }
+      return false;
+    }
+    __name(isQualifiedTypeIdentifier, "isQualifiedTypeIdentifier");
+    function isStringLiteralTypeAnnotation(node, opts) {
+      if (!node)
+        return false;
+      const nodeType = node.type;
+      if (nodeType === "StringLiteralTypeAnnotation") {
+        if (typeof opts === "undefined") {
+          return true;
+        } else {
+          return (0, _shallowEqual.default)(node, opts);
+        }
+      }
+      return false;
+    }
+    __name(isStringLiteralTypeAnnotation, "isStringLiteralTypeAnnotation");
+    function isStringTypeAnnotation(node, opts) {
+      if (!node)
+        return false;
+      const nodeType = node.type;
+      if (nodeType === "StringTypeAnnotation") {
+        if (typeof opts === "undefined") {
+          return true;
+        } else {
+          return (0, _shallowEqual.default)(node, opts);
+        }
+      }
+      return false;
+    }
+    __name(isStringTypeAnnotation, "isStringTypeAnnotation");
+    function isSymbolTypeAnnotation(node, opts) {
+      if (!node)
+        return false;
+      const nodeType = node.type;
+      if (nodeType === "SymbolTypeAnnotation") {
+        if (typeof opts === "undefined") {
+          return true;
+        } else {
+          return (0, _shallowEqual.default)(node, opts);
+        }
+      }
+      return false;
+    }
+    __name(isSymbolTypeAnnotation, "isSymbolTypeAnnotation");
+    function isThisTypeAnnotation(node, opts) {
+      if (!node)
+        return false;
+      const nodeType = node.type;
+      if (nodeType === "ThisTypeAnnotation") {
+        if (typeof opts === "undefined") {
+          return true;
+        } else {
+          return (0, _shallowEqual.default)(node, opts);
+        }
+      }
+      return false;
+    }
+    __name(isThisTypeAnnotation, "isThisTypeAnnotation");
+    function isTupleTypeAnnotation(node, opts) {
+      if (!node)
+        return false;
+      const nodeType = node.type;
+      if (nodeType === "TupleTypeAnnotation") {
+        if (typeof opts === "undefined") {
+          return true;
+        } else {
+          return (0, _shallowEqual.default)(node, opts);
+        }
+      }
+      return false;
+    }
+    __name(isTupleTypeAnnotation, "isTupleTypeAnnotation");
+    function isTypeofTypeAnnotation(node, opts) {
+      if (!node)
+        return false;
+      const nodeType = node.type;
+      if (nodeType === "TypeofTypeAnnotation") {
+        if (typeof opts === "undefined") {
+          return true;
+        } else {
+          return (0, _shallowEqual.default)(node, opts);
+        }
+      }
+      return false;
+    }
+    __name(isTypeofTypeAnnotation, "isTypeofTypeAnnotation");
+    function isTypeAlias(node, opts) {
+      if (!node)
+        return false;
+      const nodeType = node.type;
+      if (nodeType === "TypeAlias") {
+        if (typeof opts === "undefined") {
+          return true;
+        } else {
+          return (0, _shallowEqual.default)(node, opts);
+        }
+      }
+      return false;
+    }
+    __name(isTypeAlias, "isTypeAlias");
+    function isTypeAnnotation(node, opts) {
+      if (!node)
+        return false;
+      const nodeType = node.type;
+      if (nodeType === "TypeAnnotation") {
+        if (typeof opts === "undefined") {
+          return true;
+        } else {
+          return (0, _shallowEqual.default)(node, opts);
+        }
+      }
+      return false;
+    }
+    __name(isTypeAnnotation, "isTypeAnnotation");
+    function isTypeCastExpression(node, opts) {
+      if (!node)
+        return false;
+      const nodeType = node.type;
+      if (nodeType === "TypeCastExpression") {
+        if (typeof opts === "undefined") {
+          return true;
+        } else {
+          return (0, _shallowEqual.default)(node, opts);
+        }
+      }
+      return false;
+    }
+    __name(isTypeCastExpression, "isTypeCastExpression");
+    function isTypeParameter(node, opts) {
+      if (!node)
+        return false;
+      const nodeType = node.type;
+      if (nodeType === "TypeParameter") {
+        if (typeof opts === "undefined") {
+          return true;
+        } else {
+          return (0, _shallowEqual.default)(node, opts);
+        }
+      }
+      return false;
+    }
+    __name(isTypeParameter, "isTypeParameter");
+    function isTypeParameterDeclaration(node, opts) {
+      if (!node)
+        return false;
+      const nodeType = node.type;
+      if (nodeType === "TypeParameterDeclaration") {
+        if (typeof opts === "undefined") {
+          return true;
+        } else {
+          return (0, _shallowEqual.default)(node, opts);
+        }
+      }
+      return false;
+    }
+    __name(isTypeParameterDeclaration, "isTypeParameterDeclaration");
+    function isTypeParameterInstantiation(node, opts) {
+      if (!node)
+        return false;
+      const nodeType = node.type;
+      if (nodeType === "TypeParameterInstantiation") {
+        if (typeof opts === "undefined") {
+          return true;
+        } else {
+          return (0, _shallowEqual.default)(node, opts);
+        }
+      }
+      return false;
+    }
+    __name(isTypeParameterInstantiation, "isTypeParameterInstantiation");
+    function isUnionTypeAnnotation(node, opts) {
+      if (!node)
+        return false;
+      const nodeType = node.type;
+      if (nodeType === "UnionTypeAnnotation") {
+        if (typeof opts === "undefined") {
+          return true;
+        } else {
+          return (0, _shallowEqual.default)(node, opts);
+        }
+      }
+      return false;
+    }
+    __name(isUnionTypeAnnotation, "isUnionTypeAnnotation");
+    function isVariance(node, opts) {
+      if (!node)
+        return false;
+      const nodeType = node.type;
+      if (nodeType === "Variance") {
+        if (typeof opts === "undefined") {
+          return true;
+        } else {
+          return (0, _shallowEqual.default)(node, opts);
+        }
+      }
+      return false;
+    }
+    __name(isVariance, "isVariance");
+    function isVoidTypeAnnotation(node, opts) {
+      if (!node)
+        return false;
+      const nodeType = node.type;
+      if (nodeType === "VoidTypeAnnotation") {
+        if (typeof opts === "undefined") {
+          return true;
+        } else {
+          return (0, _shallowEqual.default)(node, opts);
+        }
+      }
+      return false;
+    }
+    __name(isVoidTypeAnnotation, "isVoidTypeAnnotation");
+    function isEnumDeclaration(node, opts) {
+      if (!node)
+        return false;
+      const nodeType = node.type;
+      if (nodeType === "EnumDeclaration") {
+        if (typeof opts === "undefined") {
+          return true;
+        } else {
+          return (0, _shallowEqual.default)(node, opts);
+        }
+      }
+      return false;
+    }
+    __name(isEnumDeclaration, "isEnumDeclaration");
+    function isEnumBooleanBody(node, opts) {
+      if (!node)
+        return false;
+      const nodeType = node.type;
+      if (nodeType === "EnumBooleanBody") {
+        if (typeof opts === "undefined") {
+          return true;
+        } else {
+          return (0, _shallowEqual.default)(node, opts);
+        }
+      }
+      return false;
+    }
+    __name(isEnumBooleanBody, "isEnumBooleanBody");
+    function isEnumNumberBody(node, opts) {
+      if (!node)
+        return false;
+      const nodeType = node.type;
+      if (nodeType === "EnumNumberBody") {
+        if (typeof opts === "undefined") {
+          return true;
+        } else {
+          return (0, _shallowEqual.default)(node, opts);
+        }
+      }
+      return false;
+    }
+    __name(isEnumNumberBody, "isEnumNumberBody");
+    function isEnumStringBody(node, opts) {
+      if (!node)
+        return false;
+      const nodeType = node.type;
+      if (nodeType === "EnumStringBody") {
+        if (typeof opts === "undefined") {
+          return true;
+        } else {
+          return (0, _shallowEqual.default)(node, opts);
+        }
+      }
+      return false;
+    }
+    __name(isEnumStringBody, "isEnumStringBody");
+    function isEnumSymbolBody(node, opts) {
+      if (!node)
+        return false;
+      const nodeType = node.type;
+      if (nodeType === "EnumSymbolBody") {
+        if (typeof opts === "undefined") {
+          return true;
+        } else {
+          return (0, _shallowEqual.default)(node, opts);
+        }
+      }
+      return false;
+    }
+    __name(isEnumSymbolBody, "isEnumSymbolBody");
+    function isEnumBooleanMember(node, opts) {
+      if (!node)
+        return false;
+      const nodeType = node.type;
+      if (nodeType === "EnumBooleanMember") {
+        if (typeof opts === "undefined") {
+          return true;
+        } else {
+          return (0, _shallowEqual.default)(node, opts);
+        }
+      }
+      return false;
+    }
+    __name(isEnumBooleanMember, "isEnumBooleanMember");
+    function isEnumNumberMember(node, opts) {
+      if (!node)
+        return false;
+      const nodeType = node.type;
+      if (nodeType === "EnumNumberMember") {
+        if (typeof opts === "undefined") {
+          return true;
+        } else {
+          return (0, _shallowEqual.default)(node, opts);
+        }
+      }
+      return false;
+    }
+    __name(isEnumNumberMember, "isEnumNumberMember");
+    function isEnumStringMember(node, opts) {
+      if (!node)
+        return false;
+      const nodeType = node.type;
+      if (nodeType === "EnumStringMember") {
+        if (typeof opts === "undefined") {
+          return true;
+        } else {
+          return (0, _shallowEqual.default)(node, opts);
+        }
+      }
+      return false;
+    }
+    __name(isEnumStringMember, "isEnumStringMember");
+    function isEnumDefaultedMember(node, opts) {
+      if (!node)
+        return false;
+      const nodeType = node.type;
+      if (nodeType === "EnumDefaultedMember") {
+        if (typeof opts === "undefined") {
+          return true;
+        } else {
+          return (0, _shallowEqual.default)(node, opts);
+        }
+      }
+      return false;
+    }
+    __name(isEnumDefaultedMember, "isEnumDefaultedMember");
+    function isIndexedAccessType(node, opts) {
+      if (!node)
+        return false;
+      const nodeType = node.type;
+      if (nodeType === "IndexedAccessType") {
+        if (typeof opts === "undefined") {
+          return true;
+        } else {
+          return (0, _shallowEqual.default)(node, opts);
+        }
+      }
+      return false;
+    }
+    __name(isIndexedAccessType, "isIndexedAccessType");
+    function isOptionalIndexedAccessType(node, opts) {
+      if (!node)
+        return false;
+      const nodeType = node.type;
+      if (nodeType === "OptionalIndexedAccessType") {
+        if (typeof opts === "undefined") {
+          return true;
+        } else {
+          return (0, _shallowEqual.default)(node, opts);
+        }
+      }
+      return false;
+    }
+    __name(isOptionalIndexedAccessType, "isOptionalIndexedAccessType");
+    function isJSXAttribute(node, opts) {
+      if (!node)
+        return false;
+      const nodeType = node.type;
+      if (nodeType === "JSXAttribute") {
+        if (typeof opts === "undefined") {
+          return true;
+        } else {
+          return (0, _shallowEqual.default)(node, opts);
+        }
+      }
+      return false;
+    }
+    __name(isJSXAttribute, "isJSXAttribute");
+    function isJSXClosingElement(node, opts) {
+      if (!node)
+        return false;
+      const nodeType = node.type;
+      if (nodeType === "JSXClosingElement") {
+        if (typeof opts === "undefined") {
+          return true;
+        } else {
+          return (0, _shallowEqual.default)(node, opts);
+        }
+      }
+      return false;
+    }
+    __name(isJSXClosingElement, "isJSXClosingElement");
+    function isJSXElement(node, opts) {
+      if (!node)
+        return false;
+      const nodeType = node.type;
+      if (nodeType === "JSXElement") {
+        if (typeof opts === "undefined") {
+          return true;
+        } else {
+          return (0, _shallowEqual.default)(node, opts);
+        }
+      }
+      return false;
+    }
+    __name(isJSXElement, "isJSXElement");
+    function isJSXEmptyExpression(node, opts) {
+      if (!node)
+        return false;
+      const nodeType = node.type;
+      if (nodeType === "JSXEmptyExpression") {
+        if (typeof opts === "undefined") {
+          return true;
+        } else {
+          return (0, _shallowEqual.default)(node, opts);
+        }
+      }
+      return false;
+    }
+    __name(isJSXEmptyExpression, "isJSXEmptyExpression");
+    function isJSXExpressionContainer(node, opts) {
+      if (!node)
+        return false;
+      const nodeType = node.type;
+      if (nodeType === "JSXExpressionContainer") {
+        if (typeof opts === "undefined") {
+          return true;
+        } else {
+          return (0, _shallowEqual.default)(node, opts);
+        }
+      }
+      return false;
+    }
+    __name(isJSXExpressionContainer, "isJSXExpressionContainer");
+    function isJSXSpreadChild(node, opts) {
+      if (!node)
+        return false;
+      const nodeType = node.type;
+      if (nodeType === "JSXSpreadChild") {
+        if (typeof opts === "undefined") {
+          return true;
+        } else {
+          return (0, _shallowEqual.default)(node, opts);
+        }
+      }
+      return false;
+    }
+    __name(isJSXSpreadChild, "isJSXSpreadChild");
+    function isJSXIdentifier(node, opts) {
+      if (!node)
+        return false;
+      const nodeType = node.type;
+      if (nodeType === "JSXIdentifier") {
+        if (typeof opts === "undefined") {
+          return true;
+        } else {
+          return (0, _shallowEqual.default)(node, opts);
+        }
+      }
+      return false;
+    }
+    __name(isJSXIdentifier, "isJSXIdentifier");
+    function isJSXMemberExpression(node, opts) {
+      if (!node)
+        return false;
+      const nodeType = node.type;
+      if (nodeType === "JSXMemberExpression") {
+        if (typeof opts === "undefined") {
+          return true;
+        } else {
+          return (0, _shallowEqual.default)(node, opts);
+        }
+      }
+      return false;
+    }
+    __name(isJSXMemberExpression, "isJSXMemberExpression");
+    function isJSXNamespacedName(node, opts) {
+      if (!node)
+        return false;
+      const nodeType = node.type;
+      if (nodeType === "JSXNamespacedName") {
+        if (typeof opts === "undefined") {
+          return true;
+        } else {
+          return (0, _shallowEqual.default)(node, opts);
+        }
+      }
+      return false;
+    }
+    __name(isJSXNamespacedName, "isJSXNamespacedName");
+    function isJSXOpeningElement(node, opts) {
+      if (!node)
+        return false;
+      const nodeType = node.type;
+      if (nodeType === "JSXOpeningElement") {
+        if (typeof opts === "undefined") {
+          return true;
+        } else {
+          return (0, _shallowEqual.default)(node, opts);
+        }
+      }
+      return false;
+    }
+    __name(isJSXOpeningElement, "isJSXOpeningElement");
+    function isJSXSpreadAttribute(node, opts) {
+      if (!node)
+        return false;
+      const nodeType = node.type;
+      if (nodeType === "JSXSpreadAttribute") {
+        if (typeof opts === "undefined") {
+          return true;
+        } else {
+          return (0, _shallowEqual.default)(node, opts);
+        }
+      }
+      return false;
+    }
+    __name(isJSXSpreadAttribute, "isJSXSpreadAttribute");
+    function isJSXText(node, opts) {
+      if (!node)
+        return false;
+      const nodeType = node.type;
+      if (nodeType === "JSXText") {
+        if (typeof opts === "undefined") {
+          return true;
+        } else {
+          return (0, _shallowEqual.default)(node, opts);
+        }
+      }
+      return false;
+    }
+    __name(isJSXText, "isJSXText");
+    function isJSXFragment(node, opts) {
+      if (!node)
+        return false;
+      const nodeType = node.type;
+      if (nodeType === "JSXFragment") {
+        if (typeof opts === "undefined") {
+          return true;
+        } else {
+          return (0, _shallowEqual.default)(node, opts);
+        }
+      }
+      return false;
+    }
+    __name(isJSXFragment, "isJSXFragment");
+    function isJSXOpeningFragment(node, opts) {
+      if (!node)
+        return false;
+      const nodeType = node.type;
+      if (nodeType === "JSXOpeningFragment") {
+        if (typeof opts === "undefined") {
+          return true;
+        } else {
+          return (0, _shallowEqual.default)(node, opts);
+        }
+      }
+      return false;
+    }
+    __name(isJSXOpeningFragment, "isJSXOpeningFragment");
+    function isJSXClosingFragment(node, opts) {
+      if (!node)
+        return false;
+      const nodeType = node.type;
+      if (nodeType === "JSXClosingFragment") {
+        if (typeof opts === "undefined") {
+          return true;
+        } else {
+          return (0, _shallowEqual.default)(node, opts);
+        }
+      }
+      return false;
+    }
+    __name(isJSXClosingFragment, "isJSXClosingFragment");
+    function isNoop(node, opts) {
+      if (!node)
+        return false;
+      const nodeType = node.type;
+      if (nodeType === "Noop") {
+        if (typeof opts === "undefined") {
+          return true;
+        } else {
+          return (0, _shallowEqual.default)(node, opts);
+        }
+      }
+      return false;
+    }
+    __name(isNoop, "isNoop");
+    function isPlaceholder(node, opts) {
+      if (!node)
+        return false;
+      const nodeType = node.type;
+      if (nodeType === "Placeholder") {
+        if (typeof opts === "undefined") {
+          return true;
+        } else {
+          return (0, _shallowEqual.default)(node, opts);
+        }
+      }
+      return false;
+    }
+    __name(isPlaceholder, "isPlaceholder");
+    function isV8IntrinsicIdentifier(node, opts) {
+      if (!node)
+        return false;
+      const nodeType = node.type;
+      if (nodeType === "V8IntrinsicIdentifier") {
+        if (typeof opts === "undefined") {
+          return true;
+        } else {
+          return (0, _shallowEqual.default)(node, opts);
+        }
+      }
+      return false;
+    }
+    __name(isV8IntrinsicIdentifier, "isV8IntrinsicIdentifier");
+    function isArgumentPlaceholder(node, opts) {
+      if (!node)
+        return false;
+      const nodeType = node.type;
+      if (nodeType === "ArgumentPlaceholder") {
+        if (typeof opts === "undefined") {
+          return true;
+        } else {
+          return (0, _shallowEqual.default)(node, opts);
+        }
+      }
+      return false;
+    }
+    __name(isArgumentPlaceholder, "isArgumentPlaceholder");
+    function isBindExpression(node, opts) {
+      if (!node)
+        return false;
+      const nodeType = node.type;
+      if (nodeType === "BindExpression") {
+        if (typeof opts === "undefined") {
+          return true;
+        } else {
+          return (0, _shallowEqual.default)(node, opts);
+        }
+      }
+      return false;
+    }
+    __name(isBindExpression, "isBindExpression");
+    function isImportAttribute(node, opts) {
+      if (!node)
+        return false;
+      const nodeType = node.type;
+      if (nodeType === "ImportAttribute") {
+        if (typeof opts === "undefined") {
+          return true;
+        } else {
+          return (0, _shallowEqual.default)(node, opts);
+        }
+      }
+      return false;
+    }
+    __name(isImportAttribute, "isImportAttribute");
+    function isDecorator(node, opts) {
+      if (!node)
+        return false;
+      const nodeType = node.type;
+      if (nodeType === "Decorator") {
+        if (typeof opts === "undefined") {
+          return true;
+        } else {
+          return (0, _shallowEqual.default)(node, opts);
+        }
+      }
+      return false;
+    }
+    __name(isDecorator, "isDecorator");
+    function isDoExpression(node, opts) {
+      if (!node)
+        return false;
+      const nodeType = node.type;
+      if (nodeType === "DoExpression") {
+        if (typeof opts === "undefined") {
+          return true;
+        } else {
+          return (0, _shallowEqual.default)(node, opts);
+        }
+      }
+      return false;
+    }
+    __name(isDoExpression, "isDoExpression");
+    function isExportDefaultSpecifier(node, opts) {
+      if (!node)
+        return false;
+      const nodeType = node.type;
+      if (nodeType === "ExportDefaultSpecifier") {
+        if (typeof opts === "undefined") {
+          return true;
+        } else {
+          return (0, _shallowEqual.default)(node, opts);
+        }
+      }
+      return false;
+    }
+    __name(isExportDefaultSpecifier, "isExportDefaultSpecifier");
+    function isRecordExpression(node, opts) {
+      if (!node)
+        return false;
+      const nodeType = node.type;
+      if (nodeType === "RecordExpression") {
+        if (typeof opts === "undefined") {
+          return true;
+        } else {
+          return (0, _shallowEqual.default)(node, opts);
+        }
+      }
+      return false;
+    }
+    __name(isRecordExpression, "isRecordExpression");
+    function isTupleExpression(node, opts) {
+      if (!node)
+        return false;
+      const nodeType = node.type;
+      if (nodeType === "TupleExpression") {
+        if (typeof opts === "undefined") {
+          return true;
+        } else {
+          return (0, _shallowEqual.default)(node, opts);
+        }
+      }
+      return false;
+    }
+    __name(isTupleExpression, "isTupleExpression");
+    function isDecimalLiteral(node, opts) {
+      if (!node)
+        return false;
+      const nodeType = node.type;
+      if (nodeType === "DecimalLiteral") {
+        if (typeof opts === "undefined") {
+          return true;
+        } else {
+          return (0, _shallowEqual.default)(node, opts);
+        }
+      }
+      return false;
+    }
+    __name(isDecimalLiteral, "isDecimalLiteral");
+    function isModuleExpression(node, opts) {
+      if (!node)
+        return false;
+      const nodeType = node.type;
+      if (nodeType === "ModuleExpression") {
+        if (typeof opts === "undefined") {
+          return true;
+        } else {
+          return (0, _shallowEqual.default)(node, opts);
+        }
+      }
+      return false;
+    }
+    __name(isModuleExpression, "isModuleExpression");
+    function isTopicReference(node, opts) {
+      if (!node)
+        return false;
+      const nodeType = node.type;
+      if (nodeType === "TopicReference") {
+        if (typeof opts === "undefined") {
+          return true;
+        } else {
+          return (0, _shallowEqual.default)(node, opts);
+        }
+      }
+      return false;
+    }
+    __name(isTopicReference, "isTopicReference");
+    function isPipelineTopicExpression(node, opts) {
+      if (!node)
+        return false;
+      const nodeType = node.type;
+      if (nodeType === "PipelineTopicExpression") {
+        if (typeof opts === "undefined") {
+          return true;
+        } else {
+          return (0, _shallowEqual.default)(node, opts);
+        }
+      }
+      return false;
+    }
+    __name(isPipelineTopicExpression, "isPipelineTopicExpression");
+    function isPipelineBareFunction(node, opts) {
+      if (!node)
+        return false;
+      const nodeType = node.type;
+      if (nodeType === "PipelineBareFunction") {
+        if (typeof opts === "undefined") {
+          return true;
+        } else {
+          return (0, _shallowEqual.default)(node, opts);
+        }
+      }
+      return false;
+    }
+    __name(isPipelineBareFunction, "isPipelineBareFunction");
+    function isPipelinePrimaryTopicReference(node, opts) {
+      if (!node)
+        return false;
+      const nodeType = node.type;
+      if (nodeType === "PipelinePrimaryTopicReference") {
+        if (typeof opts === "undefined") {
+          return true;
+        } else {
+          return (0, _shallowEqual.default)(node, opts);
+        }
+      }
+      return false;
+    }
+    __name(isPipelinePrimaryTopicReference, "isPipelinePrimaryTopicReference");
+    function isTSParameterProperty(node, opts) {
+      if (!node)
+        return false;
+      const nodeType = node.type;
+      if (nodeType === "TSParameterProperty") {
+        if (typeof opts === "undefined") {
+          return true;
+        } else {
+          return (0, _shallowEqual.default)(node, opts);
+        }
+      }
+      return false;
+    }
+    __name(isTSParameterProperty, "isTSParameterProperty");
+    function isTSDeclareFunction(node, opts) {
+      if (!node)
+        return false;
+      const nodeType = node.type;
+      if (nodeType === "TSDeclareFunction") {
+        if (typeof opts === "undefined") {
+          return true;
+        } else {
+          return (0, _shallowEqual.default)(node, opts);
+        }
+      }
+      return false;
+    }
+    __name(isTSDeclareFunction, "isTSDeclareFunction");
+    function isTSDeclareMethod(node, opts) {
+      if (!node)
+        return false;
+      const nodeType = node.type;
+      if (nodeType === "TSDeclareMethod") {
+        if (typeof opts === "undefined") {
+          return true;
+        } else {
+          return (0, _shallowEqual.default)(node, opts);
+        }
+      }
+      return false;
+    }
+    __name(isTSDeclareMethod, "isTSDeclareMethod");
+    function isTSQualifiedName(node, opts) {
+      if (!node)
+        return false;
+      const nodeType = node.type;
+      if (nodeType === "TSQualifiedName") {
+        if (typeof opts === "undefined") {
+          return true;
+        } else {
+          return (0, _shallowEqual.default)(node, opts);
+        }
+      }
+      return false;
+    }
+    __name(isTSQualifiedName, "isTSQualifiedName");
+    function isTSCallSignatureDeclaration(node, opts) {
+      if (!node)
+        return false;
+      const nodeType = node.type;
+      if (nodeType === "TSCallSignatureDeclaration") {
+        if (typeof opts === "undefined") {
+          return true;
+        } else {
+          return (0, _shallowEqual.default)(node, opts);
+        }
+      }
+      return false;
+    }
+    __name(isTSCallSignatureDeclaration, "isTSCallSignatureDeclaration");
+    function isTSConstructSignatureDeclaration(node, opts) {
+      if (!node)
+        return false;
+      const nodeType = node.type;
+      if (nodeType === "TSConstructSignatureDeclaration") {
+        if (typeof opts === "undefined") {
+          return true;
+        } else {
+          return (0, _shallowEqual.default)(node, opts);
+        }
+      }
+      return false;
+    }
+    __name(isTSConstructSignatureDeclaration, "isTSConstructSignatureDeclaration");
+    function isTSPropertySignature(node, opts) {
+      if (!node)
+        return false;
+      const nodeType = node.type;
+      if (nodeType === "TSPropertySignature") {
+        if (typeof opts === "undefined") {
+          return true;
+        } else {
+          return (0, _shallowEqual.default)(node, opts);
+        }
+      }
+      return false;
+    }
+    __name(isTSPropertySignature, "isTSPropertySignature");
+    function isTSMethodSignature(node, opts) {
+      if (!node)
+        return false;
+      const nodeType = node.type;
+      if (nodeType === "TSMethodSignature") {
+        if (typeof opts === "undefined") {
+          return true;
+        } else {
+          return (0, _shallowEqual.default)(node, opts);
+        }
+      }
+      return false;
+    }
+    __name(isTSMethodSignature, "isTSMethodSignature");
+    function isTSIndexSignature(node, opts) {
+      if (!node)
+        return false;
+      const nodeType = node.type;
+      if (nodeType === "TSIndexSignature") {
+        if (typeof opts === "undefined") {
+          return true;
+        } else {
+          return (0, _shallowEqual.default)(node, opts);
+        }
+      }
+      return false;
+    }
+    __name(isTSIndexSignature, "isTSIndexSignature");
+    function isTSAnyKeyword(node, opts) {
+      if (!node)
+        return false;
+      const nodeType = node.type;
+      if (nodeType === "TSAnyKeyword") {
+        if (typeof opts === "undefined") {
+          return true;
+        } else {
+          return (0, _shallowEqual.default)(node, opts);
+        }
+      }
+      return false;
+    }
+    __name(isTSAnyKeyword, "isTSAnyKeyword");
+    function isTSBooleanKeyword(node, opts) {
+      if (!node)
+        return false;
+      const nodeType = node.type;
+      if (nodeType === "TSBooleanKeyword") {
+        if (typeof opts === "undefined") {
+          return true;
+        } else {
+          return (0, _shallowEqual.default)(node, opts);
+        }
+      }
+      return false;
+    }
+    __name(isTSBooleanKeyword, "isTSBooleanKeyword");
+    function isTSBigIntKeyword(node, opts) {
+      if (!node)
+        return false;
+      const nodeType = node.type;
+      if (nodeType === "TSBigIntKeyword") {
+        if (typeof opts === "undefined") {
+          return true;
+        } else {
+          return (0, _shallowEqual.default)(node, opts);
+        }
+      }
+      return false;
+    }
+    __name(isTSBigIntKeyword, "isTSBigIntKeyword");
+    function isTSIntrinsicKeyword(node, opts) {
+      if (!node)
+        return false;
+      const nodeType = node.type;
+      if (nodeType === "TSIntrinsicKeyword") {
+        if (typeof opts === "undefined") {
+          return true;
+        } else {
+          return (0, _shallowEqual.default)(node, opts);
+        }
+      }
+      return false;
+    }
+    __name(isTSIntrinsicKeyword, "isTSIntrinsicKeyword");
+    function isTSNeverKeyword(node, opts) {
+      if (!node)
+        return false;
+      const nodeType = node.type;
+      if (nodeType === "TSNeverKeyword") {
+        if (typeof opts === "undefined") {
+          return true;
+        } else {
+          return (0, _shallowEqual.default)(node, opts);
+        }
+      }
+      return false;
+    }
+    __name(isTSNeverKeyword, "isTSNeverKeyword");
+    function isTSNullKeyword(node, opts) {
+      if (!node)
+        return false;
+      const nodeType = node.type;
+      if (nodeType === "TSNullKeyword") {
+        if (typeof opts === "undefined") {
+          return true;
+        } else {
+          return (0, _shallowEqual.default)(node, opts);
+        }
+      }
+      return false;
+    }
+    __name(isTSNullKeyword, "isTSNullKeyword");
+    function isTSNumberKeyword(node, opts) {
+      if (!node)
+        return false;
+      const nodeType = node.type;
+      if (nodeType === "TSNumberKeyword") {
+        if (typeof opts === "undefined") {
+          return true;
+        } else {
+          return (0, _shallowEqual.default)(node, opts);
+        }
+      }
+      return false;
+    }
+    __name(isTSNumberKeyword, "isTSNumberKeyword");
+    function isTSObjectKeyword(node, opts) {
+      if (!node)
+        return false;
+      const nodeType = node.type;
+      if (nodeType === "TSObjectKeyword") {
+        if (typeof opts === "undefined") {
+          return true;
+        } else {
+          return (0, _shallowEqual.default)(node, opts);
+        }
+      }
+      return false;
+    }
+    __name(isTSObjectKeyword, "isTSObjectKeyword");
+    function isTSStringKeyword(node, opts) {
+      if (!node)
+        return false;
+      const nodeType = node.type;
+      if (nodeType === "TSStringKeyword") {
+        if (typeof opts === "undefined") {
+          return true;
+        } else {
+          return (0, _shallowEqual.default)(node, opts);
+        }
+      }
+      return false;
+    }
+    __name(isTSStringKeyword, "isTSStringKeyword");
+    function isTSSymbolKeyword(node, opts) {
+      if (!node)
+        return false;
+      const nodeType = node.type;
+      if (nodeType === "TSSymbolKeyword") {
+        if (typeof opts === "undefined") {
+          return true;
+        } else {
+          return (0, _shallowEqual.default)(node, opts);
+        }
+      }
+      return false;
+    }
+    __name(isTSSymbolKeyword, "isTSSymbolKeyword");
+    function isTSUndefinedKeyword(node, opts) {
+      if (!node)
+        return false;
+      const nodeType = node.type;
+      if (nodeType === "TSUndefinedKeyword") {
+        if (typeof opts === "undefined") {
+          return true;
+        } else {
+          return (0, _shallowEqual.default)(node, opts);
+        }
+      }
+      return false;
+    }
+    __name(isTSUndefinedKeyword, "isTSUndefinedKeyword");
+    function isTSUnknownKeyword(node, opts) {
+      if (!node)
+        return false;
+      const nodeType = node.type;
+      if (nodeType === "TSUnknownKeyword") {
+        if (typeof opts === "undefined") {
+          return true;
+        } else {
+          return (0, _shallowEqual.default)(node, opts);
+        }
+      }
+      return false;
+    }
+    __name(isTSUnknownKeyword, "isTSUnknownKeyword");
+    function isTSVoidKeyword(node, opts) {
+      if (!node)
+        return false;
+      const nodeType = node.type;
+      if (nodeType === "TSVoidKeyword") {
+        if (typeof opts === "undefined") {
+          return true;
+        } else {
+          return (0, _shallowEqual.default)(node, opts);
+        }
+      }
+      return false;
+    }
+    __name(isTSVoidKeyword, "isTSVoidKeyword");
+    function isTSThisType(node, opts) {
+      if (!node)
+        return false;
+      const nodeType = node.type;
+      if (nodeType === "TSThisType") {
+        if (typeof opts === "undefined") {
+          return true;
+        } else {
+          return (0, _shallowEqual.default)(node, opts);
+        }
+      }
+      return false;
+    }
+    __name(isTSThisType, "isTSThisType");
+    function isTSFunctionType(node, opts) {
+      if (!node)
+        return false;
+      const nodeType = node.type;
+      if (nodeType === "TSFunctionType") {
+        if (typeof opts === "undefined") {
+          return true;
+        } else {
+          return (0, _shallowEqual.default)(node, opts);
+        }
+      }
+      return false;
+    }
+    __name(isTSFunctionType, "isTSFunctionType");
+    function isTSConstructorType(node, opts) {
+      if (!node)
+        return false;
+      const nodeType = node.type;
+      if (nodeType === "TSConstructorType") {
+        if (typeof opts === "undefined") {
+          return true;
+        } else {
+          return (0, _shallowEqual.default)(node, opts);
+        }
+      }
+      return false;
+    }
+    __name(isTSConstructorType, "isTSConstructorType");
+    function isTSTypeReference(node, opts) {
+      if (!node)
+        return false;
+      const nodeType = node.type;
+      if (nodeType === "TSTypeReference") {
+        if (typeof opts === "undefined") {
+          return true;
+        } else {
+          return (0, _shallowEqual.default)(node, opts);
+        }
+      }
+      return false;
+    }
+    __name(isTSTypeReference, "isTSTypeReference");
+    function isTSTypePredicate(node, opts) {
+      if (!node)
+        return false;
+      const nodeType = node.type;
+      if (nodeType === "TSTypePredicate") {
+        if (typeof opts === "undefined") {
+          return true;
+        } else {
+          return (0, _shallowEqual.default)(node, opts);
+        }
+      }
+      return false;
+    }
+    __name(isTSTypePredicate, "isTSTypePredicate");
+    function isTSTypeQuery(node, opts) {
+      if (!node)
+        return false;
+      const nodeType = node.type;
+      if (nodeType === "TSTypeQuery") {
+        if (typeof opts === "undefined") {
+          return true;
+        } else {
+          return (0, _shallowEqual.default)(node, opts);
+        }
+      }
+      return false;
+    }
+    __name(isTSTypeQuery, "isTSTypeQuery");
+    function isTSTypeLiteral(node, opts) {
+      if (!node)
+        return false;
+      const nodeType = node.type;
+      if (nodeType === "TSTypeLiteral") {
+        if (typeof opts === "undefined") {
+          return true;
+        } else {
+          return (0, _shallowEqual.default)(node, opts);
+        }
+      }
+      return false;
+    }
+    __name(isTSTypeLiteral, "isTSTypeLiteral");
+    function isTSArrayType(node, opts) {
+      if (!node)
+        return false;
+      const nodeType = node.type;
+      if (nodeType === "TSArrayType") {
+        if (typeof opts === "undefined") {
+          return true;
+        } else {
+          return (0, _shallowEqual.default)(node, opts);
+        }
+      }
+      return false;
+    }
+    __name(isTSArrayType, "isTSArrayType");
+    function isTSTupleType(node, opts) {
+      if (!node)
+        return false;
+      const nodeType = node.type;
+      if (nodeType === "TSTupleType") {
+        if (typeof opts === "undefined") {
+          return true;
+        } else {
+          return (0, _shallowEqual.default)(node, opts);
+        }
+      }
+      return false;
+    }
+    __name(isTSTupleType, "isTSTupleType");
+    function isTSOptionalType(node, opts) {
+      if (!node)
+        return false;
+      const nodeType = node.type;
+      if (nodeType === "TSOptionalType") {
+        if (typeof opts === "undefined") {
+          return true;
+        } else {
+          return (0, _shallowEqual.default)(node, opts);
+        }
+      }
+      return false;
+    }
+    __name(isTSOptionalType, "isTSOptionalType");
+    function isTSRestType(node, opts) {
+      if (!node)
+        return false;
+      const nodeType = node.type;
+      if (nodeType === "TSRestType") {
+        if (typeof opts === "undefined") {
+          return true;
+        } else {
+          return (0, _shallowEqual.default)(node, opts);
+        }
+      }
+      return false;
+    }
+    __name(isTSRestType, "isTSRestType");
+    function isTSNamedTupleMember(node, opts) {
+      if (!node)
+        return false;
+      const nodeType = node.type;
+      if (nodeType === "TSNamedTupleMember") {
+        if (typeof opts === "undefined") {
+          return true;
+        } else {
+          return (0, _shallowEqual.default)(node, opts);
+        }
+      }
+      return false;
+    }
+    __name(isTSNamedTupleMember, "isTSNamedTupleMember");
+    function isTSUnionType(node, opts) {
+      if (!node)
+        return false;
+      const nodeType = node.type;
+      if (nodeType === "TSUnionType") {
+        if (typeof opts === "undefined") {
+          return true;
+        } else {
+          return (0, _shallowEqual.default)(node, opts);
+        }
+      }
+      return false;
+    }
+    __name(isTSUnionType, "isTSUnionType");
+    function isTSIntersectionType(node, opts) {
+      if (!node)
+        return false;
+      const nodeType = node.type;
+      if (nodeType === "TSIntersectionType") {
+        if (typeof opts === "undefined") {
+          return true;
+        } else {
+          return (0, _shallowEqual.default)(node, opts);
+        }
+      }
+      return false;
+    }
+    __name(isTSIntersectionType, "isTSIntersectionType");
+    function isTSConditionalType(node, opts) {
+      if (!node)
+        return false;
+      const nodeType = node.type;
+      if (nodeType === "TSConditionalType") {
+        if (typeof opts === "undefined") {
+          return true;
+        } else {
+          return (0, _shallowEqual.default)(node, opts);
+        }
+      }
+      return false;
+    }
+    __name(isTSConditionalType, "isTSConditionalType");
+    function isTSInferType(node, opts) {
+      if (!node)
+        return false;
+      const nodeType = node.type;
+      if (nodeType === "TSInferType") {
+        if (typeof opts === "undefined") {
+          return true;
+        } else {
+          return (0, _shallowEqual.default)(node, opts);
+        }
+      }
+      return false;
+    }
+    __name(isTSInferType, "isTSInferType");
+    function isTSParenthesizedType(node, opts) {
+      if (!node)
+        return false;
+      const nodeType = node.type;
+      if (nodeType === "TSParenthesizedType") {
+        if (typeof opts === "undefined") {
+          return true;
+        } else {
+          return (0, _shallowEqual.default)(node, opts);
+        }
+      }
+      return false;
+    }
+    __name(isTSParenthesizedType, "isTSParenthesizedType");
+    function isTSTypeOperator(node, opts) {
+      if (!node)
+        return false;
+      const nodeType = node.type;
+      if (nodeType === "TSTypeOperator") {
+        if (typeof opts === "undefined") {
+          return true;
+        } else {
+          return (0, _shallowEqual.default)(node, opts);
+        }
+      }
+      return false;
+    }
+    __name(isTSTypeOperator, "isTSTypeOperator");
+    function isTSIndexedAccessType(node, opts) {
+      if (!node)
+        return false;
+      const nodeType = node.type;
+      if (nodeType === "TSIndexedAccessType") {
+        if (typeof opts === "undefined") {
+          return true;
+        } else {
+          return (0, _shallowEqual.default)(node, opts);
+        }
+      }
+      return false;
+    }
+    __name(isTSIndexedAccessType, "isTSIndexedAccessType");
+    function isTSMappedType(node, opts) {
+      if (!node)
+        return false;
+      const nodeType = node.type;
+      if (nodeType === "TSMappedType") {
+        if (typeof opts === "undefined") {
+          return true;
+        } else {
+          return (0, _shallowEqual.default)(node, opts);
+        }
+      }
+      return false;
+    }
+    __name(isTSMappedType, "isTSMappedType");
+    function isTSLiteralType(node, opts) {
+      if (!node)
+        return false;
+      const nodeType = node.type;
+      if (nodeType === "TSLiteralType") {
+        if (typeof opts === "undefined") {
+          return true;
+        } else {
+          return (0, _shallowEqual.default)(node, opts);
+        }
+      }
+      return false;
+    }
+    __name(isTSLiteralType, "isTSLiteralType");
+    function isTSExpressionWithTypeArguments(node, opts) {
+      if (!node)
+        return false;
+      const nodeType = node.type;
+      if (nodeType === "TSExpressionWithTypeArguments") {
+        if (typeof opts === "undefined") {
+          return true;
+        } else {
+          return (0, _shallowEqual.default)(node, opts);
+        }
+      }
+      return false;
+    }
+    __name(isTSExpressionWithTypeArguments, "isTSExpressionWithTypeArguments");
+    function isTSInterfaceDeclaration(node, opts) {
+      if (!node)
+        return false;
+      const nodeType = node.type;
+      if (nodeType === "TSInterfaceDeclaration") {
+        if (typeof opts === "undefined") {
+          return true;
+        } else {
+          return (0, _shallowEqual.default)(node, opts);
+        }
+      }
+      return false;
+    }
+    __name(isTSInterfaceDeclaration, "isTSInterfaceDeclaration");
+    function isTSInterfaceBody(node, opts) {
+      if (!node)
+        return false;
+      const nodeType = node.type;
+      if (nodeType === "TSInterfaceBody") {
+        if (typeof opts === "undefined") {
+          return true;
+        } else {
+          return (0, _shallowEqual.default)(node, opts);
+        }
+      }
+      return false;
+    }
+    __name(isTSInterfaceBody, "isTSInterfaceBody");
+    function isTSTypeAliasDeclaration(node, opts) {
+      if (!node)
+        return false;
+      const nodeType = node.type;
+      if (nodeType === "TSTypeAliasDeclaration") {
+        if (typeof opts === "undefined") {
+          return true;
+        } else {
+          return (0, _shallowEqual.default)(node, opts);
+        }
+      }
+      return false;
+    }
+    __name(isTSTypeAliasDeclaration, "isTSTypeAliasDeclaration");
+    function isTSInstantiationExpression(node, opts) {
+      if (!node)
+        return false;
+      const nodeType = node.type;
+      if (nodeType === "TSInstantiationExpression") {
+        if (typeof opts === "undefined") {
+          return true;
+        } else {
+          return (0, _shallowEqual.default)(node, opts);
+        }
+      }
+      return false;
+    }
+    __name(isTSInstantiationExpression, "isTSInstantiationExpression");
+    function isTSAsExpression(node, opts) {
+      if (!node)
+        return false;
+      const nodeType = node.type;
+      if (nodeType === "TSAsExpression") {
+        if (typeof opts === "undefined") {
+          return true;
+        } else {
+          return (0, _shallowEqual.default)(node, opts);
+        }
+      }
+      return false;
+    }
+    __name(isTSAsExpression, "isTSAsExpression");
+    function isTSSatisfiesExpression(node, opts) {
+      if (!node)
+        return false;
+      const nodeType = node.type;
+      if (nodeType === "TSSatisfiesExpression") {
+        if (typeof opts === "undefined") {
+          return true;
+        } else {
+          return (0, _shallowEqual.default)(node, opts);
+        }
+      }
+      return false;
+    }
+    __name(isTSSatisfiesExpression, "isTSSatisfiesExpression");
+    function isTSTypeAssertion(node, opts) {
+      if (!node)
+        return false;
+      const nodeType = node.type;
+      if (nodeType === "TSTypeAssertion") {
+        if (typeof opts === "undefined") {
+          return true;
+        } else {
+          return (0, _shallowEqual.default)(node, opts);
+        }
+      }
+      return false;
+    }
+    __name(isTSTypeAssertion, "isTSTypeAssertion");
+    function isTSEnumDeclaration(node, opts) {
+      if (!node)
+        return false;
+      const nodeType = node.type;
+      if (nodeType === "TSEnumDeclaration") {
+        if (typeof opts === "undefined") {
+          return true;
+        } else {
+          return (0, _shallowEqual.default)(node, opts);
+        }
+      }
+      return false;
+    }
+    __name(isTSEnumDeclaration, "isTSEnumDeclaration");
+    function isTSEnumMember(node, opts) {
+      if (!node)
+        return false;
+      const nodeType = node.type;
+      if (nodeType === "TSEnumMember") {
+        if (typeof opts === "undefined") {
+          return true;
+        } else {
+          return (0, _shallowEqual.default)(node, opts);
+        }
+      }
+      return false;
+    }
+    __name(isTSEnumMember, "isTSEnumMember");
+    function isTSModuleDeclaration(node, opts) {
+      if (!node)
+        return false;
+      const nodeType = node.type;
+      if (nodeType === "TSModuleDeclaration") {
+        if (typeof opts === "undefined") {
+          return true;
+        } else {
+          return (0, _shallowEqual.default)(node, opts);
+        }
+      }
+      return false;
+    }
+    __name(isTSModuleDeclaration, "isTSModuleDeclaration");
+    function isTSModuleBlock(node, opts) {
+      if (!node)
+        return false;
+      const nodeType = node.type;
+      if (nodeType === "TSModuleBlock") {
+        if (typeof opts === "undefined") {
+          return true;
+        } else {
+          return (0, _shallowEqual.default)(node, opts);
+        }
+      }
+      return false;
+    }
+    __name(isTSModuleBlock, "isTSModuleBlock");
+    function isTSImportType(node, opts) {
+      if (!node)
+        return false;
+      const nodeType = node.type;
+      if (nodeType === "TSImportType") {
+        if (typeof opts === "undefined") {
+          return true;
+        } else {
+          return (0, _shallowEqual.default)(node, opts);
+        }
+      }
+      return false;
+    }
+    __name(isTSImportType, "isTSImportType");
+    function isTSImportEqualsDeclaration(node, opts) {
+      if (!node)
+        return false;
+      const nodeType = node.type;
+      if (nodeType === "TSImportEqualsDeclaration") {
+        if (typeof opts === "undefined") {
+          return true;
+        } else {
+          return (0, _shallowEqual.default)(node, opts);
+        }
+      }
+      return false;
+    }
+    __name(isTSImportEqualsDeclaration, "isTSImportEqualsDeclaration");
+    function isTSExternalModuleReference(node, opts) {
+      if (!node)
+        return false;
+      const nodeType = node.type;
+      if (nodeType === "TSExternalModuleReference") {
+        if (typeof opts === "undefined") {
+          return true;
+        } else {
+          return (0, _shallowEqual.default)(node, opts);
+        }
+      }
+      return false;
+    }
+    __name(isTSExternalModuleReference, "isTSExternalModuleReference");
+    function isTSNonNullExpression(node, opts) {
+      if (!node)
+        return false;
+      const nodeType = node.type;
+      if (nodeType === "TSNonNullExpression") {
+        if (typeof opts === "undefined") {
+          return true;
+        } else {
+          return (0, _shallowEqual.default)(node, opts);
+        }
+      }
+      return false;
+    }
+    __name(isTSNonNullExpression, "isTSNonNullExpression");
+    function isTSExportAssignment(node, opts) {
+      if (!node)
+        return false;
+      const nodeType = node.type;
+      if (nodeType === "TSExportAssignment") {
+        if (typeof opts === "undefined") {
+          return true;
+        } else {
+          return (0, _shallowEqual.default)(node, opts);
+        }
+      }
+      return false;
+    }
+    __name(isTSExportAssignment, "isTSExportAssignment");
+    function isTSNamespaceExportDeclaration(node, opts) {
+      if (!node)
+        return false;
+      const nodeType = node.type;
+      if (nodeType === "TSNamespaceExportDeclaration") {
+        if (typeof opts === "undefined") {
+          return true;
+        } else {
+          return (0, _shallowEqual.default)(node, opts);
+        }
+      }
+      return false;
+    }
+    __name(isTSNamespaceExportDeclaration, "isTSNamespaceExportDeclaration");
+    function isTSTypeAnnotation(node, opts) {
+      if (!node)
+        return false;
+      const nodeType = node.type;
+      if (nodeType === "TSTypeAnnotation") {
+        if (typeof opts === "undefined") {
+          return true;
+        } else {
+          return (0, _shallowEqual.default)(node, opts);
+        }
+      }
+      return false;
+    }
+    __name(isTSTypeAnnotation, "isTSTypeAnnotation");
+    function isTSTypeParameterInstantiation(node, opts) {
+      if (!node)
+        return false;
+      const nodeType = node.type;
+      if (nodeType === "TSTypeParameterInstantiation") {
+        if (typeof opts === "undefined") {
+          return true;
+        } else {
+          return (0, _shallowEqual.default)(node, opts);
+        }
+      }
+      return false;
+    }
+    __name(isTSTypeParameterInstantiation, "isTSTypeParameterInstantiation");
+    function isTSTypeParameterDeclaration(node, opts) {
+      if (!node)
+        return false;
+      const nodeType = node.type;
+      if (nodeType === "TSTypeParameterDeclaration") {
+        if (typeof opts === "undefined") {
+          return true;
+        } else {
+          return (0, _shallowEqual.default)(node, opts);
+        }
+      }
+      return false;
+    }
+    __name(isTSTypeParameterDeclaration, "isTSTypeParameterDeclaration");
+    function isTSTypeParameter(node, opts) {
+      if (!node)
+        return false;
+      const nodeType = node.type;
+      if (nodeType === "TSTypeParameter") {
+        if (typeof opts === "undefined") {
+          return true;
+        } else {
+          return (0, _shallowEqual.default)(node, opts);
+        }
+      }
+      return false;
+    }
+    __name(isTSTypeParameter, "isTSTypeParameter");
+    function isStandardized(node, opts) {
+      if (!node)
+        return false;
+      const nodeType = node.type;
+      if ("ArrayExpression" === nodeType || "AssignmentExpression" === nodeType || "BinaryExpression" === nodeType || "InterpreterDirective" === nodeType || "Directive" === nodeType || "DirectiveLiteral" === nodeType || "BlockStatement" === nodeType || "BreakStatement" === nodeType || "CallExpression" === nodeType || "CatchClause" === nodeType || "ConditionalExpression" === nodeType || "ContinueStatement" === nodeType || "DebuggerStatement" === nodeType || "DoWhileStatement" === nodeType || "EmptyStatement" === nodeType || "ExpressionStatement" === nodeType || "File" === nodeType || "ForInStatement" === nodeType || "ForStatement" === nodeType || "FunctionDeclaration" === nodeType || "FunctionExpression" === nodeType || "Identifier" === nodeType || "IfStatement" === nodeType || "LabeledStatement" === nodeType || "StringLiteral" === nodeType || "NumericLiteral" === nodeType || "NullLiteral" === nodeType || "BooleanLiteral" === nodeType || "RegExpLiteral" === nodeType || "LogicalExpression" === nodeType || "MemberExpression" === nodeType || "NewExpression" === nodeType || "Program" === nodeType || "ObjectExpression" === nodeType || "ObjectMethod" === nodeType || "ObjectProperty" === nodeType || "RestElement" === nodeType || "ReturnStatement" === nodeType || "SequenceExpression" === nodeType || "ParenthesizedExpression" === nodeType || "SwitchCase" === nodeType || "SwitchStatement" === nodeType || "ThisExpression" === nodeType || "ThrowStatement" === nodeType || "TryStatement" === nodeType || "UnaryExpression" === nodeType || "UpdateExpression" === nodeType || "VariableDeclaration" === nodeType || "VariableDeclarator" === nodeType || "WhileStatement" === nodeType || "WithStatement" === nodeType || "AssignmentPattern" === nodeType || "ArrayPattern" === nodeType || "ArrowFunctionExpression" === nodeType || "ClassBody" === nodeType || "ClassExpression" === nodeType || "ClassDeclaration" === nodeType || "ExportAllDeclaration" === nodeType || "ExportDefaultDeclaration" === nodeType || "ExportNamedDeclaration" === nodeType || "ExportSpecifier" === nodeType || "ForOfStatement" === nodeType || "ImportDeclaration" === nodeType || "ImportDefaultSpecifier" === nodeType || "ImportNamespaceSpecifier" === nodeType || "ImportSpecifier" === nodeType || "MetaProperty" === nodeType || "ClassMethod" === nodeType || "ObjectPattern" === nodeType || "SpreadElement" === nodeType || "Super" === nodeType || "TaggedTemplateExpression" === nodeType || "TemplateElement" === nodeType || "TemplateLiteral" === nodeType || "YieldExpression" === nodeType || "AwaitExpression" === nodeType || "Import" === nodeType || "BigIntLiteral" === nodeType || "ExportNamespaceSpecifier" === nodeType || "OptionalMemberExpression" === nodeType || "OptionalCallExpression" === nodeType || "ClassProperty" === nodeType || "ClassAccessorProperty" === nodeType || "ClassPrivateProperty" === nodeType || "ClassPrivateMethod" === nodeType || "PrivateName" === nodeType || "StaticBlock" === nodeType || nodeType === "Placeholder" && ("Identifier" === node.expectedNode || "StringLiteral" === node.expectedNode || "BlockStatement" === node.expectedNode || "ClassBody" === node.expectedNode)) {
+        if (typeof opts === "undefined") {
+          return true;
+        } else {
+          return (0, _shallowEqual.default)(node, opts);
+        }
+      }
+      return false;
+    }
+    __name(isStandardized, "isStandardized");
+    function isExpression(node, opts) {
+      if (!node)
+        return false;
+      const nodeType = node.type;
+      if ("ArrayExpression" === nodeType || "AssignmentExpression" === nodeType || "BinaryExpression" === nodeType || "CallExpression" === nodeType || "ConditionalExpression" === nodeType || "FunctionExpression" === nodeType || "Identifier" === nodeType || "StringLiteral" === nodeType || "NumericLiteral" === nodeType || "NullLiteral" === nodeType || "BooleanLiteral" === nodeType || "RegExpLiteral" === nodeType || "LogicalExpression" === nodeType || "MemberExpression" === nodeType || "NewExpression" === nodeType || "ObjectExpression" === nodeType || "SequenceExpression" === nodeType || "ParenthesizedExpression" === nodeType || "ThisExpression" === nodeType || "UnaryExpression" === nodeType || "UpdateExpression" === nodeType || "ArrowFunctionExpression" === nodeType || "ClassExpression" === nodeType || "MetaProperty" === nodeType || "Super" === nodeType || "TaggedTemplateExpression" === nodeType || "TemplateLiteral" === nodeType || "YieldExpression" === nodeType || "AwaitExpression" === nodeType || "Import" === nodeType || "BigIntLiteral" === nodeType || "OptionalMemberExpression" === nodeType || "OptionalCallExpression" === nodeType || "TypeCastExpression" === nodeType || "JSXElement" === nodeType || "JSXFragment" === nodeType || "BindExpression" === nodeType || "DoExpression" === nodeType || "RecordExpression" === nodeType || "TupleExpression" === nodeType || "DecimalLiteral" === nodeType || "ModuleExpression" === nodeType || "TopicReference" === nodeType || "PipelineTopicExpression" === nodeType || "PipelineBareFunction" === nodeType || "PipelinePrimaryTopicReference" === nodeType || "TSInstantiationExpression" === nodeType || "TSAsExpression" === nodeType || "TSSatisfiesExpression" === nodeType || "TSTypeAssertion" === nodeType || "TSNonNullExpression" === nodeType || nodeType === "Placeholder" && ("Expression" === node.expectedNode || "Identifier" === node.expectedNode || "StringLiteral" === node.expectedNode)) {
+        if (typeof opts === "undefined") {
+          return true;
+        } else {
+          return (0, _shallowEqual.default)(node, opts);
+        }
+      }
+      return false;
+    }
+    __name(isExpression, "isExpression");
+    function isBinary(node, opts) {
+      if (!node)
+        return false;
+      const nodeType = node.type;
+      if ("BinaryExpression" === nodeType || "LogicalExpression" === nodeType) {
+        if (typeof opts === "undefined") {
+          return true;
+        } else {
+          return (0, _shallowEqual.default)(node, opts);
+        }
+      }
+      return false;
+    }
+    __name(isBinary, "isBinary");
+    function isScopable(node, opts) {
+      if (!node)
+        return false;
+      const nodeType = node.type;
+      if ("BlockStatement" === nodeType || "CatchClause" === nodeType || "DoWhileStatement" === nodeType || "ForInStatement" === nodeType || "ForStatement" === nodeType || "FunctionDeclaration" === nodeType || "FunctionExpression" === nodeType || "Program" === nodeType || "ObjectMethod" === nodeType || "SwitchStatement" === nodeType || "WhileStatement" === nodeType || "ArrowFunctionExpression" === nodeType || "ClassExpression" === nodeType || "ClassDeclaration" === nodeType || "ForOfStatement" === nodeType || "ClassMethod" === nodeType || "ClassPrivateMethod" === nodeType || "StaticBlock" === nodeType || "TSModuleBlock" === nodeType || nodeType === "Placeholder" && "BlockStatement" === node.expectedNode) {
+        if (typeof opts === "undefined") {
+          return true;
+        } else {
+          return (0, _shallowEqual.default)(node, opts);
+        }
+      }
+      return false;
+    }
+    __name(isScopable, "isScopable");
+    function isBlockParent(node, opts) {
+      if (!node)
+        return false;
+      const nodeType = node.type;
+      if ("BlockStatement" === nodeType || "CatchClause" === nodeType || "DoWhileStatement" === nodeType || "ForInStatement" === nodeType || "ForStatement" === nodeType || "FunctionDeclaration" === nodeType || "FunctionExpression" === nodeType || "Program" === nodeType || "ObjectMethod" === nodeType || "SwitchStatement" === nodeType || "WhileStatement" === nodeType || "ArrowFunctionExpression" === nodeType || "ForOfStatement" === nodeType || "ClassMethod" === nodeType || "ClassPrivateMethod" === nodeType || "StaticBlock" === nodeType || "TSModuleBlock" === nodeType || nodeType === "Placeholder" && "BlockStatement" === node.expectedNode) {
+        if (typeof opts === "undefined") {
+          return true;
+        } else {
+          return (0, _shallowEqual.default)(node, opts);
+        }
+      }
+      return false;
+    }
+    __name(isBlockParent, "isBlockParent");
+    function isBlock(node, opts) {
+      if (!node)
+        return false;
+      const nodeType = node.type;
+      if ("BlockStatement" === nodeType || "Program" === nodeType || "TSModuleBlock" === nodeType || nodeType === "Placeholder" && "BlockStatement" === node.expectedNode) {
+        if (typeof opts === "undefined") {
+          return true;
+        } else {
+          return (0, _shallowEqual.default)(node, opts);
+        }
+      }
+      return false;
+    }
+    __name(isBlock, "isBlock");
+    function isStatement(node, opts) {
+      if (!node)
+        return false;
+      const nodeType = node.type;
+      if ("BlockStatement" === nodeType || "BreakStatement" === nodeType || "ContinueStatement" === nodeType || "DebuggerStatement" === nodeType || "DoWhileStatement" === nodeType || "EmptyStatement" === nodeType || "ExpressionStatement" === nodeType || "ForInStatement" === nodeType || "ForStatement" === nodeType || "FunctionDeclaration" === nodeType || "IfStatement" === nodeType || "LabeledStatement" === nodeType || "ReturnStatement" === nodeType || "SwitchStatement" === nodeType || "ThrowStatement" === nodeType || "TryStatement" === nodeType || "VariableDeclaration" === nodeType || "WhileStatement" === nodeType || "WithStatement" === nodeType || "ClassDeclaration" === nodeType || "ExportAllDeclaration" === nodeType || "ExportDefaultDeclaration" === nodeType || "ExportNamedDeclaration" === nodeType || "ForOfStatement" === nodeType || "ImportDeclaration" === nodeType || "DeclareClass" === nodeType || "DeclareFunction" === nodeType || "DeclareInterface" === nodeType || "DeclareModule" === nodeType || "DeclareModuleExports" === nodeType || "DeclareTypeAlias" === nodeType || "DeclareOpaqueType" === nodeType || "DeclareVariable" === nodeType || "DeclareExportDeclaration" === nodeType || "DeclareExportAllDeclaration" === nodeType || "InterfaceDeclaration" === nodeType || "OpaqueType" === nodeType || "TypeAlias" === nodeType || "EnumDeclaration" === nodeType || "TSDeclareFunction" === nodeType || "TSInterfaceDeclaration" === nodeType || "TSTypeAliasDeclaration" === nodeType || "TSEnumDeclaration" === nodeType || "TSModuleDeclaration" === nodeType || "TSImportEqualsDeclaration" === nodeType || "TSExportAssignment" === nodeType || "TSNamespaceExportDeclaration" === nodeType || nodeType === "Placeholder" && ("Statement" === node.expectedNode || "Declaration" === node.expectedNode || "BlockStatement" === node.expectedNode)) {
+        if (typeof opts === "undefined") {
+          return true;
+        } else {
+          return (0, _shallowEqual.default)(node, opts);
+        }
+      }
+      return false;
+    }
+    __name(isStatement, "isStatement");
+    function isTerminatorless(node, opts) {
+      if (!node)
+        return false;
+      const nodeType = node.type;
+      if ("BreakStatement" === nodeType || "ContinueStatement" === nodeType || "ReturnStatement" === nodeType || "ThrowStatement" === nodeType || "YieldExpression" === nodeType || "AwaitExpression" === nodeType) {
+        if (typeof opts === "undefined") {
+          return true;
+        } else {
+          return (0, _shallowEqual.default)(node, opts);
+        }
+      }
+      return false;
+    }
+    __name(isTerminatorless, "isTerminatorless");
+    function isCompletionStatement(node, opts) {
+      if (!node)
+        return false;
+      const nodeType = node.type;
+      if ("BreakStatement" === nodeType || "ContinueStatement" === nodeType || "ReturnStatement" === nodeType || "ThrowStatement" === nodeType) {
+        if (typeof opts === "undefined") {
+          return true;
+        } else {
+          return (0, _shallowEqual.default)(node, opts);
+        }
+      }
+      return false;
+    }
+    __name(isCompletionStatement, "isCompletionStatement");
+    function isConditional(node, opts) {
+      if (!node)
+        return false;
+      const nodeType = node.type;
+      if ("ConditionalExpression" === nodeType || "IfStatement" === nodeType) {
+        if (typeof opts === "undefined") {
+          return true;
+        } else {
+          return (0, _shallowEqual.default)(node, opts);
+        }
+      }
+      return false;
+    }
+    __name(isConditional, "isConditional");
+    function isLoop(node, opts) {
+      if (!node)
+        return false;
+      const nodeType = node.type;
+      if ("DoWhileStatement" === nodeType || "ForInStatement" === nodeType || "ForStatement" === nodeType || "WhileStatement" === nodeType || "ForOfStatement" === nodeType) {
+        if (typeof opts === "undefined") {
+          return true;
+        } else {
+          return (0, _shallowEqual.default)(node, opts);
+        }
+      }
+      return false;
+    }
+    __name(isLoop, "isLoop");
+    function isWhile(node, opts) {
+      if (!node)
+        return false;
+      const nodeType = node.type;
+      if ("DoWhileStatement" === nodeType || "WhileStatement" === nodeType) {
+        if (typeof opts === "undefined") {
+          return true;
+        } else {
+          return (0, _shallowEqual.default)(node, opts);
+        }
+      }
+      return false;
+    }
+    __name(isWhile, "isWhile");
+    function isExpressionWrapper(node, opts) {
+      if (!node)
+        return false;
+      const nodeType = node.type;
+      if ("ExpressionStatement" === nodeType || "ParenthesizedExpression" === nodeType || "TypeCastExpression" === nodeType) {
+        if (typeof opts === "undefined") {
+          return true;
+        } else {
+          return (0, _shallowEqual.default)(node, opts);
+        }
+      }
+      return false;
+    }
+    __name(isExpressionWrapper, "isExpressionWrapper");
+    function isFor(node, opts) {
+      if (!node)
+        return false;
+      const nodeType = node.type;
+      if ("ForInStatement" === nodeType || "ForStatement" === nodeType || "ForOfStatement" === nodeType) {
+        if (typeof opts === "undefined") {
+          return true;
+        } else {
+          return (0, _shallowEqual.default)(node, opts);
+        }
+      }
+      return false;
+    }
+    __name(isFor, "isFor");
+    function isForXStatement(node, opts) {
+      if (!node)
+        return false;
+      const nodeType = node.type;
+      if ("ForInStatement" === nodeType || "ForOfStatement" === nodeType) {
+        if (typeof opts === "undefined") {
+          return true;
+        } else {
+          return (0, _shallowEqual.default)(node, opts);
+        }
+      }
+      return false;
+    }
+    __name(isForXStatement, "isForXStatement");
+    function isFunction(node, opts) {
+      if (!node)
+        return false;
+      const nodeType = node.type;
+      if ("FunctionDeclaration" === nodeType || "FunctionExpression" === nodeType || "ObjectMethod" === nodeType || "ArrowFunctionExpression" === nodeType || "ClassMethod" === nodeType || "ClassPrivateMethod" === nodeType) {
+        if (typeof opts === "undefined") {
+          return true;
+        } else {
+          return (0, _shallowEqual.default)(node, opts);
+        }
+      }
+      return false;
+    }
+    __name(isFunction, "isFunction");
+    function isFunctionParent(node, opts) {
+      if (!node)
+        return false;
+      const nodeType = node.type;
+      if ("FunctionDeclaration" === nodeType || "FunctionExpression" === nodeType || "ObjectMethod" === nodeType || "ArrowFunctionExpression" === nodeType || "ClassMethod" === nodeType || "ClassPrivateMethod" === nodeType || "StaticBlock" === nodeType || "TSModuleBlock" === nodeType) {
+        if (typeof opts === "undefined") {
+          return true;
+        } else {
+          return (0, _shallowEqual.default)(node, opts);
+        }
+      }
+      return false;
+    }
+    __name(isFunctionParent, "isFunctionParent");
+    function isPureish(node, opts) {
+      if (!node)
+        return false;
+      const nodeType = node.type;
+      if ("FunctionDeclaration" === nodeType || "FunctionExpression" === nodeType || "StringLiteral" === nodeType || "NumericLiteral" === nodeType || "NullLiteral" === nodeType || "BooleanLiteral" === nodeType || "RegExpLiteral" === nodeType || "ArrowFunctionExpression" === nodeType || "BigIntLiteral" === nodeType || "DecimalLiteral" === nodeType || nodeType === "Placeholder" && "StringLiteral" === node.expectedNode) {
+        if (typeof opts === "undefined") {
+          return true;
+        } else {
+          return (0, _shallowEqual.default)(node, opts);
+        }
+      }
+      return false;
+    }
+    __name(isPureish, "isPureish");
+    function isDeclaration(node, opts) {
+      if (!node)
+        return false;
+      const nodeType = node.type;
+      if ("FunctionDeclaration" === nodeType || "VariableDeclaration" === nodeType || "ClassDeclaration" === nodeType || "ExportAllDeclaration" === nodeType || "ExportDefaultDeclaration" === nodeType || "ExportNamedDeclaration" === nodeType || "ImportDeclaration" === nodeType || "DeclareClass" === nodeType || "DeclareFunction" === nodeType || "DeclareInterface" === nodeType || "DeclareModule" === nodeType || "DeclareModuleExports" === nodeType || "DeclareTypeAlias" === nodeType || "DeclareOpaqueType" === nodeType || "DeclareVariable" === nodeType || "DeclareExportDeclaration" === nodeType || "DeclareExportAllDeclaration" === nodeType || "InterfaceDeclaration" === nodeType || "OpaqueType" === nodeType || "TypeAlias" === nodeType || "EnumDeclaration" === nodeType || "TSDeclareFunction" === nodeType || "TSInterfaceDeclaration" === nodeType || "TSTypeAliasDeclaration" === nodeType || "TSEnumDeclaration" === nodeType || "TSModuleDeclaration" === nodeType || nodeType === "Placeholder" && "Declaration" === node.expectedNode) {
+        if (typeof opts === "undefined") {
+          return true;
+        } else {
+          return (0, _shallowEqual.default)(node, opts);
+        }
+      }
+      return false;
+    }
+    __name(isDeclaration, "isDeclaration");
+    function isPatternLike(node, opts) {
+      if (!node)
+        return false;
+      const nodeType = node.type;
+      if ("Identifier" === nodeType || "RestElement" === nodeType || "AssignmentPattern" === nodeType || "ArrayPattern" === nodeType || "ObjectPattern" === nodeType || "TSAsExpression" === nodeType || "TSSatisfiesExpression" === nodeType || "TSTypeAssertion" === nodeType || "TSNonNullExpression" === nodeType || nodeType === "Placeholder" && ("Pattern" === node.expectedNode || "Identifier" === node.expectedNode)) {
+        if (typeof opts === "undefined") {
+          return true;
+        } else {
+          return (0, _shallowEqual.default)(node, opts);
+        }
+      }
+      return false;
+    }
+    __name(isPatternLike, "isPatternLike");
+    function isLVal(node, opts) {
+      if (!node)
+        return false;
+      const nodeType = node.type;
+      if ("Identifier" === nodeType || "MemberExpression" === nodeType || "RestElement" === nodeType || "AssignmentPattern" === nodeType || "ArrayPattern" === nodeType || "ObjectPattern" === nodeType || "TSParameterProperty" === nodeType || "TSAsExpression" === nodeType || "TSSatisfiesExpression" === nodeType || "TSTypeAssertion" === nodeType || "TSNonNullExpression" === nodeType || nodeType === "Placeholder" && ("Pattern" === node.expectedNode || "Identifier" === node.expectedNode)) {
+        if (typeof opts === "undefined") {
+          return true;
+        } else {
+          return (0, _shallowEqual.default)(node, opts);
+        }
+      }
+      return false;
+    }
+    __name(isLVal, "isLVal");
+    function isTSEntityName(node, opts) {
+      if (!node)
+        return false;
+      const nodeType = node.type;
+      if ("Identifier" === nodeType || "TSQualifiedName" === nodeType || nodeType === "Placeholder" && "Identifier" === node.expectedNode) {
+        if (typeof opts === "undefined") {
+          return true;
+        } else {
+          return (0, _shallowEqual.default)(node, opts);
+        }
+      }
+      return false;
+    }
+    __name(isTSEntityName, "isTSEntityName");
+    function isLiteral(node, opts) {
+      if (!node)
+        return false;
+      const nodeType = node.type;
+      if ("StringLiteral" === nodeType || "NumericLiteral" === nodeType || "NullLiteral" === nodeType || "BooleanLiteral" === nodeType || "RegExpLiteral" === nodeType || "TemplateLiteral" === nodeType || "BigIntLiteral" === nodeType || "DecimalLiteral" === nodeType || nodeType === "Placeholder" && "StringLiteral" === node.expectedNode) {
+        if (typeof opts === "undefined") {
+          return true;
+        } else {
+          return (0, _shallowEqual.default)(node, opts);
+        }
+      }
+      return false;
+    }
+    __name(isLiteral, "isLiteral");
+    function isImmutable(node, opts) {
+      if (!node)
+        return false;
+      const nodeType = node.type;
+      if ("StringLiteral" === nodeType || "NumericLiteral" === nodeType || "NullLiteral" === nodeType || "BooleanLiteral" === nodeType || "BigIntLiteral" === nodeType || "JSXAttribute" === nodeType || "JSXClosingElement" === nodeType || "JSXElement" === nodeType || "JSXExpressionContainer" === nodeType || "JSXSpreadChild" === nodeType || "JSXOpeningElement" === nodeType || "JSXText" === nodeType || "JSXFragment" === nodeType || "JSXOpeningFragment" === nodeType || "JSXClosingFragment" === nodeType || "DecimalLiteral" === nodeType || nodeType === "Placeholder" && "StringLiteral" === node.expectedNode) {
+        if (typeof opts === "undefined") {
+          return true;
+        } else {
+          return (0, _shallowEqual.default)(node, opts);
+        }
+      }
+      return false;
+    }
+    __name(isImmutable, "isImmutable");
+    function isUserWhitespacable(node, opts) {
+      if (!node)
+        return false;
+      const nodeType = node.type;
+      if ("ObjectMethod" === nodeType || "ObjectProperty" === nodeType || "ObjectTypeInternalSlot" === nodeType || "ObjectTypeCallProperty" === nodeType || "ObjectTypeIndexer" === nodeType || "ObjectTypeProperty" === nodeType || "ObjectTypeSpreadProperty" === nodeType) {
+        if (typeof opts === "undefined") {
+          return true;
+        } else {
+          return (0, _shallowEqual.default)(node, opts);
+        }
+      }
+      return false;
+    }
+    __name(isUserWhitespacable, "isUserWhitespacable");
+    function isMethod(node, opts) {
+      if (!node)
+        return false;
+      const nodeType = node.type;
+      if ("ObjectMethod" === nodeType || "ClassMethod" === nodeType || "ClassPrivateMethod" === nodeType) {
+        if (typeof opts === "undefined") {
+          return true;
+        } else {
+          return (0, _shallowEqual.default)(node, opts);
+        }
+      }
+      return false;
+    }
+    __name(isMethod, "isMethod");
+    function isObjectMember(node, opts) {
+      if (!node)
+        return false;
+      const nodeType = node.type;
+      if ("ObjectMethod" === nodeType || "ObjectProperty" === nodeType) {
+        if (typeof opts === "undefined") {
+          return true;
+        } else {
+          return (0, _shallowEqual.default)(node, opts);
+        }
+      }
+      return false;
+    }
+    __name(isObjectMember, "isObjectMember");
+    function isProperty(node, opts) {
+      if (!node)
+        return false;
+      const nodeType = node.type;
+      if ("ObjectProperty" === nodeType || "ClassProperty" === nodeType || "ClassAccessorProperty" === nodeType || "ClassPrivateProperty" === nodeType) {
+        if (typeof opts === "undefined") {
+          return true;
+        } else {
+          return (0, _shallowEqual.default)(node, opts);
+        }
+      }
+      return false;
+    }
+    __name(isProperty, "isProperty");
+    function isUnaryLike(node, opts) {
+      if (!node)
+        return false;
+      const nodeType = node.type;
+      if ("UnaryExpression" === nodeType || "SpreadElement" === nodeType) {
+        if (typeof opts === "undefined") {
+          return true;
+        } else {
+          return (0, _shallowEqual.default)(node, opts);
+        }
+      }
+      return false;
+    }
+    __name(isUnaryLike, "isUnaryLike");
+    function isPattern(node, opts) {
+      if (!node)
+        return false;
+      const nodeType = node.type;
+      if ("AssignmentPattern" === nodeType || "ArrayPattern" === nodeType || "ObjectPattern" === nodeType || nodeType === "Placeholder" && "Pattern" === node.expectedNode) {
+        if (typeof opts === "undefined") {
+          return true;
+        } else {
+          return (0, _shallowEqual.default)(node, opts);
+        }
+      }
+      return false;
+    }
+    __name(isPattern, "isPattern");
+    function isClass(node, opts) {
+      if (!node)
+        return false;
+      const nodeType = node.type;
+      if ("ClassExpression" === nodeType || "ClassDeclaration" === nodeType) {
+        if (typeof opts === "undefined") {
+          return true;
+        } else {
+          return (0, _shallowEqual.default)(node, opts);
+        }
+      }
+      return false;
+    }
+    __name(isClass, "isClass");
+    function isModuleDeclaration(node, opts) {
+      if (!node)
+        return false;
+      const nodeType = node.type;
+      if ("ExportAllDeclaration" === nodeType || "ExportDefaultDeclaration" === nodeType || "ExportNamedDeclaration" === nodeType || "ImportDeclaration" === nodeType) {
+        if (typeof opts === "undefined") {
+          return true;
+        } else {
+          return (0, _shallowEqual.default)(node, opts);
+        }
+      }
+      return false;
+    }
+    __name(isModuleDeclaration, "isModuleDeclaration");
+    function isExportDeclaration(node, opts) {
+      if (!node)
+        return false;
+      const nodeType = node.type;
+      if ("ExportAllDeclaration" === nodeType || "ExportDefaultDeclaration" === nodeType || "ExportNamedDeclaration" === nodeType) {
+        if (typeof opts === "undefined") {
+          return true;
+        } else {
+          return (0, _shallowEqual.default)(node, opts);
+        }
+      }
+      return false;
+    }
+    __name(isExportDeclaration, "isExportDeclaration");
+    function isModuleSpecifier(node, opts) {
+      if (!node)
+        return false;
+      const nodeType = node.type;
+      if ("ExportSpecifier" === nodeType || "ImportDefaultSpecifier" === nodeType || "ImportNamespaceSpecifier" === nodeType || "ImportSpecifier" === nodeType || "ExportNamespaceSpecifier" === nodeType || "ExportDefaultSpecifier" === nodeType) {
+        if (typeof opts === "undefined") {
+          return true;
+        } else {
+          return (0, _shallowEqual.default)(node, opts);
+        }
+      }
+      return false;
+    }
+    __name(isModuleSpecifier, "isModuleSpecifier");
+    function isAccessor(node, opts) {
+      if (!node)
+        return false;
+      const nodeType = node.type;
+      if ("ClassAccessorProperty" === nodeType) {
+        if (typeof opts === "undefined") {
+          return true;
+        } else {
+          return (0, _shallowEqual.default)(node, opts);
+        }
+      }
+      return false;
+    }
+    __name(isAccessor, "isAccessor");
+    function isPrivate(node, opts) {
+      if (!node)
+        return false;
+      const nodeType = node.type;
+      if ("ClassPrivateProperty" === nodeType || "ClassPrivateMethod" === nodeType || "PrivateName" === nodeType) {
+        if (typeof opts === "undefined") {
+          return true;
+        } else {
+          return (0, _shallowEqual.default)(node, opts);
+        }
+      }
+      return false;
+    }
+    __name(isPrivate, "isPrivate");
+    function isFlow(node, opts) {
+      if (!node)
+        return false;
+      const nodeType = node.type;
+      if ("AnyTypeAnnotation" === nodeType || "ArrayTypeAnnotation" === nodeType || "BooleanTypeAnnotation" === nodeType || "BooleanLiteralTypeAnnotation" === nodeType || "NullLiteralTypeAnnotation" === nodeType || "ClassImplements" === nodeType || "DeclareClass" === nodeType || "DeclareFunction" === nodeType || "DeclareInterface" === nodeType || "DeclareModule" === nodeType || "DeclareModuleExports" === nodeType || "DeclareTypeAlias" === nodeType || "DeclareOpaqueType" === nodeType || "DeclareVariable" === nodeType || "DeclareExportDeclaration" === nodeType || "DeclareExportAllDeclaration" === nodeType || "DeclaredPredicate" === nodeType || "ExistsTypeAnnotation" === nodeType || "FunctionTypeAnnotation" === nodeType || "FunctionTypeParam" === nodeType || "GenericTypeAnnotation" === nodeType || "InferredPredicate" === nodeType || "InterfaceExtends" === nodeType || "InterfaceDeclaration" === nodeType || "InterfaceTypeAnnotation" === nodeType || "IntersectionTypeAnnotation" === nodeType || "MixedTypeAnnotation" === nodeType || "EmptyTypeAnnotation" === nodeType || "NullableTypeAnnotation" === nodeType || "NumberLiteralTypeAnnotation" === nodeType || "NumberTypeAnnotation" === nodeType || "ObjectTypeAnnotation" === nodeType || "ObjectTypeInternalSlot" === nodeType || "ObjectTypeCallProperty" === nodeType || "ObjectTypeIndexer" === nodeType || "ObjectTypeProperty" === nodeType || "ObjectTypeSpreadProperty" === nodeType || "OpaqueType" === nodeType || "QualifiedTypeIdentifier" === nodeType || "StringLiteralTypeAnnotation" === nodeType || "StringTypeAnnotation" === nodeType || "SymbolTypeAnnotation" === nodeType || "ThisTypeAnnotation" === nodeType || "TupleTypeAnnotation" === nodeType || "TypeofTypeAnnotation" === nodeType || "TypeAlias" === nodeType || "TypeAnnotation" === nodeType || "TypeCastExpression" === nodeType || "TypeParameter" === nodeType || "TypeParameterDeclaration" === nodeType || "TypeParameterInstantiation" === nodeType || "UnionTypeAnnotation" === nodeType || "Variance" === nodeType || "VoidTypeAnnotation" === nodeType || "EnumDeclaration" === nodeType || "EnumBooleanBody" === nodeType || "EnumNumberBody" === nodeType || "EnumStringBody" === nodeType || "EnumSymbolBody" === nodeType || "EnumBooleanMember" === nodeType || "EnumNumberMember" === nodeType || "EnumStringMember" === nodeType || "EnumDefaultedMember" === nodeType || "IndexedAccessType" === nodeType || "OptionalIndexedAccessType" === nodeType) {
+        if (typeof opts === "undefined") {
+          return true;
+        } else {
+          return (0, _shallowEqual.default)(node, opts);
+        }
+      }
+      return false;
+    }
+    __name(isFlow, "isFlow");
+    function isFlowType(node, opts) {
+      if (!node)
+        return false;
+      const nodeType = node.type;
+      if ("AnyTypeAnnotation" === nodeType || "ArrayTypeAnnotation" === nodeType || "BooleanTypeAnnotation" === nodeType || "BooleanLiteralTypeAnnotation" === nodeType || "NullLiteralTypeAnnotation" === nodeType || "ExistsTypeAnnotation" === nodeType || "FunctionTypeAnnotation" === nodeType || "GenericTypeAnnotation" === nodeType || "InterfaceTypeAnnotation" === nodeType || "IntersectionTypeAnnotation" === nodeType || "MixedTypeAnnotation" === nodeType || "EmptyTypeAnnotation" === nodeType || "NullableTypeAnnotation" === nodeType || "NumberLiteralTypeAnnotation" === nodeType || "NumberTypeAnnotation" === nodeType || "ObjectTypeAnnotation" === nodeType || "StringLiteralTypeAnnotation" === nodeType || "StringTypeAnnotation" === nodeType || "SymbolTypeAnnotation" === nodeType || "ThisTypeAnnotation" === nodeType || "TupleTypeAnnotation" === nodeType || "TypeofTypeAnnotation" === nodeType || "UnionTypeAnnotation" === nodeType || "VoidTypeAnnotation" === nodeType || "IndexedAccessType" === nodeType || "OptionalIndexedAccessType" === nodeType) {
+        if (typeof opts === "undefined") {
+          return true;
+        } else {
+          return (0, _shallowEqual.default)(node, opts);
+        }
+      }
+      return false;
+    }
+    __name(isFlowType, "isFlowType");
+    function isFlowBaseAnnotation(node, opts) {
+      if (!node)
+        return false;
+      const nodeType = node.type;
+      if ("AnyTypeAnnotation" === nodeType || "BooleanTypeAnnotation" === nodeType || "NullLiteralTypeAnnotation" === nodeType || "MixedTypeAnnotation" === nodeType || "EmptyTypeAnnotation" === nodeType || "NumberTypeAnnotation" === nodeType || "StringTypeAnnotation" === nodeType || "SymbolTypeAnnotation" === nodeType || "ThisTypeAnnotation" === nodeType || "VoidTypeAnnotation" === nodeType) {
+        if (typeof opts === "undefined") {
+          return true;
+        } else {
+          return (0, _shallowEqual.default)(node, opts);
+        }
+      }
+      return false;
+    }
+    __name(isFlowBaseAnnotation, "isFlowBaseAnnotation");
+    function isFlowDeclaration(node, opts) {
+      if (!node)
+        return false;
+      const nodeType = node.type;
+      if ("DeclareClass" === nodeType || "DeclareFunction" === nodeType || "DeclareInterface" === nodeType || "DeclareModule" === nodeType || "DeclareModuleExports" === nodeType || "DeclareTypeAlias" === nodeType || "DeclareOpaqueType" === nodeType || "DeclareVariable" === nodeType || "DeclareExportDeclaration" === nodeType || "DeclareExportAllDeclaration" === nodeType || "InterfaceDeclaration" === nodeType || "OpaqueType" === nodeType || "TypeAlias" === nodeType) {
+        if (typeof opts === "undefined") {
+          return true;
+        } else {
+          return (0, _shallowEqual.default)(node, opts);
+        }
+      }
+      return false;
+    }
+    __name(isFlowDeclaration, "isFlowDeclaration");
+    function isFlowPredicate(node, opts) {
+      if (!node)
+        return false;
+      const nodeType = node.type;
+      if ("DeclaredPredicate" === nodeType || "InferredPredicate" === nodeType) {
+        if (typeof opts === "undefined") {
+          return true;
+        } else {
+          return (0, _shallowEqual.default)(node, opts);
+        }
+      }
+      return false;
+    }
+    __name(isFlowPredicate, "isFlowPredicate");
+    function isEnumBody(node, opts) {
+      if (!node)
+        return false;
+      const nodeType = node.type;
+      if ("EnumBooleanBody" === nodeType || "EnumNumberBody" === nodeType || "EnumStringBody" === nodeType || "EnumSymbolBody" === nodeType) {
+        if (typeof opts === "undefined") {
+          return true;
+        } else {
+          return (0, _shallowEqual.default)(node, opts);
+        }
+      }
+      return false;
+    }
+    __name(isEnumBody, "isEnumBody");
+    function isEnumMember(node, opts) {
+      if (!node)
+        return false;
+      const nodeType = node.type;
+      if ("EnumBooleanMember" === nodeType || "EnumNumberMember" === nodeType || "EnumStringMember" === nodeType || "EnumDefaultedMember" === nodeType) {
+        if (typeof opts === "undefined") {
+          return true;
+        } else {
+          return (0, _shallowEqual.default)(node, opts);
+        }
+      }
+      return false;
+    }
+    __name(isEnumMember, "isEnumMember");
+    function isJSX(node, opts) {
+      if (!node)
+        return false;
+      const nodeType = node.type;
+      if ("JSXAttribute" === nodeType || "JSXClosingElement" === nodeType || "JSXElement" === nodeType || "JSXEmptyExpression" === nodeType || "JSXExpressionContainer" === nodeType || "JSXSpreadChild" === nodeType || "JSXIdentifier" === nodeType || "JSXMemberExpression" === nodeType || "JSXNamespacedName" === nodeType || "JSXOpeningElement" === nodeType || "JSXSpreadAttribute" === nodeType || "JSXText" === nodeType || "JSXFragment" === nodeType || "JSXOpeningFragment" === nodeType || "JSXClosingFragment" === nodeType) {
+        if (typeof opts === "undefined") {
+          return true;
+        } else {
+          return (0, _shallowEqual.default)(node, opts);
+        }
+      }
+      return false;
+    }
+    __name(isJSX, "isJSX");
+    function isMiscellaneous(node, opts) {
+      if (!node)
+        return false;
+      const nodeType = node.type;
+      if ("Noop" === nodeType || "Placeholder" === nodeType || "V8IntrinsicIdentifier" === nodeType) {
+        if (typeof opts === "undefined") {
+          return true;
+        } else {
+          return (0, _shallowEqual.default)(node, opts);
+        }
+      }
+      return false;
+    }
+    __name(isMiscellaneous, "isMiscellaneous");
+    function isTypeScript(node, opts) {
+      if (!node)
+        return false;
+      const nodeType = node.type;
+      if ("TSParameterProperty" === nodeType || "TSDeclareFunction" === nodeType || "TSDeclareMethod" === nodeType || "TSQualifiedName" === nodeType || "TSCallSignatureDeclaration" === nodeType || "TSConstructSignatureDeclaration" === nodeType || "TSPropertySignature" === nodeType || "TSMethodSignature" === nodeType || "TSIndexSignature" === nodeType || "TSAnyKeyword" === nodeType || "TSBooleanKeyword" === nodeType || "TSBigIntKeyword" === nodeType || "TSIntrinsicKeyword" === nodeType || "TSNeverKeyword" === nodeType || "TSNullKeyword" === nodeType || "TSNumberKeyword" === nodeType || "TSObjectKeyword" === nodeType || "TSStringKeyword" === nodeType || "TSSymbolKeyword" === nodeType || "TSUndefinedKeyword" === nodeType || "TSUnknownKeyword" === nodeType || "TSVoidKeyword" === nodeType || "TSThisType" === nodeType || "TSFunctionType" === nodeType || "TSConstructorType" === nodeType || "TSTypeReference" === nodeType || "TSTypePredicate" === nodeType || "TSTypeQuery" === nodeType || "TSTypeLiteral" === nodeType || "TSArrayType" === nodeType || "TSTupleType" === nodeType || "TSOptionalType" === nodeType || "TSRestType" === nodeType || "TSNamedTupleMember" === nodeType || "TSUnionType" === nodeType || "TSIntersectionType" === nodeType || "TSConditionalType" === nodeType || "TSInferType" === nodeType || "TSParenthesizedType" === nodeType || "TSTypeOperator" === nodeType || "TSIndexedAccessType" === nodeType || "TSMappedType" === nodeType || "TSLiteralType" === nodeType || "TSExpressionWithTypeArguments" === nodeType || "TSInterfaceDeclaration" === nodeType || "TSInterfaceBody" === nodeType || "TSTypeAliasDeclaration" === nodeType || "TSInstantiationExpression" === nodeType || "TSAsExpression" === nodeType || "TSSatisfiesExpression" === nodeType || "TSTypeAssertion" === nodeType || "TSEnumDeclaration" === nodeType || "TSEnumMember" === nodeType || "TSModuleDeclaration" === nodeType || "TSModuleBlock" === nodeType || "TSImportType" === nodeType || "TSImportEqualsDeclaration" === nodeType || "TSExternalModuleReference" === nodeType || "TSNonNullExpression" === nodeType || "TSExportAssignment" === nodeType || "TSNamespaceExportDeclaration" === nodeType || "TSTypeAnnotation" === nodeType || "TSTypeParameterInstantiation" === nodeType || "TSTypeParameterDeclaration" === nodeType || "TSTypeParameter" === nodeType) {
+        if (typeof opts === "undefined") {
+          return true;
+        } else {
+          return (0, _shallowEqual.default)(node, opts);
+        }
+      }
+      return false;
+    }
+    __name(isTypeScript, "isTypeScript");
+    function isTSTypeElement(node, opts) {
+      if (!node)
+        return false;
+      const nodeType = node.type;
+      if ("TSCallSignatureDeclaration" === nodeType || "TSConstructSignatureDeclaration" === nodeType || "TSPropertySignature" === nodeType || "TSMethodSignature" === nodeType || "TSIndexSignature" === nodeType) {
+        if (typeof opts === "undefined") {
+          return true;
+        } else {
+          return (0, _shallowEqual.default)(node, opts);
+        }
+      }
+      return false;
+    }
+    __name(isTSTypeElement, "isTSTypeElement");
+    function isTSType(node, opts) {
+      if (!node)
+        return false;
+      const nodeType = node.type;
+      if ("TSAnyKeyword" === nodeType || "TSBooleanKeyword" === nodeType || "TSBigIntKeyword" === nodeType || "TSIntrinsicKeyword" === nodeType || "TSNeverKeyword" === nodeType || "TSNullKeyword" === nodeType || "TSNumberKeyword" === nodeType || "TSObjectKeyword" === nodeType || "TSStringKeyword" === nodeType || "TSSymbolKeyword" === nodeType || "TSUndefinedKeyword" === nodeType || "TSUnknownKeyword" === nodeType || "TSVoidKeyword" === nodeType || "TSThisType" === nodeType || "TSFunctionType" === nodeType || "TSConstructorType" === nodeType || "TSTypeReference" === nodeType || "TSTypePredicate" === nodeType || "TSTypeQuery" === nodeType || "TSTypeLiteral" === nodeType || "TSArrayType" === nodeType || "TSTupleType" === nodeType || "TSOptionalType" === nodeType || "TSRestType" === nodeType || "TSUnionType" === nodeType || "TSIntersectionType" === nodeType || "TSConditionalType" === nodeType || "TSInferType" === nodeType || "TSParenthesizedType" === nodeType || "TSTypeOperator" === nodeType || "TSIndexedAccessType" === nodeType || "TSMappedType" === nodeType || "TSLiteralType" === nodeType || "TSExpressionWithTypeArguments" === nodeType || "TSImportType" === nodeType) {
+        if (typeof opts === "undefined") {
+          return true;
+        } else {
+          return (0, _shallowEqual.default)(node, opts);
+        }
+      }
+      return false;
+    }
+    __name(isTSType, "isTSType");
+    function isTSBaseType(node, opts) {
+      if (!node)
+        return false;
+      const nodeType = node.type;
+      if ("TSAnyKeyword" === nodeType || "TSBooleanKeyword" === nodeType || "TSBigIntKeyword" === nodeType || "TSIntrinsicKeyword" === nodeType || "TSNeverKeyword" === nodeType || "TSNullKeyword" === nodeType || "TSNumberKeyword" === nodeType || "TSObjectKeyword" === nodeType || "TSStringKeyword" === nodeType || "TSSymbolKeyword" === nodeType || "TSUndefinedKeyword" === nodeType || "TSUnknownKeyword" === nodeType || "TSVoidKeyword" === nodeType || "TSThisType" === nodeType || "TSLiteralType" === nodeType) {
+        if (typeof opts === "undefined") {
+          return true;
+        } else {
+          return (0, _shallowEqual.default)(node, opts);
+        }
+      }
+      return false;
+    }
+    __name(isTSBaseType, "isTSBaseType");
+    function isNumberLiteral(node, opts) {
+      console.trace("The node type NumberLiteral has been renamed to NumericLiteral");
+      if (!node)
+        return false;
+      const nodeType = node.type;
+      if (nodeType === "NumberLiteral") {
+        if (typeof opts === "undefined") {
+          return true;
+        } else {
+          return (0, _shallowEqual.default)(node, opts);
+        }
+      }
+      return false;
+    }
+    __name(isNumberLiteral, "isNumberLiteral");
+    function isRegexLiteral(node, opts) {
+      console.trace("The node type RegexLiteral has been renamed to RegExpLiteral");
+      if (!node)
+        return false;
+      const nodeType = node.type;
+      if (nodeType === "RegexLiteral") {
+        if (typeof opts === "undefined") {
+          return true;
+        } else {
+          return (0, _shallowEqual.default)(node, opts);
+        }
+      }
+      return false;
+    }
+    __name(isRegexLiteral, "isRegexLiteral");
+    function isRestProperty(node, opts) {
+      console.trace("The node type RestProperty has been renamed to RestElement");
+      if (!node)
+        return false;
+      const nodeType = node.type;
+      if (nodeType === "RestProperty") {
+        if (typeof opts === "undefined") {
+          return true;
+        } else {
+          return (0, _shallowEqual.default)(node, opts);
+        }
+      }
+      return false;
+    }
+    __name(isRestProperty, "isRestProperty");
+    function isSpreadProperty(node, opts) {
+      console.trace("The node type SpreadProperty has been renamed to SpreadElement");
+      if (!node)
+        return false;
+      const nodeType = node.type;
+      if (nodeType === "SpreadProperty") {
+        if (typeof opts === "undefined") {
+          return true;
+        } else {
+          return (0, _shallowEqual.default)(node, opts);
+        }
+      }
+      return false;
+    }
+    __name(isSpreadProperty, "isSpreadProperty");
+  }
+});
+
+// node_modules/@babel/generator/node_modules/@babel/types/lib/validators/matchesPattern.js
+var require_matchesPattern3 = __commonJS({
+  "node_modules/@babel/generator/node_modules/@babel/types/lib/validators/matchesPattern.js"(exports) {
+    "use strict";
+    Object.defineProperty(exports, "__esModule", {
+      value: true
+    });
+    exports.default = matchesPattern;
+    var _generated = require_generated11();
+    function matchesPattern(member, match, allowPartial) {
+      if (!(0, _generated.isMemberExpression)(member))
+        return false;
+      const parts = Array.isArray(match) ? match : match.split(".");
+      const nodes = [];
+      let node;
+      for (node = member; (0, _generated.isMemberExpression)(node); node = node.object) {
+        nodes.push(node.property);
+      }
+      nodes.push(node);
+      if (nodes.length < parts.length)
+        return false;
+      if (!allowPartial && nodes.length > parts.length)
+        return false;
+      for (let i = 0, j = nodes.length - 1; i < parts.length; i++, j--) {
+        const node1 = nodes[j];
+        let value;
+        if ((0, _generated.isIdentifier)(node1)) {
+          value = node1.name;
+        } else if ((0, _generated.isStringLiteral)(node1)) {
+          value = node1.value;
+        } else if ((0, _generated.isThisExpression)(node1)) {
+          value = "this";
+        } else {
+          return false;
+        }
+        if (parts[i] !== value)
+          return false;
+      }
+      return true;
+    }
+    __name(matchesPattern, "matchesPattern");
+  }
+});
+
+// node_modules/@babel/generator/node_modules/@babel/types/lib/validators/buildMatchMemberExpression.js
+var require_buildMatchMemberExpression3 = __commonJS({
+  "node_modules/@babel/generator/node_modules/@babel/types/lib/validators/buildMatchMemberExpression.js"(exports) {
+    "use strict";
+    Object.defineProperty(exports, "__esModule", {
+      value: true
+    });
+    exports.default = buildMatchMemberExpression;
+    var _matchesPattern = require_matchesPattern3();
+    function buildMatchMemberExpression(match, allowPartial) {
+      const parts = match.split(".");
+      return (member) => (0, _matchesPattern.default)(member, parts, allowPartial);
+    }
+    __name(buildMatchMemberExpression, "buildMatchMemberExpression");
+  }
+});
+
+// node_modules/@babel/generator/node_modules/@babel/types/lib/validators/react/isReactComponent.js
+var require_isReactComponent3 = __commonJS({
+  "node_modules/@babel/generator/node_modules/@babel/types/lib/validators/react/isReactComponent.js"(exports) {
+    "use strict";
+    Object.defineProperty(exports, "__esModule", {
+      value: true
+    });
+    exports.default = void 0;
+    var _buildMatchMemberExpression = require_buildMatchMemberExpression3();
+    var isReactComponent = (0, _buildMatchMemberExpression.default)("React.Component");
+    var _default = isReactComponent;
+    exports.default = _default;
+  }
+});
+
+// node_modules/@babel/generator/node_modules/@babel/types/lib/validators/react/isCompatTag.js
+var require_isCompatTag3 = __commonJS({
+  "node_modules/@babel/generator/node_modules/@babel/types/lib/validators/react/isCompatTag.js"(exports) {
+    "use strict";
+    Object.defineProperty(exports, "__esModule", {
+      value: true
+    });
+    exports.default = isCompatTag;
+    function isCompatTag(tagName) {
+      return !!tagName && /^[a-z]/.test(tagName);
+    }
+    __name(isCompatTag, "isCompatTag");
+  }
+});
+
+// node_modules/@babel/generator/node_modules/@babel/types/lib/validators/isType.js
+var require_isType3 = __commonJS({
+  "node_modules/@babel/generator/node_modules/@babel/types/lib/validators/isType.js"(exports) {
+    "use strict";
+    Object.defineProperty(exports, "__esModule", {
+      value: true
+    });
+    exports.default = isType;
+    var _definitions = require_definitions3();
+    function isType(nodeType, targetType) {
+      if (nodeType === targetType)
+        return true;
+      if (_definitions.ALIAS_KEYS[targetType])
+        return false;
+      const aliases = _definitions.FLIPPED_ALIAS_KEYS[targetType];
+      if (aliases) {
+        if (aliases[0] === nodeType)
+          return true;
+        for (const alias of aliases) {
+          if (nodeType === alias)
+            return true;
+        }
+      }
+      return false;
+    }
+    __name(isType, "isType");
+  }
+});
+
+// node_modules/@babel/generator/node_modules/@babel/types/lib/validators/isPlaceholderType.js
+var require_isPlaceholderType3 = __commonJS({
+  "node_modules/@babel/generator/node_modules/@babel/types/lib/validators/isPlaceholderType.js"(exports) {
+    "use strict";
+    Object.defineProperty(exports, "__esModule", {
+      value: true
+    });
+    exports.default = isPlaceholderType;
+    var _definitions = require_definitions3();
+    function isPlaceholderType(placeholderType, targetType) {
+      if (placeholderType === targetType)
+        return true;
+      const aliases = _definitions.PLACEHOLDERS_ALIAS[placeholderType];
+      if (aliases) {
+        for (const alias of aliases) {
+          if (targetType === alias)
+            return true;
+        }
+      }
+      return false;
+    }
+    __name(isPlaceholderType, "isPlaceholderType");
+  }
+});
+
+// node_modules/@babel/generator/node_modules/@babel/types/lib/validators/is.js
+var require_is3 = __commonJS({
+  "node_modules/@babel/generator/node_modules/@babel/types/lib/validators/is.js"(exports) {
+    "use strict";
+    Object.defineProperty(exports, "__esModule", {
+      value: true
+    });
+    exports.default = is;
+    var _shallowEqual = require_shallowEqual3();
+    var _isType = require_isType3();
+    var _isPlaceholderType = require_isPlaceholderType3();
+    var _definitions = require_definitions3();
+    function is(type, node, opts) {
+      if (!node)
+        return false;
+      const matches2 = (0, _isType.default)(node.type, type);
+      if (!matches2) {
+        if (!opts && node.type === "Placeholder" && type in _definitions.FLIPPED_ALIAS_KEYS) {
+          return (0, _isPlaceholderType.default)(node.expectedNode, type);
+        }
+        return false;
+      }
+      if (typeof opts === "undefined") {
+        return true;
+      } else {
+        return (0, _shallowEqual.default)(node, opts);
+      }
+    }
+    __name(is, "is");
+  }
+});
+
+// node_modules/@babel/generator/node_modules/@babel/types/lib/validators/isValidIdentifier.js
+var require_isValidIdentifier3 = __commonJS({
+  "node_modules/@babel/generator/node_modules/@babel/types/lib/validators/isValidIdentifier.js"(exports) {
+    "use strict";
+    Object.defineProperty(exports, "__esModule", {
+      value: true
+    });
+    exports.default = isValidIdentifier;
+    var _helperValidatorIdentifier = require_lib();
+    function isValidIdentifier(name, reserved = true) {
+      if (typeof name !== "string")
+        return false;
+      if (reserved) {
+        if ((0, _helperValidatorIdentifier.isKeyword)(name) || (0, _helperValidatorIdentifier.isStrictReservedWord)(name, true)) {
+          return false;
+        }
+      }
+      return (0, _helperValidatorIdentifier.isIdentifierName)(name);
+    }
+    __name(isValidIdentifier, "isValidIdentifier");
+  }
+});
+
+// node_modules/@babel/generator/node_modules/@babel/types/lib/constants/index.js
+var require_constants3 = __commonJS({
+  "node_modules/@babel/generator/node_modules/@babel/types/lib/constants/index.js"(exports) {
+    "use strict";
+    Object.defineProperty(exports, "__esModule", {
+      value: true
+    });
+    exports.UPDATE_OPERATORS = exports.UNARY_OPERATORS = exports.STRING_UNARY_OPERATORS = exports.STATEMENT_OR_BLOCK_KEYS = exports.NUMBER_UNARY_OPERATORS = exports.NUMBER_BINARY_OPERATORS = exports.NOT_LOCAL_BINDING = exports.LOGICAL_OPERATORS = exports.INHERIT_KEYS = exports.FOR_INIT_KEYS = exports.FLATTENABLE_KEYS = exports.EQUALITY_BINARY_OPERATORS = exports.COMPARISON_BINARY_OPERATORS = exports.COMMENT_KEYS = exports.BOOLEAN_UNARY_OPERATORS = exports.BOOLEAN_NUMBER_BINARY_OPERATORS = exports.BOOLEAN_BINARY_OPERATORS = exports.BLOCK_SCOPED_SYMBOL = exports.BINARY_OPERATORS = exports.ASSIGNMENT_OPERATORS = void 0;
+    var STATEMENT_OR_BLOCK_KEYS = [
+      "consequent",
+      "body",
+      "alternate"
+    ];
+    exports.STATEMENT_OR_BLOCK_KEYS = STATEMENT_OR_BLOCK_KEYS;
+    var FLATTENABLE_KEYS = [
+      "body",
+      "expressions"
+    ];
+    exports.FLATTENABLE_KEYS = FLATTENABLE_KEYS;
+    var FOR_INIT_KEYS = [
+      "left",
+      "init"
+    ];
+    exports.FOR_INIT_KEYS = FOR_INIT_KEYS;
+    var COMMENT_KEYS = [
+      "leadingComments",
+      "trailingComments",
+      "innerComments"
+    ];
+    exports.COMMENT_KEYS = COMMENT_KEYS;
+    var LOGICAL_OPERATORS = [
+      "||",
+      "&&",
+      "??"
+    ];
+    exports.LOGICAL_OPERATORS = LOGICAL_OPERATORS;
+    var UPDATE_OPERATORS = [
+      "++",
+      "--"
+    ];
+    exports.UPDATE_OPERATORS = UPDATE_OPERATORS;
+    var BOOLEAN_NUMBER_BINARY_OPERATORS = [
+      ">",
+      "<",
+      ">=",
+      "<="
+    ];
+    exports.BOOLEAN_NUMBER_BINARY_OPERATORS = BOOLEAN_NUMBER_BINARY_OPERATORS;
+    var EQUALITY_BINARY_OPERATORS = [
+      "==",
+      "===",
+      "!=",
+      "!=="
+    ];
+    exports.EQUALITY_BINARY_OPERATORS = EQUALITY_BINARY_OPERATORS;
+    var COMPARISON_BINARY_OPERATORS = [
+      ...EQUALITY_BINARY_OPERATORS,
+      "in",
+      "instanceof"
+    ];
+    exports.COMPARISON_BINARY_OPERATORS = COMPARISON_BINARY_OPERATORS;
+    var BOOLEAN_BINARY_OPERATORS = [
+      ...COMPARISON_BINARY_OPERATORS,
+      ...BOOLEAN_NUMBER_BINARY_OPERATORS
+    ];
+    exports.BOOLEAN_BINARY_OPERATORS = BOOLEAN_BINARY_OPERATORS;
+    var NUMBER_BINARY_OPERATORS = [
+      "-",
+      "/",
+      "%",
+      "*",
+      "**",
+      "&",
+      "|",
+      ">>",
+      ">>>",
+      "<<",
+      "^"
+    ];
+    exports.NUMBER_BINARY_OPERATORS = NUMBER_BINARY_OPERATORS;
+    var BINARY_OPERATORS = [
+      "+",
+      ...NUMBER_BINARY_OPERATORS,
+      ...BOOLEAN_BINARY_OPERATORS,
+      "|>"
+    ];
+    exports.BINARY_OPERATORS = BINARY_OPERATORS;
+    var ASSIGNMENT_OPERATORS = [
+      "=",
+      "+=",
+      ...NUMBER_BINARY_OPERATORS.map((op) => op + "="),
+      ...LOGICAL_OPERATORS.map((op) => op + "=")
+    ];
+    exports.ASSIGNMENT_OPERATORS = ASSIGNMENT_OPERATORS;
+    var BOOLEAN_UNARY_OPERATORS = [
+      "delete",
+      "!"
+    ];
+    exports.BOOLEAN_UNARY_OPERATORS = BOOLEAN_UNARY_OPERATORS;
+    var NUMBER_UNARY_OPERATORS = [
+      "+",
+      "-",
+      "~"
+    ];
+    exports.NUMBER_UNARY_OPERATORS = NUMBER_UNARY_OPERATORS;
+    var STRING_UNARY_OPERATORS = [
+      "typeof"
+    ];
+    exports.STRING_UNARY_OPERATORS = STRING_UNARY_OPERATORS;
+    var UNARY_OPERATORS = [
+      "void",
+      "throw",
+      ...BOOLEAN_UNARY_OPERATORS,
+      ...NUMBER_UNARY_OPERATORS,
+      ...STRING_UNARY_OPERATORS
+    ];
+    exports.UNARY_OPERATORS = UNARY_OPERATORS;
+    var INHERIT_KEYS = {
+      optional: [
+        "typeAnnotation",
+        "typeParameters",
+        "returnType"
+      ],
+      force: [
+        "start",
+        "loc",
+        "end"
+      ]
+    };
+    exports.INHERIT_KEYS = INHERIT_KEYS;
+    var BLOCK_SCOPED_SYMBOL = Symbol.for("var used to be block scoped");
+    exports.BLOCK_SCOPED_SYMBOL = BLOCK_SCOPED_SYMBOL;
+    var NOT_LOCAL_BINDING = Symbol.for("should not be considered a local binding");
+    exports.NOT_LOCAL_BINDING = NOT_LOCAL_BINDING;
+  }
+});
+
+// node_modules/@babel/generator/node_modules/@babel/types/lib/definitions/utils.js
+var require_utils3 = __commonJS({
+  "node_modules/@babel/generator/node_modules/@babel/types/lib/definitions/utils.js"(exports) {
+    "use strict";
+    Object.defineProperty(exports, "__esModule", {
+      value: true
+    });
+    exports.VISITOR_KEYS = exports.NODE_PARENT_VALIDATIONS = exports.NODE_FIELDS = exports.FLIPPED_ALIAS_KEYS = exports.DEPRECATED_KEYS = exports.BUILDER_KEYS = exports.ALIAS_KEYS = void 0;
+    exports.arrayOf = arrayOf;
+    exports.arrayOfType = arrayOfType;
+    exports.assertEach = assertEach;
+    exports.assertNodeOrValueType = assertNodeOrValueType;
+    exports.assertNodeType = assertNodeType;
+    exports.assertOneOf = assertOneOf;
+    exports.assertOptionalChainStart = assertOptionalChainStart;
+    exports.assertShape = assertShape;
+    exports.assertValueType = assertValueType;
+    exports.chain = chain;
+    exports.default = defineType;
+    exports.defineAliasedType = defineAliasedType;
+    exports.typeIs = typeIs;
+    exports.validate = validate;
+    exports.validateArrayOfType = validateArrayOfType;
+    exports.validateOptional = validateOptional;
+    exports.validateOptionalType = validateOptionalType;
+    exports.validateType = validateType;
+    var _is = require_is3();
+    var _validate = require_validate3();
+    var VISITOR_KEYS = {};
+    exports.VISITOR_KEYS = VISITOR_KEYS;
+    var ALIAS_KEYS = {};
+    exports.ALIAS_KEYS = ALIAS_KEYS;
+    var FLIPPED_ALIAS_KEYS = {};
+    exports.FLIPPED_ALIAS_KEYS = FLIPPED_ALIAS_KEYS;
+    var NODE_FIELDS = {};
+    exports.NODE_FIELDS = NODE_FIELDS;
+    var BUILDER_KEYS = {};
+    exports.BUILDER_KEYS = BUILDER_KEYS;
+    var DEPRECATED_KEYS = {};
+    exports.DEPRECATED_KEYS = DEPRECATED_KEYS;
+    var NODE_PARENT_VALIDATIONS = {};
+    exports.NODE_PARENT_VALIDATIONS = NODE_PARENT_VALIDATIONS;
+    function getType(val) {
+      if (Array.isArray(val)) {
+        return "array";
+      } else if (val === null) {
+        return "null";
+      } else {
+        return typeof val;
+      }
+    }
+    __name(getType, "getType");
+    function validate(validate2) {
+      return {
+        validate: validate2
+      };
+    }
+    __name(validate, "validate");
+    function typeIs(typeName) {
+      return typeof typeName === "string" ? assertNodeType(typeName) : assertNodeType(...typeName);
+    }
+    __name(typeIs, "typeIs");
+    function validateType(typeName) {
+      return validate(typeIs(typeName));
+    }
+    __name(validateType, "validateType");
+    function validateOptional(validate2) {
+      return {
+        validate: validate2,
+        optional: true
+      };
+    }
+    __name(validateOptional, "validateOptional");
+    function validateOptionalType(typeName) {
+      return {
+        validate: typeIs(typeName),
+        optional: true
+      };
+    }
+    __name(validateOptionalType, "validateOptionalType");
+    function arrayOf(elementType) {
+      return chain(assertValueType("array"), assertEach(elementType));
+    }
+    __name(arrayOf, "arrayOf");
+    function arrayOfType(typeName) {
+      return arrayOf(typeIs(typeName));
+    }
+    __name(arrayOfType, "arrayOfType");
+    function validateArrayOfType(typeName) {
+      return validate(arrayOfType(typeName));
+    }
+    __name(validateArrayOfType, "validateArrayOfType");
+    function assertEach(callback) {
+      function validator(node, key, val) {
+        if (!Array.isArray(val))
+          return;
+        for (let i = 0; i < val.length; i++) {
+          const subkey = `${key}[${i}]`;
+          const v = val[i];
+          callback(node, subkey, v);
+          if (process.env.BABEL_TYPES_8_BREAKING)
+            (0, _validate.validateChild)(node, subkey, v);
+        }
+      }
+      __name(validator, "validator");
+      validator.each = callback;
+      return validator;
+    }
+    __name(assertEach, "assertEach");
+    function assertOneOf(...values) {
+      function validate2(node, key, val) {
+        if (values.indexOf(val) < 0) {
+          throw new TypeError(`Property ${key} expected value to be one of ${JSON.stringify(values)} but got ${JSON.stringify(val)}`);
+        }
+      }
+      __name(validate2, "validate");
+      validate2.oneOf = values;
+      return validate2;
+    }
+    __name(assertOneOf, "assertOneOf");
+    function assertNodeType(...types) {
+      function validate2(node, key, val) {
+        for (const type of types) {
+          if ((0, _is.default)(type, val)) {
+            (0, _validate.validateChild)(node, key, val);
+            return;
+          }
+        }
+        throw new TypeError(`Property ${key} of ${node.type} expected node to be of a type ${JSON.stringify(types)} but instead got ${JSON.stringify(val == null ? void 0 : val.type)}`);
+      }
+      __name(validate2, "validate");
+      validate2.oneOfNodeTypes = types;
+      return validate2;
+    }
+    __name(assertNodeType, "assertNodeType");
+    function assertNodeOrValueType(...types) {
+      function validate2(node, key, val) {
+        for (const type of types) {
+          if (getType(val) === type || (0, _is.default)(type, val)) {
+            (0, _validate.validateChild)(node, key, val);
+            return;
+          }
+        }
+        throw new TypeError(`Property ${key} of ${node.type} expected node to be of a type ${JSON.stringify(types)} but instead got ${JSON.stringify(val == null ? void 0 : val.type)}`);
+      }
+      __name(validate2, "validate");
+      validate2.oneOfNodeOrValueTypes = types;
+      return validate2;
+    }
+    __name(assertNodeOrValueType, "assertNodeOrValueType");
+    function assertValueType(type) {
+      function validate2(node, key, val) {
+        const valid = getType(val) === type;
+        if (!valid) {
+          throw new TypeError(`Property ${key} expected type of ${type} but got ${getType(val)}`);
+        }
+      }
+      __name(validate2, "validate");
+      validate2.type = type;
+      return validate2;
+    }
+    __name(assertValueType, "assertValueType");
+    function assertShape(shape) {
+      function validate2(node, key, val) {
+        const errors = [];
+        for (const property of Object.keys(shape)) {
+          try {
+            (0, _validate.validateField)(node, property, val[property], shape[property]);
+          } catch (error) {
+            if (error instanceof TypeError) {
+              errors.push(error.message);
+              continue;
+            }
+            throw error;
+          }
+        }
+        if (errors.length) {
+          throw new TypeError(`Property ${key} of ${node.type} expected to have the following:
+${errors.join("\n")}`);
+        }
+      }
+      __name(validate2, "validate");
+      validate2.shapeOf = shape;
+      return validate2;
+    }
+    __name(assertShape, "assertShape");
+    function assertOptionalChainStart() {
+      function validate2(node) {
+        var _current;
+        let current = node;
+        while (node) {
+          const { type } = current;
+          if (type === "OptionalCallExpression") {
+            if (current.optional)
+              return;
+            current = current.callee;
+            continue;
+          }
+          if (type === "OptionalMemberExpression") {
+            if (current.optional)
+              return;
+            current = current.object;
+            continue;
+          }
+          break;
+        }
+        throw new TypeError(`Non-optional ${node.type} must chain from an optional OptionalMemberExpression or OptionalCallExpression. Found chain from ${(_current = current) == null ? void 0 : _current.type}`);
+      }
+      __name(validate2, "validate");
+      return validate2;
+    }
+    __name(assertOptionalChainStart, "assertOptionalChainStart");
+    function chain(...fns) {
+      function validate2(...args) {
+        for (const fn of fns) {
+          fn(...args);
+        }
+      }
+      __name(validate2, "validate");
+      validate2.chainOf = fns;
+      if (fns.length >= 2 && "type" in fns[0] && fns[0].type === "array" && !("each" in fns[1])) {
+        throw new Error(`An assertValueType("array") validator can only be followed by an assertEach(...) validator.`);
+      }
+      return validate2;
+    }
+    __name(chain, "chain");
+    var validTypeOpts = [
+      "aliases",
+      "builder",
+      "deprecatedAlias",
+      "fields",
+      "inherits",
+      "visitor",
+      "validate"
+    ];
+    var validFieldKeys = [
+      "default",
+      "optional",
+      "validate"
+    ];
+    var store = {};
+    function defineAliasedType(...aliases) {
+      return (type, opts = {}) => {
+        let defined = opts.aliases;
+        if (!defined) {
+          var _store$opts$inherits$, _defined;
+          if (opts.inherits)
+            defined = (_store$opts$inherits$ = store[opts.inherits].aliases) == null ? void 0 : _store$opts$inherits$.slice();
+          (_defined = defined) != null ? _defined : defined = [];
+          opts.aliases = defined;
+        }
+        const additional = aliases.filter((a) => !defined.includes(a));
+        defined.unshift(...additional);
+        return defineType(type, opts);
+      };
+    }
+    __name(defineAliasedType, "defineAliasedType");
+    function defineType(type, opts = {}) {
+      const inherits = opts.inherits && store[opts.inherits] || {};
+      let fields = opts.fields;
+      if (!fields) {
+        fields = {};
+        if (inherits.fields) {
+          const keys = Object.getOwnPropertyNames(inherits.fields);
+          for (const key of keys) {
+            const field = inherits.fields[key];
+            const def = field.default;
+            if (Array.isArray(def) ? def.length > 0 : def && typeof def === "object") {
+              throw new Error("field defaults can only be primitives or empty arrays currently");
+            }
+            fields[key] = {
+              default: Array.isArray(def) ? [] : def,
+              optional: field.optional,
+              validate: field.validate
+            };
+          }
+        }
+      }
+      const visitor = opts.visitor || inherits.visitor || [];
+      const aliases = opts.aliases || inherits.aliases || [];
+      const builder = opts.builder || inherits.builder || opts.visitor || [];
+      for (const k of Object.keys(opts)) {
+        if (validTypeOpts.indexOf(k) === -1) {
+          throw new Error(`Unknown type option "${k}" on ${type}`);
+        }
+      }
+      if (opts.deprecatedAlias) {
+        DEPRECATED_KEYS[opts.deprecatedAlias] = type;
+      }
+      for (const key1 of visitor.concat(builder)) {
+        fields[key1] = fields[key1] || {};
+      }
+      for (const key2 of Object.keys(fields)) {
+        const field1 = fields[key2];
+        if (field1.default !== void 0 && builder.indexOf(key2) === -1) {
+          field1.optional = true;
+        }
+        if (field1.default === void 0) {
+          field1.default = null;
+        } else if (!field1.validate && field1.default != null) {
+          field1.validate = assertValueType(getType(field1.default));
+        }
+        for (const k1 of Object.keys(field1)) {
+          if (validFieldKeys.indexOf(k1) === -1) {
+            throw new Error(`Unknown field key "${k1}" on ${type}.${key2}`);
+          }
+        }
+      }
+      VISITOR_KEYS[type] = opts.visitor = visitor;
+      BUILDER_KEYS[type] = opts.builder = builder;
+      NODE_FIELDS[type] = opts.fields = fields;
+      ALIAS_KEYS[type] = opts.aliases = aliases;
+      aliases.forEach((alias) => {
+        FLIPPED_ALIAS_KEYS[alias] = FLIPPED_ALIAS_KEYS[alias] || [];
+        FLIPPED_ALIAS_KEYS[alias].push(type);
+      });
+      if (opts.validate) {
+        NODE_PARENT_VALIDATIONS[type] = opts.validate;
+      }
+      store[type] = opts;
+    }
+    __name(defineType, "defineType");
+  }
+});
+
+// node_modules/@babel/generator/node_modules/@babel/types/lib/definitions/core.js
+var require_core3 = __commonJS({
+  "node_modules/@babel/generator/node_modules/@babel/types/lib/definitions/core.js"(exports) {
+    "use strict";
+    Object.defineProperty(exports, "__esModule", {
+      value: true
+    });
+    exports.patternLikeCommon = exports.functionTypeAnnotationCommon = exports.functionDeclarationCommon = exports.functionCommon = exports.classMethodOrPropertyCommon = exports.classMethodOrDeclareMethodCommon = void 0;
+    var _is = require_is3();
+    var _isValidIdentifier = require_isValidIdentifier3();
+    var _helperValidatorIdentifier = require_lib();
+    var _helperStringParser = require_lib2();
+    var _constants = require_constants3();
+    var _utils = require_utils3();
+    var defineType = (0, _utils.defineAliasedType)("Standardized");
+    defineType("ArrayExpression", {
+      fields: {
+        elements: {
+          validate: (0, _utils.chain)((0, _utils.assertValueType)("array"), (0, _utils.assertEach)((0, _utils.assertNodeOrValueType)("null", "Expression", "SpreadElement"))),
+          default: !process.env.BABEL_TYPES_8_BREAKING ? [] : void 0
+        }
+      },
+      visitor: [
+        "elements"
+      ],
+      aliases: [
+        "Expression"
+      ]
+    });
+    defineType("AssignmentExpression", {
+      fields: {
+        operator: {
+          validate: function() {
+            if (!process.env.BABEL_TYPES_8_BREAKING) {
+              return (0, _utils.assertValueType)("string");
+            }
+            const identifier2 = (0, _utils.assertOneOf)(..._constants.ASSIGNMENT_OPERATORS);
+            const pattern = (0, _utils.assertOneOf)("=");
+            return function(node, key, val) {
+              const validator = (0, _is.default)("Pattern", node.left) ? pattern : identifier2;
+              validator(node, key, val);
+            };
+          }()
+        },
+        left: {
+          validate: !process.env.BABEL_TYPES_8_BREAKING ? (0, _utils.assertNodeType)("LVal") : (0, _utils.assertNodeType)("Identifier", "MemberExpression", "ArrayPattern", "ObjectPattern", "TSAsExpression", "TSSatisfiesExpression", "TSTypeAssertion", "TSNonNullExpression")
+        },
+        right: {
+          validate: (0, _utils.assertNodeType)("Expression")
+        }
+      },
+      builder: [
+        "operator",
+        "left",
+        "right"
+      ],
+      visitor: [
+        "left",
+        "right"
+      ],
+      aliases: [
+        "Expression"
+      ]
+    });
+    defineType("BinaryExpression", {
+      builder: [
+        "operator",
+        "left",
+        "right"
+      ],
+      fields: {
+        operator: {
+          validate: (0, _utils.assertOneOf)(..._constants.BINARY_OPERATORS)
+        },
+        left: {
+          validate: function() {
+            const expression = (0, _utils.assertNodeType)("Expression");
+            const inOp = (0, _utils.assertNodeType)("Expression", "PrivateName");
+            const validator = Object.assign(function(node, key, val) {
+              const validator2 = node.operator === "in" ? inOp : expression;
+              validator2(node, key, val);
+            }, {
+              oneOfNodeTypes: [
+                "Expression",
+                "PrivateName"
+              ]
+            });
+            return validator;
+          }()
+        },
+        right: {
+          validate: (0, _utils.assertNodeType)("Expression")
+        }
+      },
+      visitor: [
+        "left",
+        "right"
+      ],
+      aliases: [
+        "Binary",
+        "Expression"
+      ]
+    });
+    defineType("InterpreterDirective", {
+      builder: [
+        "value"
+      ],
+      fields: {
+        value: {
+          validate: (0, _utils.assertValueType)("string")
+        }
+      }
+    });
+    defineType("Directive", {
+      visitor: [
+        "value"
+      ],
+      fields: {
+        value: {
+          validate: (0, _utils.assertNodeType)("DirectiveLiteral")
+        }
+      }
+    });
+    defineType("DirectiveLiteral", {
+      builder: [
+        "value"
+      ],
+      fields: {
+        value: {
+          validate: (0, _utils.assertValueType)("string")
+        }
+      }
+    });
+    defineType("BlockStatement", {
+      builder: [
+        "body",
+        "directives"
+      ],
+      visitor: [
+        "directives",
+        "body"
+      ],
+      fields: {
+        directives: {
+          validate: (0, _utils.chain)((0, _utils.assertValueType)("array"), (0, _utils.assertEach)((0, _utils.assertNodeType)("Directive"))),
+          default: []
+        },
+        body: {
+          validate: (0, _utils.chain)((0, _utils.assertValueType)("array"), (0, _utils.assertEach)((0, _utils.assertNodeType)("Statement")))
+        }
+      },
+      aliases: [
+        "Scopable",
+        "BlockParent",
+        "Block",
+        "Statement"
+      ]
+    });
+    defineType("BreakStatement", {
+      visitor: [
+        "label"
+      ],
+      fields: {
+        label: {
+          validate: (0, _utils.assertNodeType)("Identifier"),
+          optional: true
+        }
+      },
+      aliases: [
+        "Statement",
+        "Terminatorless",
+        "CompletionStatement"
+      ]
+    });
+    defineType("CallExpression", {
+      visitor: [
+        "callee",
+        "arguments",
+        "typeParameters",
+        "typeArguments"
+      ],
+      builder: [
+        "callee",
+        "arguments"
+      ],
+      aliases: [
+        "Expression"
+      ],
+      fields: Object.assign({
+        callee: {
+          validate: (0, _utils.assertNodeType)("Expression", "Super", "V8IntrinsicIdentifier")
+        },
+        arguments: {
+          validate: (0, _utils.chain)((0, _utils.assertValueType)("array"), (0, _utils.assertEach)((0, _utils.assertNodeType)("Expression", "SpreadElement", "JSXNamespacedName", "ArgumentPlaceholder")))
+        }
+      }, !process.env.BABEL_TYPES_8_BREAKING ? {
+        optional: {
+          validate: (0, _utils.assertOneOf)(true, false),
+          optional: true
+        }
+      } : {}, {
+        typeArguments: {
+          validate: (0, _utils.assertNodeType)("TypeParameterInstantiation"),
+          optional: true
+        },
+        typeParameters: {
+          validate: (0, _utils.assertNodeType)("TSTypeParameterInstantiation"),
+          optional: true
+        }
+      })
+    });
+    defineType("CatchClause", {
+      visitor: [
+        "param",
+        "body"
+      ],
+      fields: {
+        param: {
+          validate: (0, _utils.assertNodeType)("Identifier", "ArrayPattern", "ObjectPattern"),
+          optional: true
+        },
+        body: {
+          validate: (0, _utils.assertNodeType)("BlockStatement")
+        }
+      },
+      aliases: [
+        "Scopable",
+        "BlockParent"
+      ]
+    });
+    defineType("ConditionalExpression", {
+      visitor: [
+        "test",
+        "consequent",
+        "alternate"
+      ],
+      fields: {
+        test: {
+          validate: (0, _utils.assertNodeType)("Expression")
+        },
+        consequent: {
+          validate: (0, _utils.assertNodeType)("Expression")
+        },
+        alternate: {
+          validate: (0, _utils.assertNodeType)("Expression")
+        }
+      },
+      aliases: [
+        "Expression",
+        "Conditional"
+      ]
+    });
+    defineType("ContinueStatement", {
+      visitor: [
+        "label"
+      ],
+      fields: {
+        label: {
+          validate: (0, _utils.assertNodeType)("Identifier"),
+          optional: true
+        }
+      },
+      aliases: [
+        "Statement",
+        "Terminatorless",
+        "CompletionStatement"
+      ]
+    });
+    defineType("DebuggerStatement", {
+      aliases: [
+        "Statement"
+      ]
+    });
+    defineType("DoWhileStatement", {
+      visitor: [
+        "test",
+        "body"
+      ],
+      fields: {
+        test: {
+          validate: (0, _utils.assertNodeType)("Expression")
+        },
+        body: {
+          validate: (0, _utils.assertNodeType)("Statement")
+        }
+      },
+      aliases: [
+        "Statement",
+        "BlockParent",
+        "Loop",
+        "While",
+        "Scopable"
+      ]
+    });
+    defineType("EmptyStatement", {
+      aliases: [
+        "Statement"
+      ]
+    });
+    defineType("ExpressionStatement", {
+      visitor: [
+        "expression"
+      ],
+      fields: {
+        expression: {
+          validate: (0, _utils.assertNodeType)("Expression")
+        }
+      },
+      aliases: [
+        "Statement",
+        "ExpressionWrapper"
+      ]
+    });
+    defineType("File", {
+      builder: [
+        "program",
+        "comments",
+        "tokens"
+      ],
+      visitor: [
+        "program"
+      ],
+      fields: {
+        program: {
+          validate: (0, _utils.assertNodeType)("Program")
+        },
+        comments: {
+          validate: !process.env.BABEL_TYPES_8_BREAKING ? Object.assign(() => {
+          }, {
+            each: {
+              oneOfNodeTypes: [
+                "CommentBlock",
+                "CommentLine"
+              ]
+            }
+          }) : (0, _utils.assertEach)((0, _utils.assertNodeType)("CommentBlock", "CommentLine")),
+          optional: true
+        },
+        tokens: {
+          validate: (0, _utils.assertEach)(Object.assign(() => {
+          }, {
+            type: "any"
+          })),
+          optional: true
+        }
+      }
+    });
+    defineType("ForInStatement", {
+      visitor: [
+        "left",
+        "right",
+        "body"
+      ],
+      aliases: [
+        "Scopable",
+        "Statement",
+        "For",
+        "BlockParent",
+        "Loop",
+        "ForXStatement"
+      ],
+      fields: {
+        left: {
+          validate: !process.env.BABEL_TYPES_8_BREAKING ? (0, _utils.assertNodeType)("VariableDeclaration", "LVal") : (0, _utils.assertNodeType)("VariableDeclaration", "Identifier", "MemberExpression", "ArrayPattern", "ObjectPattern", "TSAsExpression", "TSSatisfiesExpression", "TSTypeAssertion", "TSNonNullExpression")
+        },
+        right: {
+          validate: (0, _utils.assertNodeType)("Expression")
+        },
+        body: {
+          validate: (0, _utils.assertNodeType)("Statement")
+        }
+      }
+    });
+    defineType("ForStatement", {
+      visitor: [
+        "init",
+        "test",
+        "update",
+        "body"
+      ],
+      aliases: [
+        "Scopable",
+        "Statement",
+        "For",
+        "BlockParent",
+        "Loop"
+      ],
+      fields: {
+        init: {
+          validate: (0, _utils.assertNodeType)("VariableDeclaration", "Expression"),
+          optional: true
+        },
+        test: {
+          validate: (0, _utils.assertNodeType)("Expression"),
+          optional: true
+        },
+        update: {
+          validate: (0, _utils.assertNodeType)("Expression"),
+          optional: true
+        },
+        body: {
+          validate: (0, _utils.assertNodeType)("Statement")
+        }
+      }
+    });
+    var functionCommon = /* @__PURE__ */ __name(() => ({
+      params: {
+        validate: (0, _utils.chain)((0, _utils.assertValueType)("array"), (0, _utils.assertEach)((0, _utils.assertNodeType)("Identifier", "Pattern", "RestElement")))
+      },
+      generator: {
+        default: false
+      },
+      async: {
+        default: false
+      }
+    }), "functionCommon");
+    exports.functionCommon = functionCommon;
+    var functionTypeAnnotationCommon = /* @__PURE__ */ __name(() => ({
+      returnType: {
+        validate: (0, _utils.assertNodeType)("TypeAnnotation", "TSTypeAnnotation", "Noop"),
+        optional: true
+      },
+      typeParameters: {
+        validate: (0, _utils.assertNodeType)("TypeParameterDeclaration", "TSTypeParameterDeclaration", "Noop"),
+        optional: true
+      }
+    }), "functionTypeAnnotationCommon");
+    exports.functionTypeAnnotationCommon = functionTypeAnnotationCommon;
+    var functionDeclarationCommon = /* @__PURE__ */ __name(() => Object.assign({}, functionCommon(), {
+      declare: {
+        validate: (0, _utils.assertValueType)("boolean"),
+        optional: true
+      },
+      id: {
+        validate: (0, _utils.assertNodeType)("Identifier"),
+        optional: true
+      }
+    }), "functionDeclarationCommon");
+    exports.functionDeclarationCommon = functionDeclarationCommon;
+    defineType("FunctionDeclaration", {
+      builder: [
+        "id",
+        "params",
+        "body",
+        "generator",
+        "async"
+      ],
+      visitor: [
+        "id",
+        "params",
+        "body",
+        "returnType",
+        "typeParameters"
+      ],
+      fields: Object.assign({}, functionDeclarationCommon(), functionTypeAnnotationCommon(), {
+        body: {
+          validate: (0, _utils.assertNodeType)("BlockStatement")
+        },
+        predicate: {
+          validate: (0, _utils.assertNodeType)("DeclaredPredicate", "InferredPredicate"),
+          optional: true
+        }
+      }),
+      aliases: [
+        "Scopable",
+        "Function",
+        "BlockParent",
+        "FunctionParent",
+        "Statement",
+        "Pureish",
+        "Declaration"
+      ],
+      validate: function() {
+        if (!process.env.BABEL_TYPES_8_BREAKING)
+          return () => {
+          };
+        const identifier2 = (0, _utils.assertNodeType)("Identifier");
+        return function(parent, key, node) {
+          if (!(0, _is.default)("ExportDefaultDeclaration", parent)) {
+            identifier2(node, "id", node.id);
+          }
+        };
+      }()
+    });
+    defineType("FunctionExpression", {
+      inherits: "FunctionDeclaration",
+      aliases: [
+        "Scopable",
+        "Function",
+        "BlockParent",
+        "FunctionParent",
+        "Expression",
+        "Pureish"
+      ],
+      fields: Object.assign({}, functionCommon(), functionTypeAnnotationCommon(), {
+        id: {
+          validate: (0, _utils.assertNodeType)("Identifier"),
+          optional: true
+        },
+        body: {
+          validate: (0, _utils.assertNodeType)("BlockStatement")
+        },
+        predicate: {
+          validate: (0, _utils.assertNodeType)("DeclaredPredicate", "InferredPredicate"),
+          optional: true
+        }
+      })
+    });
+    var patternLikeCommon = /* @__PURE__ */ __name(() => ({
+      typeAnnotation: {
+        validate: (0, _utils.assertNodeType)("TypeAnnotation", "TSTypeAnnotation", "Noop"),
+        optional: true
+      },
+      decorators: {
+        validate: (0, _utils.chain)((0, _utils.assertValueType)("array"), (0, _utils.assertEach)((0, _utils.assertNodeType)("Decorator"))),
+        optional: true
+      }
+    }), "patternLikeCommon");
+    exports.patternLikeCommon = patternLikeCommon;
+    defineType("Identifier", {
+      builder: [
+        "name"
+      ],
+      visitor: [
+        "typeAnnotation",
+        "decorators"
+      ],
+      aliases: [
+        "Expression",
+        "PatternLike",
+        "LVal",
+        "TSEntityName"
+      ],
+      fields: Object.assign({}, patternLikeCommon(), {
+        name: {
+          validate: (0, _utils.chain)((0, _utils.assertValueType)("string"), Object.assign(function(node, key, val) {
+            if (!process.env.BABEL_TYPES_8_BREAKING)
+              return;
+            if (!(0, _isValidIdentifier.default)(val, false)) {
+              throw new TypeError(`"${val}" is not a valid identifier name`);
+            }
+          }, {
+            type: "string"
+          }))
+        },
+        optional: {
+          validate: (0, _utils.assertValueType)("boolean"),
+          optional: true
+        }
+      }),
+      validate(parent, key, node) {
+        if (!process.env.BABEL_TYPES_8_BREAKING)
+          return;
+        const match = /\.(\w+)$/.exec(key);
+        if (!match)
+          return;
+        const [, parentKey] = match;
+        const nonComp = {
+          computed: false
+        };
+        if (parentKey === "property") {
+          if ((0, _is.default)("MemberExpression", parent, nonComp))
+            return;
+          if ((0, _is.default)("OptionalMemberExpression", parent, nonComp))
+            return;
+        } else if (parentKey === "key") {
+          if ((0, _is.default)("Property", parent, nonComp))
+            return;
+          if ((0, _is.default)("Method", parent, nonComp))
+            return;
+        } else if (parentKey === "exported") {
+          if ((0, _is.default)("ExportSpecifier", parent))
+            return;
+        } else if (parentKey === "imported") {
+          if ((0, _is.default)("ImportSpecifier", parent, {
+            imported: node
+          }))
+            return;
+        } else if (parentKey === "meta") {
+          if ((0, _is.default)("MetaProperty", parent, {
+            meta: node
+          }))
+            return;
+        }
+        if (((0, _helperValidatorIdentifier.isKeyword)(node.name) || (0, _helperValidatorIdentifier.isReservedWord)(node.name, false)) && node.name !== "this") {
+          throw new TypeError(`"${node.name}" is not a valid identifier`);
+        }
+      }
+    });
+    defineType("IfStatement", {
+      visitor: [
+        "test",
+        "consequent",
+        "alternate"
+      ],
+      aliases: [
+        "Statement",
+        "Conditional"
+      ],
+      fields: {
+        test: {
+          validate: (0, _utils.assertNodeType)("Expression")
+        },
+        consequent: {
+          validate: (0, _utils.assertNodeType)("Statement")
+        },
+        alternate: {
+          optional: true,
+          validate: (0, _utils.assertNodeType)("Statement")
+        }
+      }
+    });
+    defineType("LabeledStatement", {
+      visitor: [
+        "label",
+        "body"
+      ],
+      aliases: [
+        "Statement"
+      ],
+      fields: {
+        label: {
+          validate: (0, _utils.assertNodeType)("Identifier")
+        },
+        body: {
+          validate: (0, _utils.assertNodeType)("Statement")
+        }
+      }
+    });
+    defineType("StringLiteral", {
+      builder: [
+        "value"
+      ],
+      fields: {
+        value: {
+          validate: (0, _utils.assertValueType)("string")
+        }
+      },
+      aliases: [
+        "Expression",
+        "Pureish",
+        "Literal",
+        "Immutable"
+      ]
+    });
+    defineType("NumericLiteral", {
+      builder: [
+        "value"
+      ],
+      deprecatedAlias: "NumberLiteral",
+      fields: {
+        value: {
+          validate: (0, _utils.assertValueType)("number")
+        }
+      },
+      aliases: [
+        "Expression",
+        "Pureish",
+        "Literal",
+        "Immutable"
+      ]
+    });
+    defineType("NullLiteral", {
+      aliases: [
+        "Expression",
+        "Pureish",
+        "Literal",
+        "Immutable"
+      ]
+    });
+    defineType("BooleanLiteral", {
+      builder: [
+        "value"
+      ],
+      fields: {
+        value: {
+          validate: (0, _utils.assertValueType)("boolean")
+        }
+      },
+      aliases: [
+        "Expression",
+        "Pureish",
+        "Literal",
+        "Immutable"
+      ]
+    });
+    defineType("RegExpLiteral", {
+      builder: [
+        "pattern",
+        "flags"
+      ],
+      deprecatedAlias: "RegexLiteral",
+      aliases: [
+        "Expression",
+        "Pureish",
+        "Literal"
+      ],
+      fields: {
+        pattern: {
+          validate: (0, _utils.assertValueType)("string")
+        },
+        flags: {
+          validate: (0, _utils.chain)((0, _utils.assertValueType)("string"), Object.assign(function(node, key, val) {
+            if (!process.env.BABEL_TYPES_8_BREAKING)
+              return;
+            const invalid = /[^gimsuy]/.exec(val);
+            if (invalid) {
+              throw new TypeError(`"${invalid[0]}" is not a valid RegExp flag`);
+            }
+          }, {
+            type: "string"
+          })),
+          default: ""
+        }
+      }
+    });
+    defineType("LogicalExpression", {
+      builder: [
+        "operator",
+        "left",
+        "right"
+      ],
+      visitor: [
+        "left",
+        "right"
+      ],
+      aliases: [
+        "Binary",
+        "Expression"
+      ],
+      fields: {
+        operator: {
+          validate: (0, _utils.assertOneOf)(..._constants.LOGICAL_OPERATORS)
+        },
+        left: {
+          validate: (0, _utils.assertNodeType)("Expression")
+        },
+        right: {
+          validate: (0, _utils.assertNodeType)("Expression")
+        }
+      }
+    });
+    defineType("MemberExpression", {
+      builder: [
+        "object",
+        "property",
+        "computed",
+        ...!process.env.BABEL_TYPES_8_BREAKING ? [
+          "optional"
+        ] : []
+      ],
+      visitor: [
+        "object",
+        "property"
+      ],
+      aliases: [
+        "Expression",
+        "LVal"
+      ],
+      fields: Object.assign({
+        object: {
+          validate: (0, _utils.assertNodeType)("Expression", "Super")
+        },
+        property: {
+          validate: function() {
+            const normal = (0, _utils.assertNodeType)("Identifier", "PrivateName");
+            const computed = (0, _utils.assertNodeType)("Expression");
+            const validator = /* @__PURE__ */ __name(function(node, key, val) {
+              const validator2 = node.computed ? computed : normal;
+              validator2(node, key, val);
+            }, "validator");
+            validator.oneOfNodeTypes = [
+              "Expression",
+              "Identifier",
+              "PrivateName"
+            ];
+            return validator;
+          }()
+        },
+        computed: {
+          default: false
+        }
+      }, !process.env.BABEL_TYPES_8_BREAKING ? {
+        optional: {
+          validate: (0, _utils.assertOneOf)(true, false),
+          optional: true
+        }
+      } : {})
+    });
+    defineType("NewExpression", {
+      inherits: "CallExpression"
+    });
+    defineType("Program", {
+      visitor: [
+        "directives",
+        "body"
+      ],
+      builder: [
+        "body",
+        "directives",
+        "sourceType",
+        "interpreter"
+      ],
+      fields: {
+        sourceFile: {
+          validate: (0, _utils.assertValueType)("string")
+        },
+        sourceType: {
+          validate: (0, _utils.assertOneOf)("script", "module"),
+          default: "script"
+        },
+        interpreter: {
+          validate: (0, _utils.assertNodeType)("InterpreterDirective"),
+          default: null,
+          optional: true
+        },
+        directives: {
+          validate: (0, _utils.chain)((0, _utils.assertValueType)("array"), (0, _utils.assertEach)((0, _utils.assertNodeType)("Directive"))),
+          default: []
+        },
+        body: {
+          validate: (0, _utils.chain)((0, _utils.assertValueType)("array"), (0, _utils.assertEach)((0, _utils.assertNodeType)("Statement")))
+        }
+      },
+      aliases: [
+        "Scopable",
+        "BlockParent",
+        "Block"
+      ]
+    });
+    defineType("ObjectExpression", {
+      visitor: [
+        "properties"
+      ],
+      aliases: [
+        "Expression"
+      ],
+      fields: {
+        properties: {
+          validate: (0, _utils.chain)((0, _utils.assertValueType)("array"), (0, _utils.assertEach)((0, _utils.assertNodeType)("ObjectMethod", "ObjectProperty", "SpreadElement")))
+        }
+      }
+    });
+    defineType("ObjectMethod", {
+      builder: [
+        "kind",
+        "key",
+        "params",
+        "body",
+        "computed",
+        "generator",
+        "async"
+      ],
+      fields: Object.assign({}, functionCommon(), functionTypeAnnotationCommon(), {
+        kind: Object.assign({
+          validate: (0, _utils.assertOneOf)("method", "get", "set")
+        }, !process.env.BABEL_TYPES_8_BREAKING ? {
+          default: "method"
+        } : {}),
+        computed: {
+          default: false
+        },
+        key: {
+          validate: function() {
+            const normal = (0, _utils.assertNodeType)("Identifier", "StringLiteral", "NumericLiteral", "BigIntLiteral");
+            const computed = (0, _utils.assertNodeType)("Expression");
+            const validator = /* @__PURE__ */ __name(function(node, key, val) {
+              const validator2 = node.computed ? computed : normal;
+              validator2(node, key, val);
+            }, "validator");
+            validator.oneOfNodeTypes = [
+              "Expression",
+              "Identifier",
+              "StringLiteral",
+              "NumericLiteral",
+              "BigIntLiteral"
+            ];
+            return validator;
+          }()
+        },
+        decorators: {
+          validate: (0, _utils.chain)((0, _utils.assertValueType)("array"), (0, _utils.assertEach)((0, _utils.assertNodeType)("Decorator"))),
+          optional: true
+        },
+        body: {
+          validate: (0, _utils.assertNodeType)("BlockStatement")
+        }
+      }),
+      visitor: [
+        "key",
+        "params",
+        "body",
+        "decorators",
+        "returnType",
+        "typeParameters"
+      ],
+      aliases: [
+        "UserWhitespacable",
+        "Function",
+        "Scopable",
+        "BlockParent",
+        "FunctionParent",
+        "Method",
+        "ObjectMember"
+      ]
+    });
+    defineType("ObjectProperty", {
+      builder: [
+        "key",
+        "value",
+        "computed",
+        "shorthand",
+        ...!process.env.BABEL_TYPES_8_BREAKING ? [
+          "decorators"
+        ] : []
+      ],
+      fields: {
+        computed: {
+          default: false
+        },
+        key: {
+          validate: function() {
+            const normal = (0, _utils.assertNodeType)("Identifier", "StringLiteral", "NumericLiteral", "BigIntLiteral", "DecimalLiteral", "PrivateName");
+            const computed = (0, _utils.assertNodeType)("Expression");
+            const validator = Object.assign(function(node, key, val) {
+              const validator2 = node.computed ? computed : normal;
+              validator2(node, key, val);
+            }, {
+              oneOfNodeTypes: [
+                "Expression",
+                "Identifier",
+                "StringLiteral",
+                "NumericLiteral",
+                "BigIntLiteral",
+                "DecimalLiteral",
+                "PrivateName"
+              ]
+            });
+            return validator;
+          }()
+        },
+        value: {
+          validate: (0, _utils.assertNodeType)("Expression", "PatternLike")
+        },
+        shorthand: {
+          validate: (0, _utils.chain)((0, _utils.assertValueType)("boolean"), Object.assign(function(node, key, val) {
+            if (!process.env.BABEL_TYPES_8_BREAKING)
+              return;
+            if (val && node.computed) {
+              throw new TypeError("Property shorthand of ObjectProperty cannot be true if computed is true");
+            }
+          }, {
+            type: "boolean"
+          }), function(node, key, val) {
+            if (!process.env.BABEL_TYPES_8_BREAKING)
+              return;
+            if (val && !(0, _is.default)("Identifier", node.key)) {
+              throw new TypeError("Property shorthand of ObjectProperty cannot be true if key is not an Identifier");
+            }
+          }),
+          default: false
+        },
+        decorators: {
+          validate: (0, _utils.chain)((0, _utils.assertValueType)("array"), (0, _utils.assertEach)((0, _utils.assertNodeType)("Decorator"))),
+          optional: true
+        }
+      },
+      visitor: [
+        "key",
+        "value",
+        "decorators"
+      ],
+      aliases: [
+        "UserWhitespacable",
+        "Property",
+        "ObjectMember"
+      ],
+      validate: function() {
+        const pattern = (0, _utils.assertNodeType)("Identifier", "Pattern", "TSAsExpression", "TSSatisfiesExpression", "TSNonNullExpression", "TSTypeAssertion");
+        const expression = (0, _utils.assertNodeType)("Expression");
+        return function(parent, key, node) {
+          if (!process.env.BABEL_TYPES_8_BREAKING)
+            return;
+          const validator = (0, _is.default)("ObjectPattern", parent) ? pattern : expression;
+          validator(node, "value", node.value);
+        };
+      }()
+    });
+    defineType("RestElement", {
+      visitor: [
+        "argument",
+        "typeAnnotation"
+      ],
+      builder: [
+        "argument"
+      ],
+      aliases: [
+        "LVal",
+        "PatternLike"
+      ],
+      deprecatedAlias: "RestProperty",
+      fields: Object.assign({}, patternLikeCommon(), {
+        argument: {
+          validate: !process.env.BABEL_TYPES_8_BREAKING ? (0, _utils.assertNodeType)("LVal") : (0, _utils.assertNodeType)("Identifier", "ArrayPattern", "ObjectPattern", "MemberExpression", "TSAsExpression", "TSSatisfiesExpression", "TSTypeAssertion", "TSNonNullExpression")
+        },
+        optional: {
+          validate: (0, _utils.assertValueType)("boolean"),
+          optional: true
+        }
+      }),
+      validate(parent, key) {
+        if (!process.env.BABEL_TYPES_8_BREAKING)
+          return;
+        const match = /(\w+)\[(\d+)\]/.exec(key);
+        if (!match)
+          throw new Error("Internal Babel error: malformed key.");
+        const [, listKey, index] = match;
+        if (parent[listKey].length > +index + 1) {
+          throw new TypeError(`RestElement must be last element of ${listKey}`);
+        }
+      }
+    });
+    defineType("ReturnStatement", {
+      visitor: [
+        "argument"
+      ],
+      aliases: [
+        "Statement",
+        "Terminatorless",
+        "CompletionStatement"
+      ],
+      fields: {
+        argument: {
+          validate: (0, _utils.assertNodeType)("Expression"),
+          optional: true
+        }
+      }
+    });
+    defineType("SequenceExpression", {
+      visitor: [
+        "expressions"
+      ],
+      fields: {
+        expressions: {
+          validate: (0, _utils.chain)((0, _utils.assertValueType)("array"), (0, _utils.assertEach)((0, _utils.assertNodeType)("Expression")))
+        }
+      },
+      aliases: [
+        "Expression"
+      ]
+    });
+    defineType("ParenthesizedExpression", {
+      visitor: [
+        "expression"
+      ],
+      aliases: [
+        "Expression",
+        "ExpressionWrapper"
+      ],
+      fields: {
+        expression: {
+          validate: (0, _utils.assertNodeType)("Expression")
+        }
+      }
+    });
+    defineType("SwitchCase", {
+      visitor: [
+        "test",
+        "consequent"
+      ],
+      fields: {
+        test: {
+          validate: (0, _utils.assertNodeType)("Expression"),
+          optional: true
+        },
+        consequent: {
+          validate: (0, _utils.chain)((0, _utils.assertValueType)("array"), (0, _utils.assertEach)((0, _utils.assertNodeType)("Statement")))
+        }
+      }
+    });
+    defineType("SwitchStatement", {
+      visitor: [
+        "discriminant",
+        "cases"
+      ],
+      aliases: [
+        "Statement",
+        "BlockParent",
+        "Scopable"
+      ],
+      fields: {
+        discriminant: {
+          validate: (0, _utils.assertNodeType)("Expression")
+        },
+        cases: {
+          validate: (0, _utils.chain)((0, _utils.assertValueType)("array"), (0, _utils.assertEach)((0, _utils.assertNodeType)("SwitchCase")))
+        }
+      }
+    });
+    defineType("ThisExpression", {
+      aliases: [
+        "Expression"
+      ]
+    });
+    defineType("ThrowStatement", {
+      visitor: [
+        "argument"
+      ],
+      aliases: [
+        "Statement",
+        "Terminatorless",
+        "CompletionStatement"
+      ],
+      fields: {
+        argument: {
+          validate: (0, _utils.assertNodeType)("Expression")
+        }
+      }
+    });
+    defineType("TryStatement", {
+      visitor: [
+        "block",
+        "handler",
+        "finalizer"
+      ],
+      aliases: [
+        "Statement"
+      ],
+      fields: {
+        block: {
+          validate: (0, _utils.chain)((0, _utils.assertNodeType)("BlockStatement"), Object.assign(function(node) {
+            if (!process.env.BABEL_TYPES_8_BREAKING)
+              return;
+            if (!node.handler && !node.finalizer) {
+              throw new TypeError("TryStatement expects either a handler or finalizer, or both");
+            }
+          }, {
+            oneOfNodeTypes: [
+              "BlockStatement"
+            ]
+          }))
+        },
+        handler: {
+          optional: true,
+          validate: (0, _utils.assertNodeType)("CatchClause")
+        },
+        finalizer: {
+          optional: true,
+          validate: (0, _utils.assertNodeType)("BlockStatement")
+        }
+      }
+    });
+    defineType("UnaryExpression", {
+      builder: [
+        "operator",
+        "argument",
+        "prefix"
+      ],
+      fields: {
+        prefix: {
+          default: true
+        },
+        argument: {
+          validate: (0, _utils.assertNodeType)("Expression")
+        },
+        operator: {
+          validate: (0, _utils.assertOneOf)(..._constants.UNARY_OPERATORS)
+        }
+      },
+      visitor: [
+        "argument"
+      ],
+      aliases: [
+        "UnaryLike",
+        "Expression"
+      ]
+    });
+    defineType("UpdateExpression", {
+      builder: [
+        "operator",
+        "argument",
+        "prefix"
+      ],
+      fields: {
+        prefix: {
+          default: false
+        },
+        argument: {
+          validate: !process.env.BABEL_TYPES_8_BREAKING ? (0, _utils.assertNodeType)("Expression") : (0, _utils.assertNodeType)("Identifier", "MemberExpression")
+        },
+        operator: {
+          validate: (0, _utils.assertOneOf)(..._constants.UPDATE_OPERATORS)
+        }
+      },
+      visitor: [
+        "argument"
+      ],
+      aliases: [
+        "Expression"
+      ]
+    });
+    defineType("VariableDeclaration", {
+      builder: [
+        "kind",
+        "declarations"
+      ],
+      visitor: [
+        "declarations"
+      ],
+      aliases: [
+        "Statement",
+        "Declaration"
+      ],
+      fields: {
+        declare: {
+          validate: (0, _utils.assertValueType)("boolean"),
+          optional: true
+        },
+        kind: {
+          validate: (0, _utils.assertOneOf)("var", "let", "const", "using")
+        },
+        declarations: {
+          validate: (0, _utils.chain)((0, _utils.assertValueType)("array"), (0, _utils.assertEach)((0, _utils.assertNodeType)("VariableDeclarator")))
+        }
+      },
+      validate(parent, key, node) {
+        if (!process.env.BABEL_TYPES_8_BREAKING)
+          return;
+        if (!(0, _is.default)("ForXStatement", parent, {
+          left: node
+        }))
+          return;
+        if (node.declarations.length !== 1) {
+          throw new TypeError(`Exactly one VariableDeclarator is required in the VariableDeclaration of a ${parent.type}`);
+        }
+      }
+    });
+    defineType("VariableDeclarator", {
+      visitor: [
+        "id",
+        "init"
+      ],
+      fields: {
+        id: {
+          validate: function() {
+            if (!process.env.BABEL_TYPES_8_BREAKING) {
+              return (0, _utils.assertNodeType)("LVal");
+            }
+            const normal = (0, _utils.assertNodeType)("Identifier", "ArrayPattern", "ObjectPattern");
+            const without = (0, _utils.assertNodeType)("Identifier");
+            return function(node, key, val) {
+              const validator = node.init ? normal : without;
+              validator(node, key, val);
+            };
+          }()
+        },
+        definite: {
+          optional: true,
+          validate: (0, _utils.assertValueType)("boolean")
+        },
+        init: {
+          optional: true,
+          validate: (0, _utils.assertNodeType)("Expression")
+        }
+      }
+    });
+    defineType("WhileStatement", {
+      visitor: [
+        "test",
+        "body"
+      ],
+      aliases: [
+        "Statement",
+        "BlockParent",
+        "Loop",
+        "While",
+        "Scopable"
+      ],
+      fields: {
+        test: {
+          validate: (0, _utils.assertNodeType)("Expression")
+        },
+        body: {
+          validate: (0, _utils.assertNodeType)("Statement")
+        }
+      }
+    });
+    defineType("WithStatement", {
+      visitor: [
+        "object",
+        "body"
+      ],
+      aliases: [
+        "Statement"
+      ],
+      fields: {
+        object: {
+          validate: (0, _utils.assertNodeType)("Expression")
+        },
+        body: {
+          validate: (0, _utils.assertNodeType)("Statement")
+        }
+      }
+    });
+    defineType("AssignmentPattern", {
+      visitor: [
+        "left",
+        "right",
+        "decorators"
+      ],
+      builder: [
+        "left",
+        "right"
+      ],
+      aliases: [
+        "Pattern",
+        "PatternLike",
+        "LVal"
+      ],
+      fields: Object.assign({}, patternLikeCommon(), {
+        left: {
+          validate: (0, _utils.assertNodeType)("Identifier", "ObjectPattern", "ArrayPattern", "MemberExpression", "TSAsExpression", "TSSatisfiesExpression", "TSTypeAssertion", "TSNonNullExpression")
+        },
+        right: {
+          validate: (0, _utils.assertNodeType)("Expression")
+        },
+        decorators: {
+          validate: (0, _utils.chain)((0, _utils.assertValueType)("array"), (0, _utils.assertEach)((0, _utils.assertNodeType)("Decorator"))),
+          optional: true
+        }
+      })
+    });
+    defineType("ArrayPattern", {
+      visitor: [
+        "elements",
+        "typeAnnotation"
+      ],
+      builder: [
+        "elements"
+      ],
+      aliases: [
+        "Pattern",
+        "PatternLike",
+        "LVal"
+      ],
+      fields: Object.assign({}, patternLikeCommon(), {
+        elements: {
+          validate: (0, _utils.chain)((0, _utils.assertValueType)("array"), (0, _utils.assertEach)((0, _utils.assertNodeOrValueType)("null", "PatternLike", "LVal")))
+        },
+        decorators: {
+          validate: (0, _utils.chain)((0, _utils.assertValueType)("array"), (0, _utils.assertEach)((0, _utils.assertNodeType)("Decorator"))),
+          optional: true
+        },
+        optional: {
+          validate: (0, _utils.assertValueType)("boolean"),
+          optional: true
+        }
+      })
+    });
+    defineType("ArrowFunctionExpression", {
+      builder: [
+        "params",
+        "body",
+        "async"
+      ],
+      visitor: [
+        "params",
+        "body",
+        "returnType",
+        "typeParameters"
+      ],
+      aliases: [
+        "Scopable",
+        "Function",
+        "BlockParent",
+        "FunctionParent",
+        "Expression",
+        "Pureish"
+      ],
+      fields: Object.assign({}, functionCommon(), functionTypeAnnotationCommon(), {
+        expression: {
+          validate: (0, _utils.assertValueType)("boolean")
+        },
+        body: {
+          validate: (0, _utils.assertNodeType)("BlockStatement", "Expression")
+        },
+        predicate: {
+          validate: (0, _utils.assertNodeType)("DeclaredPredicate", "InferredPredicate"),
+          optional: true
+        }
+      })
+    });
+    defineType("ClassBody", {
+      visitor: [
+        "body"
+      ],
+      fields: {
+        body: {
+          validate: (0, _utils.chain)((0, _utils.assertValueType)("array"), (0, _utils.assertEach)((0, _utils.assertNodeType)("ClassMethod", "ClassPrivateMethod", "ClassProperty", "ClassPrivateProperty", "ClassAccessorProperty", "TSDeclareMethod", "TSIndexSignature", "StaticBlock")))
+        }
+      }
+    });
+    defineType("ClassExpression", {
+      builder: [
+        "id",
+        "superClass",
+        "body",
+        "decorators"
+      ],
+      visitor: [
+        "id",
+        "body",
+        "superClass",
+        "mixins",
+        "typeParameters",
+        "superTypeParameters",
+        "implements",
+        "decorators"
+      ],
+      aliases: [
+        "Scopable",
+        "Class",
+        "Expression"
+      ],
+      fields: {
+        id: {
+          validate: (0, _utils.assertNodeType)("Identifier"),
+          optional: true
+        },
+        typeParameters: {
+          validate: (0, _utils.assertNodeType)("TypeParameterDeclaration", "TSTypeParameterDeclaration", "Noop"),
+          optional: true
+        },
+        body: {
+          validate: (0, _utils.assertNodeType)("ClassBody")
+        },
+        superClass: {
+          optional: true,
+          validate: (0, _utils.assertNodeType)("Expression")
+        },
+        superTypeParameters: {
+          validate: (0, _utils.assertNodeType)("TypeParameterInstantiation", "TSTypeParameterInstantiation"),
+          optional: true
+        },
+        implements: {
+          validate: (0, _utils.chain)((0, _utils.assertValueType)("array"), (0, _utils.assertEach)((0, _utils.assertNodeType)("TSExpressionWithTypeArguments", "ClassImplements"))),
+          optional: true
+        },
+        decorators: {
+          validate: (0, _utils.chain)((0, _utils.assertValueType)("array"), (0, _utils.assertEach)((0, _utils.assertNodeType)("Decorator"))),
+          optional: true
+        },
+        mixins: {
+          validate: (0, _utils.assertNodeType)("InterfaceExtends"),
+          optional: true
+        }
+      }
+    });
+    defineType("ClassDeclaration", {
+      inherits: "ClassExpression",
+      aliases: [
+        "Scopable",
+        "Class",
+        "Statement",
+        "Declaration"
+      ],
+      fields: {
+        id: {
+          validate: (0, _utils.assertNodeType)("Identifier")
+        },
+        typeParameters: {
+          validate: (0, _utils.assertNodeType)("TypeParameterDeclaration", "TSTypeParameterDeclaration", "Noop"),
+          optional: true
+        },
+        body: {
+          validate: (0, _utils.assertNodeType)("ClassBody")
+        },
+        superClass: {
+          optional: true,
+          validate: (0, _utils.assertNodeType)("Expression")
+        },
+        superTypeParameters: {
+          validate: (0, _utils.assertNodeType)("TypeParameterInstantiation", "TSTypeParameterInstantiation"),
+          optional: true
+        },
+        implements: {
+          validate: (0, _utils.chain)((0, _utils.assertValueType)("array"), (0, _utils.assertEach)((0, _utils.assertNodeType)("TSExpressionWithTypeArguments", "ClassImplements"))),
+          optional: true
+        },
+        decorators: {
+          validate: (0, _utils.chain)((0, _utils.assertValueType)("array"), (0, _utils.assertEach)((0, _utils.assertNodeType)("Decorator"))),
+          optional: true
+        },
+        mixins: {
+          validate: (0, _utils.assertNodeType)("InterfaceExtends"),
+          optional: true
+        },
+        declare: {
+          validate: (0, _utils.assertValueType)("boolean"),
+          optional: true
+        },
+        abstract: {
+          validate: (0, _utils.assertValueType)("boolean"),
+          optional: true
+        }
+      },
+      validate: function() {
+        const identifier2 = (0, _utils.assertNodeType)("Identifier");
+        return function(parent, key, node) {
+          if (!process.env.BABEL_TYPES_8_BREAKING)
+            return;
+          if (!(0, _is.default)("ExportDefaultDeclaration", parent)) {
+            identifier2(node, "id", node.id);
+          }
+        };
+      }()
+    });
+    defineType("ExportAllDeclaration", {
+      visitor: [
+        "source"
+      ],
+      aliases: [
+        "Statement",
+        "Declaration",
+        "ModuleDeclaration",
+        "ExportDeclaration"
+      ],
+      fields: {
+        source: {
+          validate: (0, _utils.assertNodeType)("StringLiteral")
+        },
+        exportKind: (0, _utils.validateOptional)((0, _utils.assertOneOf)("type", "value")),
+        assertions: {
+          optional: true,
+          validate: (0, _utils.chain)((0, _utils.assertValueType)("array"), (0, _utils.assertEach)((0, _utils.assertNodeType)("ImportAttribute")))
+        }
+      }
+    });
+    defineType("ExportDefaultDeclaration", {
+      visitor: [
+        "declaration"
+      ],
+      aliases: [
+        "Statement",
+        "Declaration",
+        "ModuleDeclaration",
+        "ExportDeclaration"
+      ],
+      fields: {
+        declaration: {
+          validate: (0, _utils.assertNodeType)("TSDeclareFunction", "FunctionDeclaration", "ClassDeclaration", "Expression")
+        },
+        exportKind: (0, _utils.validateOptional)((0, _utils.assertOneOf)("value"))
+      }
+    });
+    defineType("ExportNamedDeclaration", {
+      visitor: [
+        "declaration",
+        "specifiers",
+        "source"
+      ],
+      aliases: [
+        "Statement",
+        "Declaration",
+        "ModuleDeclaration",
+        "ExportDeclaration"
+      ],
+      fields: {
+        declaration: {
+          optional: true,
+          validate: (0, _utils.chain)((0, _utils.assertNodeType)("Declaration"), Object.assign(function(node, key, val) {
+            if (!process.env.BABEL_TYPES_8_BREAKING)
+              return;
+            if (val && node.specifiers.length) {
+              throw new TypeError("Only declaration or specifiers is allowed on ExportNamedDeclaration");
+            }
+          }, {
+            oneOfNodeTypes: [
+              "Declaration"
+            ]
+          }), function(node, key, val) {
+            if (!process.env.BABEL_TYPES_8_BREAKING)
+              return;
+            if (val && node.source) {
+              throw new TypeError("Cannot export a declaration from a source");
+            }
+          })
+        },
+        assertions: {
+          optional: true,
+          validate: (0, _utils.chain)((0, _utils.assertValueType)("array"), (0, _utils.assertEach)((0, _utils.assertNodeType)("ImportAttribute")))
+        },
+        specifiers: {
+          default: [],
+          validate: (0, _utils.chain)((0, _utils.assertValueType)("array"), (0, _utils.assertEach)(function() {
+            const sourced = (0, _utils.assertNodeType)("ExportSpecifier", "ExportDefaultSpecifier", "ExportNamespaceSpecifier");
+            const sourceless = (0, _utils.assertNodeType)("ExportSpecifier");
+            if (!process.env.BABEL_TYPES_8_BREAKING)
+              return sourced;
+            return function(node, key, val) {
+              const validator = node.source ? sourced : sourceless;
+              validator(node, key, val);
+            };
+          }()))
+        },
+        source: {
+          validate: (0, _utils.assertNodeType)("StringLiteral"),
+          optional: true
+        },
+        exportKind: (0, _utils.validateOptional)((0, _utils.assertOneOf)("type", "value"))
+      }
+    });
+    defineType("ExportSpecifier", {
+      visitor: [
+        "local",
+        "exported"
+      ],
+      aliases: [
+        "ModuleSpecifier"
+      ],
+      fields: {
+        local: {
+          validate: (0, _utils.assertNodeType)("Identifier")
+        },
+        exported: {
+          validate: (0, _utils.assertNodeType)("Identifier", "StringLiteral")
+        },
+        exportKind: {
+          validate: (0, _utils.assertOneOf)("type", "value"),
+          optional: true
+        }
+      }
+    });
+    defineType("ForOfStatement", {
+      visitor: [
+        "left",
+        "right",
+        "body"
+      ],
+      builder: [
+        "left",
+        "right",
+        "body",
+        "await"
+      ],
+      aliases: [
+        "Scopable",
+        "Statement",
+        "For",
+        "BlockParent",
+        "Loop",
+        "ForXStatement"
+      ],
+      fields: {
+        left: {
+          validate: function() {
+            if (!process.env.BABEL_TYPES_8_BREAKING) {
+              return (0, _utils.assertNodeType)("VariableDeclaration", "LVal");
+            }
+            const declaration = (0, _utils.assertNodeType)("VariableDeclaration");
+            const lval = (0, _utils.assertNodeType)("Identifier", "MemberExpression", "ArrayPattern", "ObjectPattern", "TSAsExpression", "TSSatisfiesExpression", "TSTypeAssertion", "TSNonNullExpression");
+            return function(node, key, val) {
+              if ((0, _is.default)("VariableDeclaration", val)) {
+                declaration(node, key, val);
+              } else {
+                lval(node, key, val);
+              }
+            };
+          }()
+        },
+        right: {
+          validate: (0, _utils.assertNodeType)("Expression")
+        },
+        body: {
+          validate: (0, _utils.assertNodeType)("Statement")
+        },
+        await: {
+          default: false
+        }
+      }
+    });
+    defineType("ImportDeclaration", {
+      visitor: [
+        "specifiers",
+        "source"
+      ],
+      aliases: [
+        "Statement",
+        "Declaration",
+        "ModuleDeclaration"
+      ],
+      fields: {
+        assertions: {
+          optional: true,
+          validate: (0, _utils.chain)((0, _utils.assertValueType)("array"), (0, _utils.assertEach)((0, _utils.assertNodeType)("ImportAttribute")))
+        },
+        module: {
+          optional: true,
+          validate: (0, _utils.assertValueType)("boolean")
+        },
+        specifiers: {
+          validate: (0, _utils.chain)((0, _utils.assertValueType)("array"), (0, _utils.assertEach)((0, _utils.assertNodeType)("ImportSpecifier", "ImportDefaultSpecifier", "ImportNamespaceSpecifier")))
+        },
+        source: {
+          validate: (0, _utils.assertNodeType)("StringLiteral")
+        },
+        importKind: {
+          validate: (0, _utils.assertOneOf)("type", "typeof", "value"),
+          optional: true
+        }
+      }
+    });
+    defineType("ImportDefaultSpecifier", {
+      visitor: [
+        "local"
+      ],
+      aliases: [
+        "ModuleSpecifier"
+      ],
+      fields: {
+        local: {
+          validate: (0, _utils.assertNodeType)("Identifier")
+        }
+      }
+    });
+    defineType("ImportNamespaceSpecifier", {
+      visitor: [
+        "local"
+      ],
+      aliases: [
+        "ModuleSpecifier"
+      ],
+      fields: {
+        local: {
+          validate: (0, _utils.assertNodeType)("Identifier")
+        }
+      }
+    });
+    defineType("ImportSpecifier", {
+      visitor: [
+        "local",
+        "imported"
+      ],
+      aliases: [
+        "ModuleSpecifier"
+      ],
+      fields: {
+        local: {
+          validate: (0, _utils.assertNodeType)("Identifier")
+        },
+        imported: {
+          validate: (0, _utils.assertNodeType)("Identifier", "StringLiteral")
+        },
+        importKind: {
+          validate: (0, _utils.assertOneOf)("type", "typeof", "value"),
+          optional: true
+        }
+      }
+    });
+    defineType("MetaProperty", {
+      visitor: [
+        "meta",
+        "property"
+      ],
+      aliases: [
+        "Expression"
+      ],
+      fields: {
+        meta: {
+          validate: (0, _utils.chain)((0, _utils.assertNodeType)("Identifier"), Object.assign(function(node, key, val) {
+            if (!process.env.BABEL_TYPES_8_BREAKING)
+              return;
+            let property;
+            switch (val.name) {
+              case "function":
+                property = "sent";
+                break;
+              case "new":
+                property = "target";
+                break;
+              case "import":
+                property = "meta";
+                break;
+            }
+            if (!(0, _is.default)("Identifier", node.property, {
+              name: property
+            })) {
+              throw new TypeError("Unrecognised MetaProperty");
+            }
+          }, {
+            oneOfNodeTypes: [
+              "Identifier"
+            ]
+          }))
+        },
+        property: {
+          validate: (0, _utils.assertNodeType)("Identifier")
+        }
+      }
+    });
+    var classMethodOrPropertyCommon = /* @__PURE__ */ __name(() => ({
+      abstract: {
+        validate: (0, _utils.assertValueType)("boolean"),
+        optional: true
+      },
+      accessibility: {
+        validate: (0, _utils.assertOneOf)("public", "private", "protected"),
+        optional: true
+      },
+      static: {
+        default: false
+      },
+      override: {
+        default: false
+      },
+      computed: {
+        default: false
+      },
+      optional: {
+        validate: (0, _utils.assertValueType)("boolean"),
+        optional: true
+      },
+      key: {
+        validate: (0, _utils.chain)(function() {
+          const normal = (0, _utils.assertNodeType)("Identifier", "StringLiteral", "NumericLiteral");
+          const computed = (0, _utils.assertNodeType)("Expression");
+          return function(node, key, val) {
+            const validator = node.computed ? computed : normal;
+            validator(node, key, val);
+          };
+        }(), (0, _utils.assertNodeType)("Identifier", "StringLiteral", "NumericLiteral", "BigIntLiteral", "Expression"))
+      }
+    }), "classMethodOrPropertyCommon");
+    exports.classMethodOrPropertyCommon = classMethodOrPropertyCommon;
+    var classMethodOrDeclareMethodCommon = /* @__PURE__ */ __name(() => Object.assign({}, functionCommon(), classMethodOrPropertyCommon(), {
+      params: {
+        validate: (0, _utils.chain)((0, _utils.assertValueType)("array"), (0, _utils.assertEach)((0, _utils.assertNodeType)("Identifier", "Pattern", "RestElement", "TSParameterProperty")))
+      },
+      kind: {
+        validate: (0, _utils.assertOneOf)("get", "set", "method", "constructor"),
+        default: "method"
+      },
+      access: {
+        validate: (0, _utils.chain)((0, _utils.assertValueType)("string"), (0, _utils.assertOneOf)("public", "private", "protected")),
+        optional: true
+      },
+      decorators: {
+        validate: (0, _utils.chain)((0, _utils.assertValueType)("array"), (0, _utils.assertEach)((0, _utils.assertNodeType)("Decorator"))),
+        optional: true
+      }
+    }), "classMethodOrDeclareMethodCommon");
+    exports.classMethodOrDeclareMethodCommon = classMethodOrDeclareMethodCommon;
+    defineType("ClassMethod", {
+      aliases: [
+        "Function",
+        "Scopable",
+        "BlockParent",
+        "FunctionParent",
+        "Method"
+      ],
+      builder: [
+        "kind",
+        "key",
+        "params",
+        "body",
+        "computed",
+        "static",
+        "generator",
+        "async"
+      ],
+      visitor: [
+        "key",
+        "params",
+        "body",
+        "decorators",
+        "returnType",
+        "typeParameters"
+      ],
+      fields: Object.assign({}, classMethodOrDeclareMethodCommon(), functionTypeAnnotationCommon(), {
+        body: {
+          validate: (0, _utils.assertNodeType)("BlockStatement")
+        }
+      })
+    });
+    defineType("ObjectPattern", {
+      visitor: [
+        "properties",
+        "typeAnnotation",
+        "decorators"
+      ],
+      builder: [
+        "properties"
+      ],
+      aliases: [
+        "Pattern",
+        "PatternLike",
+        "LVal"
+      ],
+      fields: Object.assign({}, patternLikeCommon(), {
+        properties: {
+          validate: (0, _utils.chain)((0, _utils.assertValueType)("array"), (0, _utils.assertEach)((0, _utils.assertNodeType)("RestElement", "ObjectProperty")))
+        }
+      })
+    });
+    defineType("SpreadElement", {
+      visitor: [
+        "argument"
+      ],
+      aliases: [
+        "UnaryLike"
+      ],
+      deprecatedAlias: "SpreadProperty",
+      fields: {
+        argument: {
+          validate: (0, _utils.assertNodeType)("Expression")
+        }
+      }
+    });
+    defineType("Super", {
+      aliases: [
+        "Expression"
+      ]
+    });
+    defineType("TaggedTemplateExpression", {
+      visitor: [
+        "tag",
+        "quasi",
+        "typeParameters"
+      ],
+      builder: [
+        "tag",
+        "quasi"
+      ],
+      aliases: [
+        "Expression"
+      ],
+      fields: {
+        tag: {
+          validate: (0, _utils.assertNodeType)("Expression")
+        },
+        quasi: {
+          validate: (0, _utils.assertNodeType)("TemplateLiteral")
+        },
+        typeParameters: {
+          validate: (0, _utils.assertNodeType)("TypeParameterInstantiation", "TSTypeParameterInstantiation"),
+          optional: true
+        }
+      }
+    });
+    defineType("TemplateElement", {
+      builder: [
+        "value",
+        "tail"
+      ],
+      fields: {
+        value: {
+          validate: (0, _utils.chain)((0, _utils.assertShape)({
+            raw: {
+              validate: (0, _utils.assertValueType)("string")
+            },
+            cooked: {
+              validate: (0, _utils.assertValueType)("string"),
+              optional: true
+            }
+          }), /* @__PURE__ */ __name(function templateElementCookedValidator(node) {
+            const raw = node.value.raw;
+            let unterminatedCalled = false;
+            const error = /* @__PURE__ */ __name(() => {
+              throw new Error("Internal @babel/types error.");
+            }, "error");
+            const { str, firstInvalidLoc } = (0, _helperStringParser.readStringContents)("template", raw, 0, 0, 0, {
+              unterminated() {
+                unterminatedCalled = true;
+              },
+              strictNumericEscape: error,
+              invalidEscapeSequence: error,
+              numericSeparatorInEscapeSequence: error,
+              unexpectedNumericSeparator: error,
+              invalidDigit: error,
+              invalidCodePoint: error
+            });
+            if (!unterminatedCalled)
+              throw new Error("Invalid raw");
+            node.value.cooked = firstInvalidLoc ? null : str;
+          }, "templateElementCookedValidator"))
+        },
+        tail: {
+          default: false
+        }
+      }
+    });
+    defineType("TemplateLiteral", {
+      visitor: [
+        "quasis",
+        "expressions"
+      ],
+      aliases: [
+        "Expression",
+        "Literal"
+      ],
+      fields: {
+        quasis: {
+          validate: (0, _utils.chain)((0, _utils.assertValueType)("array"), (0, _utils.assertEach)((0, _utils.assertNodeType)("TemplateElement")))
+        },
+        expressions: {
+          validate: (0, _utils.chain)((0, _utils.assertValueType)("array"), (0, _utils.assertEach)((0, _utils.assertNodeType)("Expression", "TSType")), function(node, key, val) {
+            if (node.quasis.length !== val.length + 1) {
+              throw new TypeError(`Number of ${node.type} quasis should be exactly one more than the number of expressions.
+Expected ${val.length + 1} quasis but got ${node.quasis.length}`);
+            }
+          })
+        }
+      }
+    });
+    defineType("YieldExpression", {
+      builder: [
+        "argument",
+        "delegate"
+      ],
+      visitor: [
+        "argument"
+      ],
+      aliases: [
+        "Expression",
+        "Terminatorless"
+      ],
+      fields: {
+        delegate: {
+          validate: (0, _utils.chain)((0, _utils.assertValueType)("boolean"), Object.assign(function(node, key, val) {
+            if (!process.env.BABEL_TYPES_8_BREAKING)
+              return;
+            if (val && !node.argument) {
+              throw new TypeError("Property delegate of YieldExpression cannot be true if there is no argument");
+            }
+          }, {
+            type: "boolean"
+          })),
+          default: false
+        },
+        argument: {
+          optional: true,
+          validate: (0, _utils.assertNodeType)("Expression")
+        }
+      }
+    });
+    defineType("AwaitExpression", {
+      builder: [
+        "argument"
+      ],
+      visitor: [
+        "argument"
+      ],
+      aliases: [
+        "Expression",
+        "Terminatorless"
+      ],
+      fields: {
+        argument: {
+          validate: (0, _utils.assertNodeType)("Expression")
+        }
+      }
+    });
+    defineType("Import", {
+      aliases: [
+        "Expression"
+      ]
+    });
+    defineType("BigIntLiteral", {
+      builder: [
+        "value"
+      ],
+      fields: {
+        value: {
+          validate: (0, _utils.assertValueType)("string")
+        }
+      },
+      aliases: [
+        "Expression",
+        "Pureish",
+        "Literal",
+        "Immutable"
+      ]
+    });
+    defineType("ExportNamespaceSpecifier", {
+      visitor: [
+        "exported"
+      ],
+      aliases: [
+        "ModuleSpecifier"
+      ],
+      fields: {
+        exported: {
+          validate: (0, _utils.assertNodeType)("Identifier")
+        }
+      }
+    });
+    defineType("OptionalMemberExpression", {
+      builder: [
+        "object",
+        "property",
+        "computed",
+        "optional"
+      ],
+      visitor: [
+        "object",
+        "property"
+      ],
+      aliases: [
+        "Expression"
+      ],
+      fields: {
+        object: {
+          validate: (0, _utils.assertNodeType)("Expression")
+        },
+        property: {
+          validate: function() {
+            const normal = (0, _utils.assertNodeType)("Identifier");
+            const computed = (0, _utils.assertNodeType)("Expression");
+            const validator = Object.assign(function(node, key, val) {
+              const validator2 = node.computed ? computed : normal;
+              validator2(node, key, val);
+            }, {
+              oneOfNodeTypes: [
+                "Expression",
+                "Identifier"
+              ]
+            });
+            return validator;
+          }()
+        },
+        computed: {
+          default: false
+        },
+        optional: {
+          validate: !process.env.BABEL_TYPES_8_BREAKING ? (0, _utils.assertValueType)("boolean") : (0, _utils.chain)((0, _utils.assertValueType)("boolean"), (0, _utils.assertOptionalChainStart)())
+        }
+      }
+    });
+    defineType("OptionalCallExpression", {
+      visitor: [
+        "callee",
+        "arguments",
+        "typeParameters",
+        "typeArguments"
+      ],
+      builder: [
+        "callee",
+        "arguments",
+        "optional"
+      ],
+      aliases: [
+        "Expression"
+      ],
+      fields: {
+        callee: {
+          validate: (0, _utils.assertNodeType)("Expression")
+        },
+        arguments: {
+          validate: (0, _utils.chain)((0, _utils.assertValueType)("array"), (0, _utils.assertEach)((0, _utils.assertNodeType)("Expression", "SpreadElement", "JSXNamespacedName", "ArgumentPlaceholder")))
+        },
+        optional: {
+          validate: !process.env.BABEL_TYPES_8_BREAKING ? (0, _utils.assertValueType)("boolean") : (0, _utils.chain)((0, _utils.assertValueType)("boolean"), (0, _utils.assertOptionalChainStart)())
+        },
+        typeArguments: {
+          validate: (0, _utils.assertNodeType)("TypeParameterInstantiation"),
+          optional: true
+        },
+        typeParameters: {
+          validate: (0, _utils.assertNodeType)("TSTypeParameterInstantiation"),
+          optional: true
+        }
+      }
+    });
+    defineType("ClassProperty", {
+      visitor: [
+        "key",
+        "value",
+        "typeAnnotation",
+        "decorators"
+      ],
+      builder: [
+        "key",
+        "value",
+        "typeAnnotation",
+        "decorators",
+        "computed",
+        "static"
+      ],
+      aliases: [
+        "Property"
+      ],
+      fields: Object.assign({}, classMethodOrPropertyCommon(), {
+        value: {
+          validate: (0, _utils.assertNodeType)("Expression"),
+          optional: true
+        },
+        definite: {
+          validate: (0, _utils.assertValueType)("boolean"),
+          optional: true
+        },
+        typeAnnotation: {
+          validate: (0, _utils.assertNodeType)("TypeAnnotation", "TSTypeAnnotation", "Noop"),
+          optional: true
+        },
+        decorators: {
+          validate: (0, _utils.chain)((0, _utils.assertValueType)("array"), (0, _utils.assertEach)((0, _utils.assertNodeType)("Decorator"))),
+          optional: true
+        },
+        readonly: {
+          validate: (0, _utils.assertValueType)("boolean"),
+          optional: true
+        },
+        declare: {
+          validate: (0, _utils.assertValueType)("boolean"),
+          optional: true
+        },
+        variance: {
+          validate: (0, _utils.assertNodeType)("Variance"),
+          optional: true
+        }
+      })
+    });
+    defineType("ClassAccessorProperty", {
+      visitor: [
+        "key",
+        "value",
+        "typeAnnotation",
+        "decorators"
+      ],
+      builder: [
+        "key",
+        "value",
+        "typeAnnotation",
+        "decorators",
+        "computed",
+        "static"
+      ],
+      aliases: [
+        "Property",
+        "Accessor"
+      ],
+      fields: Object.assign({}, classMethodOrPropertyCommon(), {
+        key: {
+          validate: (0, _utils.chain)(function() {
+            const normal = (0, _utils.assertNodeType)("Identifier", "StringLiteral", "NumericLiteral", "BigIntLiteral", "PrivateName");
+            const computed = (0, _utils.assertNodeType)("Expression");
+            return function(node, key, val) {
+              const validator = node.computed ? computed : normal;
+              validator(node, key, val);
+            };
+          }(), (0, _utils.assertNodeType)("Identifier", "StringLiteral", "NumericLiteral", "BigIntLiteral", "Expression", "PrivateName"))
+        },
+        value: {
+          validate: (0, _utils.assertNodeType)("Expression"),
+          optional: true
+        },
+        definite: {
+          validate: (0, _utils.assertValueType)("boolean"),
+          optional: true
+        },
+        typeAnnotation: {
+          validate: (0, _utils.assertNodeType)("TypeAnnotation", "TSTypeAnnotation", "Noop"),
+          optional: true
+        },
+        decorators: {
+          validate: (0, _utils.chain)((0, _utils.assertValueType)("array"), (0, _utils.assertEach)((0, _utils.assertNodeType)("Decorator"))),
+          optional: true
+        },
+        readonly: {
+          validate: (0, _utils.assertValueType)("boolean"),
+          optional: true
+        },
+        declare: {
+          validate: (0, _utils.assertValueType)("boolean"),
+          optional: true
+        },
+        variance: {
+          validate: (0, _utils.assertNodeType)("Variance"),
+          optional: true
+        }
+      })
+    });
+    defineType("ClassPrivateProperty", {
+      visitor: [
+        "key",
+        "value",
+        "decorators",
+        "typeAnnotation"
+      ],
+      builder: [
+        "key",
+        "value",
+        "decorators",
+        "static"
+      ],
+      aliases: [
+        "Property",
+        "Private"
+      ],
+      fields: {
+        key: {
+          validate: (0, _utils.assertNodeType)("PrivateName")
+        },
+        value: {
+          validate: (0, _utils.assertNodeType)("Expression"),
+          optional: true
+        },
+        typeAnnotation: {
+          validate: (0, _utils.assertNodeType)("TypeAnnotation", "TSTypeAnnotation", "Noop"),
+          optional: true
+        },
+        decorators: {
+          validate: (0, _utils.chain)((0, _utils.assertValueType)("array"), (0, _utils.assertEach)((0, _utils.assertNodeType)("Decorator"))),
+          optional: true
+        },
+        static: {
+          validate: (0, _utils.assertValueType)("boolean"),
+          default: false
+        },
+        readonly: {
+          validate: (0, _utils.assertValueType)("boolean"),
+          optional: true
+        },
+        definite: {
+          validate: (0, _utils.assertValueType)("boolean"),
+          optional: true
+        },
+        variance: {
+          validate: (0, _utils.assertNodeType)("Variance"),
+          optional: true
+        }
+      }
+    });
+    defineType("ClassPrivateMethod", {
+      builder: [
+        "kind",
+        "key",
+        "params",
+        "body",
+        "static"
+      ],
+      visitor: [
+        "key",
+        "params",
+        "body",
+        "decorators",
+        "returnType",
+        "typeParameters"
+      ],
+      aliases: [
+        "Function",
+        "Scopable",
+        "BlockParent",
+        "FunctionParent",
+        "Method",
+        "Private"
+      ],
+      fields: Object.assign({}, classMethodOrDeclareMethodCommon(), functionTypeAnnotationCommon(), {
+        kind: {
+          validate: (0, _utils.assertOneOf)("get", "set", "method"),
+          default: "method"
+        },
+        key: {
+          validate: (0, _utils.assertNodeType)("PrivateName")
+        },
+        body: {
+          validate: (0, _utils.assertNodeType)("BlockStatement")
+        }
+      })
+    });
+    defineType("PrivateName", {
+      visitor: [
+        "id"
+      ],
+      aliases: [
+        "Private"
+      ],
+      fields: {
+        id: {
+          validate: (0, _utils.assertNodeType)("Identifier")
+        }
+      }
+    });
+    defineType("StaticBlock", {
+      visitor: [
+        "body"
+      ],
+      fields: {
+        body: {
+          validate: (0, _utils.chain)((0, _utils.assertValueType)("array"), (0, _utils.assertEach)((0, _utils.assertNodeType)("Statement")))
+        }
+      },
+      aliases: [
+        "Scopable",
+        "BlockParent",
+        "FunctionParent"
+      ]
+    });
+  }
+});
+
+// node_modules/@babel/generator/node_modules/@babel/types/lib/definitions/flow.js
+var require_flow3 = __commonJS({
+  "node_modules/@babel/generator/node_modules/@babel/types/lib/definitions/flow.js"() {
+    "use strict";
+    var _utils = require_utils3();
+    var defineType = (0, _utils.defineAliasedType)("Flow");
+    var defineInterfaceishType = /* @__PURE__ */ __name((name) => {
+      defineType(name, {
+        builder: [
+          "id",
+          "typeParameters",
+          "extends",
+          "body"
+        ],
+        visitor: [
+          "id",
+          "typeParameters",
+          "extends",
+          "mixins",
+          "implements",
+          "body"
+        ],
+        aliases: [
+          "FlowDeclaration",
+          "Statement",
+          "Declaration"
+        ],
+        fields: {
+          id: (0, _utils.validateType)("Identifier"),
+          typeParameters: (0, _utils.validateOptionalType)("TypeParameterDeclaration"),
+          extends: (0, _utils.validateOptional)((0, _utils.arrayOfType)("InterfaceExtends")),
+          mixins: (0, _utils.validateOptional)((0, _utils.arrayOfType)("InterfaceExtends")),
+          implements: (0, _utils.validateOptional)((0, _utils.arrayOfType)("ClassImplements")),
+          body: (0, _utils.validateType)("ObjectTypeAnnotation")
+        }
+      });
+    }, "defineInterfaceishType");
+    defineType("AnyTypeAnnotation", {
+      aliases: [
+        "FlowType",
+        "FlowBaseAnnotation"
+      ]
+    });
+    defineType("ArrayTypeAnnotation", {
+      visitor: [
+        "elementType"
+      ],
+      aliases: [
+        "FlowType"
+      ],
+      fields: {
+        elementType: (0, _utils.validateType)("FlowType")
+      }
+    });
+    defineType("BooleanTypeAnnotation", {
+      aliases: [
+        "FlowType",
+        "FlowBaseAnnotation"
+      ]
+    });
+    defineType("BooleanLiteralTypeAnnotation", {
+      builder: [
+        "value"
+      ],
+      aliases: [
+        "FlowType"
+      ],
+      fields: {
+        value: (0, _utils.validate)((0, _utils.assertValueType)("boolean"))
+      }
+    });
+    defineType("NullLiteralTypeAnnotation", {
+      aliases: [
+        "FlowType",
+        "FlowBaseAnnotation"
+      ]
+    });
+    defineType("ClassImplements", {
+      visitor: [
+        "id",
+        "typeParameters"
+      ],
+      fields: {
+        id: (0, _utils.validateType)("Identifier"),
+        typeParameters: (0, _utils.validateOptionalType)("TypeParameterInstantiation")
+      }
+    });
+    defineInterfaceishType("DeclareClass");
+    defineType("DeclareFunction", {
+      visitor: [
+        "id"
+      ],
+      aliases: [
+        "FlowDeclaration",
+        "Statement",
+        "Declaration"
+      ],
+      fields: {
+        id: (0, _utils.validateType)("Identifier"),
+        predicate: (0, _utils.validateOptionalType)("DeclaredPredicate")
+      }
+    });
+    defineInterfaceishType("DeclareInterface");
+    defineType("DeclareModule", {
+      builder: [
+        "id",
+        "body",
+        "kind"
+      ],
+      visitor: [
+        "id",
+        "body"
+      ],
+      aliases: [
+        "FlowDeclaration",
+        "Statement",
+        "Declaration"
+      ],
+      fields: {
+        id: (0, _utils.validateType)([
+          "Identifier",
+          "StringLiteral"
+        ]),
+        body: (0, _utils.validateType)("BlockStatement"),
+        kind: (0, _utils.validateOptional)((0, _utils.assertOneOf)("CommonJS", "ES"))
+      }
+    });
+    defineType("DeclareModuleExports", {
+      visitor: [
+        "typeAnnotation"
+      ],
+      aliases: [
+        "FlowDeclaration",
+        "Statement",
+        "Declaration"
+      ],
+      fields: {
+        typeAnnotation: (0, _utils.validateType)("TypeAnnotation")
+      }
+    });
+    defineType("DeclareTypeAlias", {
+      visitor: [
+        "id",
+        "typeParameters",
+        "right"
+      ],
+      aliases: [
+        "FlowDeclaration",
+        "Statement",
+        "Declaration"
+      ],
+      fields: {
+        id: (0, _utils.validateType)("Identifier"),
+        typeParameters: (0, _utils.validateOptionalType)("TypeParameterDeclaration"),
+        right: (0, _utils.validateType)("FlowType")
+      }
+    });
+    defineType("DeclareOpaqueType", {
+      visitor: [
+        "id",
+        "typeParameters",
+        "supertype"
+      ],
+      aliases: [
+        "FlowDeclaration",
+        "Statement",
+        "Declaration"
+      ],
+      fields: {
+        id: (0, _utils.validateType)("Identifier"),
+        typeParameters: (0, _utils.validateOptionalType)("TypeParameterDeclaration"),
+        supertype: (0, _utils.validateOptionalType)("FlowType"),
+        impltype: (0, _utils.validateOptionalType)("FlowType")
+      }
+    });
+    defineType("DeclareVariable", {
+      visitor: [
+        "id"
+      ],
+      aliases: [
+        "FlowDeclaration",
+        "Statement",
+        "Declaration"
+      ],
+      fields: {
+        id: (0, _utils.validateType)("Identifier")
+      }
+    });
+    defineType("DeclareExportDeclaration", {
+      visitor: [
+        "declaration",
+        "specifiers",
+        "source"
+      ],
+      aliases: [
+        "FlowDeclaration",
+        "Statement",
+        "Declaration"
+      ],
+      fields: {
+        declaration: (0, _utils.validateOptionalType)("Flow"),
+        specifiers: (0, _utils.validateOptional)((0, _utils.arrayOfType)([
+          "ExportSpecifier",
+          "ExportNamespaceSpecifier"
+        ])),
+        source: (0, _utils.validateOptionalType)("StringLiteral"),
+        default: (0, _utils.validateOptional)((0, _utils.assertValueType)("boolean"))
+      }
+    });
+    defineType("DeclareExportAllDeclaration", {
+      visitor: [
+        "source"
+      ],
+      aliases: [
+        "FlowDeclaration",
+        "Statement",
+        "Declaration"
+      ],
+      fields: {
+        source: (0, _utils.validateType)("StringLiteral"),
+        exportKind: (0, _utils.validateOptional)((0, _utils.assertOneOf)("type", "value"))
+      }
+    });
+    defineType("DeclaredPredicate", {
+      visitor: [
+        "value"
+      ],
+      aliases: [
+        "FlowPredicate"
+      ],
+      fields: {
+        value: (0, _utils.validateType)("Flow")
+      }
+    });
+    defineType("ExistsTypeAnnotation", {
+      aliases: [
+        "FlowType"
+      ]
+    });
+    defineType("FunctionTypeAnnotation", {
+      visitor: [
+        "typeParameters",
+        "params",
+        "rest",
+        "returnType"
+      ],
+      aliases: [
+        "FlowType"
+      ],
+      fields: {
+        typeParameters: (0, _utils.validateOptionalType)("TypeParameterDeclaration"),
+        params: (0, _utils.validate)((0, _utils.arrayOfType)("FunctionTypeParam")),
+        rest: (0, _utils.validateOptionalType)("FunctionTypeParam"),
+        this: (0, _utils.validateOptionalType)("FunctionTypeParam"),
+        returnType: (0, _utils.validateType)("FlowType")
+      }
+    });
+    defineType("FunctionTypeParam", {
+      visitor: [
+        "name",
+        "typeAnnotation"
+      ],
+      fields: {
+        name: (0, _utils.validateOptionalType)("Identifier"),
+        typeAnnotation: (0, _utils.validateType)("FlowType"),
+        optional: (0, _utils.validateOptional)((0, _utils.assertValueType)("boolean"))
+      }
+    });
+    defineType("GenericTypeAnnotation", {
+      visitor: [
+        "id",
+        "typeParameters"
+      ],
+      aliases: [
+        "FlowType"
+      ],
+      fields: {
+        id: (0, _utils.validateType)([
+          "Identifier",
+          "QualifiedTypeIdentifier"
+        ]),
+        typeParameters: (0, _utils.validateOptionalType)("TypeParameterInstantiation")
+      }
+    });
+    defineType("InferredPredicate", {
+      aliases: [
+        "FlowPredicate"
+      ]
+    });
+    defineType("InterfaceExtends", {
+      visitor: [
+        "id",
+        "typeParameters"
+      ],
+      fields: {
+        id: (0, _utils.validateType)([
+          "Identifier",
+          "QualifiedTypeIdentifier"
+        ]),
+        typeParameters: (0, _utils.validateOptionalType)("TypeParameterInstantiation")
+      }
+    });
+    defineInterfaceishType("InterfaceDeclaration");
+    defineType("InterfaceTypeAnnotation", {
+      visitor: [
+        "extends",
+        "body"
+      ],
+      aliases: [
+        "FlowType"
+      ],
+      fields: {
+        extends: (0, _utils.validateOptional)((0, _utils.arrayOfType)("InterfaceExtends")),
+        body: (0, _utils.validateType)("ObjectTypeAnnotation")
+      }
+    });
+    defineType("IntersectionTypeAnnotation", {
+      visitor: [
+        "types"
+      ],
+      aliases: [
+        "FlowType"
+      ],
+      fields: {
+        types: (0, _utils.validate)((0, _utils.arrayOfType)("FlowType"))
+      }
+    });
+    defineType("MixedTypeAnnotation", {
+      aliases: [
+        "FlowType",
+        "FlowBaseAnnotation"
+      ]
+    });
+    defineType("EmptyTypeAnnotation", {
+      aliases: [
+        "FlowType",
+        "FlowBaseAnnotation"
+      ]
+    });
+    defineType("NullableTypeAnnotation", {
+      visitor: [
+        "typeAnnotation"
+      ],
+      aliases: [
+        "FlowType"
+      ],
+      fields: {
+        typeAnnotation: (0, _utils.validateType)("FlowType")
+      }
+    });
+    defineType("NumberLiteralTypeAnnotation", {
+      builder: [
+        "value"
+      ],
+      aliases: [
+        "FlowType"
+      ],
+      fields: {
+        value: (0, _utils.validate)((0, _utils.assertValueType)("number"))
+      }
+    });
+    defineType("NumberTypeAnnotation", {
+      aliases: [
+        "FlowType",
+        "FlowBaseAnnotation"
+      ]
+    });
+    defineType("ObjectTypeAnnotation", {
+      visitor: [
+        "properties",
+        "indexers",
+        "callProperties",
+        "internalSlots"
+      ],
+      aliases: [
+        "FlowType"
+      ],
+      builder: [
+        "properties",
+        "indexers",
+        "callProperties",
+        "internalSlots",
+        "exact"
+      ],
+      fields: {
+        properties: (0, _utils.validate)((0, _utils.arrayOfType)([
+          "ObjectTypeProperty",
+          "ObjectTypeSpreadProperty"
+        ])),
+        indexers: {
+          validate: (0, _utils.arrayOfType)("ObjectTypeIndexer"),
+          optional: true,
+          default: []
+        },
+        callProperties: {
+          validate: (0, _utils.arrayOfType)("ObjectTypeCallProperty"),
+          optional: true,
+          default: []
+        },
+        internalSlots: {
+          validate: (0, _utils.arrayOfType)("ObjectTypeInternalSlot"),
+          optional: true,
+          default: []
+        },
+        exact: {
+          validate: (0, _utils.assertValueType)("boolean"),
+          default: false
+        },
+        inexact: (0, _utils.validateOptional)((0, _utils.assertValueType)("boolean"))
+      }
+    });
+    defineType("ObjectTypeInternalSlot", {
+      visitor: [
+        "id",
+        "value",
+        "optional",
+        "static",
+        "method"
+      ],
+      aliases: [
+        "UserWhitespacable"
+      ],
+      fields: {
+        id: (0, _utils.validateType)("Identifier"),
+        value: (0, _utils.validateType)("FlowType"),
+        optional: (0, _utils.validate)((0, _utils.assertValueType)("boolean")),
+        static: (0, _utils.validate)((0, _utils.assertValueType)("boolean")),
+        method: (0, _utils.validate)((0, _utils.assertValueType)("boolean"))
+      }
+    });
+    defineType("ObjectTypeCallProperty", {
+      visitor: [
+        "value"
+      ],
+      aliases: [
+        "UserWhitespacable"
+      ],
+      fields: {
+        value: (0, _utils.validateType)("FlowType"),
+        static: (0, _utils.validate)((0, _utils.assertValueType)("boolean"))
+      }
+    });
+    defineType("ObjectTypeIndexer", {
+      visitor: [
+        "id",
+        "key",
+        "value",
+        "variance"
+      ],
+      aliases: [
+        "UserWhitespacable"
+      ],
+      fields: {
+        id: (0, _utils.validateOptionalType)("Identifier"),
+        key: (0, _utils.validateType)("FlowType"),
+        value: (0, _utils.validateType)("FlowType"),
+        static: (0, _utils.validate)((0, _utils.assertValueType)("boolean")),
+        variance: (0, _utils.validateOptionalType)("Variance")
+      }
+    });
+    defineType("ObjectTypeProperty", {
+      visitor: [
+        "key",
+        "value",
+        "variance"
+      ],
+      aliases: [
+        "UserWhitespacable"
+      ],
+      fields: {
+        key: (0, _utils.validateType)([
+          "Identifier",
+          "StringLiteral"
+        ]),
+        value: (0, _utils.validateType)("FlowType"),
+        kind: (0, _utils.validate)((0, _utils.assertOneOf)("init", "get", "set")),
+        static: (0, _utils.validate)((0, _utils.assertValueType)("boolean")),
+        proto: (0, _utils.validate)((0, _utils.assertValueType)("boolean")),
+        optional: (0, _utils.validate)((0, _utils.assertValueType)("boolean")),
+        variance: (0, _utils.validateOptionalType)("Variance"),
+        method: (0, _utils.validate)((0, _utils.assertValueType)("boolean"))
+      }
+    });
+    defineType("ObjectTypeSpreadProperty", {
+      visitor: [
+        "argument"
+      ],
+      aliases: [
+        "UserWhitespacable"
+      ],
+      fields: {
+        argument: (0, _utils.validateType)("FlowType")
+      }
+    });
+    defineType("OpaqueType", {
+      visitor: [
+        "id",
+        "typeParameters",
+        "supertype",
+        "impltype"
+      ],
+      aliases: [
+        "FlowDeclaration",
+        "Statement",
+        "Declaration"
+      ],
+      fields: {
+        id: (0, _utils.validateType)("Identifier"),
+        typeParameters: (0, _utils.validateOptionalType)("TypeParameterDeclaration"),
+        supertype: (0, _utils.validateOptionalType)("FlowType"),
+        impltype: (0, _utils.validateType)("FlowType")
+      }
+    });
+    defineType("QualifiedTypeIdentifier", {
+      visitor: [
+        "id",
+        "qualification"
+      ],
+      fields: {
+        id: (0, _utils.validateType)("Identifier"),
+        qualification: (0, _utils.validateType)([
+          "Identifier",
+          "QualifiedTypeIdentifier"
+        ])
+      }
+    });
+    defineType("StringLiteralTypeAnnotation", {
+      builder: [
+        "value"
+      ],
+      aliases: [
+        "FlowType"
+      ],
+      fields: {
+        value: (0, _utils.validate)((0, _utils.assertValueType)("string"))
+      }
+    });
+    defineType("StringTypeAnnotation", {
+      aliases: [
+        "FlowType",
+        "FlowBaseAnnotation"
+      ]
+    });
+    defineType("SymbolTypeAnnotation", {
+      aliases: [
+        "FlowType",
+        "FlowBaseAnnotation"
+      ]
+    });
+    defineType("ThisTypeAnnotation", {
+      aliases: [
+        "FlowType",
+        "FlowBaseAnnotation"
+      ]
+    });
+    defineType("TupleTypeAnnotation", {
+      visitor: [
+        "types"
+      ],
+      aliases: [
+        "FlowType"
+      ],
+      fields: {
+        types: (0, _utils.validate)((0, _utils.arrayOfType)("FlowType"))
+      }
+    });
+    defineType("TypeofTypeAnnotation", {
+      visitor: [
+        "argument"
+      ],
+      aliases: [
+        "FlowType"
+      ],
+      fields: {
+        argument: (0, _utils.validateType)("FlowType")
+      }
+    });
+    defineType("TypeAlias", {
+      visitor: [
+        "id",
+        "typeParameters",
+        "right"
+      ],
+      aliases: [
+        "FlowDeclaration",
+        "Statement",
+        "Declaration"
+      ],
+      fields: {
+        id: (0, _utils.validateType)("Identifier"),
+        typeParameters: (0, _utils.validateOptionalType)("TypeParameterDeclaration"),
+        right: (0, _utils.validateType)("FlowType")
+      }
+    });
+    defineType("TypeAnnotation", {
+      visitor: [
+        "typeAnnotation"
+      ],
+      fields: {
+        typeAnnotation: (0, _utils.validateType)("FlowType")
+      }
+    });
+    defineType("TypeCastExpression", {
+      visitor: [
+        "expression",
+        "typeAnnotation"
+      ],
+      aliases: [
+        "ExpressionWrapper",
+        "Expression"
+      ],
+      fields: {
+        expression: (0, _utils.validateType)("Expression"),
+        typeAnnotation: (0, _utils.validateType)("TypeAnnotation")
+      }
+    });
+    defineType("TypeParameter", {
+      visitor: [
+        "bound",
+        "default",
+        "variance"
+      ],
+      fields: {
+        name: (0, _utils.validate)((0, _utils.assertValueType)("string")),
+        bound: (0, _utils.validateOptionalType)("TypeAnnotation"),
+        default: (0, _utils.validateOptionalType)("FlowType"),
+        variance: (0, _utils.validateOptionalType)("Variance")
+      }
+    });
+    defineType("TypeParameterDeclaration", {
+      visitor: [
+        "params"
+      ],
+      fields: {
+        params: (0, _utils.validate)((0, _utils.arrayOfType)("TypeParameter"))
+      }
+    });
+    defineType("TypeParameterInstantiation", {
+      visitor: [
+        "params"
+      ],
+      fields: {
+        params: (0, _utils.validate)((0, _utils.arrayOfType)("FlowType"))
+      }
+    });
+    defineType("UnionTypeAnnotation", {
+      visitor: [
+        "types"
+      ],
+      aliases: [
+        "FlowType"
+      ],
+      fields: {
+        types: (0, _utils.validate)((0, _utils.arrayOfType)("FlowType"))
+      }
+    });
+    defineType("Variance", {
+      builder: [
+        "kind"
+      ],
+      fields: {
+        kind: (0, _utils.validate)((0, _utils.assertOneOf)("minus", "plus"))
+      }
+    });
+    defineType("VoidTypeAnnotation", {
+      aliases: [
+        "FlowType",
+        "FlowBaseAnnotation"
+      ]
+    });
+    defineType("EnumDeclaration", {
+      aliases: [
+        "Statement",
+        "Declaration"
+      ],
+      visitor: [
+        "id",
+        "body"
+      ],
+      fields: {
+        id: (0, _utils.validateType)("Identifier"),
+        body: (0, _utils.validateType)([
+          "EnumBooleanBody",
+          "EnumNumberBody",
+          "EnumStringBody",
+          "EnumSymbolBody"
+        ])
+      }
+    });
+    defineType("EnumBooleanBody", {
+      aliases: [
+        "EnumBody"
+      ],
+      visitor: [
+        "members"
+      ],
+      fields: {
+        explicitType: (0, _utils.validate)((0, _utils.assertValueType)("boolean")),
+        members: (0, _utils.validateArrayOfType)("EnumBooleanMember"),
+        hasUnknownMembers: (0, _utils.validate)((0, _utils.assertValueType)("boolean"))
+      }
+    });
+    defineType("EnumNumberBody", {
+      aliases: [
+        "EnumBody"
+      ],
+      visitor: [
+        "members"
+      ],
+      fields: {
+        explicitType: (0, _utils.validate)((0, _utils.assertValueType)("boolean")),
+        members: (0, _utils.validateArrayOfType)("EnumNumberMember"),
+        hasUnknownMembers: (0, _utils.validate)((0, _utils.assertValueType)("boolean"))
+      }
+    });
+    defineType("EnumStringBody", {
+      aliases: [
+        "EnumBody"
+      ],
+      visitor: [
+        "members"
+      ],
+      fields: {
+        explicitType: (0, _utils.validate)((0, _utils.assertValueType)("boolean")),
+        members: (0, _utils.validateArrayOfType)([
+          "EnumStringMember",
+          "EnumDefaultedMember"
+        ]),
+        hasUnknownMembers: (0, _utils.validate)((0, _utils.assertValueType)("boolean"))
+      }
+    });
+    defineType("EnumSymbolBody", {
+      aliases: [
+        "EnumBody"
+      ],
+      visitor: [
+        "members"
+      ],
+      fields: {
+        members: (0, _utils.validateArrayOfType)("EnumDefaultedMember"),
+        hasUnknownMembers: (0, _utils.validate)((0, _utils.assertValueType)("boolean"))
+      }
+    });
+    defineType("EnumBooleanMember", {
+      aliases: [
+        "EnumMember"
+      ],
+      visitor: [
+        "id"
+      ],
+      fields: {
+        id: (0, _utils.validateType)("Identifier"),
+        init: (0, _utils.validateType)("BooleanLiteral")
+      }
+    });
+    defineType("EnumNumberMember", {
+      aliases: [
+        "EnumMember"
+      ],
+      visitor: [
+        "id",
+        "init"
+      ],
+      fields: {
+        id: (0, _utils.validateType)("Identifier"),
+        init: (0, _utils.validateType)("NumericLiteral")
+      }
+    });
+    defineType("EnumStringMember", {
+      aliases: [
+        "EnumMember"
+      ],
+      visitor: [
+        "id",
+        "init"
+      ],
+      fields: {
+        id: (0, _utils.validateType)("Identifier"),
+        init: (0, _utils.validateType)("StringLiteral")
+      }
+    });
+    defineType("EnumDefaultedMember", {
+      aliases: [
+        "EnumMember"
+      ],
+      visitor: [
+        "id"
+      ],
+      fields: {
+        id: (0, _utils.validateType)("Identifier")
+      }
+    });
+    defineType("IndexedAccessType", {
+      visitor: [
+        "objectType",
+        "indexType"
+      ],
+      aliases: [
+        "FlowType"
+      ],
+      fields: {
+        objectType: (0, _utils.validateType)("FlowType"),
+        indexType: (0, _utils.validateType)("FlowType")
+      }
+    });
+    defineType("OptionalIndexedAccessType", {
+      visitor: [
+        "objectType",
+        "indexType"
+      ],
+      aliases: [
+        "FlowType"
+      ],
+      fields: {
+        objectType: (0, _utils.validateType)("FlowType"),
+        indexType: (0, _utils.validateType)("FlowType"),
+        optional: (0, _utils.validate)((0, _utils.assertValueType)("boolean"))
+      }
+    });
+  }
+});
+
+// node_modules/@babel/generator/node_modules/@babel/types/lib/definitions/jsx.js
+var require_jsx3 = __commonJS({
+  "node_modules/@babel/generator/node_modules/@babel/types/lib/definitions/jsx.js"() {
+    "use strict";
+    var _utils = require_utils3();
+    var defineType = (0, _utils.defineAliasedType)("JSX");
+    defineType("JSXAttribute", {
+      visitor: [
+        "name",
+        "value"
+      ],
+      aliases: [
+        "Immutable"
+      ],
+      fields: {
+        name: {
+          validate: (0, _utils.assertNodeType)("JSXIdentifier", "JSXNamespacedName")
+        },
+        value: {
+          optional: true,
+          validate: (0, _utils.assertNodeType)("JSXElement", "JSXFragment", "StringLiteral", "JSXExpressionContainer")
+        }
+      }
+    });
+    defineType("JSXClosingElement", {
+      visitor: [
+        "name"
+      ],
+      aliases: [
+        "Immutable"
+      ],
+      fields: {
+        name: {
+          validate: (0, _utils.assertNodeType)("JSXIdentifier", "JSXMemberExpression", "JSXNamespacedName")
+        }
+      }
+    });
+    defineType("JSXElement", {
+      builder: [
+        "openingElement",
+        "closingElement",
+        "children",
+        "selfClosing"
+      ],
+      visitor: [
+        "openingElement",
+        "children",
+        "closingElement"
+      ],
+      aliases: [
+        "Immutable",
+        "Expression"
+      ],
+      fields: Object.assign({
+        openingElement: {
+          validate: (0, _utils.assertNodeType)("JSXOpeningElement")
+        },
+        closingElement: {
+          optional: true,
+          validate: (0, _utils.assertNodeType)("JSXClosingElement")
+        },
+        children: {
+          validate: (0, _utils.chain)((0, _utils.assertValueType)("array"), (0, _utils.assertEach)((0, _utils.assertNodeType)("JSXText", "JSXExpressionContainer", "JSXSpreadChild", "JSXElement", "JSXFragment")))
+        }
+      }, {
+        selfClosing: {
+          validate: (0, _utils.assertValueType)("boolean"),
+          optional: true
+        }
+      })
+    });
+    defineType("JSXEmptyExpression", {});
+    defineType("JSXExpressionContainer", {
+      visitor: [
+        "expression"
+      ],
+      aliases: [
+        "Immutable"
+      ],
+      fields: {
+        expression: {
+          validate: (0, _utils.assertNodeType)("Expression", "JSXEmptyExpression")
+        }
+      }
+    });
+    defineType("JSXSpreadChild", {
+      visitor: [
+        "expression"
+      ],
+      aliases: [
+        "Immutable"
+      ],
+      fields: {
+        expression: {
+          validate: (0, _utils.assertNodeType)("Expression")
+        }
+      }
+    });
+    defineType("JSXIdentifier", {
+      builder: [
+        "name"
+      ],
+      fields: {
+        name: {
+          validate: (0, _utils.assertValueType)("string")
+        }
+      }
+    });
+    defineType("JSXMemberExpression", {
+      visitor: [
+        "object",
+        "property"
+      ],
+      fields: {
+        object: {
+          validate: (0, _utils.assertNodeType)("JSXMemberExpression", "JSXIdentifier")
+        },
+        property: {
+          validate: (0, _utils.assertNodeType)("JSXIdentifier")
+        }
+      }
+    });
+    defineType("JSXNamespacedName", {
+      visitor: [
+        "namespace",
+        "name"
+      ],
+      fields: {
+        namespace: {
+          validate: (0, _utils.assertNodeType)("JSXIdentifier")
+        },
+        name: {
+          validate: (0, _utils.assertNodeType)("JSXIdentifier")
+        }
+      }
+    });
+    defineType("JSXOpeningElement", {
+      builder: [
+        "name",
+        "attributes",
+        "selfClosing"
+      ],
+      visitor: [
+        "name",
+        "attributes"
+      ],
+      aliases: [
+        "Immutable"
+      ],
+      fields: {
+        name: {
+          validate: (0, _utils.assertNodeType)("JSXIdentifier", "JSXMemberExpression", "JSXNamespacedName")
+        },
+        selfClosing: {
+          default: false
+        },
+        attributes: {
+          validate: (0, _utils.chain)((0, _utils.assertValueType)("array"), (0, _utils.assertEach)((0, _utils.assertNodeType)("JSXAttribute", "JSXSpreadAttribute")))
+        },
+        typeParameters: {
+          validate: (0, _utils.assertNodeType)("TypeParameterInstantiation", "TSTypeParameterInstantiation"),
+          optional: true
+        }
+      }
+    });
+    defineType("JSXSpreadAttribute", {
+      visitor: [
+        "argument"
+      ],
+      fields: {
+        argument: {
+          validate: (0, _utils.assertNodeType)("Expression")
+        }
+      }
+    });
+    defineType("JSXText", {
+      aliases: [
+        "Immutable"
+      ],
+      builder: [
+        "value"
+      ],
+      fields: {
+        value: {
+          validate: (0, _utils.assertValueType)("string")
+        }
+      }
+    });
+    defineType("JSXFragment", {
+      builder: [
+        "openingFragment",
+        "closingFragment",
+        "children"
+      ],
+      visitor: [
+        "openingFragment",
+        "children",
+        "closingFragment"
+      ],
+      aliases: [
+        "Immutable",
+        "Expression"
+      ],
+      fields: {
+        openingFragment: {
+          validate: (0, _utils.assertNodeType)("JSXOpeningFragment")
+        },
+        closingFragment: {
+          validate: (0, _utils.assertNodeType)("JSXClosingFragment")
+        },
+        children: {
+          validate: (0, _utils.chain)((0, _utils.assertValueType)("array"), (0, _utils.assertEach)((0, _utils.assertNodeType)("JSXText", "JSXExpressionContainer", "JSXSpreadChild", "JSXElement", "JSXFragment")))
+        }
+      }
+    });
+    defineType("JSXOpeningFragment", {
+      aliases: [
+        "Immutable"
+      ]
+    });
+    defineType("JSXClosingFragment", {
+      aliases: [
+        "Immutable"
+      ]
+    });
+  }
+});
+
+// node_modules/@babel/generator/node_modules/@babel/types/lib/definitions/placeholders.js
+var require_placeholders3 = __commonJS({
+  "node_modules/@babel/generator/node_modules/@babel/types/lib/definitions/placeholders.js"(exports) {
+    "use strict";
+    Object.defineProperty(exports, "__esModule", {
+      value: true
+    });
+    exports.PLACEHOLDERS_FLIPPED_ALIAS = exports.PLACEHOLDERS_ALIAS = exports.PLACEHOLDERS = void 0;
+    var _utils = require_utils3();
+    var PLACEHOLDERS = [
+      "Identifier",
+      "StringLiteral",
+      "Expression",
+      "Statement",
+      "Declaration",
+      "BlockStatement",
+      "ClassBody",
+      "Pattern"
+    ];
+    exports.PLACEHOLDERS = PLACEHOLDERS;
+    var PLACEHOLDERS_ALIAS = {
+      Declaration: [
+        "Statement"
+      ],
+      Pattern: [
+        "PatternLike",
+        "LVal"
+      ]
+    };
+    exports.PLACEHOLDERS_ALIAS = PLACEHOLDERS_ALIAS;
+    for (const type of PLACEHOLDERS) {
+      const alias = _utils.ALIAS_KEYS[type];
+      if (alias != null && alias.length)
+        PLACEHOLDERS_ALIAS[type] = alias;
+    }
+    var PLACEHOLDERS_FLIPPED_ALIAS = {};
+    exports.PLACEHOLDERS_FLIPPED_ALIAS = PLACEHOLDERS_FLIPPED_ALIAS;
+    Object.keys(PLACEHOLDERS_ALIAS).forEach((type) => {
+      PLACEHOLDERS_ALIAS[type].forEach((alias) => {
+        if (!Object.hasOwnProperty.call(PLACEHOLDERS_FLIPPED_ALIAS, alias)) {
+          PLACEHOLDERS_FLIPPED_ALIAS[alias] = [];
+        }
+        PLACEHOLDERS_FLIPPED_ALIAS[alias].push(type);
+      });
+    });
+  }
+});
+
+// node_modules/@babel/generator/node_modules/@babel/types/lib/definitions/misc.js
+var require_misc3 = __commonJS({
+  "node_modules/@babel/generator/node_modules/@babel/types/lib/definitions/misc.js"() {
+    "use strict";
+    var _utils = require_utils3();
+    var _placeholders = require_placeholders3();
+    var defineType = (0, _utils.defineAliasedType)("Miscellaneous");
+    {
+      defineType("Noop", {
+        visitor: []
+      });
+    }
+    defineType("Placeholder", {
+      visitor: [],
+      builder: [
+        "expectedNode",
+        "name"
+      ],
+      fields: {
+        name: {
+          validate: (0, _utils.assertNodeType)("Identifier")
+        },
+        expectedNode: {
+          validate: (0, _utils.assertOneOf)(..._placeholders.PLACEHOLDERS)
+        }
+      }
+    });
+    defineType("V8IntrinsicIdentifier", {
+      builder: [
+        "name"
+      ],
+      fields: {
+        name: {
+          validate: (0, _utils.assertValueType)("string")
+        }
+      }
+    });
+  }
+});
+
+// node_modules/@babel/generator/node_modules/@babel/types/lib/definitions/experimental.js
+var require_experimental3 = __commonJS({
+  "node_modules/@babel/generator/node_modules/@babel/types/lib/definitions/experimental.js"() {
+    "use strict";
+    var _utils = require_utils3();
+    (0, _utils.default)("ArgumentPlaceholder", {});
+    (0, _utils.default)("BindExpression", {
+      visitor: [
+        "object",
+        "callee"
+      ],
+      aliases: [
+        "Expression"
+      ],
+      fields: !process.env.BABEL_TYPES_8_BREAKING ? {
+        object: {
+          validate: Object.assign(() => {
+          }, {
+            oneOfNodeTypes: [
+              "Expression"
+            ]
+          })
+        },
+        callee: {
+          validate: Object.assign(() => {
+          }, {
+            oneOfNodeTypes: [
+              "Expression"
+            ]
+          })
+        }
+      } : {
+        object: {
+          validate: (0, _utils.assertNodeType)("Expression")
+        },
+        callee: {
+          validate: (0, _utils.assertNodeType)("Expression")
+        }
+      }
+    });
+    (0, _utils.default)("ImportAttribute", {
+      visitor: [
+        "key",
+        "value"
+      ],
+      fields: {
+        key: {
+          validate: (0, _utils.assertNodeType)("Identifier", "StringLiteral")
+        },
+        value: {
+          validate: (0, _utils.assertNodeType)("StringLiteral")
+        }
+      }
+    });
+    (0, _utils.default)("Decorator", {
+      visitor: [
+        "expression"
+      ],
+      fields: {
+        expression: {
+          validate: (0, _utils.assertNodeType)("Expression")
+        }
+      }
+    });
+    (0, _utils.default)("DoExpression", {
+      visitor: [
+        "body"
+      ],
+      builder: [
+        "body",
+        "async"
+      ],
+      aliases: [
+        "Expression"
+      ],
+      fields: {
+        body: {
+          validate: (0, _utils.assertNodeType)("BlockStatement")
+        },
+        async: {
+          validate: (0, _utils.assertValueType)("boolean"),
+          default: false
+        }
+      }
+    });
+    (0, _utils.default)("ExportDefaultSpecifier", {
+      visitor: [
+        "exported"
+      ],
+      aliases: [
+        "ModuleSpecifier"
+      ],
+      fields: {
+        exported: {
+          validate: (0, _utils.assertNodeType)("Identifier")
+        }
+      }
+    });
+    (0, _utils.default)("RecordExpression", {
+      visitor: [
+        "properties"
+      ],
+      aliases: [
+        "Expression"
+      ],
+      fields: {
+        properties: {
+          validate: (0, _utils.chain)((0, _utils.assertValueType)("array"), (0, _utils.assertEach)((0, _utils.assertNodeType)("ObjectProperty", "SpreadElement")))
+        }
+      }
+    });
+    (0, _utils.default)("TupleExpression", {
+      fields: {
+        elements: {
+          validate: (0, _utils.chain)((0, _utils.assertValueType)("array"), (0, _utils.assertEach)((0, _utils.assertNodeType)("Expression", "SpreadElement"))),
+          default: []
+        }
+      },
+      visitor: [
+        "elements"
+      ],
+      aliases: [
+        "Expression"
+      ]
+    });
+    (0, _utils.default)("DecimalLiteral", {
+      builder: [
+        "value"
+      ],
+      fields: {
+        value: {
+          validate: (0, _utils.assertValueType)("string")
+        }
+      },
+      aliases: [
+        "Expression",
+        "Pureish",
+        "Literal",
+        "Immutable"
+      ]
+    });
+    (0, _utils.default)("ModuleExpression", {
+      visitor: [
+        "body"
+      ],
+      fields: {
+        body: {
+          validate: (0, _utils.assertNodeType)("Program")
+        }
+      },
+      aliases: [
+        "Expression"
+      ]
+    });
+    (0, _utils.default)("TopicReference", {
+      aliases: [
+        "Expression"
+      ]
+    });
+    (0, _utils.default)("PipelineTopicExpression", {
+      builder: [
+        "expression"
+      ],
+      visitor: [
+        "expression"
+      ],
+      fields: {
+        expression: {
+          validate: (0, _utils.assertNodeType)("Expression")
+        }
+      },
+      aliases: [
+        "Expression"
+      ]
+    });
+    (0, _utils.default)("PipelineBareFunction", {
+      builder: [
+        "callee"
+      ],
+      visitor: [
+        "callee"
+      ],
+      fields: {
+        callee: {
+          validate: (0, _utils.assertNodeType)("Expression")
+        }
+      },
+      aliases: [
+        "Expression"
+      ]
+    });
+    (0, _utils.default)("PipelinePrimaryTopicReference", {
+      aliases: [
+        "Expression"
+      ]
+    });
+  }
+});
+
+// node_modules/@babel/generator/node_modules/@babel/types/lib/definitions/typescript.js
+var require_typescript3 = __commonJS({
+  "node_modules/@babel/generator/node_modules/@babel/types/lib/definitions/typescript.js"() {
+    "use strict";
+    var _utils = require_utils3();
+    var _core = require_core3();
+    var _is = require_is3();
+    var defineType = (0, _utils.defineAliasedType)("TypeScript");
+    var bool = (0, _utils.assertValueType)("boolean");
+    var tSFunctionTypeAnnotationCommon = /* @__PURE__ */ __name(() => ({
+      returnType: {
+        validate: (0, _utils.assertNodeType)("TSTypeAnnotation", "Noop"),
+        optional: true
+      },
+      typeParameters: {
+        validate: (0, _utils.assertNodeType)("TSTypeParameterDeclaration", "Noop"),
+        optional: true
+      }
+    }), "tSFunctionTypeAnnotationCommon");
+    defineType("TSParameterProperty", {
+      aliases: [
+        "LVal"
+      ],
+      visitor: [
+        "parameter"
+      ],
+      fields: {
+        accessibility: {
+          validate: (0, _utils.assertOneOf)("public", "private", "protected"),
+          optional: true
+        },
+        readonly: {
+          validate: (0, _utils.assertValueType)("boolean"),
+          optional: true
+        },
+        parameter: {
+          validate: (0, _utils.assertNodeType)("Identifier", "AssignmentPattern")
+        },
+        override: {
+          validate: (0, _utils.assertValueType)("boolean"),
+          optional: true
+        },
+        decorators: {
+          validate: (0, _utils.chain)((0, _utils.assertValueType)("array"), (0, _utils.assertEach)((0, _utils.assertNodeType)("Decorator"))),
+          optional: true
+        }
+      }
+    });
+    defineType("TSDeclareFunction", {
+      aliases: [
+        "Statement",
+        "Declaration"
+      ],
+      visitor: [
+        "id",
+        "typeParameters",
+        "params",
+        "returnType"
+      ],
+      fields: Object.assign({}, (0, _core.functionDeclarationCommon)(), tSFunctionTypeAnnotationCommon())
+    });
+    defineType("TSDeclareMethod", {
+      visitor: [
+        "decorators",
+        "key",
+        "typeParameters",
+        "params",
+        "returnType"
+      ],
+      fields: Object.assign({}, (0, _core.classMethodOrDeclareMethodCommon)(), tSFunctionTypeAnnotationCommon())
+    });
+    defineType("TSQualifiedName", {
+      aliases: [
+        "TSEntityName"
+      ],
+      visitor: [
+        "left",
+        "right"
+      ],
+      fields: {
+        left: (0, _utils.validateType)("TSEntityName"),
+        right: (0, _utils.validateType)("Identifier")
+      }
+    });
+    var signatureDeclarationCommon = /* @__PURE__ */ __name(() => ({
+      typeParameters: (0, _utils.validateOptionalType)("TSTypeParameterDeclaration"),
+      ["parameters"]: (0, _utils.validateArrayOfType)([
+        "Identifier",
+        "RestElement"
+      ]),
+      ["typeAnnotation"]: (0, _utils.validateOptionalType)("TSTypeAnnotation")
+    }), "signatureDeclarationCommon");
+    var callConstructSignatureDeclaration = {
+      aliases: [
+        "TSTypeElement"
+      ],
+      visitor: [
+        "typeParameters",
+        "parameters",
+        "typeAnnotation"
+      ],
+      fields: signatureDeclarationCommon()
+    };
+    defineType("TSCallSignatureDeclaration", callConstructSignatureDeclaration);
+    defineType("TSConstructSignatureDeclaration", callConstructSignatureDeclaration);
+    var namedTypeElementCommon = /* @__PURE__ */ __name(() => ({
+      key: (0, _utils.validateType)("Expression"),
+      computed: {
+        default: false
+      },
+      optional: (0, _utils.validateOptional)(bool)
+    }), "namedTypeElementCommon");
+    defineType("TSPropertySignature", {
+      aliases: [
+        "TSTypeElement"
+      ],
+      visitor: [
+        "key",
+        "typeAnnotation",
+        "initializer"
+      ],
+      fields: Object.assign({}, namedTypeElementCommon(), {
+        readonly: (0, _utils.validateOptional)(bool),
+        typeAnnotation: (0, _utils.validateOptionalType)("TSTypeAnnotation"),
+        initializer: (0, _utils.validateOptionalType)("Expression"),
+        kind: {
+          validate: (0, _utils.assertOneOf)("get", "set")
+        }
+      })
+    });
+    defineType("TSMethodSignature", {
+      aliases: [
+        "TSTypeElement"
+      ],
+      visitor: [
+        "key",
+        "typeParameters",
+        "parameters",
+        "typeAnnotation"
+      ],
+      fields: Object.assign({}, signatureDeclarationCommon(), namedTypeElementCommon(), {
+        kind: {
+          validate: (0, _utils.assertOneOf)("method", "get", "set")
+        }
+      })
+    });
+    defineType("TSIndexSignature", {
+      aliases: [
+        "TSTypeElement"
+      ],
+      visitor: [
+        "parameters",
+        "typeAnnotation"
+      ],
+      fields: {
+        readonly: (0, _utils.validateOptional)(bool),
+        static: (0, _utils.validateOptional)(bool),
+        parameters: (0, _utils.validateArrayOfType)("Identifier"),
+        typeAnnotation: (0, _utils.validateOptionalType)("TSTypeAnnotation")
+      }
+    });
+    var tsKeywordTypes = [
+      "TSAnyKeyword",
+      "TSBooleanKeyword",
+      "TSBigIntKeyword",
+      "TSIntrinsicKeyword",
+      "TSNeverKeyword",
+      "TSNullKeyword",
+      "TSNumberKeyword",
+      "TSObjectKeyword",
+      "TSStringKeyword",
+      "TSSymbolKeyword",
+      "TSUndefinedKeyword",
+      "TSUnknownKeyword",
+      "TSVoidKeyword"
+    ];
+    for (const type of tsKeywordTypes) {
+      defineType(type, {
+        aliases: [
+          "TSType",
+          "TSBaseType"
+        ],
+        visitor: [],
+        fields: {}
+      });
+    }
+    defineType("TSThisType", {
+      aliases: [
+        "TSType",
+        "TSBaseType"
+      ],
+      visitor: [],
+      fields: {}
+    });
+    var fnOrCtrBase = {
+      aliases: [
+        "TSType"
+      ],
+      visitor: [
+        "typeParameters",
+        "parameters",
+        "typeAnnotation"
+      ]
+    };
+    defineType("TSFunctionType", Object.assign({}, fnOrCtrBase, {
+      fields: signatureDeclarationCommon()
+    }));
+    defineType("TSConstructorType", Object.assign({}, fnOrCtrBase, {
+      fields: Object.assign({}, signatureDeclarationCommon(), {
+        abstract: (0, _utils.validateOptional)(bool)
+      })
+    }));
+    defineType("TSTypeReference", {
+      aliases: [
+        "TSType"
+      ],
+      visitor: [
+        "typeName",
+        "typeParameters"
+      ],
+      fields: {
+        typeName: (0, _utils.validateType)("TSEntityName"),
+        typeParameters: (0, _utils.validateOptionalType)("TSTypeParameterInstantiation")
+      }
+    });
+    defineType("TSTypePredicate", {
+      aliases: [
+        "TSType"
+      ],
+      visitor: [
+        "parameterName",
+        "typeAnnotation"
+      ],
+      builder: [
+        "parameterName",
+        "typeAnnotation",
+        "asserts"
+      ],
+      fields: {
+        parameterName: (0, _utils.validateType)([
+          "Identifier",
+          "TSThisType"
+        ]),
+        typeAnnotation: (0, _utils.validateOptionalType)("TSTypeAnnotation"),
+        asserts: (0, _utils.validateOptional)(bool)
+      }
+    });
+    defineType("TSTypeQuery", {
+      aliases: [
+        "TSType"
+      ],
+      visitor: [
+        "exprName",
+        "typeParameters"
+      ],
+      fields: {
+        exprName: (0, _utils.validateType)([
+          "TSEntityName",
+          "TSImportType"
+        ]),
+        typeParameters: (0, _utils.validateOptionalType)("TSTypeParameterInstantiation")
+      }
+    });
+    defineType("TSTypeLiteral", {
+      aliases: [
+        "TSType"
+      ],
+      visitor: [
+        "members"
+      ],
+      fields: {
+        members: (0, _utils.validateArrayOfType)("TSTypeElement")
+      }
+    });
+    defineType("TSArrayType", {
+      aliases: [
+        "TSType"
+      ],
+      visitor: [
+        "elementType"
+      ],
+      fields: {
+        elementType: (0, _utils.validateType)("TSType")
+      }
+    });
+    defineType("TSTupleType", {
+      aliases: [
+        "TSType"
+      ],
+      visitor: [
+        "elementTypes"
+      ],
+      fields: {
+        elementTypes: (0, _utils.validateArrayOfType)([
+          "TSType",
+          "TSNamedTupleMember"
+        ])
+      }
+    });
+    defineType("TSOptionalType", {
+      aliases: [
+        "TSType"
+      ],
+      visitor: [
+        "typeAnnotation"
+      ],
+      fields: {
+        typeAnnotation: (0, _utils.validateType)("TSType")
+      }
+    });
+    defineType("TSRestType", {
+      aliases: [
+        "TSType"
+      ],
+      visitor: [
+        "typeAnnotation"
+      ],
+      fields: {
+        typeAnnotation: (0, _utils.validateType)("TSType")
+      }
+    });
+    defineType("TSNamedTupleMember", {
+      visitor: [
+        "label",
+        "elementType"
+      ],
+      builder: [
+        "label",
+        "elementType",
+        "optional"
+      ],
+      fields: {
+        label: (0, _utils.validateType)("Identifier"),
+        optional: {
+          validate: bool,
+          default: false
+        },
+        elementType: (0, _utils.validateType)("TSType")
+      }
+    });
+    var unionOrIntersection = {
+      aliases: [
+        "TSType"
+      ],
+      visitor: [
+        "types"
+      ],
+      fields: {
+        types: (0, _utils.validateArrayOfType)("TSType")
+      }
+    };
+    defineType("TSUnionType", unionOrIntersection);
+    defineType("TSIntersectionType", unionOrIntersection);
+    defineType("TSConditionalType", {
+      aliases: [
+        "TSType"
+      ],
+      visitor: [
+        "checkType",
+        "extendsType",
+        "trueType",
+        "falseType"
+      ],
+      fields: {
+        checkType: (0, _utils.validateType)("TSType"),
+        extendsType: (0, _utils.validateType)("TSType"),
+        trueType: (0, _utils.validateType)("TSType"),
+        falseType: (0, _utils.validateType)("TSType")
+      }
+    });
+    defineType("TSInferType", {
+      aliases: [
+        "TSType"
+      ],
+      visitor: [
+        "typeParameter"
+      ],
+      fields: {
+        typeParameter: (0, _utils.validateType)("TSTypeParameter")
+      }
+    });
+    defineType("TSParenthesizedType", {
+      aliases: [
+        "TSType"
+      ],
+      visitor: [
+        "typeAnnotation"
+      ],
+      fields: {
+        typeAnnotation: (0, _utils.validateType)("TSType")
+      }
+    });
+    defineType("TSTypeOperator", {
+      aliases: [
+        "TSType"
+      ],
+      visitor: [
+        "typeAnnotation"
+      ],
+      fields: {
+        operator: (0, _utils.validate)((0, _utils.assertValueType)("string")),
+        typeAnnotation: (0, _utils.validateType)("TSType")
+      }
+    });
+    defineType("TSIndexedAccessType", {
+      aliases: [
+        "TSType"
+      ],
+      visitor: [
+        "objectType",
+        "indexType"
+      ],
+      fields: {
+        objectType: (0, _utils.validateType)("TSType"),
+        indexType: (0, _utils.validateType)("TSType")
+      }
+    });
+    defineType("TSMappedType", {
+      aliases: [
+        "TSType"
+      ],
+      visitor: [
+        "typeParameter",
+        "typeAnnotation",
+        "nameType"
+      ],
+      fields: {
+        readonly: (0, _utils.validateOptional)((0, _utils.assertOneOf)(true, false, "+", "-")),
+        typeParameter: (0, _utils.validateType)("TSTypeParameter"),
+        optional: (0, _utils.validateOptional)((0, _utils.assertOneOf)(true, false, "+", "-")),
+        typeAnnotation: (0, _utils.validateOptionalType)("TSType"),
+        nameType: (0, _utils.validateOptionalType)("TSType")
+      }
+    });
+    defineType("TSLiteralType", {
+      aliases: [
+        "TSType",
+        "TSBaseType"
+      ],
+      visitor: [
+        "literal"
+      ],
+      fields: {
+        literal: {
+          validate: function() {
+            const unaryExpression = (0, _utils.assertNodeType)("NumericLiteral", "BigIntLiteral");
+            const unaryOperator = (0, _utils.assertOneOf)("-");
+            const literal = (0, _utils.assertNodeType)("NumericLiteral", "StringLiteral", "BooleanLiteral", "BigIntLiteral", "TemplateLiteral");
+            function validator(parent, key, node) {
+              if ((0, _is.default)("UnaryExpression", node)) {
+                unaryOperator(node, "operator", node.operator);
+                unaryExpression(node, "argument", node.argument);
+              } else {
+                literal(parent, key, node);
+              }
+            }
+            __name(validator, "validator");
+            validator.oneOfNodeTypes = [
+              "NumericLiteral",
+              "StringLiteral",
+              "BooleanLiteral",
+              "BigIntLiteral",
+              "TemplateLiteral",
+              "UnaryExpression"
+            ];
+            return validator;
+          }()
+        }
+      }
+    });
+    defineType("TSExpressionWithTypeArguments", {
+      aliases: [
+        "TSType"
+      ],
+      visitor: [
+        "expression",
+        "typeParameters"
+      ],
+      fields: {
+        expression: (0, _utils.validateType)("TSEntityName"),
+        typeParameters: (0, _utils.validateOptionalType)("TSTypeParameterInstantiation")
+      }
+    });
+    defineType("TSInterfaceDeclaration", {
+      aliases: [
+        "Statement",
+        "Declaration"
+      ],
+      visitor: [
+        "id",
+        "typeParameters",
+        "extends",
+        "body"
+      ],
+      fields: {
+        declare: (0, _utils.validateOptional)(bool),
+        id: (0, _utils.validateType)("Identifier"),
+        typeParameters: (0, _utils.validateOptionalType)("TSTypeParameterDeclaration"),
+        extends: (0, _utils.validateOptional)((0, _utils.arrayOfType)("TSExpressionWithTypeArguments")),
+        body: (0, _utils.validateType)("TSInterfaceBody")
+      }
+    });
+    defineType("TSInterfaceBody", {
+      visitor: [
+        "body"
+      ],
+      fields: {
+        body: (0, _utils.validateArrayOfType)("TSTypeElement")
+      }
+    });
+    defineType("TSTypeAliasDeclaration", {
+      aliases: [
+        "Statement",
+        "Declaration"
+      ],
+      visitor: [
+        "id",
+        "typeParameters",
+        "typeAnnotation"
+      ],
+      fields: {
+        declare: (0, _utils.validateOptional)(bool),
+        id: (0, _utils.validateType)("Identifier"),
+        typeParameters: (0, _utils.validateOptionalType)("TSTypeParameterDeclaration"),
+        typeAnnotation: (0, _utils.validateType)("TSType")
+      }
+    });
+    defineType("TSInstantiationExpression", {
+      aliases: [
+        "Expression"
+      ],
+      visitor: [
+        "expression",
+        "typeParameters"
+      ],
+      fields: {
+        expression: (0, _utils.validateType)("Expression"),
+        typeParameters: (0, _utils.validateOptionalType)("TSTypeParameterInstantiation")
+      }
+    });
+    var TSTypeExpression = {
+      aliases: [
+        "Expression",
+        "LVal",
+        "PatternLike"
+      ],
+      visitor: [
+        "expression",
+        "typeAnnotation"
+      ],
+      fields: {
+        expression: (0, _utils.validateType)("Expression"),
+        typeAnnotation: (0, _utils.validateType)("TSType")
+      }
+    };
+    defineType("TSAsExpression", TSTypeExpression);
+    defineType("TSSatisfiesExpression", TSTypeExpression);
+    defineType("TSTypeAssertion", {
+      aliases: [
+        "Expression",
+        "LVal",
+        "PatternLike"
+      ],
+      visitor: [
+        "typeAnnotation",
+        "expression"
+      ],
+      fields: {
+        typeAnnotation: (0, _utils.validateType)("TSType"),
+        expression: (0, _utils.validateType)("Expression")
+      }
+    });
+    defineType("TSEnumDeclaration", {
+      aliases: [
+        "Statement",
+        "Declaration"
+      ],
+      visitor: [
+        "id",
+        "members"
+      ],
+      fields: {
+        declare: (0, _utils.validateOptional)(bool),
+        const: (0, _utils.validateOptional)(bool),
+        id: (0, _utils.validateType)("Identifier"),
+        members: (0, _utils.validateArrayOfType)("TSEnumMember"),
+        initializer: (0, _utils.validateOptionalType)("Expression")
+      }
+    });
+    defineType("TSEnumMember", {
+      visitor: [
+        "id",
+        "initializer"
+      ],
+      fields: {
+        id: (0, _utils.validateType)([
+          "Identifier",
+          "StringLiteral"
+        ]),
+        initializer: (0, _utils.validateOptionalType)("Expression")
+      }
+    });
+    defineType("TSModuleDeclaration", {
+      aliases: [
+        "Statement",
+        "Declaration"
+      ],
+      visitor: [
+        "id",
+        "body"
+      ],
+      fields: {
+        declare: (0, _utils.validateOptional)(bool),
+        global: (0, _utils.validateOptional)(bool),
+        id: (0, _utils.validateType)([
+          "Identifier",
+          "StringLiteral"
+        ]),
+        body: (0, _utils.validateType)([
+          "TSModuleBlock",
+          "TSModuleDeclaration"
+        ])
+      }
+    });
+    defineType("TSModuleBlock", {
+      aliases: [
+        "Scopable",
+        "Block",
+        "BlockParent",
+        "FunctionParent"
+      ],
+      visitor: [
+        "body"
+      ],
+      fields: {
+        body: (0, _utils.validateArrayOfType)("Statement")
+      }
+    });
+    defineType("TSImportType", {
+      aliases: [
+        "TSType"
+      ],
+      visitor: [
+        "argument",
+        "qualifier",
+        "typeParameters"
+      ],
+      fields: {
+        argument: (0, _utils.validateType)("StringLiteral"),
+        qualifier: (0, _utils.validateOptionalType)("TSEntityName"),
+        typeParameters: (0, _utils.validateOptionalType)("TSTypeParameterInstantiation")
+      }
+    });
+    defineType("TSImportEqualsDeclaration", {
+      aliases: [
+        "Statement"
+      ],
+      visitor: [
+        "id",
+        "moduleReference"
+      ],
+      fields: {
+        isExport: (0, _utils.validate)(bool),
+        id: (0, _utils.validateType)("Identifier"),
+        moduleReference: (0, _utils.validateType)([
+          "TSEntityName",
+          "TSExternalModuleReference"
+        ]),
+        importKind: {
+          validate: (0, _utils.assertOneOf)("type", "value"),
+          optional: true
+        }
+      }
+    });
+    defineType("TSExternalModuleReference", {
+      visitor: [
+        "expression"
+      ],
+      fields: {
+        expression: (0, _utils.validateType)("StringLiteral")
+      }
+    });
+    defineType("TSNonNullExpression", {
+      aliases: [
+        "Expression",
+        "LVal",
+        "PatternLike"
+      ],
+      visitor: [
+        "expression"
+      ],
+      fields: {
+        expression: (0, _utils.validateType)("Expression")
+      }
+    });
+    defineType("TSExportAssignment", {
+      aliases: [
+        "Statement"
+      ],
+      visitor: [
+        "expression"
+      ],
+      fields: {
+        expression: (0, _utils.validateType)("Expression")
+      }
+    });
+    defineType("TSNamespaceExportDeclaration", {
+      aliases: [
+        "Statement"
+      ],
+      visitor: [
+        "id"
+      ],
+      fields: {
+        id: (0, _utils.validateType)("Identifier")
+      }
+    });
+    defineType("TSTypeAnnotation", {
+      visitor: [
+        "typeAnnotation"
+      ],
+      fields: {
+        typeAnnotation: {
+          validate: (0, _utils.assertNodeType)("TSType")
+        }
+      }
+    });
+    defineType("TSTypeParameterInstantiation", {
+      visitor: [
+        "params"
+      ],
+      fields: {
+        params: {
+          validate: (0, _utils.chain)((0, _utils.assertValueType)("array"), (0, _utils.assertEach)((0, _utils.assertNodeType)("TSType")))
+        }
+      }
+    });
+    defineType("TSTypeParameterDeclaration", {
+      visitor: [
+        "params"
+      ],
+      fields: {
+        params: {
+          validate: (0, _utils.chain)((0, _utils.assertValueType)("array"), (0, _utils.assertEach)((0, _utils.assertNodeType)("TSTypeParameter")))
+        }
+      }
+    });
+    defineType("TSTypeParameter", {
+      builder: [
+        "constraint",
+        "default",
+        "name"
+      ],
+      visitor: [
+        "constraint",
+        "default"
+      ],
+      fields: {
+        name: {
+          validate: (0, _utils.assertValueType)("string")
+        },
+        in: {
+          validate: (0, _utils.assertValueType)("boolean"),
+          optional: true
+        },
+        out: {
+          validate: (0, _utils.assertValueType)("boolean"),
+          optional: true
+        },
+        constraint: {
+          validate: (0, _utils.assertNodeType)("TSType"),
+          optional: true
+        },
+        default: {
+          validate: (0, _utils.assertNodeType)("TSType"),
+          optional: true
+        }
+      }
+    });
+  }
+});
+
+// node_modules/@babel/generator/node_modules/@babel/types/lib/definitions/index.js
+var require_definitions3 = __commonJS({
+  "node_modules/@babel/generator/node_modules/@babel/types/lib/definitions/index.js"(exports) {
+    "use strict";
+    Object.defineProperty(exports, "__esModule", {
+      value: true
+    });
+    Object.defineProperty(exports, "ALIAS_KEYS", {
+      enumerable: true,
+      get: function() {
+        return _utils.ALIAS_KEYS;
+      }
+    });
+    Object.defineProperty(exports, "BUILDER_KEYS", {
+      enumerable: true,
+      get: function() {
+        return _utils.BUILDER_KEYS;
+      }
+    });
+    Object.defineProperty(exports, "DEPRECATED_KEYS", {
+      enumerable: true,
+      get: function() {
+        return _utils.DEPRECATED_KEYS;
+      }
+    });
+    Object.defineProperty(exports, "FLIPPED_ALIAS_KEYS", {
+      enumerable: true,
+      get: function() {
+        return _utils.FLIPPED_ALIAS_KEYS;
+      }
+    });
+    Object.defineProperty(exports, "NODE_FIELDS", {
+      enumerable: true,
+      get: function() {
+        return _utils.NODE_FIELDS;
+      }
+    });
+    Object.defineProperty(exports, "NODE_PARENT_VALIDATIONS", {
+      enumerable: true,
+      get: function() {
+        return _utils.NODE_PARENT_VALIDATIONS;
+      }
+    });
+    Object.defineProperty(exports, "PLACEHOLDERS", {
+      enumerable: true,
+      get: function() {
+        return _placeholders.PLACEHOLDERS;
+      }
+    });
+    Object.defineProperty(exports, "PLACEHOLDERS_ALIAS", {
+      enumerable: true,
+      get: function() {
+        return _placeholders.PLACEHOLDERS_ALIAS;
+      }
+    });
+    Object.defineProperty(exports, "PLACEHOLDERS_FLIPPED_ALIAS", {
+      enumerable: true,
+      get: function() {
+        return _placeholders.PLACEHOLDERS_FLIPPED_ALIAS;
+      }
+    });
+    exports.TYPES = void 0;
+    Object.defineProperty(exports, "VISITOR_KEYS", {
+      enumerable: true,
+      get: function() {
+        return _utils.VISITOR_KEYS;
+      }
+    });
+    var _toFastProperties = require_to_fast_properties();
+    require_core3();
+    require_flow3();
+    require_jsx3();
+    require_misc3();
+    require_experimental3();
+    require_typescript3();
+    var _utils = require_utils3();
+    var _placeholders = require_placeholders3();
+    _toFastProperties(_utils.VISITOR_KEYS);
+    _toFastProperties(_utils.ALIAS_KEYS);
+    _toFastProperties(_utils.FLIPPED_ALIAS_KEYS);
+    _toFastProperties(_utils.NODE_FIELDS);
+    _toFastProperties(_utils.BUILDER_KEYS);
+    _toFastProperties(_utils.DEPRECATED_KEYS);
+    _toFastProperties(_placeholders.PLACEHOLDERS_ALIAS);
+    _toFastProperties(_placeholders.PLACEHOLDERS_FLIPPED_ALIAS);
+    var TYPES = [].concat(Object.keys(_utils.VISITOR_KEYS), Object.keys(_utils.FLIPPED_ALIAS_KEYS), Object.keys(_utils.DEPRECATED_KEYS));
+    exports.TYPES = TYPES;
+  }
+});
+
+// node_modules/@babel/generator/node_modules/@babel/types/lib/validators/validate.js
+var require_validate3 = __commonJS({
+  "node_modules/@babel/generator/node_modules/@babel/types/lib/validators/validate.js"(exports) {
+    "use strict";
+    Object.defineProperty(exports, "__esModule", {
+      value: true
+    });
+    exports.default = validate;
+    exports.validateChild = validateChild;
+    exports.validateField = validateField;
+    var _definitions = require_definitions3();
+    function validate(node, key, val) {
+      if (!node)
+        return;
+      const fields = _definitions.NODE_FIELDS[node.type];
+      if (!fields)
+        return;
+      const field = fields[key];
+      validateField(node, key, val, field);
+      validateChild(node, key, val);
+    }
+    __name(validate, "validate");
+    function validateField(node, key, val, field) {
+      if (!(field != null && field.validate))
+        return;
+      if (field.optional && val == null)
+        return;
+      field.validate(node, key, val);
+    }
+    __name(validateField, "validateField");
+    function validateChild(node, key, val) {
+      if (val == null)
+        return;
+      const validate2 = _definitions.NODE_PARENT_VALIDATIONS[val.type];
+      if (!validate2)
+        return;
+      validate2(node, key, val);
+    }
+    __name(validateChild, "validateChild");
+  }
+});
+
+// node_modules/@babel/generator/node_modules/@babel/types/lib/builders/validateNode.js
+var require_validateNode3 = __commonJS({
+  "node_modules/@babel/generator/node_modules/@babel/types/lib/builders/validateNode.js"(exports) {
+    "use strict";
+    Object.defineProperty(exports, "__esModule", {
+      value: true
+    });
+    exports.default = validateNode;
+    var _validate = require_validate3();
+    var _ = require_lib9();
+    function validateNode(node) {
+      const keys = _.BUILDER_KEYS[node.type];
+      for (const key of keys) {
+        (0, _validate.default)(node, key, node[key]);
+      }
+      return node;
+    }
+    __name(validateNode, "validateNode");
+  }
+});
+
+// node_modules/@babel/generator/node_modules/@babel/types/lib/builders/generated/index.js
+var require_generated12 = __commonJS({
+  "node_modules/@babel/generator/node_modules/@babel/types/lib/builders/generated/index.js"(exports) {
+    "use strict";
+    Object.defineProperty(exports, "__esModule", {
+      value: true
+    });
+    exports.anyTypeAnnotation = anyTypeAnnotation;
+    exports.argumentPlaceholder = argumentPlaceholder;
+    exports.arrayExpression = arrayExpression;
+    exports.arrayPattern = arrayPattern;
+    exports.arrayTypeAnnotation = arrayTypeAnnotation;
+    exports.arrowFunctionExpression = arrowFunctionExpression2;
+    exports.assignmentExpression = assignmentExpression;
+    exports.assignmentPattern = assignmentPattern;
+    exports.awaitExpression = awaitExpression;
+    exports.bigIntLiteral = bigIntLiteral;
+    exports.binaryExpression = binaryExpression;
+    exports.bindExpression = bindExpression;
+    exports.blockStatement = blockStatement2;
+    exports.booleanLiteral = booleanLiteral;
+    exports.booleanLiteralTypeAnnotation = booleanLiteralTypeAnnotation;
+    exports.booleanTypeAnnotation = booleanTypeAnnotation;
+    exports.breakStatement = breakStatement;
+    exports.callExpression = callExpression2;
+    exports.catchClause = catchClause;
+    exports.classAccessorProperty = classAccessorProperty;
+    exports.classBody = classBody;
+    exports.classDeclaration = classDeclaration;
+    exports.classExpression = classExpression;
+    exports.classImplements = classImplements;
+    exports.classMethod = classMethod;
+    exports.classPrivateMethod = classPrivateMethod;
+    exports.classPrivateProperty = classPrivateProperty;
+    exports.classProperty = classProperty;
+    exports.conditionalExpression = conditionalExpression;
+    exports.continueStatement = continueStatement;
+    exports.debuggerStatement = debuggerStatement;
+    exports.decimalLiteral = decimalLiteral;
+    exports.declareClass = declareClass;
+    exports.declareExportAllDeclaration = declareExportAllDeclaration;
+    exports.declareExportDeclaration = declareExportDeclaration;
+    exports.declareFunction = declareFunction;
+    exports.declareInterface = declareInterface;
+    exports.declareModule = declareModule;
+    exports.declareModuleExports = declareModuleExports;
+    exports.declareOpaqueType = declareOpaqueType;
+    exports.declareTypeAlias = declareTypeAlias;
+    exports.declareVariable = declareVariable;
+    exports.declaredPredicate = declaredPredicate;
+    exports.decorator = decorator;
+    exports.directive = directive;
+    exports.directiveLiteral = directiveLiteral;
+    exports.doExpression = doExpression;
+    exports.doWhileStatement = doWhileStatement;
+    exports.emptyStatement = emptyStatement;
+    exports.emptyTypeAnnotation = emptyTypeAnnotation;
+    exports.enumBooleanBody = enumBooleanBody;
+    exports.enumBooleanMember = enumBooleanMember;
+    exports.enumDeclaration = enumDeclaration;
+    exports.enumDefaultedMember = enumDefaultedMember;
+    exports.enumNumberBody = enumNumberBody;
+    exports.enumNumberMember = enumNumberMember;
+    exports.enumStringBody = enumStringBody;
+    exports.enumStringMember = enumStringMember;
+    exports.enumSymbolBody = enumSymbolBody;
+    exports.existsTypeAnnotation = existsTypeAnnotation;
+    exports.exportAllDeclaration = exportAllDeclaration;
+    exports.exportDefaultDeclaration = exportDefaultDeclaration;
+    exports.exportDefaultSpecifier = exportDefaultSpecifier;
+    exports.exportNamedDeclaration = exportNamedDeclaration;
+    exports.exportNamespaceSpecifier = exportNamespaceSpecifier;
+    exports.exportSpecifier = exportSpecifier;
+    exports.expressionStatement = expressionStatement2;
+    exports.file = file;
+    exports.forInStatement = forInStatement;
+    exports.forOfStatement = forOfStatement;
+    exports.forStatement = forStatement;
+    exports.functionDeclaration = functionDeclaration;
+    exports.functionExpression = functionExpression;
+    exports.functionTypeAnnotation = functionTypeAnnotation;
+    exports.functionTypeParam = functionTypeParam;
+    exports.genericTypeAnnotation = genericTypeAnnotation;
+    exports.identifier = identifier2;
+    exports.ifStatement = ifStatement;
+    exports.import = _import;
+    exports.importAttribute = importAttribute;
+    exports.importDeclaration = importDeclaration;
+    exports.importDefaultSpecifier = importDefaultSpecifier;
+    exports.importNamespaceSpecifier = importNamespaceSpecifier;
+    exports.importSpecifier = importSpecifier;
+    exports.indexedAccessType = indexedAccessType;
+    exports.inferredPredicate = inferredPredicate;
+    exports.interfaceDeclaration = interfaceDeclaration;
+    exports.interfaceExtends = interfaceExtends;
+    exports.interfaceTypeAnnotation = interfaceTypeAnnotation;
+    exports.interpreterDirective = interpreterDirective;
+    exports.intersectionTypeAnnotation = intersectionTypeAnnotation;
+    exports.jSXAttribute = exports.jsxAttribute = jsxAttribute;
+    exports.jSXClosingElement = exports.jsxClosingElement = jsxClosingElement;
+    exports.jSXClosingFragment = exports.jsxClosingFragment = jsxClosingFragment;
+    exports.jSXElement = exports.jsxElement = jsxElement;
+    exports.jSXEmptyExpression = exports.jsxEmptyExpression = jsxEmptyExpression;
+    exports.jSXExpressionContainer = exports.jsxExpressionContainer = jsxExpressionContainer;
+    exports.jSXFragment = exports.jsxFragment = jsxFragment;
+    exports.jSXIdentifier = exports.jsxIdentifier = jsxIdentifier;
+    exports.jSXMemberExpression = exports.jsxMemberExpression = jsxMemberExpression;
+    exports.jSXNamespacedName = exports.jsxNamespacedName = jsxNamespacedName;
+    exports.jSXOpeningElement = exports.jsxOpeningElement = jsxOpeningElement;
+    exports.jSXOpeningFragment = exports.jsxOpeningFragment = jsxOpeningFragment;
+    exports.jSXSpreadAttribute = exports.jsxSpreadAttribute = jsxSpreadAttribute;
+    exports.jSXSpreadChild = exports.jsxSpreadChild = jsxSpreadChild;
+    exports.jSXText = exports.jsxText = jsxText;
+    exports.labeledStatement = labeledStatement;
+    exports.logicalExpression = logicalExpression;
+    exports.memberExpression = memberExpression;
+    exports.metaProperty = metaProperty;
+    exports.mixedTypeAnnotation = mixedTypeAnnotation;
+    exports.moduleExpression = moduleExpression;
+    exports.newExpression = newExpression;
+    exports.noop = noop;
+    exports.nullLiteral = nullLiteral;
+    exports.nullLiteralTypeAnnotation = nullLiteralTypeAnnotation;
+    exports.nullableTypeAnnotation = nullableTypeAnnotation;
+    exports.numberLiteral = NumberLiteral;
+    exports.numberLiteralTypeAnnotation = numberLiteralTypeAnnotation;
+    exports.numberTypeAnnotation = numberTypeAnnotation;
+    exports.numericLiteral = numericLiteral;
+    exports.objectExpression = objectExpression;
+    exports.objectMethod = objectMethod;
+    exports.objectPattern = objectPattern;
+    exports.objectProperty = objectProperty;
+    exports.objectTypeAnnotation = objectTypeAnnotation;
+    exports.objectTypeCallProperty = objectTypeCallProperty;
+    exports.objectTypeIndexer = objectTypeIndexer;
+    exports.objectTypeInternalSlot = objectTypeInternalSlot;
+    exports.objectTypeProperty = objectTypeProperty;
+    exports.objectTypeSpreadProperty = objectTypeSpreadProperty;
+    exports.opaqueType = opaqueType;
+    exports.optionalCallExpression = optionalCallExpression;
+    exports.optionalIndexedAccessType = optionalIndexedAccessType;
+    exports.optionalMemberExpression = optionalMemberExpression;
+    exports.parenthesizedExpression = parenthesizedExpression;
+    exports.pipelineBareFunction = pipelineBareFunction;
+    exports.pipelinePrimaryTopicReference = pipelinePrimaryTopicReference;
+    exports.pipelineTopicExpression = pipelineTopicExpression;
+    exports.placeholder = placeholder;
+    exports.privateName = privateName;
+    exports.program = program;
+    exports.qualifiedTypeIdentifier = qualifiedTypeIdentifier;
+    exports.recordExpression = recordExpression;
+    exports.regExpLiteral = regExpLiteral;
+    exports.regexLiteral = RegexLiteral;
+    exports.restElement = restElement;
+    exports.restProperty = RestProperty;
+    exports.returnStatement = returnStatement;
+    exports.sequenceExpression = sequenceExpression;
+    exports.spreadElement = spreadElement;
+    exports.spreadProperty = SpreadProperty;
+    exports.staticBlock = staticBlock;
+    exports.stringLiteral = stringLiteral2;
+    exports.stringLiteralTypeAnnotation = stringLiteralTypeAnnotation;
+    exports.stringTypeAnnotation = stringTypeAnnotation;
+    exports.super = _super;
+    exports.switchCase = switchCase;
+    exports.switchStatement = switchStatement;
+    exports.symbolTypeAnnotation = symbolTypeAnnotation;
+    exports.taggedTemplateExpression = taggedTemplateExpression;
+    exports.templateElement = templateElement;
+    exports.templateLiteral = templateLiteral;
+    exports.thisExpression = thisExpression;
+    exports.thisTypeAnnotation = thisTypeAnnotation;
+    exports.throwStatement = throwStatement;
+    exports.topicReference = topicReference;
+    exports.tryStatement = tryStatement;
+    exports.tSAnyKeyword = exports.tsAnyKeyword = tsAnyKeyword;
+    exports.tSArrayType = exports.tsArrayType = tsArrayType;
+    exports.tSAsExpression = exports.tsAsExpression = tsAsExpression;
+    exports.tSBigIntKeyword = exports.tsBigIntKeyword = tsBigIntKeyword;
+    exports.tSBooleanKeyword = exports.tsBooleanKeyword = tsBooleanKeyword;
+    exports.tSCallSignatureDeclaration = exports.tsCallSignatureDeclaration = tsCallSignatureDeclaration;
+    exports.tSConditionalType = exports.tsConditionalType = tsConditionalType;
+    exports.tSConstructSignatureDeclaration = exports.tsConstructSignatureDeclaration = tsConstructSignatureDeclaration;
+    exports.tSConstructorType = exports.tsConstructorType = tsConstructorType;
+    exports.tSDeclareFunction = exports.tsDeclareFunction = tsDeclareFunction;
+    exports.tSDeclareMethod = exports.tsDeclareMethod = tsDeclareMethod;
+    exports.tSEnumDeclaration = exports.tsEnumDeclaration = tsEnumDeclaration;
+    exports.tSEnumMember = exports.tsEnumMember = tsEnumMember;
+    exports.tSExportAssignment = exports.tsExportAssignment = tsExportAssignment;
+    exports.tSExpressionWithTypeArguments = exports.tsExpressionWithTypeArguments = tsExpressionWithTypeArguments;
+    exports.tSExternalModuleReference = exports.tsExternalModuleReference = tsExternalModuleReference;
+    exports.tSFunctionType = exports.tsFunctionType = tsFunctionType;
+    exports.tSImportEqualsDeclaration = exports.tsImportEqualsDeclaration = tsImportEqualsDeclaration;
+    exports.tSImportType = exports.tsImportType = tsImportType;
+    exports.tSIndexSignature = exports.tsIndexSignature = tsIndexSignature;
+    exports.tSIndexedAccessType = exports.tsIndexedAccessType = tsIndexedAccessType;
+    exports.tSInferType = exports.tsInferType = tsInferType;
+    exports.tSInstantiationExpression = exports.tsInstantiationExpression = tsInstantiationExpression;
+    exports.tSInterfaceBody = exports.tsInterfaceBody = tsInterfaceBody;
+    exports.tSInterfaceDeclaration = exports.tsInterfaceDeclaration = tsInterfaceDeclaration;
+    exports.tSIntersectionType = exports.tsIntersectionType = tsIntersectionType;
+    exports.tSIntrinsicKeyword = exports.tsIntrinsicKeyword = tsIntrinsicKeyword;
+    exports.tSLiteralType = exports.tsLiteralType = tsLiteralType;
+    exports.tSMappedType = exports.tsMappedType = tsMappedType;
+    exports.tSMethodSignature = exports.tsMethodSignature = tsMethodSignature;
+    exports.tSModuleBlock = exports.tsModuleBlock = tsModuleBlock;
+    exports.tSModuleDeclaration = exports.tsModuleDeclaration = tsModuleDeclaration;
+    exports.tSNamedTupleMember = exports.tsNamedTupleMember = tsNamedTupleMember;
+    exports.tSNamespaceExportDeclaration = exports.tsNamespaceExportDeclaration = tsNamespaceExportDeclaration;
+    exports.tSNeverKeyword = exports.tsNeverKeyword = tsNeverKeyword;
+    exports.tSNonNullExpression = exports.tsNonNullExpression = tsNonNullExpression;
+    exports.tSNullKeyword = exports.tsNullKeyword = tsNullKeyword;
+    exports.tSNumberKeyword = exports.tsNumberKeyword = tsNumberKeyword;
+    exports.tSObjectKeyword = exports.tsObjectKeyword = tsObjectKeyword;
+    exports.tSOptionalType = exports.tsOptionalType = tsOptionalType;
+    exports.tSParameterProperty = exports.tsParameterProperty = tsParameterProperty;
+    exports.tSParenthesizedType = exports.tsParenthesizedType = tsParenthesizedType;
+    exports.tSPropertySignature = exports.tsPropertySignature = tsPropertySignature;
+    exports.tSQualifiedName = exports.tsQualifiedName = tsQualifiedName;
+    exports.tSRestType = exports.tsRestType = tsRestType;
+    exports.tSSatisfiesExpression = exports.tsSatisfiesExpression = tsSatisfiesExpression;
+    exports.tSStringKeyword = exports.tsStringKeyword = tsStringKeyword;
+    exports.tSSymbolKeyword = exports.tsSymbolKeyword = tsSymbolKeyword;
+    exports.tSThisType = exports.tsThisType = tsThisType;
+    exports.tSTupleType = exports.tsTupleType = tsTupleType;
+    exports.tSTypeAliasDeclaration = exports.tsTypeAliasDeclaration = tsTypeAliasDeclaration;
+    exports.tSTypeAnnotation = exports.tsTypeAnnotation = tsTypeAnnotation;
+    exports.tSTypeAssertion = exports.tsTypeAssertion = tsTypeAssertion;
+    exports.tSTypeLiteral = exports.tsTypeLiteral = tsTypeLiteral;
+    exports.tSTypeOperator = exports.tsTypeOperator = tsTypeOperator;
+    exports.tSTypeParameter = exports.tsTypeParameter = tsTypeParameter;
+    exports.tSTypeParameterDeclaration = exports.tsTypeParameterDeclaration = tsTypeParameterDeclaration;
+    exports.tSTypeParameterInstantiation = exports.tsTypeParameterInstantiation = tsTypeParameterInstantiation;
+    exports.tSTypePredicate = exports.tsTypePredicate = tsTypePredicate;
+    exports.tSTypeQuery = exports.tsTypeQuery = tsTypeQuery;
+    exports.tSTypeReference = exports.tsTypeReference = tsTypeReference;
+    exports.tSUndefinedKeyword = exports.tsUndefinedKeyword = tsUndefinedKeyword;
+    exports.tSUnionType = exports.tsUnionType = tsUnionType;
+    exports.tSUnknownKeyword = exports.tsUnknownKeyword = tsUnknownKeyword;
+    exports.tSVoidKeyword = exports.tsVoidKeyword = tsVoidKeyword;
+    exports.tupleExpression = tupleExpression;
+    exports.tupleTypeAnnotation = tupleTypeAnnotation;
+    exports.typeAlias = typeAlias;
+    exports.typeAnnotation = typeAnnotation;
+    exports.typeCastExpression = typeCastExpression;
+    exports.typeParameter = typeParameter;
+    exports.typeParameterDeclaration = typeParameterDeclaration;
+    exports.typeParameterInstantiation = typeParameterInstantiation;
+    exports.typeofTypeAnnotation = typeofTypeAnnotation;
+    exports.unaryExpression = unaryExpression;
+    exports.unionTypeAnnotation = unionTypeAnnotation;
+    exports.updateExpression = updateExpression;
+    exports.v8IntrinsicIdentifier = v8IntrinsicIdentifier;
+    exports.variableDeclaration = variableDeclaration;
+    exports.variableDeclarator = variableDeclarator;
+    exports.variance = variance;
+    exports.voidTypeAnnotation = voidTypeAnnotation;
+    exports.whileStatement = whileStatement;
+    exports.withStatement = withStatement;
+    exports.yieldExpression = yieldExpression;
+    var _validateNode = require_validateNode3();
+    function arrayExpression(elements = []) {
+      return (0, _validateNode.default)({
+        type: "ArrayExpression",
+        elements
+      });
+    }
+    __name(arrayExpression, "arrayExpression");
+    function assignmentExpression(operator, left, right) {
+      return (0, _validateNode.default)({
+        type: "AssignmentExpression",
+        operator,
+        left,
+        right
+      });
+    }
+    __name(assignmentExpression, "assignmentExpression");
+    function binaryExpression(operator, left, right) {
+      return (0, _validateNode.default)({
+        type: "BinaryExpression",
+        operator,
+        left,
+        right
+      });
+    }
+    __name(binaryExpression, "binaryExpression");
+    function interpreterDirective(value) {
+      return (0, _validateNode.default)({
+        type: "InterpreterDirective",
+        value
+      });
+    }
+    __name(interpreterDirective, "interpreterDirective");
+    function directive(value) {
+      return (0, _validateNode.default)({
+        type: "Directive",
+        value
+      });
+    }
+    __name(directive, "directive");
+    function directiveLiteral(value) {
+      return (0, _validateNode.default)({
+        type: "DirectiveLiteral",
+        value
+      });
+    }
+    __name(directiveLiteral, "directiveLiteral");
+    function blockStatement2(body, directives = []) {
+      return (0, _validateNode.default)({
+        type: "BlockStatement",
+        body,
+        directives
+      });
+    }
+    __name(blockStatement2, "blockStatement");
+    function breakStatement(label = null) {
+      return (0, _validateNode.default)({
+        type: "BreakStatement",
+        label
+      });
+    }
+    __name(breakStatement, "breakStatement");
+    function callExpression2(callee, _arguments) {
+      return (0, _validateNode.default)({
+        type: "CallExpression",
+        callee,
+        arguments: _arguments
+      });
+    }
+    __name(callExpression2, "callExpression");
+    function catchClause(param = null, body) {
+      return (0, _validateNode.default)({
+        type: "CatchClause",
+        param,
+        body
+      });
+    }
+    __name(catchClause, "catchClause");
+    function conditionalExpression(test, consequent, alternate) {
+      return (0, _validateNode.default)({
+        type: "ConditionalExpression",
+        test,
+        consequent,
+        alternate
+      });
+    }
+    __name(conditionalExpression, "conditionalExpression");
+    function continueStatement(label = null) {
+      return (0, _validateNode.default)({
+        type: "ContinueStatement",
+        label
+      });
+    }
+    __name(continueStatement, "continueStatement");
+    function debuggerStatement() {
+      return {
+        type: "DebuggerStatement"
+      };
+    }
+    __name(debuggerStatement, "debuggerStatement");
+    function doWhileStatement(test, body) {
+      return (0, _validateNode.default)({
+        type: "DoWhileStatement",
+        test,
+        body
+      });
+    }
+    __name(doWhileStatement, "doWhileStatement");
+    function emptyStatement() {
+      return {
+        type: "EmptyStatement"
+      };
+    }
+    __name(emptyStatement, "emptyStatement");
+    function expressionStatement2(expression) {
+      return (0, _validateNode.default)({
+        type: "ExpressionStatement",
+        expression
+      });
+    }
+    __name(expressionStatement2, "expressionStatement");
+    function file(program2, comments = null, tokens = null) {
+      return (0, _validateNode.default)({
+        type: "File",
+        program: program2,
+        comments,
+        tokens
+      });
+    }
+    __name(file, "file");
+    function forInStatement(left, right, body) {
+      return (0, _validateNode.default)({
+        type: "ForInStatement",
+        left,
+        right,
+        body
+      });
+    }
+    __name(forInStatement, "forInStatement");
+    function forStatement(init = null, test = null, update = null, body) {
+      return (0, _validateNode.default)({
+        type: "ForStatement",
+        init,
+        test,
+        update,
+        body
+      });
+    }
+    __name(forStatement, "forStatement");
+    function functionDeclaration(id = null, params, body, generator = false, async = false) {
+      return (0, _validateNode.default)({
+        type: "FunctionDeclaration",
+        id,
+        params,
+        body,
+        generator,
+        async
+      });
+    }
+    __name(functionDeclaration, "functionDeclaration");
+    function functionExpression(id = null, params, body, generator = false, async = false) {
+      return (0, _validateNode.default)({
+        type: "FunctionExpression",
+        id,
+        params,
+        body,
+        generator,
+        async
+      });
+    }
+    __name(functionExpression, "functionExpression");
+    function identifier2(name) {
+      return (0, _validateNode.default)({
+        type: "Identifier",
+        name
+      });
+    }
+    __name(identifier2, "identifier");
+    function ifStatement(test, consequent, alternate = null) {
+      return (0, _validateNode.default)({
+        type: "IfStatement",
+        test,
+        consequent,
+        alternate
+      });
+    }
+    __name(ifStatement, "ifStatement");
+    function labeledStatement(label, body) {
+      return (0, _validateNode.default)({
+        type: "LabeledStatement",
+        label,
+        body
+      });
+    }
+    __name(labeledStatement, "labeledStatement");
+    function stringLiteral2(value) {
+      return (0, _validateNode.default)({
+        type: "StringLiteral",
+        value
+      });
+    }
+    __name(stringLiteral2, "stringLiteral");
+    function numericLiteral(value) {
+      return (0, _validateNode.default)({
+        type: "NumericLiteral",
+        value
+      });
+    }
+    __name(numericLiteral, "numericLiteral");
+    function nullLiteral() {
+      return {
+        type: "NullLiteral"
+      };
+    }
+    __name(nullLiteral, "nullLiteral");
+    function booleanLiteral(value) {
+      return (0, _validateNode.default)({
+        type: "BooleanLiteral",
+        value
+      });
+    }
+    __name(booleanLiteral, "booleanLiteral");
+    function regExpLiteral(pattern, flags = "") {
+      return (0, _validateNode.default)({
+        type: "RegExpLiteral",
+        pattern,
+        flags
+      });
+    }
+    __name(regExpLiteral, "regExpLiteral");
+    function logicalExpression(operator, left, right) {
+      return (0, _validateNode.default)({
+        type: "LogicalExpression",
+        operator,
+        left,
+        right
+      });
+    }
+    __name(logicalExpression, "logicalExpression");
+    function memberExpression(object, property, computed = false, optional = null) {
+      return (0, _validateNode.default)({
+        type: "MemberExpression",
+        object,
+        property,
+        computed,
+        optional
+      });
+    }
+    __name(memberExpression, "memberExpression");
+    function newExpression(callee, _arguments) {
+      return (0, _validateNode.default)({
+        type: "NewExpression",
+        callee,
+        arguments: _arguments
+      });
+    }
+    __name(newExpression, "newExpression");
+    function program(body, directives = [], sourceType = "script", interpreter = null) {
+      return (0, _validateNode.default)({
+        type: "Program",
+        body,
+        directives,
+        sourceType,
+        interpreter,
+        sourceFile: null
+      });
+    }
+    __name(program, "program");
+    function objectExpression(properties) {
+      return (0, _validateNode.default)({
+        type: "ObjectExpression",
+        properties
+      });
+    }
+    __name(objectExpression, "objectExpression");
+    function objectMethod(kind = "method", key, params, body, computed = false, generator = false, async = false) {
+      return (0, _validateNode.default)({
+        type: "ObjectMethod",
+        kind,
+        key,
+        params,
+        body,
+        computed,
+        generator,
+        async
+      });
+    }
+    __name(objectMethod, "objectMethod");
+    function objectProperty(key, value, computed = false, shorthand = false, decorators = null) {
+      return (0, _validateNode.default)({
+        type: "ObjectProperty",
+        key,
+        value,
+        computed,
+        shorthand,
+        decorators
+      });
+    }
+    __name(objectProperty, "objectProperty");
+    function restElement(argument) {
+      return (0, _validateNode.default)({
+        type: "RestElement",
+        argument
+      });
+    }
+    __name(restElement, "restElement");
+    function returnStatement(argument = null) {
+      return (0, _validateNode.default)({
+        type: "ReturnStatement",
+        argument
+      });
+    }
+    __name(returnStatement, "returnStatement");
+    function sequenceExpression(expressions) {
+      return (0, _validateNode.default)({
+        type: "SequenceExpression",
+        expressions
+      });
+    }
+    __name(sequenceExpression, "sequenceExpression");
+    function parenthesizedExpression(expression) {
+      return (0, _validateNode.default)({
+        type: "ParenthesizedExpression",
+        expression
+      });
+    }
+    __name(parenthesizedExpression, "parenthesizedExpression");
+    function switchCase(test = null, consequent) {
+      return (0, _validateNode.default)({
+        type: "SwitchCase",
+        test,
+        consequent
+      });
+    }
+    __name(switchCase, "switchCase");
+    function switchStatement(discriminant, cases) {
+      return (0, _validateNode.default)({
+        type: "SwitchStatement",
+        discriminant,
+        cases
+      });
+    }
+    __name(switchStatement, "switchStatement");
+    function thisExpression() {
+      return {
+        type: "ThisExpression"
+      };
+    }
+    __name(thisExpression, "thisExpression");
+    function throwStatement(argument) {
+      return (0, _validateNode.default)({
+        type: "ThrowStatement",
+        argument
+      });
+    }
+    __name(throwStatement, "throwStatement");
+    function tryStatement(block, handler = null, finalizer = null) {
+      return (0, _validateNode.default)({
+        type: "TryStatement",
+        block,
+        handler,
+        finalizer
+      });
+    }
+    __name(tryStatement, "tryStatement");
+    function unaryExpression(operator, argument, prefix = true) {
+      return (0, _validateNode.default)({
+        type: "UnaryExpression",
+        operator,
+        argument,
+        prefix
+      });
+    }
+    __name(unaryExpression, "unaryExpression");
+    function updateExpression(operator, argument, prefix = false) {
+      return (0, _validateNode.default)({
+        type: "UpdateExpression",
+        operator,
+        argument,
+        prefix
+      });
+    }
+    __name(updateExpression, "updateExpression");
+    function variableDeclaration(kind, declarations) {
+      return (0, _validateNode.default)({
+        type: "VariableDeclaration",
+        kind,
+        declarations
+      });
+    }
+    __name(variableDeclaration, "variableDeclaration");
+    function variableDeclarator(id, init = null) {
+      return (0, _validateNode.default)({
+        type: "VariableDeclarator",
+        id,
+        init
+      });
+    }
+    __name(variableDeclarator, "variableDeclarator");
+    function whileStatement(test, body) {
+      return (0, _validateNode.default)({
+        type: "WhileStatement",
+        test,
+        body
+      });
+    }
+    __name(whileStatement, "whileStatement");
+    function withStatement(object, body) {
+      return (0, _validateNode.default)({
+        type: "WithStatement",
+        object,
+        body
+      });
+    }
+    __name(withStatement, "withStatement");
+    function assignmentPattern(left, right) {
+      return (0, _validateNode.default)({
+        type: "AssignmentPattern",
+        left,
+        right
+      });
+    }
+    __name(assignmentPattern, "assignmentPattern");
+    function arrayPattern(elements) {
+      return (0, _validateNode.default)({
+        type: "ArrayPattern",
+        elements
+      });
+    }
+    __name(arrayPattern, "arrayPattern");
+    function arrowFunctionExpression2(params, body, async = false) {
+      return (0, _validateNode.default)({
+        type: "ArrowFunctionExpression",
+        params,
+        body,
+        async,
+        expression: null
+      });
+    }
+    __name(arrowFunctionExpression2, "arrowFunctionExpression");
+    function classBody(body) {
+      return (0, _validateNode.default)({
+        type: "ClassBody",
+        body
+      });
+    }
+    __name(classBody, "classBody");
+    function classExpression(id = null, superClass = null, body, decorators = null) {
+      return (0, _validateNode.default)({
+        type: "ClassExpression",
+        id,
+        superClass,
+        body,
+        decorators
+      });
+    }
+    __name(classExpression, "classExpression");
+    function classDeclaration(id, superClass = null, body, decorators = null) {
+      return (0, _validateNode.default)({
+        type: "ClassDeclaration",
+        id,
+        superClass,
+        body,
+        decorators
+      });
+    }
+    __name(classDeclaration, "classDeclaration");
+    function exportAllDeclaration(source) {
+      return (0, _validateNode.default)({
+        type: "ExportAllDeclaration",
+        source
+      });
+    }
+    __name(exportAllDeclaration, "exportAllDeclaration");
+    function exportDefaultDeclaration(declaration) {
+      return (0, _validateNode.default)({
+        type: "ExportDefaultDeclaration",
+        declaration
+      });
+    }
+    __name(exportDefaultDeclaration, "exportDefaultDeclaration");
+    function exportNamedDeclaration(declaration = null, specifiers = [], source = null) {
+      return (0, _validateNode.default)({
+        type: "ExportNamedDeclaration",
+        declaration,
+        specifiers,
+        source
+      });
+    }
+    __name(exportNamedDeclaration, "exportNamedDeclaration");
+    function exportSpecifier(local, exported) {
+      return (0, _validateNode.default)({
+        type: "ExportSpecifier",
+        local,
+        exported
+      });
+    }
+    __name(exportSpecifier, "exportSpecifier");
+    function forOfStatement(left, right, body, _await = false) {
+      return (0, _validateNode.default)({
+        type: "ForOfStatement",
+        left,
+        right,
+        body,
+        await: _await
+      });
+    }
+    __name(forOfStatement, "forOfStatement");
+    function importDeclaration(specifiers, source) {
+      return (0, _validateNode.default)({
+        type: "ImportDeclaration",
+        specifiers,
+        source
+      });
+    }
+    __name(importDeclaration, "importDeclaration");
+    function importDefaultSpecifier(local) {
+      return (0, _validateNode.default)({
+        type: "ImportDefaultSpecifier",
+        local
+      });
+    }
+    __name(importDefaultSpecifier, "importDefaultSpecifier");
+    function importNamespaceSpecifier(local) {
+      return (0, _validateNode.default)({
+        type: "ImportNamespaceSpecifier",
+        local
+      });
+    }
+    __name(importNamespaceSpecifier, "importNamespaceSpecifier");
+    function importSpecifier(local, imported) {
+      return (0, _validateNode.default)({
+        type: "ImportSpecifier",
+        local,
+        imported
+      });
+    }
+    __name(importSpecifier, "importSpecifier");
+    function metaProperty(meta, property) {
+      return (0, _validateNode.default)({
+        type: "MetaProperty",
+        meta,
+        property
+      });
+    }
+    __name(metaProperty, "metaProperty");
+    function classMethod(kind = "method", key, params, body, computed = false, _static = false, generator = false, async = false) {
+      return (0, _validateNode.default)({
+        type: "ClassMethod",
+        kind,
+        key,
+        params,
+        body,
+        computed,
+        static: _static,
+        generator,
+        async
+      });
+    }
+    __name(classMethod, "classMethod");
+    function objectPattern(properties) {
+      return (0, _validateNode.default)({
+        type: "ObjectPattern",
+        properties
+      });
+    }
+    __name(objectPattern, "objectPattern");
+    function spreadElement(argument) {
+      return (0, _validateNode.default)({
+        type: "SpreadElement",
+        argument
+      });
+    }
+    __name(spreadElement, "spreadElement");
+    function _super() {
+      return {
+        type: "Super"
+      };
+    }
+    __name(_super, "_super");
+    function taggedTemplateExpression(tag, quasi) {
+      return (0, _validateNode.default)({
+        type: "TaggedTemplateExpression",
+        tag,
+        quasi
+      });
+    }
+    __name(taggedTemplateExpression, "taggedTemplateExpression");
+    function templateElement(value, tail = false) {
+      return (0, _validateNode.default)({
+        type: "TemplateElement",
+        value,
+        tail
+      });
+    }
+    __name(templateElement, "templateElement");
+    function templateLiteral(quasis, expressions) {
+      return (0, _validateNode.default)({
+        type: "TemplateLiteral",
+        quasis,
+        expressions
+      });
+    }
+    __name(templateLiteral, "templateLiteral");
+    function yieldExpression(argument = null, delegate = false) {
+      return (0, _validateNode.default)({
+        type: "YieldExpression",
+        argument,
+        delegate
+      });
+    }
+    __name(yieldExpression, "yieldExpression");
+    function awaitExpression(argument) {
+      return (0, _validateNode.default)({
+        type: "AwaitExpression",
+        argument
+      });
+    }
+    __name(awaitExpression, "awaitExpression");
+    function _import() {
+      return {
+        type: "Import"
+      };
+    }
+    __name(_import, "_import");
+    function bigIntLiteral(value) {
+      return (0, _validateNode.default)({
+        type: "BigIntLiteral",
+        value
+      });
+    }
+    __name(bigIntLiteral, "bigIntLiteral");
+    function exportNamespaceSpecifier(exported) {
+      return (0, _validateNode.default)({
+        type: "ExportNamespaceSpecifier",
+        exported
+      });
+    }
+    __name(exportNamespaceSpecifier, "exportNamespaceSpecifier");
+    function optionalMemberExpression(object, property, computed = false, optional) {
+      return (0, _validateNode.default)({
+        type: "OptionalMemberExpression",
+        object,
+        property,
+        computed,
+        optional
+      });
+    }
+    __name(optionalMemberExpression, "optionalMemberExpression");
+    function optionalCallExpression(callee, _arguments, optional) {
+      return (0, _validateNode.default)({
+        type: "OptionalCallExpression",
+        callee,
+        arguments: _arguments,
+        optional
+      });
+    }
+    __name(optionalCallExpression, "optionalCallExpression");
+    function classProperty(key, value = null, typeAnnotation2 = null, decorators = null, computed = false, _static = false) {
+      return (0, _validateNode.default)({
+        type: "ClassProperty",
+        key,
+        value,
+        typeAnnotation: typeAnnotation2,
+        decorators,
+        computed,
+        static: _static
+      });
+    }
+    __name(classProperty, "classProperty");
+    function classAccessorProperty(key, value = null, typeAnnotation2 = null, decorators = null, computed = false, _static = false) {
+      return (0, _validateNode.default)({
+        type: "ClassAccessorProperty",
+        key,
+        value,
+        typeAnnotation: typeAnnotation2,
+        decorators,
+        computed,
+        static: _static
+      });
+    }
+    __name(classAccessorProperty, "classAccessorProperty");
+    function classPrivateProperty(key, value = null, decorators = null, _static = false) {
+      return (0, _validateNode.default)({
+        type: "ClassPrivateProperty",
+        key,
+        value,
+        decorators,
+        static: _static
+      });
+    }
+    __name(classPrivateProperty, "classPrivateProperty");
+    function classPrivateMethod(kind = "method", key, params, body, _static = false) {
+      return (0, _validateNode.default)({
+        type: "ClassPrivateMethod",
+        kind,
+        key,
+        params,
+        body,
+        static: _static
+      });
+    }
+    __name(classPrivateMethod, "classPrivateMethod");
+    function privateName(id) {
+      return (0, _validateNode.default)({
+        type: "PrivateName",
+        id
+      });
+    }
+    __name(privateName, "privateName");
+    function staticBlock(body) {
+      return (0, _validateNode.default)({
+        type: "StaticBlock",
+        body
+      });
+    }
+    __name(staticBlock, "staticBlock");
+    function anyTypeAnnotation() {
+      return {
+        type: "AnyTypeAnnotation"
+      };
+    }
+    __name(anyTypeAnnotation, "anyTypeAnnotation");
+    function arrayTypeAnnotation(elementType) {
+      return (0, _validateNode.default)({
+        type: "ArrayTypeAnnotation",
+        elementType
+      });
+    }
+    __name(arrayTypeAnnotation, "arrayTypeAnnotation");
+    function booleanTypeAnnotation() {
+      return {
+        type: "BooleanTypeAnnotation"
+      };
+    }
+    __name(booleanTypeAnnotation, "booleanTypeAnnotation");
+    function booleanLiteralTypeAnnotation(value) {
+      return (0, _validateNode.default)({
+        type: "BooleanLiteralTypeAnnotation",
+        value
+      });
+    }
+    __name(booleanLiteralTypeAnnotation, "booleanLiteralTypeAnnotation");
+    function nullLiteralTypeAnnotation() {
+      return {
+        type: "NullLiteralTypeAnnotation"
+      };
+    }
+    __name(nullLiteralTypeAnnotation, "nullLiteralTypeAnnotation");
+    function classImplements(id, typeParameters = null) {
+      return (0, _validateNode.default)({
+        type: "ClassImplements",
+        id,
+        typeParameters
+      });
+    }
+    __name(classImplements, "classImplements");
+    function declareClass(id, typeParameters = null, _extends = null, body) {
+      return (0, _validateNode.default)({
+        type: "DeclareClass",
+        id,
+        typeParameters,
+        extends: _extends,
+        body
+      });
+    }
+    __name(declareClass, "declareClass");
+    function declareFunction(id) {
+      return (0, _validateNode.default)({
+        type: "DeclareFunction",
+        id
+      });
+    }
+    __name(declareFunction, "declareFunction");
+    function declareInterface(id, typeParameters = null, _extends = null, body) {
+      return (0, _validateNode.default)({
+        type: "DeclareInterface",
+        id,
+        typeParameters,
+        extends: _extends,
+        body
+      });
+    }
+    __name(declareInterface, "declareInterface");
+    function declareModule(id, body, kind = null) {
+      return (0, _validateNode.default)({
+        type: "DeclareModule",
+        id,
+        body,
+        kind
+      });
+    }
+    __name(declareModule, "declareModule");
+    function declareModuleExports(typeAnnotation2) {
+      return (0, _validateNode.default)({
+        type: "DeclareModuleExports",
+        typeAnnotation: typeAnnotation2
+      });
+    }
+    __name(declareModuleExports, "declareModuleExports");
+    function declareTypeAlias(id, typeParameters = null, right) {
+      return (0, _validateNode.default)({
+        type: "DeclareTypeAlias",
+        id,
+        typeParameters,
+        right
+      });
+    }
+    __name(declareTypeAlias, "declareTypeAlias");
+    function declareOpaqueType(id, typeParameters = null, supertype = null) {
+      return (0, _validateNode.default)({
+        type: "DeclareOpaqueType",
+        id,
+        typeParameters,
+        supertype
+      });
+    }
+    __name(declareOpaqueType, "declareOpaqueType");
+    function declareVariable(id) {
+      return (0, _validateNode.default)({
+        type: "DeclareVariable",
+        id
+      });
+    }
+    __name(declareVariable, "declareVariable");
+    function declareExportDeclaration(declaration = null, specifiers = null, source = null) {
+      return (0, _validateNode.default)({
+        type: "DeclareExportDeclaration",
+        declaration,
+        specifiers,
+        source
+      });
+    }
+    __name(declareExportDeclaration, "declareExportDeclaration");
+    function declareExportAllDeclaration(source) {
+      return (0, _validateNode.default)({
+        type: "DeclareExportAllDeclaration",
+        source
+      });
+    }
+    __name(declareExportAllDeclaration, "declareExportAllDeclaration");
+    function declaredPredicate(value) {
+      return (0, _validateNode.default)({
+        type: "DeclaredPredicate",
+        value
+      });
+    }
+    __name(declaredPredicate, "declaredPredicate");
+    function existsTypeAnnotation() {
+      return {
+        type: "ExistsTypeAnnotation"
+      };
+    }
+    __name(existsTypeAnnotation, "existsTypeAnnotation");
+    function functionTypeAnnotation(typeParameters = null, params, rest = null, returnType) {
+      return (0, _validateNode.default)({
+        type: "FunctionTypeAnnotation",
+        typeParameters,
+        params,
+        rest,
+        returnType
+      });
+    }
+    __name(functionTypeAnnotation, "functionTypeAnnotation");
+    function functionTypeParam(name = null, typeAnnotation2) {
+      return (0, _validateNode.default)({
+        type: "FunctionTypeParam",
+        name,
+        typeAnnotation: typeAnnotation2
+      });
+    }
+    __name(functionTypeParam, "functionTypeParam");
+    function genericTypeAnnotation(id, typeParameters = null) {
+      return (0, _validateNode.default)({
+        type: "GenericTypeAnnotation",
+        id,
+        typeParameters
+      });
+    }
+    __name(genericTypeAnnotation, "genericTypeAnnotation");
+    function inferredPredicate() {
+      return {
+        type: "InferredPredicate"
+      };
+    }
+    __name(inferredPredicate, "inferredPredicate");
+    function interfaceExtends(id, typeParameters = null) {
+      return (0, _validateNode.default)({
+        type: "InterfaceExtends",
+        id,
+        typeParameters
+      });
+    }
+    __name(interfaceExtends, "interfaceExtends");
+    function interfaceDeclaration(id, typeParameters = null, _extends = null, body) {
+      return (0, _validateNode.default)({
+        type: "InterfaceDeclaration",
+        id,
+        typeParameters,
+        extends: _extends,
+        body
+      });
+    }
+    __name(interfaceDeclaration, "interfaceDeclaration");
+    function interfaceTypeAnnotation(_extends = null, body) {
+      return (0, _validateNode.default)({
+        type: "InterfaceTypeAnnotation",
+        extends: _extends,
+        body
+      });
+    }
+    __name(interfaceTypeAnnotation, "interfaceTypeAnnotation");
+    function intersectionTypeAnnotation(types) {
+      return (0, _validateNode.default)({
+        type: "IntersectionTypeAnnotation",
+        types
+      });
+    }
+    __name(intersectionTypeAnnotation, "intersectionTypeAnnotation");
+    function mixedTypeAnnotation() {
+      return {
+        type: "MixedTypeAnnotation"
+      };
+    }
+    __name(mixedTypeAnnotation, "mixedTypeAnnotation");
+    function emptyTypeAnnotation() {
+      return {
+        type: "EmptyTypeAnnotation"
+      };
+    }
+    __name(emptyTypeAnnotation, "emptyTypeAnnotation");
+    function nullableTypeAnnotation(typeAnnotation2) {
+      return (0, _validateNode.default)({
+        type: "NullableTypeAnnotation",
+        typeAnnotation: typeAnnotation2
+      });
+    }
+    __name(nullableTypeAnnotation, "nullableTypeAnnotation");
+    function numberLiteralTypeAnnotation(value) {
+      return (0, _validateNode.default)({
+        type: "NumberLiteralTypeAnnotation",
+        value
+      });
+    }
+    __name(numberLiteralTypeAnnotation, "numberLiteralTypeAnnotation");
+    function numberTypeAnnotation() {
+      return {
+        type: "NumberTypeAnnotation"
+      };
+    }
+    __name(numberTypeAnnotation, "numberTypeAnnotation");
+    function objectTypeAnnotation(properties, indexers = [], callProperties = [], internalSlots = [], exact = false) {
+      return (0, _validateNode.default)({
+        type: "ObjectTypeAnnotation",
+        properties,
+        indexers,
+        callProperties,
+        internalSlots,
+        exact
+      });
+    }
+    __name(objectTypeAnnotation, "objectTypeAnnotation");
+    function objectTypeInternalSlot(id, value, optional, _static, method) {
+      return (0, _validateNode.default)({
+        type: "ObjectTypeInternalSlot",
+        id,
+        value,
+        optional,
+        static: _static,
+        method
+      });
+    }
+    __name(objectTypeInternalSlot, "objectTypeInternalSlot");
+    function objectTypeCallProperty(value) {
+      return (0, _validateNode.default)({
+        type: "ObjectTypeCallProperty",
+        value,
+        static: null
+      });
+    }
+    __name(objectTypeCallProperty, "objectTypeCallProperty");
+    function objectTypeIndexer(id = null, key, value, variance2 = null) {
+      return (0, _validateNode.default)({
+        type: "ObjectTypeIndexer",
+        id,
+        key,
+        value,
+        variance: variance2,
+        static: null
+      });
+    }
+    __name(objectTypeIndexer, "objectTypeIndexer");
+    function objectTypeProperty(key, value, variance2 = null) {
+      return (0, _validateNode.default)({
+        type: "ObjectTypeProperty",
+        key,
+        value,
+        variance: variance2,
+        kind: null,
+        method: null,
+        optional: null,
+        proto: null,
+        static: null
+      });
+    }
+    __name(objectTypeProperty, "objectTypeProperty");
+    function objectTypeSpreadProperty(argument) {
+      return (0, _validateNode.default)({
+        type: "ObjectTypeSpreadProperty",
+        argument
+      });
+    }
+    __name(objectTypeSpreadProperty, "objectTypeSpreadProperty");
+    function opaqueType(id, typeParameters = null, supertype = null, impltype) {
+      return (0, _validateNode.default)({
+        type: "OpaqueType",
+        id,
+        typeParameters,
+        supertype,
+        impltype
+      });
+    }
+    __name(opaqueType, "opaqueType");
+    function qualifiedTypeIdentifier(id, qualification) {
+      return (0, _validateNode.default)({
+        type: "QualifiedTypeIdentifier",
+        id,
+        qualification
+      });
+    }
+    __name(qualifiedTypeIdentifier, "qualifiedTypeIdentifier");
+    function stringLiteralTypeAnnotation(value) {
+      return (0, _validateNode.default)({
+        type: "StringLiteralTypeAnnotation",
+        value
+      });
+    }
+    __name(stringLiteralTypeAnnotation, "stringLiteralTypeAnnotation");
+    function stringTypeAnnotation() {
+      return {
+        type: "StringTypeAnnotation"
+      };
+    }
+    __name(stringTypeAnnotation, "stringTypeAnnotation");
+    function symbolTypeAnnotation() {
+      return {
+        type: "SymbolTypeAnnotation"
+      };
+    }
+    __name(symbolTypeAnnotation, "symbolTypeAnnotation");
+    function thisTypeAnnotation() {
+      return {
+        type: "ThisTypeAnnotation"
+      };
+    }
+    __name(thisTypeAnnotation, "thisTypeAnnotation");
+    function tupleTypeAnnotation(types) {
+      return (0, _validateNode.default)({
+        type: "TupleTypeAnnotation",
+        types
+      });
+    }
+    __name(tupleTypeAnnotation, "tupleTypeAnnotation");
+    function typeofTypeAnnotation(argument) {
+      return (0, _validateNode.default)({
+        type: "TypeofTypeAnnotation",
+        argument
+      });
+    }
+    __name(typeofTypeAnnotation, "typeofTypeAnnotation");
+    function typeAlias(id, typeParameters = null, right) {
+      return (0, _validateNode.default)({
+        type: "TypeAlias",
+        id,
+        typeParameters,
+        right
+      });
+    }
+    __name(typeAlias, "typeAlias");
+    function typeAnnotation(typeAnnotation2) {
+      return (0, _validateNode.default)({
+        type: "TypeAnnotation",
+        typeAnnotation: typeAnnotation2
+      });
+    }
+    __name(typeAnnotation, "typeAnnotation");
+    function typeCastExpression(expression, typeAnnotation2) {
+      return (0, _validateNode.default)({
+        type: "TypeCastExpression",
+        expression,
+        typeAnnotation: typeAnnotation2
+      });
+    }
+    __name(typeCastExpression, "typeCastExpression");
+    function typeParameter(bound = null, _default = null, variance2 = null) {
+      return (0, _validateNode.default)({
+        type: "TypeParameter",
+        bound,
+        default: _default,
+        variance: variance2,
+        name: null
+      });
+    }
+    __name(typeParameter, "typeParameter");
+    function typeParameterDeclaration(params) {
+      return (0, _validateNode.default)({
+        type: "TypeParameterDeclaration",
+        params
+      });
+    }
+    __name(typeParameterDeclaration, "typeParameterDeclaration");
+    function typeParameterInstantiation(params) {
+      return (0, _validateNode.default)({
+        type: "TypeParameterInstantiation",
+        params
+      });
+    }
+    __name(typeParameterInstantiation, "typeParameterInstantiation");
+    function unionTypeAnnotation(types) {
+      return (0, _validateNode.default)({
+        type: "UnionTypeAnnotation",
+        types
+      });
+    }
+    __name(unionTypeAnnotation, "unionTypeAnnotation");
+    function variance(kind) {
+      return (0, _validateNode.default)({
+        type: "Variance",
+        kind
+      });
+    }
+    __name(variance, "variance");
+    function voidTypeAnnotation() {
+      return {
+        type: "VoidTypeAnnotation"
+      };
+    }
+    __name(voidTypeAnnotation, "voidTypeAnnotation");
+    function enumDeclaration(id, body) {
+      return (0, _validateNode.default)({
+        type: "EnumDeclaration",
+        id,
+        body
+      });
+    }
+    __name(enumDeclaration, "enumDeclaration");
+    function enumBooleanBody(members) {
+      return (0, _validateNode.default)({
+        type: "EnumBooleanBody",
+        members,
+        explicitType: null,
+        hasUnknownMembers: null
+      });
+    }
+    __name(enumBooleanBody, "enumBooleanBody");
+    function enumNumberBody(members) {
+      return (0, _validateNode.default)({
+        type: "EnumNumberBody",
+        members,
+        explicitType: null,
+        hasUnknownMembers: null
+      });
+    }
+    __name(enumNumberBody, "enumNumberBody");
+    function enumStringBody(members) {
+      return (0, _validateNode.default)({
+        type: "EnumStringBody",
+        members,
+        explicitType: null,
+        hasUnknownMembers: null
+      });
+    }
+    __name(enumStringBody, "enumStringBody");
+    function enumSymbolBody(members) {
+      return (0, _validateNode.default)({
+        type: "EnumSymbolBody",
+        members,
+        hasUnknownMembers: null
+      });
+    }
+    __name(enumSymbolBody, "enumSymbolBody");
+    function enumBooleanMember(id) {
+      return (0, _validateNode.default)({
+        type: "EnumBooleanMember",
+        id,
+        init: null
+      });
+    }
+    __name(enumBooleanMember, "enumBooleanMember");
+    function enumNumberMember(id, init) {
+      return (0, _validateNode.default)({
+        type: "EnumNumberMember",
+        id,
+        init
+      });
+    }
+    __name(enumNumberMember, "enumNumberMember");
+    function enumStringMember(id, init) {
+      return (0, _validateNode.default)({
+        type: "EnumStringMember",
+        id,
+        init
+      });
+    }
+    __name(enumStringMember, "enumStringMember");
+    function enumDefaultedMember(id) {
+      return (0, _validateNode.default)({
+        type: "EnumDefaultedMember",
+        id
+      });
+    }
+    __name(enumDefaultedMember, "enumDefaultedMember");
+    function indexedAccessType(objectType, indexType) {
+      return (0, _validateNode.default)({
+        type: "IndexedAccessType",
+        objectType,
+        indexType
+      });
+    }
+    __name(indexedAccessType, "indexedAccessType");
+    function optionalIndexedAccessType(objectType, indexType) {
+      return (0, _validateNode.default)({
+        type: "OptionalIndexedAccessType",
+        objectType,
+        indexType,
+        optional: null
+      });
+    }
+    __name(optionalIndexedAccessType, "optionalIndexedAccessType");
+    function jsxAttribute(name, value = null) {
+      return (0, _validateNode.default)({
+        type: "JSXAttribute",
+        name,
+        value
+      });
+    }
+    __name(jsxAttribute, "jsxAttribute");
+    function jsxClosingElement(name) {
+      return (0, _validateNode.default)({
+        type: "JSXClosingElement",
+        name
+      });
+    }
+    __name(jsxClosingElement, "jsxClosingElement");
+    function jsxElement(openingElement, closingElement = null, children, selfClosing = null) {
+      return (0, _validateNode.default)({
+        type: "JSXElement",
+        openingElement,
+        closingElement,
+        children,
+        selfClosing
+      });
+    }
+    __name(jsxElement, "jsxElement");
+    function jsxEmptyExpression() {
+      return {
+        type: "JSXEmptyExpression"
+      };
+    }
+    __name(jsxEmptyExpression, "jsxEmptyExpression");
+    function jsxExpressionContainer(expression) {
+      return (0, _validateNode.default)({
+        type: "JSXExpressionContainer",
+        expression
+      });
+    }
+    __name(jsxExpressionContainer, "jsxExpressionContainer");
+    function jsxSpreadChild(expression) {
+      return (0, _validateNode.default)({
+        type: "JSXSpreadChild",
+        expression
+      });
+    }
+    __name(jsxSpreadChild, "jsxSpreadChild");
+    function jsxIdentifier(name) {
+      return (0, _validateNode.default)({
+        type: "JSXIdentifier",
+        name
+      });
+    }
+    __name(jsxIdentifier, "jsxIdentifier");
+    function jsxMemberExpression(object, property) {
+      return (0, _validateNode.default)({
+        type: "JSXMemberExpression",
+        object,
+        property
+      });
+    }
+    __name(jsxMemberExpression, "jsxMemberExpression");
+    function jsxNamespacedName(namespace, name) {
+      return (0, _validateNode.default)({
+        type: "JSXNamespacedName",
+        namespace,
+        name
+      });
+    }
+    __name(jsxNamespacedName, "jsxNamespacedName");
+    function jsxOpeningElement(name, attributes, selfClosing = false) {
+      return (0, _validateNode.default)({
+        type: "JSXOpeningElement",
+        name,
+        attributes,
+        selfClosing
+      });
+    }
+    __name(jsxOpeningElement, "jsxOpeningElement");
+    function jsxSpreadAttribute(argument) {
+      return (0, _validateNode.default)({
+        type: "JSXSpreadAttribute",
+        argument
+      });
+    }
+    __name(jsxSpreadAttribute, "jsxSpreadAttribute");
+    function jsxText(value) {
+      return (0, _validateNode.default)({
+        type: "JSXText",
+        value
+      });
+    }
+    __name(jsxText, "jsxText");
+    function jsxFragment(openingFragment, closingFragment, children) {
+      return (0, _validateNode.default)({
+        type: "JSXFragment",
+        openingFragment,
+        closingFragment,
+        children
+      });
+    }
+    __name(jsxFragment, "jsxFragment");
+    function jsxOpeningFragment() {
+      return {
+        type: "JSXOpeningFragment"
+      };
+    }
+    __name(jsxOpeningFragment, "jsxOpeningFragment");
+    function jsxClosingFragment() {
+      return {
+        type: "JSXClosingFragment"
+      };
+    }
+    __name(jsxClosingFragment, "jsxClosingFragment");
+    function noop() {
+      return {
+        type: "Noop"
+      };
+    }
+    __name(noop, "noop");
+    function placeholder(expectedNode, name) {
+      return (0, _validateNode.default)({
+        type: "Placeholder",
+        expectedNode,
+        name
+      });
+    }
+    __name(placeholder, "placeholder");
+    function v8IntrinsicIdentifier(name) {
+      return (0, _validateNode.default)({
+        type: "V8IntrinsicIdentifier",
+        name
+      });
+    }
+    __name(v8IntrinsicIdentifier, "v8IntrinsicIdentifier");
+    function argumentPlaceholder() {
+      return {
+        type: "ArgumentPlaceholder"
+      };
+    }
+    __name(argumentPlaceholder, "argumentPlaceholder");
+    function bindExpression(object, callee) {
+      return (0, _validateNode.default)({
+        type: "BindExpression",
+        object,
+        callee
+      });
+    }
+    __name(bindExpression, "bindExpression");
+    function importAttribute(key, value) {
+      return (0, _validateNode.default)({
+        type: "ImportAttribute",
+        key,
+        value
+      });
+    }
+    __name(importAttribute, "importAttribute");
+    function decorator(expression) {
+      return (0, _validateNode.default)({
+        type: "Decorator",
+        expression
+      });
+    }
+    __name(decorator, "decorator");
+    function doExpression(body, async = false) {
+      return (0, _validateNode.default)({
+        type: "DoExpression",
+        body,
+        async
+      });
+    }
+    __name(doExpression, "doExpression");
+    function exportDefaultSpecifier(exported) {
+      return (0, _validateNode.default)({
+        type: "ExportDefaultSpecifier",
+        exported
+      });
+    }
+    __name(exportDefaultSpecifier, "exportDefaultSpecifier");
+    function recordExpression(properties) {
+      return (0, _validateNode.default)({
+        type: "RecordExpression",
+        properties
+      });
+    }
+    __name(recordExpression, "recordExpression");
+    function tupleExpression(elements = []) {
+      return (0, _validateNode.default)({
+        type: "TupleExpression",
+        elements
+      });
+    }
+    __name(tupleExpression, "tupleExpression");
+    function decimalLiteral(value) {
+      return (0, _validateNode.default)({
+        type: "DecimalLiteral",
+        value
+      });
+    }
+    __name(decimalLiteral, "decimalLiteral");
+    function moduleExpression(body) {
+      return (0, _validateNode.default)({
+        type: "ModuleExpression",
+        body
+      });
+    }
+    __name(moduleExpression, "moduleExpression");
+    function topicReference() {
+      return {
+        type: "TopicReference"
+      };
+    }
+    __name(topicReference, "topicReference");
+    function pipelineTopicExpression(expression) {
+      return (0, _validateNode.default)({
+        type: "PipelineTopicExpression",
+        expression
+      });
+    }
+    __name(pipelineTopicExpression, "pipelineTopicExpression");
+    function pipelineBareFunction(callee) {
+      return (0, _validateNode.default)({
+        type: "PipelineBareFunction",
+        callee
+      });
+    }
+    __name(pipelineBareFunction, "pipelineBareFunction");
+    function pipelinePrimaryTopicReference() {
+      return {
+        type: "PipelinePrimaryTopicReference"
+      };
+    }
+    __name(pipelinePrimaryTopicReference, "pipelinePrimaryTopicReference");
+    function tsParameterProperty(parameter) {
+      return (0, _validateNode.default)({
+        type: "TSParameterProperty",
+        parameter
+      });
+    }
+    __name(tsParameterProperty, "tsParameterProperty");
+    function tsDeclareFunction(id = null, typeParameters = null, params, returnType = null) {
+      return (0, _validateNode.default)({
+        type: "TSDeclareFunction",
+        id,
+        typeParameters,
+        params,
+        returnType
+      });
+    }
+    __name(tsDeclareFunction, "tsDeclareFunction");
+    function tsDeclareMethod(decorators = null, key, typeParameters = null, params, returnType = null) {
+      return (0, _validateNode.default)({
+        type: "TSDeclareMethod",
+        decorators,
+        key,
+        typeParameters,
+        params,
+        returnType
+      });
+    }
+    __name(tsDeclareMethod, "tsDeclareMethod");
+    function tsQualifiedName(left, right) {
+      return (0, _validateNode.default)({
+        type: "TSQualifiedName",
+        left,
+        right
+      });
+    }
+    __name(tsQualifiedName, "tsQualifiedName");
+    function tsCallSignatureDeclaration(typeParameters = null, parameters, typeAnnotation2 = null) {
+      return (0, _validateNode.default)({
+        type: "TSCallSignatureDeclaration",
+        typeParameters,
+        parameters,
+        typeAnnotation: typeAnnotation2
+      });
+    }
+    __name(tsCallSignatureDeclaration, "tsCallSignatureDeclaration");
+    function tsConstructSignatureDeclaration(typeParameters = null, parameters, typeAnnotation2 = null) {
+      return (0, _validateNode.default)({
+        type: "TSConstructSignatureDeclaration",
+        typeParameters,
+        parameters,
+        typeAnnotation: typeAnnotation2
+      });
+    }
+    __name(tsConstructSignatureDeclaration, "tsConstructSignatureDeclaration");
+    function tsPropertySignature(key, typeAnnotation2 = null, initializer = null) {
+      return (0, _validateNode.default)({
+        type: "TSPropertySignature",
+        key,
+        typeAnnotation: typeAnnotation2,
+        initializer,
+        kind: null
+      });
+    }
+    __name(tsPropertySignature, "tsPropertySignature");
+    function tsMethodSignature(key, typeParameters = null, parameters, typeAnnotation2 = null) {
+      return (0, _validateNode.default)({
+        type: "TSMethodSignature",
+        key,
+        typeParameters,
+        parameters,
+        typeAnnotation: typeAnnotation2,
+        kind: null
+      });
+    }
+    __name(tsMethodSignature, "tsMethodSignature");
+    function tsIndexSignature(parameters, typeAnnotation2 = null) {
+      return (0, _validateNode.default)({
+        type: "TSIndexSignature",
+        parameters,
+        typeAnnotation: typeAnnotation2
+      });
+    }
+    __name(tsIndexSignature, "tsIndexSignature");
+    function tsAnyKeyword() {
+      return {
+        type: "TSAnyKeyword"
+      };
+    }
+    __name(tsAnyKeyword, "tsAnyKeyword");
+    function tsBooleanKeyword() {
+      return {
+        type: "TSBooleanKeyword"
+      };
+    }
+    __name(tsBooleanKeyword, "tsBooleanKeyword");
+    function tsBigIntKeyword() {
+      return {
+        type: "TSBigIntKeyword"
+      };
+    }
+    __name(tsBigIntKeyword, "tsBigIntKeyword");
+    function tsIntrinsicKeyword() {
+      return {
+        type: "TSIntrinsicKeyword"
+      };
+    }
+    __name(tsIntrinsicKeyword, "tsIntrinsicKeyword");
+    function tsNeverKeyword() {
+      return {
+        type: "TSNeverKeyword"
+      };
+    }
+    __name(tsNeverKeyword, "tsNeverKeyword");
+    function tsNullKeyword() {
+      return {
+        type: "TSNullKeyword"
+      };
+    }
+    __name(tsNullKeyword, "tsNullKeyword");
+    function tsNumberKeyword() {
+      return {
+        type: "TSNumberKeyword"
+      };
+    }
+    __name(tsNumberKeyword, "tsNumberKeyword");
+    function tsObjectKeyword() {
+      return {
+        type: "TSObjectKeyword"
+      };
+    }
+    __name(tsObjectKeyword, "tsObjectKeyword");
+    function tsStringKeyword() {
+      return {
+        type: "TSStringKeyword"
+      };
+    }
+    __name(tsStringKeyword, "tsStringKeyword");
+    function tsSymbolKeyword() {
+      return {
+        type: "TSSymbolKeyword"
+      };
+    }
+    __name(tsSymbolKeyword, "tsSymbolKeyword");
+    function tsUndefinedKeyword() {
+      return {
+        type: "TSUndefinedKeyword"
+      };
+    }
+    __name(tsUndefinedKeyword, "tsUndefinedKeyword");
+    function tsUnknownKeyword() {
+      return {
+        type: "TSUnknownKeyword"
+      };
+    }
+    __name(tsUnknownKeyword, "tsUnknownKeyword");
+    function tsVoidKeyword() {
+      return {
+        type: "TSVoidKeyword"
+      };
+    }
+    __name(tsVoidKeyword, "tsVoidKeyword");
+    function tsThisType() {
+      return {
+        type: "TSThisType"
+      };
+    }
+    __name(tsThisType, "tsThisType");
+    function tsFunctionType(typeParameters = null, parameters, typeAnnotation2 = null) {
+      return (0, _validateNode.default)({
+        type: "TSFunctionType",
+        typeParameters,
+        parameters,
+        typeAnnotation: typeAnnotation2
+      });
+    }
+    __name(tsFunctionType, "tsFunctionType");
+    function tsConstructorType(typeParameters = null, parameters, typeAnnotation2 = null) {
+      return (0, _validateNode.default)({
+        type: "TSConstructorType",
+        typeParameters,
+        parameters,
+        typeAnnotation: typeAnnotation2
+      });
+    }
+    __name(tsConstructorType, "tsConstructorType");
+    function tsTypeReference(typeName, typeParameters = null) {
+      return (0, _validateNode.default)({
+        type: "TSTypeReference",
+        typeName,
+        typeParameters
+      });
+    }
+    __name(tsTypeReference, "tsTypeReference");
+    function tsTypePredicate(parameterName, typeAnnotation2 = null, asserts = null) {
+      return (0, _validateNode.default)({
+        type: "TSTypePredicate",
+        parameterName,
+        typeAnnotation: typeAnnotation2,
+        asserts
+      });
+    }
+    __name(tsTypePredicate, "tsTypePredicate");
+    function tsTypeQuery(exprName, typeParameters = null) {
+      return (0, _validateNode.default)({
+        type: "TSTypeQuery",
+        exprName,
+        typeParameters
+      });
+    }
+    __name(tsTypeQuery, "tsTypeQuery");
+    function tsTypeLiteral(members) {
+      return (0, _validateNode.default)({
+        type: "TSTypeLiteral",
+        members
+      });
+    }
+    __name(tsTypeLiteral, "tsTypeLiteral");
+    function tsArrayType(elementType) {
+      return (0, _validateNode.default)({
+        type: "TSArrayType",
+        elementType
+      });
+    }
+    __name(tsArrayType, "tsArrayType");
+    function tsTupleType(elementTypes) {
+      return (0, _validateNode.default)({
+        type: "TSTupleType",
+        elementTypes
+      });
+    }
+    __name(tsTupleType, "tsTupleType");
+    function tsOptionalType(typeAnnotation2) {
+      return (0, _validateNode.default)({
+        type: "TSOptionalType",
+        typeAnnotation: typeAnnotation2
+      });
+    }
+    __name(tsOptionalType, "tsOptionalType");
+    function tsRestType(typeAnnotation2) {
+      return (0, _validateNode.default)({
+        type: "TSRestType",
+        typeAnnotation: typeAnnotation2
+      });
+    }
+    __name(tsRestType, "tsRestType");
+    function tsNamedTupleMember(label, elementType, optional = false) {
+      return (0, _validateNode.default)({
+        type: "TSNamedTupleMember",
+        label,
+        elementType,
+        optional
+      });
+    }
+    __name(tsNamedTupleMember, "tsNamedTupleMember");
+    function tsUnionType(types) {
+      return (0, _validateNode.default)({
+        type: "TSUnionType",
+        types
+      });
+    }
+    __name(tsUnionType, "tsUnionType");
+    function tsIntersectionType(types) {
+      return (0, _validateNode.default)({
+        type: "TSIntersectionType",
+        types
+      });
+    }
+    __name(tsIntersectionType, "tsIntersectionType");
+    function tsConditionalType(checkType, extendsType, trueType, falseType) {
+      return (0, _validateNode.default)({
+        type: "TSConditionalType",
+        checkType,
+        extendsType,
+        trueType,
+        falseType
+      });
+    }
+    __name(tsConditionalType, "tsConditionalType");
+    function tsInferType(typeParameter2) {
+      return (0, _validateNode.default)({
+        type: "TSInferType",
+        typeParameter: typeParameter2
+      });
+    }
+    __name(tsInferType, "tsInferType");
+    function tsParenthesizedType(typeAnnotation2) {
+      return (0, _validateNode.default)({
+        type: "TSParenthesizedType",
+        typeAnnotation: typeAnnotation2
+      });
+    }
+    __name(tsParenthesizedType, "tsParenthesizedType");
+    function tsTypeOperator(typeAnnotation2) {
+      return (0, _validateNode.default)({
+        type: "TSTypeOperator",
+        typeAnnotation: typeAnnotation2,
+        operator: null
+      });
+    }
+    __name(tsTypeOperator, "tsTypeOperator");
+    function tsIndexedAccessType(objectType, indexType) {
+      return (0, _validateNode.default)({
+        type: "TSIndexedAccessType",
+        objectType,
+        indexType
+      });
+    }
+    __name(tsIndexedAccessType, "tsIndexedAccessType");
+    function tsMappedType(typeParameter2, typeAnnotation2 = null, nameType = null) {
+      return (0, _validateNode.default)({
+        type: "TSMappedType",
+        typeParameter: typeParameter2,
+        typeAnnotation: typeAnnotation2,
+        nameType
+      });
+    }
+    __name(tsMappedType, "tsMappedType");
+    function tsLiteralType(literal) {
+      return (0, _validateNode.default)({
+        type: "TSLiteralType",
+        literal
+      });
+    }
+    __name(tsLiteralType, "tsLiteralType");
+    function tsExpressionWithTypeArguments(expression, typeParameters = null) {
+      return (0, _validateNode.default)({
+        type: "TSExpressionWithTypeArguments",
+        expression,
+        typeParameters
+      });
+    }
+    __name(tsExpressionWithTypeArguments, "tsExpressionWithTypeArguments");
+    function tsInterfaceDeclaration(id, typeParameters = null, _extends = null, body) {
+      return (0, _validateNode.default)({
+        type: "TSInterfaceDeclaration",
+        id,
+        typeParameters,
+        extends: _extends,
+        body
+      });
+    }
+    __name(tsInterfaceDeclaration, "tsInterfaceDeclaration");
+    function tsInterfaceBody(body) {
+      return (0, _validateNode.default)({
+        type: "TSInterfaceBody",
+        body
+      });
+    }
+    __name(tsInterfaceBody, "tsInterfaceBody");
+    function tsTypeAliasDeclaration(id, typeParameters = null, typeAnnotation2) {
+      return (0, _validateNode.default)({
+        type: "TSTypeAliasDeclaration",
+        id,
+        typeParameters,
+        typeAnnotation: typeAnnotation2
+      });
+    }
+    __name(tsTypeAliasDeclaration, "tsTypeAliasDeclaration");
+    function tsInstantiationExpression(expression, typeParameters = null) {
+      return (0, _validateNode.default)({
+        type: "TSInstantiationExpression",
+        expression,
+        typeParameters
+      });
+    }
+    __name(tsInstantiationExpression, "tsInstantiationExpression");
+    function tsAsExpression(expression, typeAnnotation2) {
+      return (0, _validateNode.default)({
+        type: "TSAsExpression",
+        expression,
+        typeAnnotation: typeAnnotation2
+      });
+    }
+    __name(tsAsExpression, "tsAsExpression");
+    function tsSatisfiesExpression(expression, typeAnnotation2) {
+      return (0, _validateNode.default)({
+        type: "TSSatisfiesExpression",
+        expression,
+        typeAnnotation: typeAnnotation2
+      });
+    }
+    __name(tsSatisfiesExpression, "tsSatisfiesExpression");
+    function tsTypeAssertion(typeAnnotation2, expression) {
+      return (0, _validateNode.default)({
+        type: "TSTypeAssertion",
+        typeAnnotation: typeAnnotation2,
+        expression
+      });
+    }
+    __name(tsTypeAssertion, "tsTypeAssertion");
+    function tsEnumDeclaration(id, members) {
+      return (0, _validateNode.default)({
+        type: "TSEnumDeclaration",
+        id,
+        members
+      });
+    }
+    __name(tsEnumDeclaration, "tsEnumDeclaration");
+    function tsEnumMember(id, initializer = null) {
+      return (0, _validateNode.default)({
+        type: "TSEnumMember",
+        id,
+        initializer
+      });
+    }
+    __name(tsEnumMember, "tsEnumMember");
+    function tsModuleDeclaration(id, body) {
+      return (0, _validateNode.default)({
+        type: "TSModuleDeclaration",
+        id,
+        body
+      });
+    }
+    __name(tsModuleDeclaration, "tsModuleDeclaration");
+    function tsModuleBlock(body) {
+      return (0, _validateNode.default)({
+        type: "TSModuleBlock",
+        body
+      });
+    }
+    __name(tsModuleBlock, "tsModuleBlock");
+    function tsImportType(argument, qualifier = null, typeParameters = null) {
+      return (0, _validateNode.default)({
+        type: "TSImportType",
+        argument,
+        qualifier,
+        typeParameters
+      });
+    }
+    __name(tsImportType, "tsImportType");
+    function tsImportEqualsDeclaration(id, moduleReference) {
+      return (0, _validateNode.default)({
+        type: "TSImportEqualsDeclaration",
+        id,
+        moduleReference,
+        isExport: null
+      });
+    }
+    __name(tsImportEqualsDeclaration, "tsImportEqualsDeclaration");
+    function tsExternalModuleReference(expression) {
+      return (0, _validateNode.default)({
+        type: "TSExternalModuleReference",
+        expression
+      });
+    }
+    __name(tsExternalModuleReference, "tsExternalModuleReference");
+    function tsNonNullExpression(expression) {
+      return (0, _validateNode.default)({
+        type: "TSNonNullExpression",
+        expression
+      });
+    }
+    __name(tsNonNullExpression, "tsNonNullExpression");
+    function tsExportAssignment(expression) {
+      return (0, _validateNode.default)({
+        type: "TSExportAssignment",
+        expression
+      });
+    }
+    __name(tsExportAssignment, "tsExportAssignment");
+    function tsNamespaceExportDeclaration(id) {
+      return (0, _validateNode.default)({
+        type: "TSNamespaceExportDeclaration",
+        id
+      });
+    }
+    __name(tsNamespaceExportDeclaration, "tsNamespaceExportDeclaration");
+    function tsTypeAnnotation(typeAnnotation2) {
+      return (0, _validateNode.default)({
+        type: "TSTypeAnnotation",
+        typeAnnotation: typeAnnotation2
+      });
+    }
+    __name(tsTypeAnnotation, "tsTypeAnnotation");
+    function tsTypeParameterInstantiation(params) {
+      return (0, _validateNode.default)({
+        type: "TSTypeParameterInstantiation",
+        params
+      });
+    }
+    __name(tsTypeParameterInstantiation, "tsTypeParameterInstantiation");
+    function tsTypeParameterDeclaration(params) {
+      return (0, _validateNode.default)({
+        type: "TSTypeParameterDeclaration",
+        params
+      });
+    }
+    __name(tsTypeParameterDeclaration, "tsTypeParameterDeclaration");
+    function tsTypeParameter(constraint = null, _default = null, name) {
+      return (0, _validateNode.default)({
+        type: "TSTypeParameter",
+        constraint,
+        default: _default,
+        name
+      });
+    }
+    __name(tsTypeParameter, "tsTypeParameter");
+    function NumberLiteral(value) {
+      console.trace("The node type NumberLiteral has been renamed to NumericLiteral");
+      return numericLiteral(value);
+    }
+    __name(NumberLiteral, "NumberLiteral");
+    function RegexLiteral(pattern, flags = "") {
+      console.trace("The node type RegexLiteral has been renamed to RegExpLiteral");
+      return regExpLiteral(pattern, flags);
+    }
+    __name(RegexLiteral, "RegexLiteral");
+    function RestProperty(argument) {
+      console.trace("The node type RestProperty has been renamed to RestElement");
+      return restElement(argument);
+    }
+    __name(RestProperty, "RestProperty");
+    function SpreadProperty(argument) {
+      console.trace("The node type SpreadProperty has been renamed to SpreadElement");
+      return spreadElement(argument);
+    }
+    __name(SpreadProperty, "SpreadProperty");
+  }
+});
+
+// node_modules/@babel/generator/node_modules/@babel/types/lib/utils/react/cleanJSXElementLiteralChild.js
+var require_cleanJSXElementLiteralChild3 = __commonJS({
+  "node_modules/@babel/generator/node_modules/@babel/types/lib/utils/react/cleanJSXElementLiteralChild.js"(exports) {
+    "use strict";
+    Object.defineProperty(exports, "__esModule", {
+      value: true
+    });
+    exports.default = cleanJSXElementLiteralChild;
+    var _generated = require_generated12();
+    var _ = require_lib9();
+    function cleanJSXElementLiteralChild(child, args) {
+      const lines = child.value.split(/\r\n|\n|\r/);
+      let lastNonEmptyLine = 0;
+      for (let i = 0; i < lines.length; i++) {
+        if (lines[i].match(/[^ \t]/)) {
+          lastNonEmptyLine = i;
+        }
+      }
+      let str = "";
+      for (let i1 = 0; i1 < lines.length; i1++) {
+        const line = lines[i1];
+        const isFirstLine = i1 === 0;
+        const isLastLine = i1 === lines.length - 1;
+        const isLastNonEmptyLine = i1 === lastNonEmptyLine;
+        let trimmedLine = line.replace(/\t/g, " ");
+        if (!isFirstLine) {
+          trimmedLine = trimmedLine.replace(/^[ ]+/, "");
+        }
+        if (!isLastLine) {
+          trimmedLine = trimmedLine.replace(/[ ]+$/, "");
+        }
+        if (trimmedLine) {
+          if (!isLastNonEmptyLine) {
+            trimmedLine += " ";
+          }
+          str += trimmedLine;
+        }
+      }
+      if (str)
+        args.push((0, _.inherits)((0, _generated.stringLiteral)(str), child));
+    }
+    __name(cleanJSXElementLiteralChild, "cleanJSXElementLiteralChild");
+  }
+});
+
+// node_modules/@babel/generator/node_modules/@babel/types/lib/builders/react/buildChildren.js
+var require_buildChildren3 = __commonJS({
+  "node_modules/@babel/generator/node_modules/@babel/types/lib/builders/react/buildChildren.js"(exports) {
+    "use strict";
+    Object.defineProperty(exports, "__esModule", {
+      value: true
+    });
+    exports.default = buildChildren;
+    var _generated = require_generated11();
+    var _cleanJSXElementLiteralChild = require_cleanJSXElementLiteralChild3();
+    function buildChildren(node) {
+      const elements = [];
+      for (let i = 0; i < node.children.length; i++) {
+        let child = node.children[i];
+        if ((0, _generated.isJSXText)(child)) {
+          (0, _cleanJSXElementLiteralChild.default)(child, elements);
+          continue;
+        }
+        if ((0, _generated.isJSXExpressionContainer)(child))
+          child = child.expression;
+        if ((0, _generated.isJSXEmptyExpression)(child))
+          continue;
+        elements.push(child);
+      }
+      return elements;
+    }
+    __name(buildChildren, "buildChildren");
+  }
+});
+
+// node_modules/@babel/generator/node_modules/@babel/types/lib/validators/isNode.js
+var require_isNode3 = __commonJS({
+  "node_modules/@babel/generator/node_modules/@babel/types/lib/validators/isNode.js"(exports) {
+    "use strict";
+    Object.defineProperty(exports, "__esModule", {
+      value: true
+    });
+    exports.default = isNode;
+    var _definitions = require_definitions3();
+    function isNode(node) {
+      return !!(node && _definitions.VISITOR_KEYS[node.type]);
+    }
+    __name(isNode, "isNode");
+  }
+});
+
+// node_modules/@babel/generator/node_modules/@babel/types/lib/asserts/assertNode.js
+var require_assertNode3 = __commonJS({
+  "node_modules/@babel/generator/node_modules/@babel/types/lib/asserts/assertNode.js"(exports) {
+    "use strict";
+    Object.defineProperty(exports, "__esModule", {
+      value: true
+    });
+    exports.default = assertNode;
+    var _isNode = require_isNode3();
+    function assertNode(node) {
+      if (!(0, _isNode.default)(node)) {
+        var _node$type;
+        const type = (_node$type = node == null ? void 0 : node.type) != null ? _node$type : JSON.stringify(node);
+        throw new TypeError(`Not a valid node of type "${type}"`);
+      }
+    }
+    __name(assertNode, "assertNode");
+  }
+});
+
+// node_modules/@babel/generator/node_modules/@babel/types/lib/asserts/generated/index.js
+var require_generated13 = __commonJS({
+  "node_modules/@babel/generator/node_modules/@babel/types/lib/asserts/generated/index.js"(exports) {
+    "use strict";
+    Object.defineProperty(exports, "__esModule", {
+      value: true
+    });
+    exports.assertAccessor = assertAccessor;
+    exports.assertAnyTypeAnnotation = assertAnyTypeAnnotation;
+    exports.assertArgumentPlaceholder = assertArgumentPlaceholder;
+    exports.assertArrayExpression = assertArrayExpression;
+    exports.assertArrayPattern = assertArrayPattern;
+    exports.assertArrayTypeAnnotation = assertArrayTypeAnnotation;
+    exports.assertArrowFunctionExpression = assertArrowFunctionExpression;
+    exports.assertAssignmentExpression = assertAssignmentExpression;
+    exports.assertAssignmentPattern = assertAssignmentPattern;
+    exports.assertAwaitExpression = assertAwaitExpression;
+    exports.assertBigIntLiteral = assertBigIntLiteral;
+    exports.assertBinary = assertBinary;
+    exports.assertBinaryExpression = assertBinaryExpression;
+    exports.assertBindExpression = assertBindExpression;
+    exports.assertBlock = assertBlock;
+    exports.assertBlockParent = assertBlockParent;
+    exports.assertBlockStatement = assertBlockStatement;
+    exports.assertBooleanLiteral = assertBooleanLiteral;
+    exports.assertBooleanLiteralTypeAnnotation = assertBooleanLiteralTypeAnnotation;
+    exports.assertBooleanTypeAnnotation = assertBooleanTypeAnnotation;
+    exports.assertBreakStatement = assertBreakStatement;
+    exports.assertCallExpression = assertCallExpression;
+    exports.assertCatchClause = assertCatchClause;
+    exports.assertClass = assertClass;
+    exports.assertClassAccessorProperty = assertClassAccessorProperty;
+    exports.assertClassBody = assertClassBody;
+    exports.assertClassDeclaration = assertClassDeclaration;
+    exports.assertClassExpression = assertClassExpression;
+    exports.assertClassImplements = assertClassImplements;
+    exports.assertClassMethod = assertClassMethod;
+    exports.assertClassPrivateMethod = assertClassPrivateMethod;
+    exports.assertClassPrivateProperty = assertClassPrivateProperty;
+    exports.assertClassProperty = assertClassProperty;
+    exports.assertCompletionStatement = assertCompletionStatement;
+    exports.assertConditional = assertConditional;
+    exports.assertConditionalExpression = assertConditionalExpression;
+    exports.assertContinueStatement = assertContinueStatement;
+    exports.assertDebuggerStatement = assertDebuggerStatement;
+    exports.assertDecimalLiteral = assertDecimalLiteral;
+    exports.assertDeclaration = assertDeclaration;
+    exports.assertDeclareClass = assertDeclareClass;
+    exports.assertDeclareExportAllDeclaration = assertDeclareExportAllDeclaration;
+    exports.assertDeclareExportDeclaration = assertDeclareExportDeclaration;
+    exports.assertDeclareFunction = assertDeclareFunction;
+    exports.assertDeclareInterface = assertDeclareInterface;
+    exports.assertDeclareModule = assertDeclareModule;
+    exports.assertDeclareModuleExports = assertDeclareModuleExports;
+    exports.assertDeclareOpaqueType = assertDeclareOpaqueType;
+    exports.assertDeclareTypeAlias = assertDeclareTypeAlias;
+    exports.assertDeclareVariable = assertDeclareVariable;
+    exports.assertDeclaredPredicate = assertDeclaredPredicate;
+    exports.assertDecorator = assertDecorator;
+    exports.assertDirective = assertDirective;
+    exports.assertDirectiveLiteral = assertDirectiveLiteral;
+    exports.assertDoExpression = assertDoExpression;
+    exports.assertDoWhileStatement = assertDoWhileStatement;
+    exports.assertEmptyStatement = assertEmptyStatement;
+    exports.assertEmptyTypeAnnotation = assertEmptyTypeAnnotation;
+    exports.assertEnumBody = assertEnumBody;
+    exports.assertEnumBooleanBody = assertEnumBooleanBody;
+    exports.assertEnumBooleanMember = assertEnumBooleanMember;
+    exports.assertEnumDeclaration = assertEnumDeclaration;
+    exports.assertEnumDefaultedMember = assertEnumDefaultedMember;
+    exports.assertEnumMember = assertEnumMember;
+    exports.assertEnumNumberBody = assertEnumNumberBody;
+    exports.assertEnumNumberMember = assertEnumNumberMember;
+    exports.assertEnumStringBody = assertEnumStringBody;
+    exports.assertEnumStringMember = assertEnumStringMember;
+    exports.assertEnumSymbolBody = assertEnumSymbolBody;
+    exports.assertExistsTypeAnnotation = assertExistsTypeAnnotation;
+    exports.assertExportAllDeclaration = assertExportAllDeclaration;
+    exports.assertExportDeclaration = assertExportDeclaration;
+    exports.assertExportDefaultDeclaration = assertExportDefaultDeclaration;
+    exports.assertExportDefaultSpecifier = assertExportDefaultSpecifier;
+    exports.assertExportNamedDeclaration = assertExportNamedDeclaration;
+    exports.assertExportNamespaceSpecifier = assertExportNamespaceSpecifier;
+    exports.assertExportSpecifier = assertExportSpecifier;
+    exports.assertExpression = assertExpression;
+    exports.assertExpressionStatement = assertExpressionStatement;
+    exports.assertExpressionWrapper = assertExpressionWrapper;
+    exports.assertFile = assertFile;
+    exports.assertFlow = assertFlow;
+    exports.assertFlowBaseAnnotation = assertFlowBaseAnnotation;
+    exports.assertFlowDeclaration = assertFlowDeclaration;
+    exports.assertFlowPredicate = assertFlowPredicate;
+    exports.assertFlowType = assertFlowType;
+    exports.assertFor = assertFor;
+    exports.assertForInStatement = assertForInStatement;
+    exports.assertForOfStatement = assertForOfStatement;
+    exports.assertForStatement = assertForStatement;
+    exports.assertForXStatement = assertForXStatement;
+    exports.assertFunction = assertFunction;
+    exports.assertFunctionDeclaration = assertFunctionDeclaration;
+    exports.assertFunctionExpression = assertFunctionExpression;
+    exports.assertFunctionParent = assertFunctionParent;
+    exports.assertFunctionTypeAnnotation = assertFunctionTypeAnnotation;
+    exports.assertFunctionTypeParam = assertFunctionTypeParam;
+    exports.assertGenericTypeAnnotation = assertGenericTypeAnnotation;
+    exports.assertIdentifier = assertIdentifier;
+    exports.assertIfStatement = assertIfStatement;
+    exports.assertImmutable = assertImmutable;
+    exports.assertImport = assertImport;
+    exports.assertImportAttribute = assertImportAttribute;
+    exports.assertImportDeclaration = assertImportDeclaration;
+    exports.assertImportDefaultSpecifier = assertImportDefaultSpecifier;
+    exports.assertImportNamespaceSpecifier = assertImportNamespaceSpecifier;
+    exports.assertImportSpecifier = assertImportSpecifier;
+    exports.assertIndexedAccessType = assertIndexedAccessType;
+    exports.assertInferredPredicate = assertInferredPredicate;
+    exports.assertInterfaceDeclaration = assertInterfaceDeclaration;
+    exports.assertInterfaceExtends = assertInterfaceExtends;
+    exports.assertInterfaceTypeAnnotation = assertInterfaceTypeAnnotation;
+    exports.assertInterpreterDirective = assertInterpreterDirective;
+    exports.assertIntersectionTypeAnnotation = assertIntersectionTypeAnnotation;
+    exports.assertJSX = assertJSX;
+    exports.assertJSXAttribute = assertJSXAttribute;
+    exports.assertJSXClosingElement = assertJSXClosingElement;
+    exports.assertJSXClosingFragment = assertJSXClosingFragment;
+    exports.assertJSXElement = assertJSXElement;
+    exports.assertJSXEmptyExpression = assertJSXEmptyExpression;
+    exports.assertJSXExpressionContainer = assertJSXExpressionContainer;
+    exports.assertJSXFragment = assertJSXFragment;
+    exports.assertJSXIdentifier = assertJSXIdentifier;
+    exports.assertJSXMemberExpression = assertJSXMemberExpression;
+    exports.assertJSXNamespacedName = assertJSXNamespacedName;
+    exports.assertJSXOpeningElement = assertJSXOpeningElement;
+    exports.assertJSXOpeningFragment = assertJSXOpeningFragment;
+    exports.assertJSXSpreadAttribute = assertJSXSpreadAttribute;
+    exports.assertJSXSpreadChild = assertJSXSpreadChild;
+    exports.assertJSXText = assertJSXText;
+    exports.assertLVal = assertLVal;
+    exports.assertLabeledStatement = assertLabeledStatement;
+    exports.assertLiteral = assertLiteral;
+    exports.assertLogicalExpression = assertLogicalExpression;
+    exports.assertLoop = assertLoop;
+    exports.assertMemberExpression = assertMemberExpression;
+    exports.assertMetaProperty = assertMetaProperty;
+    exports.assertMethod = assertMethod;
+    exports.assertMiscellaneous = assertMiscellaneous;
+    exports.assertMixedTypeAnnotation = assertMixedTypeAnnotation;
+    exports.assertModuleDeclaration = assertModuleDeclaration;
+    exports.assertModuleExpression = assertModuleExpression;
+    exports.assertModuleSpecifier = assertModuleSpecifier;
+    exports.assertNewExpression = assertNewExpression;
+    exports.assertNoop = assertNoop;
+    exports.assertNullLiteral = assertNullLiteral;
+    exports.assertNullLiteralTypeAnnotation = assertNullLiteralTypeAnnotation;
+    exports.assertNullableTypeAnnotation = assertNullableTypeAnnotation;
+    exports.assertNumberLiteral = assertNumberLiteral;
+    exports.assertNumberLiteralTypeAnnotation = assertNumberLiteralTypeAnnotation;
+    exports.assertNumberTypeAnnotation = assertNumberTypeAnnotation;
+    exports.assertNumericLiteral = assertNumericLiteral;
+    exports.assertObjectExpression = assertObjectExpression;
+    exports.assertObjectMember = assertObjectMember;
+    exports.assertObjectMethod = assertObjectMethod;
+    exports.assertObjectPattern = assertObjectPattern;
+    exports.assertObjectProperty = assertObjectProperty;
+    exports.assertObjectTypeAnnotation = assertObjectTypeAnnotation;
+    exports.assertObjectTypeCallProperty = assertObjectTypeCallProperty;
+    exports.assertObjectTypeIndexer = assertObjectTypeIndexer;
+    exports.assertObjectTypeInternalSlot = assertObjectTypeInternalSlot;
+    exports.assertObjectTypeProperty = assertObjectTypeProperty;
+    exports.assertObjectTypeSpreadProperty = assertObjectTypeSpreadProperty;
+    exports.assertOpaqueType = assertOpaqueType;
+    exports.assertOptionalCallExpression = assertOptionalCallExpression;
+    exports.assertOptionalIndexedAccessType = assertOptionalIndexedAccessType;
+    exports.assertOptionalMemberExpression = assertOptionalMemberExpression;
+    exports.assertParenthesizedExpression = assertParenthesizedExpression;
+    exports.assertPattern = assertPattern;
+    exports.assertPatternLike = assertPatternLike;
+    exports.assertPipelineBareFunction = assertPipelineBareFunction;
+    exports.assertPipelinePrimaryTopicReference = assertPipelinePrimaryTopicReference;
+    exports.assertPipelineTopicExpression = assertPipelineTopicExpression;
+    exports.assertPlaceholder = assertPlaceholder;
+    exports.assertPrivate = assertPrivate;
+    exports.assertPrivateName = assertPrivateName;
+    exports.assertProgram = assertProgram;
+    exports.assertProperty = assertProperty;
+    exports.assertPureish = assertPureish;
+    exports.assertQualifiedTypeIdentifier = assertQualifiedTypeIdentifier;
+    exports.assertRecordExpression = assertRecordExpression;
+    exports.assertRegExpLiteral = assertRegExpLiteral;
+    exports.assertRegexLiteral = assertRegexLiteral;
+    exports.assertRestElement = assertRestElement;
+    exports.assertRestProperty = assertRestProperty;
+    exports.assertReturnStatement = assertReturnStatement;
+    exports.assertScopable = assertScopable;
+    exports.assertSequenceExpression = assertSequenceExpression;
+    exports.assertSpreadElement = assertSpreadElement;
+    exports.assertSpreadProperty = assertSpreadProperty;
+    exports.assertStandardized = assertStandardized;
+    exports.assertStatement = assertStatement;
+    exports.assertStaticBlock = assertStaticBlock;
+    exports.assertStringLiteral = assertStringLiteral;
+    exports.assertStringLiteralTypeAnnotation = assertStringLiteralTypeAnnotation;
+    exports.assertStringTypeAnnotation = assertStringTypeAnnotation;
+    exports.assertSuper = assertSuper;
+    exports.assertSwitchCase = assertSwitchCase;
+    exports.assertSwitchStatement = assertSwitchStatement;
+    exports.assertSymbolTypeAnnotation = assertSymbolTypeAnnotation;
+    exports.assertTSAnyKeyword = assertTSAnyKeyword;
+    exports.assertTSArrayType = assertTSArrayType;
+    exports.assertTSAsExpression = assertTSAsExpression;
+    exports.assertTSBaseType = assertTSBaseType;
+    exports.assertTSBigIntKeyword = assertTSBigIntKeyword;
+    exports.assertTSBooleanKeyword = assertTSBooleanKeyword;
+    exports.assertTSCallSignatureDeclaration = assertTSCallSignatureDeclaration;
+    exports.assertTSConditionalType = assertTSConditionalType;
+    exports.assertTSConstructSignatureDeclaration = assertTSConstructSignatureDeclaration;
+    exports.assertTSConstructorType = assertTSConstructorType;
+    exports.assertTSDeclareFunction = assertTSDeclareFunction;
+    exports.assertTSDeclareMethod = assertTSDeclareMethod;
+    exports.assertTSEntityName = assertTSEntityName;
+    exports.assertTSEnumDeclaration = assertTSEnumDeclaration;
+    exports.assertTSEnumMember = assertTSEnumMember;
+    exports.assertTSExportAssignment = assertTSExportAssignment;
+    exports.assertTSExpressionWithTypeArguments = assertTSExpressionWithTypeArguments;
+    exports.assertTSExternalModuleReference = assertTSExternalModuleReference;
+    exports.assertTSFunctionType = assertTSFunctionType;
+    exports.assertTSImportEqualsDeclaration = assertTSImportEqualsDeclaration;
+    exports.assertTSImportType = assertTSImportType;
+    exports.assertTSIndexSignature = assertTSIndexSignature;
+    exports.assertTSIndexedAccessType = assertTSIndexedAccessType;
+    exports.assertTSInferType = assertTSInferType;
+    exports.assertTSInstantiationExpression = assertTSInstantiationExpression;
+    exports.assertTSInterfaceBody = assertTSInterfaceBody;
+    exports.assertTSInterfaceDeclaration = assertTSInterfaceDeclaration;
+    exports.assertTSIntersectionType = assertTSIntersectionType;
+    exports.assertTSIntrinsicKeyword = assertTSIntrinsicKeyword;
+    exports.assertTSLiteralType = assertTSLiteralType;
+    exports.assertTSMappedType = assertTSMappedType;
+    exports.assertTSMethodSignature = assertTSMethodSignature;
+    exports.assertTSModuleBlock = assertTSModuleBlock;
+    exports.assertTSModuleDeclaration = assertTSModuleDeclaration;
+    exports.assertTSNamedTupleMember = assertTSNamedTupleMember;
+    exports.assertTSNamespaceExportDeclaration = assertTSNamespaceExportDeclaration;
+    exports.assertTSNeverKeyword = assertTSNeverKeyword;
+    exports.assertTSNonNullExpression = assertTSNonNullExpression;
+    exports.assertTSNullKeyword = assertTSNullKeyword;
+    exports.assertTSNumberKeyword = assertTSNumberKeyword;
+    exports.assertTSObjectKeyword = assertTSObjectKeyword;
+    exports.assertTSOptionalType = assertTSOptionalType;
+    exports.assertTSParameterProperty = assertTSParameterProperty;
+    exports.assertTSParenthesizedType = assertTSParenthesizedType;
+    exports.assertTSPropertySignature = assertTSPropertySignature;
+    exports.assertTSQualifiedName = assertTSQualifiedName;
+    exports.assertTSRestType = assertTSRestType;
+    exports.assertTSSatisfiesExpression = assertTSSatisfiesExpression;
+    exports.assertTSStringKeyword = assertTSStringKeyword;
+    exports.assertTSSymbolKeyword = assertTSSymbolKeyword;
+    exports.assertTSThisType = assertTSThisType;
+    exports.assertTSTupleType = assertTSTupleType;
+    exports.assertTSType = assertTSType;
+    exports.assertTSTypeAliasDeclaration = assertTSTypeAliasDeclaration;
+    exports.assertTSTypeAnnotation = assertTSTypeAnnotation;
+    exports.assertTSTypeAssertion = assertTSTypeAssertion;
+    exports.assertTSTypeElement = assertTSTypeElement;
+    exports.assertTSTypeLiteral = assertTSTypeLiteral;
+    exports.assertTSTypeOperator = assertTSTypeOperator;
+    exports.assertTSTypeParameter = assertTSTypeParameter;
+    exports.assertTSTypeParameterDeclaration = assertTSTypeParameterDeclaration;
+    exports.assertTSTypeParameterInstantiation = assertTSTypeParameterInstantiation;
+    exports.assertTSTypePredicate = assertTSTypePredicate;
+    exports.assertTSTypeQuery = assertTSTypeQuery;
+    exports.assertTSTypeReference = assertTSTypeReference;
+    exports.assertTSUndefinedKeyword = assertTSUndefinedKeyword;
+    exports.assertTSUnionType = assertTSUnionType;
+    exports.assertTSUnknownKeyword = assertTSUnknownKeyword;
+    exports.assertTSVoidKeyword = assertTSVoidKeyword;
+    exports.assertTaggedTemplateExpression = assertTaggedTemplateExpression;
+    exports.assertTemplateElement = assertTemplateElement;
+    exports.assertTemplateLiteral = assertTemplateLiteral;
+    exports.assertTerminatorless = assertTerminatorless;
+    exports.assertThisExpression = assertThisExpression;
+    exports.assertThisTypeAnnotation = assertThisTypeAnnotation;
+    exports.assertThrowStatement = assertThrowStatement;
+    exports.assertTopicReference = assertTopicReference;
+    exports.assertTryStatement = assertTryStatement;
+    exports.assertTupleExpression = assertTupleExpression;
+    exports.assertTupleTypeAnnotation = assertTupleTypeAnnotation;
+    exports.assertTypeAlias = assertTypeAlias;
+    exports.assertTypeAnnotation = assertTypeAnnotation;
+    exports.assertTypeCastExpression = assertTypeCastExpression;
+    exports.assertTypeParameter = assertTypeParameter;
+    exports.assertTypeParameterDeclaration = assertTypeParameterDeclaration;
+    exports.assertTypeParameterInstantiation = assertTypeParameterInstantiation;
+    exports.assertTypeScript = assertTypeScript;
+    exports.assertTypeofTypeAnnotation = assertTypeofTypeAnnotation;
+    exports.assertUnaryExpression = assertUnaryExpression;
+    exports.assertUnaryLike = assertUnaryLike;
+    exports.assertUnionTypeAnnotation = assertUnionTypeAnnotation;
+    exports.assertUpdateExpression = assertUpdateExpression;
+    exports.assertUserWhitespacable = assertUserWhitespacable;
+    exports.assertV8IntrinsicIdentifier = assertV8IntrinsicIdentifier;
+    exports.assertVariableDeclaration = assertVariableDeclaration;
+    exports.assertVariableDeclarator = assertVariableDeclarator;
+    exports.assertVariance = assertVariance;
+    exports.assertVoidTypeAnnotation = assertVoidTypeAnnotation;
+    exports.assertWhile = assertWhile;
+    exports.assertWhileStatement = assertWhileStatement;
+    exports.assertWithStatement = assertWithStatement;
+    exports.assertYieldExpression = assertYieldExpression;
+    var _is = require_is3();
+    function assert(type, node, opts) {
+      if (!(0, _is.default)(type, node, opts)) {
+        throw new Error(`Expected type "${type}" with option ${JSON.stringify(opts)}, but instead got "${node.type}".`);
+      }
+    }
+    __name(assert, "assert");
+    function assertArrayExpression(node, opts) {
+      assert("ArrayExpression", node, opts);
+    }
+    __name(assertArrayExpression, "assertArrayExpression");
+    function assertAssignmentExpression(node, opts) {
+      assert("AssignmentExpression", node, opts);
+    }
+    __name(assertAssignmentExpression, "assertAssignmentExpression");
+    function assertBinaryExpression(node, opts) {
+      assert("BinaryExpression", node, opts);
+    }
+    __name(assertBinaryExpression, "assertBinaryExpression");
+    function assertInterpreterDirective(node, opts) {
+      assert("InterpreterDirective", node, opts);
+    }
+    __name(assertInterpreterDirective, "assertInterpreterDirective");
+    function assertDirective(node, opts) {
+      assert("Directive", node, opts);
+    }
+    __name(assertDirective, "assertDirective");
+    function assertDirectiveLiteral(node, opts) {
+      assert("DirectiveLiteral", node, opts);
+    }
+    __name(assertDirectiveLiteral, "assertDirectiveLiteral");
+    function assertBlockStatement(node, opts) {
+      assert("BlockStatement", node, opts);
+    }
+    __name(assertBlockStatement, "assertBlockStatement");
+    function assertBreakStatement(node, opts) {
+      assert("BreakStatement", node, opts);
+    }
+    __name(assertBreakStatement, "assertBreakStatement");
+    function assertCallExpression(node, opts) {
+      assert("CallExpression", node, opts);
+    }
+    __name(assertCallExpression, "assertCallExpression");
+    function assertCatchClause(node, opts) {
+      assert("CatchClause", node, opts);
+    }
+    __name(assertCatchClause, "assertCatchClause");
+    function assertConditionalExpression(node, opts) {
+      assert("ConditionalExpression", node, opts);
+    }
+    __name(assertConditionalExpression, "assertConditionalExpression");
+    function assertContinueStatement(node, opts) {
+      assert("ContinueStatement", node, opts);
+    }
+    __name(assertContinueStatement, "assertContinueStatement");
+    function assertDebuggerStatement(node, opts) {
+      assert("DebuggerStatement", node, opts);
+    }
+    __name(assertDebuggerStatement, "assertDebuggerStatement");
+    function assertDoWhileStatement(node, opts) {
+      assert("DoWhileStatement", node, opts);
+    }
+    __name(assertDoWhileStatement, "assertDoWhileStatement");
+    function assertEmptyStatement(node, opts) {
+      assert("EmptyStatement", node, opts);
+    }
+    __name(assertEmptyStatement, "assertEmptyStatement");
+    function assertExpressionStatement(node, opts) {
+      assert("ExpressionStatement", node, opts);
+    }
+    __name(assertExpressionStatement, "assertExpressionStatement");
+    function assertFile(node, opts) {
+      assert("File", node, opts);
+    }
+    __name(assertFile, "assertFile");
+    function assertForInStatement(node, opts) {
+      assert("ForInStatement", node, opts);
+    }
+    __name(assertForInStatement, "assertForInStatement");
+    function assertForStatement(node, opts) {
+      assert("ForStatement", node, opts);
+    }
+    __name(assertForStatement, "assertForStatement");
+    function assertFunctionDeclaration(node, opts) {
+      assert("FunctionDeclaration", node, opts);
+    }
+    __name(assertFunctionDeclaration, "assertFunctionDeclaration");
+    function assertFunctionExpression(node, opts) {
+      assert("FunctionExpression", node, opts);
+    }
+    __name(assertFunctionExpression, "assertFunctionExpression");
+    function assertIdentifier(node, opts) {
+      assert("Identifier", node, opts);
+    }
+    __name(assertIdentifier, "assertIdentifier");
+    function assertIfStatement(node, opts) {
+      assert("IfStatement", node, opts);
+    }
+    __name(assertIfStatement, "assertIfStatement");
+    function assertLabeledStatement(node, opts) {
+      assert("LabeledStatement", node, opts);
+    }
+    __name(assertLabeledStatement, "assertLabeledStatement");
+    function assertStringLiteral(node, opts) {
+      assert("StringLiteral", node, opts);
+    }
+    __name(assertStringLiteral, "assertStringLiteral");
+    function assertNumericLiteral(node, opts) {
+      assert("NumericLiteral", node, opts);
+    }
+    __name(assertNumericLiteral, "assertNumericLiteral");
+    function assertNullLiteral(node, opts) {
+      assert("NullLiteral", node, opts);
+    }
+    __name(assertNullLiteral, "assertNullLiteral");
+    function assertBooleanLiteral(node, opts) {
+      assert("BooleanLiteral", node, opts);
+    }
+    __name(assertBooleanLiteral, "assertBooleanLiteral");
+    function assertRegExpLiteral(node, opts) {
+      assert("RegExpLiteral", node, opts);
+    }
+    __name(assertRegExpLiteral, "assertRegExpLiteral");
+    function assertLogicalExpression(node, opts) {
+      assert("LogicalExpression", node, opts);
+    }
+    __name(assertLogicalExpression, "assertLogicalExpression");
+    function assertMemberExpression(node, opts) {
+      assert("MemberExpression", node, opts);
+    }
+    __name(assertMemberExpression, "assertMemberExpression");
+    function assertNewExpression(node, opts) {
+      assert("NewExpression", node, opts);
+    }
+    __name(assertNewExpression, "assertNewExpression");
+    function assertProgram(node, opts) {
+      assert("Program", node, opts);
+    }
+    __name(assertProgram, "assertProgram");
+    function assertObjectExpression(node, opts) {
+      assert("ObjectExpression", node, opts);
+    }
+    __name(assertObjectExpression, "assertObjectExpression");
+    function assertObjectMethod(node, opts) {
+      assert("ObjectMethod", node, opts);
+    }
+    __name(assertObjectMethod, "assertObjectMethod");
+    function assertObjectProperty(node, opts) {
+      assert("ObjectProperty", node, opts);
+    }
+    __name(assertObjectProperty, "assertObjectProperty");
+    function assertRestElement(node, opts) {
+      assert("RestElement", node, opts);
+    }
+    __name(assertRestElement, "assertRestElement");
+    function assertReturnStatement(node, opts) {
+      assert("ReturnStatement", node, opts);
+    }
+    __name(assertReturnStatement, "assertReturnStatement");
+    function assertSequenceExpression(node, opts) {
+      assert("SequenceExpression", node, opts);
+    }
+    __name(assertSequenceExpression, "assertSequenceExpression");
+    function assertParenthesizedExpression(node, opts) {
+      assert("ParenthesizedExpression", node, opts);
+    }
+    __name(assertParenthesizedExpression, "assertParenthesizedExpression");
+    function assertSwitchCase(node, opts) {
+      assert("SwitchCase", node, opts);
+    }
+    __name(assertSwitchCase, "assertSwitchCase");
+    function assertSwitchStatement(node, opts) {
+      assert("SwitchStatement", node, opts);
+    }
+    __name(assertSwitchStatement, "assertSwitchStatement");
+    function assertThisExpression(node, opts) {
+      assert("ThisExpression", node, opts);
+    }
+    __name(assertThisExpression, "assertThisExpression");
+    function assertThrowStatement(node, opts) {
+      assert("ThrowStatement", node, opts);
+    }
+    __name(assertThrowStatement, "assertThrowStatement");
+    function assertTryStatement(node, opts) {
+      assert("TryStatement", node, opts);
+    }
+    __name(assertTryStatement, "assertTryStatement");
+    function assertUnaryExpression(node, opts) {
+      assert("UnaryExpression", node, opts);
+    }
+    __name(assertUnaryExpression, "assertUnaryExpression");
+    function assertUpdateExpression(node, opts) {
+      assert("UpdateExpression", node, opts);
+    }
+    __name(assertUpdateExpression, "assertUpdateExpression");
+    function assertVariableDeclaration(node, opts) {
+      assert("VariableDeclaration", node, opts);
+    }
+    __name(assertVariableDeclaration, "assertVariableDeclaration");
+    function assertVariableDeclarator(node, opts) {
+      assert("VariableDeclarator", node, opts);
+    }
+    __name(assertVariableDeclarator, "assertVariableDeclarator");
+    function assertWhileStatement(node, opts) {
+      assert("WhileStatement", node, opts);
+    }
+    __name(assertWhileStatement, "assertWhileStatement");
+    function assertWithStatement(node, opts) {
+      assert("WithStatement", node, opts);
+    }
+    __name(assertWithStatement, "assertWithStatement");
+    function assertAssignmentPattern(node, opts) {
+      assert("AssignmentPattern", node, opts);
+    }
+    __name(assertAssignmentPattern, "assertAssignmentPattern");
+    function assertArrayPattern(node, opts) {
+      assert("ArrayPattern", node, opts);
+    }
+    __name(assertArrayPattern, "assertArrayPattern");
+    function assertArrowFunctionExpression(node, opts) {
+      assert("ArrowFunctionExpression", node, opts);
+    }
+    __name(assertArrowFunctionExpression, "assertArrowFunctionExpression");
+    function assertClassBody(node, opts) {
+      assert("ClassBody", node, opts);
+    }
+    __name(assertClassBody, "assertClassBody");
+    function assertClassExpression(node, opts) {
+      assert("ClassExpression", node, opts);
+    }
+    __name(assertClassExpression, "assertClassExpression");
+    function assertClassDeclaration(node, opts) {
+      assert("ClassDeclaration", node, opts);
+    }
+    __name(assertClassDeclaration, "assertClassDeclaration");
+    function assertExportAllDeclaration(node, opts) {
+      assert("ExportAllDeclaration", node, opts);
+    }
+    __name(assertExportAllDeclaration, "assertExportAllDeclaration");
+    function assertExportDefaultDeclaration(node, opts) {
+      assert("ExportDefaultDeclaration", node, opts);
+    }
+    __name(assertExportDefaultDeclaration, "assertExportDefaultDeclaration");
+    function assertExportNamedDeclaration(node, opts) {
+      assert("ExportNamedDeclaration", node, opts);
+    }
+    __name(assertExportNamedDeclaration, "assertExportNamedDeclaration");
+    function assertExportSpecifier(node, opts) {
+      assert("ExportSpecifier", node, opts);
+    }
+    __name(assertExportSpecifier, "assertExportSpecifier");
+    function assertForOfStatement(node, opts) {
+      assert("ForOfStatement", node, opts);
+    }
+    __name(assertForOfStatement, "assertForOfStatement");
+    function assertImportDeclaration(node, opts) {
+      assert("ImportDeclaration", node, opts);
+    }
+    __name(assertImportDeclaration, "assertImportDeclaration");
+    function assertImportDefaultSpecifier(node, opts) {
+      assert("ImportDefaultSpecifier", node, opts);
+    }
+    __name(assertImportDefaultSpecifier, "assertImportDefaultSpecifier");
+    function assertImportNamespaceSpecifier(node, opts) {
+      assert("ImportNamespaceSpecifier", node, opts);
+    }
+    __name(assertImportNamespaceSpecifier, "assertImportNamespaceSpecifier");
+    function assertImportSpecifier(node, opts) {
+      assert("ImportSpecifier", node, opts);
+    }
+    __name(assertImportSpecifier, "assertImportSpecifier");
+    function assertMetaProperty(node, opts) {
+      assert("MetaProperty", node, opts);
+    }
+    __name(assertMetaProperty, "assertMetaProperty");
+    function assertClassMethod(node, opts) {
+      assert("ClassMethod", node, opts);
+    }
+    __name(assertClassMethod, "assertClassMethod");
+    function assertObjectPattern(node, opts) {
+      assert("ObjectPattern", node, opts);
+    }
+    __name(assertObjectPattern, "assertObjectPattern");
+    function assertSpreadElement(node, opts) {
+      assert("SpreadElement", node, opts);
+    }
+    __name(assertSpreadElement, "assertSpreadElement");
+    function assertSuper(node, opts) {
+      assert("Super", node, opts);
+    }
+    __name(assertSuper, "assertSuper");
+    function assertTaggedTemplateExpression(node, opts) {
+      assert("TaggedTemplateExpression", node, opts);
+    }
+    __name(assertTaggedTemplateExpression, "assertTaggedTemplateExpression");
+    function assertTemplateElement(node, opts) {
+      assert("TemplateElement", node, opts);
+    }
+    __name(assertTemplateElement, "assertTemplateElement");
+    function assertTemplateLiteral(node, opts) {
+      assert("TemplateLiteral", node, opts);
+    }
+    __name(assertTemplateLiteral, "assertTemplateLiteral");
+    function assertYieldExpression(node, opts) {
+      assert("YieldExpression", node, opts);
+    }
+    __name(assertYieldExpression, "assertYieldExpression");
+    function assertAwaitExpression(node, opts) {
+      assert("AwaitExpression", node, opts);
+    }
+    __name(assertAwaitExpression, "assertAwaitExpression");
+    function assertImport(node, opts) {
+      assert("Import", node, opts);
+    }
+    __name(assertImport, "assertImport");
+    function assertBigIntLiteral(node, opts) {
+      assert("BigIntLiteral", node, opts);
+    }
+    __name(assertBigIntLiteral, "assertBigIntLiteral");
+    function assertExportNamespaceSpecifier(node, opts) {
+      assert("ExportNamespaceSpecifier", node, opts);
+    }
+    __name(assertExportNamespaceSpecifier, "assertExportNamespaceSpecifier");
+    function assertOptionalMemberExpression(node, opts) {
+      assert("OptionalMemberExpression", node, opts);
+    }
+    __name(assertOptionalMemberExpression, "assertOptionalMemberExpression");
+    function assertOptionalCallExpression(node, opts) {
+      assert("OptionalCallExpression", node, opts);
+    }
+    __name(assertOptionalCallExpression, "assertOptionalCallExpression");
+    function assertClassProperty(node, opts) {
+      assert("ClassProperty", node, opts);
+    }
+    __name(assertClassProperty, "assertClassProperty");
+    function assertClassAccessorProperty(node, opts) {
+      assert("ClassAccessorProperty", node, opts);
+    }
+    __name(assertClassAccessorProperty, "assertClassAccessorProperty");
+    function assertClassPrivateProperty(node, opts) {
+      assert("ClassPrivateProperty", node, opts);
+    }
+    __name(assertClassPrivateProperty, "assertClassPrivateProperty");
+    function assertClassPrivateMethod(node, opts) {
+      assert("ClassPrivateMethod", node, opts);
+    }
+    __name(assertClassPrivateMethod, "assertClassPrivateMethod");
+    function assertPrivateName(node, opts) {
+      assert("PrivateName", node, opts);
+    }
+    __name(assertPrivateName, "assertPrivateName");
+    function assertStaticBlock(node, opts) {
+      assert("StaticBlock", node, opts);
+    }
+    __name(assertStaticBlock, "assertStaticBlock");
+    function assertAnyTypeAnnotation(node, opts) {
+      assert("AnyTypeAnnotation", node, opts);
+    }
+    __name(assertAnyTypeAnnotation, "assertAnyTypeAnnotation");
+    function assertArrayTypeAnnotation(node, opts) {
+      assert("ArrayTypeAnnotation", node, opts);
+    }
+    __name(assertArrayTypeAnnotation, "assertArrayTypeAnnotation");
+    function assertBooleanTypeAnnotation(node, opts) {
+      assert("BooleanTypeAnnotation", node, opts);
+    }
+    __name(assertBooleanTypeAnnotation, "assertBooleanTypeAnnotation");
+    function assertBooleanLiteralTypeAnnotation(node, opts) {
+      assert("BooleanLiteralTypeAnnotation", node, opts);
+    }
+    __name(assertBooleanLiteralTypeAnnotation, "assertBooleanLiteralTypeAnnotation");
+    function assertNullLiteralTypeAnnotation(node, opts) {
+      assert("NullLiteralTypeAnnotation", node, opts);
+    }
+    __name(assertNullLiteralTypeAnnotation, "assertNullLiteralTypeAnnotation");
+    function assertClassImplements(node, opts) {
+      assert("ClassImplements", node, opts);
+    }
+    __name(assertClassImplements, "assertClassImplements");
+    function assertDeclareClass(node, opts) {
+      assert("DeclareClass", node, opts);
+    }
+    __name(assertDeclareClass, "assertDeclareClass");
+    function assertDeclareFunction(node, opts) {
+      assert("DeclareFunction", node, opts);
+    }
+    __name(assertDeclareFunction, "assertDeclareFunction");
+    function assertDeclareInterface(node, opts) {
+      assert("DeclareInterface", node, opts);
+    }
+    __name(assertDeclareInterface, "assertDeclareInterface");
+    function assertDeclareModule(node, opts) {
+      assert("DeclareModule", node, opts);
+    }
+    __name(assertDeclareModule, "assertDeclareModule");
+    function assertDeclareModuleExports(node, opts) {
+      assert("DeclareModuleExports", node, opts);
+    }
+    __name(assertDeclareModuleExports, "assertDeclareModuleExports");
+    function assertDeclareTypeAlias(node, opts) {
+      assert("DeclareTypeAlias", node, opts);
+    }
+    __name(assertDeclareTypeAlias, "assertDeclareTypeAlias");
+    function assertDeclareOpaqueType(node, opts) {
+      assert("DeclareOpaqueType", node, opts);
+    }
+    __name(assertDeclareOpaqueType, "assertDeclareOpaqueType");
+    function assertDeclareVariable(node, opts) {
+      assert("DeclareVariable", node, opts);
+    }
+    __name(assertDeclareVariable, "assertDeclareVariable");
+    function assertDeclareExportDeclaration(node, opts) {
+      assert("DeclareExportDeclaration", node, opts);
+    }
+    __name(assertDeclareExportDeclaration, "assertDeclareExportDeclaration");
+    function assertDeclareExportAllDeclaration(node, opts) {
+      assert("DeclareExportAllDeclaration", node, opts);
+    }
+    __name(assertDeclareExportAllDeclaration, "assertDeclareExportAllDeclaration");
+    function assertDeclaredPredicate(node, opts) {
+      assert("DeclaredPredicate", node, opts);
+    }
+    __name(assertDeclaredPredicate, "assertDeclaredPredicate");
+    function assertExistsTypeAnnotation(node, opts) {
+      assert("ExistsTypeAnnotation", node, opts);
+    }
+    __name(assertExistsTypeAnnotation, "assertExistsTypeAnnotation");
+    function assertFunctionTypeAnnotation(node, opts) {
+      assert("FunctionTypeAnnotation", node, opts);
+    }
+    __name(assertFunctionTypeAnnotation, "assertFunctionTypeAnnotation");
+    function assertFunctionTypeParam(node, opts) {
+      assert("FunctionTypeParam", node, opts);
+    }
+    __name(assertFunctionTypeParam, "assertFunctionTypeParam");
+    function assertGenericTypeAnnotation(node, opts) {
+      assert("GenericTypeAnnotation", node, opts);
+    }
+    __name(assertGenericTypeAnnotation, "assertGenericTypeAnnotation");
+    function assertInferredPredicate(node, opts) {
+      assert("InferredPredicate", node, opts);
+    }
+    __name(assertInferredPredicate, "assertInferredPredicate");
+    function assertInterfaceExtends(node, opts) {
+      assert("InterfaceExtends", node, opts);
+    }
+    __name(assertInterfaceExtends, "assertInterfaceExtends");
+    function assertInterfaceDeclaration(node, opts) {
+      assert("InterfaceDeclaration", node, opts);
+    }
+    __name(assertInterfaceDeclaration, "assertInterfaceDeclaration");
+    function assertInterfaceTypeAnnotation(node, opts) {
+      assert("InterfaceTypeAnnotation", node, opts);
+    }
+    __name(assertInterfaceTypeAnnotation, "assertInterfaceTypeAnnotation");
+    function assertIntersectionTypeAnnotation(node, opts) {
+      assert("IntersectionTypeAnnotation", node, opts);
+    }
+    __name(assertIntersectionTypeAnnotation, "assertIntersectionTypeAnnotation");
+    function assertMixedTypeAnnotation(node, opts) {
+      assert("MixedTypeAnnotation", node, opts);
+    }
+    __name(assertMixedTypeAnnotation, "assertMixedTypeAnnotation");
+    function assertEmptyTypeAnnotation(node, opts) {
+      assert("EmptyTypeAnnotation", node, opts);
+    }
+    __name(assertEmptyTypeAnnotation, "assertEmptyTypeAnnotation");
+    function assertNullableTypeAnnotation(node, opts) {
+      assert("NullableTypeAnnotation", node, opts);
+    }
+    __name(assertNullableTypeAnnotation, "assertNullableTypeAnnotation");
+    function assertNumberLiteralTypeAnnotation(node, opts) {
+      assert("NumberLiteralTypeAnnotation", node, opts);
+    }
+    __name(assertNumberLiteralTypeAnnotation, "assertNumberLiteralTypeAnnotation");
+    function assertNumberTypeAnnotation(node, opts) {
+      assert("NumberTypeAnnotation", node, opts);
+    }
+    __name(assertNumberTypeAnnotation, "assertNumberTypeAnnotation");
+    function assertObjectTypeAnnotation(node, opts) {
+      assert("ObjectTypeAnnotation", node, opts);
+    }
+    __name(assertObjectTypeAnnotation, "assertObjectTypeAnnotation");
+    function assertObjectTypeInternalSlot(node, opts) {
+      assert("ObjectTypeInternalSlot", node, opts);
+    }
+    __name(assertObjectTypeInternalSlot, "assertObjectTypeInternalSlot");
+    function assertObjectTypeCallProperty(node, opts) {
+      assert("ObjectTypeCallProperty", node, opts);
+    }
+    __name(assertObjectTypeCallProperty, "assertObjectTypeCallProperty");
+    function assertObjectTypeIndexer(node, opts) {
+      assert("ObjectTypeIndexer", node, opts);
+    }
+    __name(assertObjectTypeIndexer, "assertObjectTypeIndexer");
+    function assertObjectTypeProperty(node, opts) {
+      assert("ObjectTypeProperty", node, opts);
+    }
+    __name(assertObjectTypeProperty, "assertObjectTypeProperty");
+    function assertObjectTypeSpreadProperty(node, opts) {
+      assert("ObjectTypeSpreadProperty", node, opts);
+    }
+    __name(assertObjectTypeSpreadProperty, "assertObjectTypeSpreadProperty");
+    function assertOpaqueType(node, opts) {
+      assert("OpaqueType", node, opts);
+    }
+    __name(assertOpaqueType, "assertOpaqueType");
+    function assertQualifiedTypeIdentifier(node, opts) {
+      assert("QualifiedTypeIdentifier", node, opts);
+    }
+    __name(assertQualifiedTypeIdentifier, "assertQualifiedTypeIdentifier");
+    function assertStringLiteralTypeAnnotation(node, opts) {
+      assert("StringLiteralTypeAnnotation", node, opts);
+    }
+    __name(assertStringLiteralTypeAnnotation, "assertStringLiteralTypeAnnotation");
+    function assertStringTypeAnnotation(node, opts) {
+      assert("StringTypeAnnotation", node, opts);
+    }
+    __name(assertStringTypeAnnotation, "assertStringTypeAnnotation");
+    function assertSymbolTypeAnnotation(node, opts) {
+      assert("SymbolTypeAnnotation", node, opts);
+    }
+    __name(assertSymbolTypeAnnotation, "assertSymbolTypeAnnotation");
+    function assertThisTypeAnnotation(node, opts) {
+      assert("ThisTypeAnnotation", node, opts);
+    }
+    __name(assertThisTypeAnnotation, "assertThisTypeAnnotation");
+    function assertTupleTypeAnnotation(node, opts) {
+      assert("TupleTypeAnnotation", node, opts);
+    }
+    __name(assertTupleTypeAnnotation, "assertTupleTypeAnnotation");
+    function assertTypeofTypeAnnotation(node, opts) {
+      assert("TypeofTypeAnnotation", node, opts);
+    }
+    __name(assertTypeofTypeAnnotation, "assertTypeofTypeAnnotation");
+    function assertTypeAlias(node, opts) {
+      assert("TypeAlias", node, opts);
+    }
+    __name(assertTypeAlias, "assertTypeAlias");
+    function assertTypeAnnotation(node, opts) {
+      assert("TypeAnnotation", node, opts);
+    }
+    __name(assertTypeAnnotation, "assertTypeAnnotation");
+    function assertTypeCastExpression(node, opts) {
+      assert("TypeCastExpression", node, opts);
+    }
+    __name(assertTypeCastExpression, "assertTypeCastExpression");
+    function assertTypeParameter(node, opts) {
+      assert("TypeParameter", node, opts);
+    }
+    __name(assertTypeParameter, "assertTypeParameter");
+    function assertTypeParameterDeclaration(node, opts) {
+      assert("TypeParameterDeclaration", node, opts);
+    }
+    __name(assertTypeParameterDeclaration, "assertTypeParameterDeclaration");
+    function assertTypeParameterInstantiation(node, opts) {
+      assert("TypeParameterInstantiation", node, opts);
+    }
+    __name(assertTypeParameterInstantiation, "assertTypeParameterInstantiation");
+    function assertUnionTypeAnnotation(node, opts) {
+      assert("UnionTypeAnnotation", node, opts);
+    }
+    __name(assertUnionTypeAnnotation, "assertUnionTypeAnnotation");
+    function assertVariance(node, opts) {
+      assert("Variance", node, opts);
+    }
+    __name(assertVariance, "assertVariance");
+    function assertVoidTypeAnnotation(node, opts) {
+      assert("VoidTypeAnnotation", node, opts);
+    }
+    __name(assertVoidTypeAnnotation, "assertVoidTypeAnnotation");
+    function assertEnumDeclaration(node, opts) {
+      assert("EnumDeclaration", node, opts);
+    }
+    __name(assertEnumDeclaration, "assertEnumDeclaration");
+    function assertEnumBooleanBody(node, opts) {
+      assert("EnumBooleanBody", node, opts);
+    }
+    __name(assertEnumBooleanBody, "assertEnumBooleanBody");
+    function assertEnumNumberBody(node, opts) {
+      assert("EnumNumberBody", node, opts);
+    }
+    __name(assertEnumNumberBody, "assertEnumNumberBody");
+    function assertEnumStringBody(node, opts) {
+      assert("EnumStringBody", node, opts);
+    }
+    __name(assertEnumStringBody, "assertEnumStringBody");
+    function assertEnumSymbolBody(node, opts) {
+      assert("EnumSymbolBody", node, opts);
+    }
+    __name(assertEnumSymbolBody, "assertEnumSymbolBody");
+    function assertEnumBooleanMember(node, opts) {
+      assert("EnumBooleanMember", node, opts);
+    }
+    __name(assertEnumBooleanMember, "assertEnumBooleanMember");
+    function assertEnumNumberMember(node, opts) {
+      assert("EnumNumberMember", node, opts);
+    }
+    __name(assertEnumNumberMember, "assertEnumNumberMember");
+    function assertEnumStringMember(node, opts) {
+      assert("EnumStringMember", node, opts);
+    }
+    __name(assertEnumStringMember, "assertEnumStringMember");
+    function assertEnumDefaultedMember(node, opts) {
+      assert("EnumDefaultedMember", node, opts);
+    }
+    __name(assertEnumDefaultedMember, "assertEnumDefaultedMember");
+    function assertIndexedAccessType(node, opts) {
+      assert("IndexedAccessType", node, opts);
+    }
+    __name(assertIndexedAccessType, "assertIndexedAccessType");
+    function assertOptionalIndexedAccessType(node, opts) {
+      assert("OptionalIndexedAccessType", node, opts);
+    }
+    __name(assertOptionalIndexedAccessType, "assertOptionalIndexedAccessType");
+    function assertJSXAttribute(node, opts) {
+      assert("JSXAttribute", node, opts);
+    }
+    __name(assertJSXAttribute, "assertJSXAttribute");
+    function assertJSXClosingElement(node, opts) {
+      assert("JSXClosingElement", node, opts);
+    }
+    __name(assertJSXClosingElement, "assertJSXClosingElement");
+    function assertJSXElement(node, opts) {
+      assert("JSXElement", node, opts);
+    }
+    __name(assertJSXElement, "assertJSXElement");
+    function assertJSXEmptyExpression(node, opts) {
+      assert("JSXEmptyExpression", node, opts);
+    }
+    __name(assertJSXEmptyExpression, "assertJSXEmptyExpression");
+    function assertJSXExpressionContainer(node, opts) {
+      assert("JSXExpressionContainer", node, opts);
+    }
+    __name(assertJSXExpressionContainer, "assertJSXExpressionContainer");
+    function assertJSXSpreadChild(node, opts) {
+      assert("JSXSpreadChild", node, opts);
+    }
+    __name(assertJSXSpreadChild, "assertJSXSpreadChild");
+    function assertJSXIdentifier(node, opts) {
+      assert("JSXIdentifier", node, opts);
+    }
+    __name(assertJSXIdentifier, "assertJSXIdentifier");
+    function assertJSXMemberExpression(node, opts) {
+      assert("JSXMemberExpression", node, opts);
+    }
+    __name(assertJSXMemberExpression, "assertJSXMemberExpression");
+    function assertJSXNamespacedName(node, opts) {
+      assert("JSXNamespacedName", node, opts);
+    }
+    __name(assertJSXNamespacedName, "assertJSXNamespacedName");
+    function assertJSXOpeningElement(node, opts) {
+      assert("JSXOpeningElement", node, opts);
+    }
+    __name(assertJSXOpeningElement, "assertJSXOpeningElement");
+    function assertJSXSpreadAttribute(node, opts) {
+      assert("JSXSpreadAttribute", node, opts);
+    }
+    __name(assertJSXSpreadAttribute, "assertJSXSpreadAttribute");
+    function assertJSXText(node, opts) {
+      assert("JSXText", node, opts);
+    }
+    __name(assertJSXText, "assertJSXText");
+    function assertJSXFragment(node, opts) {
+      assert("JSXFragment", node, opts);
+    }
+    __name(assertJSXFragment, "assertJSXFragment");
+    function assertJSXOpeningFragment(node, opts) {
+      assert("JSXOpeningFragment", node, opts);
+    }
+    __name(assertJSXOpeningFragment, "assertJSXOpeningFragment");
+    function assertJSXClosingFragment(node, opts) {
+      assert("JSXClosingFragment", node, opts);
+    }
+    __name(assertJSXClosingFragment, "assertJSXClosingFragment");
+    function assertNoop(node, opts) {
+      assert("Noop", node, opts);
+    }
+    __name(assertNoop, "assertNoop");
+    function assertPlaceholder(node, opts) {
+      assert("Placeholder", node, opts);
+    }
+    __name(assertPlaceholder, "assertPlaceholder");
+    function assertV8IntrinsicIdentifier(node, opts) {
+      assert("V8IntrinsicIdentifier", node, opts);
+    }
+    __name(assertV8IntrinsicIdentifier, "assertV8IntrinsicIdentifier");
+    function assertArgumentPlaceholder(node, opts) {
+      assert("ArgumentPlaceholder", node, opts);
+    }
+    __name(assertArgumentPlaceholder, "assertArgumentPlaceholder");
+    function assertBindExpression(node, opts) {
+      assert("BindExpression", node, opts);
+    }
+    __name(assertBindExpression, "assertBindExpression");
+    function assertImportAttribute(node, opts) {
+      assert("ImportAttribute", node, opts);
+    }
+    __name(assertImportAttribute, "assertImportAttribute");
+    function assertDecorator(node, opts) {
+      assert("Decorator", node, opts);
+    }
+    __name(assertDecorator, "assertDecorator");
+    function assertDoExpression(node, opts) {
+      assert("DoExpression", node, opts);
+    }
+    __name(assertDoExpression, "assertDoExpression");
+    function assertExportDefaultSpecifier(node, opts) {
+      assert("ExportDefaultSpecifier", node, opts);
+    }
+    __name(assertExportDefaultSpecifier, "assertExportDefaultSpecifier");
+    function assertRecordExpression(node, opts) {
+      assert("RecordExpression", node, opts);
+    }
+    __name(assertRecordExpression, "assertRecordExpression");
+    function assertTupleExpression(node, opts) {
+      assert("TupleExpression", node, opts);
+    }
+    __name(assertTupleExpression, "assertTupleExpression");
+    function assertDecimalLiteral(node, opts) {
+      assert("DecimalLiteral", node, opts);
+    }
+    __name(assertDecimalLiteral, "assertDecimalLiteral");
+    function assertModuleExpression(node, opts) {
+      assert("ModuleExpression", node, opts);
+    }
+    __name(assertModuleExpression, "assertModuleExpression");
+    function assertTopicReference(node, opts) {
+      assert("TopicReference", node, opts);
+    }
+    __name(assertTopicReference, "assertTopicReference");
+    function assertPipelineTopicExpression(node, opts) {
+      assert("PipelineTopicExpression", node, opts);
+    }
+    __name(assertPipelineTopicExpression, "assertPipelineTopicExpression");
+    function assertPipelineBareFunction(node, opts) {
+      assert("PipelineBareFunction", node, opts);
+    }
+    __name(assertPipelineBareFunction, "assertPipelineBareFunction");
+    function assertPipelinePrimaryTopicReference(node, opts) {
+      assert("PipelinePrimaryTopicReference", node, opts);
+    }
+    __name(assertPipelinePrimaryTopicReference, "assertPipelinePrimaryTopicReference");
+    function assertTSParameterProperty(node, opts) {
+      assert("TSParameterProperty", node, opts);
+    }
+    __name(assertTSParameterProperty, "assertTSParameterProperty");
+    function assertTSDeclareFunction(node, opts) {
+      assert("TSDeclareFunction", node, opts);
+    }
+    __name(assertTSDeclareFunction, "assertTSDeclareFunction");
+    function assertTSDeclareMethod(node, opts) {
+      assert("TSDeclareMethod", node, opts);
+    }
+    __name(assertTSDeclareMethod, "assertTSDeclareMethod");
+    function assertTSQualifiedName(node, opts) {
+      assert("TSQualifiedName", node, opts);
+    }
+    __name(assertTSQualifiedName, "assertTSQualifiedName");
+    function assertTSCallSignatureDeclaration(node, opts) {
+      assert("TSCallSignatureDeclaration", node, opts);
+    }
+    __name(assertTSCallSignatureDeclaration, "assertTSCallSignatureDeclaration");
+    function assertTSConstructSignatureDeclaration(node, opts) {
+      assert("TSConstructSignatureDeclaration", node, opts);
+    }
+    __name(assertTSConstructSignatureDeclaration, "assertTSConstructSignatureDeclaration");
+    function assertTSPropertySignature(node, opts) {
+      assert("TSPropertySignature", node, opts);
+    }
+    __name(assertTSPropertySignature, "assertTSPropertySignature");
+    function assertTSMethodSignature(node, opts) {
+      assert("TSMethodSignature", node, opts);
+    }
+    __name(assertTSMethodSignature, "assertTSMethodSignature");
+    function assertTSIndexSignature(node, opts) {
+      assert("TSIndexSignature", node, opts);
+    }
+    __name(assertTSIndexSignature, "assertTSIndexSignature");
+    function assertTSAnyKeyword(node, opts) {
+      assert("TSAnyKeyword", node, opts);
+    }
+    __name(assertTSAnyKeyword, "assertTSAnyKeyword");
+    function assertTSBooleanKeyword(node, opts) {
+      assert("TSBooleanKeyword", node, opts);
+    }
+    __name(assertTSBooleanKeyword, "assertTSBooleanKeyword");
+    function assertTSBigIntKeyword(node, opts) {
+      assert("TSBigIntKeyword", node, opts);
+    }
+    __name(assertTSBigIntKeyword, "assertTSBigIntKeyword");
+    function assertTSIntrinsicKeyword(node, opts) {
+      assert("TSIntrinsicKeyword", node, opts);
+    }
+    __name(assertTSIntrinsicKeyword, "assertTSIntrinsicKeyword");
+    function assertTSNeverKeyword(node, opts) {
+      assert("TSNeverKeyword", node, opts);
+    }
+    __name(assertTSNeverKeyword, "assertTSNeverKeyword");
+    function assertTSNullKeyword(node, opts) {
+      assert("TSNullKeyword", node, opts);
+    }
+    __name(assertTSNullKeyword, "assertTSNullKeyword");
+    function assertTSNumberKeyword(node, opts) {
+      assert("TSNumberKeyword", node, opts);
+    }
+    __name(assertTSNumberKeyword, "assertTSNumberKeyword");
+    function assertTSObjectKeyword(node, opts) {
+      assert("TSObjectKeyword", node, opts);
+    }
+    __name(assertTSObjectKeyword, "assertTSObjectKeyword");
+    function assertTSStringKeyword(node, opts) {
+      assert("TSStringKeyword", node, opts);
+    }
+    __name(assertTSStringKeyword, "assertTSStringKeyword");
+    function assertTSSymbolKeyword(node, opts) {
+      assert("TSSymbolKeyword", node, opts);
+    }
+    __name(assertTSSymbolKeyword, "assertTSSymbolKeyword");
+    function assertTSUndefinedKeyword(node, opts) {
+      assert("TSUndefinedKeyword", node, opts);
+    }
+    __name(assertTSUndefinedKeyword, "assertTSUndefinedKeyword");
+    function assertTSUnknownKeyword(node, opts) {
+      assert("TSUnknownKeyword", node, opts);
+    }
+    __name(assertTSUnknownKeyword, "assertTSUnknownKeyword");
+    function assertTSVoidKeyword(node, opts) {
+      assert("TSVoidKeyword", node, opts);
+    }
+    __name(assertTSVoidKeyword, "assertTSVoidKeyword");
+    function assertTSThisType(node, opts) {
+      assert("TSThisType", node, opts);
+    }
+    __name(assertTSThisType, "assertTSThisType");
+    function assertTSFunctionType(node, opts) {
+      assert("TSFunctionType", node, opts);
+    }
+    __name(assertTSFunctionType, "assertTSFunctionType");
+    function assertTSConstructorType(node, opts) {
+      assert("TSConstructorType", node, opts);
+    }
+    __name(assertTSConstructorType, "assertTSConstructorType");
+    function assertTSTypeReference(node, opts) {
+      assert("TSTypeReference", node, opts);
+    }
+    __name(assertTSTypeReference, "assertTSTypeReference");
+    function assertTSTypePredicate(node, opts) {
+      assert("TSTypePredicate", node, opts);
+    }
+    __name(assertTSTypePredicate, "assertTSTypePredicate");
+    function assertTSTypeQuery(node, opts) {
+      assert("TSTypeQuery", node, opts);
+    }
+    __name(assertTSTypeQuery, "assertTSTypeQuery");
+    function assertTSTypeLiteral(node, opts) {
+      assert("TSTypeLiteral", node, opts);
+    }
+    __name(assertTSTypeLiteral, "assertTSTypeLiteral");
+    function assertTSArrayType(node, opts) {
+      assert("TSArrayType", node, opts);
+    }
+    __name(assertTSArrayType, "assertTSArrayType");
+    function assertTSTupleType(node, opts) {
+      assert("TSTupleType", node, opts);
+    }
+    __name(assertTSTupleType, "assertTSTupleType");
+    function assertTSOptionalType(node, opts) {
+      assert("TSOptionalType", node, opts);
+    }
+    __name(assertTSOptionalType, "assertTSOptionalType");
+    function assertTSRestType(node, opts) {
+      assert("TSRestType", node, opts);
+    }
+    __name(assertTSRestType, "assertTSRestType");
+    function assertTSNamedTupleMember(node, opts) {
+      assert("TSNamedTupleMember", node, opts);
+    }
+    __name(assertTSNamedTupleMember, "assertTSNamedTupleMember");
+    function assertTSUnionType(node, opts) {
+      assert("TSUnionType", node, opts);
+    }
+    __name(assertTSUnionType, "assertTSUnionType");
+    function assertTSIntersectionType(node, opts) {
+      assert("TSIntersectionType", node, opts);
+    }
+    __name(assertTSIntersectionType, "assertTSIntersectionType");
+    function assertTSConditionalType(node, opts) {
+      assert("TSConditionalType", node, opts);
+    }
+    __name(assertTSConditionalType, "assertTSConditionalType");
+    function assertTSInferType(node, opts) {
+      assert("TSInferType", node, opts);
+    }
+    __name(assertTSInferType, "assertTSInferType");
+    function assertTSParenthesizedType(node, opts) {
+      assert("TSParenthesizedType", node, opts);
+    }
+    __name(assertTSParenthesizedType, "assertTSParenthesizedType");
+    function assertTSTypeOperator(node, opts) {
+      assert("TSTypeOperator", node, opts);
+    }
+    __name(assertTSTypeOperator, "assertTSTypeOperator");
+    function assertTSIndexedAccessType(node, opts) {
+      assert("TSIndexedAccessType", node, opts);
+    }
+    __name(assertTSIndexedAccessType, "assertTSIndexedAccessType");
+    function assertTSMappedType(node, opts) {
+      assert("TSMappedType", node, opts);
+    }
+    __name(assertTSMappedType, "assertTSMappedType");
+    function assertTSLiteralType(node, opts) {
+      assert("TSLiteralType", node, opts);
+    }
+    __name(assertTSLiteralType, "assertTSLiteralType");
+    function assertTSExpressionWithTypeArguments(node, opts) {
+      assert("TSExpressionWithTypeArguments", node, opts);
+    }
+    __name(assertTSExpressionWithTypeArguments, "assertTSExpressionWithTypeArguments");
+    function assertTSInterfaceDeclaration(node, opts) {
+      assert("TSInterfaceDeclaration", node, opts);
+    }
+    __name(assertTSInterfaceDeclaration, "assertTSInterfaceDeclaration");
+    function assertTSInterfaceBody(node, opts) {
+      assert("TSInterfaceBody", node, opts);
+    }
+    __name(assertTSInterfaceBody, "assertTSInterfaceBody");
+    function assertTSTypeAliasDeclaration(node, opts) {
+      assert("TSTypeAliasDeclaration", node, opts);
+    }
+    __name(assertTSTypeAliasDeclaration, "assertTSTypeAliasDeclaration");
+    function assertTSInstantiationExpression(node, opts) {
+      assert("TSInstantiationExpression", node, opts);
+    }
+    __name(assertTSInstantiationExpression, "assertTSInstantiationExpression");
+    function assertTSAsExpression(node, opts) {
+      assert("TSAsExpression", node, opts);
+    }
+    __name(assertTSAsExpression, "assertTSAsExpression");
+    function assertTSSatisfiesExpression(node, opts) {
+      assert("TSSatisfiesExpression", node, opts);
+    }
+    __name(assertTSSatisfiesExpression, "assertTSSatisfiesExpression");
+    function assertTSTypeAssertion(node, opts) {
+      assert("TSTypeAssertion", node, opts);
+    }
+    __name(assertTSTypeAssertion, "assertTSTypeAssertion");
+    function assertTSEnumDeclaration(node, opts) {
+      assert("TSEnumDeclaration", node, opts);
+    }
+    __name(assertTSEnumDeclaration, "assertTSEnumDeclaration");
+    function assertTSEnumMember(node, opts) {
+      assert("TSEnumMember", node, opts);
+    }
+    __name(assertTSEnumMember, "assertTSEnumMember");
+    function assertTSModuleDeclaration(node, opts) {
+      assert("TSModuleDeclaration", node, opts);
+    }
+    __name(assertTSModuleDeclaration, "assertTSModuleDeclaration");
+    function assertTSModuleBlock(node, opts) {
+      assert("TSModuleBlock", node, opts);
+    }
+    __name(assertTSModuleBlock, "assertTSModuleBlock");
+    function assertTSImportType(node, opts) {
+      assert("TSImportType", node, opts);
+    }
+    __name(assertTSImportType, "assertTSImportType");
+    function assertTSImportEqualsDeclaration(node, opts) {
+      assert("TSImportEqualsDeclaration", node, opts);
+    }
+    __name(assertTSImportEqualsDeclaration, "assertTSImportEqualsDeclaration");
+    function assertTSExternalModuleReference(node, opts) {
+      assert("TSExternalModuleReference", node, opts);
+    }
+    __name(assertTSExternalModuleReference, "assertTSExternalModuleReference");
+    function assertTSNonNullExpression(node, opts) {
+      assert("TSNonNullExpression", node, opts);
+    }
+    __name(assertTSNonNullExpression, "assertTSNonNullExpression");
+    function assertTSExportAssignment(node, opts) {
+      assert("TSExportAssignment", node, opts);
+    }
+    __name(assertTSExportAssignment, "assertTSExportAssignment");
+    function assertTSNamespaceExportDeclaration(node, opts) {
+      assert("TSNamespaceExportDeclaration", node, opts);
+    }
+    __name(assertTSNamespaceExportDeclaration, "assertTSNamespaceExportDeclaration");
+    function assertTSTypeAnnotation(node, opts) {
+      assert("TSTypeAnnotation", node, opts);
+    }
+    __name(assertTSTypeAnnotation, "assertTSTypeAnnotation");
+    function assertTSTypeParameterInstantiation(node, opts) {
+      assert("TSTypeParameterInstantiation", node, opts);
+    }
+    __name(assertTSTypeParameterInstantiation, "assertTSTypeParameterInstantiation");
+    function assertTSTypeParameterDeclaration(node, opts) {
+      assert("TSTypeParameterDeclaration", node, opts);
+    }
+    __name(assertTSTypeParameterDeclaration, "assertTSTypeParameterDeclaration");
+    function assertTSTypeParameter(node, opts) {
+      assert("TSTypeParameter", node, opts);
+    }
+    __name(assertTSTypeParameter, "assertTSTypeParameter");
+    function assertStandardized(node, opts) {
+      assert("Standardized", node, opts);
+    }
+    __name(assertStandardized, "assertStandardized");
+    function assertExpression(node, opts) {
+      assert("Expression", node, opts);
+    }
+    __name(assertExpression, "assertExpression");
+    function assertBinary(node, opts) {
+      assert("Binary", node, opts);
+    }
+    __name(assertBinary, "assertBinary");
+    function assertScopable(node, opts) {
+      assert("Scopable", node, opts);
+    }
+    __name(assertScopable, "assertScopable");
+    function assertBlockParent(node, opts) {
+      assert("BlockParent", node, opts);
+    }
+    __name(assertBlockParent, "assertBlockParent");
+    function assertBlock(node, opts) {
+      assert("Block", node, opts);
+    }
+    __name(assertBlock, "assertBlock");
+    function assertStatement(node, opts) {
+      assert("Statement", node, opts);
+    }
+    __name(assertStatement, "assertStatement");
+    function assertTerminatorless(node, opts) {
+      assert("Terminatorless", node, opts);
+    }
+    __name(assertTerminatorless, "assertTerminatorless");
+    function assertCompletionStatement(node, opts) {
+      assert("CompletionStatement", node, opts);
+    }
+    __name(assertCompletionStatement, "assertCompletionStatement");
+    function assertConditional(node, opts) {
+      assert("Conditional", node, opts);
+    }
+    __name(assertConditional, "assertConditional");
+    function assertLoop(node, opts) {
+      assert("Loop", node, opts);
+    }
+    __name(assertLoop, "assertLoop");
+    function assertWhile(node, opts) {
+      assert("While", node, opts);
+    }
+    __name(assertWhile, "assertWhile");
+    function assertExpressionWrapper(node, opts) {
+      assert("ExpressionWrapper", node, opts);
+    }
+    __name(assertExpressionWrapper, "assertExpressionWrapper");
+    function assertFor(node, opts) {
+      assert("For", node, opts);
+    }
+    __name(assertFor, "assertFor");
+    function assertForXStatement(node, opts) {
+      assert("ForXStatement", node, opts);
+    }
+    __name(assertForXStatement, "assertForXStatement");
+    function assertFunction(node, opts) {
+      assert("Function", node, opts);
+    }
+    __name(assertFunction, "assertFunction");
+    function assertFunctionParent(node, opts) {
+      assert("FunctionParent", node, opts);
+    }
+    __name(assertFunctionParent, "assertFunctionParent");
+    function assertPureish(node, opts) {
+      assert("Pureish", node, opts);
+    }
+    __name(assertPureish, "assertPureish");
+    function assertDeclaration(node, opts) {
+      assert("Declaration", node, opts);
+    }
+    __name(assertDeclaration, "assertDeclaration");
+    function assertPatternLike(node, opts) {
+      assert("PatternLike", node, opts);
+    }
+    __name(assertPatternLike, "assertPatternLike");
+    function assertLVal(node, opts) {
+      assert("LVal", node, opts);
+    }
+    __name(assertLVal, "assertLVal");
+    function assertTSEntityName(node, opts) {
+      assert("TSEntityName", node, opts);
+    }
+    __name(assertTSEntityName, "assertTSEntityName");
+    function assertLiteral(node, opts) {
+      assert("Literal", node, opts);
+    }
+    __name(assertLiteral, "assertLiteral");
+    function assertImmutable(node, opts) {
+      assert("Immutable", node, opts);
+    }
+    __name(assertImmutable, "assertImmutable");
+    function assertUserWhitespacable(node, opts) {
+      assert("UserWhitespacable", node, opts);
+    }
+    __name(assertUserWhitespacable, "assertUserWhitespacable");
+    function assertMethod(node, opts) {
+      assert("Method", node, opts);
+    }
+    __name(assertMethod, "assertMethod");
+    function assertObjectMember(node, opts) {
+      assert("ObjectMember", node, opts);
+    }
+    __name(assertObjectMember, "assertObjectMember");
+    function assertProperty(node, opts) {
+      assert("Property", node, opts);
+    }
+    __name(assertProperty, "assertProperty");
+    function assertUnaryLike(node, opts) {
+      assert("UnaryLike", node, opts);
+    }
+    __name(assertUnaryLike, "assertUnaryLike");
+    function assertPattern(node, opts) {
+      assert("Pattern", node, opts);
+    }
+    __name(assertPattern, "assertPattern");
+    function assertClass(node, opts) {
+      assert("Class", node, opts);
+    }
+    __name(assertClass, "assertClass");
+    function assertModuleDeclaration(node, opts) {
+      assert("ModuleDeclaration", node, opts);
+    }
+    __name(assertModuleDeclaration, "assertModuleDeclaration");
+    function assertExportDeclaration(node, opts) {
+      assert("ExportDeclaration", node, opts);
+    }
+    __name(assertExportDeclaration, "assertExportDeclaration");
+    function assertModuleSpecifier(node, opts) {
+      assert("ModuleSpecifier", node, opts);
+    }
+    __name(assertModuleSpecifier, "assertModuleSpecifier");
+    function assertAccessor(node, opts) {
+      assert("Accessor", node, opts);
+    }
+    __name(assertAccessor, "assertAccessor");
+    function assertPrivate(node, opts) {
+      assert("Private", node, opts);
+    }
+    __name(assertPrivate, "assertPrivate");
+    function assertFlow(node, opts) {
+      assert("Flow", node, opts);
+    }
+    __name(assertFlow, "assertFlow");
+    function assertFlowType(node, opts) {
+      assert("FlowType", node, opts);
+    }
+    __name(assertFlowType, "assertFlowType");
+    function assertFlowBaseAnnotation(node, opts) {
+      assert("FlowBaseAnnotation", node, opts);
+    }
+    __name(assertFlowBaseAnnotation, "assertFlowBaseAnnotation");
+    function assertFlowDeclaration(node, opts) {
+      assert("FlowDeclaration", node, opts);
+    }
+    __name(assertFlowDeclaration, "assertFlowDeclaration");
+    function assertFlowPredicate(node, opts) {
+      assert("FlowPredicate", node, opts);
+    }
+    __name(assertFlowPredicate, "assertFlowPredicate");
+    function assertEnumBody(node, opts) {
+      assert("EnumBody", node, opts);
+    }
+    __name(assertEnumBody, "assertEnumBody");
+    function assertEnumMember(node, opts) {
+      assert("EnumMember", node, opts);
+    }
+    __name(assertEnumMember, "assertEnumMember");
+    function assertJSX(node, opts) {
+      assert("JSX", node, opts);
+    }
+    __name(assertJSX, "assertJSX");
+    function assertMiscellaneous(node, opts) {
+      assert("Miscellaneous", node, opts);
+    }
+    __name(assertMiscellaneous, "assertMiscellaneous");
+    function assertTypeScript(node, opts) {
+      assert("TypeScript", node, opts);
+    }
+    __name(assertTypeScript, "assertTypeScript");
+    function assertTSTypeElement(node, opts) {
+      assert("TSTypeElement", node, opts);
+    }
+    __name(assertTSTypeElement, "assertTSTypeElement");
+    function assertTSType(node, opts) {
+      assert("TSType", node, opts);
+    }
+    __name(assertTSType, "assertTSType");
+    function assertTSBaseType(node, opts) {
+      assert("TSBaseType", node, opts);
+    }
+    __name(assertTSBaseType, "assertTSBaseType");
+    function assertNumberLiteral(node, opts) {
+      console.trace("The node type NumberLiteral has been renamed to NumericLiteral");
+      assert("NumberLiteral", node, opts);
+    }
+    __name(assertNumberLiteral, "assertNumberLiteral");
+    function assertRegexLiteral(node, opts) {
+      console.trace("The node type RegexLiteral has been renamed to RegExpLiteral");
+      assert("RegexLiteral", node, opts);
+    }
+    __name(assertRegexLiteral, "assertRegexLiteral");
+    function assertRestProperty(node, opts) {
+      console.trace("The node type RestProperty has been renamed to RestElement");
+      assert("RestProperty", node, opts);
+    }
+    __name(assertRestProperty, "assertRestProperty");
+    function assertSpreadProperty(node, opts) {
+      console.trace("The node type SpreadProperty has been renamed to SpreadElement");
+      assert("SpreadProperty", node, opts);
+    }
+    __name(assertSpreadProperty, "assertSpreadProperty");
+  }
+});
+
+// node_modules/@babel/generator/node_modules/@babel/types/lib/builders/flow/createTypeAnnotationBasedOnTypeof.js
+var require_createTypeAnnotationBasedOnTypeof3 = __commonJS({
+  "node_modules/@babel/generator/node_modules/@babel/types/lib/builders/flow/createTypeAnnotationBasedOnTypeof.js"(exports) {
+    "use strict";
+    Object.defineProperty(exports, "__esModule", {
+      value: true
+    });
+    exports.default = void 0;
+    var _generated = require_generated12();
+    var _default = createTypeAnnotationBasedOnTypeof;
+    exports.default = _default;
+    function createTypeAnnotationBasedOnTypeof(type) {
+      switch (type) {
+        case "string":
+          return (0, _generated.stringTypeAnnotation)();
+        case "number":
+          return (0, _generated.numberTypeAnnotation)();
+        case "undefined":
+          return (0, _generated.voidTypeAnnotation)();
+        case "boolean":
+          return (0, _generated.booleanTypeAnnotation)();
+        case "function":
+          return (0, _generated.genericTypeAnnotation)((0, _generated.identifier)("Function"));
+        case "object":
+          return (0, _generated.genericTypeAnnotation)((0, _generated.identifier)("Object"));
+        case "symbol":
+          return (0, _generated.genericTypeAnnotation)((0, _generated.identifier)("Symbol"));
+        case "bigint":
+          return (0, _generated.anyTypeAnnotation)();
+      }
+      throw new Error("Invalid typeof value: " + type);
+    }
+    __name(createTypeAnnotationBasedOnTypeof, "createTypeAnnotationBasedOnTypeof");
+  }
+});
+
+// node_modules/@babel/generator/node_modules/@babel/types/lib/modifications/flow/removeTypeDuplicates.js
+var require_removeTypeDuplicates5 = __commonJS({
+  "node_modules/@babel/generator/node_modules/@babel/types/lib/modifications/flow/removeTypeDuplicates.js"(exports) {
+    "use strict";
+    Object.defineProperty(exports, "__esModule", {
+      value: true
+    });
+    exports.default = removeTypeDuplicates;
+    var _generated = require_generated11();
+    function getQualifiedName(node) {
+      return (0, _generated.isIdentifier)(node) ? node.name : `${node.id.name}.${getQualifiedName(node.qualification)}`;
+    }
+    __name(getQualifiedName, "getQualifiedName");
+    function removeTypeDuplicates(nodes) {
+      const generics = /* @__PURE__ */ new Map();
+      const bases = /* @__PURE__ */ new Map();
+      const typeGroups = /* @__PURE__ */ new Set();
+      const types = [];
+      for (let i = 0; i < nodes.length; i++) {
+        const node = nodes[i];
+        if (!node)
+          continue;
+        if (types.indexOf(node) >= 0) {
+          continue;
+        }
+        if ((0, _generated.isAnyTypeAnnotation)(node)) {
+          return [
+            node
+          ];
+        }
+        if ((0, _generated.isFlowBaseAnnotation)(node)) {
+          bases.set(node.type, node);
+          continue;
+        }
+        if ((0, _generated.isUnionTypeAnnotation)(node)) {
+          if (!typeGroups.has(node.types)) {
+            nodes = nodes.concat(node.types);
+            typeGroups.add(node.types);
+          }
+          continue;
+        }
+        if ((0, _generated.isGenericTypeAnnotation)(node)) {
+          const name = getQualifiedName(node.id);
+          if (generics.has(name)) {
+            let existing = generics.get(name);
+            if (existing.typeParameters) {
+              if (node.typeParameters) {
+                existing.typeParameters.params = removeTypeDuplicates(existing.typeParameters.params.concat(node.typeParameters.params));
+              }
+            } else {
+              existing = node.typeParameters;
+            }
+          } else {
+            generics.set(name, node);
+          }
+          continue;
+        }
+        types.push(node);
+      }
+      for (const [, baseType] of bases) {
+        types.push(baseType);
+      }
+      for (const [, genericName] of generics) {
+        types.push(genericName);
+      }
+      return types;
+    }
+    __name(removeTypeDuplicates, "removeTypeDuplicates");
+  }
+});
+
+// node_modules/@babel/generator/node_modules/@babel/types/lib/builders/flow/createFlowUnionType.js
+var require_createFlowUnionType3 = __commonJS({
+  "node_modules/@babel/generator/node_modules/@babel/types/lib/builders/flow/createFlowUnionType.js"(exports) {
+    "use strict";
+    Object.defineProperty(exports, "__esModule", {
+      value: true
+    });
+    exports.default = createFlowUnionType;
+    var _generated = require_generated12();
+    var _removeTypeDuplicates = require_removeTypeDuplicates5();
+    function createFlowUnionType(types) {
+      const flattened = (0, _removeTypeDuplicates.default)(types);
+      if (flattened.length === 1) {
+        return flattened[0];
+      } else {
+        return (0, _generated.unionTypeAnnotation)(flattened);
+      }
+    }
+    __name(createFlowUnionType, "createFlowUnionType");
+  }
+});
+
+// node_modules/@babel/generator/node_modules/@babel/types/lib/modifications/typescript/removeTypeDuplicates.js
+var require_removeTypeDuplicates6 = __commonJS({
+  "node_modules/@babel/generator/node_modules/@babel/types/lib/modifications/typescript/removeTypeDuplicates.js"(exports) {
+    "use strict";
+    Object.defineProperty(exports, "__esModule", {
+      value: true
+    });
+    exports.default = removeTypeDuplicates;
+    var _generated = require_generated11();
+    function getQualifiedName(node) {
+      return (0, _generated.isIdentifier)(node) ? node.name : `${node.right.name}.${getQualifiedName(node.left)}`;
+    }
+    __name(getQualifiedName, "getQualifiedName");
+    function removeTypeDuplicates(nodes) {
+      const generics = /* @__PURE__ */ new Map();
+      const bases = /* @__PURE__ */ new Map();
+      const typeGroups = /* @__PURE__ */ new Set();
+      const types = [];
+      for (let i = 0; i < nodes.length; i++) {
+        const node = nodes[i];
+        if (!node)
+          continue;
+        if (types.indexOf(node) >= 0) {
+          continue;
+        }
+        if ((0, _generated.isTSAnyKeyword)(node)) {
+          return [
+            node
+          ];
+        }
+        if ((0, _generated.isTSBaseType)(node)) {
+          bases.set(node.type, node);
+          continue;
+        }
+        if ((0, _generated.isTSUnionType)(node)) {
+          if (!typeGroups.has(node.types)) {
+            nodes.push(...node.types);
+            typeGroups.add(node.types);
+          }
+          continue;
+        }
+        if ((0, _generated.isTSTypeReference)(node) && node.typeParameters) {
+          const name = getQualifiedName(node.typeName);
+          if (generics.has(name)) {
+            let existing = generics.get(name);
+            if (existing.typeParameters) {
+              if (node.typeParameters) {
+                existing.typeParameters.params = removeTypeDuplicates(existing.typeParameters.params.concat(node.typeParameters.params));
+              }
+            } else {
+              existing = node.typeParameters;
+            }
+          } else {
+            generics.set(name, node);
+          }
+          continue;
+        }
+        types.push(node);
+      }
+      for (const [, baseType] of bases) {
+        types.push(baseType);
+      }
+      for (const [, genericName] of generics) {
+        types.push(genericName);
+      }
+      return types;
+    }
+    __name(removeTypeDuplicates, "removeTypeDuplicates");
+  }
+});
+
+// node_modules/@babel/generator/node_modules/@babel/types/lib/builders/typescript/createTSUnionType.js
+var require_createTSUnionType3 = __commonJS({
+  "node_modules/@babel/generator/node_modules/@babel/types/lib/builders/typescript/createTSUnionType.js"(exports) {
+    "use strict";
+    Object.defineProperty(exports, "__esModule", {
+      value: true
+    });
+    exports.default = createTSUnionType;
+    var _generated = require_generated12();
+    var _removeTypeDuplicates = require_removeTypeDuplicates6();
+    var _index = require_generated11();
+    function createTSUnionType(typeAnnotations) {
+      const types = typeAnnotations.map((type) => {
+        return (0, _index.isTSTypeAnnotation)(type) ? type.typeAnnotation : type;
+      });
+      const flattened = (0, _removeTypeDuplicates.default)(types);
+      if (flattened.length === 1) {
+        return flattened[0];
+      } else {
+        return (0, _generated.tsUnionType)(flattened);
+      }
+    }
+    __name(createTSUnionType, "createTSUnionType");
+  }
+});
+
+// node_modules/@babel/generator/node_modules/@babel/types/lib/builders/generated/uppercase.js
+var require_uppercase3 = __commonJS({
+  "node_modules/@babel/generator/node_modules/@babel/types/lib/builders/generated/uppercase.js"(exports) {
+    "use strict";
+    Object.defineProperty(exports, "__esModule", {
+      value: true
+    });
+    Object.defineProperty(exports, "AnyTypeAnnotation", {
+      enumerable: true,
+      get: function() {
+        return _index.anyTypeAnnotation;
+      }
+    });
+    Object.defineProperty(exports, "ArgumentPlaceholder", {
+      enumerable: true,
+      get: function() {
+        return _index.argumentPlaceholder;
+      }
+    });
+    Object.defineProperty(exports, "ArrayExpression", {
+      enumerable: true,
+      get: function() {
+        return _index.arrayExpression;
+      }
+    });
+    Object.defineProperty(exports, "ArrayPattern", {
+      enumerable: true,
+      get: function() {
+        return _index.arrayPattern;
+      }
+    });
+    Object.defineProperty(exports, "ArrayTypeAnnotation", {
+      enumerable: true,
+      get: function() {
+        return _index.arrayTypeAnnotation;
+      }
+    });
+    Object.defineProperty(exports, "ArrowFunctionExpression", {
+      enumerable: true,
+      get: function() {
+        return _index.arrowFunctionExpression;
+      }
+    });
+    Object.defineProperty(exports, "AssignmentExpression", {
+      enumerable: true,
+      get: function() {
+        return _index.assignmentExpression;
+      }
+    });
+    Object.defineProperty(exports, "AssignmentPattern", {
+      enumerable: true,
+      get: function() {
+        return _index.assignmentPattern;
+      }
+    });
+    Object.defineProperty(exports, "AwaitExpression", {
+      enumerable: true,
+      get: function() {
+        return _index.awaitExpression;
+      }
+    });
+    Object.defineProperty(exports, "BigIntLiteral", {
+      enumerable: true,
+      get: function() {
+        return _index.bigIntLiteral;
+      }
+    });
+    Object.defineProperty(exports, "BinaryExpression", {
+      enumerable: true,
+      get: function() {
+        return _index.binaryExpression;
+      }
+    });
+    Object.defineProperty(exports, "BindExpression", {
+      enumerable: true,
+      get: function() {
+        return _index.bindExpression;
+      }
+    });
+    Object.defineProperty(exports, "BlockStatement", {
+      enumerable: true,
+      get: function() {
+        return _index.blockStatement;
+      }
+    });
+    Object.defineProperty(exports, "BooleanLiteral", {
+      enumerable: true,
+      get: function() {
+        return _index.booleanLiteral;
+      }
+    });
+    Object.defineProperty(exports, "BooleanLiteralTypeAnnotation", {
+      enumerable: true,
+      get: function() {
+        return _index.booleanLiteralTypeAnnotation;
+      }
+    });
+    Object.defineProperty(exports, "BooleanTypeAnnotation", {
+      enumerable: true,
+      get: function() {
+        return _index.booleanTypeAnnotation;
+      }
+    });
+    Object.defineProperty(exports, "BreakStatement", {
+      enumerable: true,
+      get: function() {
+        return _index.breakStatement;
+      }
+    });
+    Object.defineProperty(exports, "CallExpression", {
+      enumerable: true,
+      get: function() {
+        return _index.callExpression;
+      }
+    });
+    Object.defineProperty(exports, "CatchClause", {
+      enumerable: true,
+      get: function() {
+        return _index.catchClause;
+      }
+    });
+    Object.defineProperty(exports, "ClassAccessorProperty", {
+      enumerable: true,
+      get: function() {
+        return _index.classAccessorProperty;
+      }
+    });
+    Object.defineProperty(exports, "ClassBody", {
+      enumerable: true,
+      get: function() {
+        return _index.classBody;
+      }
+    });
+    Object.defineProperty(exports, "ClassDeclaration", {
+      enumerable: true,
+      get: function() {
+        return _index.classDeclaration;
+      }
+    });
+    Object.defineProperty(exports, "ClassExpression", {
+      enumerable: true,
+      get: function() {
+        return _index.classExpression;
+      }
+    });
+    Object.defineProperty(exports, "ClassImplements", {
+      enumerable: true,
+      get: function() {
+        return _index.classImplements;
+      }
+    });
+    Object.defineProperty(exports, "ClassMethod", {
+      enumerable: true,
+      get: function() {
+        return _index.classMethod;
+      }
+    });
+    Object.defineProperty(exports, "ClassPrivateMethod", {
+      enumerable: true,
+      get: function() {
+        return _index.classPrivateMethod;
+      }
+    });
+    Object.defineProperty(exports, "ClassPrivateProperty", {
+      enumerable: true,
+      get: function() {
+        return _index.classPrivateProperty;
+      }
+    });
+    Object.defineProperty(exports, "ClassProperty", {
+      enumerable: true,
+      get: function() {
+        return _index.classProperty;
+      }
+    });
+    Object.defineProperty(exports, "ConditionalExpression", {
+      enumerable: true,
+      get: function() {
+        return _index.conditionalExpression;
+      }
+    });
+    Object.defineProperty(exports, "ContinueStatement", {
+      enumerable: true,
+      get: function() {
+        return _index.continueStatement;
+      }
+    });
+    Object.defineProperty(exports, "DebuggerStatement", {
+      enumerable: true,
+      get: function() {
+        return _index.debuggerStatement;
+      }
+    });
+    Object.defineProperty(exports, "DecimalLiteral", {
+      enumerable: true,
+      get: function() {
+        return _index.decimalLiteral;
+      }
+    });
+    Object.defineProperty(exports, "DeclareClass", {
+      enumerable: true,
+      get: function() {
+        return _index.declareClass;
+      }
+    });
+    Object.defineProperty(exports, "DeclareExportAllDeclaration", {
+      enumerable: true,
+      get: function() {
+        return _index.declareExportAllDeclaration;
+      }
+    });
+    Object.defineProperty(exports, "DeclareExportDeclaration", {
+      enumerable: true,
+      get: function() {
+        return _index.declareExportDeclaration;
+      }
+    });
+    Object.defineProperty(exports, "DeclareFunction", {
+      enumerable: true,
+      get: function() {
+        return _index.declareFunction;
+      }
+    });
+    Object.defineProperty(exports, "DeclareInterface", {
+      enumerable: true,
+      get: function() {
+        return _index.declareInterface;
+      }
+    });
+    Object.defineProperty(exports, "DeclareModule", {
+      enumerable: true,
+      get: function() {
+        return _index.declareModule;
+      }
+    });
+    Object.defineProperty(exports, "DeclareModuleExports", {
+      enumerable: true,
+      get: function() {
+        return _index.declareModuleExports;
+      }
+    });
+    Object.defineProperty(exports, "DeclareOpaqueType", {
+      enumerable: true,
+      get: function() {
+        return _index.declareOpaqueType;
+      }
+    });
+    Object.defineProperty(exports, "DeclareTypeAlias", {
+      enumerable: true,
+      get: function() {
+        return _index.declareTypeAlias;
+      }
+    });
+    Object.defineProperty(exports, "DeclareVariable", {
+      enumerable: true,
+      get: function() {
+        return _index.declareVariable;
+      }
+    });
+    Object.defineProperty(exports, "DeclaredPredicate", {
+      enumerable: true,
+      get: function() {
+        return _index.declaredPredicate;
+      }
+    });
+    Object.defineProperty(exports, "Decorator", {
+      enumerable: true,
+      get: function() {
+        return _index.decorator;
+      }
+    });
+    Object.defineProperty(exports, "Directive", {
+      enumerable: true,
+      get: function() {
+        return _index.directive;
+      }
+    });
+    Object.defineProperty(exports, "DirectiveLiteral", {
+      enumerable: true,
+      get: function() {
+        return _index.directiveLiteral;
+      }
+    });
+    Object.defineProperty(exports, "DoExpression", {
+      enumerable: true,
+      get: function() {
+        return _index.doExpression;
+      }
+    });
+    Object.defineProperty(exports, "DoWhileStatement", {
+      enumerable: true,
+      get: function() {
+        return _index.doWhileStatement;
+      }
+    });
+    Object.defineProperty(exports, "EmptyStatement", {
+      enumerable: true,
+      get: function() {
+        return _index.emptyStatement;
+      }
+    });
+    Object.defineProperty(exports, "EmptyTypeAnnotation", {
+      enumerable: true,
+      get: function() {
+        return _index.emptyTypeAnnotation;
+      }
+    });
+    Object.defineProperty(exports, "EnumBooleanBody", {
+      enumerable: true,
+      get: function() {
+        return _index.enumBooleanBody;
+      }
+    });
+    Object.defineProperty(exports, "EnumBooleanMember", {
+      enumerable: true,
+      get: function() {
+        return _index.enumBooleanMember;
+      }
+    });
+    Object.defineProperty(exports, "EnumDeclaration", {
+      enumerable: true,
+      get: function() {
+        return _index.enumDeclaration;
+      }
+    });
+    Object.defineProperty(exports, "EnumDefaultedMember", {
+      enumerable: true,
+      get: function() {
+        return _index.enumDefaultedMember;
+      }
+    });
+    Object.defineProperty(exports, "EnumNumberBody", {
+      enumerable: true,
+      get: function() {
+        return _index.enumNumberBody;
+      }
+    });
+    Object.defineProperty(exports, "EnumNumberMember", {
+      enumerable: true,
+      get: function() {
+        return _index.enumNumberMember;
+      }
+    });
+    Object.defineProperty(exports, "EnumStringBody", {
+      enumerable: true,
+      get: function() {
+        return _index.enumStringBody;
+      }
+    });
+    Object.defineProperty(exports, "EnumStringMember", {
+      enumerable: true,
+      get: function() {
+        return _index.enumStringMember;
+      }
+    });
+    Object.defineProperty(exports, "EnumSymbolBody", {
+      enumerable: true,
+      get: function() {
+        return _index.enumSymbolBody;
+      }
+    });
+    Object.defineProperty(exports, "ExistsTypeAnnotation", {
+      enumerable: true,
+      get: function() {
+        return _index.existsTypeAnnotation;
+      }
+    });
+    Object.defineProperty(exports, "ExportAllDeclaration", {
+      enumerable: true,
+      get: function() {
+        return _index.exportAllDeclaration;
+      }
+    });
+    Object.defineProperty(exports, "ExportDefaultDeclaration", {
+      enumerable: true,
+      get: function() {
+        return _index.exportDefaultDeclaration;
+      }
+    });
+    Object.defineProperty(exports, "ExportDefaultSpecifier", {
+      enumerable: true,
+      get: function() {
+        return _index.exportDefaultSpecifier;
+      }
+    });
+    Object.defineProperty(exports, "ExportNamedDeclaration", {
+      enumerable: true,
+      get: function() {
+        return _index.exportNamedDeclaration;
+      }
+    });
+    Object.defineProperty(exports, "ExportNamespaceSpecifier", {
+      enumerable: true,
+      get: function() {
+        return _index.exportNamespaceSpecifier;
+      }
+    });
+    Object.defineProperty(exports, "ExportSpecifier", {
+      enumerable: true,
+      get: function() {
+        return _index.exportSpecifier;
+      }
+    });
+    Object.defineProperty(exports, "ExpressionStatement", {
+      enumerable: true,
+      get: function() {
+        return _index.expressionStatement;
+      }
+    });
+    Object.defineProperty(exports, "File", {
+      enumerable: true,
+      get: function() {
+        return _index.file;
+      }
+    });
+    Object.defineProperty(exports, "ForInStatement", {
+      enumerable: true,
+      get: function() {
+        return _index.forInStatement;
+      }
+    });
+    Object.defineProperty(exports, "ForOfStatement", {
+      enumerable: true,
+      get: function() {
+        return _index.forOfStatement;
+      }
+    });
+    Object.defineProperty(exports, "ForStatement", {
+      enumerable: true,
+      get: function() {
+        return _index.forStatement;
+      }
+    });
+    Object.defineProperty(exports, "FunctionDeclaration", {
+      enumerable: true,
+      get: function() {
+        return _index.functionDeclaration;
+      }
+    });
+    Object.defineProperty(exports, "FunctionExpression", {
+      enumerable: true,
+      get: function() {
+        return _index.functionExpression;
+      }
+    });
+    Object.defineProperty(exports, "FunctionTypeAnnotation", {
+      enumerable: true,
+      get: function() {
+        return _index.functionTypeAnnotation;
+      }
+    });
+    Object.defineProperty(exports, "FunctionTypeParam", {
+      enumerable: true,
+      get: function() {
+        return _index.functionTypeParam;
+      }
+    });
+    Object.defineProperty(exports, "GenericTypeAnnotation", {
+      enumerable: true,
+      get: function() {
+        return _index.genericTypeAnnotation;
+      }
+    });
+    Object.defineProperty(exports, "Identifier", {
+      enumerable: true,
+      get: function() {
+        return _index.identifier;
+      }
+    });
+    Object.defineProperty(exports, "IfStatement", {
+      enumerable: true,
+      get: function() {
+        return _index.ifStatement;
+      }
+    });
+    Object.defineProperty(exports, "Import", {
+      enumerable: true,
+      get: function() {
+        return _index.import;
+      }
+    });
+    Object.defineProperty(exports, "ImportAttribute", {
+      enumerable: true,
+      get: function() {
+        return _index.importAttribute;
+      }
+    });
+    Object.defineProperty(exports, "ImportDeclaration", {
+      enumerable: true,
+      get: function() {
+        return _index.importDeclaration;
+      }
+    });
+    Object.defineProperty(exports, "ImportDefaultSpecifier", {
+      enumerable: true,
+      get: function() {
+        return _index.importDefaultSpecifier;
+      }
+    });
+    Object.defineProperty(exports, "ImportNamespaceSpecifier", {
+      enumerable: true,
+      get: function() {
+        return _index.importNamespaceSpecifier;
+      }
+    });
+    Object.defineProperty(exports, "ImportSpecifier", {
+      enumerable: true,
+      get: function() {
+        return _index.importSpecifier;
+      }
+    });
+    Object.defineProperty(exports, "IndexedAccessType", {
+      enumerable: true,
+      get: function() {
+        return _index.indexedAccessType;
+      }
+    });
+    Object.defineProperty(exports, "InferredPredicate", {
+      enumerable: true,
+      get: function() {
+        return _index.inferredPredicate;
+      }
+    });
+    Object.defineProperty(exports, "InterfaceDeclaration", {
+      enumerable: true,
+      get: function() {
+        return _index.interfaceDeclaration;
+      }
+    });
+    Object.defineProperty(exports, "InterfaceExtends", {
+      enumerable: true,
+      get: function() {
+        return _index.interfaceExtends;
+      }
+    });
+    Object.defineProperty(exports, "InterfaceTypeAnnotation", {
+      enumerable: true,
+      get: function() {
+        return _index.interfaceTypeAnnotation;
+      }
+    });
+    Object.defineProperty(exports, "InterpreterDirective", {
+      enumerable: true,
+      get: function() {
+        return _index.interpreterDirective;
+      }
+    });
+    Object.defineProperty(exports, "IntersectionTypeAnnotation", {
+      enumerable: true,
+      get: function() {
+        return _index.intersectionTypeAnnotation;
+      }
+    });
+    Object.defineProperty(exports, "JSXAttribute", {
+      enumerable: true,
+      get: function() {
+        return _index.jsxAttribute;
+      }
+    });
+    Object.defineProperty(exports, "JSXClosingElement", {
+      enumerable: true,
+      get: function() {
+        return _index.jsxClosingElement;
+      }
+    });
+    Object.defineProperty(exports, "JSXClosingFragment", {
+      enumerable: true,
+      get: function() {
+        return _index.jsxClosingFragment;
+      }
+    });
+    Object.defineProperty(exports, "JSXElement", {
+      enumerable: true,
+      get: function() {
+        return _index.jsxElement;
+      }
+    });
+    Object.defineProperty(exports, "JSXEmptyExpression", {
+      enumerable: true,
+      get: function() {
+        return _index.jsxEmptyExpression;
+      }
+    });
+    Object.defineProperty(exports, "JSXExpressionContainer", {
+      enumerable: true,
+      get: function() {
+        return _index.jsxExpressionContainer;
+      }
+    });
+    Object.defineProperty(exports, "JSXFragment", {
+      enumerable: true,
+      get: function() {
+        return _index.jsxFragment;
+      }
+    });
+    Object.defineProperty(exports, "JSXIdentifier", {
+      enumerable: true,
+      get: function() {
+        return _index.jsxIdentifier;
+      }
+    });
+    Object.defineProperty(exports, "JSXMemberExpression", {
+      enumerable: true,
+      get: function() {
+        return _index.jsxMemberExpression;
+      }
+    });
+    Object.defineProperty(exports, "JSXNamespacedName", {
+      enumerable: true,
+      get: function() {
+        return _index.jsxNamespacedName;
+      }
+    });
+    Object.defineProperty(exports, "JSXOpeningElement", {
+      enumerable: true,
+      get: function() {
+        return _index.jsxOpeningElement;
+      }
+    });
+    Object.defineProperty(exports, "JSXOpeningFragment", {
+      enumerable: true,
+      get: function() {
+        return _index.jsxOpeningFragment;
+      }
+    });
+    Object.defineProperty(exports, "JSXSpreadAttribute", {
+      enumerable: true,
+      get: function() {
+        return _index.jsxSpreadAttribute;
+      }
+    });
+    Object.defineProperty(exports, "JSXSpreadChild", {
+      enumerable: true,
+      get: function() {
+        return _index.jsxSpreadChild;
+      }
+    });
+    Object.defineProperty(exports, "JSXText", {
+      enumerable: true,
+      get: function() {
+        return _index.jsxText;
+      }
+    });
+    Object.defineProperty(exports, "LabeledStatement", {
+      enumerable: true,
+      get: function() {
+        return _index.labeledStatement;
+      }
+    });
+    Object.defineProperty(exports, "LogicalExpression", {
+      enumerable: true,
+      get: function() {
+        return _index.logicalExpression;
+      }
+    });
+    Object.defineProperty(exports, "MemberExpression", {
+      enumerable: true,
+      get: function() {
+        return _index.memberExpression;
+      }
+    });
+    Object.defineProperty(exports, "MetaProperty", {
+      enumerable: true,
+      get: function() {
+        return _index.metaProperty;
+      }
+    });
+    Object.defineProperty(exports, "MixedTypeAnnotation", {
+      enumerable: true,
+      get: function() {
+        return _index.mixedTypeAnnotation;
+      }
+    });
+    Object.defineProperty(exports, "ModuleExpression", {
+      enumerable: true,
+      get: function() {
+        return _index.moduleExpression;
+      }
+    });
+    Object.defineProperty(exports, "NewExpression", {
+      enumerable: true,
+      get: function() {
+        return _index.newExpression;
+      }
+    });
+    Object.defineProperty(exports, "Noop", {
+      enumerable: true,
+      get: function() {
+        return _index.noop;
+      }
+    });
+    Object.defineProperty(exports, "NullLiteral", {
+      enumerable: true,
+      get: function() {
+        return _index.nullLiteral;
+      }
+    });
+    Object.defineProperty(exports, "NullLiteralTypeAnnotation", {
+      enumerable: true,
+      get: function() {
+        return _index.nullLiteralTypeAnnotation;
+      }
+    });
+    Object.defineProperty(exports, "NullableTypeAnnotation", {
+      enumerable: true,
+      get: function() {
+        return _index.nullableTypeAnnotation;
+      }
+    });
+    Object.defineProperty(exports, "NumberLiteral", {
+      enumerable: true,
+      get: function() {
+        return _index.numberLiteral;
+      }
+    });
+    Object.defineProperty(exports, "NumberLiteralTypeAnnotation", {
+      enumerable: true,
+      get: function() {
+        return _index.numberLiteralTypeAnnotation;
+      }
+    });
+    Object.defineProperty(exports, "NumberTypeAnnotation", {
+      enumerable: true,
+      get: function() {
+        return _index.numberTypeAnnotation;
+      }
+    });
+    Object.defineProperty(exports, "NumericLiteral", {
+      enumerable: true,
+      get: function() {
+        return _index.numericLiteral;
+      }
+    });
+    Object.defineProperty(exports, "ObjectExpression", {
+      enumerable: true,
+      get: function() {
+        return _index.objectExpression;
+      }
+    });
+    Object.defineProperty(exports, "ObjectMethod", {
+      enumerable: true,
+      get: function() {
+        return _index.objectMethod;
+      }
+    });
+    Object.defineProperty(exports, "ObjectPattern", {
+      enumerable: true,
+      get: function() {
+        return _index.objectPattern;
+      }
+    });
+    Object.defineProperty(exports, "ObjectProperty", {
+      enumerable: true,
+      get: function() {
+        return _index.objectProperty;
+      }
+    });
+    Object.defineProperty(exports, "ObjectTypeAnnotation", {
+      enumerable: true,
+      get: function() {
+        return _index.objectTypeAnnotation;
+      }
+    });
+    Object.defineProperty(exports, "ObjectTypeCallProperty", {
+      enumerable: true,
+      get: function() {
+        return _index.objectTypeCallProperty;
+      }
+    });
+    Object.defineProperty(exports, "ObjectTypeIndexer", {
+      enumerable: true,
+      get: function() {
+        return _index.objectTypeIndexer;
+      }
+    });
+    Object.defineProperty(exports, "ObjectTypeInternalSlot", {
+      enumerable: true,
+      get: function() {
+        return _index.objectTypeInternalSlot;
+      }
+    });
+    Object.defineProperty(exports, "ObjectTypeProperty", {
+      enumerable: true,
+      get: function() {
+        return _index.objectTypeProperty;
+      }
+    });
+    Object.defineProperty(exports, "ObjectTypeSpreadProperty", {
+      enumerable: true,
+      get: function() {
+        return _index.objectTypeSpreadProperty;
+      }
+    });
+    Object.defineProperty(exports, "OpaqueType", {
+      enumerable: true,
+      get: function() {
+        return _index.opaqueType;
+      }
+    });
+    Object.defineProperty(exports, "OptionalCallExpression", {
+      enumerable: true,
+      get: function() {
+        return _index.optionalCallExpression;
+      }
+    });
+    Object.defineProperty(exports, "OptionalIndexedAccessType", {
+      enumerable: true,
+      get: function() {
+        return _index.optionalIndexedAccessType;
+      }
+    });
+    Object.defineProperty(exports, "OptionalMemberExpression", {
+      enumerable: true,
+      get: function() {
+        return _index.optionalMemberExpression;
+      }
+    });
+    Object.defineProperty(exports, "ParenthesizedExpression", {
+      enumerable: true,
+      get: function() {
+        return _index.parenthesizedExpression;
+      }
+    });
+    Object.defineProperty(exports, "PipelineBareFunction", {
+      enumerable: true,
+      get: function() {
+        return _index.pipelineBareFunction;
+      }
+    });
+    Object.defineProperty(exports, "PipelinePrimaryTopicReference", {
+      enumerable: true,
+      get: function() {
+        return _index.pipelinePrimaryTopicReference;
+      }
+    });
+    Object.defineProperty(exports, "PipelineTopicExpression", {
+      enumerable: true,
+      get: function() {
+        return _index.pipelineTopicExpression;
+      }
+    });
+    Object.defineProperty(exports, "Placeholder", {
+      enumerable: true,
+      get: function() {
+        return _index.placeholder;
+      }
+    });
+    Object.defineProperty(exports, "PrivateName", {
+      enumerable: true,
+      get: function() {
+        return _index.privateName;
+      }
+    });
+    Object.defineProperty(exports, "Program", {
+      enumerable: true,
+      get: function() {
+        return _index.program;
+      }
+    });
+    Object.defineProperty(exports, "QualifiedTypeIdentifier", {
+      enumerable: true,
+      get: function() {
+        return _index.qualifiedTypeIdentifier;
+      }
+    });
+    Object.defineProperty(exports, "RecordExpression", {
+      enumerable: true,
+      get: function() {
+        return _index.recordExpression;
+      }
+    });
+    Object.defineProperty(exports, "RegExpLiteral", {
+      enumerable: true,
+      get: function() {
+        return _index.regExpLiteral;
+      }
+    });
+    Object.defineProperty(exports, "RegexLiteral", {
+      enumerable: true,
+      get: function() {
+        return _index.regexLiteral;
+      }
+    });
+    Object.defineProperty(exports, "RestElement", {
+      enumerable: true,
+      get: function() {
+        return _index.restElement;
+      }
+    });
+    Object.defineProperty(exports, "RestProperty", {
+      enumerable: true,
+      get: function() {
+        return _index.restProperty;
+      }
+    });
+    Object.defineProperty(exports, "ReturnStatement", {
+      enumerable: true,
+      get: function() {
+        return _index.returnStatement;
+      }
+    });
+    Object.defineProperty(exports, "SequenceExpression", {
+      enumerable: true,
+      get: function() {
+        return _index.sequenceExpression;
+      }
+    });
+    Object.defineProperty(exports, "SpreadElement", {
+      enumerable: true,
+      get: function() {
+        return _index.spreadElement;
+      }
+    });
+    Object.defineProperty(exports, "SpreadProperty", {
+      enumerable: true,
+      get: function() {
+        return _index.spreadProperty;
+      }
+    });
+    Object.defineProperty(exports, "StaticBlock", {
+      enumerable: true,
+      get: function() {
+        return _index.staticBlock;
+      }
+    });
+    Object.defineProperty(exports, "StringLiteral", {
+      enumerable: true,
+      get: function() {
+        return _index.stringLiteral;
+      }
+    });
+    Object.defineProperty(exports, "StringLiteralTypeAnnotation", {
+      enumerable: true,
+      get: function() {
+        return _index.stringLiteralTypeAnnotation;
+      }
+    });
+    Object.defineProperty(exports, "StringTypeAnnotation", {
+      enumerable: true,
+      get: function() {
+        return _index.stringTypeAnnotation;
+      }
+    });
+    Object.defineProperty(exports, "Super", {
+      enumerable: true,
+      get: function() {
+        return _index.super;
+      }
+    });
+    Object.defineProperty(exports, "SwitchCase", {
+      enumerable: true,
+      get: function() {
+        return _index.switchCase;
+      }
+    });
+    Object.defineProperty(exports, "SwitchStatement", {
+      enumerable: true,
+      get: function() {
+        return _index.switchStatement;
+      }
+    });
+    Object.defineProperty(exports, "SymbolTypeAnnotation", {
+      enumerable: true,
+      get: function() {
+        return _index.symbolTypeAnnotation;
+      }
+    });
+    Object.defineProperty(exports, "TSAnyKeyword", {
+      enumerable: true,
+      get: function() {
+        return _index.tsAnyKeyword;
+      }
+    });
+    Object.defineProperty(exports, "TSArrayType", {
+      enumerable: true,
+      get: function() {
+        return _index.tsArrayType;
+      }
+    });
+    Object.defineProperty(exports, "TSAsExpression", {
+      enumerable: true,
+      get: function() {
+        return _index.tsAsExpression;
+      }
+    });
+    Object.defineProperty(exports, "TSBigIntKeyword", {
+      enumerable: true,
+      get: function() {
+        return _index.tsBigIntKeyword;
+      }
+    });
+    Object.defineProperty(exports, "TSBooleanKeyword", {
+      enumerable: true,
+      get: function() {
+        return _index.tsBooleanKeyword;
+      }
+    });
+    Object.defineProperty(exports, "TSCallSignatureDeclaration", {
+      enumerable: true,
+      get: function() {
+        return _index.tsCallSignatureDeclaration;
+      }
+    });
+    Object.defineProperty(exports, "TSConditionalType", {
+      enumerable: true,
+      get: function() {
+        return _index.tsConditionalType;
+      }
+    });
+    Object.defineProperty(exports, "TSConstructSignatureDeclaration", {
+      enumerable: true,
+      get: function() {
+        return _index.tsConstructSignatureDeclaration;
+      }
+    });
+    Object.defineProperty(exports, "TSConstructorType", {
+      enumerable: true,
+      get: function() {
+        return _index.tsConstructorType;
+      }
+    });
+    Object.defineProperty(exports, "TSDeclareFunction", {
+      enumerable: true,
+      get: function() {
+        return _index.tsDeclareFunction;
+      }
+    });
+    Object.defineProperty(exports, "TSDeclareMethod", {
+      enumerable: true,
+      get: function() {
+        return _index.tsDeclareMethod;
+      }
+    });
+    Object.defineProperty(exports, "TSEnumDeclaration", {
+      enumerable: true,
+      get: function() {
+        return _index.tsEnumDeclaration;
+      }
+    });
+    Object.defineProperty(exports, "TSEnumMember", {
+      enumerable: true,
+      get: function() {
+        return _index.tsEnumMember;
+      }
+    });
+    Object.defineProperty(exports, "TSExportAssignment", {
+      enumerable: true,
+      get: function() {
+        return _index.tsExportAssignment;
+      }
+    });
+    Object.defineProperty(exports, "TSExpressionWithTypeArguments", {
+      enumerable: true,
+      get: function() {
+        return _index.tsExpressionWithTypeArguments;
+      }
+    });
+    Object.defineProperty(exports, "TSExternalModuleReference", {
+      enumerable: true,
+      get: function() {
+        return _index.tsExternalModuleReference;
+      }
+    });
+    Object.defineProperty(exports, "TSFunctionType", {
+      enumerable: true,
+      get: function() {
+        return _index.tsFunctionType;
+      }
+    });
+    Object.defineProperty(exports, "TSImportEqualsDeclaration", {
+      enumerable: true,
+      get: function() {
+        return _index.tsImportEqualsDeclaration;
+      }
+    });
+    Object.defineProperty(exports, "TSImportType", {
+      enumerable: true,
+      get: function() {
+        return _index.tsImportType;
+      }
+    });
+    Object.defineProperty(exports, "TSIndexSignature", {
+      enumerable: true,
+      get: function() {
+        return _index.tsIndexSignature;
+      }
+    });
+    Object.defineProperty(exports, "TSIndexedAccessType", {
+      enumerable: true,
+      get: function() {
+        return _index.tsIndexedAccessType;
+      }
+    });
+    Object.defineProperty(exports, "TSInferType", {
+      enumerable: true,
+      get: function() {
+        return _index.tsInferType;
+      }
+    });
+    Object.defineProperty(exports, "TSInstantiationExpression", {
+      enumerable: true,
+      get: function() {
+        return _index.tsInstantiationExpression;
+      }
+    });
+    Object.defineProperty(exports, "TSInterfaceBody", {
+      enumerable: true,
+      get: function() {
+        return _index.tsInterfaceBody;
+      }
+    });
+    Object.defineProperty(exports, "TSInterfaceDeclaration", {
+      enumerable: true,
+      get: function() {
+        return _index.tsInterfaceDeclaration;
+      }
+    });
+    Object.defineProperty(exports, "TSIntersectionType", {
+      enumerable: true,
+      get: function() {
+        return _index.tsIntersectionType;
+      }
+    });
+    Object.defineProperty(exports, "TSIntrinsicKeyword", {
+      enumerable: true,
+      get: function() {
+        return _index.tsIntrinsicKeyword;
+      }
+    });
+    Object.defineProperty(exports, "TSLiteralType", {
+      enumerable: true,
+      get: function() {
+        return _index.tsLiteralType;
+      }
+    });
+    Object.defineProperty(exports, "TSMappedType", {
+      enumerable: true,
+      get: function() {
+        return _index.tsMappedType;
+      }
+    });
+    Object.defineProperty(exports, "TSMethodSignature", {
+      enumerable: true,
+      get: function() {
+        return _index.tsMethodSignature;
+      }
+    });
+    Object.defineProperty(exports, "TSModuleBlock", {
+      enumerable: true,
+      get: function() {
+        return _index.tsModuleBlock;
+      }
+    });
+    Object.defineProperty(exports, "TSModuleDeclaration", {
+      enumerable: true,
+      get: function() {
+        return _index.tsModuleDeclaration;
+      }
+    });
+    Object.defineProperty(exports, "TSNamedTupleMember", {
+      enumerable: true,
+      get: function() {
+        return _index.tsNamedTupleMember;
+      }
+    });
+    Object.defineProperty(exports, "TSNamespaceExportDeclaration", {
+      enumerable: true,
+      get: function() {
+        return _index.tsNamespaceExportDeclaration;
+      }
+    });
+    Object.defineProperty(exports, "TSNeverKeyword", {
+      enumerable: true,
+      get: function() {
+        return _index.tsNeverKeyword;
+      }
+    });
+    Object.defineProperty(exports, "TSNonNullExpression", {
+      enumerable: true,
+      get: function() {
+        return _index.tsNonNullExpression;
+      }
+    });
+    Object.defineProperty(exports, "TSNullKeyword", {
+      enumerable: true,
+      get: function() {
+        return _index.tsNullKeyword;
+      }
+    });
+    Object.defineProperty(exports, "TSNumberKeyword", {
+      enumerable: true,
+      get: function() {
+        return _index.tsNumberKeyword;
+      }
+    });
+    Object.defineProperty(exports, "TSObjectKeyword", {
+      enumerable: true,
+      get: function() {
+        return _index.tsObjectKeyword;
+      }
+    });
+    Object.defineProperty(exports, "TSOptionalType", {
+      enumerable: true,
+      get: function() {
+        return _index.tsOptionalType;
+      }
+    });
+    Object.defineProperty(exports, "TSParameterProperty", {
+      enumerable: true,
+      get: function() {
+        return _index.tsParameterProperty;
+      }
+    });
+    Object.defineProperty(exports, "TSParenthesizedType", {
+      enumerable: true,
+      get: function() {
+        return _index.tsParenthesizedType;
+      }
+    });
+    Object.defineProperty(exports, "TSPropertySignature", {
+      enumerable: true,
+      get: function() {
+        return _index.tsPropertySignature;
+      }
+    });
+    Object.defineProperty(exports, "TSQualifiedName", {
+      enumerable: true,
+      get: function() {
+        return _index.tsQualifiedName;
+      }
+    });
+    Object.defineProperty(exports, "TSRestType", {
+      enumerable: true,
+      get: function() {
+        return _index.tsRestType;
+      }
+    });
+    Object.defineProperty(exports, "TSSatisfiesExpression", {
+      enumerable: true,
+      get: function() {
+        return _index.tsSatisfiesExpression;
+      }
+    });
+    Object.defineProperty(exports, "TSStringKeyword", {
+      enumerable: true,
+      get: function() {
+        return _index.tsStringKeyword;
+      }
+    });
+    Object.defineProperty(exports, "TSSymbolKeyword", {
+      enumerable: true,
+      get: function() {
+        return _index.tsSymbolKeyword;
+      }
+    });
+    Object.defineProperty(exports, "TSThisType", {
+      enumerable: true,
+      get: function() {
+        return _index.tsThisType;
+      }
+    });
+    Object.defineProperty(exports, "TSTupleType", {
+      enumerable: true,
+      get: function() {
+        return _index.tsTupleType;
+      }
+    });
+    Object.defineProperty(exports, "TSTypeAliasDeclaration", {
+      enumerable: true,
+      get: function() {
+        return _index.tsTypeAliasDeclaration;
+      }
+    });
+    Object.defineProperty(exports, "TSTypeAnnotation", {
+      enumerable: true,
+      get: function() {
+        return _index.tsTypeAnnotation;
+      }
+    });
+    Object.defineProperty(exports, "TSTypeAssertion", {
+      enumerable: true,
+      get: function() {
+        return _index.tsTypeAssertion;
+      }
+    });
+    Object.defineProperty(exports, "TSTypeLiteral", {
+      enumerable: true,
+      get: function() {
+        return _index.tsTypeLiteral;
+      }
+    });
+    Object.defineProperty(exports, "TSTypeOperator", {
+      enumerable: true,
+      get: function() {
+        return _index.tsTypeOperator;
+      }
+    });
+    Object.defineProperty(exports, "TSTypeParameter", {
+      enumerable: true,
+      get: function() {
+        return _index.tsTypeParameter;
+      }
+    });
+    Object.defineProperty(exports, "TSTypeParameterDeclaration", {
+      enumerable: true,
+      get: function() {
+        return _index.tsTypeParameterDeclaration;
+      }
+    });
+    Object.defineProperty(exports, "TSTypeParameterInstantiation", {
+      enumerable: true,
+      get: function() {
+        return _index.tsTypeParameterInstantiation;
+      }
+    });
+    Object.defineProperty(exports, "TSTypePredicate", {
+      enumerable: true,
+      get: function() {
+        return _index.tsTypePredicate;
+      }
+    });
+    Object.defineProperty(exports, "TSTypeQuery", {
+      enumerable: true,
+      get: function() {
+        return _index.tsTypeQuery;
+      }
+    });
+    Object.defineProperty(exports, "TSTypeReference", {
+      enumerable: true,
+      get: function() {
+        return _index.tsTypeReference;
+      }
+    });
+    Object.defineProperty(exports, "TSUndefinedKeyword", {
+      enumerable: true,
+      get: function() {
+        return _index.tsUndefinedKeyword;
+      }
+    });
+    Object.defineProperty(exports, "TSUnionType", {
+      enumerable: true,
+      get: function() {
+        return _index.tsUnionType;
+      }
+    });
+    Object.defineProperty(exports, "TSUnknownKeyword", {
+      enumerable: true,
+      get: function() {
+        return _index.tsUnknownKeyword;
+      }
+    });
+    Object.defineProperty(exports, "TSVoidKeyword", {
+      enumerable: true,
+      get: function() {
+        return _index.tsVoidKeyword;
+      }
+    });
+    Object.defineProperty(exports, "TaggedTemplateExpression", {
+      enumerable: true,
+      get: function() {
+        return _index.taggedTemplateExpression;
+      }
+    });
+    Object.defineProperty(exports, "TemplateElement", {
+      enumerable: true,
+      get: function() {
+        return _index.templateElement;
+      }
+    });
+    Object.defineProperty(exports, "TemplateLiteral", {
+      enumerable: true,
+      get: function() {
+        return _index.templateLiteral;
+      }
+    });
+    Object.defineProperty(exports, "ThisExpression", {
+      enumerable: true,
+      get: function() {
+        return _index.thisExpression;
+      }
+    });
+    Object.defineProperty(exports, "ThisTypeAnnotation", {
+      enumerable: true,
+      get: function() {
+        return _index.thisTypeAnnotation;
+      }
+    });
+    Object.defineProperty(exports, "ThrowStatement", {
+      enumerable: true,
+      get: function() {
+        return _index.throwStatement;
+      }
+    });
+    Object.defineProperty(exports, "TopicReference", {
+      enumerable: true,
+      get: function() {
+        return _index.topicReference;
+      }
+    });
+    Object.defineProperty(exports, "TryStatement", {
+      enumerable: true,
+      get: function() {
+        return _index.tryStatement;
+      }
+    });
+    Object.defineProperty(exports, "TupleExpression", {
+      enumerable: true,
+      get: function() {
+        return _index.tupleExpression;
+      }
+    });
+    Object.defineProperty(exports, "TupleTypeAnnotation", {
+      enumerable: true,
+      get: function() {
+        return _index.tupleTypeAnnotation;
+      }
+    });
+    Object.defineProperty(exports, "TypeAlias", {
+      enumerable: true,
+      get: function() {
+        return _index.typeAlias;
+      }
+    });
+    Object.defineProperty(exports, "TypeAnnotation", {
+      enumerable: true,
+      get: function() {
+        return _index.typeAnnotation;
+      }
+    });
+    Object.defineProperty(exports, "TypeCastExpression", {
+      enumerable: true,
+      get: function() {
+        return _index.typeCastExpression;
+      }
+    });
+    Object.defineProperty(exports, "TypeParameter", {
+      enumerable: true,
+      get: function() {
+        return _index.typeParameter;
+      }
+    });
+    Object.defineProperty(exports, "TypeParameterDeclaration", {
+      enumerable: true,
+      get: function() {
+        return _index.typeParameterDeclaration;
+      }
+    });
+    Object.defineProperty(exports, "TypeParameterInstantiation", {
+      enumerable: true,
+      get: function() {
+        return _index.typeParameterInstantiation;
+      }
+    });
+    Object.defineProperty(exports, "TypeofTypeAnnotation", {
+      enumerable: true,
+      get: function() {
+        return _index.typeofTypeAnnotation;
+      }
+    });
+    Object.defineProperty(exports, "UnaryExpression", {
+      enumerable: true,
+      get: function() {
+        return _index.unaryExpression;
+      }
+    });
+    Object.defineProperty(exports, "UnionTypeAnnotation", {
+      enumerable: true,
+      get: function() {
+        return _index.unionTypeAnnotation;
+      }
+    });
+    Object.defineProperty(exports, "UpdateExpression", {
+      enumerable: true,
+      get: function() {
+        return _index.updateExpression;
+      }
+    });
+    Object.defineProperty(exports, "V8IntrinsicIdentifier", {
+      enumerable: true,
+      get: function() {
+        return _index.v8IntrinsicIdentifier;
+      }
+    });
+    Object.defineProperty(exports, "VariableDeclaration", {
+      enumerable: true,
+      get: function() {
+        return _index.variableDeclaration;
+      }
+    });
+    Object.defineProperty(exports, "VariableDeclarator", {
+      enumerable: true,
+      get: function() {
+        return _index.variableDeclarator;
+      }
+    });
+    Object.defineProperty(exports, "Variance", {
+      enumerable: true,
+      get: function() {
+        return _index.variance;
+      }
+    });
+    Object.defineProperty(exports, "VoidTypeAnnotation", {
+      enumerable: true,
+      get: function() {
+        return _index.voidTypeAnnotation;
+      }
+    });
+    Object.defineProperty(exports, "WhileStatement", {
+      enumerable: true,
+      get: function() {
+        return _index.whileStatement;
+      }
+    });
+    Object.defineProperty(exports, "WithStatement", {
+      enumerable: true,
+      get: function() {
+        return _index.withStatement;
+      }
+    });
+    Object.defineProperty(exports, "YieldExpression", {
+      enumerable: true,
+      get: function() {
+        return _index.yieldExpression;
+      }
+    });
+    var _index = require_generated12();
+  }
+});
+
+// node_modules/@babel/generator/node_modules/@babel/types/lib/clone/cloneNode.js
+var require_cloneNode3 = __commonJS({
+  "node_modules/@babel/generator/node_modules/@babel/types/lib/clone/cloneNode.js"(exports) {
+    "use strict";
+    Object.defineProperty(exports, "__esModule", {
+      value: true
+    });
+    exports.default = cloneNode;
+    var _definitions = require_definitions3();
+    var _generated = require_generated11();
+    var has = Function.call.bind(Object.prototype.hasOwnProperty);
+    function cloneIfNode(obj, deep, withoutLoc, commentsCache) {
+      if (obj && typeof obj.type === "string") {
+        return cloneNodeInternal(obj, deep, withoutLoc, commentsCache);
+      }
+      return obj;
+    }
+    __name(cloneIfNode, "cloneIfNode");
+    function cloneIfNodeOrArray(obj, deep, withoutLoc, commentsCache) {
+      if (Array.isArray(obj)) {
+        return obj.map((node) => cloneIfNode(node, deep, withoutLoc, commentsCache));
+      }
+      return cloneIfNode(obj, deep, withoutLoc, commentsCache);
+    }
+    __name(cloneIfNodeOrArray, "cloneIfNodeOrArray");
+    function cloneNode(node, deep = true, withoutLoc = false) {
+      return cloneNodeInternal(node, deep, withoutLoc, /* @__PURE__ */ new Map());
+    }
+    __name(cloneNode, "cloneNode");
+    function cloneNodeInternal(node, deep = true, withoutLoc = false, commentsCache) {
+      if (!node)
+        return node;
+      const { type } = node;
+      const newNode = {
+        type: node.type
+      };
+      if ((0, _generated.isIdentifier)(node)) {
+        newNode.name = node.name;
+        if (has(node, "optional") && typeof node.optional === "boolean") {
+          newNode.optional = node.optional;
+        }
+        if (has(node, "typeAnnotation")) {
+          newNode.typeAnnotation = deep ? cloneIfNodeOrArray(node.typeAnnotation, true, withoutLoc, commentsCache) : node.typeAnnotation;
+        }
+      } else if (!has(_definitions.NODE_FIELDS, type)) {
+        throw new Error(`Unknown node type: "${type}"`);
+      } else {
+        for (const field of Object.keys(_definitions.NODE_FIELDS[type])) {
+          if (has(node, field)) {
+            if (deep) {
+              newNode[field] = (0, _generated.isFile)(node) && field === "comments" ? maybeCloneComments(node.comments, deep, withoutLoc, commentsCache) : cloneIfNodeOrArray(node[field], true, withoutLoc, commentsCache);
+            } else {
+              newNode[field] = node[field];
+            }
+          }
+        }
+      }
+      if (has(node, "loc")) {
+        if (withoutLoc) {
+          newNode.loc = null;
+        } else {
+          newNode.loc = node.loc;
+        }
+      }
+      if (has(node, "leadingComments")) {
+        newNode.leadingComments = maybeCloneComments(node.leadingComments, deep, withoutLoc, commentsCache);
+      }
+      if (has(node, "innerComments")) {
+        newNode.innerComments = maybeCloneComments(node.innerComments, deep, withoutLoc, commentsCache);
+      }
+      if (has(node, "trailingComments")) {
+        newNode.trailingComments = maybeCloneComments(node.trailingComments, deep, withoutLoc, commentsCache);
+      }
+      if (has(node, "extra")) {
+        newNode.extra = Object.assign({}, node.extra);
+      }
+      return newNode;
+    }
+    __name(cloneNodeInternal, "cloneNodeInternal");
+    function maybeCloneComments(comments, deep, withoutLoc, commentsCache) {
+      if (!comments || !deep) {
+        return comments;
+      }
+      return comments.map((comment) => {
+        const cache = commentsCache.get(comment);
+        if (cache)
+          return cache;
+        const { type, value, loc } = comment;
+        const ret = {
+          type,
+          value,
+          loc
+        };
+        if (withoutLoc) {
+          ret.loc = null;
+        }
+        commentsCache.set(comment, ret);
+        return ret;
+      });
+    }
+    __name(maybeCloneComments, "maybeCloneComments");
+  }
+});
+
+// node_modules/@babel/generator/node_modules/@babel/types/lib/clone/clone.js
+var require_clone3 = __commonJS({
+  "node_modules/@babel/generator/node_modules/@babel/types/lib/clone/clone.js"(exports) {
+    "use strict";
+    Object.defineProperty(exports, "__esModule", {
+      value: true
+    });
+    exports.default = clone;
+    var _cloneNode = require_cloneNode3();
+    function clone(node) {
+      return (0, _cloneNode.default)(node, false);
+    }
+    __name(clone, "clone");
+  }
+});
+
+// node_modules/@babel/generator/node_modules/@babel/types/lib/clone/cloneDeep.js
+var require_cloneDeep3 = __commonJS({
+  "node_modules/@babel/generator/node_modules/@babel/types/lib/clone/cloneDeep.js"(exports) {
+    "use strict";
+    Object.defineProperty(exports, "__esModule", {
+      value: true
+    });
+    exports.default = cloneDeep;
+    var _cloneNode = require_cloneNode3();
+    function cloneDeep(node) {
+      return (0, _cloneNode.default)(node);
+    }
+    __name(cloneDeep, "cloneDeep");
+  }
+});
+
+// node_modules/@babel/generator/node_modules/@babel/types/lib/clone/cloneDeepWithoutLoc.js
+var require_cloneDeepWithoutLoc3 = __commonJS({
+  "node_modules/@babel/generator/node_modules/@babel/types/lib/clone/cloneDeepWithoutLoc.js"(exports) {
+    "use strict";
+    Object.defineProperty(exports, "__esModule", {
+      value: true
+    });
+    exports.default = cloneDeepWithoutLoc;
+    var _cloneNode = require_cloneNode3();
+    function cloneDeepWithoutLoc(node) {
+      return (0, _cloneNode.default)(node, true, true);
+    }
+    __name(cloneDeepWithoutLoc, "cloneDeepWithoutLoc");
+  }
+});
+
+// node_modules/@babel/generator/node_modules/@babel/types/lib/clone/cloneWithoutLoc.js
+var require_cloneWithoutLoc3 = __commonJS({
+  "node_modules/@babel/generator/node_modules/@babel/types/lib/clone/cloneWithoutLoc.js"(exports) {
+    "use strict";
+    Object.defineProperty(exports, "__esModule", {
+      value: true
+    });
+    exports.default = cloneWithoutLoc;
+    var _cloneNode = require_cloneNode3();
+    function cloneWithoutLoc(node) {
+      return (0, _cloneNode.default)(node, false, true);
+    }
+    __name(cloneWithoutLoc, "cloneWithoutLoc");
+  }
+});
+
+// node_modules/@babel/generator/node_modules/@babel/types/lib/comments/addComments.js
+var require_addComments3 = __commonJS({
+  "node_modules/@babel/generator/node_modules/@babel/types/lib/comments/addComments.js"(exports) {
+    "use strict";
+    Object.defineProperty(exports, "__esModule", {
+      value: true
+    });
+    exports.default = addComments;
+    function addComments(node, type, comments) {
+      if (!comments || !node)
+        return node;
+      const key = `${type}Comments`;
+      if (node[key]) {
+        if (type === "leading") {
+          node[key] = comments.concat(node[key]);
+        } else {
+          node[key].push(...comments);
+        }
+      } else {
+        node[key] = comments;
+      }
+      return node;
+    }
+    __name(addComments, "addComments");
+  }
+});
+
+// node_modules/@babel/generator/node_modules/@babel/types/lib/comments/addComment.js
+var require_addComment3 = __commonJS({
+  "node_modules/@babel/generator/node_modules/@babel/types/lib/comments/addComment.js"(exports) {
+    "use strict";
+    Object.defineProperty(exports, "__esModule", {
+      value: true
+    });
+    exports.default = addComment;
+    var _addComments = require_addComments3();
+    function addComment(node, type, content, line) {
+      return (0, _addComments.default)(node, type, [
+        {
+          type: line ? "CommentLine" : "CommentBlock",
+          value: content
+        }
+      ]);
+    }
+    __name(addComment, "addComment");
+  }
+});
+
+// node_modules/@babel/generator/node_modules/@babel/types/lib/utils/inherit.js
+var require_inherit3 = __commonJS({
+  "node_modules/@babel/generator/node_modules/@babel/types/lib/utils/inherit.js"(exports) {
+    "use strict";
+    Object.defineProperty(exports, "__esModule", {
+      value: true
+    });
+    exports.default = inherit;
+    function inherit(key, child, parent) {
+      if (child && parent) {
+        child[key] = Array.from(new Set([].concat(child[key], parent[key]).filter(Boolean)));
+      }
+    }
+    __name(inherit, "inherit");
+  }
+});
+
+// node_modules/@babel/generator/node_modules/@babel/types/lib/comments/inheritInnerComments.js
+var require_inheritInnerComments3 = __commonJS({
+  "node_modules/@babel/generator/node_modules/@babel/types/lib/comments/inheritInnerComments.js"(exports) {
+    "use strict";
+    Object.defineProperty(exports, "__esModule", {
+      value: true
+    });
+    exports.default = inheritInnerComments;
+    var _inherit = require_inherit3();
+    function inheritInnerComments(child, parent) {
+      (0, _inherit.default)("innerComments", child, parent);
+    }
+    __name(inheritInnerComments, "inheritInnerComments");
+  }
+});
+
+// node_modules/@babel/generator/node_modules/@babel/types/lib/comments/inheritLeadingComments.js
+var require_inheritLeadingComments3 = __commonJS({
+  "node_modules/@babel/generator/node_modules/@babel/types/lib/comments/inheritLeadingComments.js"(exports) {
+    "use strict";
+    Object.defineProperty(exports, "__esModule", {
+      value: true
+    });
+    exports.default = inheritLeadingComments;
+    var _inherit = require_inherit3();
+    function inheritLeadingComments(child, parent) {
+      (0, _inherit.default)("leadingComments", child, parent);
+    }
+    __name(inheritLeadingComments, "inheritLeadingComments");
+  }
+});
+
+// node_modules/@babel/generator/node_modules/@babel/types/lib/comments/inheritTrailingComments.js
+var require_inheritTrailingComments3 = __commonJS({
+  "node_modules/@babel/generator/node_modules/@babel/types/lib/comments/inheritTrailingComments.js"(exports) {
+    "use strict";
+    Object.defineProperty(exports, "__esModule", {
+      value: true
+    });
+    exports.default = inheritTrailingComments;
+    var _inherit = require_inherit3();
+    function inheritTrailingComments(child, parent) {
+      (0, _inherit.default)("trailingComments", child, parent);
+    }
+    __name(inheritTrailingComments, "inheritTrailingComments");
+  }
+});
+
+// node_modules/@babel/generator/node_modules/@babel/types/lib/comments/inheritsComments.js
+var require_inheritsComments3 = __commonJS({
+  "node_modules/@babel/generator/node_modules/@babel/types/lib/comments/inheritsComments.js"(exports) {
+    "use strict";
+    Object.defineProperty(exports, "__esModule", {
+      value: true
+    });
+    exports.default = inheritsComments;
+    var _inheritTrailingComments = require_inheritTrailingComments3();
+    var _inheritLeadingComments = require_inheritLeadingComments3();
+    var _inheritInnerComments = require_inheritInnerComments3();
+    function inheritsComments(child, parent) {
+      (0, _inheritTrailingComments.default)(child, parent);
+      (0, _inheritLeadingComments.default)(child, parent);
+      (0, _inheritInnerComments.default)(child, parent);
+      return child;
+    }
+    __name(inheritsComments, "inheritsComments");
+  }
+});
+
+// node_modules/@babel/generator/node_modules/@babel/types/lib/comments/removeComments.js
+var require_removeComments3 = __commonJS({
+  "node_modules/@babel/generator/node_modules/@babel/types/lib/comments/removeComments.js"(exports) {
+    "use strict";
+    Object.defineProperty(exports, "__esModule", {
+      value: true
+    });
+    exports.default = removeComments;
+    var _constants = require_constants3();
+    function removeComments(node) {
+      _constants.COMMENT_KEYS.forEach((key) => {
+        node[key] = null;
+      });
+      return node;
+    }
+    __name(removeComments, "removeComments");
+  }
+});
+
+// node_modules/@babel/generator/node_modules/@babel/types/lib/constants/generated/index.js
+var require_generated14 = __commonJS({
+  "node_modules/@babel/generator/node_modules/@babel/types/lib/constants/generated/index.js"(exports) {
+    "use strict";
+    Object.defineProperty(exports, "__esModule", {
+      value: true
+    });
+    exports.WHILE_TYPES = exports.USERWHITESPACABLE_TYPES = exports.UNARYLIKE_TYPES = exports.TYPESCRIPT_TYPES = exports.TSTYPE_TYPES = exports.TSTYPEELEMENT_TYPES = exports.TSENTITYNAME_TYPES = exports.TSBASETYPE_TYPES = exports.TERMINATORLESS_TYPES = exports.STATEMENT_TYPES = exports.STANDARDIZED_TYPES = exports.SCOPABLE_TYPES = exports.PUREISH_TYPES = exports.PROPERTY_TYPES = exports.PRIVATE_TYPES = exports.PATTERN_TYPES = exports.PATTERNLIKE_TYPES = exports.OBJECTMEMBER_TYPES = exports.MODULESPECIFIER_TYPES = exports.MODULEDECLARATION_TYPES = exports.MISCELLANEOUS_TYPES = exports.METHOD_TYPES = exports.LVAL_TYPES = exports.LOOP_TYPES = exports.LITERAL_TYPES = exports.JSX_TYPES = exports.IMMUTABLE_TYPES = exports.FUNCTION_TYPES = exports.FUNCTIONPARENT_TYPES = exports.FOR_TYPES = exports.FORXSTATEMENT_TYPES = exports.FLOW_TYPES = exports.FLOWTYPE_TYPES = exports.FLOWPREDICATE_TYPES = exports.FLOWDECLARATION_TYPES = exports.FLOWBASEANNOTATION_TYPES = exports.EXPRESSION_TYPES = exports.EXPRESSIONWRAPPER_TYPES = exports.EXPORTDECLARATION_TYPES = exports.ENUMMEMBER_TYPES = exports.ENUMBODY_TYPES = exports.DECLARATION_TYPES = exports.CONDITIONAL_TYPES = exports.COMPLETIONSTATEMENT_TYPES = exports.CLASS_TYPES = exports.BLOCK_TYPES = exports.BLOCKPARENT_TYPES = exports.BINARY_TYPES = exports.ACCESSOR_TYPES = void 0;
+    var _definitions = require_definitions3();
+    var STANDARDIZED_TYPES = _definitions.FLIPPED_ALIAS_KEYS["Standardized"];
+    exports.STANDARDIZED_TYPES = STANDARDIZED_TYPES;
+    var EXPRESSION_TYPES = _definitions.FLIPPED_ALIAS_KEYS["Expression"];
+    exports.EXPRESSION_TYPES = EXPRESSION_TYPES;
+    var BINARY_TYPES = _definitions.FLIPPED_ALIAS_KEYS["Binary"];
+    exports.BINARY_TYPES = BINARY_TYPES;
+    var SCOPABLE_TYPES = _definitions.FLIPPED_ALIAS_KEYS["Scopable"];
+    exports.SCOPABLE_TYPES = SCOPABLE_TYPES;
+    var BLOCKPARENT_TYPES = _definitions.FLIPPED_ALIAS_KEYS["BlockParent"];
+    exports.BLOCKPARENT_TYPES = BLOCKPARENT_TYPES;
+    var BLOCK_TYPES = _definitions.FLIPPED_ALIAS_KEYS["Block"];
+    exports.BLOCK_TYPES = BLOCK_TYPES;
+    var STATEMENT_TYPES = _definitions.FLIPPED_ALIAS_KEYS["Statement"];
+    exports.STATEMENT_TYPES = STATEMENT_TYPES;
+    var TERMINATORLESS_TYPES = _definitions.FLIPPED_ALIAS_KEYS["Terminatorless"];
+    exports.TERMINATORLESS_TYPES = TERMINATORLESS_TYPES;
+    var COMPLETIONSTATEMENT_TYPES = _definitions.FLIPPED_ALIAS_KEYS["CompletionStatement"];
+    exports.COMPLETIONSTATEMENT_TYPES = COMPLETIONSTATEMENT_TYPES;
+    var CONDITIONAL_TYPES = _definitions.FLIPPED_ALIAS_KEYS["Conditional"];
+    exports.CONDITIONAL_TYPES = CONDITIONAL_TYPES;
+    var LOOP_TYPES = _definitions.FLIPPED_ALIAS_KEYS["Loop"];
+    exports.LOOP_TYPES = LOOP_TYPES;
+    var WHILE_TYPES = _definitions.FLIPPED_ALIAS_KEYS["While"];
+    exports.WHILE_TYPES = WHILE_TYPES;
+    var EXPRESSIONWRAPPER_TYPES = _definitions.FLIPPED_ALIAS_KEYS["ExpressionWrapper"];
+    exports.EXPRESSIONWRAPPER_TYPES = EXPRESSIONWRAPPER_TYPES;
+    var FOR_TYPES = _definitions.FLIPPED_ALIAS_KEYS["For"];
+    exports.FOR_TYPES = FOR_TYPES;
+    var FORXSTATEMENT_TYPES = _definitions.FLIPPED_ALIAS_KEYS["ForXStatement"];
+    exports.FORXSTATEMENT_TYPES = FORXSTATEMENT_TYPES;
+    var FUNCTION_TYPES = _definitions.FLIPPED_ALIAS_KEYS["Function"];
+    exports.FUNCTION_TYPES = FUNCTION_TYPES;
+    var FUNCTIONPARENT_TYPES = _definitions.FLIPPED_ALIAS_KEYS["FunctionParent"];
+    exports.FUNCTIONPARENT_TYPES = FUNCTIONPARENT_TYPES;
+    var PUREISH_TYPES = _definitions.FLIPPED_ALIAS_KEYS["Pureish"];
+    exports.PUREISH_TYPES = PUREISH_TYPES;
+    var DECLARATION_TYPES = _definitions.FLIPPED_ALIAS_KEYS["Declaration"];
+    exports.DECLARATION_TYPES = DECLARATION_TYPES;
+    var PATTERNLIKE_TYPES = _definitions.FLIPPED_ALIAS_KEYS["PatternLike"];
+    exports.PATTERNLIKE_TYPES = PATTERNLIKE_TYPES;
+    var LVAL_TYPES = _definitions.FLIPPED_ALIAS_KEYS["LVal"];
+    exports.LVAL_TYPES = LVAL_TYPES;
+    var TSENTITYNAME_TYPES = _definitions.FLIPPED_ALIAS_KEYS["TSEntityName"];
+    exports.TSENTITYNAME_TYPES = TSENTITYNAME_TYPES;
+    var LITERAL_TYPES = _definitions.FLIPPED_ALIAS_KEYS["Literal"];
+    exports.LITERAL_TYPES = LITERAL_TYPES;
+    var IMMUTABLE_TYPES = _definitions.FLIPPED_ALIAS_KEYS["Immutable"];
+    exports.IMMUTABLE_TYPES = IMMUTABLE_TYPES;
+    var USERWHITESPACABLE_TYPES = _definitions.FLIPPED_ALIAS_KEYS["UserWhitespacable"];
+    exports.USERWHITESPACABLE_TYPES = USERWHITESPACABLE_TYPES;
+    var METHOD_TYPES = _definitions.FLIPPED_ALIAS_KEYS["Method"];
+    exports.METHOD_TYPES = METHOD_TYPES;
+    var OBJECTMEMBER_TYPES = _definitions.FLIPPED_ALIAS_KEYS["ObjectMember"];
+    exports.OBJECTMEMBER_TYPES = OBJECTMEMBER_TYPES;
+    var PROPERTY_TYPES = _definitions.FLIPPED_ALIAS_KEYS["Property"];
+    exports.PROPERTY_TYPES = PROPERTY_TYPES;
+    var UNARYLIKE_TYPES = _definitions.FLIPPED_ALIAS_KEYS["UnaryLike"];
+    exports.UNARYLIKE_TYPES = UNARYLIKE_TYPES;
+    var PATTERN_TYPES = _definitions.FLIPPED_ALIAS_KEYS["Pattern"];
+    exports.PATTERN_TYPES = PATTERN_TYPES;
+    var CLASS_TYPES = _definitions.FLIPPED_ALIAS_KEYS["Class"];
+    exports.CLASS_TYPES = CLASS_TYPES;
+    var MODULEDECLARATION_TYPES = _definitions.FLIPPED_ALIAS_KEYS["ModuleDeclaration"];
+    exports.MODULEDECLARATION_TYPES = MODULEDECLARATION_TYPES;
+    var EXPORTDECLARATION_TYPES = _definitions.FLIPPED_ALIAS_KEYS["ExportDeclaration"];
+    exports.EXPORTDECLARATION_TYPES = EXPORTDECLARATION_TYPES;
+    var MODULESPECIFIER_TYPES = _definitions.FLIPPED_ALIAS_KEYS["ModuleSpecifier"];
+    exports.MODULESPECIFIER_TYPES = MODULESPECIFIER_TYPES;
+    var ACCESSOR_TYPES = _definitions.FLIPPED_ALIAS_KEYS["Accessor"];
+    exports.ACCESSOR_TYPES = ACCESSOR_TYPES;
+    var PRIVATE_TYPES = _definitions.FLIPPED_ALIAS_KEYS["Private"];
+    exports.PRIVATE_TYPES = PRIVATE_TYPES;
+    var FLOW_TYPES = _definitions.FLIPPED_ALIAS_KEYS["Flow"];
+    exports.FLOW_TYPES = FLOW_TYPES;
+    var FLOWTYPE_TYPES = _definitions.FLIPPED_ALIAS_KEYS["FlowType"];
+    exports.FLOWTYPE_TYPES = FLOWTYPE_TYPES;
+    var FLOWBASEANNOTATION_TYPES = _definitions.FLIPPED_ALIAS_KEYS["FlowBaseAnnotation"];
+    exports.FLOWBASEANNOTATION_TYPES = FLOWBASEANNOTATION_TYPES;
+    var FLOWDECLARATION_TYPES = _definitions.FLIPPED_ALIAS_KEYS["FlowDeclaration"];
+    exports.FLOWDECLARATION_TYPES = FLOWDECLARATION_TYPES;
+    var FLOWPREDICATE_TYPES = _definitions.FLIPPED_ALIAS_KEYS["FlowPredicate"];
+    exports.FLOWPREDICATE_TYPES = FLOWPREDICATE_TYPES;
+    var ENUMBODY_TYPES = _definitions.FLIPPED_ALIAS_KEYS["EnumBody"];
+    exports.ENUMBODY_TYPES = ENUMBODY_TYPES;
+    var ENUMMEMBER_TYPES = _definitions.FLIPPED_ALIAS_KEYS["EnumMember"];
+    exports.ENUMMEMBER_TYPES = ENUMMEMBER_TYPES;
+    var JSX_TYPES = _definitions.FLIPPED_ALIAS_KEYS["JSX"];
+    exports.JSX_TYPES = JSX_TYPES;
+    var MISCELLANEOUS_TYPES = _definitions.FLIPPED_ALIAS_KEYS["Miscellaneous"];
+    exports.MISCELLANEOUS_TYPES = MISCELLANEOUS_TYPES;
+    var TYPESCRIPT_TYPES = _definitions.FLIPPED_ALIAS_KEYS["TypeScript"];
+    exports.TYPESCRIPT_TYPES = TYPESCRIPT_TYPES;
+    var TSTYPEELEMENT_TYPES = _definitions.FLIPPED_ALIAS_KEYS["TSTypeElement"];
+    exports.TSTYPEELEMENT_TYPES = TSTYPEELEMENT_TYPES;
+    var TSTYPE_TYPES = _definitions.FLIPPED_ALIAS_KEYS["TSType"];
+    exports.TSTYPE_TYPES = TSTYPE_TYPES;
+    var TSBASETYPE_TYPES = _definitions.FLIPPED_ALIAS_KEYS["TSBaseType"];
+    exports.TSBASETYPE_TYPES = TSBASETYPE_TYPES;
+  }
+});
+
+// node_modules/@babel/generator/node_modules/@babel/types/lib/converters/toBlock.js
+var require_toBlock3 = __commonJS({
+  "node_modules/@babel/generator/node_modules/@babel/types/lib/converters/toBlock.js"(exports) {
+    "use strict";
+    Object.defineProperty(exports, "__esModule", {
+      value: true
+    });
+    exports.default = toBlock;
+    var _generated = require_generated11();
+    var _generated2 = require_generated12();
+    function toBlock(node, parent) {
+      if ((0, _generated.isBlockStatement)(node)) {
+        return node;
+      }
+      let blockNodes = [];
+      if ((0, _generated.isEmptyStatement)(node)) {
+        blockNodes = [];
+      } else {
+        if (!(0, _generated.isStatement)(node)) {
+          if ((0, _generated.isFunction)(parent)) {
+            node = (0, _generated2.returnStatement)(node);
+          } else {
+            node = (0, _generated2.expressionStatement)(node);
+          }
+        }
+        blockNodes = [
+          node
+        ];
+      }
+      return (0, _generated2.blockStatement)(blockNodes);
+    }
+    __name(toBlock, "toBlock");
+  }
+});
+
+// node_modules/@babel/generator/node_modules/@babel/types/lib/converters/ensureBlock.js
+var require_ensureBlock3 = __commonJS({
+  "node_modules/@babel/generator/node_modules/@babel/types/lib/converters/ensureBlock.js"(exports) {
+    "use strict";
+    Object.defineProperty(exports, "__esModule", {
+      value: true
+    });
+    exports.default = ensureBlock;
+    var _toBlock = require_toBlock3();
+    function ensureBlock(node, key = "body") {
+      const result = (0, _toBlock.default)(node[key], node);
+      node[key] = result;
+      return result;
+    }
+    __name(ensureBlock, "ensureBlock");
+  }
+});
+
+// node_modules/@babel/generator/node_modules/@babel/types/lib/converters/toIdentifier.js
+var require_toIdentifier3 = __commonJS({
+  "node_modules/@babel/generator/node_modules/@babel/types/lib/converters/toIdentifier.js"(exports) {
+    "use strict";
+    Object.defineProperty(exports, "__esModule", {
+      value: true
+    });
+    exports.default = toIdentifier;
+    var _isValidIdentifier = require_isValidIdentifier3();
+    var _helperValidatorIdentifier = require_lib();
+    function toIdentifier(input) {
+      input = input + "";
+      let name = "";
+      for (const c of input) {
+        name += (0, _helperValidatorIdentifier.isIdentifierChar)(c.codePointAt(0)) ? c : "-";
+      }
+      name = name.replace(/^[-0-9]+/, "");
+      name = name.replace(/[-\s]+(.)?/g, function(match, c) {
+        return c ? c.toUpperCase() : "";
+      });
+      if (!(0, _isValidIdentifier.default)(name)) {
+        name = `_${name}`;
+      }
+      return name || "_";
+    }
+    __name(toIdentifier, "toIdentifier");
+  }
+});
+
+// node_modules/@babel/generator/node_modules/@babel/types/lib/converters/toBindingIdentifierName.js
+var require_toBindingIdentifierName3 = __commonJS({
+  "node_modules/@babel/generator/node_modules/@babel/types/lib/converters/toBindingIdentifierName.js"(exports) {
+    "use strict";
+    Object.defineProperty(exports, "__esModule", {
+      value: true
+    });
+    exports.default = toBindingIdentifierName;
+    var _toIdentifier = require_toIdentifier3();
+    function toBindingIdentifierName(name) {
+      name = (0, _toIdentifier.default)(name);
+      if (name === "eval" || name === "arguments")
+        name = "_" + name;
+      return name;
+    }
+    __name(toBindingIdentifierName, "toBindingIdentifierName");
+  }
+});
+
+// node_modules/@babel/generator/node_modules/@babel/types/lib/converters/toComputedKey.js
+var require_toComputedKey3 = __commonJS({
+  "node_modules/@babel/generator/node_modules/@babel/types/lib/converters/toComputedKey.js"(exports) {
+    "use strict";
+    Object.defineProperty(exports, "__esModule", {
+      value: true
+    });
+    exports.default = toComputedKey;
+    var _generated = require_generated11();
+    var _generated2 = require_generated12();
+    function toComputedKey(node, key = node.key || node.property) {
+      if (!node.computed && (0, _generated.isIdentifier)(key))
+        key = (0, _generated2.stringLiteral)(key.name);
+      return key;
+    }
+    __name(toComputedKey, "toComputedKey");
+  }
+});
+
+// node_modules/@babel/generator/node_modules/@babel/types/lib/converters/toExpression.js
+var require_toExpression3 = __commonJS({
+  "node_modules/@babel/generator/node_modules/@babel/types/lib/converters/toExpression.js"(exports) {
+    "use strict";
+    Object.defineProperty(exports, "__esModule", {
+      value: true
+    });
+    exports.default = void 0;
+    var _generated = require_generated11();
+    var _default = toExpression;
+    exports.default = _default;
+    function toExpression(node) {
+      if ((0, _generated.isExpressionStatement)(node)) {
+        node = node.expression;
+      }
+      if ((0, _generated.isExpression)(node)) {
+        return node;
+      }
+      if ((0, _generated.isClass)(node)) {
+        node.type = "ClassExpression";
+      } else if ((0, _generated.isFunction)(node)) {
+        node.type = "FunctionExpression";
+      }
+      if (!(0, _generated.isExpression)(node)) {
+        throw new Error(`cannot turn ${node.type} to an expression`);
+      }
+      return node;
+    }
+    __name(toExpression, "toExpression");
+  }
+});
+
+// node_modules/@babel/generator/node_modules/@babel/types/lib/traverse/traverseFast.js
+var require_traverseFast3 = __commonJS({
+  "node_modules/@babel/generator/node_modules/@babel/types/lib/traverse/traverseFast.js"(exports) {
+    "use strict";
+    Object.defineProperty(exports, "__esModule", {
+      value: true
+    });
+    exports.default = traverseFast;
+    var _definitions = require_definitions3();
+    function traverseFast(node, enter, opts) {
+      if (!node)
+        return;
+      const keys = _definitions.VISITOR_KEYS[node.type];
+      if (!keys)
+        return;
+      opts = opts || {};
+      enter(node, opts);
+      for (const key of keys) {
+        const subNode = node[key];
+        if (Array.isArray(subNode)) {
+          for (const node1 of subNode) {
+            traverseFast(node1, enter, opts);
+          }
+        } else {
+          traverseFast(subNode, enter, opts);
+        }
+      }
+    }
+    __name(traverseFast, "traverseFast");
+  }
+});
+
+// node_modules/@babel/generator/node_modules/@babel/types/lib/modifications/removeProperties.js
+var require_removeProperties3 = __commonJS({
+  "node_modules/@babel/generator/node_modules/@babel/types/lib/modifications/removeProperties.js"(exports) {
+    "use strict";
+    Object.defineProperty(exports, "__esModule", {
+      value: true
+    });
+    exports.default = removeProperties;
+    var _constants = require_constants3();
+    var CLEAR_KEYS = [
+      "tokens",
+      "start",
+      "end",
+      "loc",
+      "raw",
+      "rawValue"
+    ];
+    var CLEAR_KEYS_PLUS_COMMENTS = [
+      ..._constants.COMMENT_KEYS,
+      "comments",
+      ...CLEAR_KEYS
+    ];
+    function removeProperties(node, opts = {}) {
+      const map = opts.preserveComments ? CLEAR_KEYS : CLEAR_KEYS_PLUS_COMMENTS;
+      for (const key of map) {
+        if (node[key] != null)
+          node[key] = void 0;
+      }
+      for (const key1 of Object.keys(node)) {
+        if (key1[0] === "_" && node[key1] != null)
+          node[key1] = void 0;
+      }
+      const symbols = Object.getOwnPropertySymbols(node);
+      for (const sym of symbols) {
+        node[sym] = null;
+      }
+    }
+    __name(removeProperties, "removeProperties");
+  }
+});
+
+// node_modules/@babel/generator/node_modules/@babel/types/lib/modifications/removePropertiesDeep.js
+var require_removePropertiesDeep3 = __commonJS({
+  "node_modules/@babel/generator/node_modules/@babel/types/lib/modifications/removePropertiesDeep.js"(exports) {
+    "use strict";
+    Object.defineProperty(exports, "__esModule", {
+      value: true
+    });
+    exports.default = removePropertiesDeep;
+    var _traverseFast = require_traverseFast3();
+    var _removeProperties = require_removeProperties3();
+    function removePropertiesDeep(tree, opts) {
+      (0, _traverseFast.default)(tree, _removeProperties.default, opts);
+      return tree;
+    }
+    __name(removePropertiesDeep, "removePropertiesDeep");
+  }
+});
+
+// node_modules/@babel/generator/node_modules/@babel/types/lib/converters/toKeyAlias.js
+var require_toKeyAlias3 = __commonJS({
+  "node_modules/@babel/generator/node_modules/@babel/types/lib/converters/toKeyAlias.js"(exports) {
+    "use strict";
+    Object.defineProperty(exports, "__esModule", {
+      value: true
+    });
+    exports.default = toKeyAlias;
+    var _generated = require_generated11();
+    var _cloneNode = require_cloneNode3();
+    var _removePropertiesDeep = require_removePropertiesDeep3();
+    function toKeyAlias(node, key = node.key) {
+      let alias;
+      if (node.kind === "method") {
+        return toKeyAlias.increment() + "";
+      } else if ((0, _generated.isIdentifier)(key)) {
+        alias = key.name;
+      } else if ((0, _generated.isStringLiteral)(key)) {
+        alias = JSON.stringify(key.value);
+      } else {
+        alias = JSON.stringify((0, _removePropertiesDeep.default)((0, _cloneNode.default)(key)));
+      }
+      if (node.computed) {
+        alias = `[${alias}]`;
+      }
+      if (node.static) {
+        alias = `static:${alias}`;
+      }
+      return alias;
+    }
+    __name(toKeyAlias, "toKeyAlias");
+    toKeyAlias.uid = 0;
+    toKeyAlias.increment = function() {
+      if (toKeyAlias.uid >= Number.MAX_SAFE_INTEGER) {
+        return toKeyAlias.uid = 0;
+      } else {
+        return toKeyAlias.uid++;
+      }
+    };
+  }
+});
+
+// node_modules/@babel/generator/node_modules/@babel/types/lib/retrievers/getBindingIdentifiers.js
+var require_getBindingIdentifiers3 = __commonJS({
+  "node_modules/@babel/generator/node_modules/@babel/types/lib/retrievers/getBindingIdentifiers.js"(exports) {
+    "use strict";
+    Object.defineProperty(exports, "__esModule", {
+      value: true
+    });
+    exports.default = getBindingIdentifiers;
+    var _generated = require_generated11();
+    function getBindingIdentifiers(node, duplicates, outerOnly) {
+      const search = [].concat(node);
+      const ids = /* @__PURE__ */ Object.create(null);
+      while (search.length) {
+        const id = search.shift();
+        if (!id)
+          continue;
+        const keys = getBindingIdentifiers.keys[id.type];
+        if ((0, _generated.isIdentifier)(id)) {
+          if (duplicates) {
+            const _ids = ids[id.name] = ids[id.name] || [];
+            _ids.push(id);
+          } else {
+            ids[id.name] = id;
+          }
+          continue;
+        }
+        if ((0, _generated.isExportDeclaration)(id) && !(0, _generated.isExportAllDeclaration)(id)) {
+          if ((0, _generated.isDeclaration)(id.declaration)) {
+            search.push(id.declaration);
+          }
+          continue;
+        }
+        if (outerOnly) {
+          if ((0, _generated.isFunctionDeclaration)(id)) {
+            search.push(id.id);
+            continue;
+          }
+          if ((0, _generated.isFunctionExpression)(id)) {
+            continue;
+          }
+        }
+        if (keys) {
+          for (let i = 0; i < keys.length; i++) {
+            const key = keys[i];
+            const nodes = id[key];
+            if (nodes) {
+              Array.isArray(nodes) ? search.push(...nodes) : search.push(nodes);
+            }
+          }
+        }
+      }
+      return ids;
+    }
+    __name(getBindingIdentifiers, "getBindingIdentifiers");
+    getBindingIdentifiers.keys = {
+      DeclareClass: [
+        "id"
+      ],
+      DeclareFunction: [
+        "id"
+      ],
+      DeclareModule: [
+        "id"
+      ],
+      DeclareVariable: [
+        "id"
+      ],
+      DeclareInterface: [
+        "id"
+      ],
+      DeclareTypeAlias: [
+        "id"
+      ],
+      DeclareOpaqueType: [
+        "id"
+      ],
+      InterfaceDeclaration: [
+        "id"
+      ],
+      TypeAlias: [
+        "id"
+      ],
+      OpaqueType: [
+        "id"
+      ],
+      CatchClause: [
+        "param"
+      ],
+      LabeledStatement: [
+        "label"
+      ],
+      UnaryExpression: [
+        "argument"
+      ],
+      AssignmentExpression: [
+        "left"
+      ],
+      ImportSpecifier: [
+        "local"
+      ],
+      ImportNamespaceSpecifier: [
+        "local"
+      ],
+      ImportDefaultSpecifier: [
+        "local"
+      ],
+      ImportDeclaration: [
+        "specifiers"
+      ],
+      ExportSpecifier: [
+        "exported"
+      ],
+      ExportNamespaceSpecifier: [
+        "exported"
+      ],
+      ExportDefaultSpecifier: [
+        "exported"
+      ],
+      FunctionDeclaration: [
+        "id",
+        "params"
+      ],
+      FunctionExpression: [
+        "id",
+        "params"
+      ],
+      ArrowFunctionExpression: [
+        "params"
+      ],
+      ObjectMethod: [
+        "params"
+      ],
+      ClassMethod: [
+        "params"
+      ],
+      ClassPrivateMethod: [
+        "params"
+      ],
+      ForInStatement: [
+        "left"
+      ],
+      ForOfStatement: [
+        "left"
+      ],
+      ClassDeclaration: [
+        "id"
+      ],
+      ClassExpression: [
+        "id"
+      ],
+      RestElement: [
+        "argument"
+      ],
+      UpdateExpression: [
+        "argument"
+      ],
+      ObjectProperty: [
+        "value"
+      ],
+      AssignmentPattern: [
+        "left"
+      ],
+      ArrayPattern: [
+        "elements"
+      ],
+      ObjectPattern: [
+        "properties"
+      ],
+      VariableDeclaration: [
+        "declarations"
+      ],
+      VariableDeclarator: [
+        "id"
+      ]
+    };
+  }
+});
+
+// node_modules/@babel/generator/node_modules/@babel/types/lib/converters/gatherSequenceExpressions.js
+var require_gatherSequenceExpressions3 = __commonJS({
+  "node_modules/@babel/generator/node_modules/@babel/types/lib/converters/gatherSequenceExpressions.js"(exports) {
+    "use strict";
+    Object.defineProperty(exports, "__esModule", {
+      value: true
+    });
+    exports.default = gatherSequenceExpressions;
+    var _getBindingIdentifiers = require_getBindingIdentifiers3();
+    var _generated = require_generated11();
+    var _generated2 = require_generated12();
+    var _cloneNode = require_cloneNode3();
+    function gatherSequenceExpressions(nodes, scope, declars) {
+      const exprs = [];
+      let ensureLastUndefined = true;
+      for (const node of nodes) {
+        if (!(0, _generated.isEmptyStatement)(node)) {
+          ensureLastUndefined = false;
+        }
+        if ((0, _generated.isExpression)(node)) {
+          exprs.push(node);
+        } else if ((0, _generated.isExpressionStatement)(node)) {
+          exprs.push(node.expression);
+        } else if ((0, _generated.isVariableDeclaration)(node)) {
+          if (node.kind !== "var")
+            return;
+          for (const declar of node.declarations) {
+            const bindings = (0, _getBindingIdentifiers.default)(declar);
+            for (const key of Object.keys(bindings)) {
+              declars.push({
+                kind: node.kind,
+                id: (0, _cloneNode.default)(bindings[key])
+              });
+            }
+            if (declar.init) {
+              exprs.push((0, _generated2.assignmentExpression)("=", declar.id, declar.init));
+            }
+          }
+          ensureLastUndefined = true;
+        } else if ((0, _generated.isIfStatement)(node)) {
+          const consequent = node.consequent ? gatherSequenceExpressions([
+            node.consequent
+          ], scope, declars) : scope.buildUndefinedNode();
+          const alternate = node.alternate ? gatherSequenceExpressions([
+            node.alternate
+          ], scope, declars) : scope.buildUndefinedNode();
+          if (!consequent || !alternate)
+            return;
+          exprs.push((0, _generated2.conditionalExpression)(node.test, consequent, alternate));
+        } else if ((0, _generated.isBlockStatement)(node)) {
+          const body = gatherSequenceExpressions(node.body, scope, declars);
+          if (!body)
+            return;
+          exprs.push(body);
+        } else if ((0, _generated.isEmptyStatement)(node)) {
+          if (nodes.indexOf(node) === 0) {
+            ensureLastUndefined = true;
+          }
+        } else {
+          return;
+        }
+      }
+      if (ensureLastUndefined) {
+        exprs.push(scope.buildUndefinedNode());
+      }
+      if (exprs.length === 1) {
+        return exprs[0];
+      } else {
+        return (0, _generated2.sequenceExpression)(exprs);
+      }
+    }
+    __name(gatherSequenceExpressions, "gatherSequenceExpressions");
+  }
+});
+
+// node_modules/@babel/generator/node_modules/@babel/types/lib/converters/toSequenceExpression.js
+var require_toSequenceExpression3 = __commonJS({
+  "node_modules/@babel/generator/node_modules/@babel/types/lib/converters/toSequenceExpression.js"(exports) {
+    "use strict";
+    Object.defineProperty(exports, "__esModule", {
+      value: true
+    });
+    exports.default = toSequenceExpression;
+    var _gatherSequenceExpressions = require_gatherSequenceExpressions3();
+    function toSequenceExpression(nodes, scope) {
+      if (!(nodes != null && nodes.length))
+        return;
+      const declars = [];
+      const result = (0, _gatherSequenceExpressions.default)(nodes, scope, declars);
+      if (!result)
+        return;
+      for (const declar of declars) {
+        scope.push(declar);
+      }
+      return result;
+    }
+    __name(toSequenceExpression, "toSequenceExpression");
+  }
+});
+
+// node_modules/@babel/generator/node_modules/@babel/types/lib/converters/toStatement.js
+var require_toStatement3 = __commonJS({
+  "node_modules/@babel/generator/node_modules/@babel/types/lib/converters/toStatement.js"(exports) {
+    "use strict";
+    Object.defineProperty(exports, "__esModule", {
+      value: true
+    });
+    exports.default = void 0;
+    var _generated = require_generated11();
+    var _generated2 = require_generated12();
+    var _default = toStatement;
+    exports.default = _default;
+    function toStatement(node, ignore) {
+      if ((0, _generated.isStatement)(node)) {
+        return node;
+      }
+      let mustHaveId = false;
+      let newType;
+      if ((0, _generated.isClass)(node)) {
+        mustHaveId = true;
+        newType = "ClassDeclaration";
+      } else if ((0, _generated.isFunction)(node)) {
+        mustHaveId = true;
+        newType = "FunctionDeclaration";
+      } else if ((0, _generated.isAssignmentExpression)(node)) {
+        return (0, _generated2.expressionStatement)(node);
+      }
+      if (mustHaveId && !node.id) {
+        newType = false;
+      }
+      if (!newType) {
+        if (ignore) {
+          return false;
+        } else {
+          throw new Error(`cannot turn ${node.type} to a statement`);
+        }
+      }
+      node.type = newType;
+      return node;
+    }
+    __name(toStatement, "toStatement");
+  }
+});
+
+// node_modules/@babel/generator/node_modules/@babel/types/lib/converters/valueToNode.js
+var require_valueToNode3 = __commonJS({
+  "node_modules/@babel/generator/node_modules/@babel/types/lib/converters/valueToNode.js"(exports) {
+    "use strict";
+    Object.defineProperty(exports, "__esModule", {
+      value: true
+    });
+    exports.default = void 0;
+    var _isValidIdentifier = require_isValidIdentifier3();
+    var _generated = require_generated12();
+    var _default = valueToNode;
+    exports.default = _default;
+    var objectToString = Function.call.bind(Object.prototype.toString);
+    function isRegExp(value) {
+      return objectToString(value) === "[object RegExp]";
+    }
+    __name(isRegExp, "isRegExp");
+    function isPlainObject3(value) {
+      if (typeof value !== "object" || value === null || Object.prototype.toString.call(value) !== "[object Object]") {
+        return false;
+      }
+      const proto = Object.getPrototypeOf(value);
+      return proto === null || Object.getPrototypeOf(proto) === null;
+    }
+    __name(isPlainObject3, "isPlainObject");
+    function valueToNode(value) {
+      if (value === void 0) {
+        return (0, _generated.identifier)("undefined");
+      }
+      if (value === true || value === false) {
+        return (0, _generated.booleanLiteral)(value);
+      }
+      if (value === null) {
+        return (0, _generated.nullLiteral)();
+      }
+      if (typeof value === "string") {
+        return (0, _generated.stringLiteral)(value);
+      }
+      if (typeof value === "number") {
+        let result;
+        if (Number.isFinite(value)) {
+          result = (0, _generated.numericLiteral)(Math.abs(value));
+        } else {
+          let numerator;
+          if (Number.isNaN(value)) {
+            numerator = (0, _generated.numericLiteral)(0);
+          } else {
+            numerator = (0, _generated.numericLiteral)(1);
+          }
+          result = (0, _generated.binaryExpression)("/", numerator, (0, _generated.numericLiteral)(0));
+        }
+        if (value < 0 || Object.is(value, -0)) {
+          result = (0, _generated.unaryExpression)("-", result);
+        }
+        return result;
+      }
+      if (isRegExp(value)) {
+        const pattern = value.source;
+        const flags = value.toString().match(/\/([a-z]+|)$/)[1];
+        return (0, _generated.regExpLiteral)(pattern, flags);
+      }
+      if (Array.isArray(value)) {
+        return (0, _generated.arrayExpression)(value.map(valueToNode));
+      }
+      if (isPlainObject3(value)) {
+        const props = [];
+        for (const key of Object.keys(value)) {
+          let nodeKey;
+          if ((0, _isValidIdentifier.default)(key)) {
+            nodeKey = (0, _generated.identifier)(key);
+          } else {
+            nodeKey = (0, _generated.stringLiteral)(key);
+          }
+          props.push((0, _generated.objectProperty)(nodeKey, valueToNode(value[key])));
+        }
+        return (0, _generated.objectExpression)(props);
+      }
+      throw new Error("don't know how to turn this value into a node");
+    }
+    __name(valueToNode, "valueToNode");
+  }
+});
+
+// node_modules/@babel/generator/node_modules/@babel/types/lib/modifications/appendToMemberExpression.js
+var require_appendToMemberExpression3 = __commonJS({
+  "node_modules/@babel/generator/node_modules/@babel/types/lib/modifications/appendToMemberExpression.js"(exports) {
+    "use strict";
+    Object.defineProperty(exports, "__esModule", {
+      value: true
+    });
+    exports.default = appendToMemberExpression;
+    var _generated = require_generated12();
+    function appendToMemberExpression(member, append, computed = false) {
+      member.object = (0, _generated.memberExpression)(member.object, member.property, member.computed);
+      member.property = append;
+      member.computed = !!computed;
+      return member;
+    }
+    __name(appendToMemberExpression, "appendToMemberExpression");
+  }
+});
+
+// node_modules/@babel/generator/node_modules/@babel/types/lib/modifications/inherits.js
+var require_inherits3 = __commonJS({
+  "node_modules/@babel/generator/node_modules/@babel/types/lib/modifications/inherits.js"(exports) {
+    "use strict";
+    Object.defineProperty(exports, "__esModule", {
+      value: true
+    });
+    exports.default = inherits;
+    var _constants = require_constants3();
+    var _inheritsComments = require_inheritsComments3();
+    function inherits(child, parent) {
+      if (!child || !parent)
+        return child;
+      for (const key of _constants.INHERIT_KEYS.optional) {
+        if (child[key] == null) {
+          child[key] = parent[key];
+        }
+      }
+      for (const key1 of Object.keys(parent)) {
+        if (key1[0] === "_" && key1 !== "__clone") {
+          child[key1] = parent[key1];
+        }
+      }
+      for (const key2 of _constants.INHERIT_KEYS.force) {
+        child[key2] = parent[key2];
+      }
+      (0, _inheritsComments.default)(child, parent);
+      return child;
+    }
+    __name(inherits, "inherits");
+  }
+});
+
+// node_modules/@babel/generator/node_modules/@babel/types/lib/modifications/prependToMemberExpression.js
+var require_prependToMemberExpression3 = __commonJS({
+  "node_modules/@babel/generator/node_modules/@babel/types/lib/modifications/prependToMemberExpression.js"(exports) {
+    "use strict";
+    Object.defineProperty(exports, "__esModule", {
+      value: true
+    });
+    exports.default = prependToMemberExpression;
+    var _generated = require_generated12();
+    var _ = require_lib9();
+    function prependToMemberExpression(member, prepend) {
+      if ((0, _.isSuper)(member.object)) {
+        throw new Error("Cannot prepend node to super property access (`super.foo`).");
+      }
+      member.object = (0, _generated.memberExpression)(prepend, member.object);
+      return member;
+    }
+    __name(prependToMemberExpression, "prependToMemberExpression");
+  }
+});
+
+// node_modules/@babel/generator/node_modules/@babel/types/lib/retrievers/getOuterBindingIdentifiers.js
+var require_getOuterBindingIdentifiers3 = __commonJS({
+  "node_modules/@babel/generator/node_modules/@babel/types/lib/retrievers/getOuterBindingIdentifiers.js"(exports) {
+    "use strict";
+    Object.defineProperty(exports, "__esModule", {
+      value: true
+    });
+    exports.default = void 0;
+    var _getBindingIdentifiers = require_getBindingIdentifiers3();
+    var _default = getOuterBindingIdentifiers;
+    exports.default = _default;
+    function getOuterBindingIdentifiers(node, duplicates) {
+      return (0, _getBindingIdentifiers.default)(node, duplicates, true);
+    }
+    __name(getOuterBindingIdentifiers, "getOuterBindingIdentifiers");
+  }
+});
+
+// node_modules/@babel/generator/node_modules/@babel/types/lib/traverse/traverse.js
+var require_traverse3 = __commonJS({
+  "node_modules/@babel/generator/node_modules/@babel/types/lib/traverse/traverse.js"(exports) {
+    "use strict";
+    Object.defineProperty(exports, "__esModule", {
+      value: true
+    });
+    exports.default = traverse;
+    var _definitions = require_definitions3();
+    function traverse(node, handlers, state) {
+      if (typeof handlers === "function") {
+        handlers = {
+          enter: handlers
+        };
+      }
+      const { enter, exit } = handlers;
+      traverseSimpleImpl(node, enter, exit, state, []);
+    }
+    __name(traverse, "traverse");
+    function traverseSimpleImpl(node, enter, exit, state, ancestors) {
+      const keys = _definitions.VISITOR_KEYS[node.type];
+      if (!keys)
+        return;
+      if (enter)
+        enter(node, ancestors, state);
+      for (const key of keys) {
+        const subNode = node[key];
+        if (Array.isArray(subNode)) {
+          for (let i = 0; i < subNode.length; i++) {
+            const child = subNode[i];
+            if (!child)
+              continue;
+            ancestors.push({
+              node,
+              key,
+              index: i
+            });
+            traverseSimpleImpl(child, enter, exit, state, ancestors);
+            ancestors.pop();
+          }
+        } else if (subNode) {
+          ancestors.push({
+            node,
+            key
+          });
+          traverseSimpleImpl(subNode, enter, exit, state, ancestors);
+          ancestors.pop();
+        }
+      }
+      if (exit)
+        exit(node, ancestors, state);
+    }
+    __name(traverseSimpleImpl, "traverseSimpleImpl");
+  }
+});
+
+// node_modules/@babel/generator/node_modules/@babel/types/lib/validators/isBinding.js
+var require_isBinding3 = __commonJS({
+  "node_modules/@babel/generator/node_modules/@babel/types/lib/validators/isBinding.js"(exports) {
+    "use strict";
+    Object.defineProperty(exports, "__esModule", {
+      value: true
+    });
+    exports.default = isBinding;
+    var _getBindingIdentifiers = require_getBindingIdentifiers3();
+    function isBinding(node, parent, grandparent) {
+      if (grandparent && node.type === "Identifier" && parent.type === "ObjectProperty" && grandparent.type === "ObjectExpression") {
+        return false;
+      }
+      const keys = _getBindingIdentifiers.default.keys[parent.type];
+      if (keys) {
+        for (let i = 0; i < keys.length; i++) {
+          const key = keys[i];
+          const val = parent[key];
+          if (Array.isArray(val)) {
+            if (val.indexOf(node) >= 0)
+              return true;
+          } else {
+            if (val === node)
+              return true;
+          }
+        }
+      }
+      return false;
+    }
+    __name(isBinding, "isBinding");
+  }
+});
+
+// node_modules/@babel/generator/node_modules/@babel/types/lib/validators/isLet.js
+var require_isLet3 = __commonJS({
+  "node_modules/@babel/generator/node_modules/@babel/types/lib/validators/isLet.js"(exports) {
+    "use strict";
+    Object.defineProperty(exports, "__esModule", {
+      value: true
+    });
+    exports.default = isLet;
+    var _generated = require_generated11();
+    var _constants = require_constants3();
+    function isLet(node) {
+      return (0, _generated.isVariableDeclaration)(node) && (node.kind !== "var" || node[_constants.BLOCK_SCOPED_SYMBOL]);
+    }
+    __name(isLet, "isLet");
+  }
+});
+
+// node_modules/@babel/generator/node_modules/@babel/types/lib/validators/isBlockScoped.js
+var require_isBlockScoped3 = __commonJS({
+  "node_modules/@babel/generator/node_modules/@babel/types/lib/validators/isBlockScoped.js"(exports) {
+    "use strict";
+    Object.defineProperty(exports, "__esModule", {
+      value: true
+    });
+    exports.default = isBlockScoped;
+    var _generated = require_generated11();
+    var _isLet = require_isLet3();
+    function isBlockScoped(node) {
+      return (0, _generated.isFunctionDeclaration)(node) || (0, _generated.isClassDeclaration)(node) || (0, _isLet.default)(node);
+    }
+    __name(isBlockScoped, "isBlockScoped");
+  }
+});
+
+// node_modules/@babel/generator/node_modules/@babel/types/lib/validators/isImmutable.js
+var require_isImmutable3 = __commonJS({
+  "node_modules/@babel/generator/node_modules/@babel/types/lib/validators/isImmutable.js"(exports) {
+    "use strict";
+    Object.defineProperty(exports, "__esModule", {
+      value: true
+    });
+    exports.default = isImmutable;
+    var _isType = require_isType3();
+    var _generated = require_generated11();
+    function isImmutable(node) {
+      if ((0, _isType.default)(node.type, "Immutable"))
+        return true;
+      if ((0, _generated.isIdentifier)(node)) {
+        if (node.name === "undefined") {
+          return true;
+        } else {
+          return false;
+        }
+      }
+      return false;
+    }
+    __name(isImmutable, "isImmutable");
+  }
+});
+
+// node_modules/@babel/generator/node_modules/@babel/types/lib/validators/isNodesEquivalent.js
+var require_isNodesEquivalent3 = __commonJS({
+  "node_modules/@babel/generator/node_modules/@babel/types/lib/validators/isNodesEquivalent.js"(exports) {
+    "use strict";
+    Object.defineProperty(exports, "__esModule", {
+      value: true
+    });
+    exports.default = isNodesEquivalent;
+    var _definitions = require_definitions3();
+    function isNodesEquivalent(a, b) {
+      if (typeof a !== "object" || typeof b !== "object" || a == null || b == null) {
+        return a === b;
+      }
+      if (a.type !== b.type) {
+        return false;
+      }
+      const fields = Object.keys(_definitions.NODE_FIELDS[a.type] || a.type);
+      const visitorKeys = _definitions.VISITOR_KEYS[a.type];
+      for (const field of fields) {
+        const val_a = a[field];
+        const val_b = b[field];
+        if (typeof val_a !== typeof val_b) {
+          return false;
+        }
+        if (val_a == null && val_b == null) {
+          continue;
+        } else if (val_a == null || val_b == null) {
+          return false;
+        }
+        if (Array.isArray(val_a)) {
+          if (!Array.isArray(val_b)) {
+            return false;
+          }
+          if (val_a.length !== val_b.length) {
+            return false;
+          }
+          for (let i = 0; i < val_a.length; i++) {
+            if (!isNodesEquivalent(val_a[i], val_b[i])) {
+              return false;
+            }
+          }
+          continue;
+        }
+        if (typeof val_a === "object" && !(visitorKeys != null && visitorKeys.includes(field))) {
+          for (const key of Object.keys(val_a)) {
+            if (val_a[key] !== val_b[key]) {
+              return false;
+            }
+          }
+          continue;
+        }
+        if (!isNodesEquivalent(val_a, val_b)) {
+          return false;
+        }
+      }
+      return true;
+    }
+    __name(isNodesEquivalent, "isNodesEquivalent");
+  }
+});
+
+// node_modules/@babel/generator/node_modules/@babel/types/lib/validators/isReferenced.js
+var require_isReferenced3 = __commonJS({
+  "node_modules/@babel/generator/node_modules/@babel/types/lib/validators/isReferenced.js"(exports) {
+    "use strict";
+    Object.defineProperty(exports, "__esModule", {
+      value: true
+    });
+    exports.default = isReferenced;
+    function isReferenced(node, parent, grandparent) {
+      switch (parent.type) {
+        case "MemberExpression":
+        case "OptionalMemberExpression":
+          if (parent.property === node) {
+            return !!parent.computed;
+          }
+          return parent.object === node;
+        case "JSXMemberExpression":
+          return parent.object === node;
+        case "VariableDeclarator":
+          return parent.init === node;
+        case "ArrowFunctionExpression":
+          return parent.body === node;
+        case "PrivateName":
+          return false;
+        case "ClassMethod":
+        case "ClassPrivateMethod":
+        case "ObjectMethod":
+          if (parent.key === node) {
+            return !!parent.computed;
+          }
+          return false;
+        case "ObjectProperty":
+          if (parent.key === node) {
+            return !!parent.computed;
+          }
+          return !grandparent || grandparent.type !== "ObjectPattern";
+        case "ClassProperty":
+        case "ClassAccessorProperty":
+          if (parent.key === node) {
+            return !!parent.computed;
+          }
+          return true;
+        case "ClassPrivateProperty":
+          return parent.key !== node;
+        case "ClassDeclaration":
+        case "ClassExpression":
+          return parent.superClass === node;
+        case "AssignmentExpression":
+          return parent.right === node;
+        case "AssignmentPattern":
+          return parent.right === node;
+        case "LabeledStatement":
+          return false;
+        case "CatchClause":
+          return false;
+        case "RestElement":
+          return false;
+        case "BreakStatement":
+        case "ContinueStatement":
+          return false;
+        case "FunctionDeclaration":
+        case "FunctionExpression":
+          return false;
+        case "ExportNamespaceSpecifier":
+        case "ExportDefaultSpecifier":
+          return false;
+        case "ExportSpecifier":
+          if (grandparent != null && grandparent.source) {
+            return false;
+          }
+          return parent.local === node;
+        case "ImportDefaultSpecifier":
+        case "ImportNamespaceSpecifier":
+        case "ImportSpecifier":
+          return false;
+        case "ImportAttribute":
+          return false;
+        case "JSXAttribute":
+          return false;
+        case "ObjectPattern":
+        case "ArrayPattern":
+          return false;
+        case "MetaProperty":
+          return false;
+        case "ObjectTypeProperty":
+          return parent.key !== node;
+        case "TSEnumMember":
+          return parent.id !== node;
+        case "TSPropertySignature":
+          if (parent.key === node) {
+            return !!parent.computed;
+          }
+          return true;
+      }
+      return true;
+    }
+    __name(isReferenced, "isReferenced");
+  }
+});
+
+// node_modules/@babel/generator/node_modules/@babel/types/lib/validators/isScope.js
+var require_isScope3 = __commonJS({
+  "node_modules/@babel/generator/node_modules/@babel/types/lib/validators/isScope.js"(exports) {
+    "use strict";
+    Object.defineProperty(exports, "__esModule", {
+      value: true
+    });
+    exports.default = isScope;
+    var _generated = require_generated11();
+    function isScope(node, parent) {
+      if ((0, _generated.isBlockStatement)(node) && ((0, _generated.isFunction)(parent) || (0, _generated.isCatchClause)(parent))) {
+        return false;
+      }
+      if ((0, _generated.isPattern)(node) && ((0, _generated.isFunction)(parent) || (0, _generated.isCatchClause)(parent))) {
+        return true;
+      }
+      return (0, _generated.isScopable)(node);
+    }
+    __name(isScope, "isScope");
+  }
+});
+
+// node_modules/@babel/generator/node_modules/@babel/types/lib/validators/isSpecifierDefault.js
+var require_isSpecifierDefault3 = __commonJS({
+  "node_modules/@babel/generator/node_modules/@babel/types/lib/validators/isSpecifierDefault.js"(exports) {
+    "use strict";
+    Object.defineProperty(exports, "__esModule", {
+      value: true
+    });
+    exports.default = isSpecifierDefault;
+    var _generated = require_generated11();
+    function isSpecifierDefault(specifier) {
+      return (0, _generated.isImportDefaultSpecifier)(specifier) || (0, _generated.isIdentifier)(specifier.imported || specifier.exported, {
+        name: "default"
+      });
+    }
+    __name(isSpecifierDefault, "isSpecifierDefault");
+  }
+});
+
+// node_modules/@babel/generator/node_modules/@babel/types/lib/validators/isValidES3Identifier.js
+var require_isValidES3Identifier3 = __commonJS({
+  "node_modules/@babel/generator/node_modules/@babel/types/lib/validators/isValidES3Identifier.js"(exports) {
+    "use strict";
+    Object.defineProperty(exports, "__esModule", {
+      value: true
+    });
+    exports.default = isValidES3Identifier;
+    var _isValidIdentifier = require_isValidIdentifier3();
+    var RESERVED_WORDS_ES3_ONLY = /* @__PURE__ */ new Set([
+      "abstract",
+      "boolean",
+      "byte",
+      "char",
+      "double",
+      "enum",
+      "final",
+      "float",
+      "goto",
+      "implements",
+      "int",
+      "interface",
+      "long",
+      "native",
+      "package",
+      "private",
+      "protected",
+      "public",
+      "short",
+      "static",
+      "synchronized",
+      "throws",
+      "transient",
+      "volatile"
+    ]);
+    function isValidES3Identifier(name) {
+      return (0, _isValidIdentifier.default)(name) && !RESERVED_WORDS_ES3_ONLY.has(name);
+    }
+    __name(isValidES3Identifier, "isValidES3Identifier");
+  }
+});
+
+// node_modules/@babel/generator/node_modules/@babel/types/lib/validators/isVar.js
+var require_isVar3 = __commonJS({
+  "node_modules/@babel/generator/node_modules/@babel/types/lib/validators/isVar.js"(exports) {
+    "use strict";
+    Object.defineProperty(exports, "__esModule", {
+      value: true
+    });
+    exports.default = isVar;
+    var _generated = require_generated11();
+    var _constants = require_constants3();
+    function isVar(node) {
+      return (0, _generated.isVariableDeclaration)(node, {
+        kind: "var"
+      }) && !node[_constants.BLOCK_SCOPED_SYMBOL];
+    }
+    __name(isVar, "isVar");
+  }
+});
+
+// node_modules/@babel/generator/node_modules/@babel/types/lib/ast-types/generated/index.js
+var require_generated15 = __commonJS({
+  "node_modules/@babel/generator/node_modules/@babel/types/lib/ast-types/generated/index.js"() {
+  }
+});
+
+// node_modules/@babel/generator/node_modules/@babel/types/lib/index.js
+var require_lib9 = __commonJS({
+  "node_modules/@babel/generator/node_modules/@babel/types/lib/index.js"(exports) {
+    "use strict";
+    Object.defineProperty(exports, "__esModule", {
+      value: true
+    });
+    var _exportNames = {
+      react: true,
+      assertNode: true,
+      createTypeAnnotationBasedOnTypeof: true,
+      createUnionTypeAnnotation: true,
+      createFlowUnionType: true,
+      createTSUnionType: true,
+      cloneNode: true,
+      clone: true,
+      cloneDeep: true,
+      cloneDeepWithoutLoc: true,
+      cloneWithoutLoc: true,
+      addComment: true,
+      addComments: true,
+      inheritInnerComments: true,
+      inheritLeadingComments: true,
+      inheritsComments: true,
+      inheritTrailingComments: true,
+      removeComments: true,
+      ensureBlock: true,
+      toBindingIdentifierName: true,
+      toBlock: true,
+      toComputedKey: true,
+      toExpression: true,
+      toIdentifier: true,
+      toKeyAlias: true,
+      toSequenceExpression: true,
+      toStatement: true,
+      valueToNode: true,
+      appendToMemberExpression: true,
+      inherits: true,
+      prependToMemberExpression: true,
+      removeProperties: true,
+      removePropertiesDeep: true,
+      removeTypeDuplicates: true,
+      getBindingIdentifiers: true,
+      getOuterBindingIdentifiers: true,
+      traverse: true,
+      traverseFast: true,
+      shallowEqual: true,
+      is: true,
+      isBinding: true,
+      isBlockScoped: true,
+      isImmutable: true,
+      isLet: true,
+      isNode: true,
+      isNodesEquivalent: true,
+      isPlaceholderType: true,
+      isReferenced: true,
+      isScope: true,
+      isSpecifierDefault: true,
+      isType: true,
+      isValidES3Identifier: true,
+      isValidIdentifier: true,
+      isVar: true,
+      matchesPattern: true,
+      validate: true,
+      buildMatchMemberExpression: true
+    };
+    Object.defineProperty(exports, "addComment", {
+      enumerable: true,
+      get: function() {
+        return _addComment.default;
+      }
+    });
+    Object.defineProperty(exports, "addComments", {
+      enumerable: true,
+      get: function() {
+        return _addComments.default;
+      }
+    });
+    Object.defineProperty(exports, "appendToMemberExpression", {
+      enumerable: true,
+      get: function() {
+        return _appendToMemberExpression.default;
+      }
+    });
+    Object.defineProperty(exports, "assertNode", {
+      enumerable: true,
+      get: function() {
+        return _assertNode.default;
+      }
+    });
+    Object.defineProperty(exports, "buildMatchMemberExpression", {
+      enumerable: true,
+      get: function() {
+        return _buildMatchMemberExpression.default;
+      }
+    });
+    Object.defineProperty(exports, "clone", {
+      enumerable: true,
+      get: function() {
+        return _clone.default;
+      }
+    });
+    Object.defineProperty(exports, "cloneDeep", {
+      enumerable: true,
+      get: function() {
+        return _cloneDeep.default;
+      }
+    });
+    Object.defineProperty(exports, "cloneDeepWithoutLoc", {
+      enumerable: true,
+      get: function() {
+        return _cloneDeepWithoutLoc.default;
+      }
+    });
+    Object.defineProperty(exports, "cloneNode", {
+      enumerable: true,
+      get: function() {
+        return _cloneNode.default;
+      }
+    });
+    Object.defineProperty(exports, "cloneWithoutLoc", {
+      enumerable: true,
+      get: function() {
+        return _cloneWithoutLoc.default;
+      }
+    });
+    Object.defineProperty(exports, "createFlowUnionType", {
+      enumerable: true,
+      get: function() {
+        return _createFlowUnionType.default;
+      }
+    });
+    Object.defineProperty(exports, "createTSUnionType", {
+      enumerable: true,
+      get: function() {
+        return _createTSUnionType.default;
+      }
+    });
+    Object.defineProperty(exports, "createTypeAnnotationBasedOnTypeof", {
+      enumerable: true,
+      get: function() {
+        return _createTypeAnnotationBasedOnTypeof.default;
+      }
+    });
+    Object.defineProperty(exports, "createUnionTypeAnnotation", {
+      enumerable: true,
+      get: function() {
+        return _createFlowUnionType.default;
+      }
+    });
+    Object.defineProperty(exports, "ensureBlock", {
+      enumerable: true,
+      get: function() {
+        return _ensureBlock.default;
+      }
+    });
+    Object.defineProperty(exports, "getBindingIdentifiers", {
+      enumerable: true,
+      get: function() {
+        return _getBindingIdentifiers.default;
+      }
+    });
+    Object.defineProperty(exports, "getOuterBindingIdentifiers", {
+      enumerable: true,
+      get: function() {
+        return _getOuterBindingIdentifiers.default;
+      }
+    });
+    Object.defineProperty(exports, "inheritInnerComments", {
+      enumerable: true,
+      get: function() {
+        return _inheritInnerComments.default;
+      }
+    });
+    Object.defineProperty(exports, "inheritLeadingComments", {
+      enumerable: true,
+      get: function() {
+        return _inheritLeadingComments.default;
+      }
+    });
+    Object.defineProperty(exports, "inheritTrailingComments", {
+      enumerable: true,
+      get: function() {
+        return _inheritTrailingComments.default;
+      }
+    });
+    Object.defineProperty(exports, "inherits", {
+      enumerable: true,
+      get: function() {
+        return _inherits.default;
+      }
+    });
+    Object.defineProperty(exports, "inheritsComments", {
+      enumerable: true,
+      get: function() {
+        return _inheritsComments.default;
+      }
+    });
+    Object.defineProperty(exports, "is", {
+      enumerable: true,
+      get: function() {
+        return _is.default;
+      }
+    });
+    Object.defineProperty(exports, "isBinding", {
+      enumerable: true,
+      get: function() {
+        return _isBinding.default;
+      }
+    });
+    Object.defineProperty(exports, "isBlockScoped", {
+      enumerable: true,
+      get: function() {
+        return _isBlockScoped.default;
+      }
+    });
+    Object.defineProperty(exports, "isImmutable", {
+      enumerable: true,
+      get: function() {
+        return _isImmutable.default;
+      }
+    });
+    Object.defineProperty(exports, "isLet", {
+      enumerable: true,
+      get: function() {
+        return _isLet.default;
+      }
+    });
+    Object.defineProperty(exports, "isNode", {
+      enumerable: true,
+      get: function() {
+        return _isNode.default;
+      }
+    });
+    Object.defineProperty(exports, "isNodesEquivalent", {
+      enumerable: true,
+      get: function() {
+        return _isNodesEquivalent.default;
+      }
+    });
+    Object.defineProperty(exports, "isPlaceholderType", {
+      enumerable: true,
+      get: function() {
+        return _isPlaceholderType.default;
+      }
+    });
+    Object.defineProperty(exports, "isReferenced", {
+      enumerable: true,
+      get: function() {
+        return _isReferenced.default;
+      }
+    });
+    Object.defineProperty(exports, "isScope", {
+      enumerable: true,
+      get: function() {
+        return _isScope.default;
+      }
+    });
+    Object.defineProperty(exports, "isSpecifierDefault", {
+      enumerable: true,
+      get: function() {
+        return _isSpecifierDefault.default;
+      }
+    });
+    Object.defineProperty(exports, "isType", {
+      enumerable: true,
+      get: function() {
+        return _isType.default;
+      }
+    });
+    Object.defineProperty(exports, "isValidES3Identifier", {
+      enumerable: true,
+      get: function() {
+        return _isValidES3Identifier.default;
+      }
+    });
+    Object.defineProperty(exports, "isValidIdentifier", {
+      enumerable: true,
+      get: function() {
+        return _isValidIdentifier.default;
+      }
+    });
+    Object.defineProperty(exports, "isVar", {
+      enumerable: true,
+      get: function() {
+        return _isVar.default;
+      }
+    });
+    Object.defineProperty(exports, "matchesPattern", {
+      enumerable: true,
+      get: function() {
+        return _matchesPattern.default;
+      }
+    });
+    Object.defineProperty(exports, "prependToMemberExpression", {
+      enumerable: true,
+      get: function() {
+        return _prependToMemberExpression.default;
+      }
+    });
+    exports.react = void 0;
+    Object.defineProperty(exports, "removeComments", {
+      enumerable: true,
+      get: function() {
+        return _removeComments.default;
+      }
+    });
+    Object.defineProperty(exports, "removeProperties", {
+      enumerable: true,
+      get: function() {
+        return _removeProperties.default;
+      }
+    });
+    Object.defineProperty(exports, "removePropertiesDeep", {
+      enumerable: true,
+      get: function() {
+        return _removePropertiesDeep.default;
+      }
+    });
+    Object.defineProperty(exports, "removeTypeDuplicates", {
+      enumerable: true,
+      get: function() {
+        return _removeTypeDuplicates.default;
+      }
+    });
+    Object.defineProperty(exports, "shallowEqual", {
+      enumerable: true,
+      get: function() {
+        return _shallowEqual.default;
+      }
+    });
+    Object.defineProperty(exports, "toBindingIdentifierName", {
+      enumerable: true,
+      get: function() {
+        return _toBindingIdentifierName.default;
+      }
+    });
+    Object.defineProperty(exports, "toBlock", {
+      enumerable: true,
+      get: function() {
+        return _toBlock.default;
+      }
+    });
+    Object.defineProperty(exports, "toComputedKey", {
+      enumerable: true,
+      get: function() {
+        return _toComputedKey.default;
+      }
+    });
+    Object.defineProperty(exports, "toExpression", {
+      enumerable: true,
+      get: function() {
+        return _toExpression.default;
+      }
+    });
+    Object.defineProperty(exports, "toIdentifier", {
+      enumerable: true,
+      get: function() {
+        return _toIdentifier.default;
+      }
+    });
+    Object.defineProperty(exports, "toKeyAlias", {
+      enumerable: true,
+      get: function() {
+        return _toKeyAlias.default;
+      }
+    });
+    Object.defineProperty(exports, "toSequenceExpression", {
+      enumerable: true,
+      get: function() {
+        return _toSequenceExpression.default;
+      }
+    });
+    Object.defineProperty(exports, "toStatement", {
+      enumerable: true,
+      get: function() {
+        return _toStatement.default;
+      }
+    });
+    Object.defineProperty(exports, "traverse", {
+      enumerable: true,
+      get: function() {
+        return _traverse.default;
+      }
+    });
+    Object.defineProperty(exports, "traverseFast", {
+      enumerable: true,
+      get: function() {
+        return _traverseFast.default;
+      }
+    });
+    Object.defineProperty(exports, "validate", {
+      enumerable: true,
+      get: function() {
+        return _validate.default;
+      }
+    });
+    Object.defineProperty(exports, "valueToNode", {
+      enumerable: true,
+      get: function() {
+        return _valueToNode.default;
+      }
+    });
+    var _isReactComponent = require_isReactComponent3();
+    var _isCompatTag = require_isCompatTag3();
+    var _buildChildren = require_buildChildren3();
+    var _assertNode = require_assertNode3();
+    var _generated = require_generated13();
+    Object.keys(_generated).forEach(function(key) {
+      if (key === "default" || key === "__esModule")
+        return;
+      if (Object.prototype.hasOwnProperty.call(_exportNames, key))
+        return;
+      if (key in exports && exports[key] === _generated[key])
+        return;
+      Object.defineProperty(exports, key, {
+        enumerable: true,
+        get: function() {
+          return _generated[key];
+        }
+      });
+    });
+    var _createTypeAnnotationBasedOnTypeof = require_createTypeAnnotationBasedOnTypeof3();
+    var _createFlowUnionType = require_createFlowUnionType3();
+    var _createTSUnionType = require_createTSUnionType3();
+    var _generated2 = require_generated12();
+    Object.keys(_generated2).forEach(function(key) {
+      if (key === "default" || key === "__esModule")
+        return;
+      if (Object.prototype.hasOwnProperty.call(_exportNames, key))
+        return;
+      if (key in exports && exports[key] === _generated2[key])
+        return;
+      Object.defineProperty(exports, key, {
+        enumerable: true,
+        get: function() {
+          return _generated2[key];
+        }
+      });
+    });
+    var _uppercase = require_uppercase3();
+    Object.keys(_uppercase).forEach(function(key) {
+      if (key === "default" || key === "__esModule")
+        return;
+      if (Object.prototype.hasOwnProperty.call(_exportNames, key))
+        return;
+      if (key in exports && exports[key] === _uppercase[key])
+        return;
+      Object.defineProperty(exports, key, {
+        enumerable: true,
+        get: function() {
+          return _uppercase[key];
+        }
+      });
+    });
+    var _cloneNode = require_cloneNode3();
+    var _clone = require_clone3();
+    var _cloneDeep = require_cloneDeep3();
+    var _cloneDeepWithoutLoc = require_cloneDeepWithoutLoc3();
+    var _cloneWithoutLoc = require_cloneWithoutLoc3();
+    var _addComment = require_addComment3();
+    var _addComments = require_addComments3();
+    var _inheritInnerComments = require_inheritInnerComments3();
+    var _inheritLeadingComments = require_inheritLeadingComments3();
+    var _inheritsComments = require_inheritsComments3();
+    var _inheritTrailingComments = require_inheritTrailingComments3();
+    var _removeComments = require_removeComments3();
+    var _generated3 = require_generated14();
+    Object.keys(_generated3).forEach(function(key) {
+      if (key === "default" || key === "__esModule")
+        return;
+      if (Object.prototype.hasOwnProperty.call(_exportNames, key))
+        return;
+      if (key in exports && exports[key] === _generated3[key])
+        return;
+      Object.defineProperty(exports, key, {
+        enumerable: true,
+        get: function() {
+          return _generated3[key];
+        }
+      });
+    });
+    var _constants = require_constants3();
+    Object.keys(_constants).forEach(function(key) {
+      if (key === "default" || key === "__esModule")
+        return;
+      if (Object.prototype.hasOwnProperty.call(_exportNames, key))
+        return;
+      if (key in exports && exports[key] === _constants[key])
+        return;
+      Object.defineProperty(exports, key, {
+        enumerable: true,
+        get: function() {
+          return _constants[key];
+        }
+      });
+    });
+    var _ensureBlock = require_ensureBlock3();
+    var _toBindingIdentifierName = require_toBindingIdentifierName3();
+    var _toBlock = require_toBlock3();
+    var _toComputedKey = require_toComputedKey3();
+    var _toExpression = require_toExpression3();
+    var _toIdentifier = require_toIdentifier3();
+    var _toKeyAlias = require_toKeyAlias3();
+    var _toSequenceExpression = require_toSequenceExpression3();
+    var _toStatement = require_toStatement3();
+    var _valueToNode = require_valueToNode3();
+    var _definitions = require_definitions3();
+    Object.keys(_definitions).forEach(function(key) {
+      if (key === "default" || key === "__esModule")
+        return;
+      if (Object.prototype.hasOwnProperty.call(_exportNames, key))
+        return;
+      if (key in exports && exports[key] === _definitions[key])
+        return;
+      Object.defineProperty(exports, key, {
+        enumerable: true,
+        get: function() {
+          return _definitions[key];
+        }
+      });
+    });
+    var _appendToMemberExpression = require_appendToMemberExpression3();
+    var _inherits = require_inherits3();
+    var _prependToMemberExpression = require_prependToMemberExpression3();
+    var _removeProperties = require_removeProperties3();
+    var _removePropertiesDeep = require_removePropertiesDeep3();
+    var _removeTypeDuplicates = require_removeTypeDuplicates5();
+    var _getBindingIdentifiers = require_getBindingIdentifiers3();
+    var _getOuterBindingIdentifiers = require_getOuterBindingIdentifiers3();
+    var _traverse = require_traverse3();
+    Object.keys(_traverse).forEach(function(key) {
+      if (key === "default" || key === "__esModule")
+        return;
+      if (Object.prototype.hasOwnProperty.call(_exportNames, key))
+        return;
+      if (key in exports && exports[key] === _traverse[key])
+        return;
+      Object.defineProperty(exports, key, {
+        enumerable: true,
+        get: function() {
+          return _traverse[key];
+        }
+      });
+    });
+    var _traverseFast = require_traverseFast3();
+    var _shallowEqual = require_shallowEqual3();
+    var _is = require_is3();
+    var _isBinding = require_isBinding3();
+    var _isBlockScoped = require_isBlockScoped3();
+    var _isImmutable = require_isImmutable3();
+    var _isLet = require_isLet3();
+    var _isNode = require_isNode3();
+    var _isNodesEquivalent = require_isNodesEquivalent3();
+    var _isPlaceholderType = require_isPlaceholderType3();
+    var _isReferenced = require_isReferenced3();
+    var _isScope = require_isScope3();
+    var _isSpecifierDefault = require_isSpecifierDefault3();
+    var _isType = require_isType3();
+    var _isValidES3Identifier = require_isValidES3Identifier3();
+    var _isValidIdentifier = require_isValidIdentifier3();
+    var _isVar = require_isVar3();
+    var _matchesPattern = require_matchesPattern3();
+    var _validate = require_validate3();
+    var _buildMatchMemberExpression = require_buildMatchMemberExpression3();
+    var _generated4 = require_generated11();
+    Object.keys(_generated4).forEach(function(key) {
+      if (key === "default" || key === "__esModule")
+        return;
+      if (Object.prototype.hasOwnProperty.call(_exportNames, key))
+        return;
+      if (key in exports && exports[key] === _generated4[key])
+        return;
+      Object.defineProperty(exports, key, {
+        enumerable: true,
+        get: function() {
+          return _generated4[key];
+        }
+      });
+    });
+    var _generated5 = require_generated15();
+    Object.keys(_generated5).forEach(function(key) {
+      if (key === "default" || key === "__esModule")
+        return;
+      if (Object.prototype.hasOwnProperty.call(_exportNames, key))
+        return;
+      if (key in exports && exports[key] === _generated5[key])
+        return;
+      Object.defineProperty(exports, key, {
+        enumerable: true,
+        get: function() {
+          return _generated5[key];
+        }
+      });
+    });
+    var react = {
+      isReactComponent: _isReactComponent.default,
+      isCompatTag: _isCompatTag.default,
+      buildChildren: _buildChildren.default
+    };
+    exports.react = react;
   }
 });
 
@@ -60240,7 +78372,7 @@ var require_whitespace = __commonJS({
       value: true
     });
     exports.nodes = void 0;
-    var _t = require_lib8();
+    var _t = require_lib9();
     var { FLIPPED_ALIAS_KEYS, isArrayExpression, isAssignmentExpression, isBinary, isBlockStatement, isCallExpression, isFunction, isIdentifier, isLiteral, isMemberExpression, isObjectExpression, isOptionalCallExpression, isOptionalMemberExpression, isStringLiteral } = _t;
     function crawlInternal(node, state) {
       if (!node)
@@ -60322,8 +78454,8 @@ var require_whitespace = __commonJS({
         }
       },
       VariableDeclaration(node) {
-        for (let i2 = 0; i2 < node.declarations.length; i2++) {
-          const declar = node.declarations[i2];
+        for (let i = 0; i < node.declarations.length; i++) {
+          const declar = node.declarations[i];
           let enabled = isHelper(declar.id) && !isType(declar.init);
           if (!enabled && declar.init) {
             const state = crawl(declar.init);
@@ -60431,7 +78563,7 @@ var require_parentheses = __commonJS({
     exports.IntersectionTypeAnnotation = exports.UnionTypeAnnotation = UnionTypeAnnotation;
     exports.UpdateExpression = UpdateExpression;
     exports.AwaitExpression = exports.YieldExpression = YieldExpression;
-    var _t = require_lib8();
+    var _t = require_lib9();
     var { isArrayTypeAnnotation, isArrowFunctionExpression, isAssignmentExpression, isAwaitExpression, isBinary, isBinaryExpression, isUpdateExpression, isCallExpression, isClass, isClassExpression, isConditional, isConditionalExpression, isExportDeclaration, isExportDefaultDeclaration, isExpressionStatement, isFor, isForInStatement, isForOfStatement, isForStatement, isFunctionExpression, isIfStatement, isIndexedAccessType, isIntersectionTypeAnnotation, isLogicalExpression, isMemberExpression, isNewExpression, isNullableTypeAnnotation, isObjectPattern, isOptionalCallExpression, isOptionalMemberExpression, isReturnStatement, isSequenceExpression, isSwitchStatement, isTSArrayType, isTSAsExpression, isTSInstantiationExpression, isTSIntersectionType, isTSNonNullExpression, isTSOptionalType, isTSRestType, isTSTypeAssertion, isTSUnionType, isTaggedTemplateExpression, isThrowStatement, isTypeAnnotation, isUnaryLike, isUnionTypeAnnotation, isVariableDeclarator, isWhileStatement, isYieldExpression, isTSSatisfiesExpression } = _t;
     var PRECEDENCE = {
       "||": 0,
@@ -60638,13 +78770,13 @@ var require_parentheses = __commonJS({
       const forHead = checkParam & 8;
       const forInHead = checkParam & 16;
       const forOfHead = checkParam & 32;
-      let i2 = printStack.length - 1;
-      if (i2 <= 0)
+      let i = printStack.length - 1;
+      if (i <= 0)
         return;
-      let node = printStack[i2];
-      i2--;
-      let parent = printStack[i2];
-      while (i2 >= 0) {
+      let node = printStack[i];
+      i--;
+      let parent = printStack[i];
+      while (i >= 0) {
         if (expressionStatement2 && isExpressionStatement(parent, {
           expression: node
         }) || exportDefault && isExportDefaultDeclaration(parent, {
@@ -60660,7 +78792,7 @@ var require_parentheses = __commonJS({
         })) {
           return true;
         }
-        if (i2 > 0 && (hasPostfixPart(node, parent) && !isNewExpression(parent) || isSequenceExpression(parent) && parent.expressions[0] === node || isUpdateExpression(parent) && !parent.prefix || isConditional(parent, {
+        if (i > 0 && (hasPostfixPart(node, parent) && !isNewExpression(parent) || isSequenceExpression(parent) && parent.expressions[0] === node || isUpdateExpression(parent) && !parent.prefix || isConditional(parent, {
           test: node
         }) || isBinary(parent, {
           left: node
@@ -60668,8 +78800,8 @@ var require_parentheses = __commonJS({
           left: node
         }))) {
           node = parent;
-          i2--;
-          parent = printStack[i2];
+          i--;
+          parent = printStack[i];
         } else {
           return false;
         }
@@ -60693,7 +78825,7 @@ var require_node2 = __commonJS({
     exports.needsWhitespaceBefore = needsWhitespaceBefore;
     var whitespace = require_whitespace();
     var parens = require_parentheses();
-    var _t = require_lib8();
+    var _t = require_lib9();
     var { FLIPPED_ALIAS_KEYS, isCallExpression, isExpressionStatement, isMemberExpression, isNewExpression } = _t;
     function expandAliases(obj) {
       const newObj = {};
@@ -60791,10 +78923,10 @@ var require_template_literals = __commonJS({
     __name(TemplateElement, "TemplateElement");
     function TemplateLiteral(node) {
       const quasis = node.quasis;
-      for (let i2 = 0; i2 < quasis.length; i2++) {
-        this.print(quasis[i2], node);
-        if (i2 + 1 < quasis.length) {
-          this.print(node.expressions[i2], node);
+      for (let i = 0; i < quasis.length; i++) {
+        this.print(quasis[i], node);
+        if (i + 1 < quasis.length) {
+          this.print(node.expressions[i], node);
         }
       }
     }
@@ -60835,8 +78967,8 @@ var require_expressions = __commonJS({
     exports.UpdateExpression = UpdateExpression;
     exports.V8IntrinsicIdentifier = V8IntrinsicIdentifier;
     exports.YieldExpression = YieldExpression;
-    var _t = require_lib8();
-    var n2 = require_node2();
+    var _t = require_lib9();
+    var n = require_node2();
     var { isCallExpression, isLiteral, isMemberExpression, isNewExpression } = _t;
     function UnaryExpression(node) {
       if (node.operator === "void" || node.operator === "delete" || node.operator === "typeof" || node.operator === "throw") {
@@ -61042,7 +79174,7 @@ var require_expressions = __commonJS({
     }
     __name(AssignmentPattern, "AssignmentPattern");
     function AssignmentExpression(node, parent) {
-      const parens = this.inForStatementInitCounter && node.operator === "in" && !n2.needsParens(node, parent);
+      const parens = this.inForStatementInitCounter && node.operator === "in" && !n.needsParens(node, parent);
       if (parens) {
         this.tokenChar(40);
       }
@@ -61144,7 +79276,7 @@ var require_statements = __commonJS({
     exports.VariableDeclarator = VariableDeclarator;
     exports.WhileStatement = WhileStatement;
     exports.WithStatement = WithStatement;
-    var _t = require_lib8();
+    var _t = require_lib9();
     var { isFor, isForStatement, isIfStatement, isStatement } = _t;
     function WithStatement(node) {
       this.word("with");
@@ -61431,7 +79563,7 @@ var require_classes = __commonJS({
     exports.ClassProperty = ClassProperty;
     exports.StaticBlock = StaticBlock;
     exports._classMethodHead = _classMethodHead;
-    var _t = require_lib8();
+    var _t = require_lib9();
     var { isExportDefaultDeclaration, isExportNamedDeclaration } = _t;
     function ClassDeclaration(node, parent) {
       {
@@ -61623,7 +79755,7 @@ var require_methods = __commonJS({
     exports._parameters = _parameters;
     exports._params = _params;
     exports._predicate = _predicate;
-    var _t = require_lib8();
+    var _t = require_lib9();
     var { isIdentifier } = _t;
     function _params(node) {
       this.print(node.typeParameters, node);
@@ -61637,9 +79769,9 @@ var require_methods = __commonJS({
     __name(_params, "_params");
     function _parameters(parameters, parent) {
       const paramLength = parameters.length;
-      for (let i2 = 0; i2 < paramLength; i2++) {
-        this._param(parameters[i2], parent);
-        if (i2 < parameters.length - 1) {
+      for (let i = 0; i < paramLength; i++) {
+        this._param(parameters[i], parent);
+        if (i < parameters.length - 1) {
           this.tokenChar(44);
           this.space();
         }
@@ -61767,7 +79899,7 @@ var require_modules = __commonJS({
     exports.ImportNamespaceSpecifier = ImportNamespaceSpecifier;
     exports.ImportSpecifier = ImportSpecifier;
     exports._printAssertions = _printAssertions;
-    var _t = require_lib8();
+    var _t = require_lib9();
     var { isClassDeclaration, isExportDefaultSpecifier, isExportNamespaceSpecifier, isImportDefaultSpecifier, isImportNamespaceSpecifier, isStatement } = _t;
     function ImportSpecifier(node) {
       if (node.importKind === "type" || node.importKind === "typeof") {
@@ -62303,7 +80435,7 @@ var require_types = __commonJS({
     exports.StringLiteral = StringLiteral;
     exports.TopicReference = TopicReference;
     exports.TupleExpression = TupleExpression;
-    var _t = require_lib8();
+    var _t = require_lib9();
     var _jsesc = require_jsesc();
     var { isAssignmentPattern, isIdentifier } = _t;
     function Identifier(node) {
@@ -62366,13 +80498,13 @@ var require_types = __commonJS({
       const elems = node.elements;
       const len = elems.length;
       this.tokenChar(91);
-      for (let i2 = 0; i2 < elems.length; i2++) {
-        const elem = elems[i2];
+      for (let i = 0; i < elems.length; i++) {
+        const elem = elems[i];
         if (elem) {
-          if (i2 > 0)
+          if (i > 0)
             this.space();
           this.print(elem, node);
-          if (i2 < len - 1)
+          if (i < len - 1)
             this.tokenChar(44);
         } else {
           this.tokenChar(44);
@@ -62421,13 +80553,13 @@ var require_types = __commonJS({
         throw new Error(`${this.format.recordAndTupleSyntaxType} is not a valid recordAndTuple syntax type`);
       }
       this.token(startToken);
-      for (let i2 = 0; i2 < elems.length; i2++) {
-        const elem = elems[i2];
+      for (let i = 0; i < elems.length; i++) {
+        const elem = elems[i];
         if (elem) {
-          if (i2 > 0)
+          if (i > 0)
             this.space();
           this.print(elem, node);
-          if (i2 < len - 1)
+          if (i < len - 1)
             this.tokenChar(44);
         }
       }
@@ -62525,7 +80657,7 @@ var require_types = __commonJS({
 });
 
 // node_modules/@babel/generator/lib/generators/flow.js
-var require_flow3 = __commonJS({
+var require_flow4 = __commonJS({
   "node_modules/@babel/generator/lib/generators/flow.js"(exports) {
     "use strict";
     Object.defineProperty(exports, "__esModule", {
@@ -62605,7 +80737,7 @@ var require_flow3 = __commonJS({
     exports.VoidTypeAnnotation = VoidTypeAnnotation;
     exports._interfaceish = _interfaceish;
     exports._variance = _variance;
-    var _t = require_lib8();
+    var _t = require_lib9();
     var _modules = require_modules();
     var _types2 = require_types();
     var { isDeclareExportDeclaration, isStatement } = _t;
@@ -63350,7 +81482,7 @@ var require_base = __commonJS({
 });
 
 // node_modules/@babel/generator/lib/generators/jsx.js
-var require_jsx3 = __commonJS({
+var require_jsx4 = __commonJS({
   "node_modules/@babel/generator/lib/generators/jsx.js"(exports) {
     "use strict";
     Object.defineProperty(exports, "__esModule", {
@@ -63493,7 +81625,7 @@ var require_jsx3 = __commonJS({
 });
 
 // node_modules/@babel/generator/lib/generators/typescript.js
-var require_typescript3 = __commonJS({
+var require_typescript4 = __commonJS({
   "node_modules/@babel/generator/lib/generators/typescript.js"(exports) {
     "use strict";
     Object.defineProperty(exports, "__esModule", {
@@ -64307,7 +82439,7 @@ var require_generators = __commonJS({
         }
       });
     });
-    var _flow = require_flow3();
+    var _flow = require_flow4();
     Object.keys(_flow).forEach(function(key) {
       if (key === "default" || key === "__esModule")
         return;
@@ -64333,7 +82465,7 @@ var require_generators = __commonJS({
         }
       });
     });
-    var _jsx = require_jsx3();
+    var _jsx = require_jsx4();
     Object.keys(_jsx).forEach(function(key) {
       if (key === "default" || key === "__esModule")
         return;
@@ -64346,7 +82478,7 @@ var require_generators = __commonJS({
         }
       });
     });
-    var _typescript = require_typescript3();
+    var _typescript = require_typescript4();
     Object.keys(_typescript).forEach(function(key) {
       if (key === "default" || key === "__esModule")
         return;
@@ -64371,8 +82503,8 @@ var require_printer = __commonJS({
     });
     exports.default = void 0;
     var _buffer = require_buffer();
-    var n2 = require_node2();
-    var _t = require_lib8();
+    var n = require_node2();
+    var _t = require_lib9();
     var generatorFunctions = require_generators();
     var { isFunction, isStatement, isClassBody, isTSInterfaceBody } = _t;
     var SCIENTIFIC_NOTATION = /e/i;
@@ -64381,7 +82513,7 @@ var require_printer = __commonJS({
     var PURE_ANNOTATION_RE = /^\s*[@#]__PURE__\s*$/;
     var HAS_NEWLINE = /[\n\r\u2028\u2029]/;
     var HAS_BlOCK_COMMENT_END = /\*\//;
-    var { needsParens } = n2;
+    var { needsParens } = n;
     var Printer = /* @__PURE__ */ __name(class Printer {
       constructor(format, map) {
         this.inForStatementInitCounter = 0;
@@ -64481,8 +82613,8 @@ var require_printer = __commonJS({
         this._appendChar(char);
         this._noLineTerminator = false;
       }
-      newline(i2 = 1, force) {
-        if (i2 <= 0)
+      newline(i = 1, force) {
+        if (i <= 0)
           return;
         if (!force) {
           if (this.format.retainLines || this.format.compact)
@@ -64492,10 +82624,10 @@ var require_printer = __commonJS({
             return;
           }
         }
-        if (i2 > 2)
-          i2 = 2;
-        i2 -= this._buf.getNewlineCount();
-        for (let j = 0; j < i2; j++) {
+        if (i > 2)
+          i = 2;
+        i -= this._buf.getNewlineCount();
+        for (let j = 0; j < i; j++) {
           this._newline();
         }
         return;
@@ -64593,21 +82725,21 @@ var require_printer = __commonJS({
         if (!parenPushNewlineState)
           return;
         const len = str.length;
-        let i2;
-        for (i2 = 0; i2 < len && str.charCodeAt(i2) === 32; i2++)
+        let i;
+        for (i = 0; i < len && str.charCodeAt(i) === 32; i++)
           continue;
-        if (i2 === len) {
+        if (i === len) {
           return;
         }
-        const cha = str.charCodeAt(i2);
+        const cha = str.charCodeAt(i);
         if (cha !== 10) {
-          if (cha !== 47 || i2 + 1 === len) {
+          if (cha !== 47 || i + 1 === len) {
             this._parenPushNewlineState = null;
             return;
           }
-          const chaPost = str.charCodeAt(i2 + 1);
+          const chaPost = str.charCodeAt(i + 1);
           if (chaPost === 42) {
-            if (PURE_ANNOTATION_RE.test(str.slice(i2 + 2, len - 2))) {
+            if (PURE_ANNOTATION_RE.test(str.slice(i + 2, len - 2))) {
               return;
             }
           } else if (chaPost !== 47) {
@@ -64623,7 +82755,7 @@ var require_printer = __commonJS({
         if (!this.format.retainLines)
           return;
         const count = line - this._buf.getCurrentLine();
-        for (let i2 = 0; i2 < count; i2++) {
+        for (let i = 0; i < count; i++) {
           this._newline();
         }
       }
@@ -64633,7 +82765,7 @@ var require_printer = __commonJS({
         const pos = loc ? loc[prop] : null;
         if ((pos == null ? void 0 : pos.line) != null) {
           const count = pos.line - this._buf.getCurrentLine();
-          for (let i2 = 0; i2 < count; i2++) {
+          for (let i = 0; i < count; i++) {
             this._newline();
           }
         }
@@ -64752,22 +82884,22 @@ var require_printer = __commonJS({
         };
         const separator = opts.separator ? opts.separator.bind(this) : null;
         const len = nodes.length;
-        for (let i2 = 0; i2 < len; i2++) {
-          const node = nodes[i2];
+        for (let i = 0; i < len; i++) {
+          const node = nodes[i];
           if (!node)
             continue;
           if (opts.statement)
-            this._printNewline(i2 === 0, newlineOpts);
+            this._printNewline(i === 0, newlineOpts);
           this.print(node, parent, void 0, opts.trailingCommentsLineOffset || 0);
-          opts.iterator == null ? void 0 : opts.iterator(node, i2);
-          if (i2 < len - 1)
+          opts.iterator == null ? void 0 : opts.iterator(node, i);
+          if (i < len - 1)
             separator == null ? void 0 : separator();
           if (opts.statement) {
-            if (i2 + 1 === len) {
+            if (i + 1 === len) {
               this.newline(1);
             } else {
               var _nextNode$loc;
-              const nextNode = nodes[i2 + 1];
+              const nextNode = nodes[i + 1];
               newlineOpts.nextNodeStartLine = ((_nextNode$loc = nextNode.loc) == null ? void 0 : _nextNode$loc.start.line) || 0;
               this._printNewline(true, newlineOpts);
             }
@@ -64930,15 +83062,15 @@ ${" ".repeat(indentSize)}`);
         let leadingCommentNewline = 0;
         const maybeNewline = this._noLineTerminator ? function() {
         } : this.newline.bind(this);
-        for (let i2 = 0; i2 < len; i2++) {
-          const comment = comments[i2];
+        for (let i = 0; i < len; i++) {
+          const comment = comments[i];
           const printed = this._printedComments.has(comment);
           if (hasLoc && comment.loc && !printed) {
             const commentStartLine = comment.loc.start.line;
             const commentEndLine = comment.loc.end.line;
             if (type === 0) {
               let offset = 0;
-              if (i2 === 0) {
+              if (i === 0) {
                 if (this._buf.hasContent() && (comment.type === "CommentLine" || commentStartLine != commentEndLine)) {
                   offset = leadingCommentNewline = 1;
                 }
@@ -64948,22 +83080,22 @@ ${" ".repeat(indentSize)}`);
               lastLine = commentEndLine;
               maybeNewline(offset);
               this._printComment(comment, 1);
-              if (i2 + 1 === len) {
+              if (i + 1 === len) {
                 maybeNewline(Math.max(nodeStartLine - lastLine, leadingCommentNewline));
                 lastLine = nodeStartLine;
               }
             } else if (type === 1) {
-              const offset1 = commentStartLine - (i2 === 0 ? nodeStartLine : lastLine);
+              const offset1 = commentStartLine - (i === 0 ? nodeStartLine : lastLine);
               lastLine = commentEndLine;
               maybeNewline(offset1);
               if (this._printComment(comment, 1))
                 break;
-              if (i2 + 1 === len) {
+              if (i + 1 === len) {
                 maybeNewline(Math.min(1, nodeEndLine - lastLine));
                 lastLine = nodeEndLine;
               }
             } else {
-              const offset2 = commentStartLine - (i2 === 0 ? nodeEndLine - lineOffset : lastLine);
+              const offset2 = commentStartLine - (i === 0 ? nodeEndLine - lineOffset : lastLine);
               lastLine = commentEndLine;
               maybeNewline(offset2);
               this._printComment(comment, 1);
@@ -64987,7 +83119,7 @@ ${" ".repeat(indentSize)}`);
                 this._printComment(comment, 0);
               }
             } else if (type === 1 && !(node.type === "ObjectExpression" && node.properties.length > 1) && node.type !== "ClassBody" && node.type !== "TSInterfaceBody") {
-              const skippedDueToNewline = this._printComment(comment, i2 === 0 ? 2 : i2 === len - 1 ? 3 : 0);
+              const skippedDueToNewline = this._printComment(comment, i === 0 ? 2 : i === len - 1 ? 3 : 0);
               if (skippedDueToNewline)
                 break;
             } else {
@@ -65016,7 +83148,7 @@ ${" ".repeat(indentSize)}`);
 });
 
 // node_modules/@babel/generator/lib/index.js
-var require_lib9 = __commonJS({
+var require_lib10 = __commonJS({
   "node_modules/@babel/generator/lib/index.js"(exports) {
     "use strict";
     Object.defineProperty(exports, "__esModule", {
@@ -65113,7 +83245,7 @@ var import_core = require("@swc/core");
 var import_path3 = require("path");
 var import_template = __toESM(require_lib7());
 
-// node_modules/@storybook/store/dist/index.mjs
+// node_modules/@storybook/preview-api/dist/chunk-RRZ2SPWM.mjs
 var import_memoizerific = __toESM(require_memoizerific(), 1);
 var import_mapValues = __toESM(require_mapValues(), 1);
 var import_pick = __toESM(require_pick(), 1);
@@ -65130,9 +83262,9 @@ function dedent(templ) {
   ] : templ);
   strings[strings.length - 1] = strings[strings.length - 1].replace(/\r?\n([\t ]*)$/, "");
   var indentLengths = strings.reduce(function(arr, str) {
-    var matches = str.match(/\n([\t ]+|(?!\s).)/g);
-    if (matches) {
-      return arr.concat(matches.map(function(match) {
+    var matches2 = str.match(/\n([\t ]+|(?!\s).)/g);
+    if (matches2) {
+      return arr.concat(matches2.map(function(match) {
         var _a, _b;
         return (_b = (_a = match.match(/[\t ]/g)) === null || _a === void 0 ? void 0 : _a.length) !== null && _b !== void 0 ? _b : 0;
       }));
@@ -65147,162 +83279,109 @@ function dedent(templ) {
   }
   strings[0] = strings[0].replace(/^\r?\n/, "");
   var string = strings[0];
-  values.forEach(function(value, i2) {
+  values.forEach(function(value, i) {
     var endentations = string.match(/(?:^|\n)( *)$/);
     var endentation = endentations ? endentations[1] : "";
     var indentedValue = value;
     if (typeof value === "string" && value.includes("\n")) {
-      indentedValue = String(value).split("\n").map(function(str, i3) {
-        return i3 === 0 ? str : "" + endentation + str;
+      indentedValue = String(value).split("\n").map(function(str, i2) {
+        return i2 === 0 ? str : "" + endentation + str;
       }).join("\n");
     }
-    string += indentedValue + strings[i2 + 1];
+    string += indentedValue + strings[i + 1];
   });
   return string;
 }
 __name(dedent, "dedent");
 var esm_default = dedent;
 
-// node_modules/@storybook/store/dist/index.mjs
+// node_modules/@storybook/preview-api/dist/chunk-RRZ2SPWM.mjs
 var import_memoizerific2 = __toESM(require_memoizerific(), 1);
-
-// node_modules/@storybook/client-logger/dist/index.mjs
-var import_global = __toESM(require_window(), 1);
-var { LOGLEVEL: f, console: g } = import_global.default;
-var a = { trace: 1, debug: 2, info: 3, warn: 4, error: 5, silent: 10 };
-var L = f;
-var c = a[L] || a.info;
-var i = { trace: (r, ...e) => c <= a.trace && g.trace(r, ...e), debug: (r, ...e) => c <= a.debug && g.debug(r, ...e), info: (r, ...e) => c <= a.info && g.info(r, ...e), warn: (r, ...e) => c <= a.warn && g.warn(r, ...e), error: (r, ...e) => c <= a.error && g.error(r, ...e), log: (r, ...e) => c < a.silent && g.log(r, ...e) };
-var s = /* @__PURE__ */ new Set();
-var n = /* @__PURE__ */ __name((r) => (e, ...t2) => {
-  if (!s.has(e))
-    return s.add(e), i[r](e, ...t2);
-}, "n");
-n.clear = () => s.clear();
-n.trace = n("trace");
-n.debug = n("debug");
-n.info = n("info");
-n.warn = n("warn");
-n.error = n("error");
-n.log = n("log");
-var w = n("warn");
-var o = /* @__PURE__ */ __name((r) => (...e) => {
-  let t2 = [];
-  if (e.length) {
-    let y = /<span\s+style=(['"])([^'"]*)\1\s*>/gi, u = /<\/span>/gi, d;
-    for (t2.push(e[0].replace(y, "%c").replace(u, "%c")); d = y.exec(e[0]); )
-      t2.push(d[2]), t2.push("");
-    for (let l = 1; l < e.length; l++)
-      t2.push(e[l]);
-  }
-  i[r].apply(i, t2);
-}, "o");
-o.trace = o("trace");
-o.debug = o("debug");
-o.info = o("info");
-o.warn = o("warn");
-o.error = o("error");
-
-// node_modules/@storybook/store/dist/index.mjs
 var import_isPlainObject = __toESM(require_isPlainObject(), 1);
-var import_util_deprecate = __toESM(require_node(), 1);
 var import_mapValues2 = __toESM(require_mapValues(), 1);
 var import_csf = require("@storybook/csf");
-var import_util_deprecate2 = __toESM(require_node(), 1);
+var import_util_deprecate = __toESM(require_node(), 1);
 var import_csf2 = require("@storybook/csf");
 var import_csf3 = require("@storybook/csf");
-var import_util_deprecate3 = __toESM(require_node(), 1);
-var import_global2 = __toESM(require_window(), 1);
+var import_util_deprecate2 = __toESM(require_node(), 1);
 var import_csf4 = require("@storybook/csf");
 var import_isPlainObject2 = __toESM(require_isPlainObject(), 1);
 var import_mapValues3 = __toESM(require_mapValues(), 1);
+var import_client_logger = __toESM(require_dist2(), 1);
 var import_mapValues4 = __toESM(require_mapValues(), 1);
+var import_client_logger2 = __toESM(require_dist2(), 1);
 var import_pickBy = __toESM(require_pickBy(), 1);
 var import_csf5 = require("@storybook/csf");
 var import_slash = __toESM(require_slash(), 1);
-var _r = (0, import_memoizerific2.default)(1)((e) => Object.values(e).reduce((r, t2) => (r[t2.importPath] = r[t2.importPath] || t2, r), {}));
-var x = Symbol("incompatible");
-var b = Symbol("Deeply equal");
-var Wr = (0, import_util_deprecate.default)(() => {
-}, dedent`
-    Setting a global value that is undeclared (i.e. not in the user's initial set of globals
-    or globalTypes) is deprecated and will have no effect in 7.0.
-  `);
-var re = dedent`
+var import_client_logger3 = __toESM(require_dist2(), 1);
+var getImportPathMap = (0, import_memoizerific2.default)(1)((entries) => Object.values(entries).reduce((acc, entry) => (acc[entry.importPath] = acc[entry.importPath] || entry, acc), {}));
+var INCOMPATIBLE = Symbol("incompatible");
+var DEEPLY_EQUAL = Symbol("Deeply equal");
+var deprecatedStoryAnnotation = dedent`
 CSF .story annotations deprecated; annotate story functions directly:
 - StoryFn.story.name => StoryFn.storyName
 - StoryFn.story.(parameters|decorators) => StoryFn.(parameters|decorators)
 See https://github.com/storybookjs/storybook/blob/next/MIGRATION.md#hoisted-csf-annotations for details and codemod.
 `;
-var ee = (0, import_util_deprecate2.default)(() => {
-}, re);
-var F = /* @__PURE__ */ __name((...e) => {
-  let r = {}, t2 = e.filter(Boolean), o2 = t2.reduce((n2, s2) => (Object.entries(s2).forEach(([i2, a2]) => {
-    let m = n2[i2];
-    Array.isArray(a2) || typeof m > "u" ? n2[i2] = a2 : (0, import_isPlainObject2.default)(a2) && (0, import_isPlainObject2.default)(m) ? r[i2] = true : typeof a2 < "u" && (n2[i2] = a2);
-  }), n2), {});
-  return Object.keys(r).forEach((n2) => {
-    let s2 = t2.filter(Boolean).map((i2) => i2[n2]).filter((i2) => typeof i2 < "u");
-    s2.every((i2) => (0, import_isPlainObject2.default)(i2)) ? o2[n2] = F(...s2) : o2[n2] = s2[s2.length - 1];
-  }), o2;
-}, "F");
-var Se = (0, import_util_deprecate3.default)(() => {
+var deprecatedStoryAnnotationWarning = (0, import_util_deprecate.default)(() => {
+}, deprecatedStoryAnnotation);
+var combineParameters = /* @__PURE__ */ __name((...parameterSets) => {
+  let mergeKeys = {}, definedParametersSets = parameterSets.filter(Boolean), combined = definedParametersSets.reduce((acc, parameters) => (Object.entries(parameters).forEach(([key, value]) => {
+    let existing = acc[key];
+    Array.isArray(value) || typeof existing > "u" ? acc[key] = value : (0, import_isPlainObject2.default)(value) && (0, import_isPlainObject2.default)(existing) ? mergeKeys[key] = true : typeof value < "u" && (acc[key] = value);
+  }), acc), {});
+  return Object.keys(mergeKeys).forEach((key) => {
+    let mergeValues = definedParametersSets.filter(Boolean).map((p) => p[key]).filter((value) => typeof value < "u");
+    mergeValues.every((value) => (0, import_isPlainObject2.default)(value)) ? combined[key] = combineParameters(...mergeValues) : combined[key] = mergeValues[mergeValues.length - 1];
+  }), combined;
+}, "combineParameters");
+var argTypeDefaultValueWarning = (0, import_util_deprecate2.default)(() => {
 }, dedent`
   \`argType.defaultValue\` is deprecated and will be removed in Storybook 7.0.
 
   https://github.com/storybookjs/storybook/blob/next/MIGRATION.md#no-longer-inferring-default-values-of-args`);
-var rr = /* @__PURE__ */ __name((e, r, t2) => {
-  let o2 = typeof e;
-  switch (o2) {
+var inferType = /* @__PURE__ */ __name((value, name, visited) => {
+  let type = typeof value;
+  switch (type) {
     case "boolean":
     case "string":
     case "number":
     case "function":
     case "symbol":
-      return { name: o2 };
+      return { name: type };
     default:
       break;
   }
-  if (e) {
-    if (t2.has(e))
-      return i.warn(dedent`
-        We've detected a cycle in arg '${r}'. Args should be JSON-serializable.
+  return value ? visited.has(value) ? (import_client_logger.logger.warn(dedent`
+        We've detected a cycle in arg '${name}'. Args should be JSON-serializable.
 
         Consider using the mapping feature or fully custom args:
         - Mapping: https://storybook.js.org/docs/react/writing-stories/args#mapping-to-complex-arg-values
         - Custom args: https://storybook.js.org/docs/react/essentials/controls#fully-custom-args
-      `), { name: "other", value: "cyclic object" };
-    if (t2.add(e), Array.isArray(e)) {
-      let s2 = e.length > 0 ? rr(e[0], r, new Set(t2)) : { name: "other", value: "unknown" };
-      return { name: "array", value: s2 };
-    }
-    let n2 = (0, import_mapValues3.default)(e, (s2) => rr(s2, r, new Set(t2)));
-    return { name: "object", value: n2 };
-  }
-  return { name: "object", value: {} };
-}, "rr");
-var er = /* @__PURE__ */ __name((e) => {
-  let { id: r, argTypes: t2 = {}, initialArgs: o2 = {} } = e, n2 = (0, import_mapValues3.default)(o2, (i2, a2) => ({ name: a2, type: rr(i2, `${r}.${a2}`, /* @__PURE__ */ new Set()) })), s2 = (0, import_mapValues3.default)(t2, (i2, a2) => ({ name: a2 }));
-  return F(n2, s2, t2);
-}, "er");
-er.secondPass = true;
-var Tr = /* @__PURE__ */ __name((e, r) => Array.isArray(r) ? r.includes(e) : e.match(r), "Tr");
-var tr = /* @__PURE__ */ __name((e, r, t2) => !r && !t2 ? e : e && (0, import_pickBy.default)(e, (o2, n2) => {
-  let s2 = o2.name || n2;
-  return (!r || Tr(s2, r)) && (!t2 || !Tr(s2, t2));
-}), "tr");
-var we = /* @__PURE__ */ __name((e, r, t2) => {
-  let { type: o2, options: n2 } = e;
-  if (!!o2) {
-    if (t2.color && t2.color.test(r)) {
-      let s2 = o2.name;
-      if (s2 === "string")
+      `), { name: "other", value: "cyclic object" }) : (visited.add(value), Array.isArray(value) ? { name: "array", value: value.length > 0 ? inferType(value[0], name, new Set(visited)) : { name: "other", value: "unknown" } } : { name: "object", value: (0, import_mapValues3.default)(value, (field) => inferType(field, name, new Set(visited))) }) : { name: "object", value: {} };
+}, "inferType");
+var inferArgTypes = /* @__PURE__ */ __name((context) => {
+  let { id, argTypes: userArgTypes = {}, initialArgs = {} } = context, argTypes = (0, import_mapValues3.default)(initialArgs, (arg, key) => ({ name: key, type: inferType(arg, `${id}.${key}`, /* @__PURE__ */ new Set()) })), userArgTypesNames = (0, import_mapValues3.default)(userArgTypes, (argType, key) => ({ name: key }));
+  return combineParameters(argTypes, userArgTypesNames, userArgTypes);
+}, "inferArgTypes");
+inferArgTypes.secondPass = true;
+var matches = /* @__PURE__ */ __name((name, descriptor) => Array.isArray(descriptor) ? descriptor.includes(name) : name.match(descriptor), "matches");
+var filterArgTypes = /* @__PURE__ */ __name((argTypes, include, exclude) => !include && !exclude ? argTypes : argTypes && (0, import_pickBy.default)(argTypes, (argType, key) => {
+  let name = argType.name || key;
+  return (!include || matches(name, include)) && (!exclude || !matches(name, exclude));
+}), "filterArgTypes");
+var inferControl = /* @__PURE__ */ __name((argType, name, matchers) => {
+  let { type, options } = argType;
+  if (type) {
+    if (matchers.color && matchers.color.test(name)) {
+      let controlType = type.name;
+      if (controlType === "string")
         return { control: { type: "color" } };
-      s2 !== "enum" && i.warn(`Addon controls: Control of type color only supports string, received "${s2}" instead`);
+      controlType !== "enum" && import_client_logger2.logger.warn(`Addon controls: Control of type color only supports string, received "${controlType}" instead`);
     }
-    if (t2.date && t2.date.test(r))
+    if (matchers.date && matchers.date.test(name))
       return { control: { type: "date" } };
-    switch (o2.name) {
+    switch (type.name) {
       case "array":
         return { control: { type: "object" } };
       case "boolean":
@@ -65312,65 +83391,65 @@ var we = /* @__PURE__ */ __name((e, r, t2) => {
       case "number":
         return { control: { type: "number" } };
       case "enum": {
-        let { value: s2 } = o2;
-        return { control: { type: (s2 == null ? void 0 : s2.length) <= 5 ? "radio" : "select" }, options: s2 };
+        let { value } = type;
+        return { control: { type: value?.length <= 5 ? "radio" : "select" }, options: value };
       }
       case "function":
       case "symbol":
         return null;
       default:
-        return { control: { type: n2 ? "select" : "object" } };
+        return { control: { type: options ? "select" : "object" } };
     }
   }
-}, "we");
-var V = /* @__PURE__ */ __name((e) => {
-  let { argTypes: r, parameters: { __isArgsStory: t2, controls: { include: o2 = null, exclude: n2 = null, matchers: s2 = {} } = {} } } = e;
-  if (!t2)
-    return r;
-  let i2 = tr(r, o2, n2), a2 = (0, import_mapValues4.default)(i2, (m, l) => (m == null ? void 0 : m.type) && we(m, l, s2));
-  return F(a2, i2);
-}, "V");
-V.secondPass = true;
-var Oe = /* @__PURE__ */ __name((e) => {
-  let r = [...e], t2 = r[r.length - 1], o2 = t2.indexOf("."), n2 = o2 > 0 ? t2.substr(0, o2) : t2;
-  r[r.length - 1] = n2;
-  let [s2, ...i2] = r;
-  return s2 === "" && (r = i2), r;
-}, "Oe");
-var je = /^index$/i;
-var ze = /* @__PURE__ */ __name((e) => {
-  let r;
-  return e.filter((t2, o2) => o2 === e.length - 1 && (t2 === r || je.test(t2)) ? false : (r = t2, true));
-}, "ze");
-function Cr(e) {
-  let r = new RegExp("/{1,}", "g");
-  return e.join("/").replace(r, "/");
+}, "inferControl");
+var inferControls = /* @__PURE__ */ __name((context) => {
+  let { argTypes, parameters: { __isArgsStory, controls: { include = null, exclude = null, matchers = {} } = {} } } = context;
+  if (!__isArgsStory)
+    return argTypes;
+  let filteredArgTypes = filterArgTypes(argTypes, include, exclude), withControls = (0, import_mapValues4.default)(filteredArgTypes, (argType, name) => argType?.type && inferControl(argType, name, matchers));
+  return combineParameters(withControls, filteredArgTypes);
+}, "inferControls");
+inferControls.secondPass = true;
+var stripExtension = /* @__PURE__ */ __name((path) => {
+  let parts = [...path], last = parts[parts.length - 1], dotIndex = last.indexOf("."), stripped = dotIndex > 0 ? last.substr(0, dotIndex) : last;
+  parts[parts.length - 1] = stripped;
+  let [first, ...rest] = parts;
+  return first === "" && (parts = rest), parts;
+}, "stripExtension");
+var indexRe = /^index$/i;
+var removeRedundantFilename = /* @__PURE__ */ __name((paths) => {
+  let prevVal;
+  return paths.filter((val, index) => index === paths.length - 1 && (val === prevVal || indexRe.test(val)) ? false : (prevVal = val, true));
+}, "removeRedundantFilename");
+function pathJoin(paths) {
+  let slashes = new RegExp("/{1,}", "g");
+  return paths.join("/").replace(slashes, "/");
 }
-__name(Cr, "Cr");
-var Ne = /* @__PURE__ */ __name((e, r, t2) => {
-  let { directory: o2, importPathMatcher: n2, titlePrefix: s2 = "" } = r || {};
-  typeof e == "number" && n.warn(dedent`
+__name(pathJoin, "pathJoin");
+var userOrAutoTitleFromSpecifier = /* @__PURE__ */ __name((fileName, entry, userTitle) => {
+  let { directory, importPathMatcher, titlePrefix = "" } = entry || {};
+  typeof fileName == "number" && import_client_logger3.once.warn(dedent`
       CSF Auto-title received a numeric fileName. This typically happens when
       webpack is mis-configured in production mode. To force webpack to produce
       filenames, set optimization.moduleIds = "named" in your webpack config.
     `);
-  let i2 = (0, import_slash.default)(String(e));
-  if (n2.exec(i2)) {
-    if (!t2) {
-      let a2 = i2.replace(o2, ""), l = (0, import_slash.default)(Cr([s2, a2])).split("/");
-      return l = Oe(l), l = ze(l), l.join("/");
+  let normalizedFileName = (0, import_slash.default)(String(fileName));
+  if (importPathMatcher.exec(normalizedFileName)) {
+    if (!userTitle) {
+      let suffix = normalizedFileName.replace(directory, ""), path = (0, import_slash.default)(pathJoin([titlePrefix, suffix])).split("/");
+      return path = stripExtension(path), path = removeRedundantFilename(path), path.join("/");
     }
-    return s2 ? (0, import_slash.default)(Cr([s2, t2])) : t2;
+    return titlePrefix ? (0, import_slash.default)(pathJoin([titlePrefix, userTitle])) : userTitle;
   }
-}, "Ne");
-var vo = /* @__PURE__ */ __name((e, r, t2) => {
-  for (let o2 = 0; o2 < r.length; o2 += 1) {
-    let n2 = Ne(e, r[o2], t2);
-    if (n2)
-      return n2;
+}, "userOrAutoTitleFromSpecifier");
+var userOrAutoTitle = /* @__PURE__ */ __name((fileName, storiesEntries, userTitle) => {
+  for (let i = 0; i < storiesEntries.length; i += 1) {
+    let title = userOrAutoTitleFromSpecifier(fileName, storiesEntries[i], userTitle);
+    if (title)
+      return title;
   }
-  return t2 || void 0;
-}, "vo");
+  return userTitle || void 0;
+}, "userOrAutoTitle");
 
 // src/util/getTestRunnerConfig.ts
 var import_core_common = require("@storybook/core-common");
@@ -65394,18 +83473,18 @@ var getStorybookMain = /* @__PURE__ */ __name((configDir) => {
 var import_path2 = require("path");
 var import_core_common3 = require("@storybook/core-common");
 var getStorybookMetadata = /* @__PURE__ */ __name(() => {
-  var _a, _b, _c;
   const workingDir = (0, import_path2.resolve)();
   const configDir = process.env.STORYBOOK_CONFIG_DIR;
   const main = getStorybookMain(configDir);
   const normalizedStoriesEntries = (0, import_core_common3.normalizeStories)(main.stories, {
     configDir,
     workingDir
-  }).map((specifier) => __spreadProps(__spreadValues({}, specifier), {
+  }).map((specifier) => ({
+    ...specifier,
     importPathMatcher: new RegExp(specifier.importPathMatcher)
   }));
   const storiesPaths = normalizedStoriesEntries.map((entry) => entry.directory + "/" + entry.files).map((dir) => "<rootDir>/" + (0, import_path2.relative)(workingDir, dir)).join(";");
-  const lazyCompilation = !!((_c = (_b = (_a = main == null ? void 0 : main.core) == null ? void 0 : _a.builder) == null ? void 0 : _b.options) == null ? void 0 : _c.lazyCompilation);
+  const lazyCompilation = !!main?.core?.builder?.options?.lazyCompilation;
   return {
     configDir,
     workingDir,
@@ -65418,7 +83497,7 @@ var getStorybookMetadata = /* @__PURE__ */ __name(() => {
 // src/csf/transformCsf.ts
 var import_csf_tools = require("@storybook/csf-tools");
 var t = __toESM(require_lib8());
-var import_generator = __toESM(require_lib9());
+var import_generator = __toESM(require_lib10());
 var import_csf6 = require("@storybook/csf");
 var prefixFunction = /* @__PURE__ */ __name((key, title, input, testPrefixer2) => {
   const name = (0, import_csf6.storyNameFromExport)(key);
@@ -65468,7 +83547,7 @@ var transformCsf = /* @__PURE__ */ __name((code, { clearBody = false, testPrefix
   const title = csf.meta.title;
   const storyPlays = storyExports.reduce((acc, key) => {
     const annotations = csf._storyAnnotations[key];
-    if (annotations == null ? void 0 : annotations.play) {
+    if (annotations?.play) {
       acc[key] = annotations.play;
     }
     return acc;
@@ -65565,7 +83644,7 @@ var testPrefixer = (0, import_template.default)(`
 var makeTitleFactory = /* @__PURE__ */ __name((filename) => {
   const { workingDir, normalizedStoriesEntries } = getStorybookMetadata();
   const filePath = "./" + (0, import_path3.relative)(workingDir, filename);
-  return (userTitle) => vo(filePath, normalizedStoriesEntries, userTitle);
+  return (userTitle) => userOrAutoTitle(filePath, normalizedStoriesEntries, userTitle);
 }, "makeTitleFactory");
 var transformPlaywright = /* @__PURE__ */ __name((src, filename) => {
   const result = transformCsf(src, {

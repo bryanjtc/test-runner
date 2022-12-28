@@ -1,26 +1,9 @@
 var __create = Object.create;
 var __defProp = Object.defineProperty;
-var __defProps = Object.defineProperties;
 var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
-var __getOwnPropDescs = Object.getOwnPropertyDescriptors;
 var __getOwnPropNames = Object.getOwnPropertyNames;
-var __getOwnPropSymbols = Object.getOwnPropertySymbols;
 var __getProtoOf = Object.getPrototypeOf;
 var __hasOwnProp = Object.prototype.hasOwnProperty;
-var __propIsEnum = Object.prototype.propertyIsEnumerable;
-var __defNormalProp = (obj, key, value) => key in obj ? __defProp(obj, key, { enumerable: true, configurable: true, writable: true, value }) : obj[key] = value;
-var __spreadValues = (a, b) => {
-  for (var prop in b || (b = {}))
-    if (__hasOwnProp.call(b, prop))
-      __defNormalProp(a, prop, b[prop]);
-  if (__getOwnPropSymbols)
-    for (var prop of __getOwnPropSymbols(b)) {
-      if (__propIsEnum.call(b, prop))
-        __defNormalProp(a, prop, b[prop]);
-    }
-  return a;
-};
-var __spreadProps = (a, b) => __defProps(a, __getOwnPropDescs(b));
 var __name = (target, value) => __defProp(target, "name", { value, configurable: true });
 var __commonJS = (cb, mod) => function __require() {
   return mod || (0, cb[__getOwnPropNames(cb)[0]])((mod = { exports: {} }).exports, mod), mod.exports;
@@ -42,26 +25,6 @@ var __toESM = (mod, isNodeMode, target) => (target = mod != null ? __create(__ge
   mod
 ));
 var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
-var __async = (__this, __arguments, generator) => {
-  return new Promise((resolve, reject) => {
-    var fulfilled = (value) => {
-      try {
-        step(generator.next(value));
-      } catch (e) {
-        reject(e);
-      }
-    };
-    var rejected = (value) => {
-      try {
-        step(generator.throw(value));
-      } catch (e) {
-        reject(e);
-      }
-    };
-    var step = (x) => x.done ? resolve(x.value) : Promise.resolve(x.value).then(fulfilled, rejected);
-    step((generator = generator.apply(__this, __arguments)).next());
-  });
-};
 
 // node_modules/p-try/index.js
 var require_p_try = __commonJS({
@@ -137,21 +100,20 @@ var require_p_locate = __commonJS({
         this.value = value;
       }
     }, "EndError");
-    var testElement = /* @__PURE__ */ __name((element, tester) => __async(exports, null, function* () {
-      return tester(yield element);
-    }), "testElement");
-    var finder = /* @__PURE__ */ __name((element) => __async(exports, null, function* () {
-      const values = yield Promise.all(element);
+    var testElement = /* @__PURE__ */ __name(async (element, tester) => tester(await element), "testElement");
+    var finder = /* @__PURE__ */ __name(async (element) => {
+      const values = await Promise.all(element);
       if (values[1] === true) {
         throw new EndError(values[0]);
       }
       return false;
-    }), "finder");
-    var pLocate = /* @__PURE__ */ __name((iterable, tester, options) => __async(exports, null, function* () {
-      options = __spreadValues({
+    }, "finder");
+    var pLocate = /* @__PURE__ */ __name(async (iterable, tester, options) => {
+      options = {
         concurrency: Infinity,
-        preserveOrder: true
-      }, options);
+        preserveOrder: true,
+        ...options
+      };
       const limit = pLimit(options.concurrency);
       const items = [
         ...iterable
@@ -161,14 +123,14 @@ var require_p_locate = __commonJS({
       ]);
       const checkLimit = pLimit(options.preserveOrder ? 1 : Infinity);
       try {
-        yield Promise.all(items.map((element) => checkLimit(finder, element)));
+        await Promise.all(items.map((element) => checkLimit(finder, element)));
       } catch (error) {
         if (error instanceof EndError) {
           return error.value;
         }
         throw error;
       }
-    }), "pLocate");
+    }, "pLocate");
     module2.exports = pLocate;
     module2.exports.default = pLocate;
   }
@@ -196,29 +158,31 @@ var require_locate_path = __commonJS({
     }
     __name(checkType, "checkType");
     var matchType = /* @__PURE__ */ __name((type, stat) => type === void 0 || stat[typeMappings[type]](), "matchType");
-    module2.exports = (paths, options) => __async(exports, null, function* () {
-      options = __spreadValues({
+    module2.exports = async (paths, options) => {
+      options = {
         cwd: process.cwd(),
         type: "file",
-        allowSymlinks: true
-      }, options);
+        allowSymlinks: true,
+        ...options
+      };
       checkType(options);
       const statFn = options.allowSymlinks ? fsStat : fsLStat;
-      return pLocate(paths, (path_) => __async(exports, null, function* () {
+      return pLocate(paths, async (path_) => {
         try {
-          const stat = yield statFn(path.resolve(options.cwd, path_));
+          const stat = await statFn(path.resolve(options.cwd, path_));
           return matchType(options.type, stat);
         } catch (_) {
           return false;
         }
-      }), options);
-    });
+      }, options);
+    };
     module2.exports.sync = (paths, options) => {
-      options = __spreadValues({
+      options = {
         cwd: process.cwd(),
         allowSymlinks: true,
-        type: "file"
-      }, options);
+        type: "file",
+        ...options
+      };
       checkType(options);
       const statFn = options.allowSymlinks ? fs.statSync : fs.lstatSync;
       for (const path_ of paths) {
@@ -241,14 +205,14 @@ var require_path_exists = __commonJS({
     var fs = require("fs");
     var { promisify } = require("util");
     var pAccess = promisify(fs.access);
-    module2.exports = (path) => __async(exports, null, function* () {
+    module2.exports = async (path) => {
       try {
-        yield pAccess(path);
+        await pAccess(path);
         return true;
       } catch (_) {
         return false;
       }
-    });
+    };
     module2.exports.sync = (path) => {
       try {
         fs.accessSync(path);
@@ -268,26 +232,27 @@ var require_find_up = __commonJS({
     var locatePath = require_locate_path();
     var pathExists = require_path_exists();
     var stop = Symbol("findUp.stop");
-    module2.exports = (_0, ..._1) => __async(exports, [_0, ..._1], function* (name, options = {}) {
+    module2.exports = async (name, options = {}) => {
       let directory = path.resolve(options.cwd || "");
       const { root } = path.parse(directory);
       const paths = [].concat(name);
-      const runMatcher = /* @__PURE__ */ __name((locateOptions) => __async(exports, null, function* () {
+      const runMatcher = /* @__PURE__ */ __name(async (locateOptions) => {
         if (typeof name !== "function") {
           return locatePath(paths, locateOptions);
         }
-        const foundPath = yield name(locateOptions.cwd);
+        const foundPath = await name(locateOptions.cwd);
         if (typeof foundPath === "string") {
           return locatePath([
             foundPath
           ], locateOptions);
         }
         return foundPath;
-      }), "runMatcher");
+      }, "runMatcher");
       while (true) {
-        const foundPath = yield runMatcher(__spreadProps(__spreadValues({}, options), {
+        const foundPath = await runMatcher({
+          ...options,
           cwd: directory
-        }));
+        });
         if (foundPath === stop) {
           return;
         }
@@ -299,7 +264,7 @@ var require_find_up = __commonJS({
         }
         directory = path.dirname(directory);
       }
-    });
+    };
     module2.exports.sync = (name, options = {}) => {
       let directory = path.resolve(options.cwd || "");
       const { root } = path.parse(directory);
@@ -317,9 +282,10 @@ var require_find_up = __commonJS({
         return foundPath;
       }, "runMatcher");
       while (true) {
-        const foundPath = runMatcher(__spreadProps(__spreadValues({}, options), {
+        const foundPath = runMatcher({
+          ...options,
           cwd: directory
-        }));
+        });
         if (foundPath === stop) {
           return;
         }
@@ -7790,6 +7756,8 @@ var require_core = __commonJS({
       "node:https": [">= 14.18 && < 15", ">= 16"],
       inspector: ">= 8",
       "node:inspector": [">= 14.18 && < 15", ">= 16"],
+      "inspector/promises": [">= 19"],
+      "node:inspector/promises": [">= 19"],
       _linklist: "< 8",
       module: true,
       "node:module": [">= 14.18 && < 15", ">= 16"],
@@ -9364,23 +9332,25 @@ var require_read_pkg = __commonJS({
     var path = require("path");
     var parseJson = require_parse_json();
     var readFileAsync = promisify(fs.readFile);
-    module2.exports = (options) => __async(exports, null, function* () {
-      options = __spreadValues({
+    module2.exports = async (options) => {
+      options = {
         cwd: process.cwd(),
-        normalize: true
-      }, options);
+        normalize: true,
+        ...options
+      };
       const filePath = path.resolve(options.cwd, "package.json");
-      const json = parseJson(yield readFileAsync(filePath, "utf8"));
+      const json = parseJson(await readFileAsync(filePath, "utf8"));
       if (options.normalize) {
         require_normalize()(json);
       }
       return json;
-    });
+    };
     module2.exports.sync = (options) => {
-      options = __spreadValues({
+      options = {
         cwd: process.cwd(),
-        normalize: true
-      }, options);
+        normalize: true,
+        ...options
+      };
       const filePath = path.resolve(options.cwd, "package.json");
       const json = parseJson(fs.readFileSync(filePath, "utf8"));
       if (options.normalize) {
@@ -9398,27 +9368,29 @@ var require_read_pkg_up = __commonJS({
     var path = require("path");
     var findUp = require_find_up();
     var readPkg = require_read_pkg();
-    module2.exports = (options) => __async(exports, null, function* () {
-      const filePath = yield findUp("package.json", options);
+    module2.exports = async (options) => {
+      const filePath = await findUp("package.json", options);
       if (!filePath) {
         return;
       }
       return {
-        packageJson: yield readPkg(__spreadProps(__spreadValues({}, options), {
+        packageJson: await readPkg({
+          ...options,
           cwd: path.dirname(filePath)
-        })),
+        }),
         path: filePath
       };
-    });
+    };
     module2.exports.sync = (options) => {
       const filePath = findUp.sync("package.json", options);
       if (!filePath) {
         return;
       }
       return {
-        packageJson: readPkg.sync(__spreadProps(__spreadValues({}, options), {
+        packageJson: readPkg.sync({
+          ...options,
           cwd: path.dirname(filePath)
-        })),
+        }),
         path: filePath
       };
     };
@@ -9444,22 +9416,22 @@ var sanitizeURL = /* @__PURE__ */ __name((url) => {
   }
   return finalURL;
 }, "sanitizeURL");
-var setupPage = /* @__PURE__ */ __name((page) => __async(void 0, null, function* () {
-  const targetURL = new URL("iframe.html", process.env.TARGET_URL).toString();
+var setupPage = /* @__PURE__ */ __name(async (page) => {
+  const targetURL = process.env.TARGET_URL;
   const viewMode = process.env.VIEW_MODE || "story";
   const renderedEvent = viewMode === "docs" ? "docsRendered" : "storyRendered";
-  const { packageJson } = yield (0, import_read_pkg_up.default)();
+  const { packageJson } = await (0, import_read_pkg_up.default)();
   const { version: testRunnerVersion } = packageJson;
   const referenceURL = process.env.REFERENCE_URL && sanitizeURL(process.env.REFERENCE_URL);
   const debugPrintLimit = process.env.DEBUG_PRINT_LIMIT ? Number(process.env.DEBUG_PRINT_LIMIT) : 1e3;
   if ("TARGET_URL" in process.env && !process.env.TARGET_URL) {
     console.log(`Received TARGET_URL but with a falsy value: ${process.env.TARGET_URL}, will fallback to ${targetURL} instead.`);
   }
-  yield page.goto(targetURL, {
+  const iframeURL = new URL("iframe.html", process.env.TARGET_URL).toString();
+  await page.goto(iframeURL, {
     waitUntil: "load"
   }).catch((err) => {
-    var _a;
-    if ((_a = err.message) == null ? void 0 : _a.includes("ERR_CONNECTION_REFUSED")) {
+    if (err.message?.includes("ERR_CONNECTION_REFUSED")) {
       const errorMessage = `Could not access the Storybook instance at ${targetURL}. Are you sure it's running?
 
 ${err.message}`;
@@ -9467,8 +9439,8 @@ ${err.message}`;
     }
     throw err;
   });
-  yield page.exposeBinding("logToPage", (_, message) => console.log(message));
-  yield page.addScriptTag({
+  await page.exposeBinding("logToPage", (_, message) => console.log(message));
+  await page.addScriptTag({
     content: `
       // colorizes the console output
       const bold = (message) => \`\\u001b[1m\${message}\\u001b[22m\`;
@@ -9653,7 +9625,7 @@ HTML: \${document.body.innerHTML}\`;
       };
     `
   });
-}), "setupPage");
+}, "setupPage");
 // Annotate the CommonJS export names for ESM import in node:
 0 && (module.exports = {
   setupPage

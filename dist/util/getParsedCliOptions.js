@@ -1,34 +1,8 @@
 var __defProp = Object.defineProperty;
 var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
 var __getOwnPropNames = Object.getOwnPropertyNames;
-var __getOwnPropSymbols = Object.getOwnPropertySymbols;
 var __hasOwnProp = Object.prototype.hasOwnProperty;
-var __propIsEnum = Object.prototype.propertyIsEnumerable;
-var __defNormalProp = (obj, key, value) => key in obj ? __defProp(obj, key, { enumerable: true, configurable: true, writable: true, value }) : obj[key] = value;
-var __spreadValues = (a, b) => {
-  for (var prop in b || (b = {}))
-    if (__hasOwnProp.call(b, prop))
-      __defNormalProp(a, prop, b[prop]);
-  if (__getOwnPropSymbols)
-    for (var prop of __getOwnPropSymbols(b)) {
-      if (__propIsEnum.call(b, prop))
-        __defNormalProp(a, prop, b[prop]);
-    }
-  return a;
-};
 var __name = (target, value) => __defProp(target, "name", { value, configurable: true });
-var __objRest = (source, exclude) => {
-  var target = {};
-  for (var prop in source)
-    if (__hasOwnProp.call(source, prop) && exclude.indexOf(prop) < 0)
-      target[prop] = source[prop];
-  if (source != null && __getOwnPropSymbols)
-    for (var prop of __getOwnPropSymbols(source)) {
-      if (exclude.indexOf(prop) < 0 && __propIsEnum.call(source, prop))
-        target[prop] = source[prop];
-    }
-  return target;
-};
 var __commonJS = (cb, mod) => function __require() {
   return mod || (0, cb[__getOwnPropNames(cb)[0]])((mod = { exports: {} }).exports, mod), mod.exports;
 };
@@ -45,26 +19,6 @@ var __copyProps = (to, from, except, desc) => {
   return to;
 };
 var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
-var __async = (__this, __arguments, generator) => {
-  return new Promise((resolve, reject) => {
-    var fulfilled = (value) => {
-      try {
-        step(generator.next(value));
-      } catch (e) {
-        reject(e);
-      }
-    };
-    var rejected = (value) => {
-      try {
-        step(generator.throw(value));
-      } catch (e) {
-        reject(e);
-      }
-    };
-    var step = (x) => x.done ? resolve(x.value) : Promise.resolve(x.value).then(fulfilled, rejected);
-    step((generator = generator.apply(__this, __arguments)).next());
-  });
-};
 
 // node_modules/commander/lib/error.js
 var require_error = __commonJS({
@@ -1028,15 +982,14 @@ Expecting one of '${allowedValues.join("', '")}'`);
         return this._optionValues[key];
       }
       setOptionValue(key, value) {
+        return this.setOptionValueWithSource(key, value, void 0);
+      }
+      setOptionValueWithSource(key, value, source) {
         if (this._storeOptionsAsProperties) {
           this[key] = value;
         } else {
           this._optionValues[key] = value;
         }
-        return this;
-      }
-      setOptionValueWithSource(key, value, source) {
-        this.setOptionValue(key, value);
         this._optionValueSources[key] = source;
         return this;
       }
@@ -1086,12 +1039,10 @@ Expecting one of '${allowedValues.join("', '")}'`);
         this._parseCommand([], userArgs);
         return this;
       }
-      parseAsync(argv, parseOptions) {
-        return __async(this, null, function* () {
-          const userArgs = this._prepareUserArgs(argv, parseOptions);
-          yield this._parseCommand([], userArgs);
-          return this;
-        });
+      async parseAsync(argv, parseOptions) {
+        const userArgs = this._prepareUserArgs(argv, parseOptions);
+        await this._parseCommand([], userArgs);
+        return this;
       }
       _executeSubCommand(subcommand, args) {
         args = args.slice();
@@ -1953,11 +1904,12 @@ If you'd like this option to be supported, please open an issue at https://githu
       }
     }
   }
-  const _a = program.opts(), { storiesJson } = _a, options = __objRest(_a, ["storiesJson"]);
+  const { storiesJson, ...options } = program.opts();
   return {
-    options: __spreadValues({
-      indexJson: storiesJson
-    }, options),
+    options: {
+      indexJson: storiesJson,
+      ...options
+    },
     extraArgs: program.args
   };
 }, "getParsedCliOptions");

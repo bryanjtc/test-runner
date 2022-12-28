@@ -1,9 +1,9 @@
 import {
   getParsedCliOptions
-} from "./chunk-TR4TBT53.mjs";
+} from "./chunk-7P5FXBEF.mjs";
 import {
   __name
-} from "./chunk-2RV4EXUL.mjs";
+} from "./chunk-AIG2NDDY.mjs";
 
 // src/util/getCliOptions.ts
 var STORYBOOK_RUNNER_COMMANDS = [
@@ -15,6 +15,10 @@ var STORYBOOK_RUNNER_COMMANDS = [
   "coverage",
   "junit"
 ];
+function copyOption(obj, key, value) {
+  obj[key] = value;
+}
+__name(copyOption, "copyOption");
 var getCliOptions = /* @__PURE__ */ __name(() => {
   const { options: allOptions, extraArgs } = getParsedCliOptions();
   const defaultOptions = {
@@ -23,7 +27,7 @@ var getCliOptions = /* @__PURE__ */ __name(() => {
   };
   const finalOptions = Object.keys(allOptions).reduce((acc, key) => {
     if (STORYBOOK_RUNNER_COMMANDS.includes(key)) {
-      acc.runnerOptions[key] = allOptions[key];
+      copyOption(acc.runnerOptions, key, allOptions[key]);
     } else {
       if (allOptions[key] === true) {
         acc.jestOptions.push(`--${key}`);
@@ -36,7 +40,9 @@ var getCliOptions = /* @__PURE__ */ __name(() => {
     return acc;
   }, defaultOptions);
   if (extraArgs.length) {
-    finalOptions.jestOptions.push(...extraArgs);
+    finalOptions.jestOptions.push(...[
+      extraArgs
+    ]);
   }
   return finalOptions;
 }, "getCliOptions");
