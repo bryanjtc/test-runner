@@ -1,18 +1,13 @@
 import {
   testPrefixer
-} from "./chunk-M6FZVPDI.mjs";
+} from "./chunk-TFZNTRD5.mjs";
 import {
-  require_lib2 as require_lib,
-  require_lib3 as require_lib2
-} from "./chunk-VZ65GJNG.mjs";
-import {
-  __name,
-  __toESM
+  __name
 } from "./chunk-AIG2NDDY.mjs";
 
 // src/playwright/transformPlaywrightJson.ts
-var t = __toESM(require_lib());
-var import_generator = __toESM(require_lib2());
+import * as t from "@babel/types";
+import generate from "@babel/generator";
 import { toId } from "@storybook/csf";
 var makeTest = /* @__PURE__ */ __name((entry) => {
   const result = testPrefixer({
@@ -72,7 +67,7 @@ var transformPlaywrightJson = /* @__PURE__ */ __name((index) => {
       const program2 = t.program([
         makeDescribe(stories[0].title, storyTests)
       ]);
-      const { code } = (0, import_generator.default)(program2, {});
+      const { code } = generate(program2, {});
       acc[titleId] = code;
     }
     return acc;

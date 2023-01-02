@@ -1,46 +1,20 @@
-var __create = Object.create;
-var __defProp = Object.defineProperty;
-var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
-var __getOwnPropNames = Object.getOwnPropertyNames;
-var __getProtoOf = Object.getPrototypeOf;
-var __hasOwnProp = Object.prototype.hasOwnProperty;
-var __name = (target, value) => __defProp(target, "name", { value, configurable: true });
-var __export = (target, all) => {
-  for (var name in all)
-    __defProp(target, name, { get: all[name], enumerable: true });
-};
-var __copyProps = (to, from, except, desc) => {
-  if (from && typeof from === "object" || typeof from === "function") {
-    for (let key of __getOwnPropNames(from))
-      if (!__hasOwnProp.call(to, key) && key !== except)
-        __defProp(to, key, { get: () => from[key], enumerable: !(desc = __getOwnPropDesc(from, key)) || desc.enumerable });
-  }
-  return to;
-};
-var __toESM = (mod, isNodeMode, target) => (target = mod != null ? __create(__getProtoOf(mod)) : {}, __copyProps(
-  isNodeMode || !mod || !mod.__esModule ? __defProp(target, "default", { value: mod, enumerable: true }) : target,
-  mod
-));
-var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
+import {
+  __name
+} from "./chunk-AIG2NDDY.mjs";
 
 // src/csf/transformCsf.ts
-var transformCsf_exports = {};
-__export(transformCsf_exports, {
-  transformCsf: () => transformCsf
-});
-module.exports = __toCommonJS(transformCsf_exports);
-var import_csf_tools = require("@storybook/csf-tools");
-var t = __toESM(require("@babel/types"));
-var import_generator = __toESM(require("@babel/generator"));
-var import_csf = require("@storybook/csf");
-var import_ts_dedent = __toESM(require("ts-dedent"));
+import { loadCsf } from "@storybook/csf-tools";
+import * as t from "@babel/types";
+import generate from "@babel/generator";
+import { toId, storyNameFromExport } from "@storybook/csf";
+import dedent from "ts-dedent";
 var prefixFunction = /* @__PURE__ */ __name((key, title, input, testPrefixer) => {
-  const name = (0, import_csf.storyNameFromExport)(key);
+  const name = storyNameFromExport(key);
   const context = {
     storyExport: t.identifier(key),
     name: t.stringLiteral(name),
     title: t.stringLiteral(title),
-    id: t.stringLiteral((0, import_csf.toId)(title, name))
+    id: t.stringLiteral(toId(title, name))
   };
   const result = makeArray(testPrefixer(context));
   const stmt = result[1];
@@ -74,7 +48,7 @@ var makeArray = /* @__PURE__ */ __name((templateResult) => Array.isArray(templat
   templateResult
 ], "makeArray");
 var transformCsf = /* @__PURE__ */ __name((code, { clearBody = false, testPrefixer, beforeEachPrefixer, insertTestIfEmpty, makeTitle } = {}) => {
-  const csf = (0, import_csf_tools.loadCsf)(code, {
+  const csf = loadCsf(code, {
     makeTitle
   });
   csf.parse();
@@ -105,8 +79,8 @@ var transformCsf = /* @__PURE__ */ __name((code, { clearBody = false, testPrefix
 `;
   if (allTests.length) {
     const describe = makeDescribe(csf.meta.title, allTests, beforeEachPrefixer ? makeBeforeEach(beforeEachPrefixer) : void 0);
-    const { code: describeCode } = (0, import_generator.default)(describe, {});
-    result = import_ts_dedent.default`
+    const { code: describeCode } = generate(describe, {});
+    result = dedent`
       ${result}
       if (!require.main) {
         ${describeCode}
@@ -117,7 +91,7 @@ var transformCsf = /* @__PURE__ */ __name((code, { clearBody = false, testPrefix
   }
   return result;
 }, "transformCsf");
-// Annotate the CommonJS export names for ESM import in node:
-0 && (module.exports = {
+
+export {
   transformCsf
-});
+};

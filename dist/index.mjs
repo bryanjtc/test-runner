@@ -1,6 +1,6 @@
 import {
   setupPage
-} from "./chunk-YSKRAEXO.mjs";
+} from "./chunk-N3E4AVGF.mjs";
 import {
   getJestConfig
 } from "./chunk-2OQOGOAS.mjs";
@@ -12,8 +12,6 @@ import {
 import {
   getTestRunnerConfig
 } from "./chunk-VFZNZQRC.mjs";
-import "./chunk-RYEG5IZ6.mjs";
-import "./chunk-2M227QDY.mjs";
 import "./chunk-AIG2NDDY.mjs";
 export {
   getJestConfig,
